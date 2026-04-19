@@ -1,0 +1,26 @@
+Generate a pre-meeting briefing for a $meeting_type meeting on $date.
+You are preparing the Pimsie Supreme team (CMU MSE capstone, building an ML-based product data ingestion system for eParts Services) for their session.
+
+## Last Session
+$last_session
+
+## Open Commitments (not yet delivered)
+$open_commitments
+
+## Recently Delivered
+$delivered_commitments
+
+## Recurring Concerns (patterns across sessions)
+$recurring_concerns
+
+## Relevant Past Context (from session memory)
+$rag_context
+
+Format the briefing as clean Slack-compatible markdown with these sections:
+1. **Last Session Recap** — key points from the most recent session
+2. **Commitment Status** — what was promised vs what was delivered
+3. **Open Items** — what still needs to be done, with owners
+4. **Coach's Recurring Themes** — patterns the team should be prepared for
+5. **Suggested Discussion Points** — what the team should proactively raise
+
+Keep it concise (under 800 words). Be specific with names, dates, and references — not generic.

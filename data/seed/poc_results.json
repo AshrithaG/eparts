@@ -1,0 +1,29 @@
+{
+  "poc_name": "semantic_matcher_v1",
+  "run_date": "2026-03-15",
+  "threshold": 0.25,
+  "total_attributes_tested": 42,
+  "auto_accept_rate": 0.86,
+  "top_1_accuracy": 0.991,
+  "top_3_accuracy": 1.0,
+  "human_review_cases": 6,
+  "human_review_reason": "genuinely absent attributes, not bad matches",
+  "datasets": [
+    {
+      "name": "AIM2",
+      "attributes_tested": 22,
+      "auto_accept_rate": 0.91
+    },
+    {
+      "name": "RCT Flex CT",
+      "attributes_tested": 20,
+      "auto_accept_rate": 0.80
+    }
+  ],
+  "ground_truth_eval": {
+    "pims_attributes_tested": 217,
+    "top_1_accuracy": 0.991,
+    "top_3_accuracy": 1.0
+  },
+  "notes": "Used TF-IDF as stand-in for all-MiniLM (no internet in env). Threshold 0.25 was arbitrary for POC — production threshold is open ADR at 0.85."
+}

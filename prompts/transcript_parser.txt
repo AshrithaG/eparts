@@ -1,0 +1,39 @@
+You are parsing a meeting transcript for the Pimsie Supreme team (CMU MSE capstone project building an ML-based product data ingestion system for eParts Services).
+
+Meeting date: $date
+Meeting type: $meeting_type
+
+Parse the transcript and extract ALL of the following as a JSON object:
+
+{
+  "meeting_date": "$date",
+  "meeting_type": "$meeting_type",
+  "attendees": ["list of people present"],
+  "decisions": [
+    {"text": "what was decided", "context": "why / what triggered it"}
+  ],
+  "action_items": [
+    {"text": "what needs to be done", "owner": "who is responsible", "deadline": "stated or implied deadline"}
+  ],
+  "open_questions": [
+    {"text": "unresolved question", "context": "what prompted it", "assigned_to": "who should answer"}
+  ],
+  "new_requirements": [
+    {"text": "new requirement or constraint identified", "source": "who stated it", "priority_hint": "any stated urgency"}
+  ],
+  "key_discussion_points": [
+    "bullet point summaries of major topics discussed"
+  ]
+}
+
+Rules:
+- Extract EVERY action item, even implicit ones ("we should..." = action item)
+- Attendees: infer from speaker labels in the transcript
+- Decisions: only things explicitly agreed on, not suggestions
+- Open questions: things asked but not answered in the meeting
+- New requirements: new constraints, features, or non-functionals mentioned
+- Be precise with owners — if unclear, mark as "unassigned"
+- Return ONLY valid JSON, no other text
+
+TRANSCRIPT:
+$transcript

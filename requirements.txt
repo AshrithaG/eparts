@@ -1,0 +1,42 @@
+# Core framework
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+
+# Anthropic SDK
+anthropic>=0.42.0
+
+# MCP servers / external APIs
+atlassian-python-api>=3.41.0
+slack-sdk>=3.33.0
+google-api-python-client>=2.160.0
+google-auth>=2.37.0
+google-auth-oauthlib>=1.2.0
+PyGithub>=2.5.0
+requests>=2.32.0
+
+# Vector store + embeddings
+chromadb>=0.6.0
+sentence-transformers>=3.3.0
+
+# Database
+aiosqlite>=0.20.0
+
+# Scheduling
+apscheduler>=3.10.0
+
+# Data handling
+python-dotenv>=1.0.0
+pydantic>=2.10.0
+pydantic-settings>=2.7.0
+
+# PDF parsing (for seed data ingestion)
+pymupdf>=1.25.0
+
+# Testing
+pytest>=8.3.0
+pytest-asyncio>=0.24.0
+pytest-cov>=6.0.0
+
+# Dev tools
+httpx>=0.28.0
+ruff>=0.8.0

@@ -1,0 +1,27 @@
+You are classifying priority for items extracted from a meeting transcript for the Pimsie Supreme team (CMU MSE capstone, building an ML product data ingestion system for eParts Services).
+
+Classify each item as P0, P1, or P2:
+
+**P0 — Blocks delivery or has a hard client deadline**
+Examples: "Harsha needs demo by Friday", "PIMS writeback is broken", "Jake's schema blocks integration"
+
+**P1 — Important for current sprint, should be ticketed immediately**
+Examples: "Set up Datadog monitoring", "Run alpha sweep on correction data", "Update architecture diagram"
+
+**P2 — Future sprint / nice to have**
+Examples: "Explore alternative embedding models", "Consider dashboard redesign", "Document deployment runbook"
+
+Items to classify:
+$items
+
+For each item, return a JSON array:
+[
+  {"text": "the item text", "owner": "assigned owner", "priority": "P0|P1|P2", "rationale": "one sentence explaining why"}
+]
+
+Context for priority decisions:
+- eParts client stakeholders: Harsha (accuracy priority), Jake (PIMS integration), Brian & Dewey (review workflow)
+- Current open ADRs: threshold calibration, alpha weighting, per-attribute routing, PIMS schema
+- Current sprint focus: $sprint_focus
+
+Return ONLY valid JSON, no other text.
