@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eParts Agentic System Architecture</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0f;
+    color: #e8e8f0;
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    padding: 40px 32px;
+  }
+
+  .page-title {
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: #ffffff;
+  }
+
+  .page-sub {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #555570;
+    margin-bottom: 40px;
+    letter-spacing: 0.1em;
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: #9999bb;
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 2px;
+  }
+
+  /* MAIN GRID */
+  .arch {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto auto;
+    gap: 0;
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* LANE LABELS */
+  .lane-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #44445a;
+    text-align: center;
+    padding-bottom: 12px;
+  }
+
+  /* TRIGGER ROW */
+  .trigger-row {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  /* ORCHESTRATOR */
+  .orchestrator-row {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  /* DOMAIN ROWS */
+  .domain-row {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  /* EPARTS-SPECIFIC AGENTS ROW */
+  .specific-row {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .specific-label {
+    grid-column: 1 / -1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #664400;
+    text-transform: uppercase;
+    padding: 6px 0 4px 0;
+    border-top: 1px dashed #443300;
+    margin-bottom: 6px;
+    text-align: left;
+  }
+
+  .agent-specific-coach {
+    background: #1a1200;
+    border: 1.5px dashed #886600;
+    border-radius: 8px;
+  }
+  .agent-specific-coach .card-title { color: #ffcc44; }
+
+  .agent-specific-ml {
+    background: #0a1a1a;
+    border: 1.5px dashed #006666;
+    border-radius: 8px;
+  }
+  .agent-specific-ml .card-title { color: #33dddd; }
+
+  .specific-badge {
+    display: inline-block;
+    background: #2a1500;
+    border: 1px solid #885500;
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: #ffaa33;
+    margin-top: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  /* MCP ROW */
+  .mcp-row {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  /* OUTPUT ROW */
+  .output-row {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* CARDS */
+  .card {
+    border-radius: 8px;
+    padding: 12px 14px;
+    position: relative;
+    border: 1px solid transparent;
+  }
+
+  .card-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .card-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #777790;
+    line-height: 1.5;
+  }
+
+  /* TRIGGER cards — inputs */
+  .trigger {
+    background: #111118;
+    border-color: #2a2a40;
+    min-width: 130px;
+    max-width: 160px;
+    flex: 1;
+  }
+  .trigger .card-title { color: #8888bb; }
+
+  /* ORCHESTRATOR */
+  .orchestrator {
+    background: linear-gradient(135deg, #1a0a2e, #0d1a3a);
+    border: 1.5px solid #5544aa;
+    width: 480px;
+    text-align: center;
+    box-shadow: 0 0 32px #5544aa33;
+  }
+  .orchestrator .card-title {
+    font-size: 14px;
+    color: #bb99ff;
+    font-weight: 800;
+  }
+  .orchestrator .card-sub { color: #7766cc; font-size: 10px; }
+
+  /* DOMAIN AGENT cards */
+  .agent-requirements {
+    background: #0d1a14;
+    border-color: #1a4a2a;
+  }
+  .agent-requirements .card-title { color: #44dd88; }
+
+  .agent-architecture {
+    background: #0d1520;
+    border-color: #1a2a50;
+  }
+  .agent-architecture .card-title { color: #4488ff; }
+
+  .agent-coding {
+    background: #1a140d;
+    border-color: #4a3010;
+  }
+  .agent-coding .card-title { color: #ffaa33; }
+
+  .agent-pm {
+    background: #1a0d14;
+    border-color: #4a1a2a;
+  }
+  .agent-pm .card-title { color: #ff5588; }
+
+  .agent-knowledge {
+    background: #141420;
+    border-color: #2a2a50;
+  }
+  .agent-knowledge .card-title { color: #aaaaff; }
+
+  /* Sub-agents */
+  .sub-agent {
+    margin-top: 8px;
+    padding: 7px 10px;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .sub-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .sub-desc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: #55556a;
+    line-height: 1.4;
+  }
+
+  /* MCP SERVER cards */
+  .mcp {
+    background: #0f0f18;
+    border: 1px solid #333355;
+    border-radius: 6px;
+    padding: 8px 14px;
+    min-width: 110px;
+    text-align: center;
+  }
+  .mcp .card-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: #6666cc;
+  }
+  .mcp .card-sub { font-size: 8px; }
+
+  /* OUTPUT cards */
+  .output {
+    background: #0f1515;
+    border: 1px solid #1a3a2a;
+    border-radius: 6px;
+    padding: 8px 14px;
+    min-width: 120px;
+    text-align: center;
+  }
+  .output .card-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: #33cc88;
+  }
+  .output .card-sub { font-size: 8px; }
+
+  /* SECTION LABELS */
+  .section-label {
+    grid-column: 1 / -1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #333350;
+    text-transform: uppercase;
+    padding: 6px 0 4px 0;
+    border-top: 1px solid #1a1a2a;
+    margin-bottom: 6px;
+    text-align: left;
+  }
+
+  /* ARROWS between sections */
+  .arrow-row {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 28px;
+    color: #333350;
+    font-size: 18px;
+    letter-spacing: 8px;
+  }
+
+  /* HUMAN IN LOOP badge */
+  .hitl-badge {
+    display: inline-block;
+    background: #2a1a0a;
+    border: 1px solid #664422;
+    border-radius: 3px;
+    padding: 2px 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: #cc7733;
+    margin-top: 4px;
+  }
+
+  .mcp-label {
+    grid-column: 1 / -1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #333355;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .not-feasible {
+    opacity: 0.4;
+    position: relative;
+  }
+  .not-feasible::after {
+    content: '⚠ partial';
+    position: absolute;
+    top: 6px; right: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7px;
+    color: #ff6633;
+  }
+
+  .connector {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    justify-content: center;
+    margin: 4px 0;
+  }
+  .connector-line {
+    height: 1px;
+    width: 60px;
+    background: linear-gradient(90deg, transparent, #2a2a40, transparent);
+  }
+  .connector-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: #333355;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-title">eParts Agentic System — MCP Architecture</div>
+<div class="page-sub">CMU MSE Studio 2026 · Pimsie Supreme · Draft v1</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#8888bb"></div> Trigger / Input</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#9966ff"></div> Orchestrator</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#44dd88"></div> Requirements</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#4488ff"></div> Architecture</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ffaa33"></div> Coding</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff5588"></div> Project Mgmt</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#aaaaff"></div> Knowledge</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#6666cc"></div> MCP Server</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#33cc88"></div> Output</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ffcc44; border: 1px dashed #886600"></div> eParts-Specific Agent</div>
+</div>
+
+<div class="arch">
+
+  <!-- TRIGGERS -->
+  <div class="section-label">── Triggers / Inputs</div>
+  <div class="trigger-row">
+    <div class="card trigger">
+      <div class="card-title">Zoom Transcript</div>
+      <div class="card-sub">.vtt / .txt<br>auto-polled Drive</div>
+    </div>
+    <div class="card trigger">
+      <div class="card-title">Jira Webhook</div>
+      <div class="card-sub">ticket open/close<br>status change</div>
+    </div>
+    <div class="card trigger">
+      <div class="card-title">Slack Event</div>
+      <div class="card-sub">decisions, pings<br>team channel</div>
+    </div>
+    <div class="card trigger">
+      <div class="card-title">GitHub / Bitbucket</div>
+      <div class="card-sub">PR open/merge<br>commit hooks</div>
+    </div>
+    <div class="card trigger">
+      <div class="card-title">Manual Trigger</div>
+      <div class="card-sub">CLI / API call<br>on-demand run</div>
+    </div>
+    <div class="card trigger">
+      <div class="card-title">Supplier Catalog</div>
+      <div class="card-sub">PDF / CSV / SFTP<br>eParts data ingest</div>
+    </div>
+    <div class="card trigger">
+      <div class="card-title">Scheduled Cron</div>
+      <div class="card-sub">Mon 8am / Fri 6pm<br>weekly loops</div>
+    </div>
+  </div>
+
+  <!-- ARROW -->
+  <div class="arrow-row">↓ · · · · · · · · · · · · · · · · · · · · · · · · · ↓</div>
+
+  <!-- ORCHESTRATOR -->
+  <div class="section-label">── Orchestrator</div>
+  <div class="orchestrator-row">
+    <div class="card orchestrator">
+      <div class="card-title">Central Orchestrator Agent</div>
+      <div class="card-sub">Routes triggers → domain agents · Manages execution order · Handles failures · Logs all decisions<br>FastAPI server · shared task queue · no agent races on shared state</div>
+    </div>
+  </div>
+
+  <!-- ARROW -->
+  <div class="arrow-row">↓ · · · · · · · · · · · · · · · · · · · · · · · · · ↓</div>
+
+  <!-- DOMAIN AGENTS -->
+  <div class="section-label">── Domain Agents</div>
+  <div class="domain-row">
+
+    <!-- REQUIREMENTS -->
+    <div class="card agent-requirements">
+      <div class="card-title">Requirements Agent</div>
+      <div class="card-sub">Triggered by: transcript, manual</div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#44dd88">Transcript Parser</div>
+        <div class="sub-desc">Extract action items, decisions, open questions from .vtt</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#44dd88">Priority Classifier</div>
+        <div class="sub-desc">Assign P0/P1/P2 to each item. P0 = blocks delivery.</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#44dd88">REQ Extractor</div>
+        <div class="sub-desc">Format as REQ-XXX.md, push to /requirements/parsed/</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#44dd88">Stale REQ Detector</div>
+        <div class="sub-desc">Flag REQs with no Jira ticket or PR in 14 days</div>
+      </div>
+      <div class="hitl-badge">human reviews REQ before Jira ticket created</div>
+    </div>
+
+    <!-- ARCHITECTURE -->
+    <div class="card agent-architecture">
+      <div class="card-title">Architecture Agent</div>
+      <div class="card-sub">Triggered by: transcript, PR, manual</div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#4488ff">Drift Detector</div>
+        <div class="sub-desc">Compare meeting transcript vs architecture.mmd — flag structural changes</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#4488ff">ADR Generator</div>
+        <div class="sub-desc">When a decision is made → auto-draft ADR.md with context, options, rationale</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#4488ff">Diagram Updater</div>
+        <div class="sub-desc">Propose Mermaid diff as PR — never direct commit</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#4488ff">Traceability Builder</div>
+        <div class="sub-desc">REQ → Jira → PR → test matrix. Living doc updated on every commit.</div>
+      </div>
+      <div class="hitl-badge">all arch changes require PR approval</div>
+    </div>
+
+    <!-- CODING -->
+    <div class="card agent-coding not-feasible">
+      <div class="card-title">Coding Agent</div>
+      <div class="card-sub">Triggered by: Jira ticket assigned, PR open</div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#ffaa33">Boilerplate Generator</div>
+        <div class="sub-desc">Scaffold new service/module from ADR + REQ context</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#ffaa33">PR Reviewer</div>
+        <div class="sub-desc">Auto-comment on PRs: style, missing tests, REQ traceability check</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#ffaa33">Test Generator</div>
+        <div class="sub-desc">Generate unit test stubs from function signatures</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#ffaa33">Doc Generator</div>
+        <div class="sub-desc">Auto-update API docs when endpoints change</div>
+      </div>
+      <div class="hitl-badge">human merges all PRs — no auto-merge</div>
+    </div>
+
+    <!-- PROJECT MGMT -->
+    <div class="card agent-pm">
+      <div class="card-title">Project Mgmt Agent</div>
+      <div class="card-sub">Triggered by: transcript, cron, Jira webhook</div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#ff5588">Jira Ticket Creator</div>
+        <div class="sub-desc">From P0/P1 items → create tickets with description, assignee, priority</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#ff5588">WBS Updater</div>
+        <div class="sub-desc">Maintain /sprint/wbs.md — task breakdown synced to Jira state</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#ff5588">Weekly Digest</div>
+        <div class="sub-desc">Every Friday 6pm — decisions, REQ changes, sprint health, next week preview</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#ff5588">Alert Agent</div>
+        <div class="sub-desc">Slack ping when: off-track, stale ticket, missed deadline, drift detected</div>
+      </div>
+      <div class="hitl-badge">ticket creation needs 1 approval for P0</div>
+    </div>
+
+    <!-- KNOWLEDGE -->
+    <div class="card agent-knowledge">
+      <div class="card-title">Knowledge Agent</div>
+      <div class="card-sub">Triggered by: commit, cron, manual</div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#aaaaff">Minutes Publisher</div>
+        <div class="sub-desc">Format meeting minutes → push to Confluence under correct parent</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#aaaaff">Decision Logger</div>
+        <div class="sub-desc">Extract decisions from all sources → decisions.log.md running log</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#aaaaff">Prompt Regression</div>
+        <div class="sub-desc">On any prompt change PR — run golden dataset test. Block if score drops 10%+.</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#aaaaff">Context Packager</div>
+        <div class="sub-desc">Before mentor/client meetings — package relevant docs, REQs, ADRs as briefing</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- EPARTS-SPECIFIC AGENTS -->
+  <div class="specific-label">── eParts-Specific Agents — unique to this project</div>
+  <div class="specific-row">
+
+    <!-- COACH SESSION MEMORY AGENT -->
+    <div class="card agent-specific-coach" style="padding:12px 14px;">
+      <div class="card-title">Coach Session Memory Agent</div>
+      <div class="card-sub">Triggered by: transcript of mentor / coach session (Christian, Jim, mentors)</div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#ffcc44">Persistent Session Memory</div>
+        <div class="sub-desc">Maintains a structured memory store across ALL coach sessions — what was flagged, what was committed to, what was delivered. Uses vector store (RAG) over all past session transcripts.</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#ffcc44">Commitment Tracker</div>
+        <div class="sub-desc">Extracts explicit commitments from each session ("we will define baselines by next week"). Cross-checks against Bitbucket commits and Jira closures to verify delivery.</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#ffcc44">Pre-Meeting Briefing Generator</div>
+        <div class="sub-desc">Runs 1 hour before every coach / mentor meeting. Produces: what Christian said last time → what you committed → what you delivered → what's still open. Slacks to team.</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#ffcc44">Evolving Concern Tracker</div>
+        <div class="sub-desc">Tracks Christian's recurring themes across sessions (monitorability, HITL, evidence-based AI). Surfaces pattern: "Christian has flagged monitorability 3 sessions in a row."</div>
+      </div>
+      <div class="specific-badge">★ capstone-specific — CMU coached structure</div>
+    </div>
+
+    <!-- ML DECISION MEMORY AGENT -->
+    <div class="card agent-specific-ml" style="padding:12px 14px;">
+      <div class="card-title">ML Decision Memory Agent</div>
+      <div class="card-sub">Triggered by: POC script run, meeting transcript, new labeled data commit</div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#33dddd">Open ML Decision Log</div>
+        <div class="sub-desc">Maintains living log of every unresolved ML architectural decision: threshold value (0.85 unvalidated), alpha weighting (0.7 guess), per-attribute vs per-record routing. Each entry: decision, evidence needed, evidence so far, status.</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#33dddd">Evidence Accumulator</div>
+        <div class="sub-desc">When a POC script runs or new labeled data is committed, automatically updates the relevant decision entries with new empirical results. Tracks precision-recall curves, auto-accept rates, correction patterns against each open decision.</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#33dddd">Decision Readiness Detector</div>
+        <div class="sub-desc">When accumulated evidence crosses a threshold (e.g. ≥200 labeled examples), fires a Slack alert: "Enough data to close ADR-1 threshold decision — run calibration now." Prevents decisions from staying open longer than needed.</div>
+      </div>
+      <div class="sub-agent">
+        <div class="sub-title" style="color:#33dddd">Coach Session Linker</div>
+        <div class="sub-desc">Cross-references open ML decisions against coach session transcripts. When Christian asks about threshold calibration, this agent surfaces exactly what evidence you have today vs what you need.</div>
+      </div>
+      <div class="specific-badge">★ ML-project-specific — only meaningful because your system produces empirical signals</div>
+    </div>
+
+  </div>
+
+  <!-- ARROW -->
+  <div class="arrow-row">↓ · · · · · · MCP Servers (tools available to all agents) · · · · · · ↓</div>
+
+  <!-- MCP SERVERS -->
+  <div class="mcp-row">
+    <div class="card mcp">
+      <div class="card-title">Jira MCP</div>
+      <div class="card-sub">create / update<br>tickets, sprints</div>
+    </div>
+    <div class="card mcp">
+      <div class="card-title">GitHub MCP</div>
+      <div class="card-sub">open PR, review<br>commit, comment</div>
+    </div>
+    <div class="card mcp">
+      <div class="card-title">Confluence MCP</div>
+      <div class="card-sub">publish pages<br>update docs</div>
+    </div>
+    <div class="card mcp">
+      <div class="card-title">Slack MCP</div>
+      <div class="card-sub">send alerts<br>read decisions</div>
+    </div>
+    <div class="card mcp">
+      <div class="card-title">Google Drive MCP</div>
+      <div class="card-sub">poll transcripts<br>read notes</div>
+    </div>
+    <div class="card mcp">
+      <div class="card-title">Vector Store</div>
+      <div class="card-sub">RAG over past<br>sessions + artifacts</div>
+    </div>
+    <div class="card mcp">
+      <div class="card-title">Anthropic API</div>
+      <div class="card-sub">Claude calls<br>all LLM ops</div>
+    </div>
+    <div class="card mcp">
+      <div class="card-title">Bitbucket MCP</div>
+      <div class="card-sub">commit files<br>open PRs</div>
+    </div>
+  </div>
+
+  <!-- ARROW -->
+  <div class="arrow-row">↓ · · · · · · · · · · · · · · · · · · · · · · · · · ↓</div>
+
+  <!-- OUTPUTS -->
+  <div class="section-label">── Outputs</div>
+  <div class="output-row">
+    <div class="card output">
+      <div class="card-title">REQ-XXX.md files</div>
+      <div class="card-sub">versioned in Bitbucket</div>
+    </div>
+    <div class="card output">
+      <div class="card-title">ADR docs</div>
+      <div class="card-sub">auto-drafted, human approved</div>
+    </div>
+    <div class="card output">
+      <div class="card-title">Jira Tickets</div>
+      <div class="card-sub">P0/P1/P2 with owner</div>
+    </div>
+    <div class="card output">
+      <div class="card-title">Confluence Pages</div>
+      <div class="card-sub">minutes + requirements</div>
+    </div>
+    <div class="card output">
+      <div class="card-title">Traceability Matrix</div>
+      <div class="card-sub">REQ → ticket → PR → test</div>
+    </div>
+    <div class="card output">
+      <div class="card-title">Weekly Digest</div>
+      <div class="card-sub">Slack + Confluence</div>
+    </div>
+    <div class="card output">
+      <div class="card-title">Ops Dashboard</div>
+      <div class="card-sub">sprint + arch + agent health</div>
+    </div>
+    <div class="card output">
+      <div class="card-title">PR Comments</div>
+      <div class="card-sub">review + traceability check</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTNOTE -->
+<div style="text-align:center; margin-top:36px; font-family:'JetBrains Mono',monospace; font-size:9px; color:#333350; letter-spacing:0.1em;">
+  ⚠ PARTIAL = Coding Agent is partially feasible — boilerplate + PR review are doable; full autonomous coding is not recommended &nbsp;·&nbsp; All agents respect HITL gates<br>
+  ★ eParts-Specific Agents are unique to this project — Coach Memory requires CMU coached capstone structure · ML Decision Memory requires a live ML system producing empirical signals
+</div>
+
+</body>
+</html>

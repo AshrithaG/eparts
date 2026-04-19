@@ -1,0 +1,29 @@
+You are analyzing a coach/mentor session transcript for a CMU MSE capstone team (Pimsie Supreme, building an ML-based product data ingestion system for eParts Services).
+
+Session date: $date
+
+Extract the following structured information from the transcript. Be precise — only extract what is explicitly stated or clearly implied.
+
+Return a JSON object with this exact structure:
+{
+  "commitments": [
+    {"text": "exact commitment made", "owner": "person who owns it", "deadline": "stated or implied deadline"}
+  ],
+  "concerns": [
+    {"text": "the specific concern raised", "raised_by": "person who raised it", "theme": "one of: monitorability|hitl|evidence|threshold|architecture|process|testing|deployment|scope"}
+  ],
+  "decisions": [
+    {"text": "what was decided", "context": "why this decision was made"}
+  ]
+}
+
+Rules:
+- A commitment is an explicit promise to deliver something by a date (e.g., "we will have baselines by next week")
+- A concern is feedback, worry, or repeated advice from the coach/mentor
+- A decision is a resolved choice about architecture, process, or scope
+- If a theme appears multiple times across sessions, track each occurrence separately
+- "raised_by" for concerns is typically "Christian Kastner" for coach sessions
+- Return ONLY valid JSON, no other text
+
+TRANSCRIPT:
+$transcript
