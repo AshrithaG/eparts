@@ -47,7 +47,11 @@ class TicketCreatorAgent(BaseAgent):
         super().__init__(name="ticket_creator", mcp_clients=mcp_clients)
 
     def run(self, trigger: AgentTrigger) -> AgentResult:
-        items = trigger.metadata.get("classified_items", [])
+        pipeline_ctx = trigger.metadata.get("pipeline_context", {})
+        items = (
+            trigger.metadata.get("classified_items", [])
+            or pipeline_ctx.get("classified_items", [])
+        )
         outputs = []
         review_items = []
 
@@ -75,12 +79,13 @@ class TicketCreatorAgent(BaseAgent):
             assignee = self._suggest_assignee(item.get("text", ""))
             jira_priority = "High" if priority == "P1" else "Medium"
 
-            result = jira.create_ticket(
+            result = jira.create_issue(
                 summary=item.get("text", "Untitled"),
                 description=self._build_description(item),
-                priority=jira_priority,
-                assignee=assignee,
+                issue_type="Task",
                 labels=[priority, "auto-created"],
+                agent_name=self.name,
+                priority=jira_priority,
             )
 
             if result.get("ok"):

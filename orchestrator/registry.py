@@ -56,6 +56,7 @@ def _build_mcp_clients() -> dict[str, Any]:
     from mcp.confluence import ConfluenceMCP
     from mcp.drive import DriveMCP
     from mcp.vector_store import VectorStoreMCP
+    from mcp.github import GitHubMCP
 
     return {
         "slack": SlackMCP(),
@@ -64,6 +65,7 @@ def _build_mcp_clients() -> dict[str, Any]:
         "confluence": ConfluenceMCP(),
         "drive": DriveMCP(),
         "vector_store": VectorStoreMCP(),
+        "github": GitHubMCP(),
     }
 
 
@@ -82,11 +84,11 @@ def register_all_agents(task_queue: TaskQueue) -> dict[str, Any]:
     from agents.requirements.stale_detector import StaleDetectorAgent
 
     agents["transcript_parser"] = TranscriptParserAgent(
-        mcp_clients={"bitbucket": mcp["bitbucket"]}
+        mcp_clients={"bitbucket": mcp["bitbucket"], "github": mcp["github"]}
     )
     agents["priority_classifier"] = PriorityClassifierAgent()
     agents["req_extractor"] = ReqExtractorAgent(
-        mcp_clients={"bitbucket": mcp["bitbucket"]}
+        mcp_clients={"bitbucket": mcp["bitbucket"], "github": mcp["github"]}
     )
     agents["stale_detector"] = StaleDetectorAgent(
         mcp_clients={"jira": mcp["jira"], "slack": mcp["slack"]}
@@ -100,13 +102,13 @@ def register_all_agents(task_queue: TaskQueue) -> dict[str, Any]:
 
     agents["drift_detector"] = DriftDetectorAgent()
     agents["adr_generator"] = ADRGeneratorAgent(
-        mcp_clients={"bitbucket": mcp["bitbucket"]}
+        mcp_clients={"bitbucket": mcp["bitbucket"], "github": mcp["github"]}
     )
     agents["diagram_updater"] = DiagramUpdaterAgent(
-        mcp_clients={"bitbucket": mcp["bitbucket"]}
+        mcp_clients={"bitbucket": mcp["bitbucket"], "github": mcp["github"]}
     )
     agents["traceability_builder"] = TraceabilityBuilderAgent(
-        mcp_clients={"jira": mcp["jira"], "bitbucket": mcp["bitbucket"]}
+        mcp_clients={"jira": mcp["jira"], "bitbucket": mcp["bitbucket"], "github": mcp["github"]}
     )
 
     # --- Coding Domain ---
@@ -116,16 +118,16 @@ def register_all_agents(task_queue: TaskQueue) -> dict[str, Any]:
     from agents.coding.doc_generator import DocGeneratorAgent
 
     agents["boilerplate_generator"] = BoilerplateGeneratorAgent(
-        mcp_clients={"bitbucket": mcp["bitbucket"]}
+        mcp_clients={"bitbucket": mcp["bitbucket"], "github": mcp["github"]}
     )
     agents["pr_reviewer"] = PRReviewerAgent(
-        mcp_clients={"bitbucket": mcp["bitbucket"]}
+        mcp_clients={"bitbucket": mcp["bitbucket"], "github": mcp["github"]}
     )
     agents["test_generator"] = TestGeneratorAgent(
-        mcp_clients={"bitbucket": mcp["bitbucket"]}
+        mcp_clients={"bitbucket": mcp["bitbucket"], "github": mcp["github"]}
     )
     agents["doc_generator"] = DocGeneratorAgent(
-        mcp_clients={"bitbucket": mcp["bitbucket"]}
+        mcp_clients={"bitbucket": mcp["bitbucket"], "github": mcp["github"]}
     )
 
     # --- Project Management Domain ---
@@ -138,7 +140,7 @@ def register_all_agents(task_queue: TaskQueue) -> dict[str, Any]:
         mcp_clients={"jira": mcp["jira"], "slack": mcp["slack"]}
     )
     agents["wbs_updater"] = WBSUpdaterAgent(
-        mcp_clients={"jira": mcp["jira"]}
+        mcp_clients={"jira": mcp["jira"], "github": mcp["github"]}
     )
     agents["weekly_digest"] = WeeklyDigestAgent(
         mcp_clients={"slack": mcp["slack"], "confluence": mcp["confluence"]}
@@ -157,7 +159,7 @@ def register_all_agents(task_queue: TaskQueue) -> dict[str, Any]:
         mcp_clients={"confluence": mcp["confluence"]}
     )
     agents["decision_logger"] = DecisionLoggerAgent(
-        mcp_clients={"bitbucket": mcp["bitbucket"]}
+        mcp_clients={"bitbucket": mcp["bitbucket"], "github": mcp["github"]}
     )
     agents["prompt_regression"] = PromptRegressionAgent()
     agents["context_packager"] = ContextPackagerAgent(

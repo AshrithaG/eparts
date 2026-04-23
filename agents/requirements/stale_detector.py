@@ -74,15 +74,45 @@ class StaleDetectorAgent(BaseAgent):
 
     def _find_stale_requirements(self) -> list[dict]:
         """
-        Scan requirements and find those with no recent activity.
-        In production: reads from Bitbucket and cross-refs Jira.
+        Scan the wiki for requirements with no recent activity,
+        cross-reference against Jira tickets.
         """
-        # Placeholder: in production, this will:
-        # 1. List all REQ-XXX.md files from Bitbucket
-        # 2. For each, check if there's a linked Jira ticket
-        # 3. Search recent meeting minutes for mentions of the REQ ID
-        # 4. Flag if no ticket AND no mention in STALE_THRESHOLD_DAYS
-        return []
+        stale = []
+        try:
+            reqs = self.wiki.list_namespace("requirements_engineering")
+            if not reqs:
+                return []
+
+            cutoff = (datetime.now(timezone.utc) - timedelta(days=STALE_THRESHOLD_DAYS)).isoformat()
+
+            jira = self.mcp.get("jira")
+            jira_keys = set()
+            if jira and getattr(jira, "is_configured", False):
+                result = jira.search_issues(
+                    jql=f"project = {jira._project_key} AND labels = requirements"
+                )
+                if result.get("ok"):
+                    jira_keys = {i["summary"].lower() for i in result.get("issues", [])}
+
+            for entry in reqs:
+                if not isinstance(entry, dict):
+                    continue
+                updated = entry.get("updated_at", entry.get("timestamp", ""))
+                text = str(entry.get("value", entry.get("key", "")))
+
+                has_ticket = any(kw in text.lower() for kw in jira_keys) if jira_keys else False
+
+                if updated < cutoff and not has_ticket:
+                    stale.append({
+                        "req_id": entry.get("key", "unknown"),
+                        "text": text[:100],
+                        "last_activity": updated[:10] if updated else "unknown",
+                        "jira_ticket": "none",
+                    })
+        except Exception as exc:
+            logger.debug(f"Stale detection error: {exc}")
+
+        return stale
 
     def _format_stale_report(self, stale_reqs: list[dict]) -> str:
         lines = []

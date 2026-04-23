@@ -36,10 +36,29 @@ class TestGeneratorAgent(BaseAgent):
             )
 
         tests = self._generate_tests(source_code, module_name)
-        outputs = [AgentOutput(
-            output_type="tests_generated",
-            description=f"Generated test stubs for {module_name}",
-        )]
+        outputs = []
+
+        if tests:
+            test_path = f"tests/test_{module_name.replace('/', '_').replace('.py', '')}.py"
+            repo = self.mcp.get("github") or self.mcp.get("bitbucket")
+            if repo:
+                result = repo.commit_file(
+                    file_path=test_path,
+                    content=tests,
+                    message=f"Add test stubs for {module_name}",
+                    agent_name=self.name,
+                )
+                if result.get("ok"):
+                    outputs.append(AgentOutput(
+                        output_type="file_committed",
+                        description=f"Test stubs committed for {module_name}",
+                        reference=test_path,
+                    ))
+
+            outputs.append(AgentOutput(
+                output_type="tests_generated",
+                description=f"Generated test stubs for {module_name}",
+            ))
 
         return AgentResult(agent=self.name, success=True, outputs=outputs)
 

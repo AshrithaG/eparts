@@ -59,17 +59,52 @@ class WeeklyDigestAgent(BaseAgent):
         return AgentResult(agent=self.name, success=True, outputs=outputs)
 
     def _gather_week_data(self) -> dict:
-        """Gather data from all sources for the weekly digest."""
-        # In production: query Bitbucket for week's commits,
-        # Jira for sprint state, read decision log, check drift reports
-        return {
+        """Gather data from wiki, Jira, and event bus."""
+        data = {
             "week_of": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
             "commits": [],
             "decisions": [],
             "req_changes": [],
             "sprint_state": {},
             "drift_reports": [],
+            "concerns": [],
+            "events_this_week": [],
         }
+
+        # Pull from Jira
+        jira = self.mcp.get("jira")
+        if jira and getattr(jira, "is_configured", False):
+            board = jira.get_board_status()
+            if board.get("ok"):
+                data["sprint_state"] = board.get("by_status", {})
+                data["total_issues"] = board.get("total_issues", 0)
+
+        # Pull from SharedMemory wiki
+        try:
+            decisions = self.wiki.list_namespace("decisions")
+            data["decisions"] = decisions[-10:] if decisions else []
+
+            concerns = self.wiki.list_namespace("concerns")
+            data["concerns"] = concerns[-5:] if concerns else []
+
+            reqs = self.wiki.list_namespace("requirements_engineering")
+            data["req_changes"] = reqs[-5:] if reqs else []
+        except Exception:
+            pass
+
+        # Pull recent events
+        try:
+            data["events_this_week"] = [
+                {"type": e["event_type"], "agent": e["source_agent"]}
+                for e in self.events.get_pending_events(limit=20)
+            ]
+            data["drift_reports"] = [
+                e for e in data["events_this_week"] if e["type"] == "drift_detected"
+            ]
+        except Exception:
+            pass
+
+        return data
 
     def _generate_digest(self, data: dict) -> str:
         prompt = f"""Generate a weekly project digest for the Pimsie Supreme team.

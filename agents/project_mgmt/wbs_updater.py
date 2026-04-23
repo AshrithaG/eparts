@@ -37,19 +37,28 @@ class WBSUpdaterAgent(BaseAgent):
                 )],
             )
 
-        sprint_state = jira.get_sprint_state()
-        if not sprint_state.get("ok"):
+        board = jira.get_board_status()
+        if not board.get("ok"):
             return AgentResult(
                 agent=self.name, success=False,
-                errors=[sprint_state.get("error", "Failed to fetch sprint")],
+                errors=[board.get("error", "Failed to fetch board")],
             )
 
-        wbs_content = self._build_wbs(sprint_state.get("issues", []))
+        wbs_content = self._build_wbs(board.get("recent_issues", []))
 
         outputs = []
-        bitbucket = self.mcp.get("bitbucket")
-        if bitbucket:
-            bitbucket.commit_file(
+
+        # Deposit WBS to wiki for cross-pipeline access
+        self.wiki.put("project_mgmt", "wbs_latest", {
+            "content": wbs_content,
+            "total_issues": board.get("total_issues", 0),
+            "by_status": board.get("by_status", {}),
+        }, agent=self.name, pipeline="project_mgmt")
+
+        # Commit to repo (prefer GitHub, fall back to Bitbucket)
+        repo = self.mcp.get("github") or self.mcp.get("bitbucket")
+        if repo:
+            repo.commit_file(
                 file_path="sprint/wbs.md",
                 content=wbs_content,
                 message=f"Update WBS ({datetime.now(timezone.utc).strftime('%Y-%m-%d')})",
@@ -57,7 +66,7 @@ class WBSUpdaterAgent(BaseAgent):
             )
             outputs.append(AgentOutput(
                 output_type="file_committed",
-                description="WBS updated from Jira sprint state",
+                description=f"WBS updated — {board.get('total_issues', 0)} issues tracked",
                 reference="sprint/wbs.md",
             ))
 

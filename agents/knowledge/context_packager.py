@@ -43,16 +43,51 @@ class ContextPackagerAgent(BaseAgent):
         return AgentResult(agent=self.name, success=True, outputs=outputs)
 
     def _gather_context(self) -> dict:
-        """Gather context from all available sources."""
-        # In production: query Bitbucket for week's commits,
-        # Jira for open tickets, read stale-requirements.md, etc.
-        return {
+        """Gather context from wiki, Jira, and event bus."""
+        ctx = {
             "week_start": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
             "commits": [],
             "open_reqs": [],
             "stale_items": [],
             "pending_adrs": [],
+            "concerns": [],
+            "sprint_status": {},
         }
+
+        # Jira board state
+        jira = self.mcp.get("jira")
+        if jira and getattr(jira, "is_configured", False):
+            board = jira.get_board_status()
+            if board.get("ok"):
+                ctx["sprint_status"] = board.get("by_status", {})
+                ctx["open_reqs"] = [
+                    i for i in board.get("recent_issues", [])
+                    if i.get("status") != "Done"
+                ]
+
+        # Wiki data
+        try:
+            concerns = self.wiki.list_namespace("concerns")
+            ctx["concerns"] = concerns[-5:] if concerns else []
+
+            adrs = self.wiki.list_namespace("architecture")
+            ctx["pending_adrs"] = [
+                a for a in (adrs or [])
+                if isinstance(a, dict) and "drift" in str(a.get("key", "")).lower()
+            ][-5:]
+        except Exception:
+            pass
+
+        # Recent events
+        try:
+            events = self.events.get_pending_events(limit=15)
+            ctx["recent_events"] = [
+                f"{e['event_type']} from {e['source_agent']}" for e in events
+            ]
+        except Exception:
+            pass
+
+        return ctx
 
     def _generate_briefing(self, context: dict) -> str:
         prompt = f"""Generate a concise weekly context briefing for the Pimsie Supreme team.

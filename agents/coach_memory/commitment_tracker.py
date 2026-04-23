@@ -131,13 +131,32 @@ class CommitmentTrackerAgent(BaseAgent):
 
     def _search_for_evidence(self, commitment: dict, bitbucket: Any) -> str | None:
         """
-        Search for evidence that a commitment was delivered.
+        Search Jira and wiki for evidence that a commitment was delivered.
         Returns an evidence link if found, None otherwise.
-        Placeholder: in production, this searches Bitbucket commits
-        and Jira tickets for keywords from the commitment text.
         """
-        # TODO: implement Bitbucket commit search and Jira ticket search
-        # For now, return None (no auto-verification)
+        text = commitment.get("commitment_text", "").lower()
+        if not text:
+            return None
+
+        keywords = [w for w in text.split() if len(w) > 4][:3]
+
+        # Search Jira for tickets matching commitment keywords
+        jira = self.mcp.get("jira")
+        if jira and getattr(jira, "is_configured", False) and keywords:
+            jql = f"project = {jira._project_key} AND status = Done AND text ~ \"{keywords[0]}\""
+            result = jira.search_issues(jql=jql)
+            if result.get("ok") and result.get("issues"):
+                return f"Jira: {result['issues'][0]['key']} ({result['issues'][0].get('summary', '')[:50]})"
+
+        # Search wiki for related outputs
+        try:
+            for kw in keywords:
+                entries = self.wiki.search(kw)
+                if entries:
+                    return f"Wiki: {entries[0].get('namespace', '')}:{entries[0].get('key', '')}"
+        except Exception:
+            pass
+
         return None
 
     def mark_delivered(self, commitment_id: int, evidence_link: str) -> bool:

@@ -52,16 +52,50 @@ class TraceabilityBuilderAgent(BaseAgent):
         return AgentResult(agent=self.name, success=True, outputs=outputs)
 
     def _build_matrix(self, trigger: AgentTrigger) -> str:
-        """
-        Build the traceability matrix markdown table.
-        In production: queries Bitbucket for REQs, Jira for tickets,
-        and test results for coverage.
-        """
+        """Build the traceability matrix from wiki data and Jira."""
+        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
         header = (
             "# Traceability Matrix\n\n"
-            f"_Last updated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}_\n\n"
-            "| REQ ID | Description | Jira Ticket | PR | Test Status | Last Updated |\n"
-            "|--------|-------------|-------------|-----|-------------|-------------|\n"
+            f"_Last updated: {now}_\n\n"
+            "| REQ ID | Description | Jira Ticket | Test Status | Last Updated |\n"
+            "|--------|-------------|-------------|-------------|-------------|\n"
         )
-        # Placeholder rows would be populated from actual data
-        return header
+
+        rows = []
+        try:
+            reqs = self.wiki.list_namespace("requirements")
+            jira = self.mcp.get("jira")
+            jira_issues = {}
+
+            if jira and getattr(jira, "is_configured", False):
+                result = jira.search_issues(
+                    jql=f"project = {jira._project_key} AND labels = requirements"
+                )
+                if result.get("ok"):
+                    for iss in result.get("issues", []):
+                        jira_issues[iss["summary"].lower()] = iss["key"]
+
+            for entry in reqs if reqs else []:
+                if not isinstance(entry, dict):
+                    continue
+                val = entry.get("value", {})
+                if isinstance(val, str):
+                    continue
+                req_id = entry.get("key", "?")
+                text = str(val.get("text", ""))[:60]
+                updated = entry.get("updated_at", "")[:10]
+
+                ticket = "—"
+                for k, v in jira_issues.items():
+                    if req_id.lower() in k or text[:20].lower() in k:
+                        ticket = v
+                        break
+
+                rows.append(f"| {req_id} | {text} | {ticket} | pending | {updated} |")
+        except Exception as exc:
+            rows.append(f"| — | Error building matrix: {exc} | — | — | — |")
+
+        if not rows:
+            rows.append("| — | No requirements tracked yet | — | — | — |")
+
+        return header + "\n".join(rows) + "\n"

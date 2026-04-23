@@ -29,9 +29,18 @@ class ReqExtractorAgent(BaseAgent):
         self._next_req_id = 1
 
     def run(self, trigger: AgentTrigger) -> AgentResult:
-        requirements = trigger.metadata.get("requirements", [])
-        date = trigger.metadata.get("date", datetime.now(timezone.utc).strftime("%Y-%m-%d"))
-        meeting_type = trigger.metadata.get("meeting_type", "unknown")
+        pipeline_ctx = trigger.metadata.get("pipeline_context", {})
+        requirements = (
+            trigger.metadata.get("requirements", [])
+            or pipeline_ctx.get("new_requirements", [])
+            or pipeline_ctx.get("classified_items", [])
+        )
+        date = (
+            trigger.metadata.get("date")
+            or pipeline_ctx.get("meeting_date")
+            or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        )
+        meeting_type = trigger.metadata.get("meeting_type", pipeline_ctx.get("meeting_type", "client"))
 
         if not requirements:
             return AgentResult(
@@ -44,19 +53,26 @@ class ReqExtractorAgent(BaseAgent):
             )
 
         outputs = []
-        bitbucket = self.mcp.get("bitbucket")
+        repo = self.mcp.get("github") or self.mcp.get("bitbucket")
 
         for req in requirements:
             req_id = self._generate_req_id()
+            text = req.get("text", req.get("description", str(req)))[:200]
             content = self._format_req_file(req, req_id, date, meeting_type)
-
             filename = f"requirements/parsed/{req_id}.md"
 
-            if bitbucket:
-                result = bitbucket.commit_file(
+            self.wiki.put("requirements", req_id, {
+                "text": text,
+                "date": date,
+                "meeting_type": meeting_type,
+                "priority": req.get("priority", "unclassified"),
+            }, agent=self.name, pipeline="requirements")
+
+            if repo:
+                result = repo.commit_file(
                     file_path=filename,
                     content=content,
-                    message=f"Add requirement {req_id}: {req.get('text', '')[:60]}",
+                    message=f"Add requirement {req_id}: {text[:60]}",
                     agent_name=self.name,
                 )
                 if result.get("ok"):
@@ -68,7 +84,7 @@ class ReqExtractorAgent(BaseAgent):
             else:
                 outputs.append(AgentOutput(
                     output_type="req_extracted",
-                    description=f"Requirement {req_id} formatted (no Bitbucket configured)",
+                    description=f"Requirement {req_id} formatted (no repo configured)",
                     reference=req_id,
                 ))
 
