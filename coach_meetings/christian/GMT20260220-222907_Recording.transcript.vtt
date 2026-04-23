@@ -1,0 +1,906 @@
+WEBVTT
+
+1
+00:00:02.190 --> 00:00:19.239
+hrishikb@andrew.cmu.edu: Unless, like, you take another team's requirements and try to do them, and then without any AI, and then try to compare against their time if they have used AI, and then they do the same for us, then you have a benchmark. Or you could split a new team, right? Do the requirements twice independently?
+
+2
+00:00:19.400 --> 00:00:23.799
+hrishikb@andrew.cmu.edu: That's… that's another… it's… It's a lot of effort.
+
+3
+00:00:26.170 --> 00:00:30.280
+hrishikb@andrew.cmu.edu: Has anybody seen the How to Measure Anything book from Robert?
+
+4
+00:00:30.870 --> 00:00:37.300
+hrishikb@andrew.cmu.edu: I don't think this gets taught anymore here, Rick. When I use quality assurance, we used to talk about this.
+
+5
+00:00:37.420 --> 00:00:46.699
+hrishikb@andrew.cmu.edu: It's just… I believe he mentions my class have been telling me this. It's just Brick mentioned.
+
+6
+00:00:47.920 --> 00:00:55.550
+hrishikb@andrew.cmu.edu: Measurement is… one way of thinking about measurement is that it's uncertainty reduction for decision making.
+
+7
+00:00:56.120 --> 00:01:08.239
+hrishikb@andrew.cmu.edu: maybe not the most intuitive way to describe this. Traditionally, it's defined as assigning numbers to observations, right? But what you want those numbers for is for decision making.
+
+8
+00:01:08.450 --> 00:01:13.389
+hrishikb@andrew.cmu.edu: Right, so you want to decide which of two people you want to hire, so you measure something.
+
+9
+00:01:15.220 --> 00:01:22.410
+hrishikb@andrew.cmu.edu: Measurement is often a little bit vague, and it's fine. You don't need a perfect measure.
+
+10
+00:01:22.570 --> 00:01:37.440
+hrishikb@andrew.cmu.edu: to make the perfect decision, already reducing your uncertainty. Like, if I don't know anything about these candidates, I don't know, I can flip a coin, right? If I have… if I talk to them, I get a sense that maybe one is slightly better than the other.
+
+11
+00:01:37.660 --> 00:01:43.850
+hrishikb@andrew.cmu.edu: I'm not super sure, but it gives me more than 50-50 chance. If I want to be really sure.
+
+12
+00:01:44.170 --> 00:01:49.790
+hrishikb@andrew.cmu.edu: I hire them those 4 months, give them a task, and observe them really closely, and then hire one of them.
+
+13
+00:01:49.980 --> 00:01:51.370
+hrishikb@andrew.cmu.edu: That's super expensive.
+
+14
+00:01:51.710 --> 00:01:53.160
+hrishikb@andrew.cmu.edu: Right?
+
+15
+00:01:53.570 --> 00:02:08.120
+hrishikb@andrew.cmu.edu: So, you can invest more effort into measurement, but at some point, the cost of the measurement to get more accurate measurements is outweighing the opportunity cost, or is outweighing the cost of a bad decision.
+
+16
+00:02:08.419 --> 00:02:12.840
+hrishikb@andrew.cmu.edu: Right, so the decision… like, a hiring decision can be quite consequential.
+
+17
+00:02:13.050 --> 00:02:18.399
+hrishikb@andrew.cmu.edu: If you're deciding whether to use AI, or…
+
+18
+00:02:18.730 --> 00:02:30.390
+hrishikb@andrew.cmu.edu: requirements, auditing thing, or not. I don't know how consequential the decision is. Worst case, you waste a day or two, so if you invest, like, a week…
+
+19
+00:02:31.070 --> 00:02:33.129
+hrishikb@andrew.cmu.edu: Of effort into measurement.
+
+20
+00:02:33.970 --> 00:02:35.100
+hrishikb@andrew.cmu.edu: We are at least…
+
+21
+00:02:35.830 --> 00:02:42.069
+hrishikb@andrew.cmu.edu: save a day of effort out of this, right? So that's not a worthy use of your time.
+
+22
+00:02:43.050 --> 00:02:46.529
+hrishikb@andrew.cmu.edu: So I think the point here is that you want to be…
+
+23
+00:02:47.090 --> 00:02:50.760
+hrishikb@andrew.cmu.edu: Realistic in what quality of measure you need.
+
+24
+00:02:51.810 --> 00:02:58.320
+hrishikb@andrew.cmu.edu: for one outcome, right? So if it's something that's consequential, it's worth to invest a little bit more time in
+
+25
+00:02:59.700 --> 00:03:02.009
+hrishikb@andrew.cmu.edu: In getting more precise solutions.
+
+26
+00:03:03.630 --> 00:03:09.090
+hrishikb@andrew.cmu.edu: But then I think you want to think about things where is really the potential to…
+
+27
+00:03:09.520 --> 00:03:11.130
+hrishikb@andrew.cmu.edu: See a lot of benefits.
+
+28
+00:03:11.340 --> 00:03:18.760
+hrishikb@andrew.cmu.edu: And I get the sense the meeting minutes are kind of saying, yeah, sure, that's nice, but, it's maybe not…
+
+29
+00:03:19.140 --> 00:03:31.449
+hrishikb@andrew.cmu.edu: that important, right? So, and I think there, you have some observations, you see it's slightly better or slightly faster, and you can say, sure, let's keep going, but maybe not invest a lot more, because we don't see a lot of it.
+
+30
+00:03:31.900 --> 00:03:39.200
+hrishikb@andrew.cmu.edu: Requirements is weird, because again, we're doing it once, and we have no counterfactual. You don't… I mean, we claim to invest effort.
+
+31
+00:03:39.910 --> 00:03:41.760
+hrishikb@andrew.cmu.edu: But… how much…
+
+32
+00:03:42.490 --> 00:03:48.960
+hrishikb@andrew.cmu.edu: you're not doing it again, right? So you can adjust this by saying, we did it, seemed fine, win.
+
+33
+00:03:49.830 --> 00:03:55.149
+hrishikb@andrew.cmu.edu: Are there other things that you… that are more consequential decisions, right, in your…
+
+34
+00:03:55.650 --> 00:04:00.760
+hrishikb@andrew.cmu.edu: software engineer system, right? What are the decisions that are actually of some consequence?
+
+35
+00:04:02.670 --> 00:04:06.229
+hrishikb@andrew.cmu.edu: To expect many more on the quality assurance side.
+
+36
+00:04:07.080 --> 00:04:11.520
+hrishikb@andrew.cmu.edu: Or… maybe coding, too, but again, coding seems easy.
+
+37
+00:04:12.120 --> 00:04:28.680
+hrishikb@andrew.cmu.edu: I think not using a coding agent with Stasis, maybe. I mean, it might not be super fast, right? This question is how you use it. Do you use it entirely in YOLO mode, right? Kind of just take off all… like, let it run, right, with all the tools?
+
+38
+00:04:30.500 --> 00:04:36.170
+hrishikb@andrew.cmu.edu: And I think this was doing some experimentation, because that's something that you do consistently, right?
+
+39
+00:04:36.910 --> 00:04:46.850
+hrishikb@andrew.cmu.edu: how many safeguards do you need? What access… what MCP tools do you want to get it, and so on? What's useful, right? When do you break the context limits, or something?
+
+40
+00:04:51.620 --> 00:04:55.000
+hrishikb@andrew.cmu.edu: Definitely, implement, maybe.
+
+41
+00:04:55.390 --> 00:05:09.599
+hrishikb@andrew.cmu.edu: gone a bit overboard. They just give it command line access. Some people have even gone as far as to, like, give it their bank account and, you know, other kind of access, like, connect it to their emails as well, so they can send automated emails.
+
+42
+00:05:09.840 --> 00:05:21.399
+hrishikb@andrew.cmu.edu: But I think it's also plausible to give it full access to your hard drive, but run it in a container, right? So that it can delete everything, but that's what backups are for.
+
+43
+00:05:21.650 --> 00:05:32.200
+hrishikb@andrew.cmu.edu: So, I'm not advocating this necessarily, right? And I can still have access to the internet and make all your source code. It might be, maybe, but it could, right?
+
+44
+00:05:32.320 --> 00:05:39.209
+hrishikb@andrew.cmu.edu: But I think it's… it's worth maybe looking into some of this, maybe looking into some safeguards.
+
+45
+00:05:39.520 --> 00:05:54.539
+hrishikb@andrew.cmu.edu: My approach until recently was also to look at every line of code that it generates, and I'm stepping a little bit away from that. I'm also not writing production-level, right, and writing scripts for my class and stuff like this, right?
+
+46
+00:05:54.670 --> 00:06:03.569
+hrishikb@andrew.cmu.edu: And I think I get a sense of what I can trust it, kind of, right? Or whether some tests are useful, or whether me just running a test once is good enough.
+
+47
+00:06:04.010 --> 00:06:08.679
+hrishikb@andrew.cmu.edu: Still mostly look at things, but I think this is the kind of space
+
+48
+00:06:09.370 --> 00:06:13.319
+hrishikb@andrew.cmu.edu: You could run an experiment to find a policy for your team.
+
+49
+00:06:13.660 --> 00:06:30.629
+hrishikb@andrew.cmu.edu: quality assurance might be worth it. I think there's opportunities in traceability. Make sure that all your requirements are tested. Something that you would never do otherwise, I'm pretty sure, unless somebody forces you. But I think AI is the opportunity to do more.
+
+50
+00:06:30.650 --> 00:06:36.770
+hrishikb@andrew.cmu.edu: You could do some hazard analysis, you know, some threat modeling that probably you wouldn't do otherwise.
+
+51
+00:06:36.830 --> 00:06:38.210
+hrishikb@andrew.cmu.edu: Right?
+
+52
+00:06:40.800 --> 00:06:44.590
+hrishikb@andrew.cmu.edu: But again, it's a… Draw quality diagram.
+
+53
+00:06:44.750 --> 00:06:51.780
+hrishikb@andrew.cmu.edu: Sure, but it's like, I'm sure that you wouldn't do it if you didn't do it with AI.
+
+54
+00:06:52.110 --> 00:06:53.230
+hrishikb@andrew.cmu.edu: And I think…
+
+55
+00:06:53.680 --> 00:07:04.549
+hrishikb@andrew.cmu.edu: Doing it with AI, even in a sloppy way, might be worth trying, but maybe it's also not bothered, because you're just looking at all the outcomes and nothing was useful, right? You're just annoyed, or…
+
+56
+00:07:04.880 --> 00:07:05.670
+hrishikb@andrew.cmu.edu: Farm.
+
+57
+00:07:07.130 --> 00:07:10.220
+hrishikb@andrew.cmu.edu: So… I didn't…
+
+58
+00:07:10.800 --> 00:07:19.599
+hrishikb@andrew.cmu.edu: what you should look for is places where it can speak you up, and places where it can improve your quality, right? Where you can do more than you wouldn't have done otherwise.
+
+59
+00:07:19.890 --> 00:07:30.070
+hrishikb@andrew.cmu.edu: And try to find some signals. I think that the reprompting thing is a way to connect data, but you're gonna hate it, and I'm not sure that it will tell you that much.
+
+60
+00:07:39.260 --> 00:07:42.679
+hrishikb@andrew.cmu.edu: It feels like data collection for the data collection's sake.
+
+61
+00:07:42.810 --> 00:07:52.819
+hrishikb@andrew.cmu.edu: I don't know how you would use the… let's say you wake prompt 5 times, and you need to correct, as a human 3 times.
+
+62
+00:07:53.080 --> 00:07:58.120
+hrishikb@andrew.cmu.edu: When you're doing requirements, How does this help your regular session?
+
+63
+00:08:00.300 --> 00:08:08.020
+hrishikb@andrew.cmu.edu: Right, so think backward from the decision, right? Think about what are you deciding in your software engineering system.
+
+64
+00:08:08.320 --> 00:08:10.650
+hrishikb@andrew.cmu.edu: Like, what kind of decision do you need to make?
+
+65
+00:08:12.830 --> 00:08:15.830
+hrishikb@andrew.cmu.edu: Usually, where to use it, right? How to use it.
+
+66
+00:08:17.160 --> 00:08:22.190
+hrishikb@andrew.cmu.edu: And when not to use it, you're perfectly fine not to use it, but you just need to justify it.
+
+67
+00:08:22.800 --> 00:08:28.239
+hrishikb@andrew.cmu.edu: And I don't think you need evidence to justify everything, I think. Engineering judgment is fine.
+
+68
+00:08:28.690 --> 00:08:34.329
+hrishikb@andrew.cmu.edu: I think what we're encouraging to do is be open-minded, but don't be dismissive.
+
+69
+00:08:34.909 --> 00:08:36.600
+hrishikb@andrew.cmu.edu: Okay.
+
+70
+00:08:37.850 --> 00:08:46.400
+hrishikb@andrew.cmu.edu: But I think if you… you can feel like this is going to be a waste of time for this immediately, and I would, because it's just something I can do if I stand in 5 minutes.
+
+71
+00:08:46.560 --> 00:08:51.899
+hrishikb@andrew.cmu.edu: That's a good enough reason to not do it.
+
+72
+00:08:58.620 --> 00:09:10.439
+hrishikb@andrew.cmu.edu: So, sorry, just to stick on this, it might be worth for you to think about this more, and I'm happy to talk to you again, if you have a doubt.
+
+73
+00:09:11.610 --> 00:09:13.829
+hrishikb@andrew.cmu.edu: I would suggest, think about…
+
+74
+00:09:14.020 --> 00:09:20.230
+hrishikb@andrew.cmu.edu: the new software engineering system, what decisions do you need to make, or what do you mean to justify? Yeah.
+
+75
+00:09:20.690 --> 00:09:24.210
+hrishikb@andrew.cmu.edu: Then you can… you can think about how can you measure
+
+76
+00:09:24.420 --> 00:09:29.789
+hrishikb@andrew.cmu.edu: what helps you make that decision, and I'm having to brainstorm what in your direction.
+
+77
+00:09:33.370 --> 00:09:43.240
+hrishikb@andrew.cmu.edu: So, like I said, we have the ML component here, and then, just know how you implement this thing, right?
+
+78
+00:09:43.740 --> 00:10:01.690
+hrishikb@andrew.cmu.edu: How are you going to prevent your project? Yeah. I can help with us, I think, but it's not technically my role, but I'm happy to talk to you about this, too. Yeah. Or when you use AI for a project? Yeah.
+
+79
+00:10:02.090 --> 00:10:12.359
+hrishikb@andrew.cmu.edu: It's fine, and I've talked to other teams about similar things, too. If you have AI in your project, I teach a class, and the second
+
+80
+00:10:13.100 --> 00:10:16.769
+hrishikb@andrew.cmu.edu: Try to give you some feedback, if you like.
+
+81
+00:10:17.610 --> 00:10:27.410
+hrishikb@andrew.cmu.edu: My task in this is to observe how you're using AI in your sub-engineering system, and how you evaluate this.
+
+82
+00:10:27.670 --> 00:10:32.400
+hrishikb@andrew.cmu.edu: Yeah, I mean, you start to just go over it in a…
+
+83
+00:10:32.800 --> 00:10:41.560
+hrishikb@andrew.cmu.edu: literally teaches the course on this, and it's like, why not take his head when he's… Okay, so,
+
+84
+00:10:41.780 --> 00:10:51.189
+hrishikb@andrew.cmu.edu: So here, by the time our data reaches our internet service, it, like, it's already been through some kind of parsing and the ingestion pipeline.
+
+85
+00:10:51.190 --> 00:11:06.839
+hrishikb@andrew.cmu.edu: So, it means that it's sitting in the canonical table form, like the rows and columns. So, obviously, the admin is not reading the PDFs, like I mentioned, before. It's not doing the document understanding and all of that shit stuff.
+
+86
+00:11:09.290 --> 00:11:12.049
+hrishikb@andrew.cmu.edu: Sorry? Right now, it's pretty good at this stage.
+
+87
+00:11:12.160 --> 00:11:19.770
+hrishikb@andrew.cmu.edu: It was the prescribed… Yeah, it's just the requirements for the…
+
+88
+00:11:21.120 --> 00:11:23.970
+hrishikb@andrew.cmu.edu: And actually, this is something that's…
+
+89
+00:11:24.130 --> 00:11:29.400
+hrishikb@andrew.cmu.edu: extracting data, like, even OCR for documents, it's really good on this.
+
+90
+00:11:29.780 --> 00:11:43.370
+hrishikb@andrew.cmu.edu: much better than most other resource libraries that you can just download and run. I mean, if they have the credits to put it into cloud or something, and it's not sensitive, right, this is…
+
+91
+00:11:44.610 --> 00:11:52.440
+hrishikb@andrew.cmu.edu: You may get problems with hallucinations, you might want to double-check it against OCR or something,
+
+92
+00:11:52.720 --> 00:11:55.300
+hrishikb@andrew.cmu.edu: You can have a water head for that too, but…
+
+93
+00:12:00.060 --> 00:12:07.820
+hrishikb@andrew.cmu.edu: I think the main thing is, they have Azure, and they're ready to deploy a new model on Azure. We don't want to use our movement logos anymore.
+
+94
+00:12:08.260 --> 00:12:13.320
+hrishikb@andrew.cmu.edu: ChatGPT directly. Oh, you can download and…
+
+95
+00:12:14.460 --> 00:12:19.359
+hrishikb@andrew.cmu.edu: I mean, it provides it through Azure. Oh, okay. I think the…
+
+96
+00:12:21.460 --> 00:12:29.249
+hrishikb@andrew.cmu.edu: I would have to check which model is which, but I think the cloud model that we're using for auto-grading will work is,
+
+97
+00:12:29.510 --> 00:12:31.129
+hrishikb@andrew.cmu.edu: is,
+
+98
+00:12:31.390 --> 00:12:41.729
+hrishikb@andrew.cmu.edu: Okay, yeah. Which gives you the secrecy, the privacy guarantee, essentially, right? This is probably why they wanted to.
+
+99
+00:12:42.050 --> 00:12:48.560
+hrishikb@andrew.cmu.edu: It's usually, like, half a year out of date or something. It's not the latest version, but it's, yeah.
+
+100
+00:12:50.070 --> 00:12:51.560
+hrishikb@andrew.cmu.edu: Okay, we can…
+
+101
+00:12:55.680 --> 00:13:01.639
+hrishikb@andrew.cmu.edu: Yeah. I mean, this is more of my intuition, right? But kind of data extraction…
+
+102
+00:13:02.440 --> 00:13:07.780
+hrishikb@andrew.cmu.edu: Yeah, even with CR stuff and so on.
+
+103
+00:13:10.080 --> 00:13:20.250
+hrishikb@andrew.cmu.edu: So, we evaluated the approaches, like, each one of us took out, three models, and then first was with a distal board, just
+
+104
+00:13:20.250 --> 00:13:45.099
+hrishikb@andrew.cmu.edu: give you, like, a quick brief context about what it is. It's a… it's just a… sorry, it's just a compressed version of the Word, model. Like, it's great for text classification, and extracting the attributes from any kind of unstructured, text data. And also, like, why we, delved into this, because it is natively supported on the Azure platform, the ML Studio.
+
+105
+00:13:45.100 --> 00:14:08.279
+hrishikb@andrew.cmu.edu: with the Hugging Face, library. So, the deployment was, like, pretty straightforward. That's why the client was pretty adamant about not using other tools, because they were like, after we hand off the project, they are the ones who have to maintain it. So, they were like, just use what's available on the Azure ML Studio. So, we just, researched on this.
+
+106
+00:14:08.390 --> 00:14:14.869
+hrishikb@andrew.cmu.edu: massive tool for requirements at some stage? No, not yet. We've not done any kind of POCs, this is all theoretical.
+
+107
+00:14:16.780 --> 00:14:22.809
+hrishikb@andrew.cmu.edu: Not sure that I can help you particularly pick a model like this. This is a lot of my expertise. Yeah.
+
+108
+00:14:23.060 --> 00:14:28.170
+hrishikb@andrew.cmu.edu: We can try what works. I think you should just try and see faster trade-offs, certainly.
+
+109
+00:14:28.410 --> 00:14:34.749
+hrishikb@andrew.cmu.edu: I would honestly start with a state-of-the-art living thing, and then…
+
+110
+00:14:36.790 --> 00:14:44.529
+hrishikb@andrew.cmu.edu: Unless you do really simple, kind of, entity name recognition stuff, or something like this, and…
+
+111
+00:14:44.670 --> 00:14:50.829
+hrishikb@andrew.cmu.edu: it's good at understanding structure and trying to guess things and so on.
+
+112
+00:14:51.450 --> 00:15:01.860
+hrishikb@andrew.cmu.edu: I would do the first. Intuitively, I mean, do whatever, right? But intuitively, I would do the first pass with an AM, and then do other stuff to check things to get confidentiality.
+
+113
+00:15:03.910 --> 00:15:07.609
+hrishikb@andrew.cmu.edu: Cool. I mean, try them in parallel or something, I think that's fine.
+
+114
+00:15:08.530 --> 00:15:32.720
+hrishikb@andrew.cmu.edu: So, the problem with the first one, the distalbot, is, it's a text model, but then our canonical table structure is tabular data, so, it, it's really not kind of solving the upstream problem. So it's not the, it's like an overkill, for the ML service layer that we, have. So the second one is, the gradient-boosted decision trees.
+
+115
+00:15:32.720 --> 00:15:35.870
+hrishikb@andrew.cmu.edu: We're not worried about cost.
+
+116
+00:15:35.910 --> 00:15:39.869
+hrishikb@andrew.cmu.edu: Of the item, which probably you'll want in the end.
+
+117
+00:15:40.140 --> 00:15:44.869
+hrishikb@andrew.cmu.edu: Don't worry about overworking. Okay. If it's working. Okay.
+
+118
+00:15:46.850 --> 00:16:11.660
+hrishikb@andrew.cmu.edu: The second one was CatBoost, and we were… and also, like, the light GB and the Gradient Boost model as a scale-up option. So, this is pretty much good, like, it handles, the heavy… handles heavy data set natively, but, the problem with this is, I think it requires, label data, but right now we don't
+
+119
+00:16:11.660 --> 00:16:16.350
+hrishikb@andrew.cmu.edu: have labor data, so that's, like, a gold star problem for now.
+
+120
+00:16:16.350 --> 00:16:19.860
+hrishikb@andrew.cmu.edu: But then… What do you want to use it for? What do you want to predict?
+
+121
+00:16:20.200 --> 00:16:25.180
+hrishikb@andrew.cmu.edu: We want to predict, the attributes.
+
+122
+00:16:27.930 --> 00:16:34.469
+hrishikb@andrew.cmu.edu: So let me see… Past data, right? Isn't there past data of your products and their forbids?
+
+123
+00:16:34.700 --> 00:16:39.160
+hrishikb@andrew.cmu.edu: Oh, we do. That's in the PIMS, yeah. Yes.
+
+124
+00:16:42.640 --> 00:16:45.790
+hrishikb@andrew.cmu.edu: Yeah, you might want to use some… you might…
+
+125
+00:16:45.890 --> 00:16:53.600
+hrishikb@andrew.cmu.edu: be sufficient with some embedding, or some… Exactly. There probably did something there a lot of time. If it allows the…
+
+126
+00:16:54.190 --> 00:16:55.619
+hrishikb@andrew.cmu.edu: What's you see behind it.
+
+127
+00:16:55.860 --> 00:17:00.349
+hrishikb@andrew.cmu.edu: How many SLPs do you have, or what's…
+
+128
+00:17:02.060 --> 00:17:08.489
+hrishikb@andrew.cmu.edu: what it's going to do. Yeah, probably beyond what you were just asking. Yeah, that's what I wanted.
+
+129
+00:17:08.829 --> 00:17:17.929
+hrishikb@andrew.cmu.edu: And then, I think, yeah, if you have something that's a little bit more explainable, that might be useful for the people later, but I suspect there's going to be some embedding of
+
+130
+00:17:18.319 --> 00:17:24.400
+hrishikb@andrew.cmu.edu: The text, and then some sort of decision tree over this, or some sort of simple…
+
+131
+00:17:24.710 --> 00:17:44.540
+hrishikb@andrew.cmu.edu: Perfect. So, the third one that we looked up is the semantic matcher using all mini-LM. So, it's kind of, based on the embedding similarity that you just told about. So, it just takes the supplier attribute text, embeds it, and it finds the closest, match, the neighbor in the PIMS database.
+
+132
+00:17:44.540 --> 00:18:08.100
+hrishikb@andrew.cmu.edu: Using the similarity, whatever functionality it has inside. So, instead of, classifying it into a bucket, it matches it, based on its nearest label, label. So, that's why… and it's a zero-shot model, that means it requires no label training also, so that… so there's no cold start problem as well, when we deal with this approach.
+
+133
+00:18:08.270 --> 00:18:15.400
+hrishikb@andrew.cmu.edu: Yeah. You're not trying to make that. Yeah, yeah.
+
+134
+00:18:15.830 --> 00:18:21.979
+hrishikb@andrew.cmu.edu: Yeah, I think this is… this is typically a data science problem at this point, right? This is just… this…
+
+135
+00:18:22.570 --> 00:18:31.059
+hrishikb@andrew.cmu.edu: to me, these are fairly boring, because there's no engineering around it, right? So this is the kind of stuff that somebody does in a notebook.
+
+136
+00:18:31.240 --> 00:18:34.969
+hrishikb@andrew.cmu.edu: And some people that are good at this, I think.
+
+137
+00:18:35.820 --> 00:18:38.870
+hrishikb@andrew.cmu.edu: I suspect that the thesis is… you will have…
+
+138
+00:18:39.020 --> 00:18:48.549
+hrishikb@andrew.cmu.edu: Maybe you like this kind of stuff, but have more fun with is, like, the infrastructure around it, making sure that it's reminded, and thinking about the user interface of how to
+
+139
+00:18:48.810 --> 00:18:55.209
+hrishikb@andrew.cmu.edu: How to generate confidence, maybe keep a human, or something, that feels great, so…
+
+140
+00:18:56.360 --> 00:19:09.569
+hrishikb@andrew.cmu.edu: Also, like, one more reason why we were… we are a little inclined towards using it is, again, like, theoretically, not, we have not done any POCs. So, because, this one does not require any,
+
+141
+00:19:09.930 --> 00:19:22.380
+hrishikb@andrew.cmu.edu: retraining, I mean, a human to, retrain it, because it's actually finding its nearest neighbors all by its own, using the PINCS database.
+
+142
+00:19:22.380 --> 00:19:31.340
+hrishikb@andrew.cmu.edu: So, it's… I think you just need to experiment there. I don't think I can help you with this specific model. Yeah.
+
+143
+00:19:32.610 --> 00:19:48.230
+hrishikb@andrew.cmu.edu: I think, think about how you evaluate that it's working, right? And think beyond just accuracy of something, like, figure out what's good enough for that customer, and how do you do that? And you might need some sort of interface where the customer can
+
+144
+00:19:48.230 --> 00:20:04.869
+hrishikb@andrew.cmu.edu: train this, or fix mistakes, or teach the model how to avoid mistakes, right? How you can learn from corrections, or something like this. There can be a lot of smart things, learning in production, like, daily feedback, and so on, that's not just pure machine learning.
+
+145
+00:20:07.480 --> 00:20:26.329
+hrishikb@andrew.cmu.edu: Again, just, like, this is the last concluding paragraph that, just to be just using modular design and good documentation practices. So yeah, this is something called ETTX. Assume you have access to the people who are doing this right now, right, so you can figure out what they like, and…
+
+146
+00:20:26.340 --> 00:20:34.240
+hrishikb@andrew.cmu.edu: Yeah, how they needed this, what they would need, and you can… you can probably prototype a lot, you could do Wizard of Oz kind of stuff.
+
+147
+00:20:34.460 --> 00:20:41.750
+hrishikb@andrew.cmu.edu: To show them some solutions that don't need to be working really well, right, and kind of see how they're interacting with this.
+
+148
+00:20:42.110 --> 00:20:54.039
+hrishikb@andrew.cmu.edu: I would expect that you run into a ton of automation bias, where people just click through things without thinking, right? So you might want to think about how to combine something like this with some HCI literature.
+
+149
+00:20:54.720 --> 00:20:55.530
+hrishikb@andrew.cmu.edu: Let me trip.
+
+150
+00:20:57.280 --> 00:21:00.039
+hrishikb@andrew.cmu.edu: Again, this is just a state,
+
+151
+00:21:00.230 --> 00:21:16.840
+hrishikb@andrew.cmu.edu: a general statement that I want to, tell it out, that we are ensuring that we have good documentation practices. So there's something called ETVX, methodology that we learned in our other course, and for every, task that we have, we have an
+
+152
+00:21:16.840 --> 00:21:21.269
+hrishikb@andrew.cmu.edu: Entry, task, verification, exit criteria.
+
+153
+00:21:21.310 --> 00:21:23.079
+hrishikb@andrew.cmu.edu: And also…
+
+154
+00:21:23.310 --> 00:21:45.459
+hrishikb@andrew.cmu.edu: yeah, we have a… I mean, we have not worked on the third point yet, like, we just know we have come up with a notional architecture workflow diagram, but then just today, we got the schema data from the client. So, I think it all starts with us trying out the POCs, experimenting with the different ML models, and, like, creating a baseline.
+
+155
+00:21:45.470 --> 00:22:03.369
+hrishikb@andrew.cmu.edu: Coming with numbers, and then, deciding on what model that we are supposed to use, and then probably that's when we can, you know, be very confident with the AI effectiveness, at least from the product point of… the project point of view.
+
+156
+00:22:05.520 --> 00:22:09.720
+hrishikb@andrew.cmu.edu: Yeah, that's it, behind. I suspect you've run a little difficult.
+
+157
+00:22:13.720 --> 00:22:21.499
+hrishikb@andrew.cmu.edu: you know, designing things in a space that you're probably not super familiar with, like the HCI stuff, the machine learning stuff.
+
+158
+00:22:22.890 --> 00:22:30.060
+hrishikb@andrew.cmu.edu: It's also a space that's not completely normal, so I would expect AI to be able to work a little bit, but…
+
+159
+00:22:30.240 --> 00:22:38.390
+hrishikb@andrew.cmu.edu: kind of design and asking the right questions and testing things, too, right? And especially prototyping.
+
+160
+00:22:38.550 --> 00:22:44.679
+hrishikb@andrew.cmu.edu: prototyping as part of requirements engineering, I think it's… Any corporate these two years.
+
+161
+00:22:47.090 --> 00:22:51.500
+hrishikb@andrew.cmu.edu: I think it's actually a pretty good match for his new project.
+
+162
+00:22:53.310 --> 00:22:56.570
+hrishikb@andrew.cmu.edu: We're just checking whether the requirements are complete.
+
+163
+00:22:57.920 --> 00:22:58.600
+hrishikb@andrew.cmu.edu: Beautiful.
+
+164
+00:22:59.890 --> 00:23:05.090
+hrishikb@andrew.cmu.edu: I would also encourage you, maybe, to play with this on us, like, what's…
+
+165
+00:23:05.350 --> 00:23:21.860
+hrishikb@andrew.cmu.edu: what's the need? Like, reflect on what is the need from somebody who routinely clicks through these things, right? Or somebody who gets a thousand documents, and a bunch of them are automated already, like, you need to check this and not fall asleep, right, or catch the one mistake.
+
+166
+00:23:21.860 --> 00:23:27.220
+hrishikb@andrew.cmu.edu: What kind of mistakes are important at all? I imagine I want to talk to a customer about this, too.
+
+167
+00:23:28.780 --> 00:23:44.270
+hrishikb@andrew.cmu.edu: Like, what are the problems that they're worried about most, right? Is a typo in the name of the product a problem, or a misclassification of this attribute? Probably not. Our attributes need to be the same accuracy, and some mistakes are worse than others.
+
+168
+00:23:46.120 --> 00:23:46.880
+hrishikb@andrew.cmu.edu: Dear.
+
+169
+00:23:47.310 --> 00:23:54.739
+hrishikb@andrew.cmu.edu: And I think you can do a lot of guessing with an LM before you then confirm a few parts of those with the customer.
+
+170
+00:23:57.670 --> 00:23:59.529
+hrishikb@andrew.cmu.edu: Yeah, we shouldn't…
+
+171
+00:24:11.080 --> 00:24:17.870
+hrishikb@andrew.cmu.edu: Yeah, we definitely should, just try not worry about overflow, and just try all the options before, like, 10-19.
+
+172
+00:24:20.140 --> 00:24:20.860
+hrishikb@andrew.cmu.edu: Right?
+
+173
+00:24:21.220 --> 00:24:22.130
+hrishikb@andrew.cmu.edu: Yeah.
+
+174
+00:24:23.820 --> 00:24:33.150
+hrishikb@andrew.cmu.edu: I think there's an exception, there's a little bit, do you go with a minimally viable product, or do you bid something that's very reliable and robust, right?
+
+175
+00:24:35.650 --> 00:24:37.320
+hrishikb@andrew.cmu.edu: And I think that's probably…
+
+176
+00:24:37.460 --> 00:24:49.930
+hrishikb@andrew.cmu.edu: software engineering system? Do you iterate very agile or frequently, right? Or do you do more waterfalling process, right? Where you establish all the partners, and then last semester you build everything?
+
+177
+00:24:51.850 --> 00:24:53.210
+hrishikb@andrew.cmu.edu: So let's go back to the rooms.
+
+178
+00:24:53.440 --> 00:25:06.699
+hrishikb@andrew.cmu.edu: product that's a little bit more explanatory, you don't know what will work. That suggests a more agile, kind of iterative approach, right? Very fast iteration.
+
+179
+00:25:06.820 --> 00:25:08.940
+hrishikb@andrew.cmu.edu: Lots of prototyping.
+
+180
+00:25:09.290 --> 00:25:19.399
+hrishikb@andrew.cmu.edu: That's something that AI is pretty good at, right? So you could… you could say your system is very iterative, we don't do all the models up front, right? You…
+
+181
+00:25:19.660 --> 00:25:24.800
+hrishikb@andrew.cmu.edu: don't know what the user interface will do, right? That depends a lot on the access to the financial risk.
+
+182
+00:25:24.970 --> 00:25:33.329
+hrishikb@andrew.cmu.edu: And you focus a lot on iteratively figuring out, A, what's actually reasonable, and B, what the customer actually needs.
+
+183
+00:25:36.020 --> 00:25:43.750
+hrishikb@andrew.cmu.edu: And I think with a lot of iteration, you can see how AI might have helped you there in prototyping, or in…
+
+184
+00:25:45.010 --> 00:25:54.070
+hrishikb@andrew.cmu.edu: in keeping track of iteration, what fails, what doesn't fail, more on the project management side, right? If you have some traceability or update the requirements, I think
+
+185
+00:25:54.220 --> 00:25:58.179
+hrishikb@andrew.cmu.edu: Updating requirements is annoying, right? As you're experimenting, I think that
+
+186
+00:25:58.300 --> 00:26:02.109
+hrishikb@andrew.cmu.edu: In a traditional project, that probably wouldn't have happened, or that's…
+
+187
+00:26:02.380 --> 00:26:05.470
+hrishikb@andrew.cmu.edu: This is a deliverable for grade.
+
+188
+00:26:06.640 --> 00:26:11.830
+hrishikb@andrew.cmu.edu: Right, so, but seriously, like, when you do requirements probably in the beginning, and then…
+
+189
+00:26:12.080 --> 00:26:21.149
+hrishikb@andrew.cmu.edu: everything changes, right? And maybe you go back at the very end. I think AI has the opportunity to update this more continuously.
+
+190
+00:26:21.630 --> 00:26:30.860
+hrishikb@andrew.cmu.edu: But also, I'm gonna look at this? I don't know. If it's… if it's just generating lots of documentation that nobody ever reads, that's the point?
+
+191
+00:26:33.350 --> 00:26:46.720
+hrishikb@andrew.cmu.edu: I don't know where any of this is going, right? What I see is that people generate a lot more documentation. That's kind of semi-correct, right? Yeah, it's happening to me as well, all of my friends.
+
+192
+00:26:46.990 --> 00:26:53.879
+hrishikb@andrew.cmu.edu: Yeah, he likes sending emails, and what he's doing now is, like, instead of writing, like, two lines with himself.
+
+193
+00:26:53.980 --> 00:27:07.910
+hrishikb@andrew.cmu.edu: he sends, like, 3 paragraphs with AI, and then he expects… then he does not even bother reading what I… and then he just asks this AI to summarize it. And what the AI gives it is, like, more than what I wrote in the first place, so…
+
+194
+00:27:07.970 --> 00:27:22.949
+hrishikb@andrew.cmu.edu: So, it's like AI writing to other AI, and then we're getting stuck. Again, there's no student in management. Student emails have gotten longer in recent years. I do most of the communication in my class on Slack, because it doesn't… students don't quite…
+
+195
+00:27:23.260 --> 00:27:26.069
+hrishikb@andrew.cmu.edu: Lots of long-generated messages on Slack.
+
+196
+00:27:26.690 --> 00:27:27.390
+hrishikb@andrew.cmu.edu: Yeah.
+
+197
+00:27:28.510 --> 00:27:32.319
+hrishikb@andrew.cmu.edu: Looks quite bad for that. It wasn't the attention, but it looks quite like today.
+
+198
+00:27:35.580 --> 00:27:36.540
+hrishikb@andrew.cmu.edu: Yeah.
+
+199
+00:27:40.970 --> 00:27:44.809
+hrishikb@andrew.cmu.edu: I think the conclusion is we don't know where this is going.
+
+200
+00:27:45.580 --> 00:27:51.320
+hrishikb@andrew.cmu.edu: Yeah, I think… I think, think about decisions you need to make, and how you can support those.
+
+201
+00:27:52.930 --> 00:28:10.290
+hrishikb@andrew.cmu.edu: And feel free to reach out again in a couple of weeks or so, or every week, maybe, like, whenever you have something to discuss. I think once we start talking, we'll probably reach out to you with some kind of data we have as well.
+
+202
+00:28:11.030 --> 00:28:19.369
+hrishikb@andrew.cmu.edu: Yeah, or just if you figure out what you… what decisions you need for the software engineering system, and…
+
+203
+00:28:20.470 --> 00:28:24.329
+hrishikb@andrew.cmu.edu: What kind of data you might or might not prevent.
+
+204
+00:28:24.580 --> 00:28:27.350
+hrishikb@andrew.cmu.edu: I think keep your data collection actually sane, I think.
+
+205
+00:28:28.120 --> 00:28:31.659
+hrishikb@andrew.cmu.edu: Counting the number of prompts or changes.
+
+206
+00:28:31.850 --> 00:28:38.030
+hrishikb@andrew.cmu.edu: You will hate, unless you can do this in some environment where this is automated, you will hate this.
+
+207
+00:28:38.220 --> 00:28:38.940
+hrishikb@andrew.cmu.edu: Hmm.
+
+208
+00:28:39.070 --> 00:28:41.120
+hrishikb@andrew.cmu.edu: This is… this was repeated…
+
+209
+00:28:41.580 --> 00:28:50.350
+hrishikb@andrew.cmu.edu: super tedious, you will forget, and then you approximate something after the fact. I don't think that's a good way. You can build a tool, right, so where
+
+210
+00:28:51.430 --> 00:28:59.990
+hrishikb@andrew.cmu.edu: Where it keeps it via all the changes in Dropbox or something, and you can call changes or something, based on the history, and probably…
+
+211
+00:29:00.760 --> 00:29:04.159
+hrishikb@andrew.cmu.edu: To summarize and do this analysis for you.
+
+212
+00:29:04.280 --> 00:29:11.640
+hrishikb@andrew.cmu.edu: It might be a play, it's essentially for free, right? If we can find a way to do this in an environment where you can expect less optimal.
+
+213
+00:29:12.020 --> 00:29:14.669
+hrishikb@andrew.cmu.edu: If you need to track things manually.
+
+214
+00:29:15.560 --> 00:29:19.139
+hrishikb@andrew.cmu.edu: This might be okay to get a grade, but…
+
+215
+00:29:20.290 --> 00:29:28.710
+hrishikb@andrew.cmu.edu: We use code as something like that, that you can store separate sessions in separate files and everything. But, yeah, counting, like.
+
+216
+00:29:28.960 --> 00:29:30.870
+hrishikb@andrew.cmu.edu: How many times you've done it would…
+
+217
+00:29:31.260 --> 00:29:36.409
+hrishikb@andrew.cmu.edu: Would just be only for the grade level, if it was forced, yeah.
+
+218
+00:29:38.880 --> 00:29:39.540
+hrishikb@andrew.cmu.edu: Yes.
+
+219
+00:29:43.950 --> 00:29:44.760
+hrishikb@andrew.cmu.edu: Goodbye.
+
+220
+00:29:45.220 --> 00:29:47.570
+hrishikb@andrew.cmu.edu: Thank you so much. You too.
+
+221
+00:29:48.740 --> 00:29:50.859
+hrishikb@andrew.cmu.edu: You did not pick up with me, January.
+
+222
+00:29:51.500 --> 00:29:56.659
+hrishikb@andrew.cmu.edu: I think partially it was recorded at F4 to start the recording initially.
+
+223
+00:29:57.620 --> 00:30:02.689
+hrishikb@andrew.cmu.edu: Do you mind sharing the transcript? Yeah, of course.
+
+224
+00:30:03.090 --> 00:30:14.829
+hrishikb@andrew.cmu.edu: We're… you… you've got all this IRB text, right? We're also trying to observe what you're doing, what you're struggling with. We might want to write a paper at some point and share this with other teachers.
+
+225
+00:30:16.230 --> 00:30:27.219
+hrishikb@andrew.cmu.edu: I'm not allowed to record the meeting, but I'm allowed to look at artifacts that you're producing. So, if you're willing to share the English here, I can look at this.
+
+226
+00:30:36.120 --> 00:30:38.419
+hrishikb@andrew.cmu.edu: I'm guessing these, coding sections will.
+

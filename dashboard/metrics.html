@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eParts Agentic SE System — Dashboard</title>
+<style>
+  :root {
+    --bg: #0a0b10;
+    --card: #13151e;
+    --border: #1e2130;
+    --text: #e1e4ed;
+    --muted: #6b7084;
+    --accent: #6c63ff;
+    --accent2: #00d4aa;
+    --success: #22c55e;
+    --warn: #f59e0b;
+    --danger: #ef4444;
+    --blue: #3b82f6;
+    --pink: #ec4899;
+    --cyan: #06b6d4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 28px 32px;
+  }
+  header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 36px; padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+  header h1 span { color: var(--accent); }
+  .subtitle { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .tab-bar {
+    display: flex; gap: 4px; background: var(--card); border-radius: 10px;
+    padding: 4px; border: 1px solid var(--border);
+  }
+  .tab {
+    padding: 8px 18px; border-radius: 7px; font-size: 13px; font-weight: 500;
+    cursor: pointer; color: var(--muted); transition: all 0.2s;
+    border: none; background: none; font-family: inherit;
+  }
+  .tab.active { background: var(--accent); color: white; }
+  .tab:hover:not(.active) { color: var(--text); background: rgba(108,99,255,0.1); }
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* KPI cards */
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px; margin-bottom: 32px;
+  }
+  .kpi {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px 20px; position: relative; overflow: hidden;
+  }
+  .kpi::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--accent);
+  }
+  .kpi.green::before { background: var(--success); }
+  .kpi.blue::before { background: var(--blue); }
+  .kpi.cyan::before { background: var(--cyan); }
+  .kpi.pink::before { background: var(--pink); }
+  .kpi.yellow::before { background: var(--warn); }
+  .kpi-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); margin-bottom: 6px; }
+  .kpi-value { font-size: 30px; font-weight: 800; letter-spacing: -1.5px; }
+  .kpi-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+  /* Sections */
+  .section { margin-bottom: 28px; }
+  .section h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); margin-bottom: 14px; font-weight: 600; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  th, td { padding: 10px 14px; text-align: left; font-size: 12px; border-bottom: 1px solid var(--border); }
+  th { background: rgba(108,99,255,0.06); font-weight: 600; text-transform: uppercase; font-size: 10px; letter-spacing: 0.8px; color: var(--muted); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(108,99,255,0.03); }
+
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; }
+  .badge-client { background: rgba(59,130,246,0.15); color: var(--blue); }
+  .badge-coach { background: rgba(108,99,255,0.15); color: var(--accent); }
+  .badge-mentor { background: rgba(0,212,170,0.15); color: var(--accent2); }
+  .badge-ok { background: rgba(34,197,94,0.15); color: var(--success); }
+
+  /* Bar charts */
+  .bar-chart { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+  .bar-row { display: flex; align-items: center; margin-bottom: 6px; gap: 10px; }
+  .bar-label { width: 160px; font-size: 11px; text-align: right; color: var(--muted); flex-shrink: 0; }
+  .bar-track { flex: 1; height: 22px; background: rgba(108,99,255,0.08); border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; min-width: 2px; transition: width 0.6s ease; }
+  .bar-value { width: 70px; font-size: 11px; font-weight: 700; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  @media (max-width: 1000px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+
+  /* Pipeline flow */
+  .pipeline-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px; margin-bottom: 14px;
+  }
+  .pipeline-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .pipeline-area { font-size: 11px; color: var(--accent); margin-bottom: 10px; }
+  .pipeline-steps { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
+  .step-chip {
+    background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.2);
+    border-radius: 6px; padding: 4px 10px; font-size: 10px; color: var(--text);
+    font-weight: 500;
+  }
+  .step-arrow { color: var(--muted); font-size: 11px; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 7px; top: 4px; bottom: 4px;
+    width: 2px; background: var(--border);
+  }
+  .tl-item { position: relative; margin-bottom: 16px; }
+  .tl-dot {
+    position: absolute; left: -20px; top: 4px; width: 10px; height: 10px;
+    border-radius: 50%; border: 2px solid var(--accent); background: var(--bg);
+  }
+  .tl-item.client .tl-dot { border-color: var(--blue); }
+  .tl-item.coach .tl-dot { border-color: var(--accent); background: var(--accent); }
+  .tl-item.mentor .tl-dot { border-color: var(--accent2); }
+  .tl-date { font-size: 11px; color: var(--muted); font-weight: 600; }
+  .tl-title { font-size: 13px; font-weight: 600; margin: 2px 0; }
+  .tl-detail { font-size: 11px; color: var(--muted); }
+
+  /* Knowledge card */
+  .kb-stat {
+    display: flex; align-items: center; gap: 14px; padding: 14px 18px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .kb-icon { font-size: 24px; width: 40px; text-align: center; }
+  .kb-info { flex: 1; }
+  .kb-info .label { font-size: 11px; color: var(--muted); }
+  .kb-info .value { font-size: 18px; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1><span>eParts</span> Agentic SE System</h1>
+    <div class="subtitle">Pimsie Supreme — CMU MSE Studio 2026 — Real Data Dashboard</div>
+  </div>
+  <div class="tab-bar">
+    <button class="tab active" onclick="showPage('overview')">Overview</button>
+    <button class="tab" onclick="showPage('meetings')">Meetings</button>
+    <button class="tab" onclick="showPage('pipelines')">Pipelines</button>
+    <button class="tab" onclick="showPage('memory')">Coach Memory</button>
+    <button class="tab" onclick="showPage('knowledge')">Knowledge Base</button>
+  </div>
+</header>
+
+<!-- ============ OVERVIEW PAGE ============ -->
+<div id="page-overview" class="page active">
+  <div class="kpi-grid">
+    <div class="kpi green">
+      <div class="kpi-label">Meetings Processed</div>
+      <div class="kpi-value">8</div>
+      <div class="kpi-sub">5 client + 3 coach/mentor</div>
+    </div>
+    <div class="kpi blue">
+      <div class="kpi-label">Total Words Analyzed</div>
+      <div class="kpi-value">53,745</div>
+      <div class="kpi-sub">~6.7K words/session avg</div>
+    </div>
+    <div class="kpi cyan">
+      <div class="kpi-label">ChromaDB Chunks</div>
+      <div class="kpi-value">396</div>
+      <div class="kpi-sub">317 sessions + 79 knowledge</div>
+    </div>
+    <div class="kpi pink">
+      <div class="kpi-label">Action Items Extracted</div>
+      <div class="kpi-value">123</div>
+      <div class="kpi-sub">across all 8 meetings</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Pipelines Defined</div>
+      <div class="kpi-value">7</div>
+      <div class="kpi-sub">29 steps, 25 agents</div>
+    </div>
+    <div class="kpi yellow">
+      <div class="kpi-label">Codebase</div>
+      <div class="kpi-value">7,558</div>
+      <div class="kpi-sub">lines across 56 Python files</div>
+    </div>
+    <div class="kpi green">
+      <div class="kpi-label">Commitments Tracked</div>
+      <div class="kpi-value">30</div>
+      <div class="kpi-sub">from 3 coach sessions</div>
+    </div>
+    <div class="kpi blue">
+      <div class="kpi-label">ETVX Processes</div>
+      <div class="kpi-value">31</div>
+      <div class="kpi-sub">100% agent coverage</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <h2>Session Timeline</h2>
+      <div class="bar-chart">
+        <div class="timeline" id="timeline"></div>
+      </div>
+    </div>
+    <div class="section">
+      <h2>Words Analyzed by Meeting</h2>
+      <div class="bar-chart" id="words-chart"></div>
+    </div>
+  </div>
+
+  <div class="section" style="margin-top: 20px;">
+    <h2>Practice Area Coverage</h2>
+    <div class="three-col">
+      <div class="pipeline-card">
+        <div class="pipeline-name">Requirements Engineering</div>
+        <div class="pipeline-area">7 steps — End-to-end connected</div>
+        <div class="pipeline-steps">
+          <span class="step-chip">transcript_parser</span><span class="step-arrow">→</span>
+          <span class="step-chip">priority_classifier</span><span class="step-arrow">→</span>
+          <span class="step-chip">req_extractor</span><span class="step-arrow">→</span>
+          <span class="step-chip">ticket_creator</span><span class="step-arrow">→</span>
+          <span class="step-chip">minutes_publisher</span><span class="step-arrow">→</span>
+          <span class="step-chip">decision_logger</span><span class="step-arrow">→</span>
+          <span class="step-chip">drift_detector</span>
+        </div>
+      </div>
+      <div class="pipeline-card">
+        <div class="pipeline-name">Coach Session Memory</div>
+        <div class="pipeline-area">6 steps — RAG-powered</div>
+        <div class="pipeline-steps">
+          <span class="step-chip">transcript_parser</span><span class="step-arrow">→</span>
+          <span class="step-chip">session_memory</span><span class="step-arrow">→</span>
+          <span class="step-chip">commitment_tracker</span><span class="step-arrow">→</span>
+          <span class="step-chip">concern_tracker</span><span class="step-arrow">→</span>
+          <span class="step-chip">coach_linker</span><span class="step-arrow">→</span>
+          <span class="step-chip">decision_logger</span>
+        </div>
+      </div>
+      <div class="pipeline-card">
+        <div class="pipeline-name">Architecture</div>
+        <div class="pipeline-area">4 steps</div>
+        <div class="pipeline-steps">
+          <span class="step-chip">drift_detector</span><span class="step-arrow">→</span>
+          <span class="step-chip">adr_generator</span><span class="step-arrow">→</span>
+          <span class="step-chip">diagram_updater</span><span class="step-arrow">→</span>
+          <span class="step-chip">traceability_builder</span>
+        </div>
+      </div>
+      <div class="pipeline-card">
+        <div class="pipeline-name">Coding</div>
+        <div class="pipeline-area">4 steps</div>
+        <div class="pipeline-steps">
+          <span class="step-chip">pr_reviewer</span><span class="step-arrow">→</span>
+          <span class="step-chip">test_generator</span><span class="step-arrow">→</span>
+          <span class="step-chip">doc_generator</span><span class="step-arrow">→</span>
+          <span class="step-chip">prompt_regression</span>
+        </div>
+      </div>
+      <div class="pipeline-card">
+        <div class="pipeline-name">ML Decision Memory</div>
+        <div class="pipeline-area">3 steps — eParts-specific</div>
+        <div class="pipeline-steps">
+          <span class="step-chip">evidence_accumulator</span><span class="step-arrow">→</span>
+          <span class="step-chip">readiness_detector</span><span class="step-arrow">→</span>
+          <span class="step-chip">coach_linker</span>
+        </div>
+      </div>
+      <div class="pipeline-card">
+        <div class="pipeline-name">Project Management</div>
+        <div class="pipeline-area">3 steps</div>
+        <div class="pipeline-steps">
+          <span class="step-chip">wbs_updater</span><span class="step-arrow">→</span>
+          <span class="step-chip">weekly_digest</span><span class="step-arrow">→</span>
+          <span class="step-chip">alert_agent</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MEETINGS PAGE ============ -->
+<div id="page-meetings" class="page">
+  <div class="section">
+    <h2>All Processed Meetings</h2>
+    <table>
+      <tr><th>Date</th><th>Type</th><th>Participants</th><th>Duration</th><th>Words</th><th>Turns</th><th>Actions</th><th>Decisions</th></tr>
+      <tr><td>Jan 22</td><td><span class="badge badge-client">client</span></td><td>Hrishik, Dennis</td><td>56 min</td><td>8,988</td><td>17</td><td>7</td><td>3</td></tr>
+      <tr><td>Feb 12</td><td><span class="badge badge-client">client</span></td><td>Hrishik, David (eParts)</td><td>56 min</td><td>7,417</td><td>59</td><td>19</td><td>3</td></tr>
+      <tr><td>Feb 20</td><td><span class="badge badge-mentor">mentor</span></td><td>Hrishik, Dennis</td><td>57 min</td><td>8,849</td><td>—</td><td>1</td><td>1</td></tr>
+      <tr><td>Feb 24</td><td><span class="badge badge-coach">ux coach</span></td><td>Hrishik, Ben</td><td>69 min</td><td>8,511</td><td>—</td><td>1</td><td>1</td></tr>
+      <tr><td>Feb 24</td><td><span class="badge badge-coach">ses coach</span></td><td>Hrishik, Ashritha, Jai, Cory</td><td>51 min</td><td>7,789</td><td>195</td><td>36</td><td>2</td></tr>
+      <tr><td>Feb 26</td><td><span class="badge badge-client">client</span></td><td>Hrishik, Harsha (eParts)</td><td>30 min</td><td>4,467</td><td>93</td><td>18</td><td>2</td></tr>
+      <tr><td>Apr 2</td><td><span class="badge badge-client">client</span></td><td>Jaivard, Hrishik, Harsha, Ashritha</td><td>32 min</td><td>4,629</td><td>123</td><td>37</td><td>1</td></tr>
+      <tr><td>Apr 16</td><td><span class="badge badge-client">client</span></td><td>Jaivard, Ashritha, Arjun</td><td>24 min</td><td>3,095</td><td>8</td><td>4</td><td>1</td></tr>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <h2>Participation Distribution</h2>
+      <div class="bar-chart" id="participation-chart"></div>
+    </div>
+    <div class="section">
+      <h2>Meeting Cadence</h2>
+      <div class="bar-chart">
+        <div style="font-size: 12px; color: var(--muted); line-height: 1.8;">
+          <div><strong style="color: var(--text);">Jan 22</strong> — Initial client meeting, requirements discovery</div>
+          <div><strong style="color: var(--text);">Feb 12</strong> — Data model deep-dive with David</div>
+          <div><strong style="color: var(--text);">Feb 20</strong> — Dennis mentoring: risk & PM</div>
+          <div><strong style="color: var(--text);">Feb 24</strong> — Ben coaching: UX/HITL + Cory coaching: SES</div>
+          <div><strong style="color: var(--text);">Feb 26</strong> — Harsha: ML approach & POC scope</div>
+          <div><strong style="color: var(--text);">Apr 2</strong> — Sprint review with Harsha</div>
+          <div><strong style="color: var(--text);">Apr 16</strong> — Latest client sync</div>
+          <br>
+          <div style="color: var(--accent);">Total: 375 min (6.25 hrs) of recorded sessions</div>
+          <div>Avg: 47 min/session | 6,718 words/session</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PIPELINES PAGE ============ -->
+<div id="page-pipelines" class="page">
+  <div class="kpi-grid">
+    <div class="kpi green"><div class="kpi-label">Requirements Pipeline</div><div class="kpi-value">7/7</div><div class="kpi-sub">steps run successfully on all transcripts</div></div>
+    <div class="kpi blue"><div class="kpi-label">Coach Session Pipeline</div><div class="kpi-value">6/6</div><div class="kpi-sub">steps run on all 3 coach sessions</div></div>
+    <div class="kpi"><div class="kpi-label">Total Agents</div><div class="kpi-value">25</div><div class="kpi-sub">unique agents across 7 pipelines</div></div>
+    <div class="kpi cyan"><div class="kpi-label">MCP Servers</div><div class="kpi-value">6</div><div class="kpi-sub">Jira, Bitbucket, Confluence, Slack, Drive, Vector Store</div></div>
+  </div>
+
+  <div class="section">
+    <h2>Pipeline Definitions</h2>
+    <table>
+      <tr><th>Pipeline</th><th>Practice Area</th><th>Steps</th><th>Agents</th><th>Triggers</th></tr>
+      <tr><td>requirements</td><td>Requirements Engineering</td><td>7</td><td>transcript_parser → priority_classifier → req_extractor → ticket_creator → minutes_publisher → decision_logger → drift_detector</td><td>transcript</td></tr>
+      <tr><td>coach_session</td><td>Coach Session Memory</td><td>6</td><td>transcript_parser → session_memory → commitment_tracker → concern_tracker → coach_linker → decision_logger</td><td>coach_transcript</td></tr>
+      <tr><td>architecture</td><td>Architecture</td><td>4</td><td>drift_detector → adr_generator → diagram_updater → traceability_builder</td><td>transcript, pr_event</td></tr>
+      <tr><td>coding</td><td>Coding</td><td>4</td><td>pr_reviewer → test_generator → doc_generator → prompt_regression</td><td>pr_event</td></tr>
+      <tr><td>ml_decision</td><td>ML Decision Memory</td><td>3</td><td>evidence_accumulator → readiness_detector → coach_linker</td><td>poc_result</td></tr>
+      <tr><td>project_mgmt</td><td>Project Management</td><td>3</td><td>wbs_updater → weekly_digest → alert_agent</td><td>cron_friday_6pm</td></tr>
+      <tr><td>knowledge</td><td>Knowledge Management</td><td>2</td><td>context_packager → briefing_generator</td><td>cron_pre_meeting</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Agent Inventory by Domain</h2>
+    <div class="three-col">
+      <div class="pipeline-card">
+        <div class="pipeline-name">Requirements (4)</div>
+        <div style="font-size: 11px; color: var(--muted); line-height: 1.8;">
+          transcript_parser — VTT → structured minutes<br>
+          priority_classifier — P0/P1/P2 classification<br>
+          req_extractor — REQ-XXX.md generation<br>
+          stale_detector — flags stale requirements
+        </div>
+      </div>
+      <div class="pipeline-card">
+        <div class="pipeline-name">Architecture (4)</div>
+        <div style="font-size: 11px; color: var(--muted); line-height: 1.8;">
+          drift_detector — architectural drift analysis<br>
+          adr_generator — ADR drafting<br>
+          diagram_updater — Mermaid diagram PRs<br>
+          traceability_builder — req↔arch matrix
+        </div>
+      </div>
+      <div class="pipeline-card">
+        <div class="pipeline-name">Coding (4)</div>
+        <div style="font-size: 11px; color: var(--muted); line-height: 1.8;">
+          pr_reviewer — automated PR review<br>
+          test_generator — test stub generation<br>
+          doc_generator — API doc updates<br>
+          boilerplate_generator — scaffolding
+        </div>
+      </div>
+      <div class="pipeline-card">
+        <div class="pipeline-name">Project Mgmt (4)</div>
+        <div style="font-size: 11px; color: var(--muted); line-height: 1.8;">
+          ticket_creator — Jira tickets from items<br>
+          wbs_updater — WBS sync with sprint<br>
+          weekly_digest — progress summary<br>
+          alert_agent — health monitoring
+        </div>
+      </div>
+      <div class="pipeline-card">
+        <div class="pipeline-name">Coach Memory (4)</div>
+        <div style="font-size: 11px; color: var(--muted); line-height: 1.8;">
+          session_memory — ChromaDB RAG embedding<br>
+          commitment_tracker — obligation tracking<br>
+          concern_tracker — recurring theme detection<br>
+          briefing_generator — pre-meeting briefings
+        </div>
+      </div>
+      <div class="pipeline-card">
+        <div class="pipeline-name">Knowledge (4) + ML (3)</div>
+        <div style="font-size: 11px; color: var(--muted); line-height: 1.8;">
+          minutes_publisher — Confluence publishing<br>
+          decision_logger — ADR/decision tracking<br>
+          context_packager — meeting prep<br>
+          prompt_regression — golden dataset testing<br>
+          evidence_accumulator — POC evidence<br>
+          readiness_detector — decision closure<br>
+          coach_linker — ML↔coach linking
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ COACH MEMORY PAGE ============ -->
+<div id="page-memory" class="page">
+  <div class="kpi-grid">
+    <div class="kpi green"><div class="kpi-label">Sessions Embedded</div><div class="kpi-value">3</div><div class="kpi-sub">Dennis, Ben, Cory</div></div>
+    <div class="kpi blue"><div class="kpi-label">Vector Chunks</div><div class="kpi-value">317</div><div class="kpi-sub">in ChromaDB (ONNX MiniLM-L6-v2)</div></div>
+    <div class="kpi"><div class="kpi-label">Commitments</div><div class="kpi-value">30</div><div class="kpi-sub">tracked in SQLite</div></div>
+    <div class="kpi yellow"><div class="kpi-label">Concern Themes</div><div class="kpi-value">1</div><div class="kpi-sub">recurring across 3 sessions</div></div>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <h2>Coach Sessions Indexed</h2>
+      <table>
+        <tr><th>Date</th><th>Coach</th><th>Topic</th><th>Chunks</th></tr>
+        <tr><td>Feb 20</td><td>Dennis (Mentor)</td><td>Risk & Project Management</td><td>107</td></tr>
+        <tr><td>Feb 24</td><td>Ben (UX Coach)</td><td>UX Integration & HITL Design</td><td>115</td></tr>
+        <tr><td>Feb 24</td><td>Cory Gwin (SES Coach)</td><td>Agent Feedback Loops, Code Organization</td><td>95</td></tr>
+      </table>
+    </div>
+    <div class="section">
+      <h2>Semantic Search Demo</h2>
+      <div class="bar-chart" style="font-size: 12px; line-height: 2;">
+        <div style="color: var(--accent); font-weight: 600; margin-bottom: 8px;">Sample queries against ChromaDB:</div>
+        <div><span style="color: var(--muted);">Q:</span> "agent visibility and code organization"</div>
+        <div style="color: var(--success); font-size: 11px;">→ Cory: "You always have to be thinking about what can my agent see..."</div>
+        <div style="margin-top: 6px;"><span style="color: var(--muted);">Q:</span> "ADR folder and central document store"</div>
+        <div style="color: var(--success); font-size: 11px;">→ Cory: "ADRs and make sure there are none that are required to think about..."</div>
+        <div style="margin-top: 6px;"><span style="color: var(--muted);">Q:</span> "Azure environment constraints"</div>
+        <div style="color: var(--success); font-size: 11px;">→ Dennis: "not defining it as an official constraint... kept it as preference..."</div>
+        <div style="margin-top: 6px;"><span style="color: var(--muted);">Q:</span> "HITL human in the loop"</div>
+        <div style="color: var(--success); font-size: 11px;">→ Ben: "human review part... ML spit out some good mock-ups for HITL..."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Pipeline Flow — Coach Session Memory</h2>
+    <div class="pipeline-card" style="background: linear-gradient(135deg, var(--card) 0%, rgba(108,99,255,0.05) 100%);">
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 12px;">
+        <span class="step-chip" style="background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.3);">1. transcript_parser</span>
+        <span class="step-arrow">→</span>
+        <span class="step-chip" style="background: rgba(59,130,246,0.15); border-color: rgba(59,130,246,0.3);">2. session_memory (ChromaDB)</span>
+        <span class="step-arrow">→</span>
+        <span class="step-chip" style="background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.3);">3. commitment_tracker</span>
+        <span class="step-arrow">→</span>
+        <span class="step-chip" style="background: rgba(236,72,153,0.15); border-color: rgba(236,72,153,0.3);">4. concern_tracker</span>
+        <span class="step-arrow">→</span>
+        <span class="step-chip" style="background: rgba(6,182,212,0.15); border-color: rgba(6,182,212,0.3);">5. coach_linker</span>
+        <span class="step-arrow">→</span>
+        <span class="step-chip" style="background: rgba(108,99,255,0.15); border-color: rgba(108,99,255,0.3);">6. decision_logger</span>
+      </div>
+      <div style="margin-top: 12px; font-size: 11px; color: var(--muted);">
+        All 3 sessions: <span style="color: var(--success); font-weight: 700;">6/6 SUCCESS</span> — avg 1,350ms per session
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ KNOWLEDGE BASE PAGE ============ -->
+<div id="page-knowledge" class="page">
+  <div class="kpi-grid">
+    <div class="kpi green"><div class="kpi-label">Knowledge Chunks</div><div class="kpi-value">79</div><div class="kpi-sub">from 4 project documents</div></div>
+    <div class="kpi blue"><div class="kpi-label">Session Chunks</div><div class="kpi-value">317</div><div class="kpi-sub">from 3 coach meetings</div></div>
+    <div class="kpi"><div class="kpi-label">Total Searchable</div><div class="kpi-value">396</div><div class="kpi-sub">chunks in 2 ChromaDB collections</div></div>
+    <div class="kpi cyan"><div class="kpi-label">Embedding Model</div><div class="kpi-value">ONNX</div><div class="kpi-sub">MiniLM-L6-v2 (local, no API)</div></div>
+  </div>
+
+  <div class="section">
+    <h2>Indexed Documents</h2>
+    <table>
+      <tr><th>Document</th><th>Collection</th><th>Chunks</th><th>Description</th></tr>
+      <tr><td>eParts_Risk_and_Project_Management.md</td><td>project_knowledge</td><td>7</td><td>Dennis coaching artifact — risks, constraints, SOW</td></tr>
+      <tr><td>eparts_project_overview.md</td><td>project_knowledge</td><td>18</td><td>Complete project overview — ML, architecture, SES</td></tr>
+      <tr><td>Metamodel_framework.md</td><td>project_knowledge</td><td>17</td><td>AASE meta-model — ETVX, GQIM, process design</td></tr>
+      <tr><td>CURSOR_PROMPT.md</td><td>project_knowledge</td><td>37</td><td>SES build specification — agent architecture</td></tr>
+      <tr><td>Dennis session (Feb 20)</td><td>coach_sessions</td><td>107</td><td>Risk assessment, data access, ML uncertainty</td></tr>
+      <tr><td>Ben session (Feb 24)</td><td>coach_sessions</td><td>115</td><td>UX integration, HITL design, pipeline walkthrough</td></tr>
+      <tr><td>Cory session (Feb 24)</td><td>coach_sessions</td><td>95</td><td>SES coaching, ADRs, agent feedback loops</td></tr>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <h2>Knowledge Graph Connections</h2>
+      <div class="bar-chart" style="font-size: 12px; line-height: 2;">
+        <div style="color: var(--accent); font-weight: 600; margin-bottom: 8px;">Cross-document semantic links:</div>
+        <div>Risk doc ↔ Dennis session: <span style="color: var(--success);">data access, ML model selection, Azure constraints</span></div>
+        <div>Project overview ↔ Ben session: <span style="color: var(--success);">HITL design, confidence thresholds, pipeline architecture</span></div>
+        <div>Metamodel ↔ Cory session: <span style="color: var(--success);">ETVX, measurement system, process design</span></div>
+        <div>CURSOR_PROMPT ↔ All sessions: <span style="color: var(--success);">agent architecture, MCP servers, prompts as artifacts</span></div>
+      </div>
+    </div>
+    <div class="section">
+      <h2>Meta-Model Alignment</h2>
+      <div class="bar-chart" style="font-size: 12px; line-height: 2;">
+        <div style="color: var(--accent); font-weight: 600; margin-bottom: 8px;">Four pillars mapped:</div>
+        <div><strong style="color: var(--text);">Artifacts:</strong> Prompts (versioned), ADRs, REQ docs, meeting minutes, briefings</div>
+        <div><strong style="color: var(--text);">Processes:</strong> 31 ETVX-documented processes across 7 practice areas</div>
+        <div><strong style="color: var(--text);">Resources:</strong> 25 agents (auton/assist) + human reviewers</div>
+        <div><strong style="color: var(--text);">Measurements:</strong> Tokens, latency, success rate, human review rate, corrections</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// Timeline
+const meetings = [
+  { date: 'Jan 22', type: 'client', title: 'Initial Client Meeting', detail: 'Requirements discovery with Dennis — 8,988 words, 7 action items' },
+  { date: 'Feb 12', type: 'client', title: 'Data Model Deep-Dive', detail: 'David (eParts) — PIMS schema, categories, product types — 7,417 words' },
+  { date: 'Feb 20', type: 'mentor', title: 'Dennis: Risk & PM', detail: 'Risks, ML uncertainty, Azure constraints, scope control — 8,849 words' },
+  { date: 'Feb 24', type: 'coach', title: 'Ben: UX + Cory: SES', detail: 'UX/HITL design (69 min) + Agent feedback loops, ADRs (51 min)' },
+  { date: 'Feb 26', type: 'client', title: 'Harsha: ML Approach', detail: 'Confidence scoring, semantic matching, POC scope — 4,467 words' },
+  { date: 'Apr 2', type: 'client', title: 'Sprint Review', detail: 'Full team + Harsha — 37 action items extracted — 4,629 words' },
+  { date: 'Apr 16', type: 'client', title: 'Latest Client Sync', detail: 'Jaivard, Ashritha, Arjun — 3,095 words, 4 action items' },
+];
+document.getElementById('timeline').innerHTML = meetings.map(m =>
+  `<div class="tl-item ${m.type}">
+    <div class="tl-dot"></div>
+    <div class="tl-date">${m.date}</div>
+    <div class="tl-title">${m.title}</div>
+    <div class="tl-detail">${m.detail}</div>
+  </div>`
+).join('');
+
+// Words chart
+const wordData = [
+  { label: 'Jan 22 — Client', words: 8988, color: 'var(--blue)' },
+  { label: 'Feb 12 — Client', words: 7417, color: 'var(--blue)' },
+  { label: 'Feb 20 — Dennis', words: 8849, color: 'var(--accent2)' },
+  { label: 'Feb 24 — Ben', words: 8511, color: 'var(--accent)' },
+  { label: 'Feb 24 — Cory', words: 7789, color: 'var(--accent)' },
+  { label: 'Feb 26 — Client', words: 4467, color: 'var(--blue)' },
+  { label: 'Apr 2 — Client', words: 4629, color: 'var(--blue)' },
+  { label: 'Apr 16 — Client', words: 3095, color: 'var(--blue)' },
+];
+const maxWords = Math.max(...wordData.map(d => d.words));
+document.getElementById('words-chart').innerHTML = wordData.map(d =>
+  `<div class="bar-row">
+    <div class="bar-label">${d.label}</div>
+    <div class="bar-track">
+      <div class="bar-fill" style="width:${(d.words/maxWords*100).toFixed(1)}%; background: ${d.color};"></div>
+    </div>
+    <div class="bar-value">${d.words.toLocaleString()}</div>
+  </div>`
+).join('');
+
+// Participation chart
+const partData = [
+  { label: 'Hrishik', sessions: 7, color: 'var(--blue)' },
+  { label: 'Ashritha', sessions: 3, color: 'var(--accent)' },
+  { label: 'Jaivard', sessions: 2, color: 'var(--accent2)' },
+  { label: 'Arjun', sessions: 1, color: 'var(--cyan)' },
+  { label: 'Harsha (eParts)', sessions: 2, color: 'var(--pink)' },
+  { label: 'David (eParts)', sessions: 1, color: 'var(--pink)' },
+  { label: 'Dennis (Mentor)', sessions: 1, color: 'var(--warn)' },
+  { label: 'Dennis (Client)', sessions: 1, color: 'var(--warn)' },
+  { label: 'Ben (UX Coach)', sessions: 1, color: 'var(--accent)' },
+  { label: 'Cory (Coach)', sessions: 1, color: 'var(--accent)' },
+];
+document.getElementById('participation-chart').innerHTML = partData.map(d =>
+  `<div class="bar-row">
+    <div class="bar-label">${d.label}</div>
+    <div class="bar-track">
+      <div class="bar-fill" style="width:${(d.sessions/7*100).toFixed(1)}%; background: ${d.color};"></div>
+    </div>
+    <div class="bar-value">${d.sessions} session${d.sessions > 1 ? 's' : ''}</div>
+  </div>`
+).join('');
+</script>
+</body>
+</html>

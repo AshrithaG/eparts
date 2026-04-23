@@ -1,0 +1,1326 @@
+{
+  "meetings": [
+    {
+      "file": "GMT20260220-180425_Recording.transcript (1).vtt",
+      "type": "coach",
+      "date": "2026-04-23",
+      "action_items": [
+        {
+          "text": "Consequence format, and, let's start off then. The first one is, we are\u2026 the development cannot proceed due to lack of data that we're having. So\u2026 the\u2026 first of all, we\u2026 and there's also some other ac",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260220-180425_Recording.transcript (1).vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "coach"
+        }
+      ],
+      "decisions": [
+        {
+          "text": "Consequence format, and, let's start off then. The first one is, we are\u2026 the development cannot proceed due to lack of data that we're having. So\u2026 the\u2026 first of all, we\u2026 and there's also some other ac",
+          "context": "said by Hrishik",
+          "source_meeting": "GMT20260220-180425_Recording.transcript (1).vtt",
+          "meeting_date": "2026-04-23"
+        }
+      ],
+      "attendees": [
+        "Hrishik"
+      ],
+      "new_requirements": [],
+      "discussion_topics": []
+    },
+    {
+      "file": "GMT20260220-180425_Recording.transcript.vtt",
+      "type": "coach",
+      "date": "2026-04-23",
+      "action_items": [
+        {
+          "text": "Consequence format, and, let's start off then. The first one is, we are\u2026 the development cannot proceed due to lack of data that we're having. So\u2026 the\u2026 first of all, we\u2026 and there's also some other ac",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260220-180425_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "coach"
+        }
+      ],
+      "decisions": [
+        {
+          "text": "Consequence format, and, let's start off then. The first one is, we are\u2026 the development cannot proceed due to lack of data that we're having. So\u2026 the\u2026 first of all, we\u2026 and there's also some other ac",
+          "context": "said by Hrishik",
+          "source_meeting": "GMT20260220-180425_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23"
+        }
+      ],
+      "attendees": [
+        "Hrishik"
+      ],
+      "new_requirements": [],
+      "discussion_topics": []
+    },
+    {
+      "file": "GMT20260224-190023_Recording.transcript.vtt",
+      "type": "coach",
+      "date": "2026-04-23",
+      "action_items": [
+        {
+          "text": "I'm getting the data from them. So, we\u2026 now we have received, like, I think we received it last Friday or Saturday, the data, and we are, started to work on our ML models to run basic tests. Okay. Yea",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260224-190023_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "coach"
+        }
+      ],
+      "decisions": [
+        {
+          "text": "I'm getting the data from them. So, we\u2026 now we have received, like, I think we received it last Friday or Saturday, the data, and we are, started to work on our ML models to run basic tests. Okay. Yea",
+          "context": "said by Hrishik",
+          "source_meeting": "GMT20260224-190023_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23"
+        }
+      ],
+      "attendees": [
+        "Hrishik"
+      ],
+      "new_requirements": [],
+      "discussion_topics": []
+    },
+    {
+      "file": "GMT20260224-220446_Recording.transcript.vtt",
+      "type": "coach",
+      "date": "2026-04-23",
+      "action_items": [
+        {
+          "text": "Okay. So\u2026 basically you're doing\u2026 let me understand, you're doing, like, interviewing, you're talking to people, you're getting the requirements for what the system's gonna be, and then you're\u2026 you ar",
+          "owner": "Cory (Coach)",
+          "deadline": "",
+          "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "coach"
+        },
+        {
+          "text": "So, from our side, we\u2026 we are currently using, like, people are using different tools. Like, I personally use Gemini and, ChatGPT a lot. I think, Shruta uses Claude, so we're all using those on a pers",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "coach"
+        },
+        {
+          "text": "Yeah, so until\u2026 until it has access to the things that you have access to, it's\u2026 it's just flying blind, right? You need to always be thinking, like, what can\u2026 what can my AI see? So, since you're all",
+          "owner": "Cory (Coach)",
+          "deadline": "",
+          "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "coach"
+        },
+        {
+          "text": "We'll be building some from scratch, so\u2026",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "coach"
+        },
+        {
+          "text": "Yeah. So if you're working in docs, the one thing I will say is that you've got to think about\u2026 it sounds like you're gonna be using Cloud Code. You gotta think about how Cloud Code's gonna get access",
+          "owner": "Cory (Coach)",
+          "deadline": "",
+          "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "coach"
+        },
+        {
+          "text": "Right. Ahmad, we'll probably, yeah, we\u2026 I don't think we have acidic plot code. We'll probably get access to cursor.",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "coach"
+        },
+        {
+          "text": "That's what I do, so I'll create a repo, and then anything that's relevant for the agent to know while it's building. Usually that's ADRs, things like that. I'll make sure they're in the repo, so they",
+          "owner": "Cory (Coach)",
+          "deadline": "",
+          "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "coach"
+        },
+        {
+          "text": "Yep. Yep, and then, you know, there's lots of other things you can do. Since you're in a shared repo, start setting up slash commands that you can share. you know, start building your agent files toge",
+          "owner": "Cory (Coach)",
+          "deadline": "",
+          "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "coach"
+        },
+        {
+          "text": "I'll just quickly share my screen, I'll show you the brief of the problem and the concept, so you get a better picture.",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "coach"
+        },
+        {
+          "text": "The problem right now is that the way they acquire data from their vendors is that the vendors would send them emails, PDF, CSV, there's no proper format in doing all these things. So, what they curre",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "coach"
+        }
+      ],
+      "decisions": [
+        {
+          "text": "Yeah, it is, so basically, we need to get some more information out of the clients on how, like, what sort of data they require in this aspect.",
+          "context": "said by Hrishik",
+          "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23"
+        },
+        {
+          "text": "I think we were able to grasp, all of it, I think, pretty well, and\u2026 I think I'm pretty clear on the things we need to do next. In order to, like, work more efficiently and, like, utilize AI to its fu",
+          "context": "said by Hrishik",
+          "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23"
+        }
+      ],
+      "attendees": [
+        "Cory (Coach)",
+        "Hrishik",
+        "Ashritha",
+        "Jai"
+      ],
+      "new_requirements": [],
+      "discussion_topics": []
+    },
+    {
+      "file": "GMT20260224-190023_Recording.transcript (1).vtt",
+      "type": "coach",
+      "date": "2026-04-23",
+      "action_items": [
+        {
+          "text": "I'm getting the data from them. So, we\u2026 now we have received, like, I think we received it last Friday or Saturday, the data, and we are, started to work on our ML models to run basic tests. Okay. Yea",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260224-190023_Recording.transcript (1).vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "coach"
+        }
+      ],
+      "decisions": [
+        {
+          "text": "I'm getting the data from them. So, we\u2026 now we have received, like, I think we received it last Friday or Saturday, the data, and we are, started to work on our ML models to run basic tests. Okay. Yea",
+          "context": "said by Hrishik",
+          "source_meeting": "GMT20260224-190023_Recording.transcript (1).vtt",
+          "meeting_date": "2026-04-23"
+        }
+      ],
+      "attendees": [
+        "Hrishik"
+      ],
+      "new_requirements": [],
+      "discussion_topics": []
+    },
+    {
+      "file": "GMT20260220-222907_Recording.transcript.vtt",
+      "type": "coach",
+      "date": "2026-04-23",
+      "action_items": [
+        {
+          "text": "Unless, like, you take another team's requirements and try to do them, and then without any AI, and then try to compare against their time if they have used AI, and then they do the same for us, then ",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260220-222907_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "coach"
+        }
+      ],
+      "decisions": [
+        {
+          "text": "Unless, like, you take another team's requirements and try to do them, and then without any AI, and then try to compare against their time if they have used AI, and then they do the same for us, then ",
+          "context": "said by Hrishik",
+          "source_meeting": "GMT20260220-222907_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23"
+        }
+      ],
+      "attendees": [
+        "Hrishik"
+      ],
+      "new_requirements": [],
+      "discussion_topics": []
+    },
+    {
+      "file": "GMT20260220-180425_Recording.transcript (2).vtt",
+      "type": "coach",
+      "date": "2026-04-23",
+      "action_items": [
+        {
+          "text": "Consequence format, and, let's start off then. The first one is, we are\u2026 the development cannot proceed due to lack of data that we're having. So\u2026 the\u2026 first of all, we\u2026 and there's also some other ac",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260220-180425_Recording.transcript (2).vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "coach"
+        }
+      ],
+      "decisions": [
+        {
+          "text": "Consequence format, and, let's start off then. The first one is, we are\u2026 the development cannot proceed due to lack of data that we're having. So\u2026 the\u2026 first of all, we\u2026 and there's also some other ac",
+          "context": "said by Hrishik",
+          "source_meeting": "GMT20260220-180425_Recording.transcript (2).vtt",
+          "meeting_date": "2026-04-23"
+        }
+      ],
+      "attendees": [
+        "Hrishik"
+      ],
+      "new_requirements": [],
+      "discussion_topics": []
+    },
+    {
+      "file": "GMT20260122-191430_Recording.transcript.vtt",
+      "type": "client",
+      "date": "2026-04-23",
+      "action_items": [
+        {
+          "text": "Okay, so the next topic we have is how we are gonna be working together. And the major points we wanted to cover was your availability, modes of communication, onboarding, and the documentation resour",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "I mean, I guess we could use those metrics, Oh, no, I don't know if we have how accurate, like, we could easily show\u2026 Yeah, like, what a good end, goal of it is based on, like, the PDF we took at the ",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "You'd like some metrics to see what the overall process on which it's improved. So I guess the one question would be, you ingest the data, you've got it there. Are there, future reports to say the dat",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "And I'm gonna put words in the team's mouth, which is, you know, this is a lot of good experience and do's and don'ts. from the team's\u2026 I'll actually ask the team, from the team's perspective, is ther",
+          "owner": "Dennis (Mentor)",
+          "deadline": "",
+          "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "We need to be good enough for them does. I think from my point of view, it was just the communication part, like, we are bound to have a lot of questions, because it's going to be a kind of a\u2026 struggl",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Go snowboarding on Monday if the weather slowed that much down, so you guys should be a first big storm. Yeah, you must have the December storm. Yes. Were you in the store? No, no, I just left before ",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Yep. Let me wait a second thing I want. Are you still there, Dennis? Dennis, let the content. Alright. Okay, thank you. Thank you. Make movies. I would certainly say that after a client meeting, it's ",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        }
+      ],
+      "decisions": [
+        {
+          "text": "Okay, so the next topic we have is how we are gonna be working together. And the major points we wanted to cover was your availability, modes of communication, onboarding, and the documentation resour",
+          "context": "said by Hrishik",
+          "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23"
+        },
+        {
+          "text": "You'd like some metrics to see what the overall process on which it's improved. So I guess the one question would be, you ingest the data, you've got it there. Are there, future reports to say the dat",
+          "context": "said by Hrishik",
+          "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23"
+        },
+        {
+          "text": "We need to be good enough for them does. I think from my point of view, it was just the communication part, like, we are bound to have a lot of questions, because it's going to be a kind of a\u2026 struggl",
+          "context": "said by Hrishik",
+          "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23"
+        }
+      ],
+      "attendees": [
+        "Hrishik",
+        "Dennis (Mentor)"
+      ],
+      "new_requirements": [],
+      "discussion_topics": []
+    },
+    {
+      "file": "GMT20260212-190517_Recording.transcript.vtt",
+      "type": "client",
+      "date": "2026-04-23",
+      "action_items": [
+        {
+          "text": "A for, today's agenda. I think your mic is gone. model sound? Yeah, firstly, we'll discuss a few of the ML findings that we've had. All the points I've discussed in the last meeting, we have gone over",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Yeah, yeah, I can see. Okay, so again, like, this is not a prescribed solution that we are proposing, it's just that we did a couple of experimentation, just, like, not a POC, but then theoretical rea",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "But then, don't you want your solution to be extensive? No, no, I mean, we do, I guess. I don't think it's going to be very often, though, that, like, there are suppliers coming out with more informat",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "I'm not sure if we do it with Bicep. What we do have our Azure-wide monitors, so we can tag a resource. With a tag that we've set up, and then Azure is going to take that data and ship it to Datadog i",
+          "owner": "David (eParts)",
+          "deadline": "",
+          "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "I didn't get your point on Terraform being\u2026 I think if we deploy something about Terraform, but we modify the internals from, let's say, Azure itself, the Terraform will think it is in some other stat",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Yeah, I would pick Bicep, mostly because I think it's something that we know. I also think that the value-add of Terraform\u2026 one of the big value adds of Terraform that they claim is that you can kind ",
+          "owner": "David (eParts)",
+          "deadline": "",
+          "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Okay. I think with that in mind, we can maybe go forward with Bicep itself. Yeah. Because anyways, if you are logged into Azure, then Bicep is the better way to go. But, I can just talk a little bit a",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Oh, sorry, I'm\u2026 I caught half of that. It was\u2026 the audio's getting a little quiet. Let me bump this up. Can you say that one more time?",
+          "owner": "David (eParts)",
+          "deadline": "",
+          "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Can you, explain a little bit on how, the data is written to Azure Logs, and then,",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Yeah, let me\u2026 maybe I can share my screen, and that would help clear up some confusion here. Of course, now that I want to do that, let's see if I can\u2026 We've got a Datadog\u2026 I requested access to share",
+          "owner": "David (eParts)",
+          "deadline": "",
+          "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        }
+      ],
+      "decisions": [
+        {
+          "text": "A for, today's agenda. I think your mic is gone. model sound? Yeah, firstly, we'll discuss a few of the ML findings that we've had. All the points I've discussed in the last meeting, we have gone over",
+          "context": "said by Hrishik",
+          "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23"
+        },
+        {
+          "text": "Yeah, yeah, I can see. Okay, so again, like, this is not a prescribed solution that we are proposing, it's just that we did a couple of experimentation, just, like, not a POC, but then theoretical rea",
+          "context": "said by Hrishik",
+          "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23"
+        },
+        {
+          "text": "But then, don't you want your solution to be extensive? No, no, I mean, we do, I guess. I don't think it's going to be very often, though, that, like, there are suppliers coming out with more informat",
+          "context": "said by Hrishik",
+          "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23"
+        }
+      ],
+      "attendees": [
+        "Hrishik",
+        "David (eParts)"
+      ],
+      "new_requirements": [],
+      "discussion_topics": []
+    },
+    {
+      "file": "GMT20260226-190646_Recording.transcript.vtt",
+      "type": "client",
+      "date": "2026-04-23",
+      "action_items": [
+        {
+          "text": "So, Ashtar, you added anything to add? Okay. So, Harshal, we spoke to a couple of members here last, this week and, yeah, this week, and then, one constant suggestion that we were getting is, so if\u2026 i",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "So, can you guys look at any of the other options available on Azure, other than LLMs, for this use case?",
+          "owner": "Harsha (eParts)",
+          "deadline": "",
+          "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Yeah, like, I personally have experience with Amazon Bedrock, but not the Azure ecosystem, so we'll have to try that out. And, like, one follow-up question that I would want to ask is. So, we\u2026 initial",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Yep, 100%. Again, I don't want to be restrictive in any way, so because this is just, like, the initial kind of finding slash research kind of phase, just, just do whatever at this point. I would say ",
+          "owner": "Harsha (eParts)",
+          "deadline": "",
+          "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Okay. So, at least for now, before the LEM topic even came up, we were just, playing around the semantic measure, approach, like, what\u2026 I mean, the data that we took, the, the amount was obviously, li",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Night. Yeah, I think, I think we will probably should schedule a meeting with the catalog team sometime after spring break.",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Uber. Yeah, so I'll just remove the meeting from next week, next week's calendar.",
+          "owner": "Harsha (eParts)",
+          "deadline": "",
+          "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Yeah, I'll send out a cancellation thing. Okay. Next we have\u2026 I think, yeah, for the initial ML models, you're thinking we might, like, if you're using specifically ML, we might have to use, two model",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "I think the primary, goal for the model that we're currently thinking is to get the confidence score on each of the attributes that we extract, but in order to be able to put that into PEMS, we need t",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "This\u2026 the Excel part\u2026 so, the way it is right now is, I mean, this data goes into, like, master database through a few, Like, stored procedures we have, which are kind of lacy. And these load procedur",
+          "owner": "Harsha (eParts)",
+          "deadline": "",
+          "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        }
+      ],
+      "decisions": [
+        {
+          "text": "I think the primary, goal for the model that we're currently thinking is to get the confidence score on each of the attributes that we extract, but in order to be able to put that into PEMS, we need t",
+          "context": "said by Hrishik",
+          "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23"
+        },
+        {
+          "text": "Yeah, just\u2026 just let us know, and I think\u2026 I think we should be on top of it. At least I'll be on top of it, no matter if\u2026 So, if you don't hear back until Monday, just ping me on Teams, and that shou",
+          "context": "said by Harsha (eParts)",
+          "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23"
+        }
+      ],
+      "attendees": [
+        "Hrishik",
+        "Harsha (eParts)"
+      ],
+      "new_requirements": [],
+      "discussion_topics": []
+    },
+    {
+      "file": "GMT20260402-180648_Recording.transcript.vtt",
+      "type": "client",
+      "date": "2026-04-23",
+      "action_items": [
+        {
+          "text": "Yeah, I'll just turn up my speaker. So\u2026 okay. Yep. So, the first item on the agenda is for the timeline. Yeah. Rishi, you're there, right?",
+          "owner": "Jaivard",
+          "deadline": "",
+          "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Yeah. So\u2026 Yeah, sure, can you, should I share my screen, or can you share your screen, with the timeline?",
+          "owner": "Jaivard",
+          "deadline": "",
+          "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Okay, nevermind, I'll just do it then. So\u2026 Okay. So, is it visible, Harsha, dude?",
+          "owner": "Jaivard",
+          "deadline": "",
+          "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "So, we just wanted to go over and, like, get your feedback. So, for now, what we have is, like. by April 15th. For this, this semester, we'll have, the requirements. Completed by then? And\u2026 I think we",
+          "owner": "Jaivard",
+          "deadline": "",
+          "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Yeah, so, we are targeting that towards the end of this month, we should have the basic, requirements, risk process, and like, not\u2026 I'm not sure if we'll be able to have the complete architecture, bec",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Other than July's missing, but yeah, I think\u2026 I think this makes sense. This is a decent timeline. Or at least a decent breakdown of the units. I suspect some of those units might be larger than other",
+          "owner": "Harsha (eParts)",
+          "deadline": "",
+          "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Yeah, July was, left out because, the entire development\u2026 there won't be any deliverable in that month, because we'll still be working on the, like, development of it, and we don't expect there'll be ",
+          "owner": "Hrishik",
+          "deadline": "",
+          "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Okay, we also have the statement of work, I'll just share that as well. So\u2026 One second, this is\u2026 So, we were, is it visible, first of all?",
+          "owner": "Jaivard",
+          "deadline": "",
+          "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Okay. So, we were, it was encouraged that we have a statement of work, just so that, you know, we have a shared understanding with you. I'll be\u2026 this is the first version, and this is still, I think i",
+          "owner": "Jaivard",
+          "deadline": "",
+          "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "Yeah. So, we also have other things, such as, like, You know, that are\u2026 we will be working all the way up till PIMS, but the steps after that is not something under our control, so I've also written t",
+          "owner": "Jaivard",
+          "deadline": "",
+          "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        }
+      ],
+      "decisions": [
+        {
+          "text": "Yeah, so, we are targeting that towards the end of this month, we should have the basic, requirements, risk process, and like, not\u2026 I'm not sure if we'll be able to have the complete architecture, bec",
+          "context": "said by Hrishik",
+          "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23"
+        }
+      ],
+      "attendees": [
+        "Jaivard",
+        "Hrishik",
+        "Harsha (eParts)",
+        "Ashritha"
+      ],
+      "new_requirements": [],
+      "discussion_topics": []
+    },
+    {
+      "file": "GMT20260416-180324_Recording.transcript.vtt",
+      "type": "client",
+      "date": "2026-04-23",
+      "action_items": [
+        {
+          "text": "Yeah, starting. So\u2026 I think\u2026 So the\u2026 So, the first thing\u2026 Was it regarding the training data? So, Liu, if you want to kind of elaborate on that? Hmm. So\u2026 It's basically, he\u2026 there was a list of things",
+          "owner": "Jaivard",
+          "deadline": "",
+          "source_meeting": "GMT20260416-180324_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "I'm a bit confused. Take care. I think there's an echo. I should talk. This should be fine. Yeah, this is\u2026 sorry about that. So, when you're talking about the context serves, right, so\u2026 If you have al",
+          "owner": "Ashritha",
+          "deadline": "",
+          "source_meeting": "GMT20260416-180324_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "I think I'll be traveling the end of this month, and then I'll be in India for, like, 2-3 weeks. But, I don't think there'll be any disruption in the entire workflow, though. I'll just be taking meeti",
+          "owner": "Arjun",
+          "deadline": "",
+          "source_meeting": "GMT20260416-180324_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        },
+        {
+          "text": "But he did tumble, right? So\u2026 Yeah. That would have been so bad boys, yeah. Anyway, good to hear your voice, everyone. Yes. Okay. See y'all. Enjoy the nice weather. Yeah, it's warm. Yeah, it's suppose",
+          "owner": "Ashritha",
+          "deadline": "",
+          "source_meeting": "GMT20260416-180324_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23",
+          "meeting_type": "client"
+        }
+      ],
+      "decisions": [
+        {
+          "text": "I'm a bit confused. Take care. I think there's an echo. I should talk. This should be fine. Yeah, this is\u2026 sorry about that. So, when you're talking about the context serves, right, so\u2026 If you have al",
+          "context": "said by Ashritha",
+          "source_meeting": "GMT20260416-180324_Recording.transcript.vtt",
+          "meeting_date": "2026-04-23"
+        }
+      ],
+      "attendees": [
+        "Jaivard",
+        "Ashritha",
+        "Arjun"
+      ],
+      "new_requirements": [],
+      "discussion_topics": []
+    }
+  ],
+  "action_items": [
+    {
+      "text": "Consequence format, and, let's start off then. The first one is, we are\u2026 the development cannot proceed due to lack of data that we're having. So\u2026 the\u2026 first of all, we\u2026 and there's also some other ac",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260220-180425_Recording.transcript (1).vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "coach"
+    },
+    {
+      "text": "Consequence format, and, let's start off then. The first one is, we are\u2026 the development cannot proceed due to lack of data that we're having. So\u2026 the\u2026 first of all, we\u2026 and there's also some other ac",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260220-180425_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "coach"
+    },
+    {
+      "text": "I'm getting the data from them. So, we\u2026 now we have received, like, I think we received it last Friday or Saturday, the data, and we are, started to work on our ML models to run basic tests. Okay. Yea",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260224-190023_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "coach"
+    },
+    {
+      "text": "Okay. So\u2026 basically you're doing\u2026 let me understand, you're doing, like, interviewing, you're talking to people, you're getting the requirements for what the system's gonna be, and then you're\u2026 you ar",
+      "owner": "Cory (Coach)",
+      "deadline": "",
+      "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "coach"
+    },
+    {
+      "text": "So, from our side, we\u2026 we are currently using, like, people are using different tools. Like, I personally use Gemini and, ChatGPT a lot. I think, Shruta uses Claude, so we're all using those on a pers",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "coach"
+    },
+    {
+      "text": "Yeah, so until\u2026 until it has access to the things that you have access to, it's\u2026 it's just flying blind, right? You need to always be thinking, like, what can\u2026 what can my AI see? So, since you're all",
+      "owner": "Cory (Coach)",
+      "deadline": "",
+      "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "coach"
+    },
+    {
+      "text": "We'll be building some from scratch, so\u2026",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "coach"
+    },
+    {
+      "text": "Yeah. So if you're working in docs, the one thing I will say is that you've got to think about\u2026 it sounds like you're gonna be using Cloud Code. You gotta think about how Cloud Code's gonna get access",
+      "owner": "Cory (Coach)",
+      "deadline": "",
+      "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "coach"
+    },
+    {
+      "text": "Right. Ahmad, we'll probably, yeah, we\u2026 I don't think we have acidic plot code. We'll probably get access to cursor.",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "coach"
+    },
+    {
+      "text": "That's what I do, so I'll create a repo, and then anything that's relevant for the agent to know while it's building. Usually that's ADRs, things like that. I'll make sure they're in the repo, so they",
+      "owner": "Cory (Coach)",
+      "deadline": "",
+      "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "coach"
+    },
+    {
+      "text": "Yep. Yep, and then, you know, there's lots of other things you can do. Since you're in a shared repo, start setting up slash commands that you can share. you know, start building your agent files toge",
+      "owner": "Cory (Coach)",
+      "deadline": "",
+      "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "coach"
+    },
+    {
+      "text": "I'll just quickly share my screen, I'll show you the brief of the problem and the concept, so you get a better picture.",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "coach"
+    },
+    {
+      "text": "The problem right now is that the way they acquire data from their vendors is that the vendors would send them emails, PDF, CSV, there's no proper format in doing all these things. So, what they curre",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "coach"
+    },
+    {
+      "text": "I'm getting the data from them. So, we\u2026 now we have received, like, I think we received it last Friday or Saturday, the data, and we are, started to work on our ML models to run basic tests. Okay. Yea",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260224-190023_Recording.transcript (1).vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "coach"
+    },
+    {
+      "text": "Unless, like, you take another team's requirements and try to do them, and then without any AI, and then try to compare against their time if they have used AI, and then they do the same for us, then ",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260220-222907_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "coach"
+    },
+    {
+      "text": "Consequence format, and, let's start off then. The first one is, we are\u2026 the development cannot proceed due to lack of data that we're having. So\u2026 the\u2026 first of all, we\u2026 and there's also some other ac",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260220-180425_Recording.transcript (2).vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "coach"
+    },
+    {
+      "text": "Okay, so the next topic we have is how we are gonna be working together. And the major points we wanted to cover was your availability, modes of communication, onboarding, and the documentation resour",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "I mean, I guess we could use those metrics, Oh, no, I don't know if we have how accurate, like, we could easily show\u2026 Yeah, like, what a good end, goal of it is based on, like, the PDF we took at the ",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "You'd like some metrics to see what the overall process on which it's improved. So I guess the one question would be, you ingest the data, you've got it there. Are there, future reports to say the dat",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "And I'm gonna put words in the team's mouth, which is, you know, this is a lot of good experience and do's and don'ts. from the team's\u2026 I'll actually ask the team, from the team's perspective, is ther",
+      "owner": "Dennis (Mentor)",
+      "deadline": "",
+      "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "We need to be good enough for them does. I think from my point of view, it was just the communication part, like, we are bound to have a lot of questions, because it's going to be a kind of a\u2026 struggl",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Go snowboarding on Monday if the weather slowed that much down, so you guys should be a first big storm. Yeah, you must have the December storm. Yes. Were you in the store? No, no, I just left before ",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Yep. Let me wait a second thing I want. Are you still there, Dennis? Dennis, let the content. Alright. Okay, thank you. Thank you. Make movies. I would certainly say that after a client meeting, it's ",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "A for, today's agenda. I think your mic is gone. model sound? Yeah, firstly, we'll discuss a few of the ML findings that we've had. All the points I've discussed in the last meeting, we have gone over",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Yeah, yeah, I can see. Okay, so again, like, this is not a prescribed solution that we are proposing, it's just that we did a couple of experimentation, just, like, not a POC, but then theoretical rea",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "But then, don't you want your solution to be extensive? No, no, I mean, we do, I guess. I don't think it's going to be very often, though, that, like, there are suppliers coming out with more informat",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "I'm not sure if we do it with Bicep. What we do have our Azure-wide monitors, so we can tag a resource. With a tag that we've set up, and then Azure is going to take that data and ship it to Datadog i",
+      "owner": "David (eParts)",
+      "deadline": "",
+      "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "I didn't get your point on Terraform being\u2026 I think if we deploy something about Terraform, but we modify the internals from, let's say, Azure itself, the Terraform will think it is in some other stat",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Yeah, I would pick Bicep, mostly because I think it's something that we know. I also think that the value-add of Terraform\u2026 one of the big value adds of Terraform that they claim is that you can kind ",
+      "owner": "David (eParts)",
+      "deadline": "",
+      "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Okay. I think with that in mind, we can maybe go forward with Bicep itself. Yeah. Because anyways, if you are logged into Azure, then Bicep is the better way to go. But, I can just talk a little bit a",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Oh, sorry, I'm\u2026 I caught half of that. It was\u2026 the audio's getting a little quiet. Let me bump this up. Can you say that one more time?",
+      "owner": "David (eParts)",
+      "deadline": "",
+      "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Can you, explain a little bit on how, the data is written to Azure Logs, and then,",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Yeah, let me\u2026 maybe I can share my screen, and that would help clear up some confusion here. Of course, now that I want to do that, let's see if I can\u2026 We've got a Datadog\u2026 I requested access to share",
+      "owner": "David (eParts)",
+      "deadline": "",
+      "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "So, Ashtar, you added anything to add? Okay. So, Harshal, we spoke to a couple of members here last, this week and, yeah, this week, and then, one constant suggestion that we were getting is, so if\u2026 i",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "So, can you guys look at any of the other options available on Azure, other than LLMs, for this use case?",
+      "owner": "Harsha (eParts)",
+      "deadline": "",
+      "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Yeah, like, I personally have experience with Amazon Bedrock, but not the Azure ecosystem, so we'll have to try that out. And, like, one follow-up question that I would want to ask is. So, we\u2026 initial",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Yep, 100%. Again, I don't want to be restrictive in any way, so because this is just, like, the initial kind of finding slash research kind of phase, just, just do whatever at this point. I would say ",
+      "owner": "Harsha (eParts)",
+      "deadline": "",
+      "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Okay. So, at least for now, before the LEM topic even came up, we were just, playing around the semantic measure, approach, like, what\u2026 I mean, the data that we took, the, the amount was obviously, li",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Night. Yeah, I think, I think we will probably should schedule a meeting with the catalog team sometime after spring break.",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Uber. Yeah, so I'll just remove the meeting from next week, next week's calendar.",
+      "owner": "Harsha (eParts)",
+      "deadline": "",
+      "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Yeah, I'll send out a cancellation thing. Okay. Next we have\u2026 I think, yeah, for the initial ML models, you're thinking we might, like, if you're using specifically ML, we might have to use, two model",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "I think the primary, goal for the model that we're currently thinking is to get the confidence score on each of the attributes that we extract, but in order to be able to put that into PEMS, we need t",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "This\u2026 the Excel part\u2026 so, the way it is right now is, I mean, this data goes into, like, master database through a few, Like, stored procedures we have, which are kind of lacy. And these load procedur",
+      "owner": "Harsha (eParts)",
+      "deadline": "",
+      "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Yeah, I'll just turn up my speaker. So\u2026 okay. Yep. So, the first item on the agenda is for the timeline. Yeah. Rishi, you're there, right?",
+      "owner": "Jaivard",
+      "deadline": "",
+      "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Yeah. So\u2026 Yeah, sure, can you, should I share my screen, or can you share your screen, with the timeline?",
+      "owner": "Jaivard",
+      "deadline": "",
+      "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Okay, nevermind, I'll just do it then. So\u2026 Okay. So, is it visible, Harsha, dude?",
+      "owner": "Jaivard",
+      "deadline": "",
+      "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "So, we just wanted to go over and, like, get your feedback. So, for now, what we have is, like. by April 15th. For this, this semester, we'll have, the requirements. Completed by then? And\u2026 I think we",
+      "owner": "Jaivard",
+      "deadline": "",
+      "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Yeah, so, we are targeting that towards the end of this month, we should have the basic, requirements, risk process, and like, not\u2026 I'm not sure if we'll be able to have the complete architecture, bec",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Other than July's missing, but yeah, I think\u2026 I think this makes sense. This is a decent timeline. Or at least a decent breakdown of the units. I suspect some of those units might be larger than other",
+      "owner": "Harsha (eParts)",
+      "deadline": "",
+      "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Yeah, July was, left out because, the entire development\u2026 there won't be any deliverable in that month, because we'll still be working on the, like, development of it, and we don't expect there'll be ",
+      "owner": "Hrishik",
+      "deadline": "",
+      "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Okay, we also have the statement of work, I'll just share that as well. So\u2026 One second, this is\u2026 So, we were, is it visible, first of all?",
+      "owner": "Jaivard",
+      "deadline": "",
+      "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Okay. So, we were, it was encouraged that we have a statement of work, just so that, you know, we have a shared understanding with you. I'll be\u2026 this is the first version, and this is still, I think i",
+      "owner": "Jaivard",
+      "deadline": "",
+      "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Yeah. So, we also have other things, such as, like, You know, that are\u2026 we will be working all the way up till PIMS, but the steps after that is not something under our control, so I've also written t",
+      "owner": "Jaivard",
+      "deadline": "",
+      "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "Yeah, starting. So\u2026 I think\u2026 So the\u2026 So, the first thing\u2026 Was it regarding the training data? So, Liu, if you want to kind of elaborate on that? Hmm. So\u2026 It's basically, he\u2026 there was a list of things",
+      "owner": "Jaivard",
+      "deadline": "",
+      "source_meeting": "GMT20260416-180324_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "I'm a bit confused. Take care. I think there's an echo. I should talk. This should be fine. Yeah, this is\u2026 sorry about that. So, when you're talking about the context serves, right, so\u2026 If you have al",
+      "owner": "Ashritha",
+      "deadline": "",
+      "source_meeting": "GMT20260416-180324_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "I think I'll be traveling the end of this month, and then I'll be in India for, like, 2-3 weeks. But, I don't think there'll be any disruption in the entire workflow, though. I'll just be taking meeti",
+      "owner": "Arjun",
+      "deadline": "",
+      "source_meeting": "GMT20260416-180324_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    },
+    {
+      "text": "But he did tumble, right? So\u2026 Yeah. That would have been so bad boys, yeah. Anyway, good to hear your voice, everyone. Yes. Okay. See y'all. Enjoy the nice weather. Yeah, it's warm. Yeah, it's suppose",
+      "owner": "Ashritha",
+      "deadline": "",
+      "source_meeting": "GMT20260416-180324_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23",
+      "meeting_type": "client"
+    }
+  ],
+  "decisions": [
+    {
+      "text": "Consequence format, and, let's start off then. The first one is, we are\u2026 the development cannot proceed due to lack of data that we're having. So\u2026 the\u2026 first of all, we\u2026 and there's also some other ac",
+      "context": "said by Hrishik",
+      "source_meeting": "GMT20260220-180425_Recording.transcript (1).vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "Consequence format, and, let's start off then. The first one is, we are\u2026 the development cannot proceed due to lack of data that we're having. So\u2026 the\u2026 first of all, we\u2026 and there's also some other ac",
+      "context": "said by Hrishik",
+      "source_meeting": "GMT20260220-180425_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "I'm getting the data from them. So, we\u2026 now we have received, like, I think we received it last Friday or Saturday, the data, and we are, started to work on our ML models to run basic tests. Okay. Yea",
+      "context": "said by Hrishik",
+      "source_meeting": "GMT20260224-190023_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "Yeah, it is, so basically, we need to get some more information out of the clients on how, like, what sort of data they require in this aspect.",
+      "context": "said by Hrishik",
+      "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "I think we were able to grasp, all of it, I think, pretty well, and\u2026 I think I'm pretty clear on the things we need to do next. In order to, like, work more efficiently and, like, utilize AI to its fu",
+      "context": "said by Hrishik",
+      "source_meeting": "GMT20260224-220446_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "I'm getting the data from them. So, we\u2026 now we have received, like, I think we received it last Friday or Saturday, the data, and we are, started to work on our ML models to run basic tests. Okay. Yea",
+      "context": "said by Hrishik",
+      "source_meeting": "GMT20260224-190023_Recording.transcript (1).vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "Unless, like, you take another team's requirements and try to do them, and then without any AI, and then try to compare against their time if they have used AI, and then they do the same for us, then ",
+      "context": "said by Hrishik",
+      "source_meeting": "GMT20260220-222907_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "Consequence format, and, let's start off then. The first one is, we are\u2026 the development cannot proceed due to lack of data that we're having. So\u2026 the\u2026 first of all, we\u2026 and there's also some other ac",
+      "context": "said by Hrishik",
+      "source_meeting": "GMT20260220-180425_Recording.transcript (2).vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "Okay, so the next topic we have is how we are gonna be working together. And the major points we wanted to cover was your availability, modes of communication, onboarding, and the documentation resour",
+      "context": "said by Hrishik",
+      "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "You'd like some metrics to see what the overall process on which it's improved. So I guess the one question would be, you ingest the data, you've got it there. Are there, future reports to say the dat",
+      "context": "said by Hrishik",
+      "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "We need to be good enough for them does. I think from my point of view, it was just the communication part, like, we are bound to have a lot of questions, because it's going to be a kind of a\u2026 struggl",
+      "context": "said by Hrishik",
+      "source_meeting": "GMT20260122-191430_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "A for, today's agenda. I think your mic is gone. model sound? Yeah, firstly, we'll discuss a few of the ML findings that we've had. All the points I've discussed in the last meeting, we have gone over",
+      "context": "said by Hrishik",
+      "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "Yeah, yeah, I can see. Okay, so again, like, this is not a prescribed solution that we are proposing, it's just that we did a couple of experimentation, just, like, not a POC, but then theoretical rea",
+      "context": "said by Hrishik",
+      "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "But then, don't you want your solution to be extensive? No, no, I mean, we do, I guess. I don't think it's going to be very often, though, that, like, there are suppliers coming out with more informat",
+      "context": "said by Hrishik",
+      "source_meeting": "GMT20260212-190517_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "I think the primary, goal for the model that we're currently thinking is to get the confidence score on each of the attributes that we extract, but in order to be able to put that into PEMS, we need t",
+      "context": "said by Hrishik",
+      "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "Yeah, just\u2026 just let us know, and I think\u2026 I think we should be on top of it. At least I'll be on top of it, no matter if\u2026 So, if you don't hear back until Monday, just ping me on Teams, and that shou",
+      "context": "said by Harsha (eParts)",
+      "source_meeting": "GMT20260226-190646_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "Yeah, so, we are targeting that towards the end of this month, we should have the basic, requirements, risk process, and like, not\u2026 I'm not sure if we'll be able to have the complete architecture, bec",
+      "context": "said by Hrishik",
+      "source_meeting": "GMT20260402-180648_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23"
+    },
+    {
+      "text": "I'm a bit confused. Take care. I think there's an echo. I should talk. This should be fine. Yeah, this is\u2026 sorry about that. So, when you're talking about the context serves, right, so\u2026 If you have al",
+      "context": "said by Ashritha",
+      "source_meeting": "GMT20260416-180324_Recording.transcript.vtt",
+      "meeting_date": "2026-04-23"
+    }
+  ],
+  "attendees": [
+    "Arjun",
+    "Ashritha",
+    "Cory (Coach)",
+    "David (eParts)",
+    "Dennis (Mentor)",
+    "Harsha (eParts)",
+    "Hrishik",
+    "Jai",
+    "Jaivard"
+  ]
+}

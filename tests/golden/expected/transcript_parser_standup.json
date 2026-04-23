@@ -1,0 +1,31 @@
+{
+  "required_fields": ["attendees", "decisions", "action_items"],
+  "expected_attendees": ["Sarah", "Alex", "Priya", "Marcus"],
+  "expected_decisions": [
+    {
+      "keywords": ["ChromaDB", "vector store"],
+      "min_match": 1
+    }
+  ],
+  "expected_action_items": [
+    {
+      "keywords": ["ADR", "ChromaDB"],
+      "min_match": 1
+    },
+    {
+      "keywords": ["recommendation pipeline", "end-to-end", "Wednesday"],
+      "min_match": 1
+    },
+    {
+      "keywords": ["API spec", "confidence", "OpenAPI"],
+      "min_match": 1
+    },
+    {
+      "keywords": ["staging", "test data"],
+      "min_match": 1
+    }
+  ],
+  "min_decisions": 1,
+  "min_action_items": 3,
+  "min_attendees": 3
+}

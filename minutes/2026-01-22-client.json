@@ -1,0 +1,100 @@
+{
+  "meeting_date": "2026-01-22",
+  "duration_minutes": 56,
+  "participants": [
+    "Hrishik",
+    "Dennis Grinberg"
+  ],
+  "participant_count": 2,
+  "total_words": 8988,
+  "total_turns": 17,
+  "speaker_stats": {
+    "Hrishik": {
+      "turns": 9,
+      "words": 8755,
+      "pct_words": 97.4
+    },
+    "Dennis Grinberg": {
+      "turns": 8,
+      "words": 233,
+      "pct_words": 2.6
+    }
+  },
+  "detected_topics": {
+    "ML/Model": 5,
+    "Data": 5,
+    "Onboarding": 5,
+    "Architecture": 2,
+    "Project Mgmt": 2
+  },
+  "questions_found": 5,
+  "questions_sample": [
+    {
+      "speaker": "Hrishik",
+      "text": "Is there\u2026 I know before we talked about the most sensitive thing from the vendor when it's pricing"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Is there any correction of information about a product that makes it more sensitive or not, or are you advancing in any state"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Is there anything else you want to add on these points"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "How does your current, the code checking process look like"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "How does that look like"
+    }
+  ],
+  "potential_decisions": 3,
+  "decisions_sample": [
+    {
+      "speaker": "Hrishik",
+      "text": "Okay, so the next topic we have is how we are gonna be working together. And the major points we wanted to cover was your availability, modes of communication, onboarding, and the documentation resour"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "You'd like some metrics to see what the overall process on which it's improved. So I guess the one question would be, you ingest the data, you've got it there. Are there, future reports to say the dat"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "We need to be good enough for them does. I think from my point of view, it was just the communication part, like, we are bound to have a lot of questions, because it's going to be a kind of a\u2026 struggl"
+    }
+  ],
+  "potential_action_items": 7,
+  "actions_sample": [
+    {
+      "speaker": "Hrishik",
+      "text": "Okay, so the next topic we have is how we are gonna be working together. And the major points we wanted to cover was your availability, modes of communication, onboarding, and the documentation resour"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "I mean, I guess we could use those metrics, Oh, no, I don't know if we have how accurate, like, we could easily show\u2026 Yeah, like, what a good end, goal of it is based on, like, the PDF we took at the "
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "You'd like some metrics to see what the overall process on which it's improved. So I guess the one question would be, you ingest the data, you've got it there. Are there, future reports to say the dat"
+    },
+    {
+      "speaker": "Dennis Grinberg",
+      "text": "And I'm gonna put words in the team's mouth, which is, you know, this is a lot of good experience and do's and don'ts. from the team's\u2026 I'll actually ask the team, from the team's perspective, is ther"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "We need to be good enough for them does. I think from my point of view, it was just the communication part, like, we are bound to have a lot of questions, because it's going to be a kind of a\u2026 struggl"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Go snowboarding on Monday if the weather slowed that much down, so you guys should be a first big storm. Yeah, you must have the December storm. Yes. Were you in the store? No, no, I just left before "
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Yep. Let me wait a second thing I want. Are you still there, Dennis? Dennis, let the content. Alright. Okay, thank you. Thank you. Make movies. I would certainly say that after a client meeting, it's "
+    }
+  ],
+  "analysis_mode": "offline (no LLM \u2014 structural extraction only)"
+}

@@ -36,23 +36,32 @@ class TranscriptParserAgent(BaseAgent):
         source = trigger.source
         metadata = trigger.metadata
 
-        transcript_path = Path(source)
+        # Support both direct source path and pipeline context
+        pipeline_ctx = metadata.get("pipeline_context", {})
+        source_path = pipeline_ctx.get("source", source)
+
+        transcript_path = Path(source_path)
         if not transcript_path.exists():
             return AgentResult(
                 agent=self.name,
                 success=False,
-                errors=[f"Transcript not found: {source}"],
+                errors=[f"Transcript not found: {source_path}"],
             )
 
         raw_text = transcript_path.read_text(encoding="utf-8")
         date = metadata.get("date", datetime.now(timezone.utc).strftime("%Y-%m-%d"))
-        meeting_type = metadata.get("meeting_type", "standup")
+        meeting_type = metadata.get("meeting_type", "client")
 
         # Clean VTT formatting if present
         cleaned = self._clean_vtt(raw_text)
 
-        # Send to Claude for extraction
-        parsed = self._parse_with_claude(cleaned, date, meeting_type)
+        # Try Claude-powered extraction (online) or fall back to structural (offline)
+        parsed = None
+        if self._settings.anthropic_api_key:
+            parsed = self._parse_with_claude(cleaned, date, meeting_type)
+
+        if not parsed:
+            parsed = self._parse_offline(raw_text, date, transcript_path.name)
 
         if not parsed:
             return AgentResult(
@@ -82,19 +91,92 @@ class TranscriptParserAgent(BaseAgent):
                     reference=filename,
                 ))
 
+        action_count = len(parsed.get("action_items", []))
+        decision_count = len(parsed.get("decisions", []))
+        req_count = len(parsed.get("new_requirements", []))
+        mode = "online (Claude)" if self._settings.anthropic_api_key else "offline (structural)"
+
         outputs.append(AgentOutput(
             output_type="transcript_parsed",
-            description=f"Extracted {len(parsed.get('action_items', []))} action items, "
-                       f"{len(parsed.get('decisions', []))} decisions, "
-                       f"{len(parsed.get('new_requirements', []))} new requirements",
+            description=f"[{mode}] Extracted {action_count} action items, "
+                       f"{decision_count} decisions, {req_count} new requirements",
+            reference=str(transcript_path),
         ))
+
+        # Deposit to shared wiki and emit cross-pipeline events
+        if action_count > 0:
+            self.emit("action_items_extracted", {
+                "count": action_count,
+                "meeting_date": date,
+                "meeting_type": meeting_type,
+                "source": str(transcript_path),
+                "items": parsed.get("action_items", [])[:10],
+            })
+        if decision_count > 0:
+            self.emit("decision_logged", {
+                "count": decision_count,
+                "meeting_date": date,
+                "decisions": parsed.get("decisions", [])[:10],
+            })
+        self.wiki.put("meetings", f"{date}-{meeting_type}", {
+            "date": date,
+            "type": meeting_type,
+            "source": str(transcript_path),
+            "action_items": action_count,
+            "decisions": decision_count,
+            "new_requirements": req_count,
+            "participants": parsed.get("attendees", []),
+        }, agent=self.name, tags=[meeting_type, date])
 
         return AgentResult(
             agent=self.name,
             success=True,
             outputs=outputs,
             requires_human_review=False,
+            data={
+                "parsed_minutes": parsed,
+                "transcript_cleaned": cleaned[:5000],
+                "meeting_date": date,
+                "meeting_type": meeting_type,
+                "source_file": str(transcript_path),
+            },
         )
+
+    def _parse_offline(self, transcript: str, date: str, filename: str) -> dict | None:
+        """Structural extraction without LLM — used when no API key is set."""
+        from pipeline.vtt_processor import parse_vtt, generate_offline_summary
+        meeting = parse_vtt(transcript, filename)
+        summary = generate_offline_summary(meeting)
+
+        decisions = [
+            {"text": d["text"][:200], "context": f"said by {d['speaker']}"}
+            for d in summary.get("decisions_sample", [])
+        ]
+        action_items = [
+            {"text": a["text"][:200], "owner": a["speaker"], "deadline": ""}
+            for a in summary.get("actions_sample", [])
+        ]
+        questions = [
+            {"text": q["text"], "context": "", "assigned_to": q["speaker"]}
+            for q in summary.get("questions_sample", [])
+        ]
+
+        return {
+            "meeting_date": date,
+            "meeting_type": "client",
+            "attendees": summary.get("participants", []),
+            "decisions": decisions,
+            "action_items": action_items,
+            "open_questions": questions,
+            "new_requirements": [],
+            "key_discussion_points": [
+                f"Topics discussed: {', '.join(summary.get('detected_topics', {}).keys())}",
+                f"Duration: {summary.get('duration_minutes', 0)} minutes",
+                f"Total words: {summary.get('total_words', 0)} across {summary.get('total_turns', 0)} turns",
+            ],
+            "_analysis_mode": "offline",
+            "_speaker_stats": summary.get("speaker_stats", {}),
+        }
 
     def _clean_vtt(self, text: str) -> str:
         """Strip WebVTT timestamps and metadata, keeping only speech content."""

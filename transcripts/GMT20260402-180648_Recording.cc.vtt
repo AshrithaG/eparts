@@ -1,0 +1,1247 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.000
+Yes.
+
+00:00:01.000 --> 00:00:04.000
+Yeah, I'll just turn up my speaker.
+
+00:00:04.000 --> 00:00:09.000
+So… okay.
+
+00:00:09.000 --> 00:00:12.000
+Yep. So, the first item on the agenda is…
+
+00:00:12.000 --> 00:00:15.000
+For the timeline.
+
+00:00:15.000 --> 00:00:17.000
+Um…
+
+00:00:17.000 --> 00:00:00.000
+Yeah. Rishi, you're there, right?
+
+00:00:00.000 --> 00:00:22.000
+Yeah.
+
+00:00:22.000 --> 00:00:24.000
+Yes.
+
+00:00:24.000 --> 00:00:28.000
+Yeah. So…
+
+00:00:28.000 --> 00:00:34.000
+Yeah, sure, can you, uh, should I share my screen, or can you share your screen, uh, with the timeline?
+
+00:00:34.000 --> 00:00:37.000
+Um, I think you should, I'm having some issues with my system.
+
+00:00:37.000 --> 00:00:40.000
+Okay, never mind, I'll just do it then.
+
+00:00:40.000 --> 00:00:45.000
+So…
+
+00:00:45.000 --> 00:00:49.000
+Okay.
+
+00:00:49.000 --> 00:00:52.000
+So, is it visible, Harsha, David?
+
+00:00:52.000 --> 00:00:55.000
+Yeah, I can do.
+
+00:00:55.000 --> 00:00:58.000
+So, we just wanted to go over and, like, get your feedback.
+
+00:00:58.000 --> 00:01:01.000
+So, for now, what we have is, like,
+
+00:01:01.000 --> 00:01:07.000
+By April 15th, uh, for this, uh, this semester, we'll have, uh, the requirements
+
+00:01:07.000 --> 00:01:10.000
+Completed by then?
+
+00:01:10.000 --> 00:01:12.000
+And…
+
+00:01:12.000 --> 00:01:16.000
+I think we're making progress on this, so it should be doable by then, yeah.
+
+00:01:16.000 --> 00:01:19.000
+And for… by April 30th, uh…
+
+00:01:19.000 --> 00:01:21.000
+the SES system should be finalized, and…
+
+00:01:21.000 --> 00:01:25.000
+The risk document should also be completed.
+
+00:01:25.000 --> 00:01:32.000
+If the national requirements…
+
+00:01:32.000 --> 00:01:36.000
+Um, I think we can, uh, skip towards the end. This is, uh,
+
+00:01:36.000 --> 00:01:38.000
+bit more detail, I think you can add on.
+
+00:01:38.000 --> 00:01:41.000
+which parts you want to discuss.
+
+00:01:41.000 --> 00:01:45.000
+There's a high-level view on the end.
+
+00:01:45.000 --> 00:01:48.000
+Sure.
+
+00:01:48.000 --> 00:01:49.000
+Yeah, this one, right?
+
+00:01:49.000 --> 00:01:55.000
+Yeah, so, uh, we are targeting that towards the end of this month, we should have
+
+00:01:55.000 --> 00:01:58.000
+the basic requirements, risk process,
+
+00:01:58.000 --> 00:02:03.000
+like, not, uh, I'm not sure if you'll be able to have the complete architecture, because
+
+00:02:03.000 --> 00:02:06.000
+We need to still do some POCs.
+
+00:02:06.000 --> 00:02:12.000
+on the LLM versus ML front, so that we can finalize an approach and build the architecture around that.
+
+00:02:12.000 --> 00:02:15.000
+That is the plan for, um, early May.
+
+00:02:15.000 --> 00:02:18.000
+first couple of weeks of May, we should have that information with us.
+
+00:02:18.000 --> 00:02:23.000
+And, uh, towards the end of May, we plan to begin development.
+
+00:02:23.000 --> 00:02:26.000
+On all fronts, there'll be… I think we'll do it parallelly.
+
+00:02:26.000 --> 00:02:30.000
+Uh, we'll be working on the adjacent gateway along with…
+
+00:02:30.000 --> 00:02:34.000
+the ML or LLM components.
+
+00:02:34.000 --> 00:02:37.000
+Um, after that, uh, within the next couple of months,
+
+00:02:37.000 --> 00:02:42.000
+Till, uh, in June and July, we are expecting to be done with
+
+00:02:42.000 --> 00:02:44.000
+almost all of the development.
+
+00:02:44.000 --> 00:02:48.000
+We have a… we are targeting an aggressive approach.
+
+00:02:48.000 --> 00:02:51.000
+Uh, so that we have more time to cater to any…
+
+00:02:51.000 --> 00:02:53.000
+um, issue that we may have.
+
+00:02:53.000 --> 00:02:57.000
+These timelines might increase a little bit, because we have left around,
+
+00:02:57.000 --> 00:03:00.000
+two to three months of testing effort.
+
+00:03:00.000 --> 00:03:03.000
+Just in case we run into some issues.
+
+00:03:03.000 --> 00:03:07.000
+So, we are taking a optimistic approach here.
+
+00:03:07.000 --> 00:03:10.000
+And by the end of August,
+
+00:03:10.000 --> 00:03:15.000
+We are hoping that the individual modules are ready.
+
+00:03:15.000 --> 00:03:19.000
+for, um, to basically be integrated with each other.
+
+00:03:19.000 --> 00:03:22.000
+So that we have a complete system in place, and…
+
+00:03:22.000 --> 00:03:27.000
+In that time, you'll also be doing some sort of individual component testing.
+
+00:03:27.000 --> 00:03:30.000
+And we'll probably share the results with you.
+
+00:03:30.000 --> 00:03:34.000
+Um, on how we are able to process the files that we have.
+
+00:03:34.000 --> 00:03:39.000
+And, um, how the LLM components are doing the work.
+
+00:03:39.000 --> 00:03:43.000
+And after, uh, September in… I think in…
+
+00:03:43.000 --> 00:03:47.000
+October will probably be figuring out, uh,
+
+00:03:47.000 --> 00:03:55.000
+the exact test and the extent of the testing that we're following, and then the next month or two,
+
+00:03:55.000 --> 00:03:58.000
+will be, um, just…
+
+00:03:58.000 --> 00:04:00.000
+testing the entire system, and…
+
+00:04:00.000 --> 00:04:05.000
+looking at it, if you can incorporate some of the stretch goals that we have, the…
+
+00:04:05.000 --> 00:04:10.000
+Maybe the web scraping part, or some of the other things that…
+
+00:04:10.000 --> 00:04:16.000
+Would be good to have for you guys. We'll be trying to incorporate that, so we are leaving a couple of months to…
+
+00:04:16.000 --> 00:04:18.000
+be able to work on that as well.
+
+00:04:18.000 --> 00:04:24.000
+And in December, uh, we'll probably not be… we are hoping to be done with everything before that.
+
+00:04:24.000 --> 00:04:29.000
+And in December, it'll just be, um, any documentation or handover plans that we have.
+
+00:04:29.000 --> 00:04:32.000
+maybe demos, uh, whatever is required.
+
+00:04:32.000 --> 00:04:36.000
+That's the part we're leaving for end of November and…
+
+00:04:36.000 --> 00:04:39.000
+Uh, December.
+
+00:04:39.000 --> 00:04:47.000
+And if you want to go into details of any of these, um, it's mentioned above.
+
+00:04:47.000 --> 00:04:54.000
+Okay. bring the questions to my manager.
+
+00:04:54.000 --> 00:04:59.000
+Uh, we can share this doc with you, um, after the call.
+
+00:04:59.000 --> 00:05:02.000
+Yep, um…
+
+00:05:02.000 --> 00:05:05.000
+So, is it fine with both, uh…
+
+00:05:05.000 --> 00:05:10.000
+Uh, is it Vine Horscha and David, if you have anything, then we can make changes. If not,
+
+00:05:10.000 --> 00:05:14.000
+We can share this with you after the meeting.
+
+00:05:14.000 --> 00:05:29.000
+other than July is missing. But yeah, I think I think this makes sense. This is a decent timeline, or at least a decent breakdown of the units. I suspect some of those units might be larger than others, and.
+
+00:05:29.000 --> 00:05:46.000
+It's also possible that ePart's appetite would change, that things that might be stretch goals will work its way into core requirements. That seems to be just the way of the world. But we'll do our best to keep that from happening.
+
+00:05:46.000 --> 00:05:47.000
+Good.
+
+00:05:47.000 --> 00:05:48.000
+Yeah, I think this is a good 1st plan.
+
+00:05:48.000 --> 00:05:54.000
+Got it. I think July is not there just because, uh, summer semester ends by then, and then, you know, then that's just the gap.
+
+00:05:54.000 --> 00:05:57.000
+Um, yeah, July was, um…
+
+00:05:57.000 --> 00:06:05.000
+left out because of the entire development. There won't be any deliverable in that month, because we'll still be working on the…
+
+00:06:05.000 --> 00:06:11.000
+like, development of it, and we don't expect they'll be any deliverable in the month of July. It's like a two-month
+
+00:06:11.000 --> 00:06:14.000
+period in which we'll be developing everything.
+
+00:06:14.000 --> 00:06:20.000
+Okay, I must have misunderstood before. That's that's fine. That makes sense.
+
+00:06:20.000 --> 00:06:26.000
+So…
+
+00:06:26.000 --> 00:06:35.000
+you. And there's a few things I think I want to say from mine, but I think I think currently.
+
+00:06:35.000 --> 00:06:36.000
+Okay, um…
+
+00:06:36.000 --> 00:06:37.000
+Not regarding the bank.
+
+00:06:37.000 --> 00:06:42.000
+We also have the statement of work, I'll just share that as well.
+
+00:06:42.000 --> 00:07:00.000
+So…
+
+00:07:00.000 --> 00:07:06.000
+One second, uh… this is…
+
+00:07:06.000 --> 00:07:13.000
+So, we were, uh… is it visible, first of all?
+
+00:07:13.000 --> 00:07:14.000
+Okay. So, uh, we were, uh…
+
+00:07:14.000 --> 00:07:17.000
+Yeah, I'll help you.
+
+00:07:17.000 --> 00:07:20.000
+It was encouraged that we have a statement of work, just so that, uh…
+
+00:07:20.000 --> 00:07:23.000
+you know, we have a shared understanding with you.
+
+00:07:23.000 --> 00:07:30.000
+I'll be… this is the first version, and this is still, uh, I think it… a lot of changes might be required, but…
+
+00:07:30.000 --> 00:07:35.000
+I just wanted to share it with you guys, and uh…
+
+00:07:35.000 --> 00:07:38.000
+It just basically goes over what we understand of the project.
+
+00:07:38.000 --> 00:07:44.000
+And along with the scope that we think, and how we, you know,
+
+00:07:44.000 --> 00:07:48.000
+think about each of the activities that we're gonna have, so…
+
+00:07:48.000 --> 00:07:52.000
+It's a… it's a bit of a long document, but uh…
+
+00:07:52.000 --> 00:07:56.000
+And this is just basically all of our understanding and all of the things that we think
+
+00:07:56.000 --> 00:08:01.000
+are currently… we're gonna have to do. It also defines some of the…
+
+00:08:01.000 --> 00:08:10.000
+out-of-scope things, like, uh, right now, um, I just wanted to confirm again. So, generalized web scraping and all that, uh, stuff is not included, right?
+
+00:08:10.000 --> 00:08:15.000
+Because I have it here, but we can make changes if you want.
+
+00:08:15.000 --> 00:08:24.000
+Yeah, generally, that's great to know. Uh, if there's anything which is mentioned in the PDF document itself.
+
+00:08:24.000 --> 00:08:25.000
+Okay.
+
+00:08:25.000 --> 00:08:34.000
+Probably, but that's it. There's nothing. There's nothing out out of the bounds of it, which is you guys make a search and look for things and figure out what is correct. That kind of website is completely JavaScript.
+
+00:08:34.000 --> 00:08:38.000
+Yeah. So, we also have other things, uh…
+
+00:08:38.000 --> 00:08:39.000
+Such as, like, you know, that are…
+
+00:08:39.000 --> 00:08:42.000
+Okay.
+
+00:08:42.000 --> 00:08:46.000
+we will be working all the way up till PIMS, but the steps after that,
+
+00:08:46.000 --> 00:08:51.000
+is not something under our control, so I've also written these points here.
+
+00:08:51.000 --> 00:08:57.000
+And we, we, uh, the other things are just, like,
+
+00:08:57.000 --> 00:09:02.000
+Uh, what we think we are allowed to do, and the things that either are not under our control, or…
+
+00:09:02.000 --> 00:09:09.000
+things that, uh, we're not, uh, we do not expect that, uh, will come up or will have to do.
+
+00:09:09.000 --> 00:09:11.000
+So, I'll be set…
+
+00:09:11.000 --> 00:09:14.000
+Yep.
+
+00:09:14.000 --> 00:09:17.000
+Oh, I thought someone was asking a question.
+
+00:09:17.000 --> 00:09:19.000
+So…
+
+00:09:19.000 --> 00:09:24.000
+Yeah, so it, uh, there's also the project documentation deliverables, so…
+
+00:09:24.000 --> 00:09:26.000
+All of these things.
+
+00:09:26.000 --> 00:09:32.000
+And finally, I would just like to…
+
+00:09:32.000 --> 00:09:35.000
+go to…
+
+00:09:35.000 --> 00:09:38.000
+Yep. So…
+
+00:09:38.000 --> 00:09:41.000
+The last thing is just all the…
+
+00:09:41.000 --> 00:09:44.000
+general assumptions we have.
+
+00:09:44.000 --> 00:09:49.000
+And, you know, who we have met, uh, what tools we're expected to use.
+
+00:09:49.000 --> 00:09:52.000
+that, you know, we make sure that the…
+
+00:09:52.000 --> 00:09:54.000
+the constraints, like,
+
+00:09:54.000 --> 00:09:58.000
+not using any public LLM or, you know, not…
+
+00:09:58.000 --> 00:10:03.000
+using the company data on anything other than company resources.
+
+00:10:03.000 --> 00:10:06.000
+So that… that… all that stuff is here.
+
+00:10:06.000 --> 00:10:11.000
+And we, in general, I just wanted to show it to you guys so that, you know,
+
+00:10:11.000 --> 00:10:18.000
+that this, you know, statement is, uh, here is much more clear to everyone.
+
+00:10:18.000 --> 00:10:23.000
+And that, you know, if there are any gaps in our understanding that you might… you guys…
+
+00:10:23.000 --> 00:10:30.000
+might, uh, you know, say that, okay, this is actually different here, and we can go ahead and make those changes.
+
+00:10:30.000 --> 00:10:31.000
+So, I'll also…
+
+00:10:31.000 --> 00:10:34.000
+Yeah, sure. I mean hybrids. Sorry, my back. Go ahead.
+
+00:10:34.000 --> 00:10:41.000
+It's just, I'll also send this document over, uh, you guys can look at it, and if there's any
+
+00:10:41.000 --> 00:10:47.000
+Mistakes that you… or, like, misunderstandings there, that then, yeah, we'll go ahead and change it.
+
+00:10:47.000 --> 00:10:57.000
+Yeah, I mean, I can go through it in detail and then send any changes or something which doesn't align correctly to you guys. But that shouldn't be that.
+
+00:10:57.000 --> 00:11:06.000
+Yep. So, yeah, this is just an initial first, first version, so yeah, we'll, we'll definitely update it as we go along.
+
+00:11:06.000 --> 00:11:07.000
+Yeah.
+
+00:11:07.000 --> 00:11:12.000
+So, uh, yeah. I'll send this over.
+
+00:11:12.000 --> 00:11:18.000
+Along with the timeline.
+
+00:11:18.000 --> 00:11:21.000
+The other thing is…
+
+00:11:21.000 --> 00:11:22.000
+Yep, um…
+
+00:11:22.000 --> 00:11:25.000
+Uh, Liu is here with us, it's just…
+
+00:11:25.000 --> 00:11:29.000
+Uh, he had some specific questions. He has been looking through the ML portion.
+
+00:11:29.000 --> 00:11:32.000
+And, uh, he wanted to basically
+
+00:11:32.000 --> 00:11:34.000
+you know, uh…
+
+00:11:34.000 --> 00:11:37.000
+clarify what all he needed, and, you know,
+
+00:11:37.000 --> 00:11:41.000
+all the stuff, and why he needs it, and, you know, his future steps. So, leave a few…
+
+00:11:41.000 --> 00:11:45.000
+want to, like, share your document and, like, just…
+
+00:11:45.000 --> 00:11:48.000
+You can basically go ahead and, like…
+
+00:11:48.000 --> 00:11:51.000
+Uh…
+
+00:11:51.000 --> 00:11:53.000
+Send a row to third.
+
+00:11:53.000 --> 00:11:55.000
+Just… what is it in there.
+
+00:11:55.000 --> 00:11:58.000
+Because, uh, data needs.
+
+00:11:58.000 --> 00:12:01.000
+Okay, so…
+
+00:12:01.000 --> 00:12:05.000
+Yeah. Basically, uh, Liu was saying that, uh,
+
+00:12:05.000 --> 00:12:09.000
+Uh, he's looked into the, you know, different options, and…
+
+00:12:09.000 --> 00:12:13.000
+He's done some calculations on how many entries he would need.
+
+00:12:13.000 --> 00:12:15.000
+And so…
+
+00:12:15.000 --> 00:12:19.000
+After he's made initial document and, like, all the estimates,
+
+00:12:19.000 --> 00:12:25.000
+And he sent a… he's basically sent an email with all the requirements for the ML portion.
+
+00:12:25.000 --> 00:12:29.000
+And, uh, he needs that, like, uh…
+
+00:12:29.000 --> 00:12:35.000
+I can go further in the ML prototyping, so it would be really helpful if, uh, you know,
+
+00:12:35.000 --> 00:12:38.000
+Uh, to proceed, if you could get there.
+
+00:12:38.000 --> 00:12:56.000
+Yeah, 100%. I was. I was just going to say, uh, so… I've only taken a look at that email, and I've started collecting the data for that as well. So ideally, I was saying that either end of today or Monday, I should get in SME. Is there a timeline from your end that you expect me to give you the year back?
+
+00:12:56.000 --> 00:13:01.000
+Uh, no, it's… I think Monday's fine, right? Yep, so, yeah.
+
+00:13:01.000 --> 00:13:05.000
+Um, in the meantime, he's just, uh, gonna, like, you know…
+
+00:13:05.000 --> 00:13:09.000
+Work on the other stuff for the Albert types.
+
+00:13:09.000 --> 00:13:12.000
+So… I think…
+
+00:13:12.000 --> 00:13:16.000
+That's it, in the sense that…
+
+00:13:16.000 --> 00:13:22.000
+we… we, like, we were working on other stuff as well with…
+
+00:13:22.000 --> 00:13:25.000
+Uh, but that's more related to project management.
+
+00:13:25.000 --> 00:13:29.000
+I did have a question, Hutchin, so…
+
+00:13:29.000 --> 00:13:31.000
+Next week, we have the…
+
+00:13:31.000 --> 00:13:33.000
+Carnival, so…
+
+00:13:33.000 --> 00:13:38.000
+I think the building will, uh, will be shut down on Thursday?
+
+00:13:38.000 --> 00:13:43.000
+Okay, okay. I'm not sure.
+
+00:13:43.000 --> 00:14:04.000
+So, but, uh, is there… should we reschedule the time for it? I'm not certain about it, so I just wanted to bring it up.
+
+00:14:04.000 --> 00:14:05.000
+Yeah.
+
+00:14:05.000 --> 00:14:09.000
+I mean, uh, you guys will have a vacation for, like, the 2 or 3 day carbon period, right? So, ideally, I would say, if you want to have a meeting next week, you should do it to when you guys are actually in campus and actually have a working day. Otherwise, we can do it to be after today. That's fine.
+
+00:14:09.000 --> 00:14:11.000
+Um, Ashuta, Rishi, um…
+
+00:14:11.000 --> 00:14:16.000
+I would also, like, uh, what do you guys think?
+
+00:14:16.000 --> 00:14:22.000
+Uh, I probably might not be available for those two days, Thursday and Friday.
+
+00:14:22.000 --> 00:14:23.000
+Uh, Rishi?
+
+00:14:23.000 --> 00:14:26.000
+Yeah, I think I might probably be available on…
+
+00:14:26.000 --> 00:14:33.000
+Thursday… yeah, I think I can make Thursday, but I'll not be available for the weekend and Friday, right?
+
+00:14:33.000 --> 00:14:35.000
+Right. So, um…
+
+00:14:35.000 --> 00:14:38.000
+Yeah, we wanted to discuss PIMs and the like.
+
+00:14:38.000 --> 00:14:42.000
+go into detail regarding that, uh, Harsha?
+
+00:14:42.000 --> 00:14:45.000
+So, would it be alright if we came to your office?
+
+00:14:45.000 --> 00:14:52.000
+Actually, first of all, is it alright, Shruta, Rishi, Liu, what do you think?
+
+00:14:52.000 --> 00:14:57.000
+Yeah, uh, anytime, like, Monday, Tuesday, or Wednesday works for me.
+
+00:14:57.000 --> 00:14:58.000
+Yeah.
+
+00:14:58.000 --> 00:14:59.000
+Rasheen?
+
+00:14:59.000 --> 00:15:01.000
+Yes, uh, vote for me as well.
+
+00:15:01.000 --> 00:15:04.000
+Okay, okay. Yeah, you, uh…
+
+00:15:04.000 --> 00:15:09.000
+Your voice is a bit low. I'll just increase my speaker.
+
+00:15:09.000 --> 00:15:11.000
+Uh, okay, um…
+
+00:15:11.000 --> 00:15:21.000
+Which… which day would work for you, Hasha? David? We would really like to, I guess, come over and ask questions.
+
+00:15:21.000 --> 00:15:22.000
+Okay. Yeah.
+
+00:15:22.000 --> 00:15:25.000
+I would say G would be the poison for pairs for almost most of them. So I would say global message on teams.
+
+00:15:25.000 --> 00:15:30.000
+Yeah.
+
+00:15:30.000 --> 00:15:31.000
+Okay.
+
+00:15:31.000 --> 00:15:44.000
+And just, you give us your availability on when it's the most convenient for you guys. And Jake will just let you guys know on, like, what slot works for him. My guess is that it will be Wednesday. Yeah. He's probably gonna be in Erie Monday, Tuesday. Oh, yeah, so next Wednesday might be it.
+
+00:15:44.000 --> 00:15:45.000
+Yeah. Um, okay.
+
+00:15:45.000 --> 00:15:47.000
+But let's see.
+
+00:15:47.000 --> 00:15:50.000
+So, that sounds good to me.
+
+00:15:50.000 --> 00:15:56.000
+Just to confirm, Leo, Rishi, Ashutantha, is that fine with you guys?
+
+00:15:56.000 --> 00:15:57.000
+Okay.
+
+00:15:57.000 --> 00:15:58.000
+Yeah, let's, uh, check the calendar once and then confirm.
+
+00:15:58.000 --> 00:16:00.000
+Yep.
+
+00:16:00.000 --> 00:16:05.000
+Yeah, yeah, we'll definitely send over the availability times and, like, coordinate with you.
+
+00:16:05.000 --> 00:16:08.000
+With you guys, yeah.
+
+00:16:08.000 --> 00:16:09.000
+Uh…
+
+00:16:09.000 --> 00:16:15.000
+And… I mean, I had a few things to discuss, but you guys go on. We can do with that.
+
+00:16:15.000 --> 00:16:20.000
+No, no, please go ahead. I think that that was a lot of the high priority.
+
+00:16:20.000 --> 00:16:24.000
+Okay. So a few things as in one is.
+
+00:16:24.000 --> 00:16:38.000
+With respect to Liu's email, there is one thing where he mentions about having the documents attributed to the exact products that are mapped to it.
+
+00:16:38.000 --> 00:16:50.000
+So what I'll do is I'll be sending you guys the document links from BunnyCDN. So all you can do is, you can use that link to get the exact document that you want. That is attached there.
+
+00:16:50.000 --> 00:16:51.000
+Yeah.
+
+00:16:51.000 --> 00:16:57.000
+So does that sound okay? Or do you want me to send the actual document itself embedded?
+
+00:16:57.000 --> 00:17:03.000
+Luke?
+
+00:17:03.000 --> 00:17:06.000
+You can send me a link? So, he…
+
+00:17:06.000 --> 00:17:14.000
+camera this way so we can… Yeah, go ahead.
+
+00:17:14.000 --> 00:17:16.000
+So…
+
+00:17:16.000 --> 00:17:19.000
+works great.
+
+00:17:19.000 --> 00:17:22.000
+Okay, I gotta check the landing.
+
+00:17:22.000 --> 00:17:26.000
+Um, Harsha, uh, could you repeat the two options that you had? One was sending over the link, and the other one was the actual document?
+
+00:17:26.000 --> 00:17:42.000
+Yeah. So so what is mentioned in the email is that he wanted the raw supplier text extracted from the PDF or the spec sheets, or the CSV sent directly attributed to the products itself and sent over.
+
+00:17:42.000 --> 00:17:53.000
+Um, what I can actually do is, uh… Send a link instead of the extracted data from the PDFs.
+
+00:17:53.000 --> 00:18:06.000
+So that link will contain the exact document that connects to the project's website. So it'll just be the document link products that are later on this document and so on.
+
+00:18:06.000 --> 00:18:08.000
+Okay, um, I think…
+
+00:18:08.000 --> 00:18:11.000
+That should be fine.
+
+00:18:11.000 --> 00:18:12.000
+Ashatan, do you…
+
+00:18:12.000 --> 00:18:13.000
+Okay.
+
+00:18:13.000 --> 00:18:19.000
+Like, uh, like, we need it majorly for the input for our LLM model.
+
+00:18:19.000 --> 00:18:20.000
+So that we can actually see how it is working and what it can do.
+
+00:18:20.000 --> 00:18:23.000
+Sure.
+
+00:18:23.000 --> 00:18:32.000
+I think that should be fine, but I think, uh, we will require, um, a good chunk of data in that respect. Like, what we are giving it as input, and
+
+00:18:32.000 --> 00:18:37.000
+how the catalog team is refining it, and what the actual output is towards the end.
+
+00:18:37.000 --> 00:18:38.000
+So that we can…
+
+00:18:38.000 --> 00:18:39.000
+Mm-hmm.
+
+00:18:39.000 --> 00:18:40.000
+Yep.
+
+00:18:40.000 --> 00:18:48.000
+So, I'll send over as many as I can, so don't worry about that. It'll be at least more than a thousand.
+
+00:18:48.000 --> 00:19:03.000
+And another question, actually not a question. Another, I think a thing that I think we discussed in the earlier days of the project, but we kind of, I think we've forgotten about it, and I think we've forgotten to mention that to you guys about it too, which is.
+
+00:19:03.000 --> 00:19:20.000
+Initially, you were talking about the data standards, right? On how we could standardize the data. And I think in our previous meetings, we kind of, um… I established that we will be using the attributes from the product types which are in the tables that I provided you guys with.
+
+00:19:20.000 --> 00:19:32.000
+And that's how we'll be doing it. But the thing is, we kind of identified, like, 3 data standards that are already there in the industry, and a pretty much standardized, and no matter what.
+
+00:19:32.000 --> 00:19:37.000
+type of product you're looking at, you'll find the exact type of attributes that are needed for the product.
+
+00:19:37.000 --> 00:19:47.000
+So the 3 standards are like and UNSPSE. I'll ping this to you guys. But.
+
+00:19:47.000 --> 00:19:58.000
+These are basically open source standards where all the product types and attributes for these product types. It's all available on the website.
+
+00:19:58.000 --> 00:20:06.000
+Ideally, you can use this data itself. To create the initial set of like.
+
+00:20:06.000 --> 00:20:18.000
+filtering for, like, how the product should look like, or how the… Um, or how a specific GAN video growth data approach should look like?
+
+00:20:18.000 --> 00:20:27.000
+Um, I think that works out. What do you think?
+
+00:20:27.000 --> 00:20:33.000
+And…
+
+00:20:33.000 --> 00:20:36.000
+Yes.
+
+00:20:36.000 --> 00:20:38.000
+So, yeah, um…
+
+00:20:38.000 --> 00:20:43.000
+Yeah, Lee is also saying that he'll just go through it, and then, uh…
+
+00:20:43.000 --> 00:20:48.000
+Uh, you know, go for, uh, like, if there are anything else, and he can, I guess, inform you again.
+
+00:20:48.000 --> 00:20:56.000
+Yeah, and another great thing about this, these open standards is that all of these standards have documentation which.
+
+00:20:56.000 --> 00:21:12.000
+tells us that what these specific attributes, which are called in this standard map to in the other standard that is mentioned. So, like, how does Eton's attributes identified map to the E-class attributes? It's all clearly defined.
+
+00:21:12.000 --> 00:21:18.000
+And I mean, like a benefit of this would just be that.
+
+00:21:18.000 --> 00:21:24.000
+a document… sorry, a product attributed in a certain standard can always be mapped to another standard as well.
+
+00:21:24.000 --> 00:21:38.000
+And this would mean that that one product can be identified according to 3 different standards, because they're all interrelatable, and they they have like the language defined on like what are these different.
+
+00:21:38.000 --> 00:21:42.000
+What are the various possibilities for these attributes to be called in the industry?
+
+00:21:42.000 --> 00:21:44.000
+Yeah.
+
+00:21:44.000 --> 00:21:49.000
+So symptoms, everything I highlighted pretty clearly in this.
+
+00:21:49.000 --> 00:21:50.000
+Yeah, I…
+
+00:21:50.000 --> 00:21:54.000
+Or could you, uh, explain a bit about what these standards actually are? Um, I'm not very clear on the…
+
+00:21:54.000 --> 00:22:00.000
+Uh, you might… yeah.
+
+00:22:00.000 --> 00:22:01.000
+Right.
+
+00:22:01.000 --> 00:22:10.000
+So right now we have product types, categories and attributes and so these product types and attributes are pretty much what helps like our parent company has kind of come up with.
+
+00:22:10.000 --> 00:22:19.000
+And these are like just… just things they've identified over their years of working with these products.
+
+00:22:19.000 --> 00:22:21.000
+Mm-hmm.
+
+00:22:21.000 --> 00:22:33.000
+And what these standards actually do is instead of relying on algae controls for like how they call in certain things like how they map certain attributes or what they call certain attributes.
+
+00:22:33.000 --> 00:22:41.000
+Uh, it just goes with the investing standard of, like, what these attributes are called and what sort of terms are used for these avenues and product types and anything.
+
+00:22:41.000 --> 00:22:49.000
+Okay, um, so, um, is there a chance that there is a mismatch between what ALTS uses and what the actual
+
+00:22:49.000 --> 00:22:55.000
+Um, like, documentation of Shilvan users.
+
+00:22:55.000 --> 00:23:12.000
+That could be. So I would say we don't even have to go by standards right? Ideally, I would say, if we can map to these general industry standards, we should be more than happy, because in the end Alps is just one person who decides to.
+
+00:23:12.000 --> 00:23:14.000
+I'll call these things a certain way, and that's what it is.
+
+00:23:14.000 --> 00:23:16.000
+Right.
+
+00:23:16.000 --> 00:23:27.000
+This might also simplify, like, all the different lingo that app specifically uses, because a lot of these documents, the Pdfs for these specific products and.
+
+00:23:27.000 --> 00:23:34.000
+all of these all of these specification documents. They kind of go by the general industry standards themselves.
+
+00:23:34.000 --> 00:23:40.000
+And to actually map it to Alps is a more difficult task compared to mapping it to these open standards.
+
+00:23:40.000 --> 00:23:50.000
+And these open standards kind of give us more attributes that we can expect for a product type, and um… just… they just provide a more robust email identifying them.
+
+00:23:50.000 --> 00:23:56.000
+Okay, um, but in, uh, doing that, won't it also require a rework on the PEM side?
+
+00:23:56.000 --> 00:24:02.000
+To map those attributes, the values, and so it can be used downstream.
+
+00:24:02.000 --> 00:24:08.000
+I mean, so so since these are already like predefined tables.
+
+00:24:08.000 --> 00:24:14.000
+Technically, you won't have to… you won't be expected to create these.
+
+00:24:14.000 --> 00:24:21.000
+the specific attributes and prototypes or terms. As long as you can map the product to these attributes, and.
+
+00:24:21.000 --> 00:24:29.000
+product types, we should be good. For a little bit of things, that's something we look into on, like, how we should look like there.
+
+00:24:29.000 --> 00:24:37.000
+Okay. I think for now, we were relying on the schema you provided as source of truth, but I think we can compare it with the standards.
+
+00:24:37.000 --> 00:24:38.000
+Yeah.
+
+00:24:38.000 --> 00:24:42.000
+That you mentioned, and see if and where there's an overlap or a difference, and we can then work out.
+
+00:24:42.000 --> 00:24:49.000
+Yeah. So, because I was personally comparing it to the 3.
+
+00:24:49.000 --> 00:24:52.000
+to the 3-way ball, I have that we kind of have been looking at.
+
+00:24:52.000 --> 00:25:09.000
+And for that example, these standards are actually way more clearer. So, for example, if we call flow rate flow rate in one standard, it'll also give us like synonyms which are used for flow rate, which is some sort of.
+
+00:25:09.000 --> 00:25:20.000
+water flow rate or or liquid flow rate or some sort of weird term, which is like the actuator flow value or something like that.
+
+00:25:20.000 --> 00:25:23.000
+And all of these settings are defined in these standard threaders.
+
+00:25:23.000 --> 00:25:34.000
+So there's there was an initial question too, right? In one of our earlier meetings where how do we look at the synonyms are like, what if something is called something else in document? How do we understand that this match to a specific attribute?
+
+00:25:34.000 --> 00:25:36.000
+Yeah.
+
+00:25:36.000 --> 00:25:39.000
+These standards actually clear those 10 questions up as well.
+
+00:25:39.000 --> 00:25:45.000
+Okay. I think, uh, probably we can go through the standards and do a comparison, then
+
+00:25:45.000 --> 00:25:47.000
+We'll probably need, um…
+
+00:25:47.000 --> 00:25:51.000
+the verification from the catalog team, if you're doing it in the right way.
+
+00:25:51.000 --> 00:25:52.000
+Um, we can probably create a document
+
+00:25:52.000 --> 00:25:54.000
+Yeah.
+
+00:25:54.000 --> 00:26:02.000
+Um, like, layering the differences that we have and what we're following, and we can get it verified by you guys once.
+
+00:26:02.000 --> 00:26:03.000
+Okay.
+
+00:26:03.000 --> 00:26:16.000
+Yeah. But that's it. Is there any problem with whatever what I just said? Any anything unclear, or anything that seems like it's out of scope, or anything that seems like this is not what they initially then do.
+
+00:26:16.000 --> 00:26:44.000
+Uh, just, I mean, uh, I understood what you're trying to say about the standardization part, so it's like, uh, okay, I have worked similar to this, like on the telemetry side of it, like, uh, open telemetry and then all of it. So it's basically, you want to be vendor agnostic and then standardize everything, right?
+
+00:26:44.000 --> 00:26:45.000
+Mm-hmm.
+
+00:26:45.000 --> 00:26:51.000
+So, ah. If you are sure that standardizing according to those rules won't cause any problem like in case you want to integrate with Alps or, you know, the EPATS, uh… So then I think we are good. Uh, should be actually a lot more easier, yeah.
+
+00:26:51.000 --> 00:26:56.000
+Yeah.
+
+00:26:56.000 --> 00:27:02.000
+Yeah, this this again, like another reason for like looking at these standards was also making your life easier, right? Because technically the app standards are.
+
+00:27:02.000 --> 00:27:06.000
+Okay.
+
+00:27:06.000 --> 00:27:10.000
+very… make you guys very dependent on what the ad guys are actually telling you guys to do.
+
+00:27:10.000 --> 00:27:12.000
+Correct. Yeah.
+
+00:27:12.000 --> 00:27:27.000
+And we also heard from Brian that these these attributes are basically decided by like a team who's in charge for those specific products, and they decide that, oh, these attributes are relevant, then we're going to show these attributes on the website, and that's how it works.
+
+00:27:27.000 --> 00:27:43.000
+Yeah. So this this is just making things simple, I think, but each of us. And I think as EPA said, like becomes its own thing, these standards will also help us like, just show that our data is more robust than.
+
+00:27:43.000 --> 00:27:52.000
+what did I injection? Because a certain person knows what item is, but a certain person won't know what actually is going by.
+
+00:27:52.000 --> 00:27:53.000
+Yeah.
+
+00:27:53.000 --> 00:27:57.000
+And as good as that, yeah.
+
+00:27:57.000 --> 00:28:03.000
+Um, yeah. I would have to, like, look through and, like, compare Harsha, like…
+
+00:28:03.000 --> 00:28:06.000
+To see the differences, but I think this would help us.
+
+00:28:06.000 --> 00:28:07.000
+Uh, but yeah.
+
+00:28:07.000 --> 00:28:17.000
+Yeah. Yeah, 100%. Just go through it. We can discuss this the week after, or the week after that, and you guys take your time and just understand what these standards are and how do you plan.
+
+00:28:17.000 --> 00:28:18.000
+I think the only major change would be that, uh,
+
+00:28:18.000 --> 00:28:21.000
+I if you need.
+
+00:28:21.000 --> 00:28:25.000
+the source of truth is kind of a change, but I think changing that would help us in the long run.
+
+00:28:25.000 --> 00:28:26.000
+Yeah. Yeah.
+
+00:28:26.000 --> 00:28:31.000
+If you have standardized it, so I think it's a good change.
+
+00:28:31.000 --> 00:28:32.000
+And this might, like, prevent…
+
+00:28:32.000 --> 00:28:35.000
+Yeah.
+
+00:28:35.000 --> 00:28:42.000
+This might actually prevent rework when you're actually expanding, so yeah, that… I think that makes sense.
+
+00:28:42.000 --> 00:28:43.000
+Uh… let me just go through.
+
+00:28:43.000 --> 00:28:45.000
+Yes. Yeah.
+
+00:28:45.000 --> 00:28:48.000
+Um, other than that, uh…
+
+00:28:48.000 --> 00:28:53.000
+I don't think, like, these, like, these were the things I wanted to discuss.
+
+00:28:53.000 --> 00:28:58.000
+As for the available timings and all these documents, I'll send them over.
+
+00:28:58.000 --> 00:29:05.000
+And, uh, whichever time works for you, we can, uh, you know, agree on something, and then…
+
+00:29:05.000 --> 00:29:12.000
+you know, we'll gather some questions and ask you regarding them. It's mostly BIMS, but there might be something else as well.
+
+00:29:12.000 --> 00:29:17.000
+I'll drop these standards on the team chat after the meeting.
+
+00:29:17.000 --> 00:29:18.000
+Yeah.
+
+00:29:18.000 --> 00:29:25.000
+Yeah, I'll just, uh, drop a message to Jake as well on Teams, and I'll just send him an email, both of them.
+
+00:29:25.000 --> 00:29:27.000
+Yeah.
+
+00:29:27.000 --> 00:29:32.000
+Uh, I think that's it, but, um, I'll just invite, like, Leo, Ashta,
+
+00:29:32.000 --> 00:29:37.000
+Is she this?
+
+00:29:37.000 --> 00:29:39.000
+I think…
+
+00:29:39.000 --> 00:29:40.000
+Okay.
+
+00:29:40.000 --> 00:29:41.000
+Same for me.
+
+00:29:41.000 --> 00:29:42.000
+No, I don't have anything to add.
+
+00:29:42.000 --> 00:29:48.000
+Blue.
+
+00:29:48.000 --> 00:29:55.000
+We can't hear you.
+
+00:29:55.000 --> 00:29:59.000
+Uh, he… Lee was talking about the Cloud code, uh…
+
+00:29:59.000 --> 00:30:04.000
+So, it's… he's saying that it lets… it hits the…
+
+00:30:04.000 --> 00:30:14.000
+limit… the token limit for that.
+
+00:30:14.000 --> 00:30:19.000
+It kind of becomes a big toe head right in general.
+
+00:30:19.000 --> 00:30:36.000
+I I think the main reason for that is.
+
+00:30:36.000 --> 00:30:37.000
+Yeah.
+
+00:30:37.000 --> 00:30:40.000
+I don't know. You can technically use an unlimited credits with cloud code at this point, and like we ourselves have personally been struggling with like keeping that in like a specific budget could stay. So hence the limited post. If that limit is too restrictive, we can.
+
+00:30:40.000 --> 00:30:42.000
+show you about it.
+
+00:30:42.000 --> 00:30:47.000
+Yep, uh, I think that's another topic that maybe we'll discuss more in depth, but…
+
+00:30:47.000 --> 00:30:50.000
+I've not personally, I think.
+
+00:30:50.000 --> 00:30:55.000
+gone through those same limitations, so I'm not so sure.
+
+00:30:55.000 --> 00:30:56.000
+But…
+
+00:30:56.000 --> 00:30:57.000
+I think, uh, bumping up the limits in a short term would be good, because
+
+00:30:57.000 --> 00:30:59.000
+Yeah.
+
+00:30:59.000 --> 00:31:06.000
+Currently, Claude is facing some, uh, token issues, like, even small quadies are using up much more tokens than it usually should.
+
+00:31:06.000 --> 00:31:08.000
+Um, hopefully I get it fixed soon enough, and we can maybe go back to the earlier tokens.
+
+00:31:08.000 --> 00:31:11.000
+And…
+
+00:31:11.000 --> 00:31:14.000
+But right now, even a small query just…
+
+00:31:14.000 --> 00:31:15.000
+like, uh, keeps on hitting different tokens on it, it's just…
+
+00:31:15.000 --> 00:31:17.000
+Yeah.
+
+00:31:17.000 --> 00:31:20.000
+I can download memory very quick.
+
+00:31:20.000 --> 00:31:36.000
+Yeah, there's a lot of I mean, in general, there's a lot of nuances to these tools too, right? Certain tools are very, very good with their limits. Certain tools, even though you end up being exhausted in the ones, they still run out of limits all the time.
+
+00:31:36.000 --> 00:31:47.000
+That's kind of the case with Claude Go, too. If you ever tend to use any opus model, it just runs out of limits in like 10 to 15 min.
+
+00:31:47.000 --> 00:31:49.000
+Yeah.
+
+00:31:49.000 --> 00:31:50.000
+Yeah, um…
+
+00:31:50.000 --> 00:31:51.000
+And you'll just be left wondering what happened.
+
+00:31:51.000 --> 00:31:54.000
+I've also kind of hit the limits with the Opus model, I guess.
+
+00:31:54.000 --> 00:31:58.000
+But that's a separate, uh, GitHub.
+
+00:31:58.000 --> 00:31:59.000
+student account, also, that's different.
+
+00:31:59.000 --> 00:32:00.000
+Yeah.
+
+00:32:00.000 --> 00:32:02.000
+Yeah.
+
+00:32:02.000 --> 00:32:09.000
+But yeah, I guess I'll gather some feedback, and we can just discuss this.
+
+00:32:09.000 --> 00:32:11.000
+Uh, maybe work out a solution.
+
+00:32:11.000 --> 00:32:12.000
+That's it, though. I think.
+
+00:32:12.000 --> 00:32:17.000
+Here.
+
+00:32:17.000 --> 00:32:22.000
+Yeah. So…
+
+00:32:22.000 --> 00:32:25.000
+Thanks, Hosha. Thanks, Jay. Thanks, David.
+
+00:32:25.000 --> 00:32:35.000
+Thanks a lot, guys. Very looking forward to a lot more lot more work with you guys, and hopefully.
+
+00:32:35.000 --> 00:32:36.000
+Yeah.
+
+00:32:36.000 --> 00:32:39.000
+It'll all kind of come there first. Yeah.
+
+00:32:39.000 --> 00:32:42.000
+Okay.
+
+00:32:42.000 --> 00:32:43.000
+Right?
+
+00:32:43.000 --> 00:32:44.000
+Bye, guys.
+
+00:32:44.000 --> 00:32:45.000
+I see you said.
+
+00:32:45.000 --> 00:32:50.000
+Bye-bye.
+
+00:32:50.000 --> 00:32:57.000
+Recording.
+

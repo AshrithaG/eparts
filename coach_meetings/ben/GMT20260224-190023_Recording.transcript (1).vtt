@@ -1,0 +1,2258 @@
+WEBVTT
+
+1
+00:00:00.050 --> 00:00:01.810
+hrishikb@andrew.cmu.edu: I'm getting the data from them.
+
+2
+00:00:02.550 --> 00:00:11.570
+hrishikb@andrew.cmu.edu: So, we… now we have received, like, I think we received it last Friday or Saturday, the data, and we are, started to work on our ML models to run basic tests.
+
+3
+00:00:11.730 --> 00:00:12.560
+hrishikb@andrew.cmu.edu: Okay.
+
+4
+00:00:13.100 --> 00:00:17.450
+hrishikb@andrew.cmu.edu: Yeah, we got it last Friday, like, in the evening or something. Okay.
+
+5
+00:00:23.840 --> 00:00:27.000
+hrishikb@andrew.cmu.edu: I don't have much to share, but I'm gonna just put up the…
+
+6
+00:00:27.680 --> 00:00:31.159
+hrishikb@andrew.cmu.edu: Yeah, we could maybe start with the unsuspect.
+
+7
+00:00:31.340 --> 00:00:32.220
+hrishikb@andrew.cmu.edu: Yeah.
+
+8
+00:00:32.770 --> 00:00:33.650
+hrishikb@andrew.cmu.edu: Download.
+
+9
+00:00:35.170 --> 00:00:40.429
+hrishikb@andrew.cmu.edu: Now, do some more reading. It's not pre-reading anymore, it's just reading.
+
+10
+00:01:08.560 --> 00:01:18.040
+hrishikb@andrew.cmu.edu: Cool, did you have a… an agenda in mind?
+
+11
+00:01:18.470 --> 00:01:23.270
+hrishikb@andrew.cmu.edu: The agenda for us is, basically figuring out,
+
+12
+00:01:24.270 --> 00:01:32.020
+hrishikb@andrew.cmu.edu: if and where we can integrate the UX elements, because currently our system is supposed to be,
+
+13
+00:01:32.140 --> 00:01:37.890
+hrishikb@andrew.cmu.edu: like, end-to-end automated. The only communication points with the system are, I think.
+
+14
+00:01:38.090 --> 00:01:48.919
+hrishikb@andrew.cmu.edu: Two, basically, first would be when we are inputting the data in the system, the different CSVs or PDFs on those kind of things, and as we process the data, if our…
+
+15
+00:01:48.920 --> 00:02:07.900
+hrishikb@andrew.cmu.edu: ML algorithm does not give it a good enough confidence score, then a human in the loop comes into the picture, who will either approve, deny, or modify the data that you've gotten. So, those are the only two elements we can think where the user will interact, because the endpoint of the entire pipeline is the
+
+16
+00:02:08.009 --> 00:02:14.549
+hrishikb@andrew.cmu.edu: basically publish the data into an, wait, I'll just pull it up, be better with the diagram.
+
+17
+00:02:30.280 --> 00:02:30.980
+hrishikb@andrew.cmu.edu: Hmm.
+
+18
+00:02:38.410 --> 00:02:48.920
+hrishikb@andrew.cmu.edu: So, in this part, this is the part where we put all the data in. We have the ingestion gateway, the internal tables that we have, the initial ones.
+
+19
+00:02:48.980 --> 00:02:55.170
+hrishikb@andrew.cmu.edu: then our ML module will print the scores using the defined rules, and if you have a…
+
+20
+00:02:55.170 --> 00:03:10.230
+hrishikb@andrew.cmu.edu: low content, then we have the human review. That's where the human will interact with the system to check if it's good or not. If it's high content is auto-accepted, I will go to the intermediary from this table, and then it will just be synced to PIMS. This is our endpoint.
+
+21
+00:03:10.230 --> 00:03:20.949
+hrishikb@andrew.cmu.edu: After this, this, like, not a concern. We just have to push the correct data to PIMS. Right. You only have two, points of interaction from humans.
+
+22
+00:03:21.040 --> 00:03:21.880
+hrishikb@andrew.cmu.edu: Okay.
+
+23
+00:03:22.820 --> 00:03:28.670
+hrishikb@andrew.cmu.edu: I think where I'd like to start, yeah, I mean, those are,
+
+24
+00:03:31.320 --> 00:03:43.500
+hrishikb@andrew.cmu.edu: Those are non-trivial UIs, so that is something, but I'd like to start with just understanding the current state, like.
+
+25
+00:03:43.960 --> 00:03:45.869
+hrishikb@andrew.cmu.edu: what eBars has.
+
+26
+00:03:46.030 --> 00:03:53.120
+hrishikb@andrew.cmu.edu: And… Okay. What is… And so you're introducing…
+
+27
+00:03:53.320 --> 00:04:03.139
+hrishikb@andrew.cmu.edu: a system into an existing system, so I'm curious what the current state is in. Okay, yeah, I think that'll be… What they're trying to accomplish…
+
+28
+00:04:03.850 --> 00:04:05.670
+hrishikb@andrew.cmu.edu: So, yeah…
+
+29
+00:04:05.980 --> 00:04:17.360
+hrishikb@andrew.cmu.edu: Basically, the problem is that currently, all this work… so, ePaths deals with HVAC systems. It's basically Amazon for some different parts, and it has multiple vendors. Okay, yeah.
+
+30
+00:04:18.390 --> 00:04:29.440
+hrishikb@andrew.cmu.edu: Currently, how they do it is, multiple vendors send them their catalogs via PDFs, CSVs, or some SFTP dump, things like that, so it's a very varied, type of input.
+
+31
+00:04:29.440 --> 00:04:48.600
+hrishikb@andrew.cmu.edu: And they have a specific catalog team, which goes through all of it manually. Like, they have their procedures, but they do all of it manually. They check their specs, because similar things can be called different names by different vendors. Like, one person can call an iPhone screen size, a screen size, some can call it display size.
+
+32
+00:04:49.540 --> 00:04:57.310
+hrishikb@andrew.cmu.edu: Yeah, so, those kind of things are what currently is done by the catalog team.
+
+33
+00:04:58.670 --> 00:05:04.249
+hrishikb@andrew.cmu.edu: Okay, and are those… is the catalog team…
+
+34
+00:05:04.680 --> 00:05:07.719
+hrishikb@andrew.cmu.edu: What is their interface right now?
+
+35
+00:05:08.300 --> 00:05:27.690
+hrishikb@andrew.cmu.edu: Are they talking to pins? Or, like, is there some UI for pins? We have not yet had a chance to talk to the catalog team, but from what we understood, the team basically does all the manual work, then they input the data into the… directly into the intermediary table.
+
+36
+00:05:28.160 --> 00:05:36.779
+hrishikb@andrew.cmu.edu: not… they don't have an intuitive, but they directly enter the data into the PIMS, the information manual system. Yeah. So all this part is the manual work they do.
+
+37
+00:05:38.400 --> 00:05:39.270
+hrishikb@andrew.cmu.edu: Okay.
+
+38
+00:05:39.820 --> 00:05:44.920
+hrishikb@andrew.cmu.edu: Yeah, so in PIMS, like,
+
+39
+00:05:45.820 --> 00:05:56.670
+hrishikb@andrew.cmu.edu: Does that have a web UI? Like, do you know how they… what the UI is? How they interface with that? I don't think the PIMS has a very certain internal thing you're looking at.
+
+40
+00:05:57.930 --> 00:05:58.900
+hrishikb@andrew.cmu.edu: Right.
+
+41
+00:05:59.220 --> 00:06:01.399
+hrishikb@andrew.cmu.edu: Speaker, like, back in April.
+
+42
+00:06:02.190 --> 00:06:09.049
+hrishikb@andrew.cmu.edu: I guess, yeah, like, what is… but what is their interface? If they're… they're looking at a catalog, a PDF, they're…
+
+43
+00:06:09.160 --> 00:06:15.250
+hrishikb@andrew.cmu.edu: Presumably they're typing in like, data somewhere, like, what is… where does that exist?
+
+44
+00:06:15.860 --> 00:06:19.649
+hrishikb@andrew.cmu.edu: I think internally, you don't have an interface.
+
+45
+00:06:19.790 --> 00:06:29.499
+hrishikb@andrew.cmu.edu: But then the only interface that's there, at least as per the knowledge that we have, is through the end product, like, what the customer sees at the end.
+
+46
+00:06:29.750 --> 00:06:38.740
+hrishikb@andrew.cmu.edu: I mean, if you do, like, internet, searches, so the one that comes up, that's the only interface, thing over here, I guess.
+
+47
+00:06:40.030 --> 00:06:47.020
+hrishikb@andrew.cmu.edu: Okay. They communicate to the very end, like, they are allowed to modify data on their the…
+
+48
+00:06:47.040 --> 00:06:55.119
+hrishikb@andrew.cmu.edu: web interface directly. If they see some issues. There is not much process around that. Like, there's not a proper interface which goes through processing.
+
+49
+00:06:55.130 --> 00:07:10.040
+hrishikb@andrew.cmu.edu: So it's… I think it's either… either they communicate with PIMs with directly entering their data into a predefined schema, or they do it directly, or both, into the front-end part of the system, web service, yeah.
+
+50
+00:07:10.370 --> 00:07:17.040
+hrishikb@andrew.cmu.edu: So we had actually proposed a… I mean, if you see at the beginning, right, what they're currently doing is.
+
+51
+00:07:17.290 --> 00:07:37.680
+hrishikb@andrew.cmu.edu: their source data is very scattered. Right. Someone sends them through mail, and then they get CSVs and all of that. So a human, actually, it starts all of that data, and then, I mean, all of this addition pipeline is not there. Right. But then they just, like, put it in a schema, and then do some CRAD operations over the DB, and push it. That's it.
+
+52
+00:07:37.850 --> 00:07:40.750
+hrishikb@andrew.cmu.edu: So, we actually told them that if
+
+53
+00:07:40.750 --> 00:08:05.040
+hrishikb@andrew.cmu.edu: you have multiple vendors over there, why don't you give an interface to the vendor, where the vendor can actually… Yeah, where the vendor can actually put it in, like, you know, a pretty straightforward template, and the data can flow on its own. So, they're like, that's the goal, but, at least for this project, I don't think they would want to take up that, UX or UI. That might be a…
+
+54
+00:08:05.320 --> 00:08:09.339
+hrishikb@andrew.cmu.edu: Like, stretch goal or something, but that's the end thing they wanted.
+
+55
+00:08:09.560 --> 00:08:11.470
+hrishikb@andrew.cmu.edu: After the system is implemented.
+
+56
+00:08:12.900 --> 00:08:21.760
+hrishikb@andrew.cmu.edu: So your planning will, have some APIs exposed, which we'll use, which can be… we'll make it so that it can be easily integrated into our web system.
+
+57
+00:08:21.890 --> 00:08:26.050
+hrishikb@andrew.cmu.edu: So, they can, like, if they plan to build a UI for it, they can easily… Right.
+
+58
+00:08:27.730 --> 00:08:30.250
+hrishikb@andrew.cmu.edu: Yeah, I guess,
+
+59
+00:08:33.559 --> 00:08:40.120
+hrishikb@andrew.cmu.edu: That's interesting. I guess what you're describing sounds like vendors…
+
+60
+00:08:40.450 --> 00:08:45.660
+hrishikb@andrew.cmu.edu: That the end goal is that vendors would do the work of inputting, but currently.
+
+61
+00:08:49.010 --> 00:08:50.530
+hrishikb@andrew.cmu.edu: It seems like…
+
+62
+00:08:51.080 --> 00:09:02.420
+hrishikb@andrew.cmu.edu: the vendors are not gonna change anything in their workflow, they're still just gonna email, and then eParts is gonna do the legwork of taking those files, and then
+
+63
+00:09:02.880 --> 00:09:05.209
+hrishikb@andrew.cmu.edu: Inputting them into your system. Yeah.
+
+64
+00:09:05.400 --> 00:09:06.280
+hrishikb@andrew.cmu.edu: Right.
+
+65
+00:09:06.500 --> 00:09:10.290
+hrishikb@andrew.cmu.edu: I guess.
+
+66
+00:09:12.010 --> 00:09:19.189
+hrishikb@andrew.cmu.edu: I mean, from the standpoint of vendors, this is a better system than the end goal, where they have to do any work.
+
+67
+00:09:19.660 --> 00:09:25.320
+hrishikb@andrew.cmu.edu: Right? So, I guess I'm trying to…
+
+68
+00:09:25.890 --> 00:09:30.880
+hrishikb@andrew.cmu.edu: I'm trying to identify the different stakeholders, like, the different
+
+69
+00:09:31.510 --> 00:09:39.040
+hrishikb@andrew.cmu.edu: People that are involved in this current system, because that's going to… Help.
+
+70
+00:09:39.500 --> 00:09:42.799
+hrishikb@andrew.cmu.edu: That's gonna help you to figure out
+
+71
+00:09:44.180 --> 00:09:50.589
+hrishikb@andrew.cmu.edu: how to design the system, and who you need to talk to, or who you need to make sure that ePort's team talks to.
+
+72
+00:09:50.810 --> 00:09:58.670
+hrishikb@andrew.cmu.edu: So… We do have a lot of context. Yeah, so, like…
+
+73
+00:10:00.920 --> 00:10:03.809
+hrishikb@andrew.cmu.edu: So yeah, I want to dig into a little bit, like.
+
+74
+00:10:03.930 --> 00:10:07.299
+hrishikb@andrew.cmu.edu: I know you guys say there's no interface, but I guess…
+
+75
+00:10:08.410 --> 00:10:10.899
+hrishikb@andrew.cmu.edu: when I say interface, I just mean, like.
+
+76
+00:10:11.130 --> 00:10:21.809
+hrishikb@andrew.cmu.edu: the inter… like, it's not necessarily, like, a polished UI or a front end, like… like, the API is an interface, a web form is an interface,
+
+77
+00:10:21.910 --> 00:10:25.019
+hrishikb@andrew.cmu.edu: I don't know, using Postman, like, as an interface.
+
+78
+00:10:26.360 --> 00:10:33.010
+hrishikb@andrew.cmu.edu: Or, you know, directly making database query calls, that's… that's… that could be an interface, or that is an interface. So…
+
+79
+00:10:35.370 --> 00:10:44.460
+hrishikb@andrew.cmu.edu: Let's say… So I like how you have, like, the different actors, so…
+
+80
+00:10:45.240 --> 00:10:50.239
+hrishikb@andrew.cmu.edu: So we have these human reviewers, that's good to identify. So is that…
+
+81
+00:10:52.250 --> 00:10:54.440
+hrishikb@andrew.cmu.edu: Do you… do you envision that…
+
+82
+00:10:54.670 --> 00:10:59.090
+hrishikb@andrew.cmu.edu: this is somebody from the catalog team? Like, who knows…
+
+83
+00:10:59.990 --> 00:11:12.160
+hrishikb@andrew.cmu.edu: Who does this role? Like, who is the expert there? I think that would be someone from the catalog team. Okay, okay. Because currently, this is all under their purview, so they're in charge to put the data into it. Okay. So they'll be doing best.
+
+84
+00:11:13.250 --> 00:11:14.650
+hrishikb@andrew.cmu.edu: I'm gonna quit.
+
+85
+00:11:14.840 --> 00:11:15.730
+hrishikb@andrew.cmu.edu: Word.
+
+86
+00:11:16.520 --> 00:11:19.240
+hrishikb@andrew.cmu.edu: Hope this works. Can I erase this? You can? Yeah, yeah.
+
+87
+00:11:23.160 --> 00:11:25.519
+hrishikb@andrew.cmu.edu: I'm just gonna start making a list of people here.
+
+88
+00:11:36.440 --> 00:11:43.620
+hrishikb@andrew.cmu.edu: So, so, let's say this is a catalog team member.
+
+89
+00:11:49.250 --> 00:11:56.439
+hrishikb@andrew.cmu.edu: So basically, like, a primary stakeholder for your system. And then we have, like, vendors.
+
+90
+00:11:56.960 --> 00:12:05.200
+hrishikb@andrew.cmu.edu: So I guess some representative from… From each, each vendor.
+
+91
+00:12:05.620 --> 00:12:07.319
+hrishikb@andrew.cmu.edu: Right? Do you have any idea
+
+92
+00:12:07.870 --> 00:12:11.710
+hrishikb@andrew.cmu.edu: what kind of person that is from that company, I guess.
+
+93
+00:12:13.060 --> 00:12:15.190
+hrishikb@andrew.cmu.edu: I don't know. I learned now.
+
+94
+00:12:16.330 --> 00:12:21.250
+hrishikb@andrew.cmu.edu: Alright, so, I'm weird.
+
+95
+00:12:21.600 --> 00:12:22.990
+hrishikb@andrew.cmu.edu: Representative.
+
+96
+00:12:23.980 --> 00:12:28.290
+hrishikb@andrew.cmu.edu: Let's see…
+
+97
+00:12:32.610 --> 00:12:33.580
+hrishikb@andrew.cmu.edu: I guess.
+
+98
+00:12:34.080 --> 00:12:41.340
+hrishikb@andrew.cmu.edu: What you're saying is… Currently, the catalog team is…
+
+99
+00:12:41.940 --> 00:12:45.849
+hrishikb@andrew.cmu.edu: Taking the emails and whatever is being sent.
+
+100
+00:12:46.090 --> 00:12:47.339
+hrishikb@andrew.cmu.edu: from the vendor.
+
+101
+00:12:47.440 --> 00:12:54.930
+hrishikb@andrew.cmu.edu: And then… so, yeah, how are they getting it into… pins.
+
+102
+00:12:55.630 --> 00:13:03.789
+hrishikb@andrew.cmu.edu: So… Currently, do you know? I know you mentioned… sorry, yeah, I know this is redundant, but I'm just gonna ask it again, so we can…
+
+103
+00:13:04.090 --> 00:13:23.619
+hrishikb@andrew.cmu.edu: So, I'm not sure we are completely certain, but from the picture we got, it was that the catalog team directly enters the data into the system, and that would be, I'm assuming they'll have a database, and they'll just directly input the data in the database, and then that would flow stream to their web UIs.
+
+104
+00:13:23.840 --> 00:13:24.650
+hrishikb@andrew.cmu.edu: Okay.
+
+105
+00:13:25.380 --> 00:13:26.630
+hrishikb@andrew.cmu.edu: So…
+
+106
+00:13:27.940 --> 00:13:38.440
+hrishikb@andrew.cmu.edu: Right, I guess you also mentioned, yeah, maybe, like, there might be a web interface, like, the normal, like, inventory, I guess, for…
+
+107
+00:13:39.890 --> 00:13:48.579
+hrishikb@andrew.cmu.edu: I guess, consumers? That would be a website which has all the prices.
+
+108
+00:13:48.900 --> 00:13:52.049
+hrishikb@andrew.cmu.edu: I don't know.
+
+109
+00:13:56.230 --> 00:13:58.060
+hrishikb@andrew.cmu.edu: Like, WI?
+
+110
+00:13:58.420 --> 00:14:01.850
+hrishikb@andrew.cmu.edu: But then maybe there's some backend…
+
+111
+00:14:02.560 --> 00:14:16.210
+hrishikb@andrew.cmu.edu: you're not sure yet how they're getting it into, like, maybe… The PIMS is the data, like, refined database to push, and from PIMS to the consumer website, we don't have the visibility of that kind of system.
+
+112
+00:14:16.590 --> 00:14:32.109
+hrishikb@andrew.cmu.edu: So… So the way that, yeah, the… So I think since… Basically, you're…
+
+113
+00:14:33.080 --> 00:14:40.169
+hrishikb@andrew.cmu.edu: You're trying to… like, the current state is a lot of this manual work, Where the catalog team member
+
+114
+00:14:41.040 --> 00:14:54.120
+hrishikb@andrew.cmu.edu: they understand… They understand the existing system and existing schemas, and they had…
+
+115
+00:14:54.710 --> 00:14:59.070
+hrishikb@andrew.cmu.edu: It sounds like they have the most expertise in how to translate
+
+116
+00:14:59.250 --> 00:15:04.269
+hrishikb@andrew.cmu.edu: The vendor's catalog into… into a more general thing, right?
+
+117
+00:15:04.610 --> 00:15:12.669
+hrishikb@andrew.cmu.edu: So, yeah, I mean, it sounded like this is, like, Like, a very important… Subject matter expert that…
+
+118
+00:15:13.310 --> 00:15:17.770
+hrishikb@andrew.cmu.edu: Hopefully you can talk to directly. Have you…
+
+119
+00:15:17.770 --> 00:15:36.420
+hrishikb@andrew.cmu.edu: Yeah, we are scheduled to have a meeting with the catalog team to understand how they do it, but, we wanted the initial data so that we have a better picture before we ask questions, so that was a bit delayed, so after spring break, we'll probably go on site and meet the team. Okay. And when you say data, you're talking about what's in PIMS, like.
+
+120
+00:15:36.920 --> 00:15:50.519
+hrishikb@andrew.cmu.edu: Yeah, the… Or the catalogs? I think all of it, like the input PDFs, the schema tables they have for particular, these things, attributes, like, let's say a system has this number of attributes, this is how the schema looks like, all that data.
+
+121
+00:15:50.760 --> 00:15:55.489
+hrishikb@andrew.cmu.edu: Okay. Like, some sample set of it, so that we have a better picture on what we need.
+
+122
+00:15:58.800 --> 00:16:00.149
+hrishikb@andrew.cmu.edu: Is this…
+
+123
+00:16:03.190 --> 00:16:08.780
+hrishikb@andrew.cmu.edu: When… do you have an idea of when?
+
+124
+00:16:09.730 --> 00:16:12.919
+hrishikb@andrew.cmu.edu: Like, how frequently does this happen?
+
+125
+00:16:13.410 --> 00:16:20.160
+hrishikb@andrew.cmu.edu: How many vendors are we talking about? How many catalogs? Is this, like, updates to catalogs? Like…
+
+126
+00:16:20.480 --> 00:16:23.510
+hrishikb@andrew.cmu.edu: Like, one item at a time, or is it, like, big drops?
+
+127
+00:16:24.020 --> 00:16:38.989
+hrishikb@andrew.cmu.edu: I think, they have around, I would say, 100 of vendors, hundreds of vendors. Okay. They're not at the thousands mark, but, the frequency of the updates, we are not sure about. Okay. Maybe we can add the points.
+
+128
+00:16:48.670 --> 00:16:53.809
+hrishikb@andrew.cmu.edu: So… I think what… I guess, it sounds like what you're trying to automate is…
+
+129
+00:16:54.090 --> 00:16:56.499
+hrishikb@andrew.cmu.edu: Yeah, just to say it again…
+
+130
+00:16:57.460 --> 00:17:09.880
+hrishikb@andrew.cmu.edu: If we just take one catalog, for example, The vendor is gonna… Like… You know, send…
+
+131
+00:17:10.440 --> 00:17:12.529
+hrishikb@andrew.cmu.edu: You know, send a catalog.
+
+132
+00:17:14.190 --> 00:17:23.500
+hrishikb@andrew.cmu.edu: to… to e-parts, and catalog member is going to…
+
+133
+00:17:23.670 --> 00:17:26.219
+hrishikb@andrew.cmu.edu: Read it, parse it, and then…
+
+134
+00:17:26.760 --> 00:17:33.219
+hrishikb@andrew.cmu.edu: you know, type it into the system. So you're trying to… automate that process.
+
+135
+00:17:33.700 --> 00:17:43.260
+hrishikb@andrew.cmu.edu: So, like, read… read what's in the PDF or, you know, a different format, it could be And…
+
+136
+00:17:44.270 --> 00:17:51.490
+hrishikb@andrew.cmu.edu: Figure out how to… Correlate it with existing structures, or maybe you have to make few changes.
+
+137
+00:17:52.340 --> 00:18:02.889
+hrishikb@andrew.cmu.edu: Yeah, I think primarily it is how the data would fit into the existing schemas. Okay. So they did mention that the schema changes are not very frequent. Okay. So those schemas are pretty set. Okay.
+
+138
+00:18:04.170 --> 00:18:11.510
+hrishikb@andrew.cmu.edu: Do you have a sense of…
+
+139
+00:18:11.990 --> 00:18:15.820
+hrishikb@andrew.cmu.edu: Why… why now EPARCs is doing this?
+
+140
+00:18:17.030 --> 00:18:29.980
+hrishikb@andrew.cmu.edu: I think that is to… Because this entire process, like, it's error-prone, and it requires multiple humans, when it could be done much, much more quicker than an automated system. Okay.
+
+141
+00:18:29.980 --> 00:18:40.409
+hrishikb@andrew.cmu.edu: And also, another thing would be, they need to scale much faster now. I think there's only two people there. One. One who's doing it, and okay, right.
+
+142
+00:18:40.410 --> 00:18:51.649
+hrishikb@andrew.cmu.edu: When they actually hope to get even more customers, they need this. Like, currently, they have to, get some catalog team help from their, I think it's a sister company or a parent company, Alps. Alps.
+
+143
+00:18:52.030 --> 00:18:53.960
+hrishikb@andrew.cmu.edu: Okay, interesting.
+
+144
+00:18:55.090 --> 00:19:02.590
+hrishikb@andrew.cmu.edu: It sounds like…
+
+145
+00:19:06.320 --> 00:19:07.760
+hrishikb@andrew.cmu.edu: Yeah, definitely.
+
+146
+00:19:08.260 --> 00:19:12.529
+hrishikb@andrew.cmu.edu: You need to… you need to talk to that person, like.
+
+147
+00:19:12.740 --> 00:19:16.610
+hrishikb@andrew.cmu.edu: That person has all the subject matter expertise here.
+
+148
+00:19:17.830 --> 00:19:25.260
+hrishikb@andrew.cmu.edu: They know exactly. They'll be the best person to tell you whether you're on the right track, and what are all the
+
+149
+00:19:25.610 --> 00:19:30.690
+hrishikb@andrew.cmu.edu: pitfalls, and… Tricky things about… about their role.
+
+150
+00:19:36.010 --> 00:19:44.790
+hrishikb@andrew.cmu.edu: So… I guess the one, yeah, I guess the human review part,
+
+151
+00:19:49.350 --> 00:19:59.190
+hrishikb@andrew.cmu.edu: How… How risky is it… is it if… The data gets input incorrectly.
+
+152
+00:20:01.290 --> 00:20:04.370
+hrishikb@andrew.cmu.edu: Like, we have, you know, you have this concept of low confidence.
+
+153
+00:20:04.620 --> 00:20:09.079
+hrishikb@andrew.cmu.edu: high confidence. It sounds like they are comfortable
+
+154
+00:20:09.370 --> 00:20:16.870
+hrishikb@andrew.cmu.edu: With a system that just automatically does this, and… There's no… There's no review.
+
+155
+00:20:18.790 --> 00:20:38.639
+hrishikb@andrew.cmu.edu: So, initially, the plan is, when we do implement the system, initially, it will have human in the review for both, till they have sufficient confidence that the system actually works. After that, for all the high confidence scores, we'll be removing the human part, and only it'll be automatically pushed to the intermediate table. But for the low confidence scores, you'll still be having a human in the review.
+
+156
+00:20:38.790 --> 00:20:58.189
+hrishikb@andrew.cmu.edu: And as for the previous question that, I'm not sure if wrong data is inputted. It is, like, very big deal, because it'll probably be some attribute in, like, some minor attribute of a particular product, which, when never noticed, people can modify.
+
+157
+00:20:58.880 --> 00:21:06.560
+hrishikb@andrew.cmu.edu: Yeah. Because that's what they currently do. If there is a mistake in the, like, someone sees a mistake on the web UI, then they are targeted and they just…
+
+158
+00:21:06.840 --> 00:21:08.060
+hrishikb@andrew.cmu.edu: Fix it up.
+
+159
+00:21:08.290 --> 00:21:09.150
+hrishikb@andrew.cmu.edu: Okay.
+
+160
+00:21:10.020 --> 00:21:13.750
+hrishikb@andrew.cmu.edu: That's, that's good.
+
+161
+00:21:14.000 --> 00:21:18.050
+hrishikb@andrew.cmu.edu: To know, then, who… who are the people at…
+
+162
+00:21:19.380 --> 00:21:22.189
+hrishikb@andrew.cmu.edu: Potentially, who catches those kind of errors?
+
+163
+00:21:22.560 --> 00:21:23.500
+hrishikb@andrew.cmu.edu: Huh?
+
+164
+00:21:23.760 --> 00:21:41.089
+hrishikb@andrew.cmu.edu: Right now, they mentioned they don't have a proper feedback mechanism. Okay. So, it is just some, like, it's mostly the internal team itself. When they're reviewing something or working through something, they notice some issues, but it's… I don't… they mention the…
+
+165
+00:21:41.140 --> 00:21:48.519
+hrishikb@andrew.cmu.edu: people who are actually using the front-end software, they don't really, like, give feedback or, like, say that this is wrong, that is wrong. Okay.
+
+166
+00:21:49.430 --> 00:21:56.840
+hrishikb@andrew.cmu.edu: Yeah, I wonder if that's something that they want to add, valuable. Yeah, that is… that is also part of future school, okay.
+
+167
+00:21:57.950 --> 00:22:02.649
+hrishikb@andrew.cmu.edu: So, like, some adding to the existing UI, the ability to at least
+
+168
+00:22:02.950 --> 00:22:07.019
+hrishikb@andrew.cmu.edu: fly something, so that… To your feedback list? Yes, okay.
+
+169
+00:22:07.210 --> 00:22:08.190
+hrishikb@andrew.cmu.edu: Makes sense.
+
+170
+00:22:12.600 --> 00:22:23.570
+hrishikb@andrew.cmu.edu: What is… Yeah, just from looking at here…
+
+171
+00:22:27.380 --> 00:22:37.740
+hrishikb@andrew.cmu.edu: I mean, to me, there's… There's clearly a interface for getting that stuff into your ingestion…
+
+172
+00:22:41.650 --> 00:22:42.760
+hrishikb@andrew.cmu.edu: Pipeline.
+
+173
+00:22:42.990 --> 00:22:53.220
+hrishikb@andrew.cmu.edu: like… And… It has lots of different formats, so, like, if it's, like, a webpage, like.
+
+174
+00:22:55.620 --> 00:23:00.810
+hrishikb@andrew.cmu.edu: It sounds like, if it's an email, maybe…
+
+175
+00:23:01.890 --> 00:23:10.740
+hrishikb@andrew.cmu.edu: you know, you could forward the email into the system, and file, like, you know, drag and drop, I don't know, like, lots of different forms it could take.
+
+176
+00:23:13.960 --> 00:23:24.410
+hrishikb@andrew.cmu.edu: So… there's an interface there, right? Am I… And…
+
+177
+00:23:29.720 --> 00:23:31.640
+hrishikb@andrew.cmu.edu: I guess you'll want to think about…
+
+178
+00:23:34.320 --> 00:23:40.900
+hrishikb@andrew.cmu.edu: like, what feedback that interface would give. I presume, like, again, it's the catalog team member.
+
+179
+00:23:41.080 --> 00:23:49.090
+hrishikb@andrew.cmu.edu: who… they're getting the emails, or they're getting the files from the vendor, and they're gonna have to input it into the system. And so…
+
+180
+00:23:49.600 --> 00:23:58.770
+hrishikb@andrew.cmu.edu: Yeah, you can have some kind of control to upload files or give them different options of, you know, when they get different formats.
+
+181
+00:23:58.990 --> 00:24:02.869
+hrishikb@andrew.cmu.edu: knowing what to do with that format, right? So,
+
+182
+00:24:03.890 --> 00:24:11.839
+hrishikb@andrew.cmu.edu: Identifying from them what these different formats could be, and then providing that person feedback.
+
+183
+00:24:12.340 --> 00:24:15.220
+hrishikb@andrew.cmu.edu: When they do input it, that
+
+184
+00:24:15.860 --> 00:24:22.499
+hrishikb@andrew.cmu.edu: Everything is working, or… or maybe there's an error, or, like, a parsing error, or…
+
+185
+00:24:22.790 --> 00:24:27.840
+hrishikb@andrew.cmu.edu: You know, undetect… like, unknown file format, like, stuff like that, right?
+
+186
+00:24:28.540 --> 00:24:29.890
+hrishikb@andrew.cmu.edu: I think the…
+
+187
+00:24:30.140 --> 00:24:38.360
+hrishikb@andrew.cmu.edu: Feedback mechanism that the client had in mind was more centered towards the users being able to give feedback?
+
+188
+00:24:38.640 --> 00:24:41.550
+hrishikb@andrew.cmu.edu: But, internally.
+
+189
+00:24:42.400 --> 00:24:53.219
+hrishikb@andrew.cmu.edu: Internally, I'm not sure if there is a feedback mechanism as of now, or even if that's in the plan. I guess what I'm referring to is, okay, let's say the…
+
+190
+00:24:53.510 --> 00:24:59.859
+hrishikb@andrew.cmu.edu: say this person's name is Chris, right? Vendor A is going to email Chris, PDF.
+
+191
+00:25:00.190 --> 00:25:05.789
+hrishikb@andrew.cmu.edu: So… How do you envision then getting this PDF into your system?
+
+192
+00:25:09.440 --> 00:25:11.710
+hrishikb@andrew.cmu.edu: Like, that's an interface. Right. Right?
+
+193
+00:25:12.460 --> 00:25:17.930
+hrishikb@andrew.cmu.edu: Like, it would be a… maybe it could be a web page with a form to upload the file.
+
+194
+00:25:18.410 --> 00:25:22.070
+hrishikb@andrew.cmu.edu: Right, so that's… that's a UI that you would have to design.
+
+195
+00:25:23.300 --> 00:25:26.379
+hrishikb@andrew.cmu.edu: Am I thinking about it?
+
+196
+00:25:26.510 --> 00:25:36.370
+hrishikb@andrew.cmu.edu: Yeah, so initially, we had this question with the clients as well, like, how we're planning to, like, do we create a UI or something, but they're more interested in the software part of it.
+
+197
+00:25:36.520 --> 00:25:45.650
+hrishikb@andrew.cmu.edu: like, so, for our purposes, we're thinking we'll just simply, input it via, like, maybe some listen folder or something like that.
+
+198
+00:25:45.650 --> 00:25:59.880
+hrishikb@andrew.cmu.edu: Which we can just, for dev testing, we can use something of that sort for the initial part. Okay. But, yeah, maybe it'll be good to think about from a catalog number's… Yeah, I mean, that's still an interface. Like, you have to tell Chris…
+
+199
+00:26:00.940 --> 00:26:11.169
+hrishikb@andrew.cmu.edu: this is how you use the system. You need to move… you need to download the PDF from your email, and then move it to this folder. Yeah. Right? And then he needs to get feedback, like.
+
+200
+00:26:11.920 --> 00:26:21.749
+hrishikb@andrew.cmu.edu: to know whether or not it made it. Like, is it gonna stay there? Is it gonna get deleted? Is there gonna be a file? Are you gonna get an email about it? Or, like…
+
+201
+00:26:24.390 --> 00:26:30.639
+hrishikb@andrew.cmu.edu: Then, I'm sorry if this is the right question, but then, aren't we trying to animate Chris over here?
+
+202
+00:26:30.930 --> 00:26:36.870
+hrishikb@andrew.cmu.edu: Well, that could be a valid question, but then how… how is it gonna… how do you envision the system working?
+
+203
+00:26:37.680 --> 00:26:54.330
+hrishikb@andrew.cmu.edu: The long-term goal is that what you said before, that the clients will have some sort of portal. They, instead of emailing, they just put their files on the portal, and the portal handles, uses the APIs of our system, and then… then we move forward from there.
+
+204
+00:26:55.090 --> 00:26:55.930
+hrishikb@andrew.cmu.edu: Right.
+
+205
+00:26:56.250 --> 00:27:03.290
+hrishikb@andrew.cmu.edu: So, I mean, I guess it depends on getting on the same page as your eParts,
+
+206
+00:27:03.470 --> 00:27:19.849
+hrishikb@andrew.cmu.edu: representatives, like, what they want, right? Again, when I say interface, it could be anything. It could be… maybe you're saying, and if they agree, it could be an API, and then Chris just has to figure out how to use an API, like, they have to know how to use Postman, or…
+
+207
+00:27:19.990 --> 00:27:24.639
+hrishikb@andrew.cmu.edu: like… Pearl, right?
+
+208
+00:27:24.770 --> 00:27:29.519
+hrishikb@andrew.cmu.edu: But then that's still very much an interface. Like, your API is going to have response codes.
+
+209
+00:27:29.810 --> 00:27:39.439
+hrishikb@andrew.cmu.edu: Right? And there's going to be times when the file doesn't work, or it's too big, or it's a… it doesn't make sense, and you have to give that feedback. So, I'm just trying to…
+
+210
+00:27:39.650 --> 00:27:53.070
+hrishikb@andrew.cmu.edu: I think the closest thing what we have currently would be some sort of, similar API that you can send a request through. Okay. And maybe… maybe eParts is fine with that, but…
+
+211
+00:27:53.510 --> 00:27:56.610
+hrishikb@andrew.cmu.edu: You should make sure that that's what they expect.
+
+212
+00:27:59.680 --> 00:28:02.820
+hrishikb@andrew.cmu.edu: And I know that's… yeah, that might not be the…
+
+213
+00:28:03.250 --> 00:28:06.369
+hrishikb@andrew.cmu.edu: That's not the interesting part of the project, necessarily, but…
+
+214
+00:28:06.570 --> 00:28:13.599
+hrishikb@andrew.cmu.edu: That is the very first step of how anything happens, so… You have to consider it.
+
+215
+00:28:13.850 --> 00:28:16.090
+hrishikb@andrew.cmu.edu: What that is. Otherwise,
+
+216
+00:28:16.810 --> 00:28:20.550
+hrishikb@andrew.cmu.edu: The parts won't be able to test it or use it very well, right?
+
+217
+00:28:20.680 --> 00:28:26.770
+hrishikb@andrew.cmu.edu: So… I would try to… clarify…
+
+218
+00:28:26.970 --> 00:28:30.029
+hrishikb@andrew.cmu.edu: And get aligned with eParts, like, what they expect.
+
+219
+00:28:30.790 --> 00:28:36.530
+hrishikb@andrew.cmu.edu: Currently, To get the files, to get the catalogs into your system.
+
+220
+00:28:37.040 --> 00:28:39.019
+hrishikb@andrew.cmu.edu: Like, is it Chris? Like…
+
+221
+00:28:39.380 --> 00:28:44.949
+hrishikb@andrew.cmu.edu: If it's Chris, then, you know, you need to make sure to talk to Chris, or make sure he starts to talk to Chris, and make sure that's okay.
+
+222
+00:28:45.480 --> 00:28:47.069
+hrishikb@andrew.cmu.edu: Right, otherwise there's gonna be a gap.
+
+223
+00:28:48.960 --> 00:28:49.800
+hrishikb@andrew.cmu.edu: with…
+
+224
+00:28:50.040 --> 00:28:57.670
+hrishikb@andrew.cmu.edu: Within doing anything to the system. We need to finalize how the data is being inputted, how they want the data to be imported into the system.
+
+225
+00:28:57.850 --> 00:29:01.900
+hrishikb@andrew.cmu.edu: Basically. Yeah, I mean, it has… I guess…
+
+226
+00:29:02.460 --> 00:29:06.889
+hrishikb@andrew.cmu.edu: I would assume that that should have come up, or that would have come up, right? Like…
+
+227
+00:29:07.790 --> 00:29:11.669
+hrishikb@andrew.cmu.edu: What do they say in their… in their brief?
+
+228
+00:29:13.500 --> 00:29:15.400
+hrishikb@andrew.cmu.edu: Okay, they just said ingest.
+
+229
+00:29:16.510 --> 00:29:22.829
+hrishikb@andrew.cmu.edu: Yeah, but who's gonna get it in the system of files? Yeah, I think that part has not been the discussion yet.
+
+230
+00:29:23.040 --> 00:29:31.100
+hrishikb@andrew.cmu.edu: Because that matters because that tells you where your boundary is of what you're building.
+
+231
+00:29:31.450 --> 00:29:37.230
+hrishikb@andrew.cmu.edu: Right? Like… Your system is gonna end somewhere.
+
+232
+00:29:37.600 --> 00:29:48.120
+hrishikb@andrew.cmu.edu: So, it could be the API, it could be this file listener thing, it could be a web UI. So, the endpoints that we… endpoints we have discussed, but the…
+
+233
+00:29:48.790 --> 00:29:58.510
+hrishikb@andrew.cmu.edu: now seems a bit vague, because the initial starting point is the ingestion of the files, and the ending point is the PIMS database for us, the PIMS module.
+
+234
+00:29:58.900 --> 00:30:07.399
+hrishikb@andrew.cmu.edu: middle part is all our software. We start at the CSVs or PDFs or emails, and we end that when we put the data in the community table.
+
+235
+00:30:08.250 --> 00:30:16.049
+hrishikb@andrew.cmu.edu: But how we are… I mean, to test it, you have to get in the system somehow, so… I guess, yeah, you have to consider that.
+
+236
+00:30:18.450 --> 00:30:23.730
+hrishikb@andrew.cmu.edu: I guess the second major piece that you mentioned is, like, this human review part.
+
+237
+00:30:28.170 --> 00:30:32.149
+hrishikb@andrew.cmu.edu: It seems… it sounds like, again, Chris is the best person.
+
+238
+00:30:32.290 --> 00:30:41.680
+hrishikb@andrew.cmu.edu: too, about this, like… He or she would be… your…
+
+239
+00:30:41.890 --> 00:30:44.639
+hrishikb@andrew.cmu.edu: Your primary source in terms of…
+
+240
+00:30:45.680 --> 00:30:51.800
+hrishikb@andrew.cmu.edu: figuring out how to design that interface. Yeah. So…
+
+241
+00:30:53.320 --> 00:31:00.860
+hrishikb@andrew.cmu.edu: Because the interface has to allow this reviewer to make decisions about the data.
+
+242
+00:31:01.110 --> 00:31:10.210
+hrishikb@andrew.cmu.edu: And… The way that you design and interface that is helpful is… to understand…
+
+243
+00:31:10.500 --> 00:31:15.569
+hrishikb@andrew.cmu.edu: The user's model of the world, their mental model of your system.
+
+244
+00:31:15.970 --> 00:31:18.530
+hrishikb@andrew.cmu.edu: So…
+
+245
+00:31:24.010 --> 00:31:30.690
+hrishikb@andrew.cmu.edu: I would… I would think that… I mean…
+
+246
+00:31:35.810 --> 00:31:38.909
+hrishikb@andrew.cmu.edu: Yeah, actually, I don't know, I don't want to make any assumptions, like…
+
+247
+00:31:39.150 --> 00:31:42.400
+hrishikb@andrew.cmu.edu: about how… how this should be presented to Chris, like…
+
+248
+00:31:43.890 --> 00:31:46.069
+hrishikb@andrew.cmu.edu: It could range something… somewhere like…
+
+249
+00:31:46.730 --> 00:31:54.540
+hrishikb@andrew.cmu.edu: you know, they get an email, and you reply… you reply… they reply yes or no, right? That's… that's one interface. It could be a web form.
+
+250
+00:31:54.790 --> 00:31:58.600
+hrishikb@andrew.cmu.edu: Or, like, a diff, maybe, or, like… Questions?
+
+251
+00:31:59.010 --> 00:32:08.180
+hrishikb@andrew.cmu.edu: So… I guess, he should try to find out.
+
+252
+00:32:10.130 --> 00:32:21.240
+hrishikb@andrew.cmu.edu: So, like, the goal is for… E-parts to be able to… Correct.
+
+253
+00:32:21.820 --> 00:32:28.350
+hrishikb@andrew.cmu.edu: Things that are wrong from whatever your system produced that you have low confidence, so… You're saying, like…
+
+254
+00:32:28.660 --> 00:32:34.370
+hrishikb@andrew.cmu.edu: Hey, you need to look at this and make sure that we… Decided the right things.
+
+255
+00:32:35.740 --> 00:32:42.770
+hrishikb@andrew.cmu.edu: Or, like, we, we, like, all the data is in the right place.
+
+256
+00:32:47.780 --> 00:32:50.010
+hrishikb@andrew.cmu.edu: Yeah, basically the…
+
+257
+00:32:51.990 --> 00:33:01.449
+hrishikb@andrew.cmu.edu: the, like, let's say Chris has to, and they have to check the low or high content scores, they need to have sufficient information about the data that's being inputted, and…
+
+258
+00:33:01.690 --> 00:33:10.450
+hrishikb@andrew.cmu.edu: whatever the initial questions they might have, those should be answered in whatever we are displaying. Yeah, yeah, I think you have to identify
+
+259
+00:33:18.480 --> 00:33:25.719
+hrishikb@andrew.cmu.edu: Yeah, like, what information Chris needs to decide that this is correct or not. Like, we have to give them enough context.
+
+260
+00:33:26.510 --> 00:33:34.310
+hrishikb@andrew.cmu.edu: And I'm not sure what, you know, what level is that gonna be at? Is it, like, for…
+
+261
+00:33:35.030 --> 00:33:39.900
+hrishikb@andrew.cmu.edu: You know, per attribute, or per item, per catalog.
+
+262
+00:33:41.050 --> 00:33:46.900
+hrishikb@andrew.cmu.edu: So you can try to get a sense of… Ow.
+
+263
+00:33:47.990 --> 00:33:51.620
+hrishikb@andrew.cmu.edu: I guess.
+
+264
+00:33:52.500 --> 00:33:58.629
+hrishikb@andrew.cmu.edu: content-wise, Yeah, how much is under review? And, like, make it clear, what is…
+
+265
+00:33:59.010 --> 00:34:02.520
+hrishikb@andrew.cmu.edu: what are they supposed to do with whatever you present them? Like…
+
+266
+00:34:02.710 --> 00:34:07.050
+hrishikb@andrew.cmu.edu: Is it a big checklist that they go through? Are you going to give them
+
+267
+00:34:07.930 --> 00:34:16.739
+hrishikb@andrew.cmu.edu: Like, is it a list of attributes, and then you have confidence scores next to it, and you, like, rate them by low to high confidence?
+
+268
+00:34:17.350 --> 00:34:21.100
+hrishikb@andrew.cmu.edu: You were saying early on, they're gonna review everything.
+
+269
+00:34:21.560 --> 00:34:28.149
+hrishikb@andrew.cmu.edu: So maybe, yeah, maybe it's, like, a ranked list that eventually you hide the high-confidence stuff.
+
+270
+00:34:33.350 --> 00:34:44.949
+hrishikb@andrew.cmu.edu: the… I think, Dan, the best… the best way to… Yeah, again, the…
+
+271
+00:34:45.170 --> 00:34:52.229
+hrishikb@andrew.cmu.edu: Catalog member is… sounds like the right person that you need to… Bob's you to answer that.
+
+272
+00:34:52.800 --> 00:34:56.440
+hrishikb@andrew.cmu.edu: I'm gonna have a long meeting with Chris. Yeah, yeah, yeah.
+
+273
+00:34:56.929 --> 00:35:00.330
+hrishikb@andrew.cmu.edu: Cuz, cause, yeah, it sounds like you're building… like, you're…
+
+274
+00:35:00.740 --> 00:35:07.769
+hrishikb@andrew.cmu.edu: your system is entirely to help Chris do their job faster, or, like, to scale Chris, or, you know, to take…
+
+275
+00:35:07.880 --> 00:35:09.230
+hrishikb@andrew.cmu.edu: their expertise.
+
+276
+00:35:09.580 --> 00:35:11.900
+hrishikb@andrew.cmu.edu: And… Automate.
+
+277
+00:35:12.200 --> 00:35:14.619
+hrishikb@andrew.cmu.edu: As much as makes sense.
+
+278
+00:35:19.580 --> 00:35:26.659
+hrishikb@andrew.cmu.edu: I was looking through the… you know, grief, and… what else did I trigger anything in my mind?
+
+279
+00:35:29.830 --> 00:35:32.789
+hrishikb@andrew.cmu.edu: I guess, what would you… what is the…
+
+280
+00:35:33.480 --> 00:35:38.189
+hrishikb@andrew.cmu.edu: biggest risk in your mind on the project, whether it's related to UI or not?
+
+281
+00:35:45.840 --> 00:35:48.909
+hrishikb@andrew.cmu.edu: Or the biggest, like, unknown to you right now.
+
+282
+00:35:50.360 --> 00:35:56.840
+hrishikb@andrew.cmu.edu: Now, after talking about it, the unknown looks like the interface of how you're gonna get the…
+
+283
+00:35:57.260 --> 00:36:00.970
+hrishikb@andrew.cmu.edu: files and, and the… like, how the URL will interact.
+
+284
+00:36:01.320 --> 00:36:06.839
+hrishikb@andrew.cmu.edu: Because you have not really discussed those parts, you're more focused on ML models and the ingestion parts of it.
+
+285
+00:36:07.350 --> 00:36:11.670
+hrishikb@andrew.cmu.edu: I mean, it doesn't, it can… it'll… and…
+
+286
+00:36:12.270 --> 00:36:16.489
+hrishikb@andrew.cmu.edu: Definitely start more, like, bare bones, and…
+
+287
+00:36:16.850 --> 00:36:19.039
+hrishikb@andrew.cmu.edu: Like, it doesn't have to be fancy, but you do have to…
+
+288
+00:36:19.370 --> 00:36:20.969
+hrishikb@andrew.cmu.edu: I mean, it has to get in somehow.
+
+289
+00:36:22.030 --> 00:36:30.950
+hrishikb@andrew.cmu.edu: once you get it… once you get a system, like, working end-to-end, then you can start to have discussions, or… then it makes it a lot easier for e-parts.
+
+290
+00:36:31.060 --> 00:36:39.799
+hrishikb@andrew.cmu.edu: to, like, visualize and, think about how the system is going to work, and then that will
+
+291
+00:36:40.090 --> 00:36:46.050
+hrishikb@andrew.cmu.edu: Trigger questions from their end, or, you know, thoughts on their end on how it should work.
+
+292
+00:36:48.130 --> 00:36:54.880
+hrishikb@andrew.cmu.edu: So, you don't have to figure it out right now, but you have to consider it so that you can start to get data moving and flowing.
+
+293
+00:36:55.170 --> 00:36:56.170
+hrishikb@andrew.cmu.edu: Testing.
+
+294
+00:36:56.340 --> 00:36:57.180
+hrishikb@andrew.cmu.edu: Thanks.
+
+295
+00:36:57.900 --> 00:37:02.490
+hrishikb@andrew.cmu.edu: So for, let's say from a development point of view, what would…
+
+296
+00:37:02.740 --> 00:37:08.690
+hrishikb@andrew.cmu.edu: you think that our initial UI or, like, interface should be,
+
+297
+00:37:09.060 --> 00:37:11.780
+hrishikb@andrew.cmu.edu: For, let's say, the engine part, when the…
+
+298
+00:37:12.180 --> 00:37:15.380
+hrishikb@andrew.cmu.edu: Many PDFs or CSVs? Yeah, I mean,
+
+299
+00:37:16.490 --> 00:37:23.160
+hrishikb@andrew.cmu.edu: I mean, I would try… I mean, is there a format that you know is more common than others?
+
+300
+00:37:25.790 --> 00:37:32.319
+hrishikb@andrew.cmu.edu: Preferred… That list of formats, is there, like, a priority, or…
+
+301
+00:37:32.540 --> 00:37:36.880
+hrishikb@andrew.cmu.edu: I don't think we have priority, but, we… we only know…
+
+302
+00:37:37.010 --> 00:37:45.770
+hrishikb@andrew.cmu.edu: PDFs, CSVs are the most common. Okay. And the web scraping is for, basically they do it for if some…
+
+303
+00:37:46.010 --> 00:37:54.460
+hrishikb@andrew.cmu.edu: vendor provides some information, it's completely… it's not… it's, like, half-baked, so the catalyticin goes to the website, and they themselves get the information. Right.
+
+304
+00:37:55.080 --> 00:38:01.700
+hrishikb@andrew.cmu.edu: Well, CSV sounds like the most structured and easiest to work with, so I'd probably start there.
+
+305
+00:38:02.230 --> 00:38:07.770
+hrishikb@andrew.cmu.edu: So…
+
+306
+00:38:08.790 --> 00:38:13.790
+hrishikb@andrew.cmu.edu: I mean, that could be just, like, a web… a web form that's, like, upload file and…
+
+307
+00:38:14.290 --> 00:38:19.029
+hrishikb@andrew.cmu.edu: Okay. Just basic, you know, whether or not that worked to get things into the system.
+
+308
+00:38:19.490 --> 00:38:20.500
+hrishikb@andrew.cmu.edu: Okay.
+
+309
+00:38:22.750 --> 00:38:31.200
+hrishikb@andrew.cmu.edu: I guess, and then… Oh yeah, I was gonna ask, like… I'm curious about…
+
+310
+00:38:32.670 --> 00:38:35.970
+hrishikb@andrew.cmu.edu: Yeah, how you're, let's see…
+
+311
+00:38:36.940 --> 00:38:48.660
+hrishikb@andrew.cmu.edu: I guess your… what are your current thoughts on… here, let me go to your… Yeah, alright, so…
+
+312
+00:38:52.000 --> 00:38:55.209
+hrishikb@andrew.cmu.edu: your… your… the ML part of it, like…
+
+313
+00:39:04.090 --> 00:39:07.730
+hrishikb@andrew.cmu.edu: I don't know, how… how do you envision this working?
+
+314
+00:39:08.080 --> 00:39:16.359
+hrishikb@andrew.cmu.edu: Like, so you get a bunch of… you get a catalog, and… You know the existing schema.
+
+315
+00:39:20.640 --> 00:39:25.200
+hrishikb@andrew.cmu.edu: what is… what is the intermediate structured layer doing? And then…
+
+316
+00:39:25.720 --> 00:39:27.610
+hrishikb@andrew.cmu.edu: Like, how do you evaluate that?
+
+317
+00:39:27.760 --> 00:39:33.000
+hrishikb@andrew.cmu.edu: Something is… Is correct or not.
+
+318
+00:39:35.430 --> 00:39:39.489
+hrishikb@andrew.cmu.edu: I think that is the part where MLRE will come into picture.
+
+319
+00:39:40.050 --> 00:39:54.929
+hrishikb@andrew.cmu.edu: I think they will, we'll have some sort of precise rules to see if particular attributes fits the, data or not.
+
+320
+00:39:55.150 --> 00:40:11.049
+hrishikb@andrew.cmu.edu: And then, according to that, we'll be giving it the content scores. Okay. And this table is basically, after we get all the data, we parse it, and we have it in proper, like, let's say, a schema sort of format, we just dump it on the intermediate structure table, and then the ML model can use the data from there.
+
+321
+00:40:12.460 --> 00:40:23.180
+hrishikb@andrew.cmu.edu: Did eParts… suggest… I guess, yeah, they said… like…
+
+322
+00:40:26.770 --> 00:40:34.520
+hrishikb@andrew.cmu.edu: How much… Machine learning capability do they currently use, or…
+
+323
+00:40:35.490 --> 00:40:42.239
+hrishikb@andrew.cmu.edu: None. They're just building the infra and just starting to get into machine learning. Okay.
+
+324
+00:40:43.070 --> 00:40:47.530
+hrishikb@andrew.cmu.edu: But they, they ask for ML. This is the ML-based. Yeah. Okay.
+
+325
+00:40:48.140 --> 00:40:58.340
+hrishikb@andrew.cmu.edu: They plan to grow their ML infra as well. They wanted this to be extensible so that they can maybe some other day use some of their ML components to plug into the system.
+
+326
+00:40:58.720 --> 00:40:59.929
+hrishikb@andrew.cmu.edu: And things like that.
+
+327
+00:41:00.400 --> 00:41:01.230
+hrishikb@andrew.cmu.edu: Okay.
+
+328
+00:41:11.310 --> 00:41:20.790
+hrishikb@andrew.cmu.edu: Okay, so yeah, you mentioned, yeah, I mean, we talked a little bit about that human review piece.
+
+329
+00:41:26.190 --> 00:41:39.160
+hrishikb@andrew.cmu.edu: And then there's also… I like the ops part, logs and metrics and… dashboards,
+
+330
+00:41:40.240 --> 00:41:46.190
+hrishikb@andrew.cmu.edu: Is that a significant… Part… Or is that more, like, stretch goal?
+
+331
+00:41:49.790 --> 00:41:57.029
+hrishikb@andrew.cmu.edu: I… I'm not sure we… we have not really discussed that part into length. Ashutar, you have an opinion on the observability part?
+
+332
+00:41:57.620 --> 00:42:04.039
+hrishikb@andrew.cmu.edu: And we've created a package with them and more. They're using Datadog, so that's…
+
+333
+00:42:04.220 --> 00:42:18.079
+hrishikb@andrew.cmu.edu: And they wouldn't want the learning efforts to go into the observability, but it's just a thing that we added, that, okay, since there's an ML thing added, so we would want to send
+
+334
+00:42:18.080 --> 00:42:31.730
+hrishikb@andrew.cmu.edu: define some kind of metrics and, send some traces or logs into your data doc system. Yeah. But currently, they do, they have… they have their own observability metrics, so they're not, like, very much keen into
+
+335
+00:42:31.930 --> 00:42:40.819
+hrishikb@andrew.cmu.edu: expanding it. This would mostly be, I guess, internal for our internal system, for us to… Okay, okay.
+
+336
+00:42:42.330 --> 00:42:57.839
+hrishikb@andrew.cmu.edu: Something like, per day, these many number of queries were served, or these many number of records got ingested, or just like that, metrics around the data that's another.
+
+337
+00:42:58.350 --> 00:43:08.270
+hrishikb@andrew.cmu.edu: Do you know if, like, I don't know, like… Cost or, like, token usage?
+
+338
+00:43:08.420 --> 00:43:11.309
+hrishikb@andrew.cmu.edu: That kind of stuff is on their radar.
+
+339
+00:43:11.540 --> 00:43:13.330
+hrishikb@andrew.cmu.edu: Like, what? No.
+
+340
+00:43:14.200 --> 00:43:18.459
+hrishikb@andrew.cmu.edu: Okay. What kind of proposal? I mean, like, the,
+
+341
+00:43:19.300 --> 00:43:23.169
+hrishikb@andrew.cmu.edu: Like, for using LLMs, so things like that.
+
+342
+00:43:23.280 --> 00:43:26.810
+hrishikb@andrew.cmu.edu: Did you talk about queries, but…
+
+343
+00:43:30.660 --> 00:43:42.280
+hrishikb@andrew.cmu.edu: Yeah, actually, no, maybe, maybe, are they planning to use… Like, LLM-based ML stuff.
+
+344
+00:43:42.750 --> 00:43:48.460
+hrishikb@andrew.cmu.edu: No, no, no. No, we're just going by the traditional email. Okay, okay, yeah. Got it, got it.
+
+345
+00:43:49.610 --> 00:43:51.280
+hrishikb@andrew.cmu.edu: Nevermind, man. Cool.
+
+346
+00:43:52.070 --> 00:43:56.789
+hrishikb@andrew.cmu.edu: Okay, yeah, so going back to,
+
+347
+00:43:58.070 --> 00:44:03.550
+hrishikb@andrew.cmu.edu: Yeah, the biggest risks, or, what else is…
+
+348
+00:44:05.880 --> 00:44:11.769
+hrishikb@andrew.cmu.edu: I guess there's multiple levels, too, not just for e-parts, but, what do you need?
+
+349
+00:44:12.190 --> 00:44:15.819
+hrishikb@andrew.cmu.edu: For the checkpoint that… Got you still…
+
+350
+00:44:16.900 --> 00:44:24.820
+hrishikb@andrew.cmu.edu: For the checkpoint, there are a couple of documents. There is… And therefore, it's called,
+
+351
+00:44:24.930 --> 00:44:42.499
+hrishikb@andrew.cmu.edu: the, like, the exact boundary of work that we're supposed to do, you know, has to be a document and things like that, but initially, we have our software engineering system also, like, it is still developing, but for now, we have a pretty solid system defined a lot of things in that.
+
+352
+00:44:42.840 --> 00:44:55.979
+hrishikb@andrew.cmu.edu: We have an initial requirements document as well, but that has not yet been vetted by the, requirements coach. We have a meeting with him tomorrow to get that done.
+
+353
+00:44:56.540 --> 00:45:02.150
+hrishikb@andrew.cmu.edu: There are a couple of things, but I can't remember them.
+
+354
+00:45:03.380 --> 00:45:14.930
+hrishikb@andrew.cmu.edu: And the remaining high-level architecture, what we're planning to do, what our semester plan would be, all those things are, pretty much… we have a… we know what we have to do, we have plan ready.
+
+355
+00:45:16.360 --> 00:45:24.169
+hrishikb@andrew.cmu.edu: Yeah, we just have to, prepare the actual activities for the presentation that we're gonna present to everyone.
+
+356
+00:45:25.460 --> 00:45:29.990
+hrishikb@andrew.cmu.edu: One thing I just thought of, too, looking at the… Project thing.
+
+357
+00:45:32.540 --> 00:45:35.700
+hrishikb@andrew.cmu.edu: You might… think about…
+
+358
+00:45:36.340 --> 00:45:44.670
+hrishikb@andrew.cmu.edu: I'm just reading about the problem and how they said, like, you know, every record's touched by a person to do all this stuff, and it's error-prone.
+
+359
+00:45:46.880 --> 00:45:51.120
+hrishikb@andrew.cmu.edu: Like, if there's a way to, you know, phase your project so that
+
+360
+00:45:51.920 --> 00:45:55.610
+hrishikb@andrew.cmu.edu: You start to automate, you know, small parts of it.
+
+361
+00:45:56.770 --> 00:45:57.620
+hrishikb@andrew.cmu.edu: that.
+
+362
+00:45:58.290 --> 00:46:02.459
+hrishikb@andrew.cmu.edu: our friend Chris can already get value early on.
+
+363
+00:46:05.300 --> 00:46:12.290
+hrishikb@andrew.cmu.edu: So that's… I think, one, that reduces risk in the overall project, because
+
+364
+00:46:15.120 --> 00:46:17.649
+hrishikb@andrew.cmu.edu: You are, you know, starting to…
+
+365
+00:46:18.210 --> 00:46:23.080
+hrishikb@andrew.cmu.edu: Build things that are useful and valuable, and then you can get even richer feedback.
+
+366
+00:46:23.540 --> 00:46:29.269
+hrishikb@andrew.cmu.edu: From e-parts, so, like… Kind of where the… where the next step should be.
+
+367
+00:46:29.610 --> 00:46:32.370
+hrishikb@andrew.cmu.edu: And…
+
+368
+00:46:35.210 --> 00:46:48.120
+hrishikb@andrew.cmu.edu: In line with those things, we did have a few, like, concerns, because since we are, like, we are to use AI heavily to do all the coding and all these things, so we…
+
+369
+00:46:48.230 --> 00:46:57.270
+hrishikb@andrew.cmu.edu: expect the development part to, flow around very quickly. And, like, even thinking about two-week sprint seemed very… way too long.
+
+370
+00:46:57.320 --> 00:47:16.429
+hrishikb@andrew.cmu.edu: And we were planning to have, like, shorter sprints, maybe one week at max, kind of stretch. So, currently, we are expecting the entire development process, the actual writing all the different modules, should be fairly quick. Yeah. But we're not… we're not… we're not sure how quick, but, let's say we get it all done in a
+
+371
+00:47:16.720 --> 00:47:25.060
+hrishikb@andrew.cmu.edu: I don't know, maybe a… optimistically, maybe a month. So, having intermittent releases between that, would you think that would be, like, useful?
+
+372
+00:47:26.330 --> 00:47:36.150
+hrishikb@andrew.cmu.edu: Yeah, I think definitely… The earlier that you can…
+
+373
+00:47:43.060 --> 00:47:48.429
+hrishikb@andrew.cmu.edu: Yeah, the other that you can get feedback, You know, the…
+
+374
+00:47:48.870 --> 00:47:53.849
+hrishikb@andrew.cmu.edu: the more risk that you can mitigate. Like, even if it's, you know, a month.
+
+375
+00:47:54.320 --> 00:47:57.709
+hrishikb@andrew.cmu.edu: Like, if you end up building the wrong thing, then…
+
+376
+00:47:58.540 --> 00:48:02.280
+hrishikb@andrew.cmu.edu: Then you have to rebuild it, right? So…
+
+377
+00:48:02.630 --> 00:48:04.819
+hrishikb@andrew.cmu.edu: Like, it sounds like there's a lot of…
+
+378
+00:48:05.300 --> 00:48:11.530
+hrishikb@andrew.cmu.edu: There's a lot of, different activities that Chris does that you could automate.
+
+379
+00:48:13.350 --> 00:48:19.750
+hrishikb@andrew.cmu.edu: like… They're, like, just parsing and understanding, like, what is in the catalog.
+
+380
+00:48:20.060 --> 00:48:26.109
+hrishikb@andrew.cmu.edu: There's just, like, the man… I guess the manual inputting the records, like…
+
+381
+00:48:26.360 --> 00:48:28.520
+hrishikb@andrew.cmu.edu: There might be small wins there.
+
+382
+00:48:29.050 --> 00:48:33.130
+hrishikb@andrew.cmu.edu: to… That…
+
+383
+00:48:36.380 --> 00:48:43.950
+hrishikb@andrew.cmu.edu: like… In the… in the interim, like, that could still be a manual piece.
+
+384
+00:48:44.170 --> 00:48:48.250
+hrishikb@andrew.cmu.edu: But that could also serve as, like, the human review part.
+
+385
+00:48:49.470 --> 00:48:58.669
+hrishikb@andrew.cmu.edu: Right, and then eventually that part can be automated, where whatever… whatever UI that You're using their,
+
+386
+00:48:58.950 --> 00:49:05.530
+hrishikb@andrew.cmu.edu: Yeah, can get automated through an API instead of manually, you know, Chris looking at it.
+
+387
+00:49:09.480 --> 00:49:14.400
+hrishikb@andrew.cmu.edu: like… Another way to say it is, like, identifying
+
+388
+00:49:17.580 --> 00:49:27.019
+hrishikb@andrew.cmu.edu: what are… what are Chris's pain points right now? Like, I know overall it's just… it's manual, right? But if you can break down their workflow.
+
+389
+00:49:27.210 --> 00:49:32.349
+hrishikb@andrew.cmu.edu: Or understand what the different pieces are, what the different activities are. Maybe there's opportunities to
+
+390
+00:49:32.470 --> 00:49:35.289
+hrishikb@andrew.cmu.edu: First, automate just a piece of that.
+
+391
+00:49:35.770 --> 00:49:37.400
+hrishikb@andrew.cmu.edu: And… Okay.
+
+392
+00:49:40.490 --> 00:49:51.390
+hrishikb@andrew.cmu.edu: Because, like, the deeper you get into understanding Chris's world, then the better you'll be able to address and know exactly how to automate this whole system.
+
+393
+00:49:51.740 --> 00:49:53.270
+hrishikb@andrew.cmu.edu: It should be designed.
+
+394
+00:50:35.600 --> 00:50:36.300
+hrishikb@andrew.cmu.edu: Hmm.
+
+395
+00:50:37.550 --> 00:50:40.470
+hrishikb@andrew.cmu.edu: And you can also…
+
+396
+00:50:44.370 --> 00:50:48.769
+hrishikb@andrew.cmu.edu: I guess when you do talk to Chris, or whatever their name is,
+
+397
+00:50:56.230 --> 00:51:03.439
+hrishikb@andrew.cmu.edu: I guess… try to… Yeah, like, trying to understand how they see the world.
+
+398
+00:51:04.050 --> 00:51:08.630
+hrishikb@andrew.cmu.edu: And how they… how they think the system might work.
+
+399
+00:51:09.640 --> 00:51:15.479
+hrishikb@andrew.cmu.edu: Like, try to get into… into their minds.
+
+400
+00:51:15.630 --> 00:51:21.960
+hrishikb@andrew.cmu.edu: You know, this… this team is building this system that
+
+401
+00:51:22.080 --> 00:51:25.009
+hrishikb@andrew.cmu.edu: That I'm gonna use, and gonna automate.
+
+402
+00:51:25.350 --> 00:51:30.929
+hrishikb@andrew.cmu.edu: The tedious parts of my job, and, the parts that are really error-prone.
+
+403
+00:51:31.110 --> 00:51:39.130
+hrishikb@andrew.cmu.edu: And… Understanding that will help you focus.
+
+404
+00:51:39.320 --> 00:51:40.230
+hrishikb@andrew.cmu.edu: on.
+
+405
+00:51:41.340 --> 00:51:42.889
+hrishikb@andrew.cmu.edu: What parts are important?
+
+406
+00:51:43.200 --> 00:51:44.720
+hrishikb@andrew.cmu.edu: In this whole process.
+
+407
+00:51:46.930 --> 00:51:51.780
+hrishikb@andrew.cmu.edu: Basically, from their point of view, what all… As the most…
+
+408
+00:51:52.010 --> 00:52:00.000
+hrishikb@andrew.cmu.edu: like, pain points for them should be things you should work on, like, prioritize, basically. Yeah. And we're breaking down parts also. Right, yeah.
+
+409
+00:52:03.900 --> 00:52:07.100
+hrishikb@andrew.cmu.edu: Like, they might say, like, if I could just have…
+
+410
+00:52:08.210 --> 00:52:10.760
+hrishikb@andrew.cmu.edu: If you do this parse, like.
+
+411
+00:52:11.860 --> 00:52:14.389
+hrishikb@andrew.cmu.edu: the PDF and put it into this…
+
+412
+00:52:14.700 --> 00:52:22.750
+hrishikb@andrew.cmu.edu: you know, X intermediate format that I have, or, like, into this Word template I use, or into this text document, or this spreadsheet, right?
+
+413
+00:52:22.890 --> 00:52:31.619
+hrishikb@andrew.cmu.edu: like… Then… then you could separate out that module, and…
+
+414
+00:52:32.010 --> 00:52:36.330
+hrishikb@andrew.cmu.edu: Work on that, and be able to… validate that.
+
+415
+00:52:36.740 --> 00:52:44.270
+hrishikb@andrew.cmu.edu: You know, this is giving Chris exactly what they need, and… and then also, like.
+
+416
+00:52:44.630 --> 00:52:47.519
+hrishikb@andrew.cmu.edu: That also tells you, like, this is what is…
+
+417
+00:52:48.060 --> 00:52:50.450
+hrishikb@andrew.cmu.edu: this is where Chris wants to…
+
+418
+00:52:50.550 --> 00:52:55.570
+hrishikb@andrew.cmu.edu: check that the system is working. Like, this is what they want to see, what format they expect it in.
+
+419
+00:52:55.940 --> 00:53:03.810
+hrishikb@andrew.cmu.edu: What are the… what are the things that are important, and what they need in order to say, okay, this is… this work… this system is working well.
+
+420
+00:53:04.060 --> 00:53:09.710
+hrishikb@andrew.cmu.edu: I'm confident in… What's happening on the backend? Stuff like that.
+
+421
+00:53:16.640 --> 00:53:17.330
+hrishikb@andrew.cmu.edu: Okay.
+
+422
+00:53:22.500 --> 00:53:24.129
+hrishikb@andrew.cmu.edu: What else? What else am I?
+
+423
+00:53:26.040 --> 00:53:27.370
+hrishikb@andrew.cmu.edu: Talked everywhere.
+
+424
+00:53:29.010 --> 00:53:32.269
+hrishikb@andrew.cmu.edu: I think we have a lot of questions now, because we haven't actually
+
+425
+00:53:33.020 --> 00:53:37.790
+hrishikb@andrew.cmu.edu: worked on the system or any particle core yet. Okay. There's at least
+
+426
+00:53:37.960 --> 00:53:40.350
+hrishikb@andrew.cmu.edu: I mean, since they're, like, we…
+
+427
+00:53:40.680 --> 00:53:58.570
+hrishikb@andrew.cmu.edu: our thinking as developers starts from, you know, okay, let's look at the code and then figure out the data. Right, right, right. So I think, once we get to understand the whole flow, and then the actual interfaces that we spoke about, the APIs, or if they have any, GUI or something.
+
+428
+00:53:58.710 --> 00:54:04.509
+hrishikb@andrew.cmu.edu: Probably then we'll be able to answer a lot of questions that you've brought up, but currently it's just, like.
+
+429
+00:54:04.900 --> 00:54:07.039
+hrishikb@andrew.cmu.edu: the high level. Yeah, yeah.
+
+430
+00:54:08.640 --> 00:54:24.090
+hrishikb@andrew.cmu.edu: They've given us a lot of data, actually. They've given us around 27 data documents. I did spend 2 days, but then we have our mid-semester incident, right? So, we just, like, powered it, and then we put it, like, to it.
+
+431
+00:54:24.290 --> 00:54:32.349
+hrishikb@andrew.cmu.edu: What's the kind of data that you need? Like, catalogs, or also just catalogs, schemas? Catalogs…
+
+432
+00:54:32.980 --> 00:54:36.320
+hrishikb@andrew.cmu.edu: Sort out specification documents.
+
+433
+00:54:37.020 --> 00:54:37.940
+hrishikb@andrew.cmu.edu: Okay.
+
+434
+00:54:38.220 --> 00:54:50.150
+hrishikb@andrew.cmu.edu: basically a small dump of the data, like, removing all the PII and all those critical information, and some sort of input files, the kind they expect, usually.
+
+435
+00:54:50.520 --> 00:54:59.499
+hrishikb@andrew.cmu.edu: And the… they also give us some specific schemas, which, like, doesn't really change very often, those kind of things. Okay.
+
+436
+00:55:00.690 --> 00:55:09.060
+hrishikb@andrew.cmu.edu: Yeah, that's interesting. I guess I was assuming the whole time, like, is the main…
+
+437
+00:55:09.280 --> 00:55:13.490
+hrishikb@andrew.cmu.edu: Are we talking mainly about…
+
+438
+00:55:13.940 --> 00:55:24.239
+hrishikb@andrew.cmu.edu: items in a catalog that people can order, or is there other kinds of information that they want to ingest and that goes in the system? Like, is there just general vendor information, and…
+
+439
+00:55:25.220 --> 00:55:32.700
+hrishikb@andrew.cmu.edu: I don't know, other… It'll be, product information, the product specs. Yeah, specs, like, shape, size…
+
+440
+00:55:32.730 --> 00:55:42.309
+hrishikb@andrew.cmu.edu: Things like that. Okay, okay. So let's say they have a vendor, like, Apin as a vendor, so they would, like, give you… if they have category of MacBooks.
+
+441
+00:55:42.310 --> 00:55:45.170
+hrishikb@andrew.cmu.edu: Okay. They're gonna give you, like, the screen size.
+
+442
+00:55:45.170 --> 00:56:09.900
+hrishikb@andrew.cmu.edu: And all of that. So there can be a hardware shop vendor as well. They're gonna input screw dimensions… Okay. Is there images that you have to… Yeah, I mean, we don't have to deal with images, but then the catalog, the document has images, but we don't parse any kind of… But those eParts… is that in their catalog, though? In their image? Yeah, they are. In the website, there is…
+
+443
+00:56:10.560 --> 00:56:13.360
+hrishikb@andrew.cmu.edu: Okay, so that's just, I guess…
+
+444
+00:56:13.830 --> 00:56:20.069
+hrishikb@andrew.cmu.edu: Outside of the scope of this project? Yeah. Okay, but it's still part of what they want to do, right? Or…
+
+445
+00:56:20.250 --> 00:56:30.800
+hrishikb@andrew.cmu.edu: Okay. I would look forward to donate image for whatever is being passed.
+
+446
+00:56:35.440 --> 00:56:46.930
+hrishikb@andrew.cmu.edu: But since the… I mean, if the data's in CSV format, they'll probably… they won't have a… Right. …something to… they'll probably get some general picture out there. Yeah, maybe it's, like, a blank or something.
+
+447
+00:56:47.250 --> 00:56:48.570
+hrishikb@andrew.cmu.edu: And couldn't be.
+
+448
+00:57:00.440 --> 00:57:03.906
+hrishikb@andrew.cmu.edu: How are you guys considering… Or how…
+
+449
+00:57:04.640 --> 00:57:07.640
+hrishikb@andrew.cmu.edu: How have you been answering the constant…
+
+450
+00:57:08.020 --> 00:57:12.140
+hrishikb@andrew.cmu.edu: questions, it feels like to neighboring faculty, like, how are you using AI?
+
+451
+00:57:14.650 --> 00:57:18.169
+hrishikb@andrew.cmu.edu: We're using it as much as possible.
+
+452
+00:57:18.560 --> 00:57:29.320
+hrishikb@andrew.cmu.edu: And, songhood has worked out pretty well. Other parts… We're kind of a… Questioning more of its,
+
+453
+00:57:30.050 --> 00:57:33.059
+hrishikb@andrew.cmu.edu: Whether we should just do that part ourselves.
+
+454
+00:57:37.270 --> 00:57:44.890
+hrishikb@andrew.cmu.edu: like, we are trying to use it as much, but some parts does seem like an overkill. It is not helping us improve, it's just slowing us down.
+
+455
+00:57:45.190 --> 00:57:51.870
+hrishikb@andrew.cmu.edu: Just trying to automate multiple things, getting this NYI, that NYI. I think AI is helpful in most places, but not all.
+
+456
+00:57:51.980 --> 00:57:57.580
+hrishikb@andrew.cmu.edu: Yeah. And the amount of AI usage should also be limited. Like, I think,
+
+457
+00:57:58.770 --> 00:58:17.739
+hrishikb@andrew.cmu.edu: recently, I think Cory put out a post on LinkedIn, I was reading that, so it mentioned that how much AI you should use, like, it's not always good to, if you have to change a line in a document, it's better to do it yourselves than give it to AI, and write a prompt to change that line, and so things like that is something that, I guess, we need to consider more.
+
+458
+00:58:17.910 --> 00:58:21.299
+hrishikb@andrew.cmu.edu: Yeah. Amount of, like, areas and amount of AI usage.
+
+459
+00:58:25.470 --> 00:58:29.330
+hrishikb@andrew.cmu.edu: What's your take on this? Yeah, I think,
+
+460
+00:58:32.970 --> 00:58:38.630
+hrishikb@andrew.cmu.edu: Anything that you… Anything that you care about learning?
+
+461
+00:58:38.960 --> 00:58:41.909
+hrishikb@andrew.cmu.edu: I would to minimize AI use.
+
+462
+00:58:42.370 --> 00:58:53.300
+hrishikb@andrew.cmu.edu: Right? And it's really… It's tricky and nuanced, and… And it…
+
+463
+00:58:53.980 --> 00:59:01.410
+hrishikb@andrew.cmu.edu: to me, right now, in this environment that I'm in, and I think also just in general, like, the industry, it's…
+
+464
+00:59:04.580 --> 00:59:11.000
+hrishikb@andrew.cmu.edu: It feels impossible to… use it… in…
+
+465
+00:59:13.200 --> 00:59:16.769
+hrishikb@andrew.cmu.edu: In a good way, or in a helpful way, because…
+
+466
+00:59:18.370 --> 00:59:25.539
+hrishikb@andrew.cmu.edu: The conception is that it's gonna… You know, provide…
+
+467
+00:59:25.810 --> 00:59:30.570
+hrishikb@andrew.cmu.edu: 10x productivity, or, you know, like, just the claims are really…
+
+468
+00:59:30.770 --> 00:59:33.189
+hrishikb@andrew.cmu.edu: Overblown, but the tricky part is…
+
+469
+00:59:33.320 --> 00:59:36.770
+hrishikb@andrew.cmu.edu: In the right context, with the right user.
+
+470
+00:59:37.110 --> 00:59:46.630
+hrishikb@andrew.cmu.edu: it does… it can be successful, or it can have those kind of results, but you can't generalize that. Yeah. So…
+
+471
+00:59:47.050 --> 00:59:53.089
+hrishikb@andrew.cmu.edu: And I… I don't know… I don't know what to tell.
+
+472
+00:59:53.290 --> 01:00:00.890
+hrishikb@andrew.cmu.edu: People like you in school, and… I think… Definitely… like…
+
+473
+01:00:01.200 --> 01:00:05.739
+hrishikb@andrew.cmu.edu: Fundamentals are still critical, so it's like…
+
+474
+01:00:06.010 --> 01:00:09.140
+hrishikb@andrew.cmu.edu: And… and the… also, the tricky thing is, it's just…
+
+475
+01:00:09.380 --> 01:00:15.110
+hrishikb@andrew.cmu.edu: It's too much of a temptation to use in so many cases, and that's going to…
+
+476
+01:00:15.480 --> 01:00:17.779
+hrishikb@andrew.cmu.edu: Rob you of a learning opportunity.
+
+477
+01:00:18.480 --> 01:00:21.400
+hrishikb@andrew.cmu.edu: But I understand incentives and pressures.
+
+478
+01:00:21.860 --> 01:00:27.439
+hrishikb@andrew.cmu.edu: And there are things that you… you know, there are shortcuts, sometimes they might be the right ones to take, but…
+
+479
+01:00:31.960 --> 01:00:37.410
+hrishikb@andrew.cmu.edu: But it's hard to… It's hard to, like… Resist when.
+
+480
+01:00:37.550 --> 01:00:39.250
+hrishikb@andrew.cmu.edu: You know, it's something important.
+
+481
+01:00:40.180 --> 01:00:42.620
+hrishikb@andrew.cmu.edu: And when you're in this high-pressure environment.
+
+482
+01:00:43.220 --> 01:00:45.330
+hrishikb@andrew.cmu.edu: Which you are in?
+
+483
+01:00:45.800 --> 01:00:49.820
+hrishikb@andrew.cmu.edu: The whole industry has kind of been trying to, like, keep up with
+
+484
+01:00:51.460 --> 01:01:04.940
+hrishikb@andrew.cmu.edu: Phantom, you know, stories of success, or… But, like… Yeah, it's like, you know.
+
+485
+01:01:05.070 --> 01:01:13.379
+hrishikb@andrew.cmu.edu: The way that you learned is… came up through… Experimenting and trying and failing.
+
+486
+01:01:14.680 --> 01:01:20.760
+hrishikb@andrew.cmu.edu: But when you have this machine that can get you Past all the pain.
+
+487
+01:01:22.960 --> 01:01:30.950
+hrishikb@andrew.cmu.edu: Then you have… then… then you don't have the opportunity to make all the decisions along the way that inform and, you know, change the other person.
+
+488
+01:01:34.000 --> 01:01:38.000
+hrishikb@andrew.cmu.edu: And even… like…
+
+489
+01:01:38.770 --> 01:01:45.439
+hrishikb@andrew.cmu.edu: Yeah, like, you can definitely buy-code a lot of stuff, right? I'm sure you guys have experimented. But as soon as you…
+
+490
+01:01:45.580 --> 01:01:50.280
+hrishikb@andrew.cmu.edu: Have a non-trivial size of a team, like…
+
+491
+01:01:50.400 --> 01:01:54.760
+hrishikb@andrew.cmu.edu: It's less and less about what you can build, but more… Like…
+
+492
+01:01:55.930 --> 01:02:00.850
+hrishikb@andrew.cmu.edu: working together, and… like, work is more social than, I think.
+
+493
+01:02:01.830 --> 01:02:07.779
+hrishikb@andrew.cmu.edu: most of the people in our industry give gratitude, or appreciate. Like, it's more about…
+
+494
+01:02:08.330 --> 01:02:16.230
+hrishikb@andrew.cmu.edu: Aligning on the same idea around a system, and understanding the people that you're building for, and making sure you're solving the right problems.
+
+495
+01:02:17.520 --> 01:02:19.060
+hrishikb@andrew.cmu.edu: Like, it's never…
+
+496
+01:02:20.280 --> 01:02:27.150
+hrishikb@andrew.cmu.edu: It's never been about typing up the code. But, you know, people are trying to, you know, do more and more with it, but…
+
+497
+01:02:27.630 --> 01:02:29.690
+hrishikb@andrew.cmu.edu: I think that's at the cost of…
+
+498
+01:02:30.490 --> 01:02:35.720
+hrishikb@andrew.cmu.edu: A lot of things that we don't currently have the right feedback loops to properly understand.
+
+499
+01:02:37.200 --> 01:02:38.100
+hrishikb@andrew.cmu.edu: I don't know.
+
+500
+01:02:42.010 --> 01:02:46.299
+hrishikb@andrew.cmu.edu: It's constant today that my company and lots of other companies.
+
+501
+01:02:47.480 --> 01:02:53.490
+hrishikb@andrew.cmu.edu: I only… yeah, the divide feels like it's getting bigger, and it's also a very interesting dynamic of, like.
+
+502
+01:02:53.910 --> 01:02:58.349
+hrishikb@andrew.cmu.edu: Kind of, like, class warfare, too, where it's, like, pushed down by the leaders who…
+
+503
+01:03:00.990 --> 01:03:04.720
+hrishikb@andrew.cmu.edu: are far from what the reality is, right? Like…
+
+504
+01:03:06.060 --> 01:03:15.320
+hrishikb@andrew.cmu.edu: You know, you see good results, but then you often see, like, You know, bad results, and…
+
+505
+01:03:15.660 --> 01:03:20.229
+hrishikb@andrew.cmu.edu: Yeah, definitely, like… When they say 10x time productivity.
+
+506
+01:03:20.400 --> 01:03:25.949
+hrishikb@andrew.cmu.edu: I don't know how that would even be possible, even with, like, the best AI in the world. Not because… Yeah.
+
+507
+01:03:26.570 --> 01:03:31.870
+hrishikb@andrew.cmu.edu: the only way that would happen is, right, if I actually did not touch the computer.
+
+508
+01:03:32.200 --> 01:03:46.519
+hrishikb@andrew.cmu.edu: If it actually just did every single step, you know, not even me debugging or, like, checking it. Because even if I checked perfect code, supposing it was perfect, it would take me time, like, probably half the time it would take me to do the entire thing.
+
+509
+01:03:46.580 --> 01:03:54.610
+hrishikb@andrew.cmu.edu: So, just that alone just limits their productivity to 2x. So, unless they manage to, like, completely eliminate the human from the loop.
+
+510
+01:03:54.810 --> 01:04:02.490
+hrishikb@andrew.cmu.edu: And just, like, have screens flashing and closing down IDEs constantly and checking. If that happens, then…
+
+511
+01:04:02.680 --> 01:04:05.940
+hrishikb@andrew.cmu.edu: Hopefully I can get a management job or something.
+
+512
+01:04:06.280 --> 01:04:11.289
+hrishikb@andrew.cmu.edu: Yeah, but, like, the… yeah, the value of the work that you're producing is…
+
+513
+01:04:13.810 --> 01:04:18.679
+hrishikb@andrew.cmu.edu: Like, at the end of the day, to me, a human being has to understand the system.
+
+514
+01:04:19.140 --> 01:04:20.050
+hrishikb@andrew.cmu.edu: Mom.
+
+515
+01:04:20.540 --> 01:04:23.829
+hrishikb@andrew.cmu.edu: And be able to change that system, and it has to affect
+
+516
+01:04:24.390 --> 01:04:29.519
+hrishikb@andrew.cmu.edu: It has to change another human being's workflow or, you know, their life, so to speak.
+
+517
+01:04:31.550 --> 01:04:39.229
+hrishikb@andrew.cmu.edu: But… But, you know, it collapses into absurdity when then you're talking about
+
+518
+01:04:39.790 --> 01:04:46.310
+hrishikb@andrew.cmu.edu: I don't know, agents acting on your behalf, and like, who's actually using… like, there's no value that's really being created, we're just…
+
+519
+01:04:48.050 --> 01:04:52.669
+hrishikb@andrew.cmu.edu: Like, throwing around, like, numbers are just, like, bags of numbers are just interacting.
+
+520
+01:04:52.900 --> 01:04:54.449
+hrishikb@andrew.cmu.edu: There's nothing really happening.
+
+521
+01:04:55.090 --> 01:04:55.850
+hrishikb@andrew.cmu.edu: Thank you.
+
+522
+01:04:56.940 --> 01:04:58.729
+hrishikb@andrew.cmu.edu: And yeah, when I thought, like.
+
+523
+01:04:59.180 --> 01:05:04.090
+hrishikb@andrew.cmu.edu: Just, like, if you think about it more just, like, automating things.
+
+524
+01:05:04.210 --> 01:05:14.780
+hrishikb@andrew.cmu.edu: like, what… what in my… in my current development workflow and product workflow can I automate to become 10 times more productive? Like, what does that even mean?
+
+525
+01:05:15.060 --> 01:05:20.869
+hrishikb@andrew.cmu.edu: like… Most of my job is, like, Talking to other people, and…
+
+526
+01:05:21.010 --> 01:05:32.180
+hrishikb@andrew.cmu.edu: Like, getting aligned on what we're building and how it should look, like… But, yeah. So, it's… But…
+
+527
+01:05:33.030 --> 01:05:38.120
+hrishikb@andrew.cmu.edu: There's that very strong narrative that it should be like this, so…
+
+528
+01:05:38.490 --> 01:05:41.000
+hrishikb@andrew.cmu.edu: I think that's why I say it's, like, impossible…
+
+529
+01:05:41.130 --> 01:05:47.059
+hrishikb@andrew.cmu.edu: for us to find, like, the right uses of this kind of LLM technology, because no one's gonna invest.
+
+530
+01:05:47.460 --> 01:05:49.190
+hrishikb@andrew.cmu.edu: In something that…
+
+531
+01:05:49.400 --> 01:05:58.780
+hrishikb@andrew.cmu.edu: Well, first of all, it takes effort and time to, like, design a good product using this stuff, and no one's gonna invest in that, because you're not gonna get that immediate
+
+532
+01:05:58.920 --> 01:06:02.070
+hrishikb@andrew.cmu.edu: so-called, or seemingly, like, 10x return.
+
+533
+01:06:03.450 --> 01:06:08.410
+hrishikb@andrew.cmu.edu: So, that's… At some point, I think it's… It's gonna…
+
+534
+01:06:08.760 --> 01:06:15.860
+hrishikb@andrew.cmu.edu: Yeah, they also keep saying that, you know, the next model will be two times better than the previous model, and
+
+535
+01:06:16.110 --> 01:06:20.800
+hrishikb@andrew.cmu.edu: In their defense, I will say it's getting better, but… Yeah. I don't see, like, the…
+
+536
+01:06:21.030 --> 01:06:25.440
+hrishikb@andrew.cmu.edu: Well, yeah, two times, like, every year. Yeah.
+
+537
+01:06:25.680 --> 01:06:38.250
+hrishikb@andrew.cmu.edu: I think the efficiency also matters if you're working on a, let's say, a greenfield or property project, because if you're writing something from scratch, maybe even you can get 10 times productivity, right, because you have to write thousands of, like, maybe hundreds of files, thousands of files. Yeah, yeah.
+
+538
+01:06:38.250 --> 01:06:45.690
+hrishikb@andrew.cmu.edu: In that part, it might help, but if you already have a tightly coupled, 20 years old codebase, then AI can't do much.
+
+539
+01:06:45.690 --> 01:06:55.909
+hrishikb@andrew.cmu.edu: Better have good version control in which AWS went down, right? They were boasting, like, 3 days ago, like… I'm glad you guys have a bevelhead about this stuff, like…
+
+540
+01:06:57.590 --> 01:07:04.670
+hrishikb@andrew.cmu.edu: Yeah, it's… yeah, you can't… it's… it's… you can't generalize, but that's… That's the only thing that…
+
+541
+01:07:04.910 --> 01:07:06.420
+hrishikb@andrew.cmu.edu: Leaders can do.
+
+542
+01:07:06.900 --> 01:07:11.540
+hrishikb@andrew.cmu.edu: We're like… Of course, they're going to… Try to promote.
+
+543
+01:07:11.810 --> 01:07:16.720
+hrishikb@andrew.cmu.edu: You know, uncertainties of working, or the stories of success, but…
+
+544
+01:07:17.170 --> 01:07:21.270
+hrishikb@andrew.cmu.edu: Yeah, you can't apply, like, a brand new project Good.
+
+545
+01:07:22.330 --> 01:07:29.150
+hrishikb@andrew.cmu.edu: Brownfield stuff, and… Situations… Yes.
+
+546
+01:07:30.120 --> 01:07:32.210
+hrishikb@andrew.cmu.edu: Amy, there's a… there's a… yeah.
+
+547
+01:07:33.470 --> 01:07:35.039
+hrishikb@andrew.cmu.edu: At work this week.
+
+548
+01:07:35.190 --> 01:07:35.960
+hrishikb@andrew.cmu.edu: Thank you.
+
+549
+01:07:37.610 --> 01:07:54.129
+hrishikb@andrew.cmu.edu: Alright, the last thing I'll share, like, somebody, one of our teams, they built, like, a tool using OMs to, like, triage bugs. Like, something that is… is hard and, you know, takes a lot of time for people to analyze, like, what's going on and go into the system, so…
+
+550
+01:07:54.230 --> 01:08:04.420
+hrishikb@andrew.cmu.edu: And then a principal engineer used it, and they got good results. So then SVP heard that and said, everyone's got to use this. So then managers, like, pushed us out and said, like.
+
+551
+01:08:04.590 --> 01:08:08.489
+hrishikb@andrew.cmu.edu: please try this out. So that more people looked at it.
+
+552
+01:08:08.930 --> 01:08:16.110
+hrishikb@andrew.cmu.edu: And… One, I mean, somebody discovered, like, they had left the API key in the open.
+
+553
+01:08:16.229 --> 01:08:31.549
+hrishikb@andrew.cmu.edu: I don't think it's related to what I mentioned happened, but then over the weekend, somebody hacked the tracking dashboard, which they had built, to, like, track every single employee under this SPP, and, like, whether or not they installed the tool, and all these stats about them, right?
+
+554
+01:08:31.779 --> 01:08:34.669
+hrishikb@andrew.cmu.edu: And somebody hacked that system to send out
+
+555
+01:08:35.430 --> 01:08:40.449
+hrishikb@andrew.cmu.edu: email, or send out a WebEx message to every single person, like, 400 people.
+
+556
+01:08:40.760 --> 01:08:47.410
+hrishikb@andrew.cmu.edu: And they included in one of the fields, like, they hijacked it with, like, this anti-AI message, like.
+
+557
+01:08:48.130 --> 01:08:53.130
+hrishikb@andrew.cmu.edu: like, AI being forced on us, like, you know. And also, this is the environment where
+
+558
+01:08:53.470 --> 01:09:01.129
+hrishikb@andrew.cmu.edu: I don't know, we keep laying people off every quarter, so it's like, are you gonna use this telemetry to, like, decide who gets on the…
+
+559
+01:09:01.330 --> 01:09:04.839
+hrishikb@andrew.cmu.edu: Layoff list, like… And it's just this… you…
+
+560
+01:09:05.279 --> 01:09:07.470
+hrishikb@andrew.cmu.edu: It's like a… it was like a protest.
+
+561
+01:09:07.670 --> 01:09:13.029
+hrishikb@andrew.cmu.edu: In a sense. That… I think speaks to just, like, this dissent.
+
+562
+01:09:13.229 --> 01:09:21.389
+hrishikb@andrew.cmu.edu: But it's not being addressed, right? It's not being heard, that's why this person… I don't know who it is yet, and hopefully I don't get in big trouble, like, but…
+
+563
+01:09:21.979 --> 01:09:28.589
+hrishikb@andrew.cmu.edu: They're expressing, like, This is… this is not, like, sustainable, this is not good for our products.
+
+564
+01:09:29.040 --> 01:09:34.420
+hrishikb@andrew.cmu.edu: So… That's… that's the environment we're in.
+

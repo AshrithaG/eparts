@@ -1,0 +1,2002 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.640
+Cory Gwin: Just gonna be the two of you, then?
+
+2
+00:00:02.280 --> 00:00:03.770
+hrishikb@andrew.cmu.edu: Sorry, will you repeat that?
+
+3
+00:00:04.059 --> 00:00:05.389
+Cory Gwin: Just the two of you, then?
+
+4
+00:00:05.870 --> 00:00:11.450
+hrishikb@andrew.cmu.edu: Yup, I'm pretty sure they'll be joining in a few minutes, but I'm not sure… I'm not able to reach them over still as well.
+
+5
+00:00:12.090 --> 00:00:12.710
+Cory Gwin: Okay.
+
+6
+00:00:13.530 --> 00:00:16.990
+Cory Gwin: Alright, how's your project going so far?
+
+7
+00:00:17.700 --> 00:00:24.730
+hrishikb@andrew.cmu.edu: Currently, I think we are at a good pace. A few of the things we are struggling with.
+
+8
+00:00:25.420 --> 00:00:32.530
+hrishikb@andrew.cmu.edu: Currently is… Basically integrating AI with the… non-development aspects.
+
+9
+00:00:33.630 --> 00:00:45.530
+hrishikb@andrew.cmu.edu: Of the project, but we haven't been able to do that successfully. We have been generating diagrams, we've used it for automating our minutes, action items, things like that.
+
+10
+00:00:45.840 --> 00:00:51.270
+hrishikb@andrew.cmu.edu: And we've also, used it to generate our software engineering system.
+
+11
+00:00:51.470 --> 00:00:52.870
+hrishikb@andrew.cmu.edu: Things like that.
+
+12
+00:00:53.650 --> 00:00:56.190
+hrishikb@andrew.cmu.edu: We do have initial artifacts, we have a…
+
+13
+00:00:56.300 --> 00:01:02.480
+hrishikb@andrew.cmu.edu: base… not basic, but we have an initial draft of our requirements documents, we have a risk document ready.
+
+14
+00:01:02.840 --> 00:01:05.440
+hrishikb@andrew.cmu.edu: And there are a couple of points which we are still working on.
+
+15
+00:01:07.230 --> 00:01:07.940
+Cory Gwin: Okay.
+
+16
+00:01:08.750 --> 00:01:12.810
+Cory Gwin: So…
+
+17
+00:01:14.730 --> 00:01:25.290
+Cory Gwin: basically you're doing… let me understand, you're doing, like, interviewing, you're talking to people, you're getting the requirements for what the system's gonna be, and then you're… you are using AI to help you develop some of those documents?
+
+18
+00:01:25.530 --> 00:01:44.480
+hrishikb@andrew.cmu.edu: Right now, we have not reached the interviewing phase, because we were waiting on the client data, and that got laid by a couple of weeks. So we just got the client data last Friday in the evening, so we are currently processing through that. And the requirements that we currently have are based off the meetings we have with clients.
+
+19
+00:01:45.390 --> 00:02:01.400
+hrishikb@andrew.cmu.edu: Like, we made a notional workflow diagram to get on the same page with the clients, to understand what the system they want us to build, and based on the system and the conversation we had with clients, we came up with some initial quality attributes and some initial
+
+20
+00:02:01.640 --> 00:02:05.560
+hrishikb@andrew.cmu.edu: functional requirements. And yes, we…
+
+21
+00:02:05.670 --> 00:02:14.999
+hrishikb@andrew.cmu.edu: we basically used AI to… we fed all the information and use an LLM to generate a well-formatted document for requirements.
+
+22
+00:02:15.840 --> 00:02:16.600
+Cory Gwin: Okay.
+
+23
+00:02:18.250 --> 00:02:25.560
+Cory Gwin: And you said you started working on your software engineering development system. Do you… so what tools do you have available to you? Like…
+
+24
+00:02:25.850 --> 00:02:32.170
+Cory Gwin: What all are you… have in your ecosystem, like GitHub, GitHub Actions, GitLab…
+
+25
+00:02:32.460 --> 00:02:35.790
+Cory Gwin: TrapGPT, what tools do you have at your disposal?
+
+26
+00:02:36.320 --> 00:02:55.569
+hrishikb@andrew.cmu.edu: So, from our side, we… we are currently using, like, people are using different tools. Like, I personally use Gemini and, ChatGPT a lot. I think, Shruta uses Claude, so we're all using those on a personal level, but the client is providing us with,
+
+27
+00:02:55.960 --> 00:03:08.600
+hrishikb@andrew.cmu.edu: a cursor, but that's also currently not able to be completed, so we are waiting on that as well. So, we'll be primarily using a cursor with the client's data to use it to process it and stuff.
+
+28
+00:03:08.960 --> 00:03:10.180
+hrishikb@andrew.cmu.edu: And…
+
+29
+00:03:10.880 --> 00:03:19.310
+hrishikb@andrew.cmu.edu: Yeah, and we will be using GitHub Actions for our testing and deployments, but we haven't set that up yet.
+
+30
+00:03:19.720 --> 00:03:20.420
+Cory Gwin: Okay.
+
+31
+00:03:20.510 --> 00:03:23.910
+hrishikb@andrew.cmu.edu: So one thing, to really think about.
+
+32
+00:03:23.910 --> 00:03:27.890
+Cory Gwin: As you start to develop these documents is,
+
+33
+00:03:27.960 --> 00:03:43.930
+Cory Gwin: how are they… how is the AI using them to build off of itself, right? So, think of it like a harness, right? All these requirements documents that you're making, quality attributes, ADR, ADRs, all these things are information that eventually they…
+
+34
+00:03:44.080 --> 00:03:51.140
+Cory Gwin: they can… Inform the AI of, like, how to build the system, right?
+
+35
+00:03:51.420 --> 00:03:54.279
+Cory Gwin: Just like they inform you. And…
+
+36
+00:03:54.590 --> 00:03:58.539
+Cory Gwin: Can the AI help you if it can't see your decisions?
+
+37
+00:04:01.200 --> 00:04:02.410
+hrishikb@andrew.cmu.edu: Ordinance.
+
+38
+00:04:03.350 --> 00:04:06.900
+hrishikb@andrew.cmu.edu: I guess it needs the entire picture to help us with these things.
+
+39
+00:04:07.190 --> 00:04:21.790
+Cory Gwin: Yeah, so until… until it has access to the things that you have access to, it's… it's just flying blind, right? You need to always be thinking, like, what can… what can my AI see? So, since you're all in separate systems, you've kind of…
+
+40
+00:04:22.500 --> 00:04:32.130
+Cory Gwin: you know, you've taken the AI and you've made it much dumber, because it's not able to contextualize all the work that all of you are doing.
+
+41
+00:04:32.410 --> 00:04:41.570
+Cory Gwin: So I would say one of the first things to do is try to get into a single system, and then try to start feeding as much information into that system as you can, right?
+
+42
+00:04:43.710 --> 00:04:51.490
+Cory Gwin: You know, if you're using chat, chat isn't necessarily as smart as, like, an agent, but once you start using agents,
+
+43
+00:04:51.920 --> 00:04:58.360
+Cory Gwin: They'll start… especially if you're prompting them in the right way, they'll start looking around for information before they do their work.
+
+44
+00:04:58.600 --> 00:05:09.839
+Cory Gwin: And you can have conversations then, and they'll be like, oh, in this ADR you said this, in this ADR you said that. And then you can start to build up, you know, it becomes kind of a,
+
+45
+00:05:11.580 --> 00:05:17.129
+Cory Gwin: like a Sisyphus ball, where it just keeps building and building and building. And that's what you want to…
+
+46
+00:05:17.240 --> 00:05:24.049
+Cory Gwin: start working towards is getting all of this information centralized and inside of some sort of an AI harness.
+
+47
+00:05:24.170 --> 00:05:26.260
+Cory Gwin: So that it can be shared.
+
+48
+00:05:27.440 --> 00:05:30.020
+Cory Gwin: Are you building a…
+
+49
+00:05:30.690 --> 00:05:35.649
+Cory Gwin: Are you building on, like, an existing legacy tool, or are you going to be building something from scratch?
+
+50
+00:05:35.800 --> 00:05:38.380
+hrishikb@andrew.cmu.edu: We'll be building some from scratch, so…
+
+51
+00:05:38.380 --> 00:05:41.630
+Cory Gwin: You have, like, a totally greenfield repo, you can start fresh.
+
+52
+00:05:41.630 --> 00:05:42.659
+hrishikb@andrew.cmu.edu: Yeah, yeah.
+
+53
+00:05:42.840 --> 00:05:59.470
+Cory Gwin: Okay, so that's really nice, because, then you can start… you can just start a repo and start plugging all of these documents in there, and sometimes I, you know, just create, like, an ADR folder, with all of your design records and things like this.
+
+54
+00:05:59.820 --> 00:06:11.389
+Cory Gwin: And just start to organize it all in one place, and then you can hook your AI up to that, right? And you have, like, a central document store that everyone is agreeing upon. Does that make sense?
+
+55
+00:06:11.830 --> 00:06:22.260
+hrishikb@andrew.cmu.edu: Yeah, that does. So for all the documents, we do have a, like, we are currently sorting it on Drive. We don't have a… like, I think we currently use that, but I get your point of using an Agent AI.
+
+56
+00:06:22.360 --> 00:06:26.920
+hrishikb@andrew.cmu.edu: Giving it all the information that we also have access to, and then…
+
+57
+00:06:27.060 --> 00:06:43.209
+hrishikb@andrew.cmu.edu: prompting it in the right way to get the most out of it. And I think since we have a greenfield project, it might be much quicker in helping us develop as well, because there are very few constraints on us.
+
+58
+00:06:43.660 --> 00:06:44.240
+Cory Gwin: Yeah.
+
+59
+00:06:44.780 --> 00:06:57.990
+Cory Gwin: So if you're working in docs, the one thing I will say is that you've got to think about… it sounds like you're gonna be using Cloud Code. You gotta think about how Cloud Code's gonna get access to those things when it's helping you build, right?
+
+60
+00:06:58.330 --> 00:07:01.209
+Cory Gwin: Because if it's… if it's in Docs, it doesn't have access.
+
+61
+00:07:01.620 --> 00:07:02.330
+hrishikb@andrew.cmu.edu: Right.
+
+62
+00:07:03.710 --> 00:07:09.379
+hrishikb@andrew.cmu.edu: Ahmad, we'll probably, yeah, we… I don't think we have acidic plot code.
+
+63
+00:07:09.760 --> 00:07:12.760
+hrishikb@andrew.cmu.edu: We'll probably get access to cursor.
+
+64
+00:07:13.050 --> 00:07:14.279
+Cory Gwin: Okay, whichever one.
+
+65
+00:07:14.280 --> 00:07:14.640
+hrishikb@andrew.cmu.edu: Put down.
+
+66
+00:07:14.640 --> 00:07:28.409
+Cory Gwin: Doesn't matter, same idea. They're all the same thing. Yeah, you just gotta think about, okay, can my agents see my information, right? Like, can it access it? Can it help it help me make decisions using it?
+
+67
+00:07:28.560 --> 00:07:33.470
+Cory Gwin: Otherwise, again, it's a black box, and you're starting fresh every time.
+
+68
+00:07:34.470 --> 00:07:40.750
+hrishikb@andrew.cmu.edu: So what central repo would you suggest? Just to have a new repo and put all of the information in that?
+
+69
+00:07:41.400 --> 00:07:45.340
+Cory Gwin: That's what I do, so I'll create a repo, and then anything that's relevant
+
+70
+00:07:45.390 --> 00:08:05.280
+Cory Gwin: for the agent to know while it's building. Usually that's ADRs, things like that. I'll make sure they're in the repo, so they're alongside of it. And that way, when I'm, you know, creating specs or whatever, creating things that I'm gonna have the agent do for me, I can say, okay, read all the ADRs and make sure that there are none that are, you know.
+
+71
+00:08:05.310 --> 00:08:09.139
+Cory Gwin: Required to think about as part of this implementation.
+
+72
+00:08:09.290 --> 00:08:18.800
+Cory Gwin: And you can spawn sub-agents or whatever to do that, and say, like, if you have any questions about any of the ADRs, come back and we can discuss them.
+
+73
+00:08:19.110 --> 00:08:26.139
+Cory Gwin: And then that information is really easy. Like, agents are really good at looking at files. Like, they're really good at files.
+
+74
+00:08:26.290 --> 00:08:30.130
+Cory Gwin: So if it's right there in a file, it's… Really good at it.
+
+75
+00:08:33.490 --> 00:08:38.730
+Cory Gwin: The other thing to think about is, you know, you're… you're gonna…
+
+76
+00:08:39.250 --> 00:08:47.159
+Cory Gwin: You're all going to be working in a repo with Cursor, so, when you start developing, you'll want to think about,
+
+77
+00:08:47.360 --> 00:09:01.080
+Cory Gwin: you know, your, your feedback loop for your agent. So how is your agent able to validate changes? How is it making sure it's maintaining your code quality? How does it make sure it's, you know, got everything set up the way that you want it?
+
+78
+00:09:01.420 --> 00:09:09.810
+Cory Gwin: so that you get what you want for output. So… Okay, share my screen.
+
+79
+00:09:17.230 --> 00:09:22.239
+Cory Gwin: Let's see… I'm gonna share the screen.
+
+80
+00:09:22.900 --> 00:09:37.110
+Cory Gwin: If I look… I'm gonna open… So… For example… Let's find a good example.
+
+81
+00:09:44.610 --> 00:09:46.829
+Cory Gwin: So I have this app builder skill.
+
+82
+00:09:47.060 --> 00:09:56.110
+Cory Gwin: You know, and you can have an agent.md file or whatever. But, like, start out with, like, one shared agent for all of you.
+
+83
+00:09:57.770 --> 00:10:09.900
+Cory Gwin: And just, like, teach it how your code is organized, how you want things laid out, and then make sure that it's always running, basically, your scripts that you want it to run to ensure code quality, right?
+
+84
+00:10:09.900 --> 00:10:18.739
+Cory Gwin: So this is… this is, like, it's… it's feedback. You always have to be thinking about, like, what can my agent see, right? Because if it can't see anything, then it's completely blind.
+
+85
+00:10:18.940 --> 00:10:29.119
+Cory Gwin: So, like, how do I get it lint information? How do I get it test information? How do I check all my types? All these sorts of things. And the more rigid you are with
+
+86
+00:10:29.290 --> 00:10:40.420
+Cory Gwin: code quality stuff, right? Like, ensuring that you're using types everywhere, ensuring that you're using really good linters. It forces the agent to build in a style that you're looking for, right?
+
+87
+00:10:40.470 --> 00:10:51.310
+Cory Gwin: So getting these sorts of style things set up early, and getting code organization in place early pays dividends, because then you have this
+
+88
+00:10:51.390 --> 00:11:06.459
+Cory Gwin: feedback cycle, where they… you can… you can feed information into the agent. The other thing to think really a lot about, you know how I said make sure that you have all of your docs in place, so that it can see all, like, all of your decisions that you've already made?
+
+89
+00:11:06.460 --> 00:11:11.410
+Cory Gwin: Also, make sure you have really good loggers in place, so that if problems are happening.
+
+90
+00:11:11.420 --> 00:11:18.979
+Cory Gwin: during the test suites, I can see what's… what's not working. And if you're building any kind of a UI, make sure you get something like…
+
+91
+00:11:19.030 --> 00:11:35.180
+Cory Gwin: playwright set up early so that it can interact with the web browser, right? Like, when you're working with agents to… in your engineering system, you really have to think about it from, like, development from its perspective. You're building a toolset for the agent to be able to help you.
+
+92
+00:11:35.400 --> 00:11:36.519
+Cory Gwin: Does that make sense?
+
+93
+00:11:37.010 --> 00:11:38.160
+hrishikb@andrew.cmu.edu: Yeah, that is.
+
+94
+00:11:39.450 --> 00:11:43.260
+Cory Gwin: And if it can't see it, it can't help you, right?
+
+95
+00:11:43.800 --> 00:11:49.180
+hrishikb@andrew.cmu.edu: But if we donate all the data again and again only slows down the process, and we might miss out.
+
+96
+00:11:49.660 --> 00:11:51.249
+hrishikb@andrew.cmu.edu: Sometimes, you know.
+
+97
+00:11:51.250 --> 00:11:51.830
+Cory Gwin: Yep.
+
+98
+00:11:53.660 --> 00:12:01.109
+Cory Gwin: Yep, and then, you know, there's lots of other things you can do. Since you're in a shared repo, start setting up slash commands that you can share.
+
+99
+00:12:01.110 --> 00:12:18.369
+Cory Gwin: you know, start building your agent files together, and just make sure you're getting your tools in place early, and you really want to focus on organization. I can't say that enough, you really want to focus on organization of your codebase early, because the LLM's going to copy what you set up.
+
+100
+00:12:18.970 --> 00:12:22.160
+Cory Gwin: And if you set up bad patterns, you're gonna make a mess.
+
+101
+00:12:22.930 --> 00:12:25.549
+Cory Gwin: So, really clean patterns.
+
+102
+00:12:26.670 --> 00:12:31.609
+hrishikb@andrew.cmu.edu: What do you mean exactly by, clean patterns of the repo?
+
+103
+00:12:31.780 --> 00:12:34.979
+hrishikb@andrew.cmu.edu: Like, the file structure, or…
+
+104
+00:12:34.980 --> 00:12:48.800
+Cory Gwin: file structures, how you're organizing code, like, if you're using services, you know, are you using an MVC pattern, you know, what sorts of… what sorts of patterns are you using, and make sure that they're well-defined.
+
+105
+00:12:50.310 --> 00:12:50.950
+hrishikb@andrew.cmu.edu: Okay.
+
+106
+00:12:53.590 --> 00:12:54.720
+Cory Gwin: That makes sense.
+
+107
+00:12:54.720 --> 00:12:56.270
+hrishikb@andrew.cmu.edu: Yeah, that does make sense, yeah.
+
+108
+00:12:56.800 --> 00:12:57.790
+hrishikb@andrew.cmu.edu: No doubt.
+
+109
+00:12:58.530 --> 00:13:02.630
+Cory Gwin: Yeah. Yeah.
+
+110
+00:13:05.200 --> 00:13:07.970
+Cory Gwin: Alright, what else, what else have you guys been thinking about?
+
+111
+00:13:10.140 --> 00:13:15.660
+hrishikb@andrew.cmu.edu: Currently our prime focus has been on the ML module that we have to build.
+
+112
+00:13:15.920 --> 00:13:16.600
+Cory Gwin: Okay.
+
+113
+00:13:16.600 --> 00:13:23.880
+hrishikb@andrew.cmu.edu: So, as he, got the data recently, I think Ashita has run some tests on ML modules. Ashita, if you wanna…
+
+114
+00:13:24.420 --> 00:13:25.470
+hrishikb@andrew.cmu.edu: Tell us all that.
+
+115
+00:13:26.580 --> 00:13:34.959
+Cory Gwin: So… Oh, okay. Yeah, so you… remind me what your project was. Again, you're… you're building a machine learning model for…
+
+116
+00:13:35.700 --> 00:13:42.660
+hrishikb@andrew.cmu.edu: I'll just quickly share my screen, I'll show you the brief of the problem and the concept, so you get a better picture.
+
+117
+00:13:43.100 --> 00:13:43.730
+Cory Gwin: Okay.
+
+118
+00:13:52.210 --> 00:13:58.539
+hrishikb@andrew.cmu.edu: So, basically, the problem we currently have is that our client EPads,
+
+119
+00:13:59.220 --> 00:14:07.099
+hrishikb@andrew.cmu.edu: the process of getting information from their vendors. Like, this is basically, like, kind of like Amazon for HVAC parts.
+
+120
+00:14:07.300 --> 00:14:08.399
+Cory Gwin: Yeah, solid.
+
+121
+00:14:08.900 --> 00:14:11.959
+hrishikb@andrew.cmu.edu: The problem right now is that
+
+122
+00:14:12.410 --> 00:14:30.079
+hrishikb@andrew.cmu.edu: the way they acquire data from their vendors is that the vendors would send them emails, PDF, CSV, there's no proper format in doing all these things. So, what they currently want us to do is to eliminate all of this. So, currently, catalog team does all of it. It's a completely manual process.
+
+123
+00:14:30.080 --> 00:14:35.780
+hrishikb@andrew.cmu.edu: They'll read the emails, they'll go through the websites to get the data, and things like that.
+
+124
+00:14:36.480 --> 00:14:39.099
+hrishikb@andrew.cmu.edu: So, right now, what they want is an automated process.
+
+125
+00:14:39.510 --> 00:14:40.769
+hrishikb@andrew.cmu.edu: For this to be done.
+
+126
+00:14:41.020 --> 00:14:45.940
+hrishikb@andrew.cmu.edu: So, what we are building is, we'll… Wait, I'll just,
+
+127
+00:14:46.810 --> 00:14:52.700
+hrishikb@andrew.cmu.edu: Let me show you the, architecture flow diagram, I'll be… Much easier to understand.
+
+128
+00:14:53.390 --> 00:14:59.820
+Cory Gwin: Okay, so you're taking just a whole bunch of… randomly formatted.
+
+129
+00:15:00.430 --> 00:15:03.659
+Cory Gwin: And you're trying to parse it out into a structured format.
+
+130
+00:15:04.260 --> 00:15:06.959
+hrishikb@andrew.cmu.edu: Yeah, that would be the first step.
+
+131
+00:15:07.780 --> 00:15:09.980
+hrishikb@andrew.cmu.edu: So, pair…
+
+132
+00:15:10.160 --> 00:15:24.640
+hrishikb@andrew.cmu.edu: I hope you can see this. Here we have the initial document that we'll be getting from whatever source, like vendors, basically. Then we have an ingestion Gateway. We'll try to process these via OCR, via different methods.
+
+133
+00:15:24.640 --> 00:15:30.390
+hrishikb@andrew.cmu.edu: To get them into an intermediate layer, which will have the key value pairs.
+
+134
+00:15:30.440 --> 00:15:33.419
+hrishikb@andrew.cmu.edu: Then our ML model comes into the picture.
+
+135
+00:15:33.670 --> 00:15:36.169
+hrishikb@andrew.cmu.edu: Which will be assigning confidence scores.
+
+136
+00:15:36.300 --> 00:15:55.579
+hrishikb@andrew.cmu.edu: to different attributes, if they map well to the product or not, and basically giving each attribute a confidence score. Then, if the confidence score is high enough, it goes to auto-accept, and we push it to our intermediate publish layer, after which it will go directly to the
+
+137
+00:15:55.870 --> 00:15:58.370
+hrishikb@andrew.cmu.edu: Sick.
+
+138
+00:15:58.780 --> 00:16:00.570
+hrishikb@andrew.cmu.edu: After it, it'll go directly
+
+139
+00:16:00.680 --> 00:16:14.599
+hrishikb@andrew.cmu.edu: to this, which is PIMS. So, our starting endpoints are… the starting point for us is the suppliers, where you get the initial files from, and our systems endpoint is PIMS, which is the Product Information Management System, PolyPaths.
+
+140
+00:16:14.750 --> 00:16:33.759
+hrishikb@andrew.cmu.edu: So, after the intermediate table, we push the data to pins, and that's our entire process done. But if the corner score on the attributes is low enough, then we have a human loop. So, they will review the processing, the scores, and then they'll take a decision on it.
+
+141
+00:16:35.060 --> 00:16:37.610
+Cory Gwin: How many examples do you have of these…
+
+142
+00:16:38.920 --> 00:16:44.120
+Cory Gwin: like, files and emails and things. Did they give you a decent set of examples?
+
+143
+00:16:44.120 --> 00:16:57.529
+hrishikb@andrew.cmu.edu: They have given us a lot of files. I'm not exactly sure of the numbers. We haven't… they have sent us around 27 files. We haven't been able to go through all of them yet, but they do contain example catalogs.
+
+144
+00:16:57.640 --> 00:16:59.800
+hrishikb@andrew.cmu.edu: Pdfs, CSVs…
+
+145
+00:17:00.310 --> 00:17:10.310
+Ashritha: Yeah, so right now, like, whatever the limited set of data that they're given, those sum up to, like, around 500, PIMs, attribute names, yeah.
+
+146
+00:17:10.619 --> 00:17:11.359
+Cory Gwin: Okay.
+
+147
+00:17:13.049 --> 00:17:16.369
+Cory Gwin: Well… If… if I was you.
+
+148
+00:17:16.489 --> 00:17:20.179
+Cory Gwin: what I would do is I would actually just…
+
+149
+00:17:20.409 --> 00:17:25.189
+Cory Gwin: prototype an LLM doing this attribute prediction service, and see how it does.
+
+150
+00:17:26.520 --> 00:17:27.089
+hrishikb@andrew.cmu.edu: Okay.
+
+151
+00:17:28.109 --> 00:17:37.749
+Cory Gwin: it's really cheap to do a prototype there. It's a good way to use AI, and I bet an LLM's gonna be pretty good at it, if not great at it, because it's just text.
+
+152
+00:17:38.339 --> 00:17:40.889
+Cory Gwin: Manipulation.
+
+153
+00:17:41.750 --> 00:17:43.830
+Cory Gwin: You may not have to train anything.
+
+154
+00:17:46.120 --> 00:17:50.469
+hrishikb@andrew.cmu.edu: So you're saying after we parse the data, we can just use an LLM to…
+
+155
+00:17:50.770 --> 00:17:57.579
+hrishikb@andrew.cmu.edu: basically give it what our ML model is doing, replace that with an agent.
+
+156
+00:17:58.470 --> 00:17:59.230
+hrishikb@andrew.cmu.edu: Tell them more.
+
+157
+00:17:59.230 --> 00:18:03.189
+Cory Gwin: Yeah, yeah, just… or you have the attribute prediction service.
+
+158
+00:18:03.710 --> 00:18:11.369
+Cory Gwin: I would… I would… you can really cheaply prototype that with an AI, right? Like, here's a file of…
+
+159
+00:18:11.520 --> 00:18:17.400
+Cory Gwin: randomly… You know… formatted data.
+
+160
+00:18:17.780 --> 00:18:20.079
+Cory Gwin: Pull it out into this format.
+
+161
+00:18:21.110 --> 00:18:26.050
+Cory Gwin: I bet it's gonna do pretty darn good. And that's a really cheap thing to prototype with AI.
+
+162
+00:18:30.510 --> 00:18:33.999
+Cory Gwin: And if it works, you don't need to build anything for that layer.
+
+163
+00:18:34.810 --> 00:18:37.249
+Cory Gwin: You just hook up Lang Chain Doof.
+
+164
+00:18:37.370 --> 00:18:44.240
+Cory Gwin: some LLM, and the thing to prototype would be, like, you know, how cheap of a model can do this well.
+
+165
+00:18:49.390 --> 00:19:07.819
+hrishikb@andrew.cmu.edu: I think we didn't, think in that direction, because the client's, I think, requirement was that they need an ML system to do the content scoring, so I guess we didn't, try to question that, but you do make a good point. I think it'll be much easier to do, and more economic as well.
+
+166
+00:19:08.440 --> 00:19:15.090
+hrishikb@andrew.cmu.edu: Plus, I am pretty sure it's gonna be more accurate than any ML system that we can build to do this.
+
+167
+00:19:15.360 --> 00:19:22.059
+Cory Gwin: I would… I would imagine so. It's just… it's just text, and you can… I mean, you can prototype this and…
+
+168
+00:19:22.550 --> 00:19:24.009
+Cory Gwin: I don't know, an hour.
+
+169
+00:19:24.490 --> 00:19:38.539
+Ashritha: Yeah, but Corey, quick question. So, is the suggestion that I've made about the LLM usage, is it only for the initial prototype, or for the actual, feature itself? Because, like, when…
+
+170
+00:19:38.790 --> 00:19:50.149
+Ashritha: Because when… because when you use LLMs, it has to deal with the tokens, right? Like, I don't know, what limits they have, over there.
+
+171
+00:19:50.150 --> 00:20:02.370
+Cory Gwin: Sure, so you can run small LLMs on a GPU for relatively cheap. I would start by prototyping this on, you know, whatever LLM you have available to you.
+
+172
+00:20:03.190 --> 00:20:07.860
+Cory Gwin: you know, I think you said you had access to Gemini?
+
+173
+00:20:08.080 --> 00:20:10.659
+Cory Gwin: And just see how Gemini does, right?
+
+174
+00:20:10.850 --> 00:20:23.649
+Cory Gwin: Like, start on a mid-sized Gemini model, and then go down to a cheaper Gemini model, and then try to… try to run Llama locally for free, because it's an open source model, and see how that does, right?
+
+175
+00:20:23.650 --> 00:20:24.250
+Ashritha: Okay.
+
+176
+00:20:24.250 --> 00:20:27.379
+Cory Gwin: And create a scorecard of how a model does.
+
+177
+00:20:27.650 --> 00:20:30.480
+Cory Gwin: You know, you have… you have a whole… you have a whole bunch of…
+
+178
+00:20:31.140 --> 00:20:44.279
+Cory Gwin: models that you have to pay as a service for, which are more expensive, and then you have a whole bunch of open-source Llama-type models on Hugging Face that are out-of-the-box LLMs that might be good enough for what you need to do.
+
+179
+00:20:45.110 --> 00:20:45.680
+Ashritha: ship.
+
+180
+00:20:45.680 --> 00:20:52.069
+Cory Gwin: But it's… the thing that you can prototype here with AI is AI, right? Like.
+
+181
+00:20:52.460 --> 00:20:58.190
+Cory Gwin: If you can save yourself training your own machine learning algorithm here, do it.
+
+182
+00:20:59.190 --> 00:20:59.850
+Ashritha: I'm done.
+
+183
+00:21:01.190 --> 00:21:13.420
+Cory Gwin: And the prototype is, you know, maybe you build some sort of evaluation system for evaluating, you know, which LLMs perform the best, and then you can show that.
+
+184
+00:21:14.460 --> 00:21:15.000
+Ashritha: Okay.
+
+185
+00:21:15.800 --> 00:21:16.759
+Cory Gwin: That makes sense.
+
+186
+00:21:17.040 --> 00:21:17.360
+Ashritha: Yeah.
+
+187
+00:21:18.630 --> 00:21:25.480
+Cory Gwin: But yeah, there's a bunch, Let's see…
+
+188
+00:21:27.980 --> 00:21:29.930
+Cory Gwin: Mama comes to mind, but there's a bunch.
+
+189
+00:21:30.160 --> 00:21:34.050
+Cory Gwin: Deepseek, you could try DeepSeek.
+
+190
+00:21:36.220 --> 00:21:37.520
+Cory Gwin: And there's others.
+
+191
+00:21:37.890 --> 00:21:41.509
+Cory Gwin: You guys familiar with, Hugging Face?
+
+192
+00:21:41.940 --> 00:21:42.600
+Ashritha: Yep.
+
+193
+00:21:42.600 --> 00:21:45.789
+Cory Gwin: Okay, so you can find all these on Hugging Face.
+
+194
+00:21:45.790 --> 00:21:46.380
+Ashritha: Okay.
+
+195
+00:21:46.750 --> 00:21:50.610
+Cory Gwin: But I would… I would just start with something easy, just, you know.
+
+196
+00:21:51.240 --> 00:21:57.890
+Cory Gwin: Take… put together a sample set of data that is random from the distribution that they gave you.
+
+197
+00:21:58.240 --> 00:22:01.889
+Cory Gwin: And then try throwing it at Gemini models.
+
+198
+00:22:02.120 --> 00:22:03.519
+Cory Gwin: And see how it does.
+
+199
+00:22:03.690 --> 00:22:07.440
+Cory Gwin: You know, and try to figure out what the format you want coming out to be is, of course.
+
+200
+00:22:07.990 --> 00:22:08.630
+Ashritha: Okay.
+
+201
+00:22:10.990 --> 00:22:16.740
+Cory Gwin: Alright, coming back to your engineering setup,
+
+202
+00:22:17.050 --> 00:22:19.049
+Cory Gwin: It does look like in… is this…
+
+203
+00:22:21.060 --> 00:22:27.270
+Cory Gwin: This is all a self-contained system, or are you integrating with other external systems?
+
+204
+00:22:27.800 --> 00:22:35.300
+hrishikb@andrew.cmu.edu: No, this will be self-contained. The only system that we have to integrate with is the PIMS, so that's also an internal system.
+
+205
+00:22:35.560 --> 00:22:37.300
+Cory Gwin: Okay, how do you integrate with that?
+
+206
+00:22:38.110 --> 00:22:43.779
+hrishikb@andrew.cmu.edu: So, it'll have, predefined schemas, which we'll have to populate the information in.
+
+207
+00:22:44.110 --> 00:22:44.790
+Cory Gwin: Okay.
+
+208
+00:22:45.190 --> 00:22:53.780
+Cory Gwin: So… Whatever you can do to get that schema information typed into your agent early is going to.
+
+209
+00:22:53.780 --> 00:22:54.400
+hrishikb@andrew.cmu.edu: Hold on.
+
+210
+00:22:54.540 --> 00:23:03.069
+Cory Gwin: Right? Because then your agent can see all of its types. I don't know if they use something like, like a protocol buffer or something, but agents like those sort of type situations.
+
+211
+00:23:05.370 --> 00:23:11.569
+hrishikb@andrew.cmu.edu: by… Fed into the agent early, you mean earlier in the lifecycle of the entire system?
+
+212
+00:23:11.760 --> 00:23:19.870
+Cory Gwin: Yeah, so define… if you can define contracts between systems as requirements early on, and have them well-defined…
+
+213
+00:23:20.270 --> 00:23:25.790
+Cory Gwin: Even better if they're defined as software, like, with some sort of a protocol box system.
+
+214
+00:23:25.940 --> 00:23:33.909
+Cory Gwin: That's gonna help you, because then your agent has a contract, and you don't have to, like, try to explain it to it.
+
+215
+00:23:34.530 --> 00:23:35.200
+hrishikb@andrew.cmu.edu: Okay.
+
+216
+00:23:35.530 --> 00:23:36.460
+Cory Gwin: Does that make sense?
+
+217
+00:23:36.740 --> 00:23:37.789
+hrishikb@andrew.cmu.edu: Yeah, it does.
+
+218
+00:23:37.790 --> 00:23:41.560
+Cory Gwin: Like, the place where a lot of,
+
+219
+00:23:42.740 --> 00:23:51.640
+Cory Gwin: place where a lot of agentic-built software falls over is at the edges between systems, right? Because I can't see into them.
+
+220
+00:23:51.840 --> 00:23:59.459
+Cory Gwin: And it doesn't… it doesn't know their limitations, right? So, like, you have to be able to explain to it things like.
+
+221
+00:24:00.090 --> 00:24:03.040
+hrishikb@andrew.cmu.edu: you're gonna get rate limited, right? Or, like…
+
+222
+00:24:03.040 --> 00:24:09.260
+Cory Gwin: If you hit it too hard, you're gonna knock it over, things like that, right? Because every system has limitations.
+
+223
+00:24:09.410 --> 00:24:13.800
+Cory Gwin: And, that's a black… that's a black hole right there.
+
+224
+00:24:13.970 --> 00:24:23.940
+Cory Gwin: So anything you can learn about that system and get outlined is going to help you as a developer, right? Because you'll understand the system you're integrating with, but it's also going to help you define work for the agent.
+
+225
+00:24:30.730 --> 00:24:36.200
+hrishikb@andrew.cmu.edu: Alright. Yeah, that is something we should definitely, Take a look at.
+
+226
+00:24:36.310 --> 00:24:40.169
+hrishikb@andrew.cmu.edu: We haven't really explored the… using an LLM for our…
+
+227
+00:24:40.560 --> 00:24:43.830
+hrishikb@andrew.cmu.edu: like, instead of the ML model, we have been very myopic about that.
+
+228
+00:24:43.940 --> 00:24:47.330
+hrishikb@andrew.cmu.edu: So that is something that's… We should definitely try.
+
+229
+00:24:48.860 --> 00:24:56.520
+Cory Gwin: How about this approval decision audit trail? Like, this whole thing? This is gonna require some sort of a UI?
+
+230
+00:24:59.340 --> 00:25:05.009
+Ashritha: No, I think that's gonna be an auto-accept, thing, yeah, based on the.
+
+231
+00:25:05.010 --> 00:25:07.840
+Cory Gwin: Your human review plus UI.
+
+232
+00:25:11.050 --> 00:25:12.520
+Ashritha: Oh, okay, okay.
+
+233
+00:25:13.280 --> 00:25:15.200
+Cory Gwin: Yeah, for all the low confidence stuff.
+
+234
+00:25:15.830 --> 00:25:24.100
+hrishikb@andrew.cmu.edu: Yeah, yeah, this will, require, some sort of a UI with sufficient information that the human can make a…
+
+235
+00:25:24.120 --> 00:25:25.719
+Cory Gwin: Okay. Accurate decision.
+
+236
+00:25:26.000 --> 00:25:31.380
+Cory Gwin: So this is another place where the, you know, working with an AI for an early prototype can really pay dividends.
+
+237
+00:25:31.490 --> 00:25:43.560
+Cory Gwin: You know, you can… you can work up in an afternoon with the client, you can work up 4 or 5 different UI examples and try to get an, you know, an understanding of what they want their workflow to look like.
+
+238
+00:25:43.960 --> 00:25:51.329
+Cory Gwin: And if you can visualize what their workflow looks like early, and give them examples they can play with.
+
+239
+00:25:51.470 --> 00:26:01.499
+Cory Gwin: then you're going to understand all the pieces that you're going to want to put in place, right? Like, maybe they want filters. I don't know, you know? Like, how does this person want to work with this data?
+
+240
+00:26:04.930 --> 00:26:05.610
+hrishikb@andrew.cmu.edu: Okay.
+
+241
+00:26:05.820 --> 00:26:08.459
+Cory Gwin: Does that make sense?
+
+242
+00:26:10.230 --> 00:26:20.909
+hrishikb@andrew.cmu.edu: Yeah, it is, so basically, we need to get some more information out of the clients on how, like, what sort of data they require in this aspect.
+
+243
+00:26:21.620 --> 00:26:26.189
+Cory Gwin: I would think so, right? Because any sort of a UI is usually data-driven.
+
+244
+00:26:26.190 --> 00:26:30.439
+hrishikb@andrew.cmu.edu: And it's like, okay, well, how are you using this data to make decisions?
+
+245
+00:26:30.440 --> 00:26:47.440
+Cory Gwin: Okay? Like, that's a… that's a good step forward, and then how can I use AI to help me have a conversation with you about, you know, well, here's an example of how you could work with this data. Is this what you want? No, I want to do this. And you can prototype these things really fast and have a really quick feedback cycle.
+
+246
+00:26:48.080 --> 00:26:48.740
+hrishikb@andrew.cmu.edu: Okay.
+
+247
+00:26:50.320 --> 00:26:51.730
+hrishikb@andrew.cmu.edu: Yeah, economism.
+
+248
+00:26:51.840 --> 00:26:53.210
+hrishikb@andrew.cmu.edu: Yeah, it does, it does.
+
+249
+00:26:57.440 --> 00:27:01.439
+hrishikb@andrew.cmu.edu: We'll try to get in touch with the clients and get some more information on what they expect.
+
+250
+00:27:01.990 --> 00:27:04.780
+Cory Gwin: It'll be in this phase, and then we can work accordingly.
+
+251
+00:27:05.160 --> 00:27:17.929
+Cory Gwin: Yeah, I mean, the best thing to do is try to, you know, you have this attribute prediction service. If you can understand exactly what the data coming out of that is going to be shaped like.
+
+252
+00:27:18.200 --> 00:27:24.980
+Cory Gwin: like, that's gonna inform a lot about your UI, right? Because most UIs are, like, just a view over that data.
+
+253
+00:27:25.780 --> 00:27:29.140
+Cory Gwin: So you'll know what you need to show.
+
+254
+00:27:29.550 --> 00:27:35.569
+Cory Gwin: And then, you know, you can add filters and stuff based on how they want to interact with it.
+
+255
+00:27:38.270 --> 00:27:50.160
+hrishikb@andrew.cmu.edu: So, I think the data that we currently have thought about, which will be coming out of the protection service, would be, it'll have all the attributes for the particular product, and each attribute will have a confidence score.
+
+256
+00:27:50.630 --> 00:27:57.910
+hrishikb@andrew.cmu.edu: And, like, the… it should probably be sorted from highest to lowest, and the lowest ones
+
+257
+00:27:58.920 --> 00:28:07.709
+hrishikb@andrew.cmu.edu: I guess the user will have to check the lowest ones to see if it is correct or not, or what the issue is, before they proceed.
+
+258
+00:28:08.210 --> 00:28:08.870
+Cory Gwin: Yeah.
+
+259
+00:28:09.530 --> 00:28:10.260
+Cory Gwin: No.
+
+260
+00:28:11.160 --> 00:28:16.849
+Cory Gwin: Okay. Can I show you guys one more thing? I'm just thinking about this, like, you know,
+
+261
+00:28:17.490 --> 00:28:20.559
+Cory Gwin: this LLM piece that we're talking about.
+
+262
+00:28:21.610 --> 00:28:22.860
+Cory Gwin: Share my screen.
+
+263
+00:28:23.460 --> 00:28:28.490
+Cory Gwin: So…
+
+264
+00:28:31.510 --> 00:28:42.519
+Cory Gwin: if I look at this… this is a… this is a Slack thing that I've been working on with some people. It's kind of a hack project we're doing, but we wanted to see if we could…
+
+265
+00:28:42.860 --> 00:28:48.959
+Cory Gwin: Use an LLM to extract information out of a Slack message.
+
+266
+00:28:49.560 --> 00:28:56.350
+Cory Gwin: And, you know, with simple prompts,
+
+267
+00:28:57.160 --> 00:29:05.510
+Cory Gwin: we're actually able to pull the information that we want out of a Slack message, like get the incident state and ID,
+
+268
+00:29:05.670 --> 00:29:10.920
+Cory Gwin: And then… set it and store it, and just tell the LLM to store it.
+
+269
+00:29:11.220 --> 00:29:19.700
+Cory Gwin: And it will do all of that, so we can extract… You know, monitoring information.
+
+270
+00:29:19.970 --> 00:29:23.590
+Cory Gwin: And then store it. We can identify a service.
+
+271
+00:29:24.020 --> 00:29:30.319
+Cory Gwin: So sometimes with just simple prompting, or,
+
+272
+00:29:30.950 --> 00:29:35.410
+Cory Gwin: You know, instructions about how to parse things out, or what to look for.
+
+273
+00:29:35.530 --> 00:29:37.580
+Cory Gwin: And then a tool.
+
+274
+00:29:37.940 --> 00:29:41.750
+Cory Gwin: Saying, like, call this… Let's had that.
+
+275
+00:29:41.930 --> 00:29:46.779
+Cory Gwin: You can get what you want. Another thing that we do…
+
+276
+00:29:48.750 --> 00:29:54.740
+Cory Gwin: Is we'll have it, give it an output template, and say, okay, your output should look like this.
+
+277
+00:29:54.960 --> 00:29:55.850
+Cory Gwin: Right?
+
+278
+00:29:55.950 --> 00:29:58.310
+Cory Gwin: And it'll just generate that.
+
+279
+00:29:58.930 --> 00:30:01.190
+Cory Gwin: And then you can plug it into something else.
+
+280
+00:30:01.610 --> 00:30:05.159
+Cory Gwin: So that might be the path forward.
+
+281
+00:30:05.590 --> 00:30:08.310
+Cory Gwin: for your LLM-based pros, I think.
+
+282
+00:30:12.870 --> 00:30:17.590
+hrishikb@andrew.cmu.edu: I think we have to try our hands on… prototyping and using agentics.
+
+283
+00:30:17.710 --> 00:30:24.120
+Cory Gwin: Yeah, and then I think for that workflow, like, the low confidence thing would be, like, were you unable to parse it?
+
+284
+00:30:24.310 --> 00:30:27.050
+Cory Gwin: Like, if you don't think you were able to parse it.
+
+285
+00:30:27.320 --> 00:30:30.330
+Cory Gwin: You know, just put it in a UI for a human to do.
+
+286
+00:30:31.520 --> 00:30:32.230
+hrishikb@andrew.cmu.edu: Right.
+
+287
+00:30:36.290 --> 00:30:43.810
+Ashritha: Quick question, so here, is the LLM responsible for…
+
+288
+00:30:44.190 --> 00:30:59.889
+Ashritha: getting the information and, like, I mean, putting it into some form of key-value pairs, or do you want… do you suggest that it should also, like, assign attitude of confidence score to it? It should do both?
+
+289
+00:31:00.560 --> 00:31:01.740
+Cory Gwin: It can do both.
+
+290
+00:31:02.580 --> 00:31:03.800
+Ashritha: Okay, okay.
+
+291
+00:31:04.560 --> 00:31:14.159
+hrishikb@andrew.cmu.edu: I think just before the call, you were having a discussion about the same thing, because we thought we might need a smaller ML model as well, after we pass the data from the different formats.
+
+292
+00:31:14.360 --> 00:31:23.940
+hrishikb@andrew.cmu.edu: So, let's say, they're selling an iPhone, and one vendor has something called a screen size, and one has, let's say, display size.
+
+293
+00:31:24.050 --> 00:31:30.299
+hrishikb@andrew.cmu.edu: They have the same thing, but they have same… it'll be a different key for both of them, but the information is similar.
+
+294
+00:31:30.520 --> 00:31:34.499
+Cory Gwin: So you might just be able to tell an LLM that, and I might just be able to figure it out.
+
+295
+00:31:36.200 --> 00:31:38.380
+Cory Gwin: You know, they're pretty good at that sort of thing.
+
+296
+00:31:39.530 --> 00:31:49.330
+Cory Gwin: the… so an LLM, when it emits its, its findings, it… it returns a stat sig.
+
+297
+00:31:49.490 --> 00:31:53.740
+Cory Gwin: Which is basically, how confident am I that this is correct?
+
+298
+00:31:54.270 --> 00:31:58.389
+Cory Gwin: So that is something that you get in the response back from the LLM already.
+
+299
+00:32:01.190 --> 00:32:03.000
+hrishikb@andrew.cmu.edu: You just have to parse it out.
+
+300
+00:32:04.280 --> 00:32:08.189
+hrishikb@andrew.cmu.edu: Maybe we can use that as a metric also, how confident the LLM is, yeah.
+
+301
+00:32:09.170 --> 00:32:13.160
+Cory Gwin: Yeah, that's a… that's an… that's an element that is a part of the response.
+
+302
+00:32:13.540 --> 00:32:15.980
+Cory Gwin: So that's another thing you don't have to train it to do.
+
+303
+00:32:18.160 --> 00:32:18.800
+hrishikb@andrew.cmu.edu: Right.
+
+304
+00:32:21.950 --> 00:32:33.179
+Cory Gwin: Like I said, I would prototype it, and I would… I would start out with a big model, and then just work my way down, and see how good it did, and make sure you have, like, a reasonably sized dataset.
+
+305
+00:32:33.610 --> 00:32:38.399
+Cory Gwin: you can even, you know, create, like, a… like, a loop.
+
+306
+00:32:38.740 --> 00:32:42.060
+Cory Gwin: Basically, around an LLM.
+
+307
+00:32:42.480 --> 00:32:46.440
+Cory Gwin: And just have it spit out,
+
+308
+00:32:47.190 --> 00:32:51.110
+Cory Gwin: This results into some sort of a file or something as you go.
+
+309
+00:32:52.700 --> 00:32:57.629
+Cory Gwin: You could even… you could even employ, like, an LLM as a judge on the other side to say, like.
+
+310
+00:32:57.740 --> 00:32:59.120
+Cory Gwin: How did it do
+
+311
+00:32:59.470 --> 00:33:05.340
+Cory Gwin: And if the… if the LLM on the other side says really bad, then you look at it.
+
+312
+00:33:05.550 --> 00:33:06.560
+Cory Gwin: Yeah.
+
+313
+00:33:18.650 --> 00:33:22.000
+Cory Gwin: Alright, that's a lot. You guys have questions about anything?
+
+314
+00:33:25.250 --> 00:33:27.380
+hrishikb@andrew.cmu.edu: One thing you mentioned about having…
+
+315
+00:33:27.570 --> 00:33:40.980
+hrishikb@andrew.cmu.edu: like, NLM running a loop, I'm not very sure how we would do that, for it to generate, let's say, to… like, we have a dataset of, I don't know, 30 entries. If you want to extrapolate that to make it into 300,
+
+316
+00:33:41.770 --> 00:33:43.160
+hrishikb@andrew.cmu.edu: Or 3,000…
+
+317
+00:33:43.650 --> 00:33:46.660
+Cory Gwin: Yeah, so every LLM has an API available.
+
+318
+00:33:47.620 --> 00:33:49.350
+Cory Gwin: You can call them.
+
+319
+00:33:50.840 --> 00:34:08.630
+Cory Gwin: you can look up, you know, if you're talking about Gemini, you can call Gemini. Google has an API available, so you would just take your examples and put them into some sort of a, like, CSV file or something, you know, whatever format makes sense for what you have.
+
+320
+00:34:09.460 --> 00:34:23.639
+Cory Gwin: write a Python script that basically loops through that CSV file and just sends them into the LLM, and then you would have the LLM's output written into some sort of structured format, I would imagine, because that's what you want coming out of them.
+
+321
+00:34:23.889 --> 00:34:27.259
+Cory Gwin: Oh, and then you would check the structured format on the other side.
+
+322
+00:34:28.340 --> 00:34:30.650
+hrishikb@andrew.cmu.edu: Guys, alright.
+
+323
+00:34:30.790 --> 00:34:40.949
+Cory Gwin: You could even write… you could even write scripts to make sure, like, is the structured format valid? Does every… is every field, you know, filled in? Whatever.
+
+324
+00:34:44.010 --> 00:34:46.549
+hrishikb@andrew.cmu.edu: Yeah, we can defend. Yeah, it does, it does.
+
+325
+00:34:46.909 --> 00:34:47.469
+Cory Gwin: Yep.
+
+326
+00:34:54.870 --> 00:34:56.739
+hrishikb@andrew.cmu.edu: Do you guys have any questions? Jaya, Shrata?
+
+327
+00:34:58.720 --> 00:35:06.810
+Jai: No, I just, like, I was looking at Corey's, like, when he opened up VS Code, I was like, I better take a screenshot before I remember, like…
+
+328
+00:35:07.150 --> 00:35:10.140
+Jai: This is being recorded, so that's all good there.
+
+329
+00:35:10.450 --> 00:35:16.639
+Cory Gwin: Yeah, yeah. I mean, if you guys want to talk about setup or anything, I'm happy to talk about setup.
+
+330
+00:35:16.850 --> 00:35:21.480
+Cory Gwin: I mean, for a lot of this stuff, what you're doing…
+
+331
+00:35:22.110 --> 00:35:28.909
+Cory Gwin: you know, I think you can have an agent build a lot of it, right? Like, there's no reason to build…
+
+332
+00:35:29.130 --> 00:35:42.540
+Cory Gwin: this, you know, loop over an API, just have an agent build it, right? There's no reason to have it… to write, like, a script that knows how to validate and test the JSON that comes out on the other side. Have an agent build it.
+
+333
+00:35:42.570 --> 00:35:43.510
+hrishikb@andrew.cmu.edu: Good, yeah.
+
+334
+00:35:43.730 --> 00:35:49.330
+Cory Gwin: Yeah. So, you know, really lean into, I'm not gonna write any code for any of this.
+
+335
+00:35:49.540 --> 00:35:51.760
+Cory Gwin: I'm just gonna have an agent write all of it.
+
+336
+00:35:52.220 --> 00:35:59.720
+Cory Gwin: And you can even do it in, like, the repo that you're going to build the final product in, as a way to, like.
+
+337
+00:35:59.850 --> 00:36:02.380
+Cory Gwin: Or maybe a different one, but as a way to, like.
+
+338
+00:36:02.700 --> 00:36:06.800
+Cory Gwin: get some, like, muscle around how to set these things up.
+
+339
+00:36:08.680 --> 00:36:09.320
+hrishikb@andrew.cmu.edu: Okay.
+
+340
+00:36:11.460 --> 00:36:17.599
+hrishikb@andrew.cmu.edu: Yeah, like, given it's also a greenfield project, we can have it generate almost all of it.
+
+341
+00:36:18.120 --> 00:36:20.520
+Cory Gwin: You have it generate all of it, yeah.
+
+342
+00:36:20.520 --> 00:36:21.070
+hrishikb@andrew.cmu.edu: Yeah.
+
+343
+00:36:21.350 --> 00:36:29.390
+Cory Gwin: Yeah, what I would… what I would do is I would start with an LLM and say, this is what I want to do, okay? Help me write a spec file.
+
+344
+00:36:30.000 --> 00:36:33.150
+Cory Gwin: Ask me any questions about this that don't make sense.
+
+345
+00:36:33.440 --> 00:36:36.710
+Cory Gwin: Here… here are my sample files.
+
+346
+00:36:37.920 --> 00:36:42.420
+Cory Gwin: let's go. And then you iterate on that spec file until you have what you want.
+
+347
+00:36:42.540 --> 00:36:44.339
+Cory Gwin: And then you say, okay, build it.
+
+348
+00:36:48.490 --> 00:36:53.900
+Cory Gwin: Yeah, and then you'll be able to build that whole, like, test an LLM harness, right?
+
+349
+00:36:54.680 --> 00:36:55.360
+hrishikb@andrew.cmu.edu: Hello.
+
+350
+00:36:55.360 --> 00:37:02.589
+Cory Gwin: And just start out simple. Start out with saying, we're going to use the Gemini API, right? And then once you have that going, you can say, okay.
+
+351
+00:37:02.730 --> 00:37:10.830
+Cory Gwin: Now we want to evaluate a local running Llama model. And then you can, you know, do the same thing, but with a Llama model.
+
+352
+00:37:15.070 --> 00:37:15.870
+hrishikb@andrew.cmu.edu: Right.
+
+353
+00:37:16.330 --> 00:37:18.690
+hrishikb@andrew.cmu.edu: Yeah, that sounds like a pretty good plan.
+
+354
+00:37:20.520 --> 00:37:32.419
+Cory Gwin: And it's gonna build your muscle around how to use these AI agents, how to build things with them, and you'll be able to have, like, a rigorous thing that you showed, like, how we tested different
+
+355
+00:37:32.580 --> 00:37:44.540
+Cory Gwin: methodologies of working with LLMs to build things, but also use that to evaluate our ML LLM implementation, if NIFO is a feasible approach.
+
+356
+00:37:51.180 --> 00:37:52.000
+Ashritha: Go ahead.
+
+357
+00:37:57.370 --> 00:37:58.000
+Cory Gwin: Oops, sorry.
+
+358
+00:37:58.000 --> 00:38:02.390
+Ashritha: Also, I have a question not related to the project. Are you able to hear me now?
+
+359
+00:38:02.790 --> 00:38:15.380
+Ashritha: Yeah, I was saying, I was saying, I don't have a question related to the project, but then, when you say a coaching session about AI tools.
+
+360
+00:38:15.470 --> 00:38:28.699
+Ashritha: Like, give… what… what comes under that? Like, is it just the LLM models, or the, like, cursor, Gemini, and all of that? Like, what's the definition there?
+
+361
+00:38:28.870 --> 00:38:30.160
+Cory Gwin: There is no definition.
+
+362
+00:38:30.160 --> 00:38:30.660
+Ashritha: Beautiful.
+
+363
+00:38:30.660 --> 00:38:32.520
+Cory Gwin: with whatever you need.
+
+364
+00:38:33.520 --> 00:38:42.599
+Cory Gwin: Right? I mean, I'm figuring this out as I go. You know, I've never coached, at CMU before, this is my first year. You're my second coaching session.
+
+365
+00:38:43.020 --> 00:38:52.379
+Cory Gwin: And I think that a lot of what we're talking about here isn't even defined in the industry, right? Like, people are figuring out how to do it.
+
+366
+00:38:52.480 --> 00:38:53.670
+Ashritha: And I know you're…
+
+367
+00:38:53.670 --> 00:39:02.289
+Cory Gwin: probably… I don't know, I'm not gonna say I know. I don't think you're probably being taught some of the things that we are doing in industry now, right? So I'm trying to show you some of it.
+
+368
+00:39:03.470 --> 00:39:05.409
+Ashritha: Got it. Yeah.
+
+369
+00:39:05.410 --> 00:39:10.690
+Cory Gwin: So… Yeah, I don't know, what did you think it meant? And is it.
+
+370
+00:39:10.690 --> 00:39:11.776
+Ashritha: No, they…
+
+371
+00:39:12.750 --> 00:39:29.120
+Ashritha: No, we were just discussing what to present, and then we were like, all that we use right now is Cursor, and then we have Gemini, and then Claude, so what else? Like, what else can be considered as an AI tool? So, that was the question.
+
+372
+00:39:29.120 --> 00:39:30.700
+Cory Gwin: Okay, yeah, I mean…
+
+373
+00:39:30.700 --> 00:39:31.200
+Ashritha: Oof.
+
+374
+00:39:32.000 --> 00:39:37.639
+Cory Gwin: The… so the thing that's really emerging is, like, what we call your development harness, right?
+
+375
+00:39:38.160 --> 00:39:42.530
+Cory Gwin: And there's, like, these two things. One is an inner loop, and one is a forward loop.
+
+376
+00:39:44.430 --> 00:39:53.109
+Cory Gwin: And what we're trying, like, inside of where I work, what we're trying to do more and more of is not write code, like, at all.
+
+377
+00:39:53.250 --> 00:40:00.580
+Cory Gwin: So it's like, can you get the agent to a point where it can write correct code without you touching any code?
+
+378
+00:40:02.500 --> 00:40:02.880
+Ashritha: Okay.
+
+379
+00:40:03.040 --> 00:40:17.870
+Cory Gwin: So a lot of that is tooling setup, right? Like I was talking about, you know, making sure your agent files exist, making sure they know how to run your tests and your linters, getting all of those feedback mechanisms in place so the agent can see what's happening.
+
+380
+00:40:18.070 --> 00:40:23.590
+Cory Gwin: And understand, like, how to fix things when they break, because I can see what's happening.
+
+381
+00:40:25.400 --> 00:40:33.810
+Cory Gwin: And then, you know, having our agents learn over time, and the way that you learn is by updating things like agent files and stuff like that.
+
+382
+00:40:35.520 --> 00:40:47.139
+Cory Gwin: And then, like I was mentioning before, if it can't see your ADRs, well, it's never going to implement your ADRs, right? And if you don't tell them that they're important when it's implementing a certain feature, it's never going to consider them.
+
+383
+00:40:47.410 --> 00:40:51.909
+Cory Gwin: So really, a lot of it's about thinking from your agent's perspective.
+
+384
+00:40:52.500 --> 00:40:59.919
+Cory Gwin: It just so happens that you all are doing an AI project also, so I have some feedback about how to do that.
+
+385
+00:41:00.040 --> 00:41:04.940
+Cory Gwin: Or about what to try. And then also in the prototyping side of things, right? Like.
+
+386
+00:41:05.140 --> 00:41:19.699
+Cory Gwin: A lot of us are used to working in a world where software is really expensive to make. It's hours and hours and hours of time, but that's not really the case anymore. Like, yesterday, I was working on a problem, and I was like, oh, it's really hard to think about how
+
+387
+00:41:19.930 --> 00:41:24.940
+Cory Gwin: this… Code is changing this data structure through its process.
+
+388
+00:41:25.600 --> 00:41:31.060
+Cory Gwin: And I was like, wait a minute, like, I can build a UI to just watch how it's changing over time.
+
+389
+00:41:31.350 --> 00:41:36.770
+Cory Gwin: Right? And I can just build it and watch it, and run some tests and watch the code change the data.
+
+390
+00:41:37.500 --> 00:41:47.950
+Cory Gwin: And I did that, and it saved me so much time, and I was like, I never would have thought to do that in the past, because it would have taken me hours to do it, but I did it in, like, 5 minutes.
+
+391
+00:41:48.390 --> 00:41:51.940
+Cory Gwin: Right, so it's like, how can… like, what tools
+
+392
+00:41:52.180 --> 00:42:01.780
+Cory Gwin: AI allows you to build tools to make yourself go faster in a way that was never possible before, so think about that too, right? Like, what can I build myself
+
+393
+00:42:02.130 --> 00:42:03.989
+Cory Gwin: To make my job easier.
+
+394
+00:42:08.070 --> 00:42:10.890
+Cory Gwin: It's really cheap to build something, though.
+
+395
+00:42:11.600 --> 00:42:12.510
+Ashritha: Yeah.
+
+396
+00:42:14.510 --> 00:42:15.310
+Cory Gwin: Yeah.
+
+397
+00:42:18.730 --> 00:42:21.120
+Cory Gwin: My puppy is so sad. He wants me to
+
+398
+00:42:24.000 --> 00:42:26.520
+Cory Gwin: Yeah. Do you guys have other questions?
+
+399
+00:42:27.410 --> 00:42:29.210
+Ashritha: Oh, I don't think I'm good.
+
+400
+00:42:30.020 --> 00:42:32.230
+hrishikb@andrew.cmu.edu: Yeah, I think that's all the questions I had, too.
+
+401
+00:42:32.450 --> 00:42:33.080
+Cory Gwin: Okay.
+
+402
+00:42:33.490 --> 00:42:39.539
+Cory Gwin: Is there anything that you took away from this that was more helpful than anything else? Any feedback for the coach?
+
+403
+00:42:41.320 --> 00:42:44.299
+hrishikb@andrew.cmu.edu: I think all of it was pretty helpful,
+
+404
+00:42:44.660 --> 00:42:47.540
+hrishikb@andrew.cmu.edu: There are multiple aspects that we haven't explored yet.
+
+405
+00:42:47.780 --> 00:43:05.329
+hrishikb@andrew.cmu.edu: And I realize we're using our AIs not that efficiently, so the idea to put it in a Git repo and just have iterations over it is, I think, going to be very useful after we have sufficient documents. So that's something we'll definitely do, and…
+
+406
+00:43:06.050 --> 00:43:13.099
+hrishikb@andrew.cmu.edu: the part of, replacing the ML module with lightweight AI can also be useful. I think the…
+
+407
+00:43:13.240 --> 00:43:28.540
+hrishikb@andrew.cmu.edu: I think it'll be much… it'll work much better than the ML model. We just have to, I don't know, try it out and maybe, pitch the idea to the clients. Because the clients are very open-minded. They said, if you think something is better than our approach, then feel free to tell us and, like.
+
+408
+00:43:28.720 --> 00:43:33.649
+hrishikb@andrew.cmu.edu: So, maybe we can try it out and… See how that goes.
+
+409
+00:43:33.920 --> 00:43:37.090
+Cory Gwin: Yeah, I mean, I think it would be great if you could go to them and be like, look.
+
+410
+00:43:37.500 --> 00:43:44.830
+Cory Gwin: You know, we tried 30 different iterations of prompts combined with different models. This is how accurate it was.
+
+411
+00:43:44.950 --> 00:44:04.880
+Cory Gwin: Like, you can do that pretty quick, right? Because you can just set up a bunch of these things to run in parallel and be like, test, test, test, test, test. We do that all the time at work, and it actually gives you something… if you can do it programmatically, it gives you something that if you do need to train an ML model, you have a way to evaluate it, right?
+
+412
+00:44:05.570 --> 00:44:06.130
+hrishikb@andrew.cmu.edu: Yeah.
+
+413
+00:44:06.130 --> 00:44:11.369
+Cory Gwin: So by evaluating LLMs up front, and having an evaluating methodology in place.
+
+414
+00:44:11.820 --> 00:44:16.169
+Cory Gwin: one, you may not have to do the work, because you may prove the LLM can just do it.
+
+415
+00:44:16.340 --> 00:44:21.350
+Cory Gwin: And if you don't, well, then you still have gotten an evaluation methodology out of it.
+
+416
+00:44:23.690 --> 00:44:24.720
+Cory Gwin: Makes sense.
+
+417
+00:44:25.040 --> 00:44:25.470
+hrishikb@andrew.cmu.edu: Yeah.
+
+418
+00:44:25.470 --> 00:44:26.080
+Ashritha: Yeah.
+
+419
+00:44:26.080 --> 00:44:28.420
+Cory Gwin: So it's not time wasted, no matter what.
+
+420
+00:44:29.600 --> 00:44:41.300
+Cory Gwin: And if you are training an ML model, you're going to have to train a ton of them, and you're going to be evaluating all the time. So, getting good at evaluating an ML model is going to be a requirement of this project, no matter what.
+
+421
+00:44:43.680 --> 00:44:44.350
+hrishikb@andrew.cmu.edu: Right.
+
+422
+00:44:48.410 --> 00:44:49.500
+Cory Gwin: Make sense?
+
+423
+00:44:50.880 --> 00:44:55.450
+Cory Gwin: Alright. What… Three things are you gonna do?
+
+424
+00:44:55.680 --> 00:44:57.159
+Cory Gwin: In the next week.
+
+425
+00:44:59.910 --> 00:45:02.599
+hrishikb@andrew.cmu.edu: The next week is,
+
+426
+00:45:02.600 --> 00:45:03.580
+Ashritha: Bing green.
+
+427
+00:45:04.580 --> 00:45:05.800
+hrishikb@andrew.cmu.edu: No, probably.
+
+428
+00:45:07.200 --> 00:45:15.130
+hrishikb@andrew.cmu.edu: Yeah, but in the coming weeks, we'll definitely first create a shared repo with all the data that we have from the clients.
+
+429
+00:45:15.470 --> 00:45:19.340
+hrishikb@andrew.cmu.edu: Then we'll, try out a different…
+
+430
+00:45:19.680 --> 00:45:28.090
+hrishikb@andrew.cmu.edu: Like, we'll try a better LLM first and try to narrow it down till which LLM can actually process what we're asking it to do.
+
+431
+00:45:28.950 --> 00:45:35.310
+hrishikb@andrew.cmu.edu: And then maybe, have an… LM spit out some…
+
+432
+00:45:36.280 --> 00:45:38.680
+hrishikb@andrew.cmu.edu: Good mock-ups for the human in the Loop.
+
+433
+00:45:39.100 --> 00:45:40.940
+hrishikb@andrew.cmu.edu: This thing which you can show to the client.
+
+434
+00:45:41.430 --> 00:45:43.459
+Cory Gwin: That sounds like a good plan.
+
+435
+00:45:44.950 --> 00:45:46.880
+Cory Gwin: Cool, whoa.
+
+436
+00:45:47.450 --> 00:45:50.899
+Cory Gwin: Do you guys have any other questions, feedback, comments?
+
+437
+00:45:51.240 --> 00:45:52.959
+Cory Gwin: Evaluations for me?
+
+438
+00:45:53.480 --> 00:45:54.750
+hrishikb@andrew.cmu.edu: I mean, it's not…
+
+439
+00:45:54.750 --> 00:45:58.359
+Jai: Especially for me, it really helps when you talk about the harness stuff, like…
+
+440
+00:45:58.680 --> 00:46:07.210
+Jai: That was new to me, and the idea that with it, like, you could really reduce the amount of times you'd need to, like, correct it really helped.
+
+441
+00:46:08.060 --> 00:46:13.820
+Cory Gwin: Yeah, yeah, you don't want to have to correct it, right? Like, when you build a harness, your KPRs are, like.
+
+442
+00:46:15.930 --> 00:46:24.130
+Cory Gwin: how many times can I one-shot successfully, right? Like, how many times can I get this thing to build correctly on the first try? Like, that's what you're trying to improve.
+
+443
+00:46:24.260 --> 00:46:32.150
+Cory Gwin: So you want to have a shared harness that all of you are iterating on working towards building and making better. And that comes down to, like.
+
+444
+00:46:32.930 --> 00:46:33.880
+Cory Gwin: you know…
+
+445
+00:46:34.240 --> 00:46:45.269
+Cory Gwin: Improving your agent file, if you just have one, or splitting your agent file by sections of your codebase, if there are different, like, implementation points for the agent needs to behave differently.
+
+446
+00:46:47.160 --> 00:46:54.350
+Cory Gwin: It comes down to, like, giving really good visibility into how the application is running when the agent is running tests.
+
+447
+00:46:54.520 --> 00:46:59.240
+Cory Gwin: Giving it good tooling for testing visual things, like, Playwright.
+
+448
+00:47:01.140 --> 00:47:09.219
+Cory Gwin: And then giving it good skills, right? Like, I actually have a skill that I have it run at the end of everything that's, like, simplified code.
+
+449
+00:47:09.470 --> 00:47:12.760
+Cory Gwin: Because after the agent's been running for a while, it makes a whole bunch of mess.
+
+450
+00:47:12.880 --> 00:47:27.479
+Cory Gwin: And if you just tell it… if you give it rules about how to clean up after itself, it'll be like, oh, remove all dead code, you know, reduce cyclical complexity, you know, a bunch of best practices. A lot of times it'll just clean up a bunch of slop on its own.
+
+451
+00:47:34.100 --> 00:47:40.530
+Jai: That does make sense. It really does. If it runs off for a while, it really does complicate it, so that does make sense.
+
+452
+00:47:40.760 --> 00:47:43.630
+Cory Gwin: Yeah, the other thing to do, too, is, like.
+
+453
+00:47:43.890 --> 00:47:49.180
+Cory Gwin: If you're running agents over a long-running task, right, you want to…
+
+454
+00:47:49.800 --> 00:47:55.939
+Cory Gwin: You want to make it so that you're not… that you can run it without using the same agent every time.
+
+455
+00:47:56.470 --> 00:48:00.119
+Cory Gwin: And so you want to make it so that you can get into a place where you can
+
+456
+00:48:00.360 --> 00:48:10.689
+Cory Gwin: Run an agent for a short period of time, mark where you're at, stop it, start it again. Because context rot is the enemy of everything, right?
+
+457
+00:48:11.240 --> 00:48:27.100
+Cory Gwin: So, if you can get to a place where you just have, like, a bash cycle that's running over… running an agent over, like, an implementation plan, you're like, okay, just check off one part, and then continue on, check off one part, continue on, and you get in that loop.
+
+458
+00:48:27.140 --> 00:48:37.839
+Cory Gwin: you always have a fresh context window, and it's working better. But those kind of PRs are really hard to review, and you only want to do that in places that are low risk.
+
+459
+00:48:38.150 --> 00:48:42.240
+Cory Gwin: I don't know if you guys… I wrote a bit about this.
+
+460
+00:48:43.840 --> 00:48:45.420
+Cory Gwin: Hold on.
+
+461
+00:48:48.050 --> 00:48:52.500
+Cory Gwin: Here, you can… Share this.
+
+462
+00:48:55.330 --> 00:48:57.870
+Cory Gwin: There's that.
+
+463
+00:48:59.130 --> 00:49:04.220
+Cory Gwin: But that might be helpful, hmm, and then that…
+
+464
+00:49:04.510 --> 00:49:08.980
+Cory Gwin: loop that I was just talking about, a lot of people call it the Ralph Wiggum loop.
+
+465
+00:49:11.100 --> 00:49:11.889
+Cory Gwin: But there's lots of things.
+
+466
+00:49:11.890 --> 00:49:15.010
+hrishikb@andrew.cmu.edu: This is the one you recently posted on LinkedIn as well, right?
+
+467
+00:49:16.020 --> 00:49:16.860
+Cory Gwin: Yeah.
+
+468
+00:49:16.860 --> 00:49:19.010
+hrishikb@andrew.cmu.edu: Yeah, yeah, I think I read it last night.
+
+469
+00:49:19.240 --> 00:49:22.010
+Cory Gwin: Okay. Yeah.
+
+470
+00:49:22.230 --> 00:49:28.199
+Cory Gwin: Yeah, so, you know, think about… think about, like, okay, how safe is it to make a big change here?
+
+471
+00:49:28.320 --> 00:49:30.890
+Cory Gwin: How hard is it gonna be to review this change?
+
+472
+00:49:31.090 --> 00:49:43.960
+Cory Gwin: Okay, now, that kind of dictates, like, how… like, how big of a change do I want to let the agent do, right? When you're in this early prototyping phase, risk is, like, zero, right? Like.
+
+473
+00:49:44.260 --> 00:49:49.239
+Cory Gwin: Just… just set up an agent to do stuff for you until you run off tokens.
+
+474
+00:49:49.600 --> 00:50:01.769
+Cory Gwin: Right? Just expunge as many tokens as you can, make it do as much work as it can, because it's like, once you have it set up to run, it's like free work, right? This is work you don't have to do until you've run out of tokens.
+
+475
+00:50:03.520 --> 00:50:07.369
+Cory Gwin: And then you can just pick up tomorrow if you… if you have it set up the right way.
+
+476
+00:50:08.840 --> 00:50:14.849
+Cory Gwin: That is… that is… where you're at in this project, that is gold.
+
+477
+00:50:15.400 --> 00:50:20.660
+Cory Gwin: Once you start implementing the actual final thing, there are times when you can do that.
+
+478
+00:50:21.300 --> 00:50:22.790
+hrishikb@andrew.cmu.edu: And it's okay.
+
+479
+00:50:22.970 --> 00:50:38.989
+Cory Gwin: I wouldn't do it early in a project, because you haven't set up the structure yet, so it'll… it's much more likely to make a mess. Like, I like to be more hands-on at that point, because I'm going to kind of dictate, like, put things here, shape things like this. I don't quite know how I want my lenders to work.
+
+480
+00:50:39.250 --> 00:50:45.190
+Cory Gwin: But once you're past that, and you have some low-risk work, right, like, Add a new UI.
+
+481
+00:50:45.610 --> 00:50:48.019
+Cory Gwin: You can just have an agent do that.
+
+482
+00:50:49.020 --> 00:50:49.610
+hrishikb@andrew.cmu.edu: Right.
+
+483
+00:50:52.100 --> 00:50:53.110
+Cory Gwin: Does that make sense?
+
+484
+00:50:53.420 --> 00:50:54.230
+hrishikb@andrew.cmu.edu: Here it is.
+
+485
+00:50:54.230 --> 00:50:57.929
+Cory Gwin: Yeah, and the… but just know, the bigger change you ask it to make.
+
+486
+00:50:58.380 --> 00:51:01.880
+Cory Gwin: The more you have to test it, and the harder that review's gonna be.
+
+487
+00:51:05.770 --> 00:51:06.300
+Ashritha: Yeah.
+
+488
+00:51:08.850 --> 00:51:09.530
+Cory Gwin: Are we?
+
+489
+00:51:10.630 --> 00:51:15.579
+Cory Gwin: Alright, that was a lot. That was a lot of information. How are you guys feeling? Overwhelmed?
+
+490
+00:51:16.800 --> 00:51:22.680
+Cory Gwin: You're like, I've been in class all day, and you're just, like, you're just, like, teaching me all kinds of crazy things.
+
+491
+00:51:23.550 --> 00:51:28.700
+hrishikb@andrew.cmu.edu: I think we were able to grasp, all of it, I think, pretty well, and…
+
+492
+00:51:29.800 --> 00:51:32.589
+hrishikb@andrew.cmu.edu: I think I'm pretty clear on the things we need to do next.
+
+493
+00:51:32.720 --> 00:51:36.999
+hrishikb@andrew.cmu.edu: In order to, like, work more efficiently and, like, utilize AI to its fullest.
+
+494
+00:51:37.990 --> 00:51:38.540
+Cory Gwin: Nope.
+
+495
+00:51:38.720 --> 00:51:40.940
+Cory Gwin: Cool. Then I think I did my job.
+
+496
+00:51:42.260 --> 00:51:47.909
+Cory Gwin: Alright, if you guys have questions, you can always reach out to me in Slack.
+
+497
+00:51:48.240 --> 00:51:51.019
+Cory Gwin: Or if you need to do this again, let me know.
+
+498
+00:51:51.720 --> 00:51:54.139
+hrishikb@andrew.cmu.edu: All right. Thank you so much, Cody.
+
+499
+00:51:54.900 --> 00:51:55.670
+Ashritha: survey.
+
+500
+00:51:55.670 --> 00:51:56.640
+hrishikb@andrew.cmu.edu: Bye, see ya.
+

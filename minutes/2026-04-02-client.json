@@ -1,0 +1,109 @@
+{
+  "meeting_date": "2026-04-02",
+  "duration_minutes": 32,
+  "participants": [
+    "Jaivard",
+    "Hrishik",
+    "Harsha (eParts)",
+    "Ashritha"
+  ],
+  "participant_count": 4,
+  "total_words": 4629,
+  "total_turns": 123,
+  "speaker_stats": {
+    "Jaivard": {
+      "turns": 41,
+      "words": 1514,
+      "pct_words": 32.7
+    },
+    "Hrishik": {
+      "turns": 30,
+      "words": 1001,
+      "pct_words": 21.6
+    },
+    "Harsha (eParts)": {
+      "turns": 42,
+      "words": 1984,
+      "pct_words": 42.9
+    },
+    "Ashritha": {
+      "turns": 10,
+      "words": 130,
+      "pct_words": 2.8
+    }
+  },
+  "detected_topics": {
+    "Data": 4,
+    "ML/Model": 3,
+    "Architecture": 3,
+    "Project Mgmt": 3,
+    "Infrastructure": 2,
+    "Onboarding": 2
+  },
+  "questions_found": 3,
+  "questions_sample": [
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Is there a timeline from your end that you expect me to give you the data by"
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "How do we understand that this matches to a specific category"
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Is there any problem with what I just said"
+    }
+  ],
+  "potential_decisions": 1,
+  "decisions_sample": [
+    {
+      "speaker": "Hrishik",
+      "text": "Yeah, so, we are targeting that towards the end of this month, we should have the basic, requirements, risk process, and like, not\u2026 I'm not sure if we'll be able to have the complete architecture, bec"
+    }
+  ],
+  "potential_action_items": 37,
+  "actions_sample": [
+    {
+      "speaker": "Jaivard",
+      "text": "Yeah, I'll just turn up my speaker. So\u2026 okay. Yep. So, the first item on the agenda is for the timeline. Yeah. Rishi, you're there, right?"
+    },
+    {
+      "speaker": "Jaivard",
+      "text": "Yeah. So\u2026 Yeah, sure, can you, should I share my screen, or can you share your screen, with the timeline?"
+    },
+    {
+      "speaker": "Jaivard",
+      "text": "Okay, nevermind, I'll just do it then. So\u2026 Okay. So, is it visible, Harsha, dude?"
+    },
+    {
+      "speaker": "Jaivard",
+      "text": "So, we just wanted to go over and, like, get your feedback. So, for now, what we have is, like. by April 15th. For this, this semester, we'll have, the requirements. Completed by then? And\u2026 I think we"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Yeah, so, we are targeting that towards the end of this month, we should have the basic, requirements, risk process, and like, not\u2026 I'm not sure if we'll be able to have the complete architecture, bec"
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Other than July's missing, but yeah, I think\u2026 I think this makes sense. This is a decent timeline. Or at least a decent breakdown of the units. I suspect some of those units might be larger than other"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Yeah, July was, left out because, the entire development\u2026 there won't be any deliverable in that month, because we'll still be working on the, like, development of it, and we don't expect there'll be "
+    },
+    {
+      "speaker": "Jaivard",
+      "text": "Okay, we also have the statement of work, I'll just share that as well. So\u2026 One second, this is\u2026 So, we were, is it visible, first of all?"
+    },
+    {
+      "speaker": "Jaivard",
+      "text": "Okay. So, we were, it was encouraged that we have a statement of work, just so that, you know, we have a shared understanding with you. I'll be\u2026 this is the first version, and this is still, I think i"
+    },
+    {
+      "speaker": "Jaivard",
+      "text": "Yeah. So, we also have other things, such as, like, You know, that are\u2026 we will be working all the way up till PIMS, but the steps after that is not something under our control, so I've also written t"
+    }
+  ],
+  "analysis_mode": "offline (no LLM \u2014 structural extraction only)"
+}

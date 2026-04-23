@@ -1,0 +1,978 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.540
+hrishikb@andrew.cmu.edu: The two… the few talking points you have are around the ML components.
+
+2
+00:00:06.689 --> 00:00:07.089
+Harsha Tummala: Okay.
+
+3
+00:00:07.090 --> 00:00:13.499
+hrishikb@andrew.cmu.edu: prediction model, and we also had a question about if we can use LLMs instead of the traditional ML.
+
+4
+00:00:14.570 --> 00:00:19.899
+hrishikb@andrew.cmu.edu: If that will be viable, and some initial work we have done on the semantic matches.
+
+5
+00:00:22.690 --> 00:00:28.600
+hrishikb@andrew.cmu.edu: Okay, for the… okay, let's start. So the… I don't have anything present as such, but…
+
+6
+00:00:29.310 --> 00:00:31.710
+hrishikb@andrew.cmu.edu: for the ML component.
+
+7
+00:00:32.130 --> 00:00:38.960
+hrishikb@andrew.cmu.edu: We were… we had a few questions on how exactly the confidence scoring would work.
+
+8
+00:00:39.640 --> 00:00:40.180
+Harsha Tummala: Okay.
+
+9
+00:00:40.990 --> 00:00:44.200
+hrishikb@andrew.cmu.edu: So, Ashtar, you added anything to add?
+
+10
+00:00:44.460 --> 00:00:57.700
+hrishikb@andrew.cmu.edu: Okay. So, Harshal, we spoke to a couple of members here last, this week and, yeah, this week, and then, one constant suggestion that we were getting is, so if…
+
+11
+00:00:57.700 --> 00:01:07.810
+hrishikb@andrew.cmu.edu: if… I think in the last, or, like, in the… one of the previous meetings, Jake mentioned that, the updates are not going to be that frequent, right? So, it's…
+
+12
+00:01:07.810 --> 00:01:32.300
+hrishikb@andrew.cmu.edu: it's pretty much the same schema throughout, like, at least for a period of time. So, one of the suggestions that we got is instead of using a traditional ML model that, I mean, wherein you would be responsible for, like, any kind of retraining or, like, setting some confident threshold values and all of that, why don't we just use a LLM, that's available
+
+13
+00:01:32.300 --> 00:01:36.900
+hrishikb@andrew.cmu.edu: That's directly offered by Azure, and, plug it in.
+
+14
+00:01:36.900 --> 00:01:45.909
+hrishikb@andrew.cmu.edu: that's one of the approaches that they had suggested to taking. So we just wanted to know, like, what do you think about that, and then I can,
+
+15
+00:01:45.920 --> 00:01:51.219
+hrishikb@andrew.cmu.edu: So, but before that, we did one kind of a very… not…
+
+16
+00:01:51.220 --> 00:02:06.369
+hrishikb@andrew.cmu.edu: not a very solid POC, but a small POC using semantic matcher. I'll describe more about that, but I just wanted to, like, know your opinion on the LLM versus traditional ML approach.
+
+17
+00:02:07.620 --> 00:02:15.000
+Harsha Tummala: So, can you guys look at any of the other options available on Azure, other than LLMs, for this use case?
+
+18
+00:02:16.540 --> 00:02:17.550
+hrishikb@andrew.cmu.edu: For example.
+
+19
+00:02:18.150 --> 00:02:30.330
+Harsha Tummala: No, I mean, for the semantic matching. You suggested Azure for the LLMs, so I was just wondering if there's anything else that Azure offers for, the other ML stuff.
+
+20
+00:02:31.370 --> 00:02:40.339
+hrishikb@andrew.cmu.edu: Yeah, I think we were exploring BERT that is offered on Azure, and then, semantic matcher for, we were using all mini-LM model.
+
+21
+00:02:40.340 --> 00:02:56.449
+hrishikb@andrew.cmu.edu: That is also available on Azure. But we have not experimented yet, like, we don't have the accuracy scores and all of that, but for all mini-LM, like, the semantic measure, yeah, we did, some bit of exploration there.
+
+22
+00:02:56.740 --> 00:03:03.169
+Harsha Tummala: I mean, just like an off-topic question, Lewis, but coming back to the LLM question.
+
+23
+00:03:03.370 --> 00:03:18.829
+Harsha Tummala: So, Azure is pretty restrictive in terms of, like, just general fine-tuning of LLMs that they offer. So, I would highly suggest that you take a look at, what's being offered in terms of, just open models that you can train versus
+
+24
+00:03:18.890 --> 00:03:29.599
+Harsha Tummala: whatever other options are, because, one thing is Azure's AI subscription kind of is two parts, which is…
+
+25
+00:03:29.600 --> 00:03:40.290
+Harsha Tummala: they offer LLMs which are, basically open source and, self, like, just self-hosted by Azure, and the other is Azure OpenAI stuff.
+
+26
+00:03:40.510 --> 00:03:56.019
+Harsha Tummala: So, Azure OpenAI is a complete different thing in itself, and only, I think, GPD 4.0 is what's supporting fine-tuning, and that's pretty expensive in general, like, for a use case like this.
+
+27
+00:03:56.020 --> 00:03:56.370
+hrishikb@andrew.cmu.edu: Thank you.
+
+28
+00:03:56.370 --> 00:04:00.040
+Harsha Tummala: So that's… that's one point. And,
+
+29
+00:04:00.220 --> 00:04:08.659
+Harsha Tummala: So, I mean, the open… the other open source models that they kind of host and give us, I'm not sure how much offer fine-tuning support they offer in general.
+
+30
+00:04:09.110 --> 00:04:16.480
+Harsha Tummala: So, just check that out, I would say. That's probably one suggestion. But honestly, if that's a pretty viable approach, I would say go ahead with it.
+
+31
+00:04:18.060 --> 00:04:30.530
+hrishikb@andrew.cmu.edu: Yeah, like, I personally have experience with Amazon Bedrock, but not the Azure ecosystem, so we'll have to try that out. And, like, one follow-up question that I would want to ask is.
+
+32
+00:04:30.530 --> 00:04:44.070
+hrishikb@andrew.cmu.edu: So, we… initially, we just decided off two parts here, right? One is the OCR part, where would… where you would extract the text from the different sources that you have, and the… obviously, the prediction and the confidence score attributing part.
+
+33
+00:04:44.070 --> 00:04:52.320
+hrishikb@andrew.cmu.edu: So, if at all, like, obviously, like, we'll see how the LLM works in terms of cost and, resource feasibility-wise.
+
+34
+00:04:52.320 --> 00:05:06.720
+hrishikb@andrew.cmu.edu: But let's say it's possible to use that. Can we at least use the LLM part for, instead of the OCR? Because LLMs are quite good at extracting text, right?
+
+35
+00:05:07.090 --> 00:05:10.079
+hrishikb@andrew.cmu.edu: That would be, like, pretty straightforward, I agree.
+
+36
+00:05:10.080 --> 00:05:14.129
+Harsha Tummala: Yeah, yeah, they are. So again, for OCR purposes.
+
+37
+00:05:14.460 --> 00:05:25.519
+Harsha Tummala: using an LLM is not bad at all, I would say. It's pretty weird, because Azure has a separate OCR service.
+
+38
+00:05:26.010 --> 00:05:28.669
+Harsha Tummala: Oh, okay. So.
+
+39
+00:05:29.020 --> 00:05:34.830
+Harsha Tummala: So that OCR service is highly tunable in terms of how the document looks like and how it works.
+
+40
+00:05:35.040 --> 00:05:45.659
+Harsha Tummala: But it's not a great generalist, so, for example, if you ever have, like, a change in, change in schema, like, change in the type of document you're expecting, it kind of…
+
+41
+00:05:45.980 --> 00:05:49.189
+Harsha Tummala: It starts glitching, and, like, it doesn't really extract text that well.
+
+42
+00:05:49.480 --> 00:05:52.059
+Harsha Tummala: Because, there's no logical flow to it.
+
+43
+00:05:52.520 --> 00:05:59.019
+Harsha Tummala: There is, in fact, a recent paper that I was reading about, which was,
+
+44
+00:05:59.750 --> 00:06:10.820
+Harsha Tummala: It's basically trying to read a document the way a human reads it, and that's kind of how they semantically, like, extract the characters out of the document.
+
+45
+00:06:11.080 --> 00:06:27.310
+Harsha Tummala: It's… so what it does is, there's a small LLM which is corrected in the front, which feeds information to the bigger OCR extraction LLM. I'm not sure if Azure offers it at this point, but you could take a look at it, and…
+
+46
+00:06:27.380 --> 00:06:37.630
+Harsha Tummala: I mean, just… just probably experiment… I could… I could give you access to, like, the AI resources so that you can experiment with just general OCR extraction through the LLMs offered by Azure.
+
+47
+00:06:37.860 --> 00:06:45.260
+Harsha Tummala: And I think they're pretty restrictive on that end, because they do have a separate OCR service, so they kind of want to push people towards using that.
+
+48
+00:06:47.170 --> 00:06:47.930
+hrishikb@andrew.cmu.edu: Okay.
+
+49
+00:06:49.230 --> 00:06:52.590
+hrishikb@andrew.cmu.edu: I think for using the LLM to…
+
+50
+00:06:52.880 --> 00:07:10.450
+hrishikb@andrew.cmu.edu: instead of the ML model, we could even, initially try out with, maybe not on Azure, but, to seek its feasibility, we can try out with better models, the one we have access to, and see if it is able to do the work efficiently. Then we can maybe scale down the…
+
+51
+00:07:10.730 --> 00:07:25.360
+hrishikb@andrew.cmu.edu: like, go to, like, older versions or, like, less expensive versions, and then maybe, like, best case scenario would be we can host our own LAM model or something like that, which we can use to get a, like, good output.
+
+52
+00:07:26.040 --> 00:07:45.480
+Harsha Tummala: Yep, 100%. Again, I don't want to be restrictive in any way, so because this is just, like, the initial kind of finding slash research kind of phase, just, just do whatever at this point. I would say we should probably only think about if we want to go with LLMs or just stick with ML models at a later stage.
+
+53
+00:07:46.130 --> 00:07:46.800
+hrishikb@andrew.cmu.edu: Okay.
+
+54
+00:07:49.140 --> 00:08:02.160
+hrishikb@andrew.cmu.edu: So, at least for now, before the LEM topic even came up, we were just, playing around the semantic measure, approach, like, what… I mean, the data that we took, the,
+
+55
+00:08:02.320 --> 00:08:18.289
+hrishikb@andrew.cmu.edu: the amount was obviously, like, low, so, I'm not saying that the numbers are reliable or something. So I, so I think you gave us two spec docs, AM2 and RCT FlexCT, I think, yeah, I had, like, two, spec docs.
+
+56
+00:08:18.310 --> 00:08:37.190
+hrishikb@andrew.cmu.edu: So, basically, the model extracted all the attribute names from them, and, I think they totaled up to, like, around 42 attributes in total, to work with. So, we ran, through all of those, I mean, we ran the semantic matcher against the PIMS attribute index.
+
+57
+00:08:37.190 --> 00:08:43.610
+hrishikb@andrew.cmu.edu: Which has, I think, 480… I mean, something close to, like, 500 or 480, I don't remember the number.
+
+58
+00:08:43.610 --> 00:08:58.990
+hrishikb@andrew.cmu.edu: So, and then for each, supplier attribute, obviously, like, this is the internet working of the, model, like, it, it computed a cosine similarity against what it has and what the PIMS database has.
+
+59
+00:08:58.990 --> 00:09:17.580
+hrishikb@andrew.cmu.edu: So it, just gave an… I mean, it is supposed to, like, emit a number, similarity score, like, 0 or 1. For now, I don't have any rational behind setting it to, like, 0.25 as a threshold, but I just, like, intentionally gave it a very low score of 0.25. So…
+
+60
+00:09:17.610 --> 00:09:36.489
+hrishikb@andrew.cmu.edu: So, anything about that, got auto-accepted and, got written to PIMS, and anything below that got rejected. So, for now, the numbers are, like, pretty high, like, I think out of 42, 36 records got auto-accepted, so that's around, like, 86% to 87 percentage.
+
+61
+00:09:36.490 --> 00:09:42.559
+hrishikb@andrew.cmu.edu: And, 6… the other 5 or 6 got, routed to the human review.
+
+62
+00:09:42.630 --> 00:10:02.999
+hrishikb@andrew.cmu.edu: like, with this, we did not, like, want to, come to any conclusions, but we just want to, like, check, how the, internal working of the semantic matcher is done. So, this is just, like, our key findings, and moreover, the records are, like, too less to compare it against. Like, the ground truth, that we have is, like,
+
+63
+00:10:03.460 --> 00:10:19.560
+hrishikb@andrew.cmu.edu: too little, so we were thinking, like, should we, you know, produce some synthetic data, based on what we have, or how do we go about it? Because yesterday we were talking about this to, one of our coaches, and then he was like.
+
+64
+00:10:19.690 --> 00:10:30.109
+hrishikb@andrew.cmu.edu: At least for this use case, synthetic data might screw up the numbers in terms of accuracy, so how do we go about that?
+
+65
+00:10:30.400 --> 00:10:32.920
+Harsha Tummala: I can give you guys more data, honestly, like, it's not that difficult.
+
+66
+00:10:32.920 --> 00:10:33.315
+hrishikb@andrew.cmu.edu: So…
+
+67
+00:10:34.240 --> 00:10:40.180
+hrishikb@andrew.cmu.edu: That was huge. Last time you just dumped a lot of data, like the spec files and everything.
+
+68
+00:10:40.180 --> 00:10:46.390
+Harsha Tummala: Yeah, so that's the thing, right? Like, the spec files I sent you were, like, 2 or 3 out of.
+
+69
+00:10:46.390 --> 00:10:47.160
+hrishikb@andrew.cmu.edu: Yeah, yeah.
+
+70
+00:10:47.160 --> 00:10:48.390
+Harsha Tummala: 40,000 and a half.
+
+71
+00:10:48.900 --> 00:10:49.930
+hrishikb@andrew.cmu.edu: Oh, okay.
+
+72
+00:10:49.930 --> 00:10:54.609
+Harsha Tummala: Yeah, so I can always give you guys way more data if you need.
+
+73
+00:10:55.320 --> 00:10:55.930
+hrishikb@andrew.cmu.edu: Open.
+
+74
+00:10:56.350 --> 00:10:56.960
+Harsha Tummala: Tim.
+
+75
+00:10:57.510 --> 00:11:06.589
+Harsha Tummala: And I can… so I can also, like, grant access to, like, a blob storage, which we use. So, you can just pick your files from it and probably do whatever with it.
+
+76
+00:11:07.560 --> 00:11:10.819
+hrishikb@andrew.cmu.edu: Okay. Yeah, I think that would be really useful for us.
+
+77
+00:11:10.930 --> 00:11:29.069
+hrishikb@andrew.cmu.edu: Yeah. And if you could also, like, so we had the data of running final lines of, in the input into the schema, but if you have something, like, where those… where the data exactly came from, like, if you have a starting point, like, the PDF, and what that PDF extracted, so we could have a
+
+78
+00:11:29.160 --> 00:11:37.649
+hrishikb@andrew.cmu.edu: entire picture of how the existing… the, like, catalog team works, what they see and what they output from it.
+
+79
+00:11:37.650 --> 00:11:42.460
+Harsha Tummala: I would say for this, a good use case is just, like, interviewing the catalog team and understanding.
+
+80
+00:11:43.270 --> 00:11:44.380
+hrishikb@andrew.cmu.edu: Okay, yeah.
+
+81
+00:11:44.780 --> 00:11:45.320
+hrishikb@andrew.cmu.edu: Other than that.
+
+82
+00:11:45.320 --> 00:11:59.309
+Harsha Tummala: I can give you guys the data, but because there's a human there and, like, he's doing a lot of the thinking and putting the data into the database, you won't really see the steps taken there. You'll just see PDF and final data, and that's it.
+
+83
+00:12:01.040 --> 00:12:01.830
+hrishikb@andrew.cmu.edu: Night.
+
+84
+00:12:03.090 --> 00:12:09.889
+hrishikb@andrew.cmu.edu: Yeah, I think, I think we will probably should schedule a meeting with the catalog team sometime after spring break.
+
+85
+00:12:10.190 --> 00:12:10.830
+Harsha Tummala: Yeah.
+
+86
+00:12:11.520 --> 00:12:13.659
+Harsha Tummala: Wednesday for you guys, I forgot to tell you.
+
+87
+00:12:14.290 --> 00:12:15.340
+hrishikb@andrew.cmu.edu: Next week.
+
+88
+00:12:15.770 --> 00:12:16.350
+Harsha Tummala: Okay.
+
+89
+00:12:16.350 --> 00:12:17.730
+hrishikb@andrew.cmu.edu: Tomorrow's the last decision.
+
+90
+00:12:18.260 --> 00:12:21.269
+hrishikb@andrew.cmu.edu: Not if you're standing. A little bit.
+
+91
+00:12:21.270 --> 00:12:21.900
+Harsha Tummala: Uber.
+
+92
+00:12:22.080 --> 00:12:26.249
+Harsha Tummala: Yeah, so I'll just remove the meeting from next week, next week's calendar.
+
+93
+00:12:27.620 --> 00:12:30.580
+hrishikb@andrew.cmu.edu: Yeah, I'll send out a cancellation thing.
+
+94
+00:12:31.870 --> 00:12:33.040
+hrishikb@andrew.cmu.edu: Okay.
+
+95
+00:12:35.810 --> 00:12:36.939
+hrishikb@andrew.cmu.edu: Next we have…
+
+96
+00:12:39.560 --> 00:12:53.900
+hrishikb@andrew.cmu.edu: I think, yeah, for the initial ML models, you're thinking we might, like, if you're using specifically ML, we might have to use, two models for… one for the confidence scoring, and one for the initial mapping.
+
+97
+00:12:54.010 --> 00:13:03.139
+hrishikb@andrew.cmu.edu: So the data that we extract from the PDFs and other sources, like the example that Jake gave was the display size and screen size.
+
+98
+00:13:03.270 --> 00:13:05.029
+hrishikb@andrew.cmu.edu: To tackle things like that.
+
+99
+00:13:05.170 --> 00:13:11.159
+hrishikb@andrew.cmu.edu: We might have to have a smaller model which can map those key-value pairs more accurately.
+
+100
+00:13:11.370 --> 00:13:13.390
+hrishikb@andrew.cmu.edu: So that we don't have duplicate data.
+
+101
+00:13:13.710 --> 00:13:16.229
+hrishikb@andrew.cmu.edu: So, just wanted to get your opinion on that.
+
+102
+00:13:17.030 --> 00:13:23.620
+Harsha Tummala: Just, just wondering why, why, like, what's the rationale behind, like, using two models for that?
+
+103
+00:13:24.860 --> 00:13:36.100
+hrishikb@andrew.cmu.edu: I think the primary, goal for the model that we're currently thinking is to get the confidence score on each of the attributes that we extract, but in order to
+
+104
+00:13:36.460 --> 00:13:42.000
+hrishikb@andrew.cmu.edu: be able to put that into PEMS, we need to fit that data into the existing schema.
+
+105
+00:13:43.040 --> 00:13:52.959
+hrishikb@andrew.cmu.edu: So, I would say attribute matching would also require… I'm not sure if it requires a separate model, but that's the way we were initially thinking that it might.
+
+106
+00:13:52.960 --> 00:13:53.530
+Harsha Tummala: I'm in.
+
+107
+00:13:54.420 --> 00:14:05.010
+Harsha Tummala: I mean, nothing specific on that. I would say… so most, most attribute prediction kind of models, I would say, predict with a certain,
+
+108
+00:14:05.150 --> 00:14:07.799
+Harsha Tummala: Like, certain level of confidence themselves.
+
+109
+00:14:08.070 --> 00:14:15.300
+Harsha Tummala: So, when a value is generated, you could probably take that value itself. So, that… that can only be done if you're actually
+
+110
+00:14:15.530 --> 00:14:25.509
+Harsha Tummala: like, using a… using, like, an open source model where there's complete transparency on the process. But if you're using, like, an Azure kind of model, I'm not sure how… how visible it'll be.
+
+111
+00:14:29.730 --> 00:14:32.009
+Harsha Tummala: So yeah, in that case, two models would make sense.
+
+112
+00:14:39.960 --> 00:14:48.180
+hrishikb@andrew.cmu.edu: Yeah, I think that was the main, doubts we had regarding the… ML components.
+
+113
+00:14:49.020 --> 00:14:50.969
+hrishikb@andrew.cmu.edu: Yeah, but, I mean…
+
+114
+00:14:51.540 --> 00:15:11.119
+hrishikb@andrew.cmu.edu: at least, like, this week, whatever discussions we have had, everything were revolving around, the catalog team's inputs. At least, for example, for the ML thing also, like, like I said, the scores are pretty high, because it… I was just, like, trying to check how the semantic matcher works.
+
+115
+00:15:11.120 --> 00:15:21.909
+hrishikb@andrew.cmu.edu: And this is not something that you would set as a threshold, in the actual production, right? So I think the real, test would be, like,
+
+116
+00:15:21.920 --> 00:15:28.790
+hrishikb@andrew.cmu.edu: Is it Brian who's working, from the catalog? Yeah, so I think, I think when,
+
+117
+00:15:28.920 --> 00:15:46.690
+hrishikb@andrew.cmu.edu: you, my benchmark would be, like, getting the data from his team, like, where, like, with, where the, labels are manually, you know, which, I mean, mapped to which attribute,
+
+118
+00:15:46.820 --> 00:15:47.710
+hrishikb@andrew.cmu.edu: Sorry.
+
+119
+00:15:47.870 --> 00:16:00.899
+hrishikb@andrew.cmu.edu: when, so Brian does manual labeling of each attribute, right? So if we can get that data, and if I could compare… compare it against what my semantic matcher gave.
+
+120
+00:16:00.900 --> 00:16:12.159
+hrishikb@andrew.cmu.edu: That would be, like, a litmus test, but right now, I think, like you said, probably we can get all of this information only after talking to him or, like, someone from his team.
+
+121
+00:16:12.720 --> 00:16:22.139
+Harsha Tummala: Yeah, I mean, the primary interview with, like, Brian and team would help you guys, honestly, understand, like, more niche challenges as well, which they kind of encounter.
+
+122
+00:16:22.540 --> 00:16:28.740
+Harsha Tummala: And that might honestly, like, even end up making you guys deviate from whatever path you're on right now.
+
+123
+00:16:29.060 --> 00:16:42.210
+Harsha Tummala: So, they have, again, the catalog team works in their own way, and sometimes the way they kind of get files and data is straightforward.
+
+124
+00:16:42.430 --> 00:16:47.170
+Harsha Tummala: On good days, and just on very occasional days, it might not be that easy.
+
+125
+00:16:47.320 --> 00:16:52.210
+Harsha Tummala: So I sent you guys a template of… a template file, too, for, like, the data that is filled out.
+
+126
+00:16:52.760 --> 00:17:06.679
+Harsha Tummala: So, in that template file, what happens is, ePath generally sends that template file out to all the suppliers that we have, and that template file is just used by us to directly input data into our product catalog.
+
+127
+00:17:07.089 --> 00:17:11.310
+Harsha Tummala: And similar case is with Brian's team as well, in most days.
+
+128
+00:17:11.500 --> 00:17:18.190
+Harsha Tummala: And they also have a catalogue team, which kind of does this work of filling the Excel sheet out.
+
+129
+00:17:20.280 --> 00:17:31.199
+Harsha Tummala: themselves. So, there's certain suppliers that Alps basically deals with, who don't have, like, who don't have people to do that for them. And…
+
+130
+00:17:31.360 --> 00:17:36.309
+Harsha Tummala: For those kind of clients, we take on the work, and we kind of fill the catalog out for them.
+
+131
+00:17:36.790 --> 00:17:44.159
+Harsha Tummala: But that template is kind of, like, a good benchmark on how we expect the data to be after we,
+
+132
+00:17:44.840 --> 00:17:49.719
+Harsha Tummala: extract all the information from, like, the websites and the PDFs that we have.
+
+133
+00:17:51.700 --> 00:18:05.079
+hrishikb@andrew.cmu.edu: So, you just mentioned about some Excel where the data would be, present, right? So, how does that go to Prims? Like, do you have some APIs, or is it, like, some kind of a upload, release, or how does that work?
+
+134
+00:18:05.080 --> 00:18:15.390
+Harsha Tummala: This… the Excel part… so, the way it is right now is, I mean, this data goes into, like, master database through a few,
+
+135
+00:18:15.780 --> 00:18:19.220
+Harsha Tummala: Like, stored procedures we have, which are kind of lacy.
+
+136
+00:18:19.430 --> 00:18:24.100
+Harsha Tummala: And these load procedures ingest the data into the SQL database, SQL database.
+
+137
+00:18:24.410 --> 00:18:38.040
+Harsha Tummala: has this occasional sync with PIMS that goes on, and that's how it ends up in PIMS. But ideally, it should just go directly into PIMS, and that's… that's kind of the process. But I would say if you guys can generate this specific
+
+138
+00:18:38.140 --> 00:18:41.589
+Harsha Tummala: Like, generate the data in the…
+
+139
+00:18:41.810 --> 00:18:46.969
+Harsha Tummala: in the specific Excel template that we have, that is honestly, like, 70% of the work done.
+
+140
+00:18:47.170 --> 00:18:51.900
+Harsha Tummala: And ingesting it is kind of just the final programmatic step.
+
+141
+00:18:55.710 --> 00:18:58.980
+Harsha Tummala: I mean, Jake would be a better person to talk about the PIMS part of things.
+
+142
+00:18:59.370 --> 00:19:05.159
+Harsha Tummala: So, again, I think you should leave that question open for, like, next, next week, when you have a discussion.
+
+143
+00:19:06.130 --> 00:19:11.920
+hrishikb@andrew.cmu.edu: Yeah, so why did I ask? This is, again, like, one of our coaches,
+
+144
+00:19:11.960 --> 00:19:26.960
+hrishikb@andrew.cmu.edu: asked us about what is the UI part of it, like, we don't have an explicit UI here, but then, obviously, the API's interface or anything of that sort is also considered
+
+145
+00:19:26.960 --> 00:19:33.420
+hrishikb@andrew.cmu.edu: as… under that spectrum. So, we didn't have much details on that, so that's why I asked.
+
+146
+00:19:33.810 --> 00:19:38.739
+Harsha Tummala: Yeah, I mean, probably just designing the API would probably be the last cog in this project.
+
+147
+00:19:39.030 --> 00:19:44.220
+Harsha Tummala: And that would probably be as much UI UX would have to do, which is literally backing work.
+
+148
+00:19:45.210 --> 00:19:45.800
+hrishikb@andrew.cmu.edu: Okay.
+
+149
+00:19:46.410 --> 00:19:47.030
+Harsha Tummala: Yeah.
+
+150
+00:19:50.730 --> 00:19:51.350
+hrishikb@andrew.cmu.edu: Question?
+
+151
+00:19:58.940 --> 00:20:03.609
+hrishikb@andrew.cmu.edu: I think we covered all the main points and questions we had. Does anyone have anything else?
+
+152
+00:20:04.680 --> 00:20:16.339
+hrishikb@andrew.cmu.edu: I have a general question. Thank you for supplying all the sample data to the team. Of the sample data you provided, how representative is that of the spectrum of the data that you get?
+
+153
+00:20:18.000 --> 00:20:34.400
+Harsha Tummala: It pretty much represents, like, almost all of the data that we get. So, the way I've kind of created the sample data is actually by querying from our main production databases and up for scaling, like.
+
+154
+00:20:34.970 --> 00:20:36.450
+Harsha Tummala: key elements which…
+
+155
+00:20:36.640 --> 00:20:53.610
+Harsha Tummala: which we probably don't want to expose, and that's… that's pretty much it. And, the spectrum of data, it pretty much covers everything. So, the Word file kind of, details upon, like, how all the data interfaces and how the… how all the data flows.
+
+156
+00:20:53.880 --> 00:20:57.330
+Harsha Tummala: So, that has all the details on…
+
+157
+00:20:57.860 --> 00:21:04.649
+Harsha Tummala: How the data ties in, and the sample files are pretty much representative of the production data that we can deal with day-to-day.
+
+158
+00:21:09.590 --> 00:21:18.610
+hrishikb@andrew.cmu.edu: So I'm curious, in which files would you have to OCR anything? If you… I mean, you have text files, you have Word files, and you have PDF files.
+
+159
+00:21:19.080 --> 00:21:21.709
+hrishikb@andrew.cmu.edu: Where's the OCR need for that?
+
+160
+00:21:21.710 --> 00:21:37.169
+Harsha Tummala: Not really. So, again, I think OCR component left would only be for the PDFs, and that's pretty much it. So, there are two PDFs that I sent across to the team, and those are the kind of documents you would ever have to OCR in this process.
+
+161
+00:21:37.510 --> 00:21:39.329
+Harsha Tummala: And
+
+162
+00:21:39.430 --> 00:21:57.660
+Harsha Tummala: the Word files and CSV files, I mean, the CSV files are pretty much a SQL database extract that I've given them, and the rest of the CSV files, I mean, there's… if it's a CSV, I would say you can always write a program to kind of get data from it and never really do OCR.
+
+163
+00:22:02.960 --> 00:22:03.570
+hrishikb@andrew.cmu.edu: Okay.
+
+164
+00:22:03.570 --> 00:22:04.919
+Harsha Tummala: We're gonna be more standardized.
+
+165
+00:22:09.200 --> 00:22:11.189
+hrishikb@andrew.cmu.edu: I had another question.
+
+166
+00:22:11.750 --> 00:22:18.709
+hrishikb@andrew.cmu.edu: Could we also, like, I think in the files that you have sent, the prices part is removed?
+
+167
+00:22:19.050 --> 00:22:20.060
+hrishikb@andrew.cmu.edu: the…
+
+168
+00:22:20.440 --> 00:22:32.459
+hrishikb@andrew.cmu.edu: do… could we also get some, I guess, catalogs or PDFs which have prices, like, maybe old resident prices, but just to be able to see how that will look when we start doing our POC on
+
+169
+00:22:32.940 --> 00:22:35.290
+hrishikb@andrew.cmu.edu: The OCR part.
+
+170
+00:22:36.440 --> 00:22:44.410
+Harsha Tummala: So, in the PDFs, usually prices aren't present at all. So, prices are sent across as a separate CSV,
+
+171
+00:22:45.300 --> 00:22:57.340
+Harsha Tummala: which, detail, how the specific build… often build of a model, is priced, or is supposed to be priced by us. So, for example, if we take, like, a…
+
+172
+00:22:58.030 --> 00:22:59.780
+Harsha Tummala: Or something, and
+
+173
+00:23:00.060 --> 00:23:19.130
+Harsha Tummala: for example, there's, like, in the same type of tap, which is made of, like, brass, there's, like, 10 different flow rates that are available, and each different flow rate is spec'd with a different price. And each different material for that tap is spec'd with a different price. So all these combinations and how it can be built out.
+
+174
+00:23:19.250 --> 00:23:22.079
+Harsha Tummala: Those are basically sent as a CSV file to us.
+
+175
+00:23:23.010 --> 00:23:32.660
+Harsha Tummala: And that's how we build out the pricing. So, I would say, as long as you can create a product without the price component in there, it should be pretty much good.
+
+176
+00:23:33.280 --> 00:23:41.570
+Harsha Tummala: Because, ideally, I mean, we've been discussing that, I think since the beginning of the project, that prices are the only sensitive content here.
+
+177
+00:23:41.720 --> 00:23:48.259
+Harsha Tummala: And… I would say the price part is something we can work on it at a later phase.
+
+178
+00:23:48.460 --> 00:23:49.900
+Harsha Tummala: But,
+
+179
+00:23:50.040 --> 00:24:01.630
+Harsha Tummala: I mean, the project mainly is doing, like, a POC on how well can we actually streamline the whole process of getting the product data into our systems.
+
+180
+00:24:03.690 --> 00:24:04.670
+hrishikb@andrew.cmu.edu: Alright, okay.
+
+181
+00:24:04.800 --> 00:24:13.510
+Harsha Tummala: Yeah, because again, if you go down the price, price thing, it's… it's insane, like, just the way these products are built out is a full thing to understand itself.
+
+182
+00:24:15.340 --> 00:24:18.429
+Harsha Tummala: Because there's some parts which, honestly, I feel like…
+
+183
+00:24:18.920 --> 00:24:23.380
+Harsha Tummala: There are people in the company which have spent their entire lives to understand how they're priced out.
+
+184
+00:24:28.850 --> 00:24:33.599
+hrishikb@andrew.cmu.edu: Another thing, how much, do you have an approximation how much data
+
+185
+00:24:33.780 --> 00:24:37.230
+hrishikb@andrew.cmu.edu: does a catalog team ingest? Generally, like, how many…
+
+186
+00:24:37.400 --> 00:24:39.900
+hrishikb@andrew.cmu.edu: How much you're able to fill out?
+
+187
+00:24:40.910 --> 00:24:46.250
+Harsha Tummala: This varies, right? So right now, we have a certain set of suppliers, and it's…
+
+188
+00:24:46.550 --> 00:24:50.640
+Harsha Tummala: pretty much all stable at the given moment. But,
+
+189
+00:24:50.790 --> 00:24:58.560
+Harsha Tummala: There might be a case where, in the next 2 months, we have, like, 4 different new suppliers coming in, and that would mean there's a few
+
+190
+00:24:59.860 --> 00:25:03.100
+Harsha Tummala: From thousands to tens of thousands of products going in.
+
+191
+00:25:03.210 --> 00:25:04.349
+Harsha Tummala: Or even more.
+
+192
+00:25:04.610 --> 00:25:12.920
+Harsha Tummala: So, this, this all depends. And the thing is, sometimes one product might have, like, multiple variations to it, and…
+
+193
+00:25:13.070 --> 00:25:17.420
+Harsha Tummala: That might be a big task in itself.
+
+194
+00:25:18.530 --> 00:25:19.140
+hrishikb@andrew.cmu.edu: Okay.
+
+195
+00:25:21.830 --> 00:25:32.820
+Harsha Tummala: So just building a… so just, like, getting a product into the catalog in the right way, where, we mention the… mention all your variable specs in the correct manner is also a challenge in itself.
+
+196
+00:25:40.700 --> 00:25:42.059
+hrishikb@andrew.cmu.edu: That's what I have.
+
+197
+00:25:44.920 --> 00:25:49.160
+hrishikb@andrew.cmu.edu: Do you have any questions for us? I think we are over all our points.
+
+198
+00:25:51.000 --> 00:25:56.880
+Harsha Tummala: I mean, no specific question as such. I mean, it's just interesting to see what kind of approach you guys take and where you guys head every week.
+
+199
+00:25:57.650 --> 00:26:05.779
+Harsha Tummala: And I would say just keep at it, and let me know if there's any more, documents or data that I can send over that can help you guys out.
+
+200
+00:26:06.090 --> 00:26:11.999
+Harsha Tummala: And I'm actively working on it. Last week was just too much travel, so I just… it just took me forever to get you guys those documents.
+
+201
+00:26:13.390 --> 00:26:19.199
+hrishikb@andrew.cmu.edu: Yeah, we haven't gotten the Azure access, personal access as well.
+
+202
+00:26:19.400 --> 00:26:19.960
+Harsha Tummala: Oh shit, okay.
+
+203
+00:26:19.960 --> 00:26:20.819
+hrishikb@andrew.cmu.edu: Oh, beautiful.
+
+204
+00:26:21.370 --> 00:26:27.490
+hrishikb@andrew.cmu.edu: The blob storage, if you can give a small portion of it, or somehow give us access, so we can look at it.
+
+205
+00:26:27.490 --> 00:26:31.010
+Harsha Tummala: Let me do that. So, I can give you guys a small portion of the blob storage.
+
+206
+00:26:31.340 --> 00:26:39.810
+Harsha Tummala: And the Azure access is still not working USN. So what does that mean? You're, do you want to create, like, a separate,
+
+207
+00:26:40.140 --> 00:26:44.840
+Harsha Tummala: container instance and work on it, or do you want to support team on it? What's…
+
+208
+00:26:46.360 --> 00:26:56.859
+hrishikb@andrew.cmu.edu: No, I think last time… Just to experiment with the different Azure aspects. Yeah, I think David said he'd create one separate account, which is like a guest account, which doesn't have all the…
+
+209
+00:26:56.980 --> 00:27:00.269
+hrishikb@andrew.cmu.edu: Permissions, and he would give that to us, so we can look at it.
+
+210
+00:27:00.300 --> 00:27:01.180
+Harsha Tummala: Go ahead.
+
+211
+00:27:01.370 --> 00:27:07.809
+Harsha Tummala: So, I'll… I'll talk to David about it. So, he's been, out on some sort of,
+
+212
+00:27:08.380 --> 00:27:16.689
+Harsha Tummala: leadership retreat thingy, and he'll be back tomorrow from it. And, I'll add to him as soon as he's back from it.
+
+213
+00:27:19.850 --> 00:27:23.419
+hrishikb@andrew.cmu.edu: And I think, we still haven't gotten the cursor access.
+
+214
+00:27:24.360 --> 00:27:36.100
+Harsha Tummala: Yeah, true. Courser is still something we're working out, because we kind of, I think, asked the cursor support team on how we can figure it out, and they've been taking their own time getting back to us.
+
+215
+00:27:37.070 --> 00:27:37.830
+hrishikb@andrew.cmu.edu: Okay, okay.
+
+216
+00:27:37.830 --> 00:27:45.870
+Harsha Tummala: So, I would also say, like, in the meanwhile, do explore, like, if you guys can set anything up for yourselves in the meantime, mainly for ideation and other stuff.
+
+217
+00:27:46.560 --> 00:27:53.360
+Harsha Tummala: Especially when you guys have to work with Azure and other things, so… I'll get the Azure access done as soon as I can, but cursor, I'm not sure.
+
+218
+00:27:54.820 --> 00:27:55.720
+hrishikb@andrew.cmu.edu: Okay.
+
+219
+00:27:55.940 --> 00:28:00.750
+Harsha Tummala: Yeah, because it's so weird, like, the enterprise tier has these weird
+
+220
+00:28:01.120 --> 00:28:07.609
+Harsha Tummala: policies in place for Cursor, where you literally cannot do anything if a person's out of that enterprise and
+
+221
+00:28:07.950 --> 00:28:11.800
+Harsha Tummala: It just completely locks you in with that specific ending.
+
+222
+00:28:13.360 --> 00:28:16.070
+Harsha Tummala: And it needs to be connected to an outbox.
+
+223
+00:28:16.270 --> 00:28:30.760
+Harsha Tummala: Which is… which is just weird, because we kind of gave you an alias, right, initially? Like, Rishkej at, like, Outlook… at ePathservices.com, which was the alias, but it doesn't take an alias, because there's no outbox connected to it, and, like, it's…
+
+224
+00:28:32.840 --> 00:28:33.510
+hrishikb@andrew.cmu.edu: No.
+
+225
+00:28:34.540 --> 00:28:38.319
+Harsha Tummala: Yeah, it's… these are things that we've never really experienced.
+
+226
+00:28:43.870 --> 00:28:49.239
+hrishikb@andrew.cmu.edu: Okay. One last question. Did you leave Pittsburgh before the big snow, or after the big snow?
+
+227
+00:28:51.150 --> 00:28:53.639
+Harsha Tummala: I left Pittsburgh on, like,
+
+228
+00:28:53.770 --> 00:28:59.970
+Harsha Tummala: 8th of Feb, so I kind of, left exactly when it was getting slightly warm.
+
+229
+00:29:00.550 --> 00:29:01.090
+hrishikb@andrew.cmu.edu: Sorry.
+
+230
+00:29:02.440 --> 00:29:05.269
+Harsha Tummala: I'm glad, I'm glad to have missed all of this.
+
+231
+00:29:08.610 --> 00:29:09.350
+hrishikb@andrew.cmu.edu: Oh, very good.
+
+232
+00:29:09.350 --> 00:29:14.589
+Harsha Tummala: But India right now has been on the other end of the spectrum. It's been, like, high 80s in, like…
+
+233
+00:29:14.680 --> 00:29:16.040
+hrishikb@andrew.cmu.edu: Low 90s.
+
+234
+00:29:16.040 --> 00:29:17.220
+Harsha Tummala: Which is insane.
+
+235
+00:29:23.230 --> 00:29:24.739
+hrishikb@andrew.cmu.edu: Alright, thanks a lot, Hasha.
+
+236
+00:29:24.900 --> 00:29:26.600
+hrishikb@andrew.cmu.edu: What do you expect?
+
+237
+00:29:27.300 --> 00:29:33.329
+Harsha Tummala: Just let me know. Also, do send out a summary of this, so that Jake and everyone can go through it later, and…
+
+238
+00:29:33.550 --> 00:29:42.379
+Harsha Tummala: do reminders, keep bothering us with, like, the reminders for Azure Acts and cursor access, because that completely left our minds, I think, for the last one week.
+
+239
+00:29:43.560 --> 00:29:44.410
+hrishikb@andrew.cmu.edu: Okay.
+
+240
+00:29:44.410 --> 00:29:49.749
+Harsha Tummala: Yeah, just… just let us know, and I think… I think we should be on top of it. At least I'll be on top of it, no matter if…
+
+241
+00:29:50.220 --> 00:29:56.130
+Harsha Tummala: So, if you don't hear back until Monday, just ping me on Teams, and that should be good.
+
+242
+00:29:57.170 --> 00:29:58.679
+hrishikb@andrew.cmu.edu: Alright, I think we'll do that.
+
+243
+00:30:03.000 --> 00:30:03.670
+Harsha Tummala: Serious.
+
+244
+00:30:03.740 --> 00:30:06.680
+hrishikb@andrew.cmu.edu: Thank you. Have a good night.
+

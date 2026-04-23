@@ -26,6 +26,14 @@ pipeline/logs/*.jsonl
 .DS_Store
 Thumbs.db
 
+# Large media files — don't commit to git
+*.m4a
+*.mp4
+*.wav
+*.mp3
+*.avi
+*.mov
+
 .idea/
 .vscode/
 *.swp

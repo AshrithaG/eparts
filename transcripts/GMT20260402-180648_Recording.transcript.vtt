@@ -1,0 +1,1294 @@
+WEBVTT
+
+1
+00:00:01.150 --> 00:00:03.759
+jaivards@andrew.cmu.edu: Yeah, I'll just turn up my speaker.
+
+2
+00:00:04.900 --> 00:00:06.490
+jaivards@andrew.cmu.edu: So… okay.
+
+3
+00:00:09.250 --> 00:00:14.190
+jaivards@andrew.cmu.edu: Yep. So, the first item on the agenda is for the timeline.
+
+4
+00:00:15.060 --> 00:00:18.260
+jaivards@andrew.cmu.edu: Yeah.
+
+5
+00:00:19.300 --> 00:00:20.980
+jaivards@andrew.cmu.edu: Rishi, you're there, right?
+
+6
+00:00:22.950 --> 00:00:23.760
+hrishikb@andrew.cmu.edu: Yes.
+
+7
+00:00:25.080 --> 00:00:25.620
+jaivards@andrew.cmu.edu: Yeah.
+
+8
+00:00:26.530 --> 00:00:27.560
+jaivards@andrew.cmu.edu: So…
+
+9
+00:00:28.640 --> 00:00:34.540
+jaivards@andrew.cmu.edu: Yeah, sure, can you, should I share my screen, or can you share your screen, with the timeline?
+
+10
+00:00:35.280 --> 00:00:37.949
+hrishikb@andrew.cmu.edu: I think you shared I'm having some issues with my system.
+
+11
+00:00:38.240 --> 00:00:39.999
+jaivards@andrew.cmu.edu: Okay, nevermind, I'll just do it then.
+
+12
+00:00:41.090 --> 00:00:42.030
+jaivards@andrew.cmu.edu: So…
+
+13
+00:00:46.090 --> 00:00:46.970
+jaivards@andrew.cmu.edu: Okay.
+
+14
+00:00:49.480 --> 00:00:51.620
+jaivards@andrew.cmu.edu: So, is it visible, Harsha, dude?
+
+15
+00:00:51.620 --> 00:00:53.270
+Harsha Tummala: Yep, indeed.
+
+16
+00:00:55.150 --> 00:01:01.599
+jaivards@andrew.cmu.edu: So, we just wanted to go over and, like, get your feedback. So, for now, what we have is, like.
+
+17
+00:01:01.800 --> 00:01:03.399
+jaivards@andrew.cmu.edu: by April 15th.
+
+18
+00:01:03.550 --> 00:01:07.930
+jaivards@andrew.cmu.edu: For this, this semester, we'll have, the requirements.
+
+19
+00:01:08.080 --> 00:01:09.470
+jaivards@andrew.cmu.edu: Completed by then?
+
+20
+00:01:10.130 --> 00:01:11.130
+jaivards@andrew.cmu.edu: And…
+
+21
+00:01:12.340 --> 00:01:24.319
+jaivards@andrew.cmu.edu: I think we're making progress on this, so it should be doable by then, yeah. And for… by April 30th, the SES system should be finalized, and the risk document should also be completed.
+
+22
+00:01:25.510 --> 00:01:30.920
+jaivards@andrew.cmu.edu: If the notion of requirements… You might want to say that.
+
+23
+00:01:32.740 --> 00:01:33.990
+jaivards@andrew.cmu.edu: on his calendar.
+
+24
+00:01:34.270 --> 00:01:41.779
+hrishikb@andrew.cmu.edu: I think we can, skip towards the end. This is a bit more detail. I think you can add on which parts you want to discuss.
+
+25
+00:01:42.080 --> 00:01:44.200
+hrishikb@andrew.cmu.edu: There's a high-level view on the island.
+
+26
+00:01:45.500 --> 00:01:46.100
+jaivards@andrew.cmu.edu: Sure.
+
+27
+00:01:48.580 --> 00:01:50.680
+jaivards@andrew.cmu.edu: Yeah. This one, right?
+
+28
+00:01:50.680 --> 00:02:00.359
+hrishikb@andrew.cmu.edu: Yeah, so, we are targeting that towards the end of this month, we should have the basic, requirements, risk process, and
+
+29
+00:02:00.600 --> 00:02:06.909
+hrishikb@andrew.cmu.edu: like, not… I'm not sure if we'll be able to have the complete architecture, because we need to still do some POCs.
+
+30
+00:02:07.090 --> 00:02:19.109
+hrishikb@andrew.cmu.edu: on the LLM versus ML front, so that we can finalize an approach and build the architecture around that. That is the plan for early May, first couple of weeks of May. We should have that information with us.
+
+31
+00:02:19.350 --> 00:02:23.899
+hrishikb@andrew.cmu.edu: And, towards the end of May, we plan to begin development.
+
+32
+00:02:24.160 --> 00:02:30.749
+hrishikb@andrew.cmu.edu: on all fronts, there'll be… I think we'll do it parallelly. We'll be working on the Innesian Gateway, along with
+
+33
+00:02:31.290 --> 00:02:34.280
+hrishikb@andrew.cmu.edu: the ML or LLM components.
+
+34
+00:02:34.980 --> 00:02:42.539
+hrishikb@andrew.cmu.edu: After that, within the next couple of months, till, in June and July, we are expecting to be done with
+
+35
+00:02:42.770 --> 00:02:45.099
+hrishikb@andrew.cmu.edu: Almost all of the development.
+
+36
+00:02:45.380 --> 00:02:48.980
+hrishikb@andrew.cmu.edu: We have a… we are targeting an aggressive approach.
+
+37
+00:02:49.260 --> 00:03:01.080
+hrishikb@andrew.cmu.edu: So that we have more time to cater to any, issues that we may have. These timelines might increase a little bit, because we have left around 2 to 3 months of testing effort.
+
+38
+00:03:01.230 --> 00:03:03.840
+hrishikb@andrew.cmu.edu: Just in case we run into some issues.
+
+39
+00:03:03.950 --> 00:03:07.959
+hrishikb@andrew.cmu.edu: So, we are taking a optimistic approach here.
+
+40
+00:03:08.560 --> 00:03:11.460
+hrishikb@andrew.cmu.edu: And by the end of August.
+
+41
+00:03:11.590 --> 00:03:16.069
+hrishikb@andrew.cmu.edu: We are hoping that the individual modules are ready.
+
+42
+00:03:16.560 --> 00:03:30.269
+hrishikb@andrew.cmu.edu: For, to basically be integrated with each other, so that we have a complete system in place. And in that time, we'll also be doing some sort of individual component testing, and we'll probably share the results with you.
+
+43
+00:03:30.850 --> 00:03:35.240
+hrishikb@andrew.cmu.edu: On how we are able to process the files that we have.
+
+44
+00:03:35.400 --> 00:03:38.860
+hrishikb@andrew.cmu.edu: And, how the LLM components are doing the work.
+
+45
+00:03:39.950 --> 00:03:44.009
+hrishikb@andrew.cmu.edu: And after, September in, I think in…
+
+46
+00:03:44.360 --> 00:03:48.490
+hrishikb@andrew.cmu.edu: October, we'll probably be figuring out,
+
+47
+00:03:48.620 --> 00:03:58.630
+hrishikb@andrew.cmu.edu: the exact tests and the extent of the testing that we're following, and then the next month or two will be, just…
+
+48
+00:03:58.920 --> 00:04:01.480
+hrishikb@andrew.cmu.edu: Testing the entire system, and…
+
+49
+00:04:01.650 --> 00:04:12.000
+hrishikb@andrew.cmu.edu: Looking at it, if we can, incorporate some of the stretch codes that we have, the… maybe the web scraping part, or some of the other things that would be good to have.
+
+50
+00:04:12.290 --> 00:04:17.200
+hrishikb@andrew.cmu.edu: For you guys, we'll be trying to incorporate that, so we are leaving a couple of months to…
+
+51
+00:04:17.500 --> 00:04:29.950
+hrishikb@andrew.cmu.edu: be able to work on that as well. And in December, we'll probably not be… we are hoping to be done with everything before that, and in December, it'll just be, any documentation or handover plans that we have.
+
+52
+00:04:30.110 --> 00:04:37.700
+hrishikb@andrew.cmu.edu: maybe demos, whatever is required. That's the part we're leaving for end of November and December.
+
+53
+00:04:40.270 --> 00:04:44.469
+hrishikb@andrew.cmu.edu: And if you want to go into details of any of these, it's mentioned above.
+
+54
+00:04:47.110 --> 00:04:47.850
+Harsha Tummala: Okay
+
+55
+00:04:51.280 --> 00:04:52.949
+Harsha Tummala: Being the questions to my husband.
+
+56
+00:04:55.620 --> 00:04:58.269
+hrishikb@andrew.cmu.edu: We can share this doc with you, after the call.
+
+57
+00:04:59.790 --> 00:05:01.180
+jaivards@andrew.cmu.edu: Yep,
+
+58
+00:05:02.520 --> 00:05:13.719
+jaivards@andrew.cmu.edu: So, is it fine with both, is it fine, Hersha and David? If you have anything, then we can make changes. If not, we can share this with you after the meeting.
+
+59
+00:05:14.710 --> 00:05:21.490
+Harsha Tummala: Other than July's missing, but yeah, I think… I think this makes sense. This is a decent timeline.
+
+60
+00:05:21.610 --> 00:05:28.440
+Harsha Tummala: Or at least a decent breakdown of the units. I suspect some of those units might be larger than others, and…
+
+61
+00:05:28.780 --> 00:05:42.960
+Harsha Tummala: It's also possible that EPART's appetite would change, that things that might be stretch goals will work its way into core requirements. That seems to be just the way of the world, but we'll do our best to keep that from happening.
+
+62
+00:05:43.110 --> 00:05:48.340
+Harsha Tummala: Yeah, I think this is a good… a good first plan.
+
+63
+00:05:48.970 --> 00:05:56.259
+jaivards@andrew.cmu.edu: Got it. I think July is not there just because summer semester ends by then, and then, you know, that's just, again…
+
+64
+00:05:56.260 --> 00:06:11.790
+hrishikb@andrew.cmu.edu: Yeah, July was, left out because, the entire development… there won't be any deliverable in that month, because we'll still be working on the, like, development of it, and we don't expect there'll be any deliverable in the month of July. It's like a two-month
+
+65
+00:06:12.000 --> 00:06:14.030
+hrishikb@andrew.cmu.edu: Period in which we'll be developing everything.
+
+66
+00:06:14.530 --> 00:06:16.950
+Harsha Tummala: Okay, I must have misunderstood before, that's… that's fine.
+
+67
+00:06:17.060 --> 00:06:18.130
+Harsha Tummala: That makes sense.
+
+68
+00:06:19.750 --> 00:06:20.350
+jaivards@andrew.cmu.edu: Yep.
+
+69
+00:06:21.130 --> 00:06:22.230
+jaivards@andrew.cmu.edu: So…
+
+70
+00:06:26.320 --> 00:06:31.909
+Harsha Tummala: And, you know, there's a few things I think I want to say from mine, but I think that can cover the end of the key.
+
+71
+00:06:32.800 --> 00:06:34.389
+Harsha Tummala: Not regarding the deadline.
+
+72
+00:06:36.050 --> 00:06:42.000
+jaivards@andrew.cmu.edu: Okay, we also have the statement of work, I'll just share that as well.
+
+73
+00:06:42.800 --> 00:06:43.890
+jaivards@andrew.cmu.edu: So…
+
+74
+00:07:00.790 --> 00:07:03.099
+jaivards@andrew.cmu.edu: One second, this is…
+
+75
+00:07:06.530 --> 00:07:10.520
+jaivards@andrew.cmu.edu: So, we were, is it visible, first of all?
+
+76
+00:07:11.350 --> 00:07:12.689
+Harsha Tummala: Yeah, I'll…
+
+77
+00:07:13.500 --> 00:07:14.210
+jaivards@andrew.cmu.edu: Okay.
+
+78
+00:07:14.310 --> 00:07:20.700
+jaivards@andrew.cmu.edu: So, we were, it was encouraged that we have a statement of work, just so that,
+
+79
+00:07:20.870 --> 00:07:33.840
+jaivards@andrew.cmu.edu: you know, we have a shared understanding with you. I'll be… this is the first version, and this is still, I think it… a lot of changes might be required, but I just wanted to share it with you guys, and
+
+80
+00:07:35.140 --> 00:07:38.910
+jaivards@andrew.cmu.edu: It just basically goes over what we understand of the project.
+
+81
+00:07:39.030 --> 00:07:44.240
+jaivards@andrew.cmu.edu: And along with the scope that we think, and how we, you know.
+
+82
+00:07:44.380 --> 00:07:47.560
+jaivards@andrew.cmu.edu: think about each of the activities that we're gonna have, so…
+
+83
+00:07:48.040 --> 00:07:56.470
+jaivards@andrew.cmu.edu: It's a… it's a bit of a long document, but this is just basically all of our understanding and all of the things that we think
+
+84
+00:07:56.770 --> 00:08:11.719
+jaivards@andrew.cmu.edu: are currently… we're gonna have to do. It also defines some of the out-of-scope things, like, right now, I just wanted to confirm again, so generalized web scraping and all that, stuff is not included, right? Because…
+
+85
+00:08:11.960 --> 00:08:14.459
+jaivards@andrew.cmu.edu: I have it here, but we can make changes if you want.
+
+86
+00:08:15.200 --> 00:08:21.489
+Harsha Tummala: Yeah, generally, that's great, no. If there's anything which is mentioned in the PDF document itself.
+
+87
+00:08:21.740 --> 00:08:33.900
+Harsha Tummala: Probably, but that's… that's it. There's nothing… there's nothing out of the bounds of it, which is, you guys make a search, and look for things, and figure out what is correct. That kind of website is completely out of scope.
+
+88
+00:08:34.760 --> 00:08:41.670
+jaivards@andrew.cmu.edu: Yeah. So, we also have other things, such as, like, You know, that are…
+
+89
+00:08:42.510 --> 00:08:52.770
+jaivards@andrew.cmu.edu: we will be working all the way up till PIMS, but the steps after that is not something under our control, so I've also written these points here, and…
+
+90
+00:08:53.430 --> 00:08:57.009
+jaivards@andrew.cmu.edu: VAB, the other things are just, like.
+
+91
+00:08:57.130 --> 00:09:09.279
+jaivards@andrew.cmu.edu: What we think we are allowed to do, and the things that, either are not under our control, or things that, we're not, we do not expect that, will come up, or we'll have to do.
+
+92
+00:09:09.530 --> 00:09:12.260
+jaivards@andrew.cmu.edu: So, I'll be set… Yep.
+
+93
+00:09:12.630 --> 00:09:13.360
+jaivards@andrew.cmu.edu: Okay.
+
+94
+00:09:14.810 --> 00:09:17.179
+jaivards@andrew.cmu.edu: Oh, I thought someone was asking a question.
+
+95
+00:09:17.730 --> 00:09:26.259
+jaivards@andrew.cmu.edu: So… Yeah, so it, there's also the project documentation deliverables, so all of these things.
+
+96
+00:09:26.990 --> 00:09:29.610
+jaivards@andrew.cmu.edu: And finally, I would just like to…
+
+97
+00:09:32.650 --> 00:09:34.420
+jaivards@andrew.cmu.edu: Go to… one sec.
+
+98
+00:09:35.620 --> 00:09:36.330
+jaivards@andrew.cmu.edu: Yep.
+
+99
+00:09:37.350 --> 00:09:43.940
+jaivards@andrew.cmu.edu: So… The last thing is just all the… Yeah, general assumptions we have?
+
+100
+00:09:44.100 --> 00:09:49.220
+jaivards@andrew.cmu.edu: And, you know, who we have met, what tools we're expected to use.
+
+101
+00:09:49.340 --> 00:09:52.720
+jaivards@andrew.cmu.edu: That, you know, we make sure that the…
+
+102
+00:09:52.850 --> 00:09:58.830
+jaivards@andrew.cmu.edu: the constraints, like, not using any public LLM, or, you know, not…
+
+103
+00:09:59.010 --> 00:10:03.700
+jaivards@andrew.cmu.edu: Using the company data on anything other than company resources.
+
+104
+00:10:03.870 --> 00:10:06.189
+jaivards@andrew.cmu.edu: So that, that, all that stuff is here.
+
+105
+00:10:06.470 --> 00:10:12.370
+jaivards@andrew.cmu.edu: And we, in general, I just wanted to show it to you guys so that, you know,
+
+106
+00:10:12.610 --> 00:10:29.910
+jaivards@andrew.cmu.edu: That this, you know, statement is, here is much more clear to everyone. And that, you know, if there are any gaps in our understanding, that you might… you guys might, you know, say that, okay, this is actually different here, and we can go ahead and make those changes.
+
+107
+00:10:30.830 --> 00:10:31.970
+jaivards@andrew.cmu.edu: So, I'll also…
+
+108
+00:10:32.290 --> 00:10:34.430
+Harsha Tummala: Excuse me, sorry, bye-bye. Go ahead.
+
+109
+00:10:35.140 --> 00:10:46.910
+jaivards@andrew.cmu.edu: It's just, I'll also send this document over, you guys can look at it, and if there's any mistakes that you… or, like, misunderstandings there, then, yeah, we'll go ahead and change it.
+
+110
+00:10:47.660 --> 00:10:57.310
+Harsha Tummala: Yeah, I mean, I can go through it in detail and then send any changes or something which doesn't align correctly to you guys, but there shouldn't be any… yeah.
+
+111
+00:10:58.040 --> 00:10:58.590
+jaivards@andrew.cmu.edu: Yep.
+
+112
+00:10:59.310 --> 00:11:05.920
+jaivards@andrew.cmu.edu: So, yeah, this is just an initial first first version, so yeah, we'll definitely update it as we go along.
+
+113
+00:11:06.300 --> 00:11:06.960
+Harsha Tummala: Yeah.
+
+114
+00:11:08.100 --> 00:11:12.089
+jaivards@andrew.cmu.edu: So… Yeah, I'll send this over.
+
+115
+00:11:12.550 --> 00:11:14.839
+jaivards@andrew.cmu.edu: Along with the timeline.
+
+116
+00:11:15.970 --> 00:11:21.780
+jaivards@andrew.cmu.edu: The other thing is… yeah,
+
+117
+00:11:22.600 --> 00:11:41.729
+jaivards@andrew.cmu.edu: Liu is here with us. It's just… he had some specific questions. He has been looking through the ML portion, and he wanted to basically, you know, clarify what all he needed, and, you know, all the stuff, and why he needs it, and, you know, his future steps. So, Lou, if you…
+
+118
+00:11:41.840 --> 00:11:45.810
+jaivards@andrew.cmu.edu: Or want to, like, share your document and, like, just,
+
+119
+00:11:46.030 --> 00:11:53.020
+jaivards@andrew.cmu.edu: You can basically go ahead and, like, Send a mail to them.
+
+120
+00:11:53.270 --> 00:11:55.730
+jaivards@andrew.cmu.edu: So, just… closing down.
+
+121
+00:11:56.080 --> 00:11:57.430
+jaivards@andrew.cmu.edu: detailed data.
+
+122
+00:11:57.660 --> 00:11:58.320
+jaivards@andrew.cmu.edu: Neat.
+
+123
+00:11:58.570 --> 00:12:04.910
+jaivards@andrew.cmu.edu: Okay, so… Yeah. Basically, Liu's saying that,
+
+124
+00:12:05.460 --> 00:12:13.610
+jaivards@andrew.cmu.edu: He's looked into the, you know, different options, and he's done some calculations on how many entries he would need.
+
+125
+00:12:13.790 --> 00:12:19.490
+jaivards@andrew.cmu.edu: And, so… After he's made initial document and, like, all the estimates.
+
+126
+00:12:19.610 --> 00:12:34.660
+jaivards@andrew.cmu.edu: And he sent a… he's basically sent an email with all the requirements for the ML portion, and he needs that to, like, go further in the ML prototyping, so it would be really helpful if, you know.
+
+127
+00:12:35.170 --> 00:12:37.440
+jaivards@andrew.cmu.edu: To proceed, if you could get them.
+
+128
+00:12:38.110 --> 00:12:41.420
+Harsha Tummala: Yep, 100%. I was… I was just gonna say, also…
+
+129
+00:12:41.610 --> 00:12:56.270
+Harsha Tummala: I've already taken a look at that email, and I've started collecting the data for that as well. So ideally, I was saying that either end of today or Monday, I should, get you guys an email. Is there a timeline from your end that you expect me to give you the data by?
+
+130
+00:12:57.150 --> 00:13:05.420
+jaivards@andrew.cmu.edu: No, it's… I think Monday's fine, right? Yep, so, yeah, in the meantime, he's just, gonna, like, you know…
+
+131
+00:13:05.550 --> 00:13:08.099
+jaivards@andrew.cmu.edu: Work on the other stuff for the output types.
+
+132
+00:13:09.800 --> 00:13:18.070
+jaivards@andrew.cmu.edu: So… I think… that's it, in the sense that… we…
+
+133
+00:13:18.520 --> 00:13:21.909
+jaivards@andrew.cmu.edu: The, like, we were working on other stuff as well with…
+
+134
+00:13:22.170 --> 00:13:25.430
+jaivards@andrew.cmu.edu: But that's more related to project management.
+
+135
+00:13:25.770 --> 00:13:28.940
+jaivards@andrew.cmu.edu: I did have a question, Harcher, so…
+
+136
+00:13:29.290 --> 00:13:33.610
+jaivards@andrew.cmu.edu: Next week, we have the carnival, so…
+
+137
+00:13:33.790 --> 00:13:51.389
+jaivards@andrew.cmu.edu: I think the building will, will be shut down on Thursday? No? Okay, okay. I'm not sure. So, but, is there… should we reschedule the time for it? I'm not certain about it, so I just wanted to bring it up.
+
+138
+00:13:52.080 --> 00:14:08.160
+Harsha Tummala: I mean, you guys will have a vacation for, like, the 2 or 3 day cargo period, right? So, ideally, I would say if you want to have a meeting next week, reschedule it to when you guys are actually in campus and actually have a working day. Otherwise, you can do it the week after today, that's fine.
+
+139
+00:14:09.520 --> 00:14:14.860
+jaivards@andrew.cmu.edu: Ashuta, Rishi, I would also, like, what do you guys think?
+
+140
+00:14:16.210 --> 00:14:22.040
+Ashritha: I probably might not be available for those two days, Thursday and Friday.
+
+141
+00:14:22.900 --> 00:14:23.930
+jaivards@andrew.cmu.edu: Rishi?
+
+142
+00:14:23.930 --> 00:14:33.429
+hrishikb@andrew.cmu.edu: Yeah, I think I might not be available on Friday… Thursday… yeah, I think I can make Thursday, but I'll not be available for the weekend on Fridays.
+
+143
+00:14:33.430 --> 00:14:38.969
+jaivards@andrew.cmu.edu: But, so, yeah, we wanted to discuss PIMs and the like.
+
+144
+00:14:39.080 --> 00:14:42.010
+jaivards@andrew.cmu.edu: go into detail regarding that, Harsha.
+
+145
+00:14:42.200 --> 00:14:50.170
+jaivards@andrew.cmu.edu: So, would it be alright if we came to your office? Actually, first of all, is it alright, Shruta, Rishi, Liu? What do you think?
+
+146
+00:14:52.090 --> 00:14:56.899
+Ashritha: Yeah, anytime, like, Monday, Tuesday, or Wednesday works for me.
+
+147
+00:14:57.830 --> 00:14:58.450
+hrishikb@andrew.cmu.edu: Yeah.
+
+148
+00:14:59.620 --> 00:15:00.540
+jaivards@andrew.cmu.edu: Rishi?
+
+149
+00:15:00.540 --> 00:15:02.330
+hrishikb@andrew.cmu.edu: Yes, vote for me.
+
+150
+00:15:02.330 --> 00:15:07.320
+jaivards@andrew.cmu.edu: Okay. Yeah, your voice is a bit long. I'll just increase my speaker.
+
+151
+00:15:09.330 --> 00:15:17.679
+jaivards@andrew.cmu.edu: Okay, which, which day would, work for you, Harsha? David? We would really like to, I guess, come over and ask questions.
+
+152
+00:15:17.850 --> 00:15:25.809
+Harsha Tummala: So, I would say Jake would be the person for PIMS, for almost most of them. So, I would say drop a message on Teams.
+
+153
+00:15:26.000 --> 00:15:44.089
+Harsha Tummala: And just give us your availability on when it's the most convenient for you guys, and Jake will just let you guys know on, like, what slot works for him. My guess is that it will be Wednesday. He's probably gonna be in Erie Monday, Tuesday. So next Wednesday might be it, but let's see.
+
+154
+00:15:44.660 --> 00:15:47.359
+jaivards@andrew.cmu.edu: Yeah. Okay.
+
+155
+00:15:47.800 --> 00:15:54.319
+jaivards@andrew.cmu.edu: So, that sounds good to me. Just to confirm, Liu, Rishi, Ashitantha, is that fine with you guys?
+
+156
+00:15:54.630 --> 00:15:55.360
+Ashritha: Yup.
+
+157
+00:15:57.280 --> 00:16:00.500
+hrishikb@andrew.cmu.edu: Yeah, let's, check the calendar once and then confirm.
+
+158
+00:16:00.990 --> 00:16:07.420
+jaivards@andrew.cmu.edu: Yeah, we'll definitely send over the availability times and, like, coordinate with you, with you guys, yeah.
+
+159
+00:16:08.590 --> 00:16:09.970
+jaivards@andrew.cmu.edu: And… .
+
+160
+00:16:10.910 --> 00:16:15.479
+Harsha Tummala: I mean, I have a few things to discuss, but, you guys go on, begin with that.
+
+161
+00:16:15.480 --> 00:16:19.410
+jaivards@andrew.cmu.edu: No, no, please go ahead. I think that that was a lot of the high priority.
+
+162
+00:16:19.720 --> 00:16:23.520
+Harsha Tummala: Okay. So, a few things, as in, one is.
+
+163
+00:16:23.870 --> 00:16:28.109
+Harsha Tummala: with respect to, Liu's email.
+
+164
+00:16:28.310 --> 00:16:38.099
+Harsha Tummala: There is one thing where, he mentions, about having the documents attributed to the exact products that are mapped to it.
+
+165
+00:16:38.360 --> 00:16:49.569
+Harsha Tummala: So, what I'll do is, I'll be sending you guys the document links from BunnyCDN. So, all you can do is, you can use that link to get the exact document that you want, that is attached there.
+
+166
+00:16:49.830 --> 00:16:55.420
+Harsha Tummala: So, does that sound okay? Or do you want me to send the actual document itself, embedded?
+
+167
+00:16:57.840 --> 00:16:58.510
+jaivards@andrew.cmu.edu: loop.
+
+168
+00:17:03.320 --> 00:17:15.990
+jaivards@andrew.cmu.edu: So, he… Actually, just like, I'll just turn the camera this way so we can… So…
+
+169
+00:17:16.920 --> 00:17:19.070
+jaivards@andrew.cmu.edu: It works great. Yeah, yeah.
+
+170
+00:17:20.040 --> 00:17:21.799
+jaivards@andrew.cmu.edu: Okay, I got checks around me.
+
+171
+00:17:22.839 --> 00:17:26.209
+hrishikb@andrew.cmu.edu: Harsha, could you repeat the two options that you had? One was sending over
+
+172
+00:17:26.630 --> 00:17:28.310
+hrishikb@andrew.cmu.edu: Another one was the actual document.
+
+173
+00:17:28.600 --> 00:17:47.070
+Harsha Tummala: So, what is mentioned in the email is that, he wanted the raw supplier text extracted from the PDF, or the spec sheets, or the CSV sent directly attributed to the products itself, and, sent over. What I can actually do is,
+
+174
+00:17:47.260 --> 00:17:52.319
+Harsha Tummala: send a link instead of the, extracted data from the PDFs.
+
+175
+00:17:52.640 --> 00:17:58.579
+Harsha Tummala: So, that link will contain the exact document that, connects to the projects themselves.
+
+176
+00:17:58.690 --> 00:18:04.739
+Harsha Tummala: So, it'll just be the document link, products that are catered on this document, and so on.
+
+177
+00:18:07.150 --> 00:18:11.330
+hrishikb@andrew.cmu.edu: Okay, I think that should be fine.
+
+178
+00:18:11.800 --> 00:18:12.370
+hrishikb@andrew.cmu.edu: Go ahead.
+
+179
+00:18:12.970 --> 00:18:13.350
+jaivards@andrew.cmu.edu: Yeah.
+
+180
+00:18:13.350 --> 00:18:20.150
+hrishikb@andrew.cmu.edu: Ashata, do you… like, as, like, we need it majorly for the input for our LLM model.
+
+181
+00:18:20.150 --> 00:18:37.809
+hrishikb@andrew.cmu.edu: So that we can actually see how it is working and what it can do. I think that should be fine, but I think we will require a good chunk of data in that respect, like, what we are giving it as input, and how the catalog team is refining it, and what the actual output is towards the end.
+
+182
+00:18:37.870 --> 00:18:39.230
+hrishikb@andrew.cmu.edu: So that we can…
+
+183
+00:18:40.650 --> 00:18:47.260
+Harsha Tummala: So, I'll send over as many as I can, so don't worry about that. It'll be at least more than a thousand, so don't worry about it.
+
+184
+00:18:47.470 --> 00:19:05.559
+Harsha Tummala: And, another question… actually, not a question, another, I think, thing that I think we discussed in the earlier days of the project, but we kind of… I think we've forgotten about it, and I think we've forgotten to mention that to you guys have heard it too, which is, initially you were talking about the data standards, right?
+
+185
+00:19:05.620 --> 00:19:12.040
+Harsha Tummala: on, how we could standardize the data, and I think in our previous meetings, we kind of,
+
+186
+00:19:12.510 --> 00:19:19.210
+Harsha Tummala: establish that we will be using the attributes from the product types, which are in the tables that I provided you guys with.
+
+187
+00:19:19.650 --> 00:19:31.760
+Harsha Tummala: And that's how we'll be doing it. But the thing is, we kind of identified, like, 3 data standards that are already there in the industry, and are pretty much standardized. And no matter what
+
+188
+00:19:32.180 --> 00:19:37.160
+Harsha Tummala: Type of product you're looking at, you'll find the exact type of attributes that are needed for the product.
+
+189
+00:19:37.390 --> 00:19:46.259
+Harsha Tummala: So the three standards are, like, ETIM, E-Class, and UNSPSC. I'll ping this to you guys, but,
+
+190
+00:19:46.620 --> 00:19:56.039
+Harsha Tummala: These are basically open source standards, where all the product types and attributes for these product types, it's all available on the website.
+
+191
+00:19:56.170 --> 00:20:01.790
+Harsha Tummala: And, ideally, you can use this data itself
+
+192
+00:20:02.070 --> 00:20:05.590
+Harsha Tummala: To create the initial set of, like.
+
+193
+00:20:05.810 --> 00:20:09.440
+Harsha Tummala: Fittering for, like, how the product should look like, or how the…
+
+194
+00:20:09.710 --> 00:20:14.490
+Harsha Tummala: Or how a specific category or product type of product should look like.
+
+195
+00:20:18.090 --> 00:20:21.419
+jaivards@andrew.cmu.edu: I think that works, I'll tell you what you think.
+
+196
+00:20:24.480 --> 00:20:25.939
+jaivards@andrew.cmu.edu: Do you seem to agree.
+
+197
+00:20:26.580 --> 00:20:27.090
+jaivards@andrew.cmu.edu: This is true.
+
+198
+00:20:27.090 --> 00:20:28.009
+Harsha Tummala: I need to.
+
+199
+00:20:28.050 --> 00:20:28.740
+jaivards@andrew.cmu.edu: excuse me.
+
+200
+00:20:29.940 --> 00:20:32.820
+jaivards@andrew.cmu.edu: Just understandable.
+
+201
+00:20:33.470 --> 00:20:34.370
+jaivards@andrew.cmu.edu: Yes.
+
+202
+00:20:36.250 --> 00:20:43.120
+jaivards@andrew.cmu.edu: So, yeah, yeah, Lee is also saying that he'll just go through it, and then,
+
+203
+00:20:43.440 --> 00:20:47.989
+jaivards@andrew.cmu.edu: You know, go for, like, if there's anything else, then he can, I guess, inform you again.
+
+204
+00:20:48.760 --> 00:20:55.359
+Harsha Tummala: Yeah, and another great thing about this… these open standards is that all of these standards have documentation which
+
+205
+00:20:55.550 --> 00:21:11.500
+Harsha Tummala: tells us that what these specific attributes, which are called in this standard, map to in the other standard that is mentioned. So, like, how does ETIM, ETIM's attributes identified map to the E-class attributes? It's all clearly, defined.
+
+206
+00:21:11.950 --> 00:21:16.949
+Harsha Tummala: And, I mean, like, a benefit of this would just be that
+
+207
+00:21:17.540 --> 00:21:23.690
+Harsha Tummala: A document, sorry, a product attributed in a certain standard can always be mapped to another standard as well.
+
+208
+00:21:24.010 --> 00:21:37.559
+Harsha Tummala: And this would mean that that one product can be identified according to three different standards, because they're all interrelatable, and they have, like, the language defined on, like, what are these different
+
+209
+00:21:37.740 --> 00:21:42.040
+Harsha Tummala: What are the various possibilities for these attributes to be called in the industry?
+
+210
+00:21:43.020 --> 00:21:43.640
+jaivards@andrew.cmu.edu: Yeah.
+
+211
+00:21:44.200 --> 00:21:48.090
+Harsha Tummala: So, synonyms, everything are highlighted pretty clearly in this.
+
+212
+00:21:49.020 --> 00:21:49.380
+hrishikb@andrew.cmu.edu: Could you.
+
+213
+00:21:49.380 --> 00:21:49.720
+jaivards@andrew.cmu.edu: Yeah.
+
+214
+00:21:49.840 --> 00:21:54.959
+hrishikb@andrew.cmu.edu: explain a bit about what these standards actually are. I'm not very clear on the…
+
+215
+00:21:55.180 --> 00:21:55.600
+Harsha Tummala: What's.
+
+216
+00:21:55.600 --> 00:21:56.900
+hrishikb@andrew.cmu.edu: Right, yeah.
+
+217
+00:21:56.900 --> 00:22:13.700
+Harsha Tummala: So right now, we have product types, categories, and attributes, right, Vishkish? So, these product types and attributes are pretty much what Alps, like, our parent company has kind of come up with, and these are, these are, like, just…
+
+218
+00:22:14.300 --> 00:22:19.989
+Harsha Tummala: Just things they've identified over their years of working with these products.
+
+219
+00:22:20.800 --> 00:22:39.669
+Harsha Tummala: And what these standards actually do is, instead of relying on apps controls for, like, how they call certain things, like, how they map certain attitudes, or what they call certain attributes, it just goes with the industry standard of, like, what these attributes are called, and what sort of terms are used for these attributes.
+
+220
+00:22:39.800 --> 00:22:41.400
+Harsha Tummala: Road banks and anything.
+
+221
+00:22:42.800 --> 00:22:54.349
+hrishikb@andrew.cmu.edu: Okay, so, is there a chance that there is a mismatch between what Alps uses and what the actual, like, documentation the official one uses?
+
+222
+00:22:54.890 --> 00:23:11.930
+Harsha Tummala: There could be. So, I would say, we don't even have to go by ALPS standards, right? Ideally, I would say, if we can map to these general industry standards, we should be more than happy, because, in the end, ALPS is just one person who decides to
+
+223
+00:23:12.000 --> 00:23:15.009
+Harsha Tummala: Call these things a certain name, and that's what it is.
+
+224
+00:23:15.710 --> 00:23:26.919
+Harsha Tummala: This might also simplify, like, all the different lingo that I have specifically uses, because a lot of these documents, the PDFs for these specific products and,
+
+225
+00:23:27.240 --> 00:23:33.770
+Harsha Tummala: All of these, all of these specification documents, they kind of go by the general industry standards themselves.
+
+226
+00:23:33.960 --> 00:23:39.329
+Harsha Tummala: And to actually map it to ALPS is a more difficult task compared to mapping it to these open standards.
+
+227
+00:23:39.600 --> 00:23:46.260
+Harsha Tummala: And these open standards kind of give us more attributes that we can expect for a product type, and
+
+228
+00:23:46.510 --> 00:23:50.289
+Harsha Tummala: Just… they just provide a more robust way in identifying them.
+
+229
+00:23:51.240 --> 00:23:56.669
+hrishikb@andrew.cmu.edu: Okay, but in, doing that, won't it also require a rework on the PIM side?
+
+230
+00:23:56.930 --> 00:24:01.019
+hrishikb@andrew.cmu.edu: To map those attributes, the values, and so it can be used on stream?
+
+231
+00:24:01.930 --> 00:24:08.040
+Harsha Tummala: I mean, so, since these are already, like, predefined tailors,
+
+232
+00:24:08.380 --> 00:24:13.690
+Harsha Tummala: Technically, you won't have to… you won't be expected to create, these…
+
+233
+00:24:14.010 --> 00:24:20.490
+Harsha Tummala: these specific attributes and product types or terms, as long as you can map the product to these attributes and more.
+
+234
+00:24:20.720 --> 00:24:23.229
+Harsha Tummala: Product types, we should be good.
+
+235
+00:24:23.590 --> 00:24:30.000
+Harsha Tummala: But the whole page end of things, that's something we look into, on, like, how these things should look like there.
+
+236
+00:24:30.360 --> 00:24:37.700
+hrishikb@andrew.cmu.edu: Okay. I think for now, we were relying on the schema you provide at source of growth, but I think we can compare it with the standards that you mentioned.
+
+237
+00:24:37.700 --> 00:24:38.230
+Harsha Tummala: Sure.
+
+238
+00:24:38.230 --> 00:24:43.650
+hrishikb@andrew.cmu.edu: And see if and where there's an overlap or a difference, and we can…
+
+239
+00:24:44.440 --> 00:24:47.919
+Harsha Tummala: So, because I was personally comparing it to the three,
+
+240
+00:24:48.700 --> 00:24:52.030
+Harsha Tummala: To the 3-way ball valve that we kind of have been looking at.
+
+241
+00:24:52.390 --> 00:24:53.810
+Harsha Tummala: And,
+
+242
+00:24:53.860 --> 00:25:08.969
+Harsha Tummala: for that example, this… these standards are actually way more clearer. So, for example, if we call flow rate flow rate in one standard, it'll also give us, like, synonyms which are used for flow rate, which is some sort of,
+
+243
+00:25:08.980 --> 00:25:19.339
+Harsha Tummala: Water flow rate, or liquid flow rate, or some sort of weird term, which is, like, the actuator flow value, or something like that.
+
+244
+00:25:19.700 --> 00:25:22.999
+Harsha Tummala: And all of these surnames are defined in the standard thresholds.
+
+245
+00:25:23.200 --> 00:25:35.550
+Harsha Tummala: So, there's… there was an initial question, too, right, in one of our earlier meetings, where, how do we look at the synonyms, or like, what if something is called something else in a document? How do we understand that this matches to a specific category?
+
+246
+00:25:35.550 --> 00:25:36.090
+hrishikb@andrew.cmu.edu: Yeah.
+
+247
+00:25:36.440 --> 00:25:40.260
+Harsha Tummala: These, these standards actually clear those, those kind of questions up, I started.
+
+248
+00:25:40.930 --> 00:25:41.530
+hrishikb@andrew.cmu.edu: Okay.
+
+249
+00:25:41.640 --> 00:25:51.950
+hrishikb@andrew.cmu.edu: I think, probably we can go through the standards and do a comparison, and we'll probably need, the verification from the catalog team if we are doing it in the right way.
+
+250
+00:25:52.480 --> 00:25:53.020
+Harsha Tummala: noon.
+
+251
+00:25:53.020 --> 00:26:01.539
+hrishikb@andrew.cmu.edu: We can probably create a document, like, layering the differences that we have and what we're following, and we can get it verified by you guys once.
+
+252
+00:26:02.120 --> 00:26:02.870
+Harsha Tummala: Yeah.
+
+253
+00:26:03.230 --> 00:26:14.590
+Harsha Tummala: But that's it. Is there any problem with what I just said? Anything unclear, or anything that seems like it's out of scope, or anything that seems like this is not what we initially intended to do?
+
+254
+00:26:16.150 --> 00:26:28.120
+Ashritha: Just, I mean, I understood what you're trying to say about the standardization part, so it's like, okay, I've worked similar to this, like, on the telemetry side of it, like.
+
+255
+00:26:28.120 --> 00:26:36.840
+Ashritha: OpenTelemetry, and then all of it. So, it's basically, you want to be vendor agnostic, and then standardize everything, right? So,
+
+256
+00:26:37.220 --> 00:26:51.240
+Ashritha: if you are sure that standardizing according to those, rules, won't cause any problem, like, in case you want to integrate with ALPS or, you know, the EPADS,
+
+257
+00:26:51.240 --> 00:26:51.660
+Harsha Tummala: Yeah.
+
+258
+00:26:51.660 --> 00:26:56.379
+Ashritha: So then I think we're good. Should be actually a lot more easier, yeah.
+
+259
+00:26:56.380 --> 00:27:02.640
+Harsha Tummala: Yeah, this… this… again, like, another reason for, like, looking at these standards was also making your life easier, right?
+
+260
+00:27:02.640 --> 00:27:03.290
+Ashritha: Good.
+
+261
+00:27:03.550 --> 00:27:05.439
+Harsha Tummala: Technically, the ALP standards are…
+
+262
+00:27:05.740 --> 00:27:24.749
+Harsha Tummala: very… make you guys very dependent on what the guys are actually telling you guys to… Cool. And we also heard from Brian that these… these attributes are basically decided by, like, a team who's in charge for those specific products, and they decide that, oh, these attributes are relevant, and we're gonna show these attributes on the website, and that's how it works.
+
+263
+00:27:25.410 --> 00:27:26.110
+Harsha Tummala: Okay.
+
+264
+00:27:26.570 --> 00:27:43.310
+Harsha Tummala: Yeah, so this… this is just making things simpler, I think, for each of us. And I think as ePaths, like, separates and, like, becomes its own thing, these standards will also help us, like, like, just show that our data is more robust than
+
+265
+00:27:43.500 --> 00:27:51.699
+Harsha Tummala: more related, in general, because a certain person knows what ETIM is, but a certain person won't know what else is going by.
+
+266
+00:27:51.910 --> 00:27:52.540
+Ashritha: Yep.
+
+267
+00:27:53.050 --> 00:27:54.409
+Harsha Tummala: And simple as that, yeah.
+
+268
+00:27:57.820 --> 00:27:59.210
+jaivards@andrew.cmu.edu: Yeah.
+
+269
+00:27:59.480 --> 00:28:08.069
+jaivards@andrew.cmu.edu: I would have to, like, look through and, like, compare Harsha, like, to see the differences, but I think this would help us, yeah.
+
+270
+00:28:08.070 --> 00:28:17.899
+Harsha Tummala: just go through… go through it. We can discuss this the week after, or the week after that, and you basically could ever just understand what he sent, and how the input.
+
+271
+00:28:18.130 --> 00:28:21.650
+hrishikb@andrew.cmu.edu: I think the only major change would be that,
+
+272
+00:28:21.970 --> 00:28:30.679
+hrishikb@andrew.cmu.edu: the source of truth is kind of a change, but I think changing that would help us in the long run, if you have standardized it, so I think it's a good change.
+
+273
+00:28:31.070 --> 00:28:31.750
+Harsha Tummala: Yeah.
+
+274
+00:28:33.610 --> 00:28:40.900
+jaivards@andrew.cmu.edu: Yeah, this might, like, prevent… this might actually prevent rework when you're actually expanding, so yeah, that… I think that makes sense.
+
+275
+00:28:42.210 --> 00:28:45.230
+jaivards@andrew.cmu.edu: Let me just go through.
+
+276
+00:28:45.550 --> 00:28:52.759
+jaivards@andrew.cmu.edu: Other than that, I don't think, like, these, like, these were the things I wanted to discuss.
+
+277
+00:28:52.980 --> 00:28:58.219
+jaivards@andrew.cmu.edu: As for the available timings and all these documents, I'll send them over.
+
+278
+00:28:58.440 --> 00:28:59.400
+jaivards@andrew.cmu.edu: And…
+
+279
+00:28:59.560 --> 00:29:12.290
+jaivards@andrew.cmu.edu: Whichever time works for you, we can, you know, agree on something, and then, you know, we'll gather some questions and ask you regarding them. It's mostly BIMS, but there might be something else as well.
+
+280
+00:29:12.290 --> 00:29:16.550
+Harsha Tummala: I'll drop these standards on the team's chat after the meeting.
+
+281
+00:29:17.000 --> 00:29:17.830
+Harsha Tummala: Yeah.
+
+282
+00:29:17.830 --> 00:29:24.929
+jaivards@andrew.cmu.edu: Yeah, I'll just drop a message to Jake as well on Teams, and I'll just send him an email, both of them.
+
+283
+00:29:25.370 --> 00:29:26.050
+Harsha Tummala: Damn.
+
+284
+00:29:27.500 --> 00:29:34.389
+jaivards@andrew.cmu.edu: I think that's it, but, I'll just invite, like, you, Ashta, Is she this?
+
+285
+00:29:36.000 --> 00:29:38.339
+Ashritha: No, I don't have anything to add.
+
+286
+00:29:38.340 --> 00:29:39.060
+hrishikb@andrew.cmu.edu: Hmm.
+
+287
+00:29:39.280 --> 00:29:39.930
+hrishikb@andrew.cmu.edu: I think…
+
+288
+00:29:39.930 --> 00:29:40.500
+jaivards@andrew.cmu.edu: Okay.
+
+289
+00:29:40.690 --> 00:29:41.580
+hrishikb@andrew.cmu.edu: Same for me.
+
+290
+00:29:42.140 --> 00:29:42.830
+jaivards@andrew.cmu.edu: Blue?
+
+291
+00:29:47.210 --> 00:29:48.020
+jaivards@andrew.cmu.edu: Hello?
+
+292
+00:29:48.760 --> 00:29:49.750
+jaivards@andrew.cmu.edu: decoratively.
+
+293
+00:29:49.900 --> 00:29:50.959
+hrishikb@andrew.cmu.edu: We can't hear you.
+
+294
+00:29:51.350 --> 00:30:07.220
+jaivards@andrew.cmu.edu: He… Lou is talking about the Claude code, so… it's… he's saying that it lets… it hits the limit… the token limit for that.
+
+295
+00:30:09.150 --> 00:30:18.510
+Harsha Tummala: Yeah, I mean, we've kind of restricted total token limit, too, because it kind of becomes a big overhead, right, in general.
+
+296
+00:30:18.930 --> 00:30:22.400
+Harsha Tummala: I think the main reason for that is
+
+297
+00:30:23.910 --> 00:30:31.730
+Harsha Tummala: I don't know, you can technically use up unlimited credits with Cloud Core at this point, and, like, we ourselves have personally been struggling with, like.
+
+298
+00:30:31.910 --> 00:30:35.879
+Harsha Tummala: Keeping that in, like, the best in budget, good state.
+
+299
+00:30:36.260 --> 00:30:40.869
+Harsha Tummala: So, hence the limit imposed. If that limit is too restrictive, we can surely bump it up.
+
+300
+00:30:42.430 --> 00:30:50.169
+jaivards@andrew.cmu.edu: Yep, I think that's another topic that maybe we'll discuss more in depth, but I've not personally, I think.
+
+301
+00:30:50.610 --> 00:30:55.000
+jaivards@andrew.cmu.edu: gone through those same limitations, so I'm not so sure.
+
+302
+00:30:55.180 --> 00:30:55.720
+jaivards@andrew.cmu.edu: But…
+
+303
+00:30:55.800 --> 00:31:12.370
+hrishikb@andrew.cmu.edu: bumping up the limits in a short term would be good, because currently Claude is facing some token issues, like, even small KDs are using up much more tokens than it usually should. Hopefully that'll fix soon enough, and we can maybe go back to the earlier tokens.
+
+304
+00:31:12.460 --> 00:31:19.929
+hrishikb@andrew.cmu.edu: But right now, even a small query just, like, keeps on hitting different tokens, and it just runs out of memory very quick.
+
+305
+00:31:20.420 --> 00:31:35.740
+Harsha Tummala: Yeah, there's a lot of… I mean, in general, there's a lot of nuances to these tools too, right? Certain tools are very, very good with their limits. Certain tools, even though you end up paying exorbitant amounts, they still run out of limits all the time.
+
+306
+00:31:35.940 --> 00:31:44.059
+Harsha Tummala: That's kind of the case with CloudCo, too. If you ever tend to use any Opus model, it just runs out of limits in, like, 10 to 15 minutes.
+
+307
+00:31:44.190 --> 00:31:46.730
+Harsha Tummala: And you just were left wondering what happened.
+
+308
+00:31:48.350 --> 00:31:49.060
+hrishikb@andrew.cmu.edu: Yeah.
+
+309
+00:31:49.780 --> 00:31:51.000
+jaivards@andrew.cmu.edu: Yeah,
+
+310
+00:31:51.440 --> 00:32:01.079
+jaivards@andrew.cmu.edu: I've also kind of hit the limits with the Opus model, I guess, but that's a separate GitHub student account, so that's different.
+
+311
+00:32:02.540 --> 00:32:12.300
+jaivards@andrew.cmu.edu: But yeah, I guess we'll… I'll gather some feedback, and we can… we can just discuss this, maybe work out a solution.
+
+312
+00:32:12.300 --> 00:32:12.890
+Harsha Tummala: Here.
+
+313
+00:32:13.460 --> 00:32:18.730
+jaivards@andrew.cmu.edu: That's it, though. I think… Yeah.
+
+314
+00:32:19.230 --> 00:32:25.320
+jaivards@andrew.cmu.edu: So… Thanks, Hosha. Thanks, thanks, David.
+
+315
+00:32:26.430 --> 00:32:32.510
+Harsha Tummala: Thanks a lot, guys. Well, looking forward to a lot more work with you guys, and hopefully…
+
+316
+00:32:32.810 --> 00:32:35.990
+Harsha Tummala: It learned, kind of, on there first, yeah.
+
+317
+00:32:36.230 --> 00:32:36.810
+jaivards@andrew.cmu.edu: Yes.
+
+318
+00:32:40.060 --> 00:32:40.570
+jaivards@andrew.cmu.edu: Okay.
+
+319
+00:32:40.570 --> 00:32:42.660
+Harsha Tummala: I see you, Cliff.
+
+320
+00:32:44.370 --> 00:32:45.029
+hrishikb@andrew.cmu.edu: Bye, guys.
+
+321
+00:32:45.030 --> 00:32:46.000
+Ashritha: Bye-bye.
+
+322
+00:32:51.720 --> 00:32:52.870
+jaivards@andrew.cmu.edu: Recording.
+
+323
+00:32:55.910 --> 00:32:57.099
+Ashritha: I'll join.
+

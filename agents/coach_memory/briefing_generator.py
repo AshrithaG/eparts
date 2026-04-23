@@ -57,15 +57,25 @@ class BriefingGeneratorAgent(BaseAgent):
         meeting_type = trigger.metadata.get("meeting_type", "coach")
         rag_context = self._get_rag_context(meeting_type)
 
-        # 3. Generate the briefing with Claude
-        briefing = self._generate_briefing(
-            last_session=last_session,
-            open_commitments=open_commitments,
-            delivered_commitments=delivered_commitments,
-            recurring_concerns=recurring_concerns,
-            rag_context=rag_context,
-            meeting_type=meeting_type,
-        )
+        # 3. Generate the briefing — online (Claude) or offline (template)
+        if self._settings.anthropic_api_key:
+            briefing = self._generate_briefing(
+                last_session=last_session,
+                open_commitments=open_commitments,
+                delivered_commitments=delivered_commitments,
+                recurring_concerns=recurring_concerns,
+                rag_context=rag_context,
+                meeting_type=meeting_type,
+            )
+        else:
+            briefing = self._generate_briefing_offline(
+                last_session=last_session,
+                open_commitments=open_commitments,
+                delivered_commitments=delivered_commitments,
+                recurring_concerns=recurring_concerns,
+                rag_context=rag_context,
+                meeting_type=meeting_type,
+            )
 
         # 4. Post to Slack
         outputs = []
@@ -89,7 +99,12 @@ class BriefingGeneratorAgent(BaseAgent):
                        f"({len(briefing)} chars)",
         ))
 
-        return AgentResult(agent=self.name, success=True, outputs=outputs)
+        return AgentResult(
+            agent=self.name,
+            success=True,
+            outputs=outputs,
+            data={"briefing": briefing},
+        )
 
     def _get_last_session_summary(self) -> str:
         row = self._db.execute(
@@ -191,6 +206,40 @@ class BriefingGeneratorAgent(BaseAgent):
         )
 
         return self.call_claude(prompt)
+
+    def _generate_briefing_offline(
+        self,
+        last_session: str,
+        open_commitments: str,
+        delivered_commitments: str,
+        recurring_concerns: str,
+        rag_context: str,
+        meeting_type: str,
+    ) -> str:
+        """Template-based briefing when no API key is available."""
+        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        return f"""# Pre-Meeting Briefing — {meeting_type.title()} ({today})
+
+## Last Session Recap
+{last_session}
+
+## Commitment Status
+
+### Open Items
+{open_commitments}
+
+### Recently Delivered
+{delivered_commitments}
+
+## Recurring Themes
+{recurring_concerns}
+
+## Relevant Context from Past Sessions
+{rag_context[:1000] if rag_context else 'No past context available.'}
+
+---
+*Generated offline (template mode) — connect API key for AI-enhanced briefings.*
+"""
 
     def _default_briefing_prompt(
         self,

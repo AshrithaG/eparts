@@ -48,7 +48,7 @@ class ConcernTrackerAgent(BaseAgent):
         patterns = self.detect_patterns()
         outputs = []
 
-        recurring = [p for p in patterns if p["times_raised"] >= RECURRING_THRESHOLD]
+        recurring = [p for p in patterns if p["total_raised"] >= RECURRING_THRESHOLD]
 
         if recurring:
             alert = self._format_pattern_alert(recurring)
@@ -65,6 +65,19 @@ class ConcernTrackerAgent(BaseAgent):
             description=f"Tracked {len(patterns)} concern themes, "
                        f"{len(recurring)} recurring (≥{RECURRING_THRESHOLD} sessions)",
         ))
+
+        # Emit cross-pipeline event for recurring concerns
+        if recurring:
+            self.emit("recurring_concern", {
+                "themes": [p["theme"] for p in recurring],
+                "details": recurring,
+                "total_patterns": len(patterns),
+            })
+            self.wiki.put("concerns", "recurring_themes", {
+                "themes": recurring,
+                "updated_by": self.name,
+            }, agent=self.name, pipeline="coach_session",
+               tags=["recurring", "coach"])
 
         return AgentResult(agent=self.name, success=True, outputs=outputs)
 

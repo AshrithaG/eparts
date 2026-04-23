@@ -1,0 +1,109 @@
+Think: "Show and tell and defend" 
+Somewhere in the presentation - show the timeline (past, present and future)
+SES 
+Viable project and risk management plan - more of visual diagrams 
+Not textual slides 
+Diagram - detailed level of context diagram 
+
+
+1. Every repeatable Activity that you do this semester should be documented according to the meta-model framework.
+
+A good example of a documented Activity was shared by Punn (Chawit) of the IRAlogix team during the Checkpoint Review. You can find it here in the video recording starting at 3:49:33.
+
+Think of an Activity as a part of a larger end-to-end process such as requirements management.
+
+For at least one Practice Area, there should be an end-to-end connection between the Activities in that area.
+
+We want to see teams move from ad-hoc use of AI to principled use of AI. Use and non-use of AI should be justified with evidence. Reusable prompts should be treated as version-controlled artifacts. - common claude 
+
+
+the Software System they will create for their client.
+the Software Engineering System they’ll use to create the Software System.
+their project and risk management plan
+
+
+4 sections - arjun and Liu:
+Understand what is asked, come up with visually appealing and artifacts backed idea to convey the content 
+
+SES  - Jai, hrishi and Ashritha 
+
+SES - https://github.com/AshrithaG/eparts
+
+Identify repeatable activities:
+
+
+
+
+
+
+Project Context [Abt. 5 minutes] - Arjun/ Liu 
+Client, business, product, stakeholders
+Project goal(s)
+Problem to solve and value to stakeholders
+Solution concept
+Overview (timeline) of the team’s work to date.
+
+Management [ Abt. 7 min.] - Arjun/ Liu 
+Project plan to end of year
+Key risks and mitigation
+Team roles and responsibilities to implement the plan
+Measurement plan 
+Resources to implement the plan (e.g., tools, learning, etc.)
+
+Software System: Requirements [Abt. 7 min.] - Liu/ Arjun 
+Functional requirements
+Non-functional requirements and constraints
+Scope and priorities: decisions and reasoning about tradeoffs and implications
+
+Software System: Architecture [Abt. 7 min.] - Liu/ Arjun  
+Context Diagram
+Quality Attributes
+Architectural drivers: decisions and reasoning about tradeoffs and implications
+
+5. Software Engineering System [Abt. 7 min.]
+SE System “overview” [i.e. deep dives are done in the 1:1 Critiques]
+SDLC choice
+Processes, artifacts, measurements and resources (including AI use/non-use), per the meta-model framework
+Evidence that process will be effective, particularly with AI
+Decisions and reasoning about tradeoffs and implications
+
+
+6. Reflection and Closing [2 min.]
+2 key lessons learned, with at least one about the use of AI in Software Engineering
+Closing
+
+
+Viability of Project and Risk Management
+The extent that the team's project and risk management is likely to lead to project success.
+(includes plans, estimates, tracking, etc.) - 3 pts
+Exemplary
+The project and risk management is viable.
+
+
+Soundness of Software System Definition
+The extent that the software system for the sponsor is clearly understood and sufficient to execute the rest of the project successfully.
+
+(e.g., goals, requirements, priorities, quality attributes, constraints, context diagram, architectural drivers, tradeoffs) - 5 pts
+Exemplary
+The software system definition is: Clearly specified Appropriate Sufficient Prioritized Tradeoffs, implications and decisions were explicit and well-reasoned.
+
+
+Strength of Engineering System: DECISION QUALITY - 5 pts
+Exemplary
+All 4 of these are true: 1. Clear decisions 2. Strong justification with evidence 3. Tradeoffs explained 4. Consistent reasoning
+
+
+Strength of Engineering System: ELEMENTS
+per the Meta-Model framework, an engineering system has these elements:
+- Processes
+- Key artifacts
+- Measurements
+- Resources - 5 pts
+Exemplary
+The engineering system has all appropriate, identified, well-defined, completed and documented elements.
+
+
+Crit Performance
+The extent that the team clearly articulates their team's work, decisions and reflective thinking, while actively engaging with feedback to foster critical dialogue and professional growth. - 2 pts
+Exemplary
+All 4 of these were true: 1. Effective communication of team’s work 2. Deep, thoughtful reflection 3. Actively engaged with feedback 4. Balanced team member participation

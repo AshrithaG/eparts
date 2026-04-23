@@ -1,0 +1,1690 @@
+WEBVTT
+
+1
+00:00:03.660 --> 00:00:06.930
+hrishikb@andrew.cmu.edu: A for, today's agenda.
+
+2
+00:00:09.130 --> 00:00:11.390
+hrishikb@andrew.cmu.edu: I think your mic is gone.
+
+3
+00:00:11.570 --> 00:00:26.610
+hrishikb@andrew.cmu.edu: model sound? Yeah, firstly, we'll discuss a few of the ML findings that we've had. All the points I've discussed in the last meeting, we have gone over those. We'll talk BERT and different models which you can use.
+
+4
+00:00:26.990 --> 00:00:29.849
+hrishikb@andrew.cmu.edu: And next, we have, terraformis bicep.
+
+5
+00:00:30.080 --> 00:00:42.739
+hrishikb@andrew.cmu.edu: This one is, still a bit open-ended, but we can discuss the benefits and ways we can use in our project. Then we have oral implementation and dockerization that Arjun will be handling.
+
+6
+00:00:43.130 --> 00:00:47.039
+hrishikb@andrew.cmu.edu: So, I guess we can start off with the ML findings.
+
+7
+00:00:50.910 --> 00:00:52.500
+hrishikb@andrew.cmu.edu: They're pony.
+
+8
+00:01:03.160 --> 00:01:04.710
+hrishikb@andrew.cmu.edu: If you can move Zoom.
+
+9
+00:01:07.320 --> 00:01:08.549
+hrishikb@andrew.cmu.edu: She's gonna show.
+
+10
+00:01:09.120 --> 00:01:11.060
+hrishikb@andrew.cmu.edu: Mine's only… The disabled.
+
+11
+00:01:34.140 --> 00:01:36.630
+hrishikb@andrew.cmu.edu: To put the Zoom theme there.
+
+12
+00:01:36.840 --> 00:01:42.489
+hrishikb@andrew.cmu.edu: I think we need to raise the accent. Yeah, we need to go over the HTML.
+
+13
+00:01:42.970 --> 00:01:43.770
+hrishikb@andrew.cmu.edu: Okay.
+
+14
+00:01:52.930 --> 00:01:54.559
+hrishikb@andrew.cmu.edu: You can stop for them.
+
+15
+00:01:55.660 --> 00:01:57.240
+hrishikb@andrew.cmu.edu: Do you have access to shit?
+
+16
+00:01:57.720 --> 00:02:00.420
+hrishikb@andrew.cmu.edu: They're stop sharing your name, other people's covenants.
+
+17
+00:02:05.790 --> 00:02:06.470
+hrishikb@andrew.cmu.edu: I'm doing.
+
+18
+00:02:13.580 --> 00:02:14.999
+hrishikb@andrew.cmu.edu: Yep, here it goes, Tom.
+
+19
+00:02:20.440 --> 00:02:23.569
+hrishikb@andrew.cmu.edu: David just got back to me, he'll be jumping in.
+
+20
+00:02:49.570 --> 00:02:51.140
+hrishikb@andrew.cmu.edu: Yep.
+
+21
+00:02:58.090 --> 00:02:58.840
+hrishikb@andrew.cmu.edu: Wonderful.
+
+22
+00:03:00.480 --> 00:03:03.100
+hrishikb@andrew.cmu.edu: That much data to increase the font size.
+
+23
+00:03:09.820 --> 00:03:11.650
+David Mine: No. So, Google.
+
+24
+00:03:11.810 --> 00:03:13.490
+David Mine: That's good. Real good, though.
+
+25
+00:03:13.490 --> 00:03:14.640
+hrishikb@andrew.cmu.edu: There is also him.
+
+26
+00:03:14.930 --> 00:03:15.560
+hrishikb@andrew.cmu.edu: Hi, David.
+
+27
+00:03:15.560 --> 00:03:22.020
+David Mine: I didn't talk to this guy, I think he's not blue.
+
+28
+00:03:22.120 --> 00:03:25.499
+hrishikb@andrew.cmu.edu: Yeah, yeah, I can see.
+
+29
+00:03:26.850 --> 00:03:41.559
+hrishikb@andrew.cmu.edu: Okay, so again, like, this is not a prescribed solution that we are proposing, it's just that we did a couple of experimentation, just, like, not a POC, but then theoretical real findings of
+
+30
+00:03:41.560 --> 00:03:53.990
+hrishikb@andrew.cmu.edu: where… how we want to, like, do the ML component, which is, like, assigning scores, and everything. So, one, all three of us will be, like, presenting three different approaches, and we just want to, like.
+
+31
+00:03:54.040 --> 00:04:10.489
+hrishikb@andrew.cmu.edu: present our findings till now, again. So, one of the approach that we came up with, like, it's called… it's called the semantic matcher, so I'll explain, in, like, the basics of it so that everyone understands, what it is and how is it supposed to work.
+
+32
+00:04:10.490 --> 00:04:15.569
+hrishikb@andrew.cmu.edu: So, it's like, let's say,
+
+33
+00:04:15.770 --> 00:04:37.019
+hrishikb@andrew.cmu.edu: like, let's say you want to paint this wall, right? You literally won't remember the color of the paint and go to the shop and get the paint color. So, you'll have a catalog, and you'll find… you'll have those swatches, and then you'll come and try matching it one by one. So, that's something like how the semantic matcher works.
+
+34
+00:04:37.020 --> 00:04:39.580
+hrishikb@andrew.cmu.edu: So, what'll happen here is,
+
+35
+00:04:39.580 --> 00:04:48.309
+hrishikb@andrew.cmu.edu: Like, to put it in the context of the project, when a supplier sends a description, like, let's say, a drill or a
+
+36
+00:04:48.310 --> 00:05:13.229
+hrishikb@andrew.cmu.edu: screwoo description. So, we use a… it's a very tiny model that we're trying to use here. It's called All MiniLM. Now, what it does is it will turn that text into a list of numbers. Now, this process in the ML world, it's called vectorization, where you turn… where you convert a text into numbers. That's called vectorization. Now, the next step is search. So, like you said, there's PIMS database, right?
+
+37
+00:05:13.230 --> 00:05:30.029
+hrishikb@andrew.cmu.edu: So, we'll use this vector, and we'll, vectorization search over the existing PIMS database. And now, since we already have, like, thousands of approved products in… sitting in the PIMS database, we'll leverage that knowledge base first.
+
+38
+00:05:30.030 --> 00:05:47.630
+hrishikb@andrew.cmu.edu: And then we'll, your… and this is what we're taking as the master, swatch book, like, the… where you get the paint catalog and you'll try matching it with the color of the paint. So your… the knowledge bank that is in the PIMS is your master swatch book.
+
+39
+00:05:47.630 --> 00:05:54.460
+hrishikb@andrew.cmu.edu: Now, the third one, there's
+
+40
+00:05:56.660 --> 00:06:06.390
+hrishikb@andrew.cmu.edu: Yeah. Now, the third… the third step here is you make a decision based on the confidence. So, like, let's say if the closest ma…
+
+41
+00:06:06.560 --> 00:06:25.800
+hrishikb@andrew.cmu.edu: again, like, the vectors, after you decide, the ML component, assigns, not assigns, like, it, concludes on a confidence code based on the distance. Like, how similar can, how similar is this particular, screw?
+
+42
+00:06:25.800 --> 00:06:47.280
+hrishikb@andrew.cmu.edu: To the one that is already present in the PIMS database. So, as soon as it comes with a distance factor over there, so the larger distance and the smaller distance, I'm not going to the technicalities, like, how the distance is measured. It'll, come up with the confidence code, like, obviously, the smaller distance, meaning it has more… it is more confident that, this product matches
+
+43
+00:06:47.280 --> 00:06:59.730
+hrishikb@andrew.cmu.edu: with this particular categorization that is already present in the PRIMS database. Otherwise, you get a very low confidence score. And we already, obviously, have a human checker, in the loop. Now.
+
+44
+00:06:59.730 --> 00:07:23.910
+hrishikb@andrew.cmu.edu: hear why, this approach is better than what these guys are gonna, like, propose Nexus. Like, he'll be talking about BERT, and, Leo will be talking about XGBoost, you will learn about that more in detail. With semantic search, what happens is you don't have to retrain as a developer, like, you don't need a developer's intervention for the model to be retrained every now and then, because
+
+45
+00:07:24.160 --> 00:07:36.159
+hrishikb@andrew.cmu.edu: our, whole architecture is prone to schema changes, right? Now, that's the biggest change point that I see over here. Everything else is constant, like.
+
+46
+00:07:36.160 --> 00:07:42.729
+hrishikb@andrew.cmu.edu: The attributes related to a particular product are constant, like, at least over a period of time.
+
+47
+00:07:42.730 --> 00:08:06.799
+hrishikb@andrew.cmu.edu: I mean, they are not, like, too subjective to change too quickly, right? But then the schema might change, schema as in the information that we're extracting from the raw data. Like, someone might just give you 1, 2, 3 items in the description, but the others can give you, like, four. So the schema that is entering into the ingestion pipeline will change, and the model has to, like, relearn
+
+48
+00:08:06.800 --> 00:08:18.449
+hrishikb@andrew.cmu.edu: okay, now this is the new data that I'm getting. So, we don't have to do that. The model will retain on its own, because we have connected with the central knowledge base, that is the PIMS database.
+
+49
+00:08:18.450 --> 00:08:30.030
+hrishikb@andrew.cmu.edu: And it's also, like, very… and one of the major constraints that Harsha mentioned the other day was, like, he wanted a small short model, like, which is not too compute-heavy, and also can access that
+
+50
+00:08:30.030 --> 00:08:43.149
+hrishikb@andrew.cmu.edu: I think… I forgot the number, how many records we maintain, like, the average number, but then this model actually is efficient enough, like, since it's an embedding model, we are not actually digging the text.
+
+51
+00:08:43.150 --> 00:08:51.280
+hrishikb@andrew.cmu.edu: But we are converting into a form of numbers, which is very condensed. That vectorization will help us,
+
+52
+00:08:51.280 --> 00:09:10.800
+hrishikb@andrew.cmu.edu: very much, like, lower the compute cost. And, this can be run on Azure as well, and this can be run on, like, independently if you want to, like, maintain. It can be done like that also. So, there's no platform dependency, like a blocker as such. So, that's the high level of
+
+53
+00:09:10.800 --> 00:09:12.859
+hrishikb@andrew.cmu.edu: The semantic matcher approach.
+
+54
+00:09:14.990 --> 00:09:15.670
+hrishikb@andrew.cmu.edu: Great.
+
+55
+00:09:17.520 --> 00:09:40.340
+hrishikb@andrew.cmu.edu: Yeah, that's a pitch, actually, like, it's the last sentence, like, it's maintenance-free, and it automatically adopts the new products, and that's the whole, pro that I saw in this approach when compared to BERT and the HCBoost one, wherein those models, even if they are maintained by the Azure platform.
+
+56
+00:09:40.340 --> 00:10:02.860
+hrishikb@andrew.cmu.edu: you have to, like, retrain your model and keep it updating, but it does not work like that, because it updates on its own. It is capable enough because it has some sentence transformers libraries ingested in it, and it is intelligent enough to, like, retrain on its own upon… like, it basically detects the schema change and understands by itself, okay, there's a change.
+
+57
+00:10:02.860 --> 00:10:09.729
+hrishikb@andrew.cmu.edu: So, I have to relearn. So, you know, there's no human trigger over here. That's the pro in this approach.
+
+58
+00:10:11.700 --> 00:10:17.439
+hrishikb@andrew.cmu.edu: But, do we expect, frequent schema changes? How currently the things are working?
+
+59
+00:10:17.580 --> 00:10:27.569
+hrishikb@andrew.cmu.edu: No. So wait, you said schema change can also include, like, adding more attributes? Yeah. Yeah, well, so in that case, like, over time, we will be…
+
+60
+00:10:27.680 --> 00:10:35.010
+hrishikb@andrew.cmu.edu: hopefully getting more data and adding on more and more attributes to a given product, or, yeah. So, that is the case.
+
+61
+00:10:35.220 --> 00:10:40.119
+hrishikb@andrew.cmu.edu: Yeah, that's a case, but I wouldn't say it's going to be all the time. Okay, okay.
+
+62
+00:10:41.500 --> 00:10:49.969
+hrishikb@andrew.cmu.edu: I don't know, like a product, they might go back and dig deeper on some products and enrich them and add some more attributes, but I…
+
+63
+00:10:50.540 --> 00:11:05.900
+hrishikb@andrew.cmu.edu: And yeah, like, after they go back and… from once we get something to the vendor, and they go out and do research and enrich it, I can't see it happening again and again and again. I don't think they're gonna be, like, over time, revisiting the same product over and over and over again, adding more and more. What are your thoughts on that, David?
+
+64
+00:11:09.040 --> 00:11:11.380
+David Mine: Yeah, I agree with all that. I think you got it.
+
+65
+00:11:12.460 --> 00:11:18.450
+hrishikb@andrew.cmu.edu: But then, don't you want your solution to be extensive? No, no, I mean, we do, I guess.
+
+66
+00:11:18.600 --> 00:11:38.390
+hrishikb@andrew.cmu.edu: I don't think it's going to be very often, though, that, like, there are suppliers coming out with more information about something that already exists. Like, yeah, they'll probably go through a period of discovery where they're searching the internet and looking for more resources on something, and… Okay. But yeah, if the product changes, then it's probably just going to be a brand new product. Yeah.
+
+67
+00:11:38.460 --> 00:11:47.429
+hrishikb@andrew.cmu.edu: So it means, there's definitely, more weightage given to the simpler solution against something that
+
+68
+00:11:47.430 --> 00:11:49.060
+hrishikb@andrew.cmu.edu: You know, that,
+
+69
+00:11:49.060 --> 00:12:07.910
+hrishikb@andrew.cmu.edu: brings up, like, for this one, an event… I don't know which is the simplest one, because we have not implemented it, and we have not made our hands dirty yet. So, let's say if the BERT is very simpler to, you know, work around. So, but then it does not do the retraining bit on its own.
+
+70
+00:12:07.910 --> 00:12:16.959
+hrishikb@andrew.cmu.edu: So, you are open to having that trade-off? Oh, no, no, I mean, we definitely like how it did all in China, so yeah, that's definitely a pro.
+
+71
+00:12:18.850 --> 00:12:23.969
+hrishikb@andrew.cmu.edu: Sure, would you… because my laptop requiring such thing.
+
+72
+00:12:34.900 --> 00:12:37.160
+hrishikb@andrew.cmu.edu: Gotcha. Is it this? Beautiful.
+
+73
+00:13:02.150 --> 00:13:07.669
+hrishikb@andrew.cmu.edu: So what is the source data for the semantic matter? Somebody gives you a PDF file of a product, or…
+
+74
+00:13:07.800 --> 00:13:23.960
+hrishikb@andrew.cmu.edu: Does that matter? Yeah, so, I mean, if it's coming… we're getting the information straight from the vendor, it's probably going to be more comprehensive. It'll be, like, PDFs, spec sheets, and whatnot. A lot of times, too, though, if we onboard, let's say, a distributor.
+
+75
+00:13:24.130 --> 00:13:41.809
+hrishikb@andrew.cmu.edu: they're giving us the catalog products they sell. They're not necessarily giving us all of their vendor spec sheets that they received, so in that case, the data might be a little more at least unfilled, and that's when we want to be going back and kind of doing our own discovery period with our catalog team of trying to search the internet for more sources.
+
+76
+00:13:44.470 --> 00:13:47.660
+hrishikb@andrew.cmu.edu: So… Okay.
+
+77
+00:13:51.980 --> 00:14:06.149
+hrishikb@andrew.cmu.edu: Is it… So, I basically went through and looked through some of the models, and Parsha did mention BERT when we were discussing it, and I went through and
+
+78
+00:14:06.340 --> 00:14:11.920
+hrishikb@andrew.cmu.edu: look through it. So, BERT is just a… it's basically an…
+
+79
+00:14:13.130 --> 00:14:30.789
+hrishikb@andrew.cmu.edu: It's based on the transformer model, and as for distilled BERT and tiny bird, they're the same thing, but they're just a… Distilled BERT is just a smaller model that's trained on the BERT itself as a mentor model, and it's designed to replicate it.
+
+80
+00:14:32.860 --> 00:14:40.200
+hrishikb@andrew.cmu.edu: It solves some of the issues that BERT has, that it's pretty large, but BERT is compared to the other options.
+
+81
+00:14:40.710 --> 00:14:50.719
+hrishikb@andrew.cmu.edu: It's… BERT is best used for text classification, and basically, it can also do semantic massing, but the best part of BERT is that
+
+82
+00:14:51.890 --> 00:15:10.599
+hrishikb@andrew.cmu.edu: it does bi-directional searching. So even if something is not clear, and there's a huge paragraph of text that we need to extract, BERT will be able to basically get out all of the required categories, as long as it's been trained on all the relevant ones for our product.
+
+83
+00:15:11.090 --> 00:15:19.509
+hrishikb@andrew.cmu.edu: Distilled Bird is just, I think a 40% smaller version, but it still has, like, around 97% of the accuracy.
+
+84
+00:15:19.900 --> 00:15:36.959
+hrishikb@andrew.cmu.edu: And best part is DistillBird has… it's available on Azure. There's no need to manually deploy it or anything like that. And training it, it does not cost that much time. It is longer than the semantic matching one, I'm pretty sure, but it's not that much longer.
+
+85
+00:15:40.270 --> 00:15:47.540
+hrishikb@andrew.cmu.edu: As for the other stuff, basically, as long as we have the OCR working properly and we've deleted all the data.
+
+86
+00:15:47.690 --> 00:16:00.400
+hrishikb@andrew.cmu.edu: It will go through, and it does not have any problems, like, for semantics, matching. If the text grows large enough, there might… future tweaks might be required.
+
+87
+00:16:00.400 --> 00:16:12.839
+hrishikb@andrew.cmu.edu: But Word can handle, like, very, very large text paragraphs, or, like, if… if it's, like, 5 pages long and has, like, multiple paragraph after paragraph, it can extract whatever you need and get into categories.
+
+88
+00:16:12.860 --> 00:16:22.639
+hrishikb@andrew.cmu.edu: The… I would… I will say, as a downside, that it does… it will need a retraining, that will be manually triggered. Like, if you add a bunch of products with new categories.
+
+89
+00:16:22.750 --> 00:16:25.909
+hrishikb@andrew.cmu.edu: Then it won't probably get them out.
+
+90
+00:16:26.040 --> 00:16:33.769
+hrishikb@andrew.cmu.edu: As… as well as before, and you will need to manually do it again, compared to a sugar solution.
+
+91
+00:16:35.240 --> 00:16:38.700
+hrishikb@andrew.cmu.edu: I think it's cool.
+
+92
+00:16:41.010 --> 00:16:41.860
+hrishikb@andrew.cmu.edu: Beautiful.
+
+93
+00:16:42.860 --> 00:16:58.499
+hrishikb@andrew.cmu.edu: both, are you gonna do some experiments to see which one works best for you? Yes, we were waiting on, like, Harsha told us that he would give us the sample schema of how it'll look like, so we thought we could just take that and, like.
+
+94
+00:16:58.500 --> 00:17:07.929
+hrishikb@andrew.cmu.edu: generate some synthetic data and, like, do some kind of a POC. So, for now, we just went ahead and, found out this. I think I can, I can…
+
+95
+00:17:07.930 --> 00:17:28.179
+hrishikb@andrew.cmu.edu: again, he's probably, in and out of the next month. I can get that to you. So you want to just sample of, like… A sample of the data, yeah. Even a small sample would do. Sure. Because we just want to do some test runs, and we, because right now, what we are, the accuracies we can, as best as we can tell us.
+
+96
+00:17:28.270 --> 00:17:38.829
+hrishikb@andrew.cmu.edu: The bigger the model, the better, but there might be a diminishing returns. So, for example, at a certain point, a bigger model might just be, like, 1 or 2% better, and if we could just
+
+97
+00:17:38.910 --> 00:17:45.719
+hrishikb@andrew.cmu.edu: do some test runs, we could just hit the optimal point much faster.
+
+98
+00:17:45.750 --> 00:18:10.459
+hrishikb@andrew.cmu.edu: information the supplier would give you, you know, PDF, or CSV, whatever, one of those formats that they usually give you, right? I guess so, so which one? Do you want… so you want the PDF, like, what the suppliers will give us? Do you also want what we have in our database? Yeah, so we want the PDF so we can start working on the… The transition side, and we also want the data part so they can start working on the end product. So that, at the end, we can combine the
+
+99
+00:18:10.830 --> 00:18:22.579
+hrishikb@andrew.cmu.edu: Got it, got it. Okay. The major hinging points in the different models is how the data is that we're going to be processing in the model, so data will help a lot in maintaining this. Okay.
+
+100
+00:18:23.930 --> 00:18:24.720
+hrishikb@andrew.cmu.edu: You?
+
+101
+00:18:25.530 --> 00:18:38.250
+hrishikb@andrew.cmu.edu: And I'll try and also give you ones that align. I'll make sure that the vendor data that I'm giving you, the spec sheets, the PDFs, are the exact same products of the actual things we have in our database. Okay, perfect.
+
+102
+00:18:39.970 --> 00:18:53.589
+hrishikb@andrew.cmu.edu: Well, that's the best case scenario. Yeah, best case scenario. Worst case scenario, or, you know, other edge cases that you have to deal with? I can… I can pick the catalog team's brain and see, yeah, see what other things…
+
+103
+00:18:56.400 --> 00:19:04.020
+hrishikb@andrew.cmu.edu: Okay, I… I have… just these days, I have investigated three can of common GP.
+
+104
+00:19:04.680 --> 00:19:06.820
+hrishikb@andrew.cmu.edu: DET terminal models.
+
+105
+00:19:07.430 --> 00:19:09.279
+hrishikb@andrew.cmu.edu: What's a market.
+
+106
+00:19:09.690 --> 00:19:16.659
+hrishikb@andrew.cmu.edu: So, this is for… Dealing with, downstream data from
+
+107
+00:19:16.880 --> 00:19:20.500
+hrishikb@andrew.cmu.edu: So… so this is the data that actually taught.
+
+108
+00:19:20.620 --> 00:19:23.970
+hrishikb@andrew.cmu.edu: Talking about, say, how… do some…
+
+109
+00:19:24.610 --> 00:19:28.829
+hrishikb@andrew.cmu.edu: Luminization, or to get some… get open tonight.
+
+110
+00:19:29.030 --> 00:19:36.449
+hrishikb@andrew.cmu.edu: Anyway, after we take those data, we can do some… towards, processing.
+
+111
+00:19:36.680 --> 00:19:53.520
+hrishikb@andrew.cmu.edu: So these three kinds of models, they are put at classification, regression, output scores. For probabilities, this is what we want to get. And, they are good at, you know, explain… explainabilities.
+
+112
+00:19:57.330 --> 00:20:01.010
+hrishikb@andrew.cmu.edu: And, yep.
+
+113
+00:20:02.690 --> 00:20:06.059
+hrishikb@andrew.cmu.edu: Yeah, because we… we wanted to have the…
+
+114
+00:20:07.620 --> 00:20:14.210
+hrishikb@andrew.cmu.edu: Processing data, so we don't need to be able to take care of all the… So, only that data.
+
+115
+00:20:23.180 --> 00:20:29.989
+hrishikb@andrew.cmu.edu: Yeah, just, some, make a table, and
+
+116
+00:20:30.530 --> 00:20:36.280
+hrishikb@andrew.cmu.edu: This… we could propel the… the characteristics.
+
+117
+00:20:36.890 --> 00:20:39.589
+hrishikb@andrew.cmu.edu: And, we can choose the best one, really.
+
+118
+00:20:39.760 --> 00:20:41.560
+hrishikb@andrew.cmu.edu: To predict our project.
+
+119
+00:20:41.660 --> 00:20:44.349
+hrishikb@andrew.cmu.edu: So is the acronym GBTP mean?
+
+120
+00:20:48.880 --> 00:20:51.800
+hrishikb@andrew.cmu.edu: GBT models, what is the acronym? GBT.
+
+121
+00:20:51.920 --> 00:20:55.739
+hrishikb@andrew.cmu.edu: It's called Gradient Boost Destiny Tree Modulence.
+
+122
+00:20:56.180 --> 00:20:57.080
+hrishikb@andrew.cmu.edu: Say it again.
+
+123
+00:20:57.240 --> 00:21:01.549
+hrishikb@andrew.cmu.edu: gradient boost, hosted in listening to you, I mean? Okay, questions.
+
+124
+00:21:03.750 --> 00:21:06.270
+hrishikb@andrew.cmu.edu: So… Nope.
+
+125
+00:21:06.500 --> 00:21:09.230
+hrishikb@andrew.cmu.edu: So, the first one is the campus.
+
+126
+00:21:11.870 --> 00:21:22.279
+hrishikb@andrew.cmu.edu: It can quickly deal with So, some heavy load work, like, generally some category, heavy tables.
+
+127
+00:21:26.050 --> 00:21:32.890
+hrishikb@andrew.cmu.edu: And, they only need some original information. They don't need to…
+
+128
+00:21:34.220 --> 00:21:37.770
+hrishikb@andrew.cmu.edu: Like, strong… need to strong mapping.
+
+129
+00:21:38.030 --> 00:21:41.180
+hrishikb@andrew.cmu.edu: Or need to change those.
+
+130
+00:21:41.880 --> 00:21:47.510
+hrishikb@andrew.cmu.edu: original information tool, so… token… tokenization…
+
+131
+00:21:47.790 --> 00:21:50.559
+hrishikb@andrew.cmu.edu: features, so it's useful to use.
+
+132
+00:21:51.760 --> 00:22:03.250
+hrishikb@andrew.cmu.edu: And, this does… they just have the same ability in the robust Julie, and…
+
+133
+00:22:03.690 --> 00:22:08.940
+hrishikb@andrew.cmu.edu: And, the catapult, the training speed is… Yes.
+
+134
+00:22:09.680 --> 00:22:14.230
+hrishikb@andrew.cmu.edu: Not very slow, but the light GPT So…
+
+135
+00:22:14.880 --> 00:22:18.999
+hrishikb@andrew.cmu.edu: Train speed and interface speed and scalability is…
+
+136
+00:22:20.200 --> 00:22:23.230
+hrishikb@andrew.cmu.edu: It's good then, catfold.
+
+137
+00:22:29.400 --> 00:22:42.810
+hrishikb@andrew.cmu.edu: Related to the teaching engineering, which is about how much the reprocessing digital work is required to tensor raw data to…
+
+138
+00:22:43.180 --> 00:22:45.450
+hrishikb@andrew.cmu.edu: moderated columns.
+
+139
+00:22:46.660 --> 00:22:57.210
+hrishikb@andrew.cmu.edu: So, can't book… like I said before, they don't… it doesn't need to… Some…
+
+140
+00:23:01.560 --> 00:23:07.110
+hrishikb@andrew.cmu.edu: You don't need to… There was, data.
+
+141
+00:23:11.760 --> 00:23:23.029
+hrishikb@andrew.cmu.edu: And, so, you don't need to pay much attention to the… Pre-processing all the data.
+
+142
+00:23:24.670 --> 00:23:29.610
+hrishikb@andrew.cmu.edu: So, if we… it can be, do a quick deployment.
+
+143
+00:23:31.040 --> 00:23:33.620
+hrishikb@andrew.cmu.edu: Well, the G export is very…
+
+144
+00:23:34.080 --> 00:23:37.809
+hrishikb@andrew.cmu.edu: Not good at this to deal with these things.
+
+145
+00:23:39.800 --> 00:23:44.059
+hrishikb@andrew.cmu.edu: Like, it needs final features to preparation.
+
+146
+00:23:46.790 --> 00:23:48.000
+hrishikb@andrew.cmu.edu: And,
+
+147
+00:23:51.910 --> 00:23:58.280
+hrishikb@andrew.cmu.edu: And also, so I'd like the GPT added XG boots.
+
+148
+00:23:58.620 --> 00:24:01.820
+hrishikb@andrew.cmu.edu: To have strong ecosystem activities.
+
+149
+00:24:02.320 --> 00:24:05.779
+hrishikb@andrew.cmu.edu: So, it can slow down the…
+
+150
+00:24:07.000 --> 00:24:11.860
+hrishikb@andrew.cmu.edu: They reduce the work for retaining, and we can find some…
+
+151
+00:24:12.060 --> 00:24:17.300
+hrishikb@andrew.cmu.edu: You know, they use cold coding from the community, or ask someone.
+
+152
+00:24:17.430 --> 00:24:22.569
+hrishikb@andrew.cmu.edu: That way, if we meet some common price change.
+
+153
+00:24:22.920 --> 00:24:24.989
+hrishikb@andrew.cmu.edu: Permanence will… we have.
+
+154
+00:24:25.340 --> 00:24:26.760
+hrishikb@andrew.cmu.edu: implementing to exist.
+
+155
+00:24:27.520 --> 00:24:28.370
+hrishikb@andrew.cmu.edu: project.
+
+156
+00:24:29.030 --> 00:24:34.250
+hrishikb@andrew.cmu.edu: And, and I think so.
+
+157
+00:24:34.660 --> 00:24:37.920
+hrishikb@andrew.cmu.edu: Typical limitation, or the… Excellent.
+
+158
+00:24:38.990 --> 00:24:40.439
+hrishikb@andrew.cmu.edu: So, the first one is.
+
+159
+00:24:43.860 --> 00:24:48.300
+hrishikb@andrew.cmu.edu: The scale support may be a little,
+
+160
+00:24:48.510 --> 00:24:50.959
+hrishikb@andrew.cmu.edu: Love… a little better to hand.
+
+161
+00:24:51.240 --> 00:24:53.109
+hrishikb@andrew.cmu.edu: The second one.
+
+162
+00:24:53.830 --> 00:24:56.169
+hrishikb@andrew.cmu.edu: But I think it is mostly very…
+
+163
+00:24:59.450 --> 00:25:01.240
+hrishikb@andrew.cmu.edu: We don't need to think about…
+
+164
+00:25:01.490 --> 00:25:07.970
+hrishikb@andrew.cmu.edu: much to carry weight, because I think we don't need to deal with such amount of data.
+
+165
+00:25:08.580 --> 00:25:15.160
+hrishikb@andrew.cmu.edu: So, this is my conclusion. We could take the catboard as a default scoring model.
+
+166
+00:25:15.560 --> 00:25:20.349
+hrishikb@andrew.cmu.edu: And, came… led GPT… GPM as the plan.
+
+167
+00:25:20.710 --> 00:25:28.409
+hrishikb@andrew.cmu.edu: scale-up opportunity if the throughput becomes very the domestic country.
+
+168
+00:25:30.670 --> 00:25:34.459
+hrishikb@andrew.cmu.edu: And which could also match our project architecture requirements.
+
+169
+00:25:36.380 --> 00:25:40.920
+hrishikb@andrew.cmu.edu: And, I read some… Amazing.
+
+170
+00:25:41.310 --> 00:25:51.950
+hrishikb@andrew.cmu.edu: So, from the architect phase, Well, which is based on… So, architecture responses and, So, Clint… Clyde?
+
+171
+00:25:52.090 --> 00:25:53.260
+hrishikb@andrew.cmu.edu: of fulfillments.
+
+172
+00:25:59.020 --> 00:26:03.680
+hrishikb@andrew.cmu.edu: So, it's just, Static effect and the functional phase.
+
+173
+00:26:04.240 --> 00:26:06.059
+hrishikb@andrew.cmu.edu: And a long position of faith.
+
+174
+00:26:12.660 --> 00:26:16.499
+hrishikb@andrew.cmu.edu: And I compelled why the other…
+
+175
+00:26:17.240 --> 00:26:20.410
+hrishikb@andrew.cmu.edu: Models that don't fit this project.
+
+176
+00:26:25.600 --> 00:26:33.480
+hrishikb@andrew.cmu.edu: And the trade-off. And this time is what we need to… supports, models with.
+
+177
+00:26:33.630 --> 00:26:36.660
+hrishikb@andrew.cmu.edu: to… tomorrow.
+
+178
+00:26:39.420 --> 00:26:44.750
+hrishikb@andrew.cmu.edu: So I guess, we can, probably import this document into your content as well.
+
+179
+00:26:44.890 --> 00:26:46.070
+hrishikb@andrew.cmu.edu: Or,
+
+180
+00:26:46.460 --> 00:26:56.699
+hrishikb@andrew.cmu.edu: when we keep doing our PEOCs, and if we have more desires, we can decide to do a document on confidence. Definitely. Yeah, Harsha's gonna wanna review this, too. Yeah. Great.
+
+181
+00:27:00.080 --> 00:27:09.189
+hrishikb@andrew.cmu.edu: Okay, so that's pretty much it. So, I think you guys, did you guys talk about constraints? Like, we wanted to,
+
+182
+00:27:09.410 --> 00:27:12.620
+hrishikb@andrew.cmu.edu: Think about the constraints as well when we were looking at these models.
+
+183
+00:27:12.790 --> 00:27:19.920
+hrishikb@andrew.cmu.edu: Let's say you have 100,000 suppliers versus 40,000 suppliers. That would change which model you're going to be using.
+
+184
+00:27:20.160 --> 00:27:28.070
+hrishikb@andrew.cmu.edu: So we wanted to get an estimate of those constraints, and how many different categories would have, like 5,000 categories versus 50,000 categories.
+
+185
+00:27:28.800 --> 00:27:38.469
+hrishikb@andrew.cmu.edu: Yeah. So, that kind of data as well, we would want from others.
+
+186
+00:27:38.960 --> 00:27:44.709
+hrishikb@andrew.cmu.edu: So I think, when you give us the sample data, sample schema, it wouldn't cover all of it.
+
+187
+00:27:44.960 --> 00:27:48.220
+hrishikb@andrew.cmu.edu: I can give you a…
+
+188
+00:27:49.100 --> 00:27:57.949
+hrishikb@andrew.cmu.edu: Yeah, I can do, kind of, just give you, you know, select count to, like, an addition of that, just from each of the things, yeah, categories, options, attributes, products.
+
+189
+00:27:59.250 --> 00:28:01.890
+hrishikb@andrew.cmu.edu: just the breadth of data would be enough, I think.
+
+190
+00:28:02.530 --> 00:28:07.239
+hrishikb@andrew.cmu.edu: Do you have any information that gives any trending stuff in terms of the science of things?
+
+191
+00:28:07.360 --> 00:28:19.090
+hrishikb@andrew.cmu.edu: I'm just saying, you know, your model right now made 100,000 items, but it last year over 80,000, whatever it is, I'm just trying to get some sort of scale type of thing. Yeah, definitely, that's good.
+
+192
+00:28:19.420 --> 00:28:33.010
+hrishikb@andrew.cmu.edu: We could definitely break that down, too. I could break that down and run a couple more little analysis on it on, you know, we store creative products and whatnot, all those things, so just scanning that out over time and seeing, yeah, what the transit look like.
+
+193
+00:28:41.260 --> 00:28:50.020
+hrishikb@andrew.cmu.edu: So do you, the people who do this work here doing this sort of stuff, do you have to track how much time it took for you to develop this? Doing research, or just starting?
+
+194
+00:28:50.230 --> 00:28:59.649
+hrishikb@andrew.cmu.edu: Well, you know, your results, your reports, you know. Yeah, I think we have a approximate time, yeah.
+
+195
+00:28:59.790 --> 00:29:06.940
+hrishikb@andrew.cmu.edu: at the granular level, to know for this work, how much time it took to do this particular effort. Okay. Okay.
+
+196
+00:29:07.910 --> 00:29:09.669
+hrishikb@andrew.cmu.edu: It's just useful to have that data.
+
+197
+00:29:09.850 --> 00:29:10.590
+hrishikb@andrew.cmu.edu: Right.
+
+198
+00:29:11.340 --> 00:29:12.020
+hrishikb@andrew.cmu.edu: Yeah.
+
+199
+00:29:12.960 --> 00:29:30.700
+hrishikb@andrew.cmu.edu: But again, it's just the initial research phase. I understand. Yes, we have not done any implementation. We spent 3 hours researching this aspect, you know, built this report, those types of stuff. That's all kind of useful historical data from before.
+
+200
+00:29:39.200 --> 00:29:41.240
+hrishikb@andrew.cmu.edu: Oh, thank you.
+
+201
+00:29:41.400 --> 00:29:42.100
+hrishikb@andrew.cmu.edu: Oh, boy.
+
+202
+00:29:43.610 --> 00:29:45.169
+hrishikb@andrew.cmu.edu: A lot of shades on that.
+
+203
+00:29:45.350 --> 00:29:46.740
+hrishikb@andrew.cmu.edu: Oh, I'm gonna assume.
+
+204
+00:29:49.670 --> 00:29:51.140
+hrishikb@andrew.cmu.edu: I'd rather show Zoom.
+
+205
+00:29:51.270 --> 00:29:54.100
+hrishikb@andrew.cmu.edu: I can't share this screen.
+
+206
+00:30:06.960 --> 00:30:07.810
+hrishikb@andrew.cmu.edu: Yes.
+
+207
+00:30:08.040 --> 00:30:12.220
+hrishikb@andrew.cmu.edu: Okay, so next we have is, Terraform versus Bicep.
+
+208
+00:30:13.340 --> 00:30:15.669
+hrishikb@andrew.cmu.edu: Oh, I suppose it.
+
+209
+00:30:17.540 --> 00:30:23.569
+hrishikb@andrew.cmu.edu: So I have created a small doc, but it is, a bit high level, so from…
+
+210
+00:30:23.970 --> 00:30:34.450
+hrishikb@andrew.cmu.edu: what I could, think of right now is the two major distinguished factors between Terraform and Bicep are that Bicep is very Azure-oriented, and
+
+211
+00:30:34.500 --> 00:30:47.279
+hrishikb@andrew.cmu.edu: It is, of course, better if we use it with Azure, but if we, around the time you try to use some other soft… some other services from other environments, other cloud providers, then Azure will become a bottleneck.
+
+212
+00:30:47.600 --> 00:30:53.870
+hrishikb@andrew.cmu.edu: But on the other hand, if you try to use Terraform, it is… it works with Azure, it has good support, but…
+
+213
+00:30:54.320 --> 00:31:03.139
+hrishikb@andrew.cmu.edu: we can say slightly less than Azure Bicep, but if you use Terraform, we still have those options available to us if we plan to switch, if you plan to use different
+
+214
+00:31:03.250 --> 00:31:05.560
+hrishikb@andrew.cmu.edu: Different services with it.
+
+215
+00:31:05.760 --> 00:31:10.300
+hrishikb@andrew.cmu.edu: And one of… another negative of Terraform would be that,
+
+216
+00:31:10.790 --> 00:31:18.360
+hrishikb@andrew.cmu.edu: it does give us drifts, so if you used Reform 2, deploy something, but then manually modify it, so there's a…
+
+217
+00:31:19.230 --> 00:31:25.200
+hrishikb@andrew.cmu.edu: discrepancy between what is actually deployed and what should we have in our telecom files. So that is something that we'll have to keep in mind.
+
+218
+00:31:25.610 --> 00:31:43.879
+hrishikb@andrew.cmu.edu: But there are, like, as of right now, I don't think we have a definitive answer of what we are going to choose, but as our ML research finalizer, and we know what models we're gonna use, and that's gonna drill down to which, cloud provider we'll use, then I think we can, have a better
+
+219
+00:31:44.730 --> 00:32:04.570
+hrishikb@andrew.cmu.edu: the, like, say in which one we need to use. But as of right now, I am leaning towards Terraform, because it might be a bit… a bit more tedious to work with, but it gives us more options to explore different things, and gives us flexibility to work on the project in different ways, and not just be stuck to Azure and all its…
+
+220
+00:32:04.700 --> 00:32:10.689
+hrishikb@andrew.cmu.edu: internal things. So, for my background, some of the terraform.
+
+221
+00:32:10.780 --> 00:32:21.140
+hrishikb@andrew.cmu.edu: So Terraform and Viceps, basically, they're used to deploy, services on the cloud.
+
+222
+00:32:21.160 --> 00:32:32.949
+hrishikb@andrew.cmu.edu: Its infrastructure as code, so you don't directly deploy on AWS or on Azure, so you use a git commit, and only then you verify it, and then it pushes to the cloud.
+
+223
+00:32:33.140 --> 00:32:37.090
+hrishikb@andrew.cmu.edu: Should automatically have reset how it's gonna…
+
+224
+00:32:37.530 --> 00:32:55.359
+hrishikb@andrew.cmu.edu: Microsoft product, a third-party product? What's that? It's an open source. Open source, yeah, okay. Azure Bicep is Microsoft. Okay, yeah, Bicep is something similar, or what? Yeah, it's Microsoft, but it is, it is similar, but it is very focused to Microsoft Azure.
+
+225
+00:32:55.590 --> 00:33:12.560
+hrishikb@andrew.cmu.edu: It's not, with Terraform, we can work with, Azure, GCP, AWS, everything, and different software services, but with Azure, it is very… sorry, with Bicep, it's very Azure-specific. You cannot, like, you can, but it is,
+
+226
+00:33:12.560 --> 00:33:15.610
+hrishikb@andrew.cmu.edu: Not really used, because the support is not there.
+
+227
+00:33:15.620 --> 00:33:21.879
+hrishikb@andrew.cmu.edu: to use different services. So it's kind of a… it'll force you down a very narrow path, and then you'll have to…
+
+228
+00:33:21.930 --> 00:33:30.869
+hrishikb@andrew.cmu.edu: make go with what you have, and you won't have the other options available. So we don't want to close that door right now. So, one more thing, I don't think Bicep does is,
+
+229
+00:33:31.420 --> 00:33:46.210
+hrishikb@andrew.cmu.edu: If we are going to integrate, the entire system with Datadog, I'll go there. Yeah. I don't think Microsoft natively gives it support for that. While Terraform does, we can create Terraform modules for routing, which feeds data directly to Teradog.
+
+230
+00:33:46.810 --> 00:33:53.069
+hrishikb@andrew.cmu.edu: So, David, do you… we… do we do any of our, Datadog setup in our, bicep?
+
+231
+00:33:53.920 --> 00:33:56.560
+hrishikb@andrew.cmu.edu: For, like, her number?
+
+232
+00:33:56.560 --> 00:34:04.630
+David Mine: I'm not sure if we do it with Bicep. What we do have our Azure-wide monitors, so we can tag a resource.
+
+233
+00:34:04.750 --> 00:34:14.449
+David Mine: With a tag that we've set up, and then Azure is going to take that data and ship it to Datadog in some way, shape, or form.
+
+234
+00:34:14.639 --> 00:34:24.960
+David Mine: So that's how we do… kind of native-level logging on our Azure environment.
+
+235
+00:34:24.960 --> 00:34:29.460
+hrishikb@andrew.cmu.edu: But, to your point, that takes, I guess, an extra step of setup that's inside of this.
+
+236
+00:34:30.199 --> 00:34:35.160
+hrishikb@andrew.cmu.edu: But Terraform, we can directly use it to set up Oh, Pipeline's digital dog.
+
+237
+00:34:35.770 --> 00:34:41.270
+David Mine: Yeah, I think my hesitation with Terraform is, firstly, that we don't use it right now.
+
+238
+00:34:41.489 --> 00:34:51.420
+David Mine: Which isn't a big deal if something's really good, but we're already using Bicep, so we're already locked into Azure for,
+
+239
+00:34:51.580 --> 00:34:53.620
+David Mine: For all of our new products.
+
+240
+00:34:53.730 --> 00:34:59.570
+David Mine: The ones that were… we would be the most likely to move if we needed to were already locked in.
+
+241
+00:34:59.780 --> 00:35:04.760
+David Mine: The other thing that worries me about Terraform
+
+242
+00:35:05.820 --> 00:35:13.839
+David Mine: I don't know if this is a valid worry or not, is that Terraform… my understanding is that it…
+
+243
+00:35:14.170 --> 00:35:17.859
+David Mine: Forms actions based on the state that it thinks
+
+244
+00:35:18.310 --> 00:35:25.710
+David Mine: your environment is in. Whereas Bicep describes the state that it wants
+
+245
+00:35:25.880 --> 00:35:42.370
+David Mine: like, you, in your code, describe the state you want your infrastructure, and it takes care of cobbling together the commands needed to get to that state. So it's more, declarative than imperative, so to speak.
+
+246
+00:35:42.570 --> 00:35:45.020
+David Mine: Save that slide up.
+
+247
+00:35:45.490 --> 00:36:01.449
+hrishikb@andrew.cmu.edu: I didn't get your point on Terraform being… I think if we deploy something about Terraform, but we modify the internals from, let's say, Azure itself, the Terraform will think it is in some other state, and the actual cloud will be in some other state. And if you put something else on Terraform.
+
+248
+00:36:01.450 --> 00:36:07.109
+hrishikb@andrew.cmu.edu: It can conflict and give you the RAM output. Yeah, it will never deploy it, because there's a conflict.
+
+249
+00:36:07.370 --> 00:36:15.510
+hrishikb@andrew.cmu.edu: I think that's… so, Terraform also has Terraform Plan, which is, specifically what you just said about Bicep as well. It gives you how the…
+
+250
+00:36:15.900 --> 00:36:20.340
+hrishikb@andrew.cmu.edu: Resources are going to look like when it's going to be created before you actually deploy it.
+
+251
+00:36:27.650 --> 00:36:29.880
+hrishikb@andrew.cmu.edu: I don't think Azure has the…
+
+252
+00:36:30.020 --> 00:36:36.040
+hrishikb@andrew.cmu.edu: Azure has, what we call drift, because I think Azure, when you…
+
+253
+00:36:36.160 --> 00:36:51.999
+hrishikb@andrew.cmu.edu: deploy something else using Bicep, it will take the latest state and work on that. Terraform does not… I don't think it pulls back from the actual… what's actually working on it. Yeah, but that is a security feature that is required, because let's say I push some code.
+
+254
+00:36:52.170 --> 00:36:55.010
+hrishikb@andrew.cmu.edu: And someone else logs in to the UI and just…
+
+255
+00:36:55.140 --> 00:37:11.419
+hrishikb@andrew.cmu.edu: changes something. That shouldn't happen, ideally. No, that will happen, right? No, that shouldn't happen, because people shouldn't just go and change code on the UI. That's the whole point of using something like that.
+
+256
+00:37:11.950 --> 00:37:31.000
+hrishikb@andrew.cmu.edu: Yes, yeah. I mean, yeah, it's just something to consider. That doesn't mean that right now, as we're, as we're growing, it shouldn't happen, but it doesn't get involved. Yeah. Okay, but, like, I think, so, from the discussion, I think David wants to go ahead with myself. Right, David?
+
+257
+00:37:31.700 --> 00:37:43.039
+David Mine: Yeah, I would pick Bicep, mostly because I think it's something that we know. I also think that the value-add of Terraform… one of the big value adds of Terraform that they claim is that you can
+
+258
+00:37:43.290 --> 00:37:50.859
+David Mine: kind of switch providers. But my understanding is upon further investigation.
+
+259
+00:37:51.210 --> 00:37:55.809
+David Mine: A lot of those commands are actually pretty cloud-specific.
+
+260
+00:37:55.930 --> 00:38:12.339
+David Mine: So there's a single language to describe everything, but you're still kind of… there's still kind of some vendor lock-in, which makes sense, because the cloud providers don't exactly offer the exact same offerings in the exact same way.
+
+261
+00:38:12.640 --> 00:38:14.579
+David Mine: So, to me.
+
+262
+00:38:14.710 --> 00:38:27.470
+David Mine: what's best for the product is one question, which is what you guys are considering, right? It's what you know the best, and what makes the most sense for this project. But one of the other things we have to make sure that we're not forgetting is
+
+263
+00:38:27.540 --> 00:38:44.750
+David Mine: when you guys hand over the project and give us the keys, so to speak, we're going to have a team that has to maintain that, and are we going to ask them to get good at Bicep and Terraform, or are we just going to ask them to get good at Bicep? So that's prob… that's another factor that's on my
+
+264
+00:38:44.850 --> 00:38:48.440
+David Mine: That's on my mind that might not be on your mind.
+
+265
+00:38:49.070 --> 00:38:55.299
+David Mine: So I would… I would prefer bicep mostly for those reasons. I've got to train a whole bunch of people who…
+
+266
+00:38:55.520 --> 00:39:01.179
+David Mine: I mean, they're developers, they don't care a whole lot about infrastructure, they don't care how it runs, as long as it runs on their local environment.
+
+267
+00:39:01.320 --> 00:39:08.419
+David Mine: And so I can train them on Bicep. That's a lot easier than getting them caught up on Bicep and Terraform.
+
+268
+00:39:10.080 --> 00:39:10.660
+hrishikb@andrew.cmu.edu: Okay.
+
+269
+00:39:13.030 --> 00:39:19.940
+hrishikb@andrew.cmu.edu: I think with that in mind, we can maybe go forward with Bicep itself. Yeah. Because anyways, if you are logged into Azure, then Bicep is the better way to go.
+
+270
+00:39:24.590 --> 00:39:41.809
+hrishikb@andrew.cmu.edu: But, I can just talk a little bit about hotel. I think, we had a discussion last week, David, we can have hotels, so we get, like, a waterfall view of what's happening in every request on a weekly basis.
+
+271
+00:39:42.000 --> 00:39:44.590
+hrishikb@andrew.cmu.edu: So OTL already handles this,
+
+272
+00:39:44.900 --> 00:39:54.960
+hrishikb@andrew.cmu.edu: I think it's called, so we don't need to have separate request IDs and RIDs for each service, or it already takes care of this.
+
+273
+00:39:55.200 --> 00:40:00.640
+hrishikb@andrew.cmu.edu: It's called W3C, standard header reporting index into every request.
+
+274
+00:40:00.780 --> 00:40:09.310
+hrishikb@andrew.cmu.edu: So, that header has, like, a global case only, then it has a pattern case only. And, like, for each request, it has a sample tag as well.
+
+275
+00:40:09.690 --> 00:40:24.969
+hrishikb@andrew.cmu.edu: So, let's say you were a data doc, you'd have to put the global tracer name so you get the entire waterfall of what's happening, which request is taking a lot longer than what's expected. And then if you want to see into a specific request, you can just put in the package.
+
+276
+00:40:24.980 --> 00:40:30.580
+hrishikb@andrew.cmu.edu: Okay, so this is… would be in addition to Datadog. I… I don't know about themselves, so it's not like a…
+
+277
+00:40:31.350 --> 00:40:49.010
+hrishikb@andrew.cmu.edu: It's not an alternative to Datadog, you're sending it with Datadog. Yeah, yeah, it's… yeah, it's a layer before Datadog where you send requests to, and then that feeds it to Datadog. Oh, it's open data metric. What's that? OpenChall metric? Yeah. It's like,
+
+278
+00:40:49.570 --> 00:41:04.479
+hrishikb@andrew.cmu.edu: like, the problem that you guys are dealing with, so you have vendors, different vendors, giving you different, giving you the data in different formats, right? So, the telemetry world came together, and they were like, let's build open telemetry.
+
+279
+00:41:04.480 --> 00:41:09.940
+hrishikb@andrew.cmu.edu: A standardized version of how your observability metrics should look like.
+
+280
+00:41:09.940 --> 00:41:19.230
+hrishikb@andrew.cmu.edu: And, where even if you end up using Datadog, or Telegraph, or, Premieres, or these, dashboards.
+
+281
+00:41:19.250 --> 00:41:37.280
+hrishikb@andrew.cmu.edu: You can have a centralized format, like OpenTelemetry format, and you can just, like, plug in these external sources. So that's, how… that's how, like, why Arjun is proposing, OpenTelemetry. But, since you, since David just mentioned,
+
+282
+00:41:37.570 --> 00:41:44.950
+hrishikb@andrew.cmu.edu: something about Azure, which I didn't actually catch, writing to Azure Louds and then passing that to Azure.
+
+283
+00:41:46.630 --> 00:41:54.969
+hrishikb@andrew.cmu.edu: David, are you able to talk more about that, expand more on how Azure writes to logs that have been tested?
+
+284
+00:41:54.970 --> 00:42:05.880
+David Mine: Oh, sorry, I'm… I caught half of that. It was… the audio's getting a little quiet. Let me bump this up. Can you say that one more time?
+
+285
+00:42:05.880 --> 00:42:11.349
+hrishikb@andrew.cmu.edu: Can you, explain a little bit on how, the data is written to Azure Logs, and then,
+
+286
+00:42:11.350 --> 00:42:12.630
+David Mine: Yeah, but yes.
+
+287
+00:42:12.630 --> 00:42:14.160
+hrishikb@andrew.cmu.edu: Azure Logs pushes the data onto it.
+
+288
+00:42:14.160 --> 00:42:28.160
+David Mine: Yeah, let me… maybe I can share my screen, and that would help clear up some confusion here. Of course, now that I want to do that, let's see if I can…
+
+289
+00:42:29.450 --> 00:42:40.240
+David Mine: We've got a Datadog… I requested access to share… there we go, let's share my…
+
+290
+00:42:40.240 --> 00:42:40.950
+hrishikb@andrew.cmu.edu: of…
+
+291
+00:42:41.370 --> 00:42:47.320
+David Mine: It was not so, just… There we go. So here on Azure.
+
+292
+00:42:48.090 --> 00:42:58.369
+David Mine: Oh, you guys are completely superior. Here on Azure, we've got this Datadog Azure Native ISV service. Not sure what that stands for, to be honest with you.
+
+293
+00:42:58.530 --> 00:43:05.819
+David Mine: But we have our prod, and we have our QA environment, which really should pare down, because we're not using that anymore. At least not there.
+
+294
+00:43:06.050 --> 00:43:10.169
+David Mine: And we have this connected to…
+
+295
+00:43:10.850 --> 00:43:28.339
+David Mine: organization. So, if we include Datadog logs true, anything that has Datadog logs true gets included there. So, for example, I could go to a… I hope I have an example up for you guys here, of a function app.
+
+296
+00:43:28.860 --> 00:43:42.500
+David Mine: Probably enough here… Data dialog's true, that means that instead of syncing this to, say, what would it be, like,
+
+297
+00:43:43.430 --> 00:43:45.590
+David Mine: We've got a logs here…
+
+298
+00:43:46.110 --> 00:44:01.570
+David Mine: Yeah, so instead of needing Application Insights, I could actually turn this off. I don't really need Application Insights inside of Azure, because these logs are supposed to be sending directly to Datadog through this native,
+
+299
+00:44:01.740 --> 00:44:06.500
+David Mine: Datadog service, which just kind of captures things
+
+300
+00:44:07.060 --> 00:44:15.709
+David Mine: Azure-wide makes it easy to capture logs and metrics Azure-wide and ship that off to our Datadog tenant.
+
+301
+00:44:16.230 --> 00:44:18.010
+David Mine: Does that make sense?
+
+302
+00:44:18.010 --> 00:44:19.110
+hrishikb@andrew.cmu.edu: Yeah.
+
+303
+00:44:19.490 --> 00:44:20.219
+David Mine: That's the only category.
+
+304
+00:44:20.220 --> 00:44:24.859
+hrishikb@andrew.cmu.edu: Can you, show me the Datadog, dashboard as well, how the.
+
+305
+00:44:24.860 --> 00:44:25.610
+David Mine: Right, okay.
+
+306
+00:44:25.610 --> 00:44:27.220
+hrishikb@andrew.cmu.edu: How it looks when…
+
+307
+00:44:27.220 --> 00:44:28.340
+David Mine: For your business.
+
+308
+00:44:28.340 --> 00:44:30.279
+hrishikb@andrew.cmu.edu: the requests come from Cisco.
+
+309
+00:44:30.280 --> 00:44:48.340
+David Mine: I didn't actually know about all this, but you can see all the different metrics and logs. Looks like our logs, we're doing a pretty terrible job on, but in terms of our metrics, a lot of that stuff's going over. So let's pick, let's pick a…
+
+310
+00:44:49.230 --> 00:44:59.119
+David Mine: Or maybe that's how they do it. They ship from Application Insights over to Datadogs. Maybe we do need an App Insights. Either way, let's find one that we know works.
+
+311
+00:44:59.390 --> 00:45:00.760
+David Mine: That's not helpful.
+
+312
+00:45:01.250 --> 00:45:07.690
+David Mine: We'll just go here and take a look at our…
+
+313
+00:45:09.160 --> 00:45:12.710
+David Mine: Oh, would that be service, maybe?
+
+314
+00:45:14.940 --> 00:45:25.530
+David Mine: So Azure itself has… Looks like calls into it. This would be our prod, and…
+
+315
+00:45:25.750 --> 00:45:31.899
+David Mine: caller IP address 10-1, that's probably our app gateway, on dev.
+
+316
+00:45:32.520 --> 00:45:35.540
+David Mine: What else can we see that might be really useful?
+
+317
+00:45:35.770 --> 00:45:40.359
+David Mine: These are our databases, whoops.
+
+318
+00:45:40.710 --> 00:45:41.810
+David Mine: That, pass.
+
+319
+00:45:42.230 --> 00:45:46.959
+David Mine: These are some microservices we have.
+
+320
+00:45:47.610 --> 00:45:52.919
+David Mine: And this is, again, this is just logs. Oh, here we go, yeah, let's…
+
+321
+00:45:53.110 --> 00:45:56.570
+David Mine: Get rid of all these. Check all of our hosts.
+
+322
+00:45:56.870 --> 00:46:01.259
+David Mine: So these are the… wish I could see a little more.
+
+323
+00:46:02.420 --> 00:46:03.829
+David Mine: There we go.
+
+324
+00:46:04.120 --> 00:46:06.169
+David Mine: These are all of our revisions.
+
+325
+00:46:06.440 --> 00:46:09.230
+David Mine: Of different, container apps.
+
+326
+00:46:09.940 --> 00:46:12.690
+David Mine: Thank you.
+
+327
+00:46:12.850 --> 00:46:15.299
+David Mine: And it looks like we also have…
+
+328
+00:46:18.130 --> 00:46:28.520
+David Mine: Saw some database stuff, Azure Functions? Yeah, okay, cool. So, Azure Functions, instead of going to, well, I guess they're called Function Apps now, but instead of going to…
+
+329
+00:46:28.570 --> 00:46:41.650
+David Mine: Application Insights directly, they also come here. I'm not sure exactly how that works, but you can see that I… I didn't configure that, I just put Datadog logs equals true in the tags, and then it shows up here.
+
+330
+00:46:42.000 --> 00:46:44.649
+David Mine: And then in terms of metrics or, or,
+
+331
+00:46:44.760 --> 00:46:47.159
+David Mine: That's not what I want. Do I have an APM?
+
+332
+00:46:48.340 --> 00:46:51.420
+David Mine: Services, maybe?
+
+333
+00:46:52.490 --> 00:46:54.039
+David Mine: Might just be AP.
+
+334
+00:46:54.040 --> 00:47:10.139
+hrishikb@andrew.cmu.edu: Right now, do we… do you guys have tracers enabled? Like, if there's… I'm sure there's multiple microservices, like, there's multiple services talking to each other via IPC calls. So, do you guys have, like, a chart on Datadog which shows how…
+
+335
+00:47:10.140 --> 00:47:14.870
+hrishikb@andrew.cmu.edu: Yeah, we do with our brand new product, Peregrine. It's still there.
+
+336
+00:47:14.870 --> 00:47:15.390
+David Mine: Yeah.
+
+337
+00:47:15.390 --> 00:47:24.310
+hrishikb@andrew.cmu.edu: product is just starting to get to prod right now, but yeah, the VIN tank has actually helped us, you know, we have the waterfall and everything you're talking about, traces connecting between different.
+
+338
+00:47:24.310 --> 00:47:27.720
+David Mine: Yeah, so between services.
+
+339
+00:47:27.940 --> 00:47:45.929
+David Mine: it's mostly in-app, right, by configuring in the application. Between apps, for our monoliths, it… this is basically all you get is a flame graph that… this isn't a flame graph, but it's… it's just this, right? It's not super helpful, in terms of tracing.
+
+340
+00:47:49.920 --> 00:47:58.529
+David Mine: So, that would… if you're looking to do that as a concern, to talk between multiple services and build traces, I'm not sure that…
+
+341
+00:47:59.980 --> 00:48:04.460
+David Mine: We've never made that happen with our current configuration. We've handled that.
+
+342
+00:48:04.670 --> 00:48:09.089
+David Mine: In our application, rather than in our infrastructure.
+
+343
+00:48:10.390 --> 00:48:11.190
+hrishikb@andrew.cmu.edu: Noted.
+
+344
+00:48:16.330 --> 00:48:19.080
+hrishikb@andrew.cmu.edu: I'm just… I'm very confused as to…
+
+345
+00:48:19.080 --> 00:48:19.550
+David Mine: Fair enough.
+
+346
+00:48:19.550 --> 00:48:22.420
+hrishikb@andrew.cmu.edu: If we should just use the current system, or if he should…
+
+347
+00:48:22.540 --> 00:48:24.889
+hrishikb@andrew.cmu.edu: I actually spent time on Instagram.
+
+348
+00:48:25.500 --> 00:48:26.320
+David Mine: Bye.
+
+349
+00:48:27.430 --> 00:48:38.650
+hrishikb@andrew.cmu.edu: I mean, because, like, right now, everything's working for you guys on Niger, and, like, just one system which we are building with our demos can afford us, because you have 100 other services with Nigeria.
+
+350
+00:48:38.840 --> 00:48:40.930
+hrishikb@andrew.cmu.edu: It's all in, yeah, it's all together.
+
+351
+00:48:41.790 --> 00:48:43.780
+David Mine: Yeah.
+
+352
+00:48:43.780 --> 00:48:49.539
+hrishikb@andrew.cmu.edu: I mean, I don't want to be the one to necessarily make a decision. This is more David than bending things around.
+
+353
+00:48:50.020 --> 00:48:50.740
+David Mine: I haven't.
+
+354
+00:48:51.180 --> 00:48:57.449
+David Mine: I, kind of got lost in the sauce a little bit. What's the… what decision are we trying to make again?
+
+355
+00:48:58.150 --> 00:49:10.649
+hrishikb@andrew.cmu.edu: Do we want to actually implement hotel, or do we just want to stick with whatever is working for you guys right now? Because, if we bring in hotel, it's just gonna be for the service we are creating, and…
+
+356
+00:49:11.020 --> 00:49:14.930
+hrishikb@andrew.cmu.edu: To actually move it system-wide would take a lot of effort, and…
+
+357
+00:49:14.930 --> 00:49:15.720
+David Mine: Oh, okay.
+
+358
+00:49:16.540 --> 00:49:20.019
+David Mine: I mean, I guess I would leave that up to you,
+
+359
+00:49:21.250 --> 00:49:29.330
+David Mine: That would be something that ultimately… Oh, sounds like added complexity.
+
+360
+00:49:30.370 --> 00:49:37.269
+David Mine: but could be a value add to eParts as a company. In terms of adding value to this particular product.
+
+361
+00:49:39.600 --> 00:49:40.760
+David Mine: I…
+
+362
+00:49:43.360 --> 00:49:53.080
+David Mine: If you have the time, sure, but I don't know that I would put that… rank that very high in terms of what I would… I would demand. I… I think,
+
+363
+00:49:54.340 --> 00:50:00.660
+David Mine: We're pretty locked in to a vendor right now. We're pretty locked into a way of doing things.
+
+364
+00:50:00.810 --> 00:50:04.070
+David Mine: And to switch from…
+
+365
+00:50:05.140 --> 00:50:12.700
+David Mine: data dog to someone else to change how we do logging or traces and metrics is going to be a project, if we were to do it.
+
+366
+00:50:13.480 --> 00:50:21.580
+David Mine: Our good old friend artificial intelligence would help us figure out how to do that, and doing that… for…
+
+367
+00:50:21.750 --> 00:50:23.500
+David Mine: 10 repositories.
+
+368
+00:50:24.080 --> 00:50:33.200
+David Mine: where 11 repositories doesn't make a big difference, right? If the difference is that we also have to convert your stuff over from OTEL to.
+
+369
+00:50:33.200 --> 00:50:33.700
+hrishikb@andrew.cmu.edu: Yeah.
+
+370
+00:50:34.140 --> 00:50:36.060
+David Mine: Or, from Datadog.
+
+371
+00:50:36.870 --> 00:50:39.070
+David Mine: To some other… sink.
+
+372
+00:50:39.520 --> 00:50:48.030
+David Mine: it's not really that much more work to me. Most of that stuff's just configured in the startup anyway, it's already easy to switch.
+
+373
+00:50:51.280 --> 00:50:56.349
+David Mine: I wouldn't make that a requirement. I also wouldn't say no if you want to do that as, like, a…
+
+374
+00:50:56.710 --> 00:50:59.200
+David Mine: a stretch goal.
+
+375
+00:50:59.310 --> 00:51:02.730
+David Mine: You can't push that Facebook, like, the…
+
+376
+00:51:06.470 --> 00:51:11.840
+hrishikb@andrew.cmu.edu: Okay, I guess the… the last part I wanted to talk about was dockerization.
+
+377
+00:51:12.280 --> 00:51:15.509
+hrishikb@andrew.cmu.edu: I think we spoke about this as well last week,
+
+378
+00:51:15.770 --> 00:51:34.509
+hrishikb@andrew.cmu.edu: So I did go over it, and I think dockerizing the entire system, what we're building, would not be the best way to move forward, because we have stateless compute components, so we could dockerize individual components. One would be the ingestion Gateway, and one would be the ML component. We can dockerize them separately, and they can talk to each other via network.
+
+379
+00:51:35.350 --> 00:51:40.590
+hrishikb@andrew.cmu.edu: yeah, that's pretty much it.
+
+380
+00:51:41.320 --> 00:51:43.500
+hrishikb@andrew.cmu.edu: But I had,
+
+381
+00:51:43.790 --> 00:51:50.200
+hrishikb@andrew.cmu.edu: I guess, once we get the data from you, maybe we can slowly start building the OCR functionality?
+
+382
+00:51:51.390 --> 00:51:54.870
+hrishikb@andrew.cmu.edu: And build on the ML model that we use.
+
+383
+00:51:55.000 --> 00:51:58.420
+hrishikb@andrew.cmu.edu: How did the doctorization topic come up? I'm curious.
+
+384
+00:51:59.790 --> 00:52:09.609
+hrishikb@andrew.cmu.edu: Last week, since we have multiple services talking to each other, so when we're building it on our local device versus when we're hosting it on the cloud.
+
+385
+00:52:09.610 --> 00:52:22.389
+hrishikb@andrew.cmu.edu: We don't want it to experience two separate behaviors. We want the behaviors to be exactly the same. So, if we have a Docker container, we know exactly how it's going to be going on both sides. We're just going to put this container up in the cloud, that's it.
+
+386
+00:52:24.760 --> 00:52:30.620
+hrishikb@andrew.cmu.edu: Then lastly, talk about it making it a bit agnostic, so that the software can work anywhere.
+
+387
+00:52:30.830 --> 00:52:33.839
+hrishikb@andrew.cmu.edu: So, that's where the localization point came into the virtual.
+
+388
+00:52:38.350 --> 00:52:42.450
+hrishikb@andrew.cmu.edu: I think that's all we had. Any questions from anyone?
+
+389
+00:52:43.210 --> 00:52:44.070
+hrishikb@andrew.cmu.edu: David?
+
+390
+00:52:45.880 --> 00:52:48.760
+David Mine: Nothing for me.
+
+391
+00:52:48.760 --> 00:52:59.269
+hrishikb@andrew.cmu.edu: Great, so I have a couple takeaways then. I can get you… I'll definitely be able to get you pretty quickly, a global set of our current, like, AMS product data.
+
+392
+00:52:59.450 --> 00:53:12.559
+hrishikb@andrew.cmu.edu: The vendor product data, like, from the suppliers, the spec sheets, the PDFs, so that might take a couple more days just off to actually go to the catalog team and kind of collect that, but I can, again, get you the actual, database data pretty quickly.
+
+393
+00:53:12.790 --> 00:53:28.749
+hrishikb@andrew.cmu.edu: And then also I'll try and get you some, metrics for constraints, such as, like, total number of suppliers, attributes, categories, and, also try and get some trends from that, over time, such as how many we've been adding per year, and for new tenants signed up, or something like that.
+
+394
+00:53:31.770 --> 00:53:42.690
+hrishikb@andrew.cmu.edu: We still haven't gotten the cursive. Yeah, well, Cursive, and yeah, David brought that up this morning. David said he was working on Cursive, he was running into an issue. I know he hasn't had much time today.
+
+395
+00:53:42.750 --> 00:53:43.850
+David Mine: Like, he was employed.
+
+396
+00:53:44.350 --> 00:53:49.060
+David Mine: Yeah, can we schedule a time where I could just sit with someone and try a bunch of things?
+
+397
+00:53:49.460 --> 00:53:52.750
+David Mine: Probably take half an hour to 45 minutes.
+
+398
+00:53:54.010 --> 00:54:01.919
+hrishikb@andrew.cmu.edu: Yeah, sure. Yes, like, one of you, like, in a call on this, he tries different things and it fails, he can try it.
+
+399
+00:54:02.950 --> 00:54:14.279
+David Mine: I would try on my own guest account, but the problem, I think, is that you guys have, rather than being, like, guest accounts with the username, password, your guest accounts to another ENTRE tenant.
+
+400
+00:54:14.420 --> 00:54:17.620
+David Mine: Which is… which adds some complexity to the equation.
+
+401
+00:54:19.000 --> 00:54:22.489
+hrishikb@andrew.cmu.edu: Okay. I think you just let us know what time you're available, and we can…
+
+402
+00:54:22.880 --> 00:54:26.170
+hrishikb@andrew.cmu.edu: So one of us should be free at that time, most likely.
+
+403
+00:54:26.480 --> 00:54:27.330
+hrishikb@andrew.cmu.edu: Okay.
+
+404
+00:54:27.340 --> 00:54:28.410
+David Mine: Okay.
+
+405
+00:54:29.190 --> 00:54:37.679
+hrishikb@andrew.cmu.edu: Did we get them in a team, David, on Microsoft Teams? Yeah. Well, I don't know, David, if you want to post the, potential meeting times there?
+
+406
+00:54:38.980 --> 00:54:41.369
+hrishikb@andrew.cmu.edu: Just make a post with, your availability.
+
+407
+00:54:51.130 --> 00:54:55.150
+hrishikb@andrew.cmu.edu: Both David and Cat Fence here. I'm checking out the picture behind it.
+
+408
+00:54:55.610 --> 00:54:57.770
+hrishikb@andrew.cmu.edu: Those are his cats. Those are your cats.
+
+409
+00:54:57.770 --> 00:54:59.869
+David Mine: Yeah, these are actually my cats.
+
+410
+00:55:01.960 --> 00:55:06.000
+hrishikb@andrew.cmu.edu: Oh, cool. Many of us have cats in the office.
+
+411
+00:55:08.120 --> 00:55:09.809
+hrishikb@andrew.cmu.edu: And what are the names of your cats?
+
+412
+00:55:10.050 --> 00:55:16.550
+David Mine: Let's see, finn, Bumi, and Simon.
+
+413
+00:55:18.540 --> 00:55:20.830
+hrishikb@andrew.cmu.edu: I love it.
+
+414
+00:55:22.630 --> 00:55:24.529
+David Mine: Best Christmas present I ever got.
+
+415
+00:55:29.460 --> 00:55:34.830
+David Mine: From private.
+
+416
+00:55:34.830 --> 00:55:41.930
+hrishikb@andrew.cmu.edu: Yeah, I'll also… Could we get a snapshot of, like, the production table that we've broken?
+
+417
+00:55:43.110 --> 00:55:54.220
+hrishikb@andrew.cmu.edu: What do you need a production table, right, before tables? Our… in our architecture… In the intermediate table, maybe? And that is something that we will create? No, the intermediate table is something we would create. Okay.
+
+418
+00:55:54.640 --> 00:55:58.130
+hrishikb@andrew.cmu.edu: So we would want to replicate whatever
+
+419
+00:55:58.170 --> 00:56:14.820
+hrishikb@andrew.cmu.edu: Oh, you just mean, like, the table? Yeah. Oh, yeah, I mean, that's kind of what I was going to give you, with the sample data from the database. I was just going to give you, you know, top 2,000 rows or something, whatever tables. Would that suffice? Yeah, yeah, that's fine.
+
+420
+00:56:15.030 --> 00:56:16.600
+hrishikb@andrew.cmu.edu: Oh, yeah, there was.
+
+421
+00:56:17.260 --> 00:56:17.920
+hrishikb@andrew.cmu.edu: Right.
+
+422
+00:56:21.280 --> 00:56:23.020
+hrishikb@andrew.cmu.edu: Okay, I guess I'm good.
+

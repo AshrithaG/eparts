@@ -1,0 +1,91 @@
+{
+  "meeting_date": "2026-02-26",
+  "duration_minutes": 30,
+  "participants": [
+    "Hrishik",
+    "Harsha (eParts)"
+  ],
+  "participant_count": 2,
+  "total_words": 4467,
+  "total_turns": 93,
+  "speaker_stats": {
+    "Hrishik": {
+      "turns": 47,
+      "words": 1996,
+      "pct_words": 44.7
+    },
+    "Harsha (eParts)": {
+      "turns": 46,
+      "words": 2471,
+      "pct_words": 55.3
+    }
+  },
+  "detected_topics": {
+    "ML/Model": 8,
+    "Architecture": 4,
+    "Data": 4,
+    "Onboarding": 2
+  },
+  "questions_found": 1,
+  "questions_sample": [
+    {
+      "speaker": "Hrishik",
+      "text": "Can we at least use the LLM part for, instead of the OCR"
+    }
+  ],
+  "potential_decisions": 2,
+  "decisions_sample": [
+    {
+      "speaker": "Hrishik",
+      "text": "I think the primary, goal for the model that we're currently thinking is to get the confidence score on each of the attributes that we extract, but in order to be able to put that into PEMS, we need t"
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Yeah, just\u2026 just let us know, and I think\u2026 I think we should be on top of it. At least I'll be on top of it, no matter if\u2026 So, if you don't hear back until Monday, just ping me on Teams, and that shou"
+    }
+  ],
+  "potential_action_items": 18,
+  "actions_sample": [
+    {
+      "speaker": "Hrishik",
+      "text": "So, Ashtar, you added anything to add? Okay. So, Harshal, we spoke to a couple of members here last, this week and, yeah, this week, and then, one constant suggestion that we were getting is, so if\u2026 i"
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "So, can you guys look at any of the other options available on Azure, other than LLMs, for this use case?"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Yeah, like, I personally have experience with Amazon Bedrock, but not the Azure ecosystem, so we'll have to try that out. And, like, one follow-up question that I would want to ask is. So, we\u2026 initial"
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Yep, 100%. Again, I don't want to be restrictive in any way, so because this is just, like, the initial kind of finding slash research kind of phase, just, just do whatever at this point. I would say "
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Okay. So, at least for now, before the LEM topic even came up, we were just, playing around the semantic measure, approach, like, what\u2026 I mean, the data that we took, the, the amount was obviously, li"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Night. Yeah, I think, I think we will probably should schedule a meeting with the catalog team sometime after spring break."
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Uber. Yeah, so I'll just remove the meeting from next week, next week's calendar."
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Yeah, I'll send out a cancellation thing. Okay. Next we have\u2026 I think, yeah, for the initial ML models, you're thinking we might, like, if you're using specifically ML, we might have to use, two model"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "I think the primary, goal for the model that we're currently thinking is to get the confidence score on each of the attributes that we extract, but in order to be able to put that into PEMS, we need t"
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "This\u2026 the Excel part\u2026 so, the way it is right now is, I mean, this data goes into, like, master database through a few, Like, stored procedures we have, which are kind of lacy. And these load procedur"
+    }
+  ],
+  "analysis_mode": "offline (no LLM \u2014 structural extraction only)"
+}

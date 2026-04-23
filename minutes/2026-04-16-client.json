@@ -1,0 +1,68 @@
+{
+  "meeting_date": "2026-04-16",
+  "duration_minutes": 24,
+  "participants": [
+    "Jaivard",
+    "Ashritha",
+    "Arjun"
+  ],
+  "participant_count": 3,
+  "total_words": 3095,
+  "total_turns": 8,
+  "speaker_stats": {
+    "Jaivard": {
+      "turns": 1,
+      "words": 1074,
+      "pct_words": 34.7
+    },
+    "Ashritha": {
+      "turns": 4,
+      "words": 1967,
+      "pct_words": 63.6
+    },
+    "Arjun": {
+      "turns": 3,
+      "words": 54,
+      "pct_words": 1.7
+    }
+  },
+  "detected_topics": {
+    "Data": 6,
+    "ML/Model": 2,
+    "Architecture": 2
+  },
+  "questions_found": 1,
+  "questions_sample": [
+    {
+      "speaker": "Jaivard",
+      "text": "Can we Actually, just use a CS"
+    }
+  ],
+  "potential_decisions": 1,
+  "decisions_sample": [
+    {
+      "speaker": "Ashritha",
+      "text": "I'm a bit confused. Take care. I think there's an echo. I should talk. This should be fine. Yeah, this is\u2026 sorry about that. So, when you're talking about the context serves, right, so\u2026 If you have al"
+    }
+  ],
+  "potential_action_items": 4,
+  "actions_sample": [
+    {
+      "speaker": "Jaivard",
+      "text": "Yeah, starting. So\u2026 I think\u2026 So the\u2026 So, the first thing\u2026 Was it regarding the training data? So, Liu, if you want to kind of elaborate on that? Hmm. So\u2026 It's basically, he\u2026 there was a list of things"
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "I'm a bit confused. Take care. I think there's an echo. I should talk. This should be fine. Yeah, this is\u2026 sorry about that. So, when you're talking about the context serves, right, so\u2026 If you have al"
+    },
+    {
+      "speaker": "Arjun",
+      "text": "I think I'll be traveling the end of this month, and then I'll be in India for, like, 2-3 weeks. But, I don't think there'll be any disruption in the entire workflow, though. I'll just be taking meeti"
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "But he did tumble, right? So\u2026 Yeah. That would have been so bad boys, yeah. Anyway, good to hear your voice, everyone. Yes. Okay. See y'all. Enjoy the nice weather. Yeah, it's warm. Yeah, it's suppose"
+    }
+  ],
+  "analysis_mode": "offline (no LLM \u2014 structural extraction only)"
+}

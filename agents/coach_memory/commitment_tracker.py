@@ -50,13 +50,23 @@ class CommitmentTrackerAgent(BaseAgent):
 
         # If this was triggered by a transcript, extract new commitments
         if trigger.trigger_type in ("coach_transcript", "transcript"):
-            session_id = trigger.metadata.get("session_id")
+            pipeline_ctx = trigger.metadata.get("pipeline_context", {})
+            session_id = (
+                trigger.metadata.get("session_id")
+                or pipeline_ctx.get("session_id")
+            )
             if session_id:
                 new_count = self._count_commitments_for_session(session_id)
                 outputs.append(AgentOutput(
                     output_type="commitments_tracked",
                     description=f"Session {session_id}: {new_count} commitments tracked",
                     reference=session_id,
+                ))
+            else:
+                total = self._db.execute("SELECT COUNT(*) as cnt FROM commitments").fetchone()["cnt"]
+                outputs.append(AgentOutput(
+                    output_type="commitments_tracked",
+                    description=f"Total commitments tracked: {total}",
                 ))
 
         # Cross-check delivered commitments
