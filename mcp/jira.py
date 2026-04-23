@@ -187,9 +187,9 @@ class JiraMCP:
             return {"ok": False, "error": "Not configured"}
 
         query = jql or f"project = {self._project_key} ORDER BY created DESC"
-        resp = self._session.get(
-            f"{self._api}/search",
-            params={"jql": query, "maxResults": max_results, "fields": "summary,status,assignee,labels,priority"},
+        resp = self._session.post(
+            f"{self._api}/search/jql",
+            json={"jql": query, "maxResults": max_results, "fields": ["summary", "status", "assignee", "labels", "priority"]},
         )
 
         if resp.ok:
