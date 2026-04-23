@@ -1,0 +1,29 @@
+{
+  "required_fields": ["commitments", "concerns", "decisions"],
+  "expected_commitments": [
+    {
+      "keywords": ["200", "labeled", "Friday"],
+      "min_match": 2
+    },
+    {
+      "keywords": ["monitoring", "design", "Wednesday"],
+      "min_match": 2
+    },
+    {
+      "keywords": ["instrument", "review", "time-per-decision"],
+      "min_match": 1
+    }
+  ],
+  "expected_concerns": [
+    {
+      "keywords": ["monitorability", "drift", "degradation"],
+      "min_match": 1
+    },
+    {
+      "keywords": ["HITL", "human review", "30 seconds", "economics"],
+      "min_match": 1
+    }
+  ],
+  "min_commitments": 2,
+  "min_concerns": 1
+}

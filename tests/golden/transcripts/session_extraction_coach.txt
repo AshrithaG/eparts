@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:10.000
+Christian: So let's talk about your ML pipeline. How is the confidence threshold calibration going?
+
+00:00:10.000 --> 00:00:30.000
+Alex: We ran the POC with 500 test parts. The auto-accept rate is 34% at the current threshold of 0.85. We think we can push it higher but need more labeled data. We committed to having 200 more labeled examples by next Friday.
+
+00:00:30.000 --> 00:00:50.000
+Christian: That's good progress. My concern is about monitorability — how will you know if the model degrades in production? You need a drift detection mechanism. This has come up before.
+
+00:00:50.000 --> 00:01:10.000
+Sarah: We've discussed adding a monitoring dashboard but haven't prioritized it yet. We'll commit to having a design for the monitoring approach by next Wednesday.
+
+00:01:10.000 --> 00:01:30.000
+Christian: Good. Another thing — your HITL workflow. The human review for low-confidence matches needs to be efficient. If reviewers spend more than 30 seconds per decision, the economics don't work. Have you measured that?
+
+00:01:30.000 --> 00:01:45.000
+Priya: Not yet. That's a great point. We'll instrument the review interface to track time-per-decision.
+
+00:01:45.000 --> 00:02:00.000
+Christian: Excellent. The key decision you need to make soon is the alpha weighting between semantic and attribute matching. Have you collected enough evidence to decide?
+
+00:02:00.000 --> 00:02:15.000
+Alex: We have some initial numbers but need to run the full A/B test. We're targeting next sprint for that.

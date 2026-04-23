@@ -125,12 +125,18 @@ class SessionMemoryAgent(BaseAgent):
 
         raw_text = transcript_path.read_text(encoding="utf-8")
 
+        # Parse date from filename (GMT20260224-190023_Recording...)
+        date_match = re.search(r"GMT(\d{4})(\d{2})(\d{2})", transcript_path.name)
+        filename_date = (
+            f"{date_match.group(1)}-{date_match.group(2)}-{date_match.group(3)}"
+            if date_match else None
+        )
+        date = metadata.get("date") or filename_date or datetime.now(timezone.utc).strftime("%Y-%m-%d")
         session_id = metadata.get(
             "session_id",
-            f"session-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')}",
+            f"session-{date}-{transcript_path.stem[:20]}",
         )
         session_type = metadata.get("session_type", "coach")
-        date = metadata.get("date", datetime.now(timezone.utc).strftime("%Y-%m-%d"))
         participants = metadata.get("participants", [])
 
         # 1. Store session metadata in SQLite
@@ -167,8 +173,11 @@ class SessionMemoryAgent(BaseAgent):
             ids=chunk_ids,
         )
 
-        # 3. Use Claude to extract structured data from the transcript
-        extraction = self._extract_session_data(raw_text, session_id, date)
+        # 3. Extract structured data — online (Claude) or offline (pattern matching)
+        if self._settings.anthropic_api_key:
+            extraction = self._extract_session_data(raw_text, session_id, date)
+        else:
+            extraction = self._extract_offline(raw_text, session_id, date)
 
         outputs = [
             AgentOutput(
@@ -180,10 +189,33 @@ class SessionMemoryAgent(BaseAgent):
             )
         ]
 
+        # Deposit to shared wiki and emit cross-pipeline events
+        self.emit("new_session_embedded", {
+            "session_id": session_id,
+            "date": date,
+            "session_type": session_type,
+            "chunks_embedded": stored,
+            "commitments": len(extraction.get("commitments", [])),
+            "concerns": len(extraction.get("concerns", [])),
+        })
+        self.wiki.put("commitments", f"session-{session_id}", {
+            "session_id": session_id,
+            "date": date,
+            "commitments": extraction.get("commitments", []),
+            "concerns": extraction.get("concerns", []),
+            "decisions": extraction.get("decisions", []),
+        }, agent=self.name, pipeline="coach_session",
+           tags=["coach", session_type, date])
+
         return AgentResult(
             agent=self.name,
             success=True,
             outputs=outputs,
+            data={
+                "session_id": session_id,
+                "chunks_embedded": stored,
+                "extraction": extraction,
+            },
         )
 
     def _extract_session_data(self, transcript: str, session_id: str, date: str) -> dict:
@@ -237,6 +269,78 @@ class SessionMemoryAgent(BaseAgent):
 
         self._db.commit()
         return data
+
+    def _extract_offline(self, transcript: str, session_id: str, date: str) -> dict:
+        """Pattern-based extraction when no API key is available."""
+        text = transcript.lower()
+
+        # Commitment patterns
+        commit_patterns = [
+            r"(?:we'll|i'll|we will|i will|committed? to|we need to)\s+(.{20,120})",
+            r"(?:by next|by end of|deadline is)\s+(.{10,80})",
+        ]
+        commitments = []
+        for pat in commit_patterns:
+            for match in re.finditer(pat, text):
+                commitments.append({
+                    "text": match.group(0).strip()[:200],
+                    "owner": "team",
+                    "deadline": "",
+                })
+
+        # Concern patterns
+        concern_patterns = [
+            r"(?:concern|worried|problem|issue|risk|challenge|struggling)\s+(?:is|with|about)?\s*(.{20,120})",
+        ]
+        concerns = []
+        seen_themes = set()
+        for pat in concern_patterns:
+            for match in re.finditer(pat, text):
+                concern_text = match.group(0).strip()[:200]
+                theme_keywords = {
+                    "data": "data_access", "access": "data_access",
+                    "scope": "scope_creep", "creep": "scope_creep",
+                    "azure": "tool_constraints", "tool": "tool_constraints",
+                    "model": "model_selection", "ml": "model_selection",
+                    "monitor": "monitorability", "drift": "monitorability",
+                }
+                theme = "general"
+                for kw, th in theme_keywords.items():
+                    if kw in concern_text.lower():
+                        theme = th
+                        break
+                if theme not in seen_themes:
+                    concerns.append({
+                        "text": concern_text,
+                        "raised_by": "team",
+                        "theme": theme,
+                    })
+                    seen_themes.add(theme)
+
+        # Store in SQLite
+        for c in commitments[:10]:
+            self._db.execute(
+                "INSERT INTO commitments (session_id, commitment_text, owner, deadline) VALUES (?, ?, ?, ?)",
+                (session_id, c["text"], c["owner"], c["deadline"]),
+            )
+        for c in concerns[:10]:
+            existing = self._db.execute(
+                "SELECT id, times_raised FROM concerns WHERE theme = ?",
+                (c["theme"],),
+            ).fetchone()
+            if existing:
+                self._db.execute(
+                    "UPDATE concerns SET times_raised = times_raised + 1 WHERE id = ?",
+                    (existing["id"],),
+                )
+            else:
+                self._db.execute(
+                    "INSERT INTO concerns (session_id, concern_text, raised_by, theme) VALUES (?, ?, ?, ?)",
+                    (session_id, c["text"], c["raised_by"], c["theme"]),
+                )
+        self._db.commit()
+
+        return {"commitments": commitments[:10], "concerns": concerns[:10], "decisions": []}
 
     def _default_extraction_prompt(self, transcript: str, date: str) -> str:
         return f"""Analyze this coach/mentor session transcript from {date}.

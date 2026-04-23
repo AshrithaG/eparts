@@ -33,12 +33,16 @@ class VectorStoreMCP:
             path=path,
             settings=Settings(anonymized_telemetry=False),
         )
-        logger.info(f"ChromaDB initialized at {path}")
+        # Use local ONNX embedding model — no API key required
+        from chromadb.utils.embedding_functions import ONNXMiniLM_L6_V2
+        self._embedding_fn = ONNXMiniLM_L6_V2()
+        logger.info(f"ChromaDB initialized at {path} (embedding: ONNX MiniLM-L6-v2)")
 
     def get_or_create_collection(self, name: str) -> chromadb.Collection:
         return self._client.get_or_create_collection(
             name=name,
             metadata={"hnsw:space": "cosine"},
+            embedding_function=self._embedding_fn,
         )
 
     def embed_and_store(

@@ -1,0 +1,840 @@
+# eParts SES — ETVX Process Manifest
+# Maps every agent activity to the CMU meta-model: Entry, Task, Verification, Exit
+# Resource types: auton (agent-driven), assist (AI-assisted), human (human-driven)
+#
+# References: Metamodel_framework.md (Steps 3/4), instruction_and_rubric_for_the_presentation.txt
+
+meta:
+  project: "eParts Agentic SE System"
+  team: "Pimsie Supreme — CMU MSE Studio"
+  framework: "AASE/LASE Meta-Model"
+  sdlc_pattern: "Custom agentic pipeline — not Scrum, not RUP"
+  version: "1.0.0"
+
+# ─────────────────────────────────────────────────────────────────────────
+# REQUIREMENTS DOMAIN
+# ─────────────────────────────────────────────────────────────────────────
+
+processes:
+  - id: REQ-PARSE
+    name: "Transcript Parsing"
+    domain: requirements
+    agent: transcript_parser
+    resource_type: auton
+    description: "Ingest raw VTT meeting transcript, extract structured minutes."
+    entry:
+      - "Raw .vtt file available (Google Drive or manual upload)"
+      - "Prompt template transcript_parser.txt exists and is version-tracked"
+    task:
+      - "Clean VTT formatting (timestamps, speaker labels)"
+      - "Send cleaned text to Claude with extraction prompt"
+      - "Parse JSON response into structured minutes"
+      - "Format as markdown and commit to Bitbucket"
+    verification:
+      - "JSON output passes schema validation (attendees, decisions, action_items, questions)"
+      - "Markdown minutes committed successfully"
+      - "Token usage and latency recorded in metrics DB"
+    exit:
+      - "Structured minutes artifact available in repository"
+      - "Downstream agents (priority_classifier, drift_detector) can consume output"
+    artifacts_produced:
+      - "minutes/YYYY-MM-DD-meeting.md"
+      - "pipeline/logs/agent_runs.jsonl entry"
+    artifacts_consumed:
+      - "Raw .vtt transcript"
+      - "prompts/transcript_parser.txt"
+    measurements:
+      - "Tokens used (input/output)"
+      - "Latency (ms)"
+      - "Extraction completeness (fields populated vs. empty)"
+      - "Human correction count post-extraction"
+
+  - id: REQ-CLASSIFY
+    name: "Priority Classification"
+    domain: requirements
+    agent: priority_classifier
+    resource_type: assist
+    description: "Classify extracted items into P0/P1/P2. P0 requires human review."
+    entry:
+      - "Structured items available from transcript parser output"
+      - "Priority classifier prompt template exists"
+    task:
+      - "Send items + context to Claude for priority classification"
+      - "Parse priority assignments"
+      - "Flag P0 items for human-in-the-loop review"
+    verification:
+      - "Each item assigned exactly one priority (P0, P1, P2)"
+      - "P0 items flagged with requires_human_review=true"
+    exit:
+      - "Classified items ready for ticket creation or requirement extraction"
+    artifacts_produced:
+      - "Priority-annotated item list (in-memory, passed to downstream agents)"
+    artifacts_consumed:
+      - "Parsed transcript items"
+      - "prompts/priority_classifier.txt"
+    measurements:
+      - "P0/P1/P2 distribution per meeting"
+      - "Human override rate on priority assignments"
+      - "Tokens used per classification batch"
+
+  - id: REQ-EXTRACT
+    name: "Requirement Extraction"
+    domain: requirements
+    agent: req_extractor
+    resource_type: auton
+    description: "Format new requirements as REQ-XXX.md files and commit to repo."
+    entry:
+      - "Parsed and classified items available"
+      - "Current REQ numbering state known (scan existing files)"
+    task:
+      - "Generate REQ-XXX.md from structured requirement data"
+      - "Commit files to requirements/ directory in Bitbucket"
+    verification:
+      - "Each file follows REQ-XXX.md naming convention"
+      - "Commit succeeds without conflicts"
+    exit:
+      - "New requirements tracked in version control"
+      - "Jira agent can link tickets to REQ IDs"
+    artifacts_produced:
+      - "requirements/REQ-XXX.md files"
+    artifacts_consumed:
+      - "Classified items from priority classifier"
+    measurements:
+      - "Requirements generated per meeting"
+      - "Requirements-to-ticket conversion rate"
+
+  - id: REQ-STALE
+    name: "Stale Requirement Detection"
+    domain: requirements
+    agent: stale_detector
+    resource_type: auton
+    description: "Identify requirements lacking Jira tickets or recent activity."
+    entry:
+      - "Cron trigger (Monday 8am)"
+      - "Jira and Bitbucket APIs accessible"
+    task:
+      - "Scan all REQ-XXX.md files"
+      - "Cross-reference with Jira tickets"
+      - "Identify stale items (no activity in N days)"
+      - "Alert team via Slack"
+    verification:
+      - "Alert includes actionable list of stale REQs"
+    exit:
+      - "Team notified, stale items visible in dashboard"
+    artifacts_produced:
+      - "Slack alert message"
+    artifacts_consumed:
+      - "requirements/REQ-*.md files"
+      - "Jira sprint state"
+    measurements:
+      - "Stale requirement count over time"
+      - "Time-to-resolution after alert"
+
+# ─────────────────────────────────────────────────────────────────────────
+# ARCHITECTURE DOMAIN
+# ─────────────────────────────────────────────────────────────────────────
+
+  - id: ARCH-DRIFT
+    name: "Architectural Drift Detection"
+    domain: architecture
+    agent: drift_detector
+    resource_type: auton
+    description: "Compare meeting discussions against canonical architecture diagram."
+    entry:
+      - "New meeting transcript parsed"
+      - "Canonical Mermaid diagram exists in docs/architecture.mmd"
+    task:
+      - "Extract architecture-relevant statements from transcript"
+      - "Compare against current diagram components/connections"
+      - "Score drift severity"
+    verification:
+      - "Drift report includes specific component references"
+      - "No false positives on trivial mentions"
+    exit:
+      - "Drift report available; triggers diagram_updater if significant"
+    artifacts_produced:
+      - "Drift analysis report"
+    artifacts_consumed:
+      - "Parsed meeting minutes"
+      - "docs/architecture.mmd"
+    measurements:
+      - "Drift events detected per sprint"
+      - "False positive rate (human-reviewed)"
+
+  - id: ARCH-ADR
+    name: "ADR Generation"
+    domain: architecture
+    agent: adr_generator
+    resource_type: assist
+    description: "Auto-draft Architecture Decision Records when significant decisions detected."
+    entry:
+      - "Significant technical decision detected in meeting or PR"
+    task:
+      - "Draft ADR using standard template (Context, Decision, Consequences)"
+      - "Create PR for human review — never auto-merge"
+    verification:
+      - "ADR follows template structure"
+      - "PR created successfully with reviewers assigned"
+    exit:
+      - "ADR PR open for team review"
+    artifacts_produced:
+      - "docs/adr/ADR-XXX.md (as PR)"
+    artifacts_consumed:
+      - "Decision context from transcript/discussion"
+    measurements:
+      - "ADRs generated per sprint"
+      - "ADR approval rate vs. rejection/revision rate"
+      - "Time from decision detection to ADR draft"
+
+  - id: ARCH-DIAGRAM
+    name: "Diagram Update"
+    domain: architecture
+    agent: diagram_updater
+    resource_type: assist
+    description: "Propose Mermaid diagram updates via PR when drift is detected."
+    entry:
+      - "Drift detector reports significant architectural drift"
+    task:
+      - "Generate updated Mermaid diagram reflecting new components/connections"
+      - "Create PR with before/after comparison"
+    verification:
+      - "Updated Mermaid parses without errors"
+      - "Changes are minimal and targeted (not full rewrites)"
+    exit:
+      - "Diagram update PR open for human review"
+    artifacts_produced:
+      - "docs/architecture.mmd update (as PR)"
+    artifacts_consumed:
+      - "Drift analysis report"
+      - "Current docs/architecture.mmd"
+    measurements:
+      - "Diagram update frequency"
+      - "Diagram accuracy (human assessment)"
+
+  - id: ARCH-TRACE
+    name: "Traceability Matrix"
+    domain: architecture
+    agent: traceability_builder
+    resource_type: auton
+    description: "Maintain living traceability matrix: REQ → Jira → PR → Test."
+    entry:
+      - "New requirement, ticket, PR, or test result available"
+    task:
+      - "Cross-reference REQ IDs, Jira keys, PR numbers, test status"
+      - "Update traceability matrix document"
+    verification:
+      - "Matrix has no orphaned entries"
+      - "Each REQ links to at least one downstream artifact"
+    exit:
+      - "Updated matrix committed to repository"
+    artifacts_produced:
+      - "docs/traceability_matrix.md"
+    artifacts_consumed:
+      - "requirements/REQ-*.md, Jira tickets, Bitbucket PRs"
+    measurements:
+      - "Traceability coverage percentage"
+      - "Orphaned requirements count"
+
+# ─────────────────────────────────────────────────────────────────────────
+# CODING DOMAIN
+# ─────────────────────────────────────────────────────────────────────────
+
+  - id: CODE-SCAFFOLD
+    name: "Boilerplate Generation"
+    domain: coding
+    agent: boilerplate_generator
+    resource_type: auton
+    description: "Scaffold new service/module directories with interface stubs and test files."
+    entry:
+      - "ADR approved or new module requirement identified"
+    task:
+      - "Generate directory structure based on ADR context"
+      - "Create interface stubs, __init__.py, basic test file"
+      - "Submit as PR for review"
+    verification:
+      - "Generated code passes linting"
+      - "Test file imports and runs (even if tests are empty)"
+    exit:
+      - "Scaffolding PR open for developer review"
+    artifacts_produced:
+      - "New module directory with stubs (as PR)"
+    artifacts_consumed:
+      - "ADR, requirement context"
+    measurements:
+      - "Scaffold-to-implementation time"
+      - "Developer modification rate on scaffolded code"
+
+  - id: CODE-REVIEW
+    name: "Automated PR Review"
+    domain: coding
+    agent: pr_reviewer
+    resource_type: assist
+    description: "Auto-comment on PRs checking style, coverage, traceability, and docs."
+    entry:
+      - "New PR opened or updated in Bitbucket"
+    task:
+      - "Analyze diff for style violations, missing tests, undocumented APIs"
+      - "Check REQ/Jira references in PR description"
+      - "Post review comments"
+    verification:
+      - "Comments are specific and actionable (not generic)"
+      - "False positive rate tracked"
+    exit:
+      - "Review comments posted; developer can proceed"
+    artifacts_produced:
+      - "PR review comments"
+    artifacts_consumed:
+      - "PR diff, REQ documents, coding standards"
+    measurements:
+      - "Issues caught per PR review"
+      - "False positive rate (developer dismissals)"
+      - "Time from PR open to first review comment"
+
+  - id: CODE-TEST
+    name: "Test Stub Generation"
+    domain: coding
+    agent: test_generator
+    resource_type: auton
+    description: "Generate unit test stubs from function signatures in new modules."
+    entry:
+      - "New module scaffolded or significant functions added"
+    task:
+      - "Parse function signatures"
+      - "Generate pytest test stubs with descriptive names"
+    verification:
+      - "Test file imports without errors"
+      - "All public functions have at least one test stub"
+    exit:
+      - "Test stubs committed or included in scaffold PR"
+    artifacts_produced:
+      - "tests/test_*.py files"
+    artifacts_consumed:
+      - "Source module files"
+    measurements:
+      - "Test stub coverage (% of public functions)"
+      - "Stub-to-implementation completion rate"
+
+  - id: CODE-DOC
+    name: "API Documentation Update"
+    domain: coding
+    agent: doc_generator
+    resource_type: auton
+    description: "Auto-update API documentation when endpoints are added or changed."
+    entry:
+      - "PR contains changes to API endpoint files"
+    task:
+      - "Detect new/changed endpoints in diff"
+      - "Generate or update API documentation"
+      - "Add documentation changes to PR"
+    verification:
+      - "Documentation matches actual endpoint signatures"
+    exit:
+      - "Updated docs included in PR"
+    artifacts_produced:
+      - "docs/api/ documentation updates"
+    artifacts_consumed:
+      - "PR diff containing endpoint changes"
+    measurements:
+      - "Documentation coverage (% of endpoints documented)"
+      - "Documentation staleness (age of last update)"
+
+# ─────────────────────────────────────────────────────────────────────────
+# PROJECT MANAGEMENT DOMAIN
+# ─────────────────────────────────────────────────────────────────────────
+
+  - id: PM-TICKET
+    name: "Ticket Creation"
+    domain: project_mgmt
+    agent: ticket_creator
+    resource_type: assist
+    description: "Create Jira tickets from classified items. P0 queued for human approval."
+    entry:
+      - "Priority-classified items available"
+    task:
+      - "Create Jira tickets for P1/P2 items automatically"
+      - "Queue P0 items with human approval prompt"
+      - "Suggest assignees based on keyword analysis"
+    verification:
+      - "Tickets created with correct priority, labels, sprint"
+      - "P0 items visible in human review queue"
+    exit:
+      - "All items tracked in Jira"
+    artifacts_produced:
+      - "Jira tickets"
+    artifacts_consumed:
+      - "Classified items from priority classifier"
+    measurements:
+      - "Tickets created per sprint"
+      - "P0 human approval time"
+      - "Assignee accuracy (% accepted by suggested assignee)"
+
+  - id: PM-WBS
+    name: "WBS Maintenance"
+    domain: project_mgmt
+    agent: wbs_updater
+    resource_type: auton
+    description: "Maintain work breakdown structure synced with Jira sprint states."
+    entry:
+      - "Sprint state changed or periodic sync trigger"
+    task:
+      - "Query Jira for current sprint contents"
+      - "Update sprint/wbs.md with current state"
+    verification:
+      - "WBS matches Jira sprint exactly"
+    exit:
+      - "Updated WBS available for team reference"
+    artifacts_produced:
+      - "sprint/wbs.md"
+    artifacts_consumed:
+      - "Jira sprint API response"
+    measurements:
+      - "WBS sync frequency"
+      - "Drift between WBS and actual sprint state"
+
+  - id: PM-DIGEST
+    name: "Weekly Digest"
+    domain: project_mgmt
+    agent: weekly_digest
+    resource_type: auton
+    description: "Generate comprehensive weekly digest for Slack and Confluence."
+    entry:
+      - "Cron trigger (Friday 6pm)"
+    task:
+      - "Gather commits, decisions, sprint health, metrics from the week"
+      - "Format as digest report"
+      - "Post to Slack and Confluence"
+    verification:
+      - "Digest covers all activity categories"
+      - "Successfully posted to both channels"
+    exit:
+      - "Team has visibility into weekly progress"
+    artifacts_produced:
+      - "Slack message, Confluence page"
+    artifacts_consumed:
+      - "Bitbucket commits, Jira sprint, decisions log, metrics DB"
+    measurements:
+      - "Digest completeness score"
+      - "Team engagement (Slack reactions/views)"
+
+  - id: PM-ALERT
+    name: "Project Health Alerting"
+    domain: project_mgmt
+    agent: alert_agent
+    resource_type: auton
+    description: "Monitor sprint health and fire Slack alerts for risks."
+    entry:
+      - "Periodic check (every 6 hours)"
+    task:
+      - "Check sprint velocity, unassigned P0s, blocked items"
+      - "Fire alerts for threshold violations"
+    verification:
+      - "Alerts include specific risk and suggested action"
+    exit:
+      - "Team aware of project risks"
+    artifacts_produced:
+      - "Slack alert messages"
+    artifacts_consumed:
+      - "Jira sprint state, metrics data"
+    measurements:
+      - "Alerts fired per sprint"
+      - "Alert-to-resolution time"
+      - "False alert rate"
+
+# ─────────────────────────────────────────────────────────────────────────
+# KNOWLEDGE DOMAIN
+# ─────────────────────────────────────────────────────────────────────────
+
+  - id: KN-PUBLISH
+    name: "Minutes Publishing"
+    domain: knowledge
+    agent: minutes_publisher
+    resource_type: auton
+    description: "Publish meeting minutes to Confluence as human-readable pages."
+    entry:
+      - "Meeting minutes markdown committed to Bitbucket"
+    task:
+      - "Convert markdown to Confluence storage format"
+      - "Create or update Confluence page"
+    verification:
+      - "Page renders correctly in Confluence"
+    exit:
+      - "Minutes accessible to all stakeholders"
+    artifacts_produced:
+      - "Confluence page"
+    artifacts_consumed:
+      - "minutes/*.md from Bitbucket"
+    measurements:
+      - "Publishing latency (commit to Confluence)"
+      - "Page view counts"
+
+  - id: KN-DECISION
+    name: "Decision Logging"
+    domain: knowledge
+    agent: decision_logger
+    resource_type: auton
+    description: "Extract and maintain a running decision log from all sources."
+    entry:
+      - "New transcript or discussion with decisions"
+    task:
+      - "Extract decisions from parsed content"
+      - "Append to minutes/decisions.log.md"
+      - "Commit to Bitbucket"
+    verification:
+      - "No duplicate decisions logged"
+      - "Each entry has date, context, and rationale"
+    exit:
+      - "Decision history updated and committed"
+    artifacts_produced:
+      - "minutes/decisions.log.md"
+    artifacts_consumed:
+      - "Parsed meeting minutes, Slack discussions"
+    measurements:
+      - "Decisions logged per sprint"
+      - "Decision reference frequency in later meetings"
+
+  - id: KN-PROMPT-REG
+    name: "Prompt Regression Testing"
+    domain: knowledge
+    agent: prompt_regression
+    resource_type: auton
+    description: "Run regression tests on modified prompts against golden dataset."
+    entry:
+      - "PR modifies a file in prompts/ directory"
+    task:
+      - "Run modified prompt against golden test cases"
+      - "Compare outputs to baseline (semantic similarity)"
+      - "Block PR if quality drops > threshold"
+    verification:
+      - "All golden cases produce acceptable outputs"
+      - "Quality score meets or exceeds baseline"
+    exit:
+      - "PR approved for prompt change or blocked with report"
+    artifacts_produced:
+      - "Prompt regression report"
+    artifacts_consumed:
+      - "prompts/*.txt, data/golden/*.json"
+    measurements:
+      - "Prompt version count per template"
+      - "Quality score per version"
+      - "Regression rate (% of changes that degrade quality)"
+
+  - id: KN-CONTEXT
+    name: "Context Packaging"
+    domain: knowledge
+    agent: context_packager
+    resource_type: auton
+    description: "Package relevant project context for mentor meetings."
+    entry:
+      - "Cron trigger (Monday 8am or pre-meeting)"
+    task:
+      - "Gather recent commits, open REQs, active ADRs"
+      - "Format as concise briefing document"
+    verification:
+      - "Briefing is under 2 pages"
+      - "Includes only relevant, recent items"
+    exit:
+      - "Context package available for meeting preparation"
+    artifacts_produced:
+      - "Context briefing document"
+    artifacts_consumed:
+      - "Bitbucket commits, requirements, ADRs, Jira sprint"
+    measurements:
+      - "Briefing preparation time"
+      - "Content relevance score (meeting feedback)"
+
+# ─────────────────────────────────────────────────────────────────────────
+# COACH SESSION MEMORY (eParts-specific)
+# ─────────────────────────────────────────────────────────────────────────
+
+  - id: COACH-INGEST
+    name: "Session Memory Ingestion"
+    domain: coach_memory
+    agent: session_memory
+    resource_type: auton
+    description: "Chunk and embed coach session transcripts into ChromaDB for RAG."
+    entry:
+      - "Coach/mentor session transcript available"
+      - "ChromaDB vector store accessible"
+    task:
+      - "Chunk transcript into semantic segments"
+      - "Generate embeddings via sentence-transformers"
+      - "Store in ChromaDB with session metadata"
+      - "Record session in SQLite index"
+    verification:
+      - "All chunks successfully embedded (count matches)"
+      - "Session retrievable via semantic query"
+    exit:
+      - "Session queryable in vector store for future RAG"
+    artifacts_produced:
+      - "ChromaDB embeddings, SQLite session record"
+    artifacts_consumed:
+      - "Coach session transcript"
+    measurements:
+      - "Chunks per session"
+      - "Embedding latency"
+      - "Retrieval quality (relevance score on test queries)"
+
+  - id: COACH-COMMIT
+    name: "Commitment Tracking"
+    domain: coach_memory
+    agent: commitment_tracker
+    resource_type: auton
+    description: "Identify and track commitments made during coach sessions."
+    entry:
+      - "Session ingested into memory"
+    task:
+      - "Use Claude to extract commitments from session text"
+      - "Store commitments with owner, deadline, status"
+      - "Check for overdue commitments"
+    verification:
+      - "Commitments have owner and deadline"
+      - "Overdue items flagged for follow-up"
+    exit:
+      - "Commitment database updated"
+    artifacts_produced:
+      - "SQLite commitment records"
+    artifacts_consumed:
+      - "Session transcripts, prompts/session_extraction.txt"
+    measurements:
+      - "Commitments tracked per session"
+      - "On-time delivery rate"
+      - "Overdue commitment count over time"
+
+  - id: COACH-CONCERN
+    name: "Concern Detection"
+    domain: coach_memory
+    agent: concern_tracker
+    resource_type: auton
+    description: "Detect recurring themes/concerns from coach sessions."
+    entry:
+      - "Multiple sessions ingested"
+    task:
+      - "Analyze session history for recurring themes"
+      - "Track concern frequency and evolution"
+      - "Flag persistent unresolved concerns"
+    verification:
+      - "Concerns linked to specific session references"
+      - "Frequency counts accurate"
+    exit:
+      - "Concern report available for briefing generation"
+    artifacts_produced:
+      - "SQLite concern records with frequency data"
+    artifacts_consumed:
+      - "Session memory (ChromaDB + SQLite)"
+    measurements:
+      - "Unique concerns per session"
+      - "Concern resolution rate"
+      - "Concern persistence duration"
+
+  - id: COACH-BRIEF
+    name: "Pre-Meeting Briefing"
+    domain: coach_memory
+    agent: briefing_generator
+    resource_type: auton
+    description: "Generate pre-meeting briefing from session memory + commitments + concerns."
+    entry:
+      - "Cron trigger or manual trigger before meeting"
+      - "Session memory, commitments, and concerns data available"
+    task:
+      - "Query session memory for recent context"
+      - "Gather open commitments and active concerns"
+      - "Use Claude to synthesize briefing"
+      - "Post to Slack"
+    verification:
+      - "Briefing covers open items, recent decisions, concerns"
+      - "Posted successfully to Slack"
+    exit:
+      - "Team prepared for upcoming meeting"
+    artifacts_produced:
+      - "Slack briefing message"
+    artifacts_consumed:
+      - "Session memory, commitment DB, concern DB, prompts/briefing_generator.txt"
+    measurements:
+      - "Briefing generation time"
+      - "Content coverage (% of open items mentioned)"
+      - "Team feedback score"
+
+# ─────────────────────────────────────────────────────────────────────────
+# ML DECISION MEMORY (eParts-specific)
+# ─────────────────────────────────────────────────────────────────────────
+
+  - id: ML-LOG
+    name: "ML Decision Log"
+    domain: ml_decision
+    agent: decision_log
+    resource_type: auton
+    description: "Maintain SQLite-backed log of open ML architectural decisions."
+    entry:
+      - "New ML decision identified or system initialization"
+    task:
+      - "Record decision with context, options, criteria"
+      - "Maintain decision status (open/evidence_gathering/ready_to_close/closed)"
+    verification:
+      - "All decisions have required fields"
+      - "No duplicate decision IDs"
+    exit:
+      - "Decision log current and queryable"
+    artifacts_produced:
+      - "SQLite ml_decisions records"
+    artifacts_consumed:
+      - "ADRs, meeting transcripts, manual input"
+    measurements:
+      - "Open decisions count"
+      - "Average time to decision closure"
+      - "Decision-to-implementation gap"
+
+  - id: ML-EVIDENCE
+    name: "Evidence Accumulation"
+    domain: ml_decision
+    agent: evidence_accumulator
+    resource_type: auton
+    description: "Parse POC results and update decision log with empirical evidence."
+    entry:
+      - "New POC result file (e.g., poc_results.json) available"
+    task:
+      - "Parse POC metrics"
+      - "Match results to relevant open decisions"
+      - "Record evidence with metrics, source, timestamp"
+    verification:
+      - "Evidence linked to correct decision(s)"
+      - "Metrics parsed accurately"
+    exit:
+      - "Decision log enriched with evidence"
+    artifacts_produced:
+      - "SQLite evidence records"
+    artifacts_consumed:
+      - "data/seed/poc_results.json, experiment outputs"
+    measurements:
+      - "Evidence items per decision"
+      - "Time from experiment completion to evidence logging"
+
+  - id: ML-READINESS
+    name: "Decision Readiness Detection"
+    domain: ml_decision
+    agent: readiness_detector
+    resource_type: auton
+    description: "Check evidence against thresholds and alert when a decision is ready to close."
+    entry:
+      - "New evidence accumulated or periodic check"
+    task:
+      - "Evaluate evidence count/quality against decision thresholds"
+      - "Fire Slack alert when ready"
+    verification:
+      - "Threshold logic is deterministic and auditable"
+      - "Alert includes summary of evidence"
+    exit:
+      - "Team notified of decisions ready for closure"
+    artifacts_produced:
+      - "Slack readiness alert"
+    artifacts_consumed:
+      - "Decision log, evidence records, threshold config"
+    measurements:
+      - "Readiness alerts per sprint"
+      - "Alert-to-closure time"
+      - "Threshold accuracy (were decisions actually ready?)"
+
+  - id: ML-LINK
+    name: "Coach-ML Linking"
+    domain: ml_decision
+    agent: coach_linker
+    resource_type: auton
+    description: "Search coach session memory for ML-related mentions and link to open decisions."
+    entry:
+      - "Open ML decisions exist and session memory is populated"
+    task:
+      - "For each open decision, query session memory for related keywords"
+      - "Link high-relevance session chunks to decisions"
+    verification:
+      - "Links are semantically relevant (not just keyword matches)"
+    exit:
+      - "ML decisions enriched with coach context for briefings"
+    artifacts_produced:
+      - "Decision-to-session links"
+    artifacts_consumed:
+      - "ML decision log, ChromaDB session embeddings"
+    measurements:
+      - "Links created per decision"
+      - "Link relevance score (semantic similarity)"
+
+# ─────────────────────────────────────────────────────────────────────────
+# CROSS-CUTTING PROCESSES (non-agent)
+# ─────────────────────────────────────────────────────────────────────────
+
+  - id: SYS-METRICS
+    name: "Metrics Collection"
+    domain: system
+    agent: "N/A (built into BaseAgent)"
+    resource_type: auton
+    description: "Automatic measurement of every agent operation."
+    entry:
+      - "Any agent.execute() call"
+    task:
+      - "Record LLM call metrics (tokens, latency, cost, model, prompt)"
+      - "Record agent run metrics (duration, success, outputs)"
+      - "Track prompt version hashes"
+    verification:
+      - "Metrics DB contains entry for every agent run"
+      - "No gaps in the audit trail"
+    exit:
+      - "Metrics queryable via /metrics API and dashboard"
+    artifacts_produced:
+      - "pipeline/metrics.db records"
+      - "pipeline/logs/agent_runs.jsonl entries"
+    artifacts_consumed:
+      - "Agent execution telemetry"
+    measurements:
+      - "Metrics completeness (runs recorded / runs executed)"
+      - "DB query latency for dashboard"
+
+  - id: SYS-ORCHESTRATE
+    name: "Event Orchestration"
+    domain: system
+    agent: "Central Orchestrator (FastAPI)"
+    resource_type: auton
+    description: "Route triggers to agents, manage task queue, serve API."
+    entry:
+      - "Incoming webhook, cron event, or manual trigger"
+    task:
+      - "Resolve trigger type to agent list via routing table"
+      - "Enqueue tasks for sequential execution"
+      - "Return task IDs for status tracking"
+    verification:
+      - "All triggers routed to correct agents"
+      - "Queue processes tasks without drops"
+    exit:
+      - "Agent results available via /task/{id} endpoint"
+    artifacts_produced:
+      - "Task queue entries, API responses"
+    artifacts_consumed:
+      - "Webhooks, cron signals, manual API calls"
+    measurements:
+      - "Events processed per day"
+      - "Queue depth over time"
+      - "End-to-end latency (trigger to result)"
+
+  - id: HUMAN-REVIEW
+    name: "Human-in-the-Loop Review"
+    domain: system
+    agent: "N/A (human process)"
+    resource_type: human
+    description: "Human review of P0 items, ADR drafts, diagram changes, and flagged outputs."
+    entry:
+      - "Agent flags output with requires_human_review=true"
+    task:
+      - "Review flagged item in context"
+      - "Approve, modify, or reject"
+      - "Record correction if output was modified"
+    verification:
+      - "Correction recorded in metrics DB"
+      - "Downstream agents receive corrected version"
+    exit:
+      - "Item either approved or corrected and re-processed"
+    artifacts_produced:
+      - "Human corrections in metrics DB"
+    artifacts_consumed:
+      - "Agent outputs flagged for review"
+    measurements:
+      - "Review queue depth"
+      - "Review turnaround time"
+      - "Correction rate by agent (quality indicator)"
+      - "Re-prompt rate (corrections leading to re-execution)"

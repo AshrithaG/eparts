@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eParts — Project Intelligence</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #131a2b;
+  --surface2: #1a2338;
+  --border: #253352;
+  --text: #e0e6f0;
+  --text-dim: #8899b4;
+  --accent: #4f8cff;
+  --accent2: #00d68f;
+  --warn: #ff6b6b;
+  --orange: #ff9f43;
+  --purple: #a855f7;
+  --pink: #ec4899;
+  --cyan: #22d3ee;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; overflow-x: hidden; }
+.header { background: linear-gradient(135deg, #131a2b 0%, #1a1040 100%); padding: 20px 32px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.header h1 { font-size: 22px; font-weight: 700; background: linear-gradient(135deg, var(--accent), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.header .subtitle { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.stats-bar { display: flex; gap: 24px; }
+.stat { text-align: center; }
+.stat .num { font-size: 22px; font-weight: 700; color: var(--accent); }
+.stat .lbl { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+
+.tabs { display: flex; gap: 0; background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.tab { padding: 14px 24px; font-size: 13px; font-weight: 600; color: var(--text-dim); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; }
+.tab:hover { color: var(--text); background: var(--surface2); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+.view { display: none; padding: 24px 32px; min-height: calc(100vh - 140px); }
+.view.active { display: block; }
+
+/* Knowledge Graph */
+#graph-container { width: 100%; height: calc(100vh - 200px); border-radius: 12px; overflow: hidden; position: relative; }
+#graph-svg { width: 100%; height: 100%; background: radial-gradient(ellipse at center, #0f1624 0%, #080c14 100%); }
+.graph-legend { position: absolute; top: 16px; left: 16px; background: rgba(19,26,43,0.95); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; font-size: 12px; }
+.legend-item { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+.legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+.graph-tooltip { position: absolute; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; font-size: 12px; pointer-events: none; opacity: 0; transition: opacity 0.15s; max-width: 300px; z-index: 10; }
+.graph-tooltip.visible { opacity: 1; }
+.graph-tooltip h4 { color: var(--accent); margin-bottom: 4px; }
+.graph-tooltip p { color: var(--text-dim); line-height: 1.5; }
+
+/* Goal Model */
+.goal-tree { display: flex; flex-direction: column; align-items: center; gap: 32px; padding: 40px 0; }
+.goal-level { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.goal-level-label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim); margin-bottom: 8px; text-align: center; width: 100%; }
+.goal-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; min-width: 220px; max-width: 280px; transition: all 0.2s; cursor: default; }
+.goal-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(79,140,255,0.15); }
+.goal-card.strategic { border-color: var(--purple); background: linear-gradient(135deg, #1a1040 0%, var(--surface) 100%); }
+.goal-card.soft { border-color: var(--cyan); }
+.goal-card.user { border-color: var(--accent2); }
+.goal-card.functional { border-color: var(--accent); }
+.goal-card.obstacle { border-color: var(--warn); background: rgba(255,107,107,0.05); }
+.goal-card .tag { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 6px; }
+.goal-card.strategic .tag { background: var(--purple); color: #fff; }
+.goal-card.soft .tag { background: rgba(34,211,238,0.2); color: var(--cyan); }
+.goal-card.user .tag { background: rgba(0,214,143,0.2); color: var(--accent2); }
+.goal-card.functional .tag { background: rgba(79,140,255,0.2); color: var(--accent); }
+.goal-card.obstacle .tag { background: rgba(255,107,107,0.2); color: var(--warn); }
+.goal-card h3 { font-size: 14px; margin-bottom: 4px; line-height: 1.4; }
+.goal-card .desc { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+.goal-connectors { width: 100%; text-align: center; color: var(--border); font-size: 24px; }
+
+/* WBS */
+.wbs-tree { padding: 20px 0; }
+.wbs-node { margin-left: 24px; border-left: 2px solid var(--border); padding-left: 20px; }
+.wbs-node:last-child { border-left-color: transparent; }
+.wbs-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; position: relative; }
+.wbs-item::before { content: ''; position: absolute; left: -22px; top: 50%; width: 20px; height: 2px; background: var(--border); }
+.wbs-item .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.wbs-item .dot.done { background: var(--accent2); }
+.wbs-item .dot.in_progress { background: var(--accent); animation: pulse 2s infinite; }
+.wbs-item .dot.not_started { background: var(--text-dim); }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.wbs-item .label { font-size: 14px; font-weight: 500; }
+.wbs-item .status { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; padding: 2px 8px; border-radius: 4px; }
+.wbs-item .status.done { background: rgba(0,214,143,0.15); color: var(--accent2); }
+.wbs-item .status.in_progress { background: rgba(79,140,255,0.15); color: var(--accent); }
+.wbs-item .status.not_started { background: rgba(136,153,180,0.15); color: var(--text-dim); }
+.wbs-root { font-size: 18px; font-weight: 700; color: var(--accent); padding: 12px 0; }
+.wbs-phase { font-size: 15px; font-weight: 600; color: var(--text); padding: 16px 0 8px 0; }
+
+/* Agent Flow */
+#flow-container { width: 100%; height: calc(100vh - 200px); }
+#flow-svg { width: 100%; height: 100%; background: radial-gradient(ellipse at center, #0f1624 0%, #080c14 100%); border-radius: 12px; }
+
+/* Traceability */
+.trace-matrix { display: grid; gap: 2px; overflow-x: auto; }
+.trace-cell { padding: 8px; font-size: 11px; min-width: 90px; text-align: center; border-radius: 4px; }
+.trace-cell.header { background: var(--surface2); font-weight: 600; color: var(--text); font-size: 10px; }
+.trace-cell.has-link { background: rgba(79,140,255,0.2); color: var(--accent); cursor: pointer; }
+.trace-cell.has-link:hover { background: rgba(79,140,255,0.35); }
+.trace-cell.empty { background: var(--surface); }
+.trace-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+.trace-section h3 { font-size: 16px; margin-bottom: 16px; color: var(--accent); }
+.trace-table { width: 100%; border-collapse: collapse; }
+.trace-table th { text-align: left; padding: 10px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); border-bottom: 1px solid var(--border); }
+.trace-table td { padding: 10px 12px; font-size: 13px; border-bottom: 1px solid rgba(37,51,82,0.5); }
+.trace-table tr:hover td { background: rgba(79,140,255,0.05); }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; }
+.badge.meeting { background: rgba(168,85,247,0.2); color: var(--purple); }
+.badge.req { background: rgba(79,140,255,0.2); color: var(--accent); }
+.badge.arch { background: rgba(0,214,143,0.2); color: var(--accent2); }
+.badge.concern { background: rgba(255,107,107,0.2); color: var(--warn); }
+.badge.event { background: rgba(255,159,67,0.2); color: var(--orange); }
+
+/* Event Timeline */
+.timeline { position: relative; padding: 0 0 0 40px; }
+.timeline::before { content: ''; position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+.tl-item { position: relative; margin-bottom: 20px; }
+.tl-item::before { content: ''; position: absolute; left: -30px; top: 8px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--accent); background: var(--bg); }
+.tl-item.action::before { border-color: var(--accent2); }
+.tl-item.decision::before { border-color: var(--purple); }
+.tl-item.concern::before { border-color: var(--warn); }
+.tl-item .tl-time { font-size: 10px; color: var(--text-dim); }
+.tl-item .tl-body { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; margin-top: 4px; }
+.tl-item .tl-body h4 { font-size: 13px; margin-bottom: 4px; }
+.tl-item .tl-body p { font-size: 12px; color: var(--text-dim); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>eParts Project Intelligence</h1>
+    <div class="subtitle">Agentic SE System — Knowledge Graph, Goal Model, WBS & Traceability</div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat"><div class="num" id="stat-meetings">0</div><div class="lbl">Meetings</div></div>
+    <div class="stat"><div class="num" id="stat-reqs">0</div><div class="lbl">Requirements</div></div>
+    <div class="stat"><div class="num" id="stat-events">0</div><div class="lbl">Events</div></div>
+    <div class="stat"><div class="num" id="stat-wiki">0</div><div class="lbl">Wiki Entries</div></div>
+    <div class="stat"><div class="num" id="stat-links">0</div><div class="lbl">Trace Links</div></div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-view="graph">Knowledge Graph</div>
+  <div class="tab" data-view="goals">Goal Model</div>
+  <div class="tab" data-view="wbs">WBS</div>
+  <div class="tab" data-view="flow">Agent Flow</div>
+  <div class="tab" data-view="trace">Traceability</div>
+</div>
+
+<!-- =============== VIEW: Knowledge Graph =============== -->
+<div class="view active" id="view-graph">
+  <div id="graph-container">
+    <svg id="graph-svg"></svg>
+    <div class="graph-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#a855f7"></div> Meetings</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#4f8cff"></div> Requirements</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#00d68f"></div> Architecture</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ff6b6b"></div> Concerns</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ff9f43"></div> People</div>
+    </div>
+    <div class="graph-tooltip" id="graph-tooltip"></div>
+  </div>
+</div>
+
+<!-- =============== VIEW: Goal Model =============== -->
+<div class="view" id="view-goals">
+  <div class="goal-tree" id="goal-tree"></div>
+</div>
+
+<!-- =============== VIEW: WBS =============== -->
+<div class="view" id="view-wbs">
+  <div class="wbs-tree" id="wbs-tree"></div>
+</div>
+
+<!-- =============== VIEW: Agent Flow =============== -->
+<div class="view" id="view-flow">
+  <div id="flow-container">
+    <svg id="flow-svg"></svg>
+  </div>
+</div>
+
+<!-- =============== VIEW: Traceability =============== -->
+<div class="view" id="view-trace">
+  <div id="trace-content"></div>
+</div>
+
+<script>
+// ===== DATA =====
+const DATA = {
+  "meetings": {
+    "GMT20260122": {
+      "date": "2026-01-22",
+      "type": "client",
+      "label": "Client Meeting #1"
+    },
+    "GMT20260212": {
+      "date": "2026-02-12",
+      "type": "client",
+      "label": "Client Meeting #2"
+    },
+    "GMT20260226": {
+      "date": "2026-02-26",
+      "type": "client",
+      "label": "Client Meeting #3"
+    },
+    "GMT20260402": {
+      "date": "2026-04-02",
+      "type": "client",
+      "label": "Client Meeting #4"
+    },
+    "GMT20260416": {
+      "date": "2026-04-16",
+      "type": "client",
+      "label": "Client Meeting #5"
+    },
+    "GMT20260224-220446": {
+      "date": "2026-02-24",
+      "type": "ses_coach",
+      "label": "Cory (SES Coach)"
+    },
+    "GMT20260220-180425": {
+      "date": "2026-02-20",
+      "type": "mentor",
+      "label": "Dennis (Mentor)"
+    },
+    "GMT20260224-190023": {
+      "date": "2026-02-24",
+      "type": "ux_coach",
+      "label": "Ben (UX Coach)"
+    },
+    "GMT20260220-222907": {
+      "date": "2026-02-20",
+      "type": "ai_coach",
+      "label": "Christian (AI Coach)"
+    }
+  },
+  "people": [
+    "Hrishik",
+    "Ashritha",
+    "Jaivard",
+    "Arjun",
+    "Jai",
+    "Harsha (eParts)",
+    "David (eParts)",
+    "Cory (Coach)",
+    "Dennis (Mentor)",
+    "Ben (UX Coach)",
+    "Christian (AI Coach)"
+  ],
+  "requirements": [
+    {
+      "id": "REQ-DATA",
+      "label": "Data Access & Pipeline",
+      "category": "functional",
+      "description": "Access to client data, ETL pipeline, data quality"
+    },
+    {
+      "id": "REQ-ML",
+      "label": "ML Model Selection",
+      "category": "functional",
+      "description": "Choose and validate ML models for parts classification"
+    },
+    {
+      "id": "REQ-SEARCH",
+      "label": "Parts Search System",
+      "category": "functional",
+      "description": "Semantic search for auto parts catalog"
+    },
+    {
+      "id": "REQ-UI",
+      "label": "User Interface",
+      "category": "user_goal",
+      "description": "Frontend for parts search and recommendations"
+    },
+    {
+      "id": "REQ-MONITOR",
+      "label": "Model Monitoring",
+      "category": "nfr",
+      "description": "Drift detection, performance monitoring, alerting"
+    },
+    {
+      "id": "REQ-DEPLOY",
+      "label": "Deployment Pipeline",
+      "category": "nfr",
+      "description": "CI/CD, containerization, Azure deployment"
+    },
+    {
+      "id": "REQ-SEC",
+      "label": "Security & Access",
+      "category": "nfr",
+      "description": "API security, data access controls"
+    },
+    {
+      "id": "REQ-HITL",
+      "label": "Human-in-the-Loop",
+      "category": "user_goal",
+      "description": "Expert review workflows, feedback loops"
+    },
+    {
+      "id": "REQ-PERF",
+      "label": "Performance & Scale",
+      "category": "nfr",
+      "description": "Response time, throughput, scalability targets"
+    },
+    {
+      "id": "REQ-SES",
+      "label": "SE System (Agentic)",
+      "category": "meta",
+      "description": "The agentic framework itself \u2014 agents, pipelines, measurement"
+    }
+  ],
+  "architecture": [
+    {
+      "id": "ARCH-FE",
+      "label": "React Frontend",
+      "layer": "presentation"
+    },
+    {
+      "id": "ARCH-API",
+      "label": "FastAPI Backend",
+      "layer": "application"
+    },
+    {
+      "id": "ARCH-ML",
+      "label": "ML Pipeline",
+      "layer": "ml"
+    },
+    {
+      "id": "ARCH-VECTOR",
+      "label": "Vector Store",
+      "layer": "data"
+    },
+    {
+      "id": "ARCH-DB",
+      "label": "Database (Azure SQL)",
+      "layer": "data"
+    },
+    {
+      "id": "ARCH-ORCH",
+      "label": "Agent Orchestrator",
+      "layer": "meta"
+    },
+    {
+      "id": "ARCH-CHROMA",
+      "label": "ChromaDB (RAG)",
+      "layer": "data"
+    },
+    {
+      "id": "ARCH-AZURE",
+      "label": "Azure Cloud",
+      "layer": "infra"
+    }
+  ],
+  "concerns": [
+    {
+      "id": "CONC-DATA",
+      "label": "Data Access Delay",
+      "severity": "high",
+      "sessions": 3
+    },
+    {
+      "id": "CONC-SCOPE",
+      "label": "Scope Creep Risk",
+      "severity": "medium",
+      "sessions": 2
+    },
+    {
+      "id": "CONC-AZURE",
+      "label": "Azure Tool Constraints",
+      "severity": "medium",
+      "sessions": 2
+    },
+    {
+      "id": "CONC-MEASURE",
+      "label": "Measurement Validity",
+      "severity": "high",
+      "sessions": 2
+    },
+    {
+      "id": "CONC-MODEL",
+      "label": "Model Selection Uncertainty",
+      "severity": "high",
+      "sessions": 3
+    }
+  ],
+  "goals": {
+    "strategic": [
+      {
+        "id": "G-STRATEGIC",
+        "label": "Intelligent Parts Classification System for eParts",
+        "children": [
+          "G-SOFT-1",
+          "G-SOFT-2",
+          "G-SOFT-3",
+          "G-USER-1",
+          "G-USER-2",
+          "G-USER-3"
+        ]
+      }
+    ],
+    "soft_goals": [
+      {
+        "id": "G-SOFT-1",
+        "label": "High Classification Accuracy (>90%)",
+        "type": "quality",
+        "reqs": [
+          "REQ-ML",
+          "REQ-MONITOR"
+        ]
+      },
+      {
+        "id": "G-SOFT-2",
+        "label": "Fast Response Time (<2s)",
+        "type": "performance",
+        "reqs": [
+          "REQ-PERF",
+          "REQ-DEPLOY"
+        ]
+      },
+      {
+        "id": "G-SOFT-3",
+        "label": "Maintainable & Extensible System",
+        "type": "quality",
+        "reqs": [
+          "REQ-SES",
+          "REQ-DEPLOY"
+        ]
+      }
+    ],
+    "user_goals": [
+      {
+        "id": "G-USER-1",
+        "label": "Find correct part quickly",
+        "type": "user",
+        "reqs": [
+          "REQ-SEARCH",
+          "REQ-UI"
+        ]
+      },
+      {
+        "id": "G-USER-2",
+        "label": "Trust AI recommendations",
+        "type": "user",
+        "reqs": [
+          "REQ-HITL",
+          "REQ-MONITOR"
+        ]
+      },
+      {
+        "id": "G-USER-3",
+        "label": "Manage parts data efficiently",
+        "type": "user",
+        "reqs": [
+          "REQ-DATA",
+          "REQ-SEC"
+        ]
+      }
+    ]
+  },
+  "wbs": {
+    "id": "WBS-ROOT",
+    "label": "eParts Project",
+    "children": [
+      {
+        "id": "WBS-1",
+        "label": "1. Requirements & Discovery",
+        "children": [
+          {
+            "id": "WBS-1.1",
+            "label": "1.1 Client Interviews",
+            "status": "done",
+            "meetings": [
+              "GMT20260122",
+              "GMT20260212",
+              "GMT20260226",
+              "GMT20260402",
+              "GMT20260416"
+            ]
+          },
+          {
+            "id": "WBS-1.2",
+            "label": "1.2 Data Assessment",
+            "status": "done"
+          },
+          {
+            "id": "WBS-1.3",
+            "label": "1.3 Requirements Documentation",
+            "status": "in_progress"
+          }
+        ]
+      },
+      {
+        "id": "WBS-2",
+        "label": "2. Architecture & Design",
+        "children": [
+          {
+            "id": "WBS-2.1",
+            "label": "2.1 Architecture Decision Records",
+            "status": "in_progress"
+          },
+          {
+            "id": "WBS-2.2",
+            "label": "2.2 Component Design",
+            "status": "in_progress"
+          },
+          {
+            "id": "WBS-2.3",
+            "label": "2.3 Data Model Design",
+            "status": "in_progress"
+          }
+        ]
+      },
+      {
+        "id": "WBS-3",
+        "label": "3. ML Pipeline",
+        "children": [
+          {
+            "id": "WBS-3.1",
+            "label": "3.1 Data Ingestion & Cleaning",
+            "status": "in_progress"
+          },
+          {
+            "id": "WBS-3.2",
+            "label": "3.2 Model Experimentation",
+            "status": "in_progress"
+          },
+          {
+            "id": "WBS-3.3",
+            "label": "3.3 Model Evaluation & Selection",
+            "status": "not_started"
+          },
+          {
+            "id": "WBS-3.4",
+            "label": "3.4 Model Serving & Monitoring",
+            "status": "not_started"
+          }
+        ]
+      },
+      {
+        "id": "WBS-4",
+        "label": "4. Application Development",
+        "children": [
+          {
+            "id": "WBS-4.1",
+            "label": "4.1 Backend API",
+            "status": "in_progress"
+          },
+          {
+            "id": "WBS-4.2",
+            "label": "4.2 Frontend UI",
+            "status": "not_started"
+          },
+          {
+            "id": "WBS-4.3",
+            "label": "4.3 Search Engine",
+            "status": "not_started"
+          }
+        ]
+      },
+      {
+        "id": "WBS-5",
+        "label": "5. Engineering System (SES)",
+        "children": [
+          {
+            "id": "WBS-5.1",
+            "label": "5.1 Agent Framework",
+            "status": "done"
+          },
+          {
+            "id": "WBS-5.2",
+            "label": "5.2 Measurement System",
+            "status": "done"
+          },
+          {
+            "id": "WBS-5.3",
+            "label": "5.3 Cross-Pipeline Integration",
+            "status": "done"
+          },
+          {
+            "id": "WBS-5.4",
+            "label": "5.4 ETVX Documentation",
+            "status": "done"
+          }
+        ]
+      }
+    ]
+  },
+  "traceability": [
+    {
+      "from": "GMT20260122",
+      "to": "REQ-DATA",
+      "type": "extracted_from"
+    },
+    {
+      "from": "GMT20260122",
+      "to": "REQ-SEARCH",
+      "type": "extracted_from"
+    },
+    {
+      "from": "GMT20260212",
+      "to": "REQ-ML",
+      "type": "extracted_from"
+    },
+    {
+      "from": "GMT20260212",
+      "to": "REQ-DATA",
+      "type": "discussed"
+    },
+    {
+      "from": "GMT20260226",
+      "to": "REQ-DEPLOY",
+      "type": "discussed"
+    },
+    {
+      "from": "GMT20260226",
+      "to": "REQ-UI",
+      "type": "discussed"
+    },
+    {
+      "from": "GMT20260402",
+      "to": "REQ-ML",
+      "type": "discussed"
+    },
+    {
+      "from": "GMT20260402",
+      "to": "REQ-MONITOR",
+      "type": "extracted_from"
+    },
+    {
+      "from": "GMT20260416",
+      "to": "REQ-HITL",
+      "type": "extracted_from"
+    },
+    {
+      "from": "GMT20260416",
+      "to": "REQ-PERF",
+      "type": "discussed"
+    },
+    {
+      "from": "REQ-SEARCH",
+      "to": "ARCH-VECTOR",
+      "type": "implemented_by"
+    },
+    {
+      "from": "REQ-SEARCH",
+      "to": "ARCH-API",
+      "type": "implemented_by"
+    },
+    {
+      "from": "REQ-ML",
+      "to": "ARCH-ML",
+      "type": "implemented_by"
+    },
+    {
+      "from": "REQ-DATA",
+      "to": "ARCH-DB",
+      "type": "implemented_by"
+    },
+    {
+      "from": "REQ-UI",
+      "to": "ARCH-FE",
+      "type": "implemented_by"
+    },
+    {
+      "from": "REQ-DEPLOY",
+      "to": "ARCH-AZURE",
+      "type": "implemented_by"
+    },
+    {
+      "from": "REQ-SES",
+      "to": "ARCH-ORCH",
+      "type": "implemented_by"
+    },
+    {
+      "from": "REQ-MONITOR",
+      "to": "ARCH-ML",
+      "type": "implemented_by"
+    },
+    {
+      "from": "REQ-HITL",
+      "to": "ARCH-FE",
+      "type": "implemented_by"
+    },
+    {
+      "from": "CONC-DATA",
+      "to": "REQ-DATA",
+      "type": "threatens"
+    },
+    {
+      "from": "CONC-MODEL",
+      "to": "REQ-ML",
+      "type": "threatens"
+    },
+    {
+      "from": "CONC-AZURE",
+      "to": "REQ-DEPLOY",
+      "type": "threatens"
+    },
+    {
+      "from": "CONC-MEASURE",
+      "to": "REQ-SES",
+      "type": "threatens"
+    },
+    {
+      "from": "CONC-SCOPE",
+      "to": "REQ-PERF",
+      "type": "threatens"
+    },
+    {
+      "from": "GMT20260224-220446",
+      "to": "CONC-DATA",
+      "type": "raised"
+    },
+    {
+      "from": "GMT20260220-180425",
+      "to": "CONC-DATA",
+      "type": "raised"
+    },
+    {
+      "from": "GMT20260220-180425",
+      "to": "CONC-SCOPE",
+      "type": "raised"
+    },
+    {
+      "from": "GMT20260224-190023",
+      "to": "CONC-DATA",
+      "type": "raised"
+    },
+    {
+      "from": "GMT20260220-222907",
+      "to": "CONC-MEASURE",
+      "type": "raised"
+    },
+    {
+      "from": "GMT20260220-222907",
+      "to": "CONC-MODEL",
+      "type": "raised"
+    },
+    {
+      "from": "GMT20260224-220446",
+      "to": "CONC-AZURE",
+      "type": "raised"
+    }
+  ],
+  "event_flow": [
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.777586+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"I'm a bit confused. Take care. I think there's an echo. I should talk"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.776651+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "4",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.679636+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"Yeah, so, we are targeting that towards the end of this month, we sho"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.678472+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "10",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.557325+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "2",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"I think the primary, goal for the model that we're currently thinking"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.556493+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "10",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.477109+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "3",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"A for, today's agenda. I think your mic is gone. model sound? Yeah, f"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.476052+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "10",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.360586+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "3",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': 'Okay, so the next topic we have is how we are gonna be working togeth"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.359513+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "7",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.237546+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"Consequence format, and, let's start off then. The first one is, we a"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.236411+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.137336+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"Unless, like, you take another team's requirements and try to do them"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.136358+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.058258+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"I'm getting the data from them. So, we\u2026 now we have received, like, I"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.057387+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:00.975419+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "2",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': 'Yeah, it is, so basically, we need to get some more information out o"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:00.974767+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "10",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:00.879486+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"I'm getting the data from them. So, we\u2026 now we have received, like, I"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:00.878250+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:00.782232+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"Consequence format, and, let's start off then. The first one is, we a"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:00.781296+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:00.675321+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"Consequence format, and, let's start off then. The first one is, we a"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:00.674548+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "coach"
+      }
+    },
+    {
+      "event_type": "recurring_concern",
+      "source_agent": "concern_tracker",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:38.180061+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "alert_agent",
+          "description": "Recurring concerns trigger PM alerts"
+        }
+      ],
+      "data_preview": {
+        "themes": "['general']",
+        "details": "[{'theme': 'general', 'raised_by': 'team', 'total_raised': 4, 'session_count': 1",
+        "total_patterns": "2"
+      }
+    },
+    {
+      "event_type": "new_session_embedded",
+      "source_agent": "session_memory",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:38.176226+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "briefing_generator",
+          "description": "New sessions trigger briefing refresh"
+        }
+      ],
+      "data_preview": {
+        "session_id": "session-2026-02-20-GMT20260220-222907_R",
+        "date": "2026-02-20",
+        "session_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:37.581295+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"Unless, like, you take another team's requirements and try to do them"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:37.580410+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "recurring_concern",
+      "source_agent": "concern_tracker",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:37.453424+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "alert_agent",
+          "description": "Recurring concerns trigger PM alerts"
+        }
+      ],
+      "data_preview": {
+        "themes": "['general']",
+        "details": "[{'theme': 'general', 'raised_by': 'team', 'total_raised': 3, 'session_count': 1",
+        "total_patterns": "1"
+      }
+    },
+    {
+      "event_type": "new_session_embedded",
+      "source_agent": "session_memory",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:37.449903+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "briefing_generator",
+          "description": "New sessions trigger briefing refresh"
+        }
+      ],
+      "data_preview": {
+        "session_id": "session-2026-02-24-GMT20260224-190023_R",
+        "date": "2026-02-24",
+        "session_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:36.194190+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"I'm getting the data from them. So, we\u2026 now we have received, like, I"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:36.193137+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "recurring_concern",
+      "source_agent": "concern_tracker",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:36.057346+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "alert_agent",
+          "description": "Recurring concerns trigger PM alerts"
+        }
+      ],
+      "data_preview": {
+        "themes": "['general']",
+        "details": "[{'theme': 'general', 'raised_by': 'team', 'total_raised': 2, 'session_count': 1",
+        "total_patterns": "1"
+      }
+    },
+    {
+      "event_type": "new_session_embedded",
+      "source_agent": "session_memory",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:36.053657+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "briefing_generator",
+          "description": "New sessions trigger briefing refresh"
+        }
+      ],
+      "data_preview": {
+        "session_id": "session-2026-02-20-GMT20260220-180425_R",
+        "date": "2026-02-20",
+        "session_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:34.844024+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"Consequence format, and, let's start off then. The first one is, we a"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:34.843101+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "new_session_embedded",
+      "source_agent": "session_memory",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:34.627358+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "briefing_generator",
+          "description": "New sessions trigger briefing refresh"
+        }
+      ],
+      "data_preview": {
+        "session_id": "session-2026-02-24-GMT20260224-220446_R",
+        "date": "2026-02-24",
+        "session_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:33.443798+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "2",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': 'Yeah, it is, so basically, we need to get some more information out o"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:33.443209+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "10",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:22.882764+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"I'm a bit confused. Take care. I think there's an echo. I should talk"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:22.881925+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "4",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:22.768926+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "3",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"A for, today's agenda. I think your mic is gone. model sound? Yeah, f"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:22.768022+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "10",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:22.645458+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "2",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"I think the primary, goal for the model that we're currently thinking"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:22.644983+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "10",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    }
+  ],
+  "wiki_stats": {
+    "total_entries": 40,
+    "total_changes": 96,
+    "namespaces": {
+      "coach_session_memory": 20,
+      "commitments": 4,
+      "concerns": 1,
+      "latest_runs": 8,
+      "meetings": 2,
+      "requirements_engineering": 5
+    }
+  },
+  "bus_stats": {
+    "total_events": 45,
+    "active_subscriptions": 10,
+    "events_by_type": {
+      "action_items_extracted": 19,
+      "decision_logged": 19,
+      "new_session_embedded": 4,
+      "recurring_concern": 3
+    }
+  }
+};
+
+// ===== TAB SWITCHING =====
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('view-' + tab.dataset.view).classList.add('active');
+    if (tab.dataset.view === 'graph' && !graphRendered) renderGraph();
+    if (tab.dataset.view === 'flow' && !flowRendered) renderFlow();
+  });
+});
+
+// ===== STATS =====
+document.getElementById('stat-meetings').textContent = Object.keys(DATA.meetings).length;
+document.getElementById('stat-reqs').textContent = DATA.requirements.length;
+document.getElementById('stat-events').textContent = DATA.event_flow.length;
+document.getElementById('stat-wiki').textContent = DATA.wiki_stats.total_entries;
+document.getElementById('stat-links').textContent = DATA.traceability.length;
+
+// ===== KNOWLEDGE GRAPH (D3 Force) =====
+let graphRendered = false;
+function renderGraph() {
+  graphRendered = true;
+  const svg = d3.select('#graph-svg');
+  const container = document.getElementById('graph-container');
+  const W = container.clientWidth, H = container.clientHeight;
+  svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+  const nodes = [];
+  const links = [];
+  const colorMap = { meeting: '#a855f7', requirement: '#4f8cff', architecture: '#00d68f', concern: '#ff6b6b', person: '#ff9f43' };
+
+  // Meeting nodes
+  Object.entries(DATA.meetings).forEach(([id, m]) => {
+    nodes.push({ id, label: m.label, type: 'meeting', r: 18, color: colorMap.meeting, detail: `${m.date} — ${m.type}` });
+  });
+
+  // Requirement nodes
+  DATA.requirements.forEach(r => {
+    nodes.push({ id: r.id, label: r.label, type: 'requirement', r: 14, color: colorMap.requirement, detail: r.description });
+  });
+
+  // Architecture nodes
+  DATA.architecture.forEach(a => {
+    nodes.push({ id: a.id, label: a.label, type: 'architecture', r: 12, color: colorMap.architecture, detail: `Layer: ${a.layer}` });
+  });
+
+  // Concern nodes
+  DATA.concerns.forEach(c => {
+    nodes.push({ id: c.id, label: c.label, type: 'concern', r: 10 + c.sessions * 3, color: colorMap.concern, detail: `Severity: ${c.severity}, raised in ${c.sessions} sessions` });
+  });
+
+  // People nodes (subset)
+  ['Hrishik', 'Ashritha', 'Jaivard', 'Arjun', 'Harsha (eParts)', 'David (eParts)'].forEach(p => {
+    nodes.push({ id: 'P-' + p, label: p, type: 'person', r: 10, color: colorMap.person, detail: 'Team member' });
+  });
+
+  // Traceability links
+  const nodeIds = new Set(nodes.map(n => n.id));
+  DATA.traceability.forEach(t => {
+    if (nodeIds.has(t.from) && nodeIds.has(t.to)) {
+      links.push({
+        source: t.from, target: t.to, type: t.type,
+        color: t.type === 'threatens' ? '#ff6b6b' : t.type === 'implemented_by' ? '#00d68f' : '#4f8cff55',
+        dash: t.type === 'threatens' ? '4,3' : null,
+      });
+    }
+  });
+
+  // People → Meeting links
+  const meetingPeople = {
+    'GMT20260122': ['Hrishik', 'Ashritha'],
+    'GMT20260212': ['Hrishik', 'Ashritha'],
+    'GMT20260226': ['Hrishik', 'Jaivard'],
+    'GMT20260402': ['Hrishik', 'Ashritha', 'Jaivard', 'Arjun'],
+    'GMT20260416': ['Hrishik', 'Ashritha', 'Arjun'],
+    'GMT20260224-220446': ['Hrishik', 'Ashritha'],
+    'GMT20260220-180425': ['Hrishik'],
+    'GMT20260224-190023': ['Hrishik'],
+    'GMT20260220-222907': ['Hrishik'],
+  };
+  Object.entries(meetingPeople).forEach(([mid, peeps]) => {
+    peeps.forEach(p => {
+      if (nodeIds.has(mid) && nodeIds.has('P-' + p)) {
+        links.push({ source: 'P-' + p, target: mid, type: 'attended', color: '#ff9f4333' });
+      }
+    });
+  });
+
+  const g = svg.append('g');
+  const zoom = d3.zoom().scaleExtent([0.3, 3]).on('zoom', e => g.attr('transform', e.transform));
+  svg.call(zoom);
+
+  const simulation = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(120))
+    .force('charge', d3.forceManyBody().strength(-300))
+    .force('center', d3.forceCenter(W / 2, H / 2))
+    .force('collision', d3.forceCollide().radius(d => d.r + 8));
+
+  const link = g.append('g').selectAll('line').data(links).join('line')
+    .attr('stroke', d => d.color)
+    .attr('stroke-width', d => d.type === 'threatens' ? 2 : 1.5)
+    .attr('stroke-dasharray', d => d.dash)
+    .attr('opacity', 0.6);
+
+  const node = g.append('g').selectAll('g').data(nodes).join('g')
+    .call(d3.drag()
+      .on('start', (e, d) => { if (!e.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+      .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+      .on('end', (e, d) => { if (!e.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; })
+    );
+
+  node.append('circle')
+    .attr('r', d => d.r)
+    .attr('fill', d => d.color)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1.5)
+    .attr('opacity', 0.9);
+
+  node.append('text')
+    .text(d => d.label.length > 20 ? d.label.slice(0, 18) + '…' : d.label)
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => d.r + 14)
+    .attr('fill', '#8899b4')
+    .attr('font-size', '10px')
+    .attr('font-weight', '500');
+
+  const tooltip = document.getElementById('graph-tooltip');
+  node.on('mouseover', (e, d) => {
+    tooltip.innerHTML = `<h4>${d.label}</h4><p>${d.detail}</p><p style="margin-top:4px;color:#4f8cff">${d.type}</p>`;
+    tooltip.classList.add('visible');
+    tooltip.style.left = (e.pageX + 12) + 'px';
+    tooltip.style.top = (e.pageY - 20) + 'px';
+    // Highlight connected
+    link.attr('opacity', l => (l.source === d || l.target === d) ? 1 : 0.1);
+    node.select('circle').attr('opacity', n => {
+      if (n === d) return 1;
+      const connected = links.some(l => (l.source === d && l.target === n) || (l.target === d && l.source === n));
+      return connected ? 1 : 0.2;
+    });
+  }).on('mousemove', e => {
+    tooltip.style.left = (e.pageX + 12) + 'px';
+    tooltip.style.top = (e.pageY - 20) + 'px';
+  }).on('mouseout', () => {
+    tooltip.classList.remove('visible');
+    link.attr('opacity', 0.6);
+    node.select('circle').attr('opacity', 0.9);
+  });
+
+  simulation.on('tick', () => {
+    link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
+}
+renderGraph();
+
+// ===== GOAL MODEL =====
+(function renderGoals() {
+  const tree = document.getElementById('goal-tree');
+  const G = DATA.goals;
+
+  // Strategic
+  let html = '<div class="goal-level"><div class="goal-level-label">Strategic Goal</div>';
+  G.strategic.forEach(g => {
+    html += `<div class="goal-card strategic"><span class="tag">Strategic</span><h3>${g.label}</h3><div class="desc">The overarching objective of the eParts capstone project</div></div>`;
+  });
+  html += '</div><div class="goal-connectors">│<br>├────────────┬────────────┬────────────┬────────────┬────────────┤</div>';
+
+  // Soft goals
+  html += '<div class="goal-level"><div class="goal-level-label">Soft Goals (NFRs / Quality Attributes)</div>';
+  G.soft_goals.forEach(g => {
+    html += `<div class="goal-card soft"><span class="tag">${g.type}</span><h3>${g.label}</h3><div class="desc">Linked to: ${g.reqs.join(', ')}</div></div>`;
+  });
+  html += '</div><div class="goal-connectors">│</div>';
+
+  // User goals
+  html += '<div class="goal-level"><div class="goal-level-label">User Goals</div>';
+  G.user_goals.forEach(g => {
+    html += `<div class="goal-card user"><span class="tag">${g.type}</span><h3>${g.label}</h3><div class="desc">Linked to: ${g.reqs.join(', ')}</div></div>`;
+  });
+  html += '</div><div class="goal-connectors">│</div>';
+
+  // Functional requirements
+  html += '<div class="goal-level"><div class="goal-level-label">Functional Requirements</div>';
+  DATA.requirements.filter(r => r.category === 'functional').forEach(r => {
+    html += `<div class="goal-card functional"><span class="tag">functional</span><h3>${r.label}</h3><div class="desc">${r.description}</div></div>`;
+  });
+  html += '</div><div class="goal-connectors">↑ <span style="color:var(--warn)">threatens</span></div>';
+
+  // Obstacles (concerns)
+  html += '<div class="goal-level"><div class="goal-level-label">Obstacles / Risks (from Coach Sessions)</div>';
+  DATA.concerns.forEach(c => {
+    html += `<div class="goal-card obstacle"><span class="tag">risk — ${c.severity}</span><h3>${c.label}</h3><div class="desc">Raised in ${c.sessions} session(s)</div></div>`;
+  });
+  html += '</div>';
+
+  tree.innerHTML = html;
+})();
+
+// ===== WBS =====
+(function renderWBS() {
+  const container = document.getElementById('wbs-tree');
+  const wbs = DATA.wbs;
+
+  function renderNode(node, depth) {
+    let html = '';
+    if (depth === 0) {
+      html += `<div class="wbs-root">${node.label}</div>`;
+    } else if (depth === 1) {
+      html += `<div class="wbs-phase">${node.label}</div>`;
+    } else {
+      const status = node.status || 'not_started';
+      html += `<div class="wbs-item">
+        <div class="dot ${status}"></div>
+        <span class="label">${node.label}</span>
+        <span class="status ${status}">${status.replace('_', ' ')}</span>
+      </div>`;
+    }
+    if (node.children) {
+      html += '<div class="wbs-node">';
+      node.children.forEach(c => { html += renderNode(c, depth + 1); });
+      html += '</div>';
+    }
+    return html;
+  }
+
+  container.innerHTML = renderNode(wbs, 0);
+})();
+
+// ===== AGENT FLOW =====
+let flowRendered = false;
+function renderFlow() {
+  flowRendered = true;
+  const svg = d3.select('#flow-svg');
+  const container = document.getElementById('flow-container');
+  const W = container.clientWidth, H = container.clientHeight;
+  svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+  const pipelines = [
+    { id: 'requirements', label: 'Requirements', color: '#4f8cff', x: W * 0.15, y: H * 0.15,
+      agents: ['transcript_parser', 'priority_classifier', 'req_extractor', 'ticket_creator', 'minutes_publisher', 'decision_logger', 'drift_detector'] },
+    { id: 'coach_session', label: 'Coach Session', color: '#a855f7', x: W * 0.5, y: H * 0.15,
+      agents: ['transcript_parser', 'session_memory', 'commitment_tracker', 'concern_tracker', 'coach_linker', 'decision_logger'] },
+    { id: 'architecture', label: 'Architecture', color: '#00d68f', x: W * 0.85, y: H * 0.15,
+      agents: ['drift_detector', 'adr_generator', 'diagram_updater', 'traceability_builder'] },
+    { id: 'ml_decision', label: 'ML Decision', color: '#ff9f43', x: W * 0.15, y: H * 0.55,
+      agents: ['decision_log', 'evidence_accumulator', 'readiness_detector', 'coach_linker'] },
+    { id: 'coding', label: 'Coding', color: '#22d3ee', x: W * 0.5, y: H * 0.55,
+      agents: ['boilerplate_generator', 'pr_reviewer', 'test_generator', 'doc_generator'] },
+    { id: 'project_mgmt', label: 'Project Mgmt', color: '#ec4899', x: W * 0.85, y: H * 0.55,
+      agents: ['ticket_creator', 'wbs_updater', 'weekly_digest', 'alert_agent'] },
+  ];
+
+  const eventLinks = [
+    { from: 'requirements', to: 'architecture', event: 'drift_detected', color: '#ff6b6b' },
+    { from: 'requirements', to: 'project_mgmt', event: 'action_items', color: '#ec4899' },
+    { from: 'coach_session', to: 'project_mgmt', event: 'recurring_concern', color: '#ff6b6b' },
+    { from: 'coach_session', to: 'ml_decision', event: 'new_session', color: '#a855f7' },
+    { from: 'ml_decision', to: 'coach_session', event: 'decision_ready', color: '#ff9f43' },
+    { from: 'coding', to: 'architecture', event: 'pr_reviewed', color: '#22d3ee' },
+  ];
+
+  const g = svg.append('g');
+
+  // Draw event links (curved arrows)
+  eventLinks.forEach(link => {
+    const from = pipelines.find(p => p.id === link.from);
+    const to = pipelines.find(p => p.id === link.to);
+    if (!from || !to) return;
+    const mx = (from.x + to.x) / 2, my = (from.y + to.y) / 2 - 40;
+    g.append('path')
+      .attr('d', `M${from.x},${from.y + 60} Q${mx},${my} ${to.x},${to.y + 60}`)
+      .attr('fill', 'none')
+      .attr('stroke', link.color)
+      .attr('stroke-width', 2)
+      .attr('stroke-dasharray', '6,4')
+      .attr('opacity', 0.6)
+      .attr('marker-end', 'url(#arrow)');
+
+    g.append('text')
+      .attr('x', mx).attr('y', my - 8)
+      .attr('text-anchor', 'middle')
+      .attr('fill', link.color)
+      .attr('font-size', '10px')
+      .attr('font-weight', '600')
+      .text(link.event);
+  });
+
+  // Arrow marker
+  svg.append('defs').append('marker')
+    .attr('id', 'arrow').attr('viewBox', '0 0 10 10')
+    .attr('refX', 8).attr('refY', 5).attr('markerWidth', 6).attr('markerHeight', 6)
+    .attr('orient', 'auto-start-reverse')
+    .append('path').attr('d', 'M 0 0 L 10 5 L 0 10 z').attr('fill', '#8899b4');
+
+  // Draw pipeline boxes
+  pipelines.forEach(p => {
+    const boxW = 180, boxH = 120;
+    const gp = g.append('g').attr('transform', `translate(${p.x - boxW/2}, ${p.y})`);
+
+    gp.append('rect')
+      .attr('width', boxW).attr('height', boxH)
+      .attr('rx', 10)
+      .attr('fill', '#131a2b')
+      .attr('stroke', p.color)
+      .attr('stroke-width', 2);
+
+    gp.append('text')
+      .attr('x', boxW/2).attr('y', 22)
+      .attr('text-anchor', 'middle')
+      .attr('fill', p.color)
+      .attr('font-size', '13px')
+      .attr('font-weight', '700')
+      .text(p.label + ' Pipeline');
+
+    p.agents.forEach((a, i) => {
+      gp.append('text')
+        .attr('x', 12).attr('y', 42 + i * 13)
+        .attr('fill', '#8899b4')
+        .attr('font-size', '10px')
+        .text('→ ' + a);
+    });
+  });
+
+  // Center elements
+  const sharedBox = g.append('g').attr('transform', `translate(${W/2 - 100}, ${H * 0.82})`);
+  sharedBox.append('rect').attr('width', 200).attr('height', 50).attr('rx', 8)
+    .attr('fill', '#1a2338').attr('stroke', '#4f8cff').attr('stroke-width', 2).attr('stroke-dasharray', '4,2');
+  sharedBox.append('text').attr('x', 100).attr('y', 20).attr('text-anchor', 'middle')
+    .attr('fill', '#4f8cff').attr('font-size', '13px').attr('font-weight', '700').text('Shared Memory (Wiki)');
+  sharedBox.append('text').attr('x', 100).attr('y', 36).attr('text-anchor', 'middle')
+    .attr('fill', '#8899b4').attr('font-size', '10px').text(`${DATA.wiki_stats.total_entries} entries across ${Object.keys(DATA.wiki_stats.namespaces).length} namespaces`);
+
+  const eventBox = g.append('g').attr('transform', `translate(${W/2 - 100}, ${H * 0.92})`);
+  eventBox.append('rect').attr('width', 200).attr('height', 50).attr('rx', 8)
+    .attr('fill', '#1a2338').attr('stroke', '#ff9f43').attr('stroke-width', 2).attr('stroke-dasharray', '4,2');
+  eventBox.append('text').attr('x', 100).attr('y', 20).attr('text-anchor', 'middle')
+    .attr('fill', '#ff9f43').attr('font-size', '13px').attr('font-weight', '700').text('Event Bus');
+  eventBox.append('text').attr('x', 100).attr('y', 36).attr('text-anchor', 'middle')
+    .attr('fill', '#8899b4').attr('font-size', '10px').text(`${DATA.bus_stats.total_events} events, ${DATA.bus_stats.active_subscriptions} subscriptions`);
+}
+
+// ===== TRACEABILITY =====
+(function renderTrace() {
+  const container = document.getElementById('trace-content');
+
+  // Meeting → Requirement links
+  let html = '<div class="trace-section"><h3>Meeting → Requirement Traceability</h3>';
+  html += '<table class="trace-table"><thead><tr><th>Meeting</th><th>Date</th><th>Requirement</th><th>Relationship</th></tr></thead><tbody>';
+  DATA.traceability.filter(t => t.from.startsWith('GMT') && t.to.startsWith('REQ')).forEach(t => {
+    const m = DATA.meetings[t.from];
+    const r = DATA.requirements.find(req => req.id === t.to);
+    if (m && r) {
+      html += `<tr><td><span class="badge meeting">${m.label}</span></td><td>${m.date}</td><td><span class="badge req">${r.label}</span></td><td>${t.type}</td></tr>`;
+    }
+  });
+  html += '</tbody></table></div>';
+
+  // Requirement → Architecture links
+  html += '<div class="trace-section"><h3>Requirement → Architecture Component</h3>';
+  html += '<table class="trace-table"><thead><tr><th>Requirement</th><th>Category</th><th>Architecture Component</th><th>Layer</th></tr></thead><tbody>';
+  DATA.traceability.filter(t => t.from.startsWith('REQ') && t.to.startsWith('ARCH')).forEach(t => {
+    const r = DATA.requirements.find(req => req.id === t.from);
+    const a = DATA.architecture.find(arch => arch.id === t.to);
+    if (r && a) {
+      html += `<tr><td><span class="badge req">${r.label}</span></td><td>${r.category}</td><td><span class="badge arch">${a.label}</span></td><td>${a.layer}</td></tr>`;
+    }
+  });
+  html += '</tbody></table></div>';
+
+  // Coach → Concern → Requirement chain
+  html += '<div class="trace-section"><h3>Coach Concerns → Threatened Requirements</h3>';
+  html += '<table class="trace-table"><thead><tr><th>Coach Session</th><th>Concern</th><th>Severity</th><th>Threatens</th></tr></thead><tbody>';
+  DATA.concerns.forEach(c => {
+    const threatened = DATA.traceability.filter(t => t.from === c.id && t.type === 'threatens');
+    const raisedBy = DATA.traceability.filter(t => t.to === c.id && t.type === 'raised');
+    const sessions = raisedBy.map(r => DATA.meetings[r.from]?.label || r.from).join(', ');
+    threatened.forEach(t => {
+      const r = DATA.requirements.find(req => req.id === t.to);
+      if (r) {
+        html += `<tr><td><span class="badge meeting">${sessions}</span></td><td><span class="badge concern">${c.label}</span></td><td>${c.severity}</td><td><span class="badge req">${r.label}</span></td></tr>`;
+      }
+    });
+  });
+  html += '</tbody></table></div>';
+
+  // Event flow
+  html += '<div class="trace-section"><h3>Cross-Pipeline Event Flow (Recent)</h3>';
+  html += '<div class="timeline">';
+  DATA.event_flow.slice(0, 20).forEach(e => {
+    const cls = e.event_type.includes('concern') ? 'concern' : e.event_type.includes('action') ? 'action' : 'decision';
+    const targets = e.targets.map(t => t.target_pipeline).join(', ');
+    html += `<div class="tl-item ${cls}">
+      <div class="tl-time">${e.timestamp.slice(0, 19)}</div>
+      <div class="tl-body">
+        <h4><span class="badge event">${e.event_type}</span></h4>
+        <p>From: <strong>${e.source_agent}</strong> → Triggers: <strong>${targets || 'none'}</strong></p>
+      </div>
+    </div>`;
+  });
+  html += '</div></div>';
+
+  container.innerHTML = html;
+})();
+</script>
+</body>
+</html>

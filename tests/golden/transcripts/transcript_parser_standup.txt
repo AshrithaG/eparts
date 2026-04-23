@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.000
+Sarah: Good morning everyone, let's do a quick standup.
+
+00:00:05.000 --> 00:00:15.000
+Alex: I finished the API endpoint for part recommendations yesterday. Today I'm working on the confidence threshold calibration. No blockers.
+
+00:00:15.000 --> 00:00:30.000
+Priya: I'm still working on the semantic matcher integration tests. I'm blocked on getting test data from the eParts staging environment. Can someone help with that?
+
+00:00:30.000 --> 00:00:45.000
+Marcus: I can help with the staging data, Priya. I have access. Also, we decided yesterday to use ChromaDB instead of Pinecone for the vector store — it simplifies our deployment since everything stays local.
+
+00:00:45.000 --> 00:01:00.000
+Sarah: Good decision. Let's make sure we create an ADR for the ChromaDB choice. Also, the client demo is next Thursday — we need the recommendation pipeline working end-to-end by Wednesday. That's P0.
+
+00:01:00.000 --> 00:01:10.000
+Alex: Question — should we expose the confidence scores in the API response, or just the binary accept/reject decision?
+
+00:01:10.000 --> 00:01:20.000
+Sarah: Let's expose both. The client specifically asked for transparency in the ML decisions. Priya, can you add that to the API spec?
+
+00:01:20.000 --> 00:01:25.000
+Priya: Sure, I'll update the OpenAPI spec today.
+
+00:01:25.000 --> 00:01:30.000
+Sarah: Great. Any other blockers? No? Let's get to work.

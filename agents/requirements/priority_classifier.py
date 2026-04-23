@@ -33,7 +33,15 @@ class PriorityClassifierAgent(BaseAgent):
         super().__init__(name="priority_classifier", mcp_clients=mcp_clients)
 
     def run(self, trigger: AgentTrigger) -> AgentResult:
+        # Read items from direct metadata or from pipeline context
         items = trigger.metadata.get("items", [])
+        pipeline_ctx = trigger.metadata.get("pipeline_context", {})
+
+        if not items:
+            parsed = pipeline_ctx.get("parsed_minutes", {})
+            if isinstance(parsed, dict):
+                items = parsed.get("action_items", []) + parsed.get("new_requirements", [])
+
         sprint_focus = trigger.metadata.get("sprint_focus", "ML pipeline integration and threshold calibration")
 
         if not items:
@@ -42,11 +50,15 @@ class PriorityClassifierAgent(BaseAgent):
                 success=True,
                 outputs=[AgentOutput(
                     output_type="classification_skipped",
-                    description="No items to classify",
+                    description="No items to classify (upstream produced none)",
                 )],
             )
 
-        classified = self._classify_items(items, sprint_focus)
+        # Online: use Claude. Offline: heuristic classification
+        if self._settings.anthropic_api_key:
+            classified = self._classify_items(items, sprint_focus)
+        else:
+            classified = self._classify_offline(items)
 
         p0_items = [i for i in classified if i.get("priority") == "P0"]
         p1_items = [i for i in classified if i.get("priority") == "P1"]
@@ -66,7 +78,7 @@ class PriorityClassifierAgent(BaseAgent):
                 {
                     "type": "p0_ticket_approval",
                     "item": item,
-                    "message": f"P0 ticket needs approval: {item['text']}"
+                    "message": f"P0 ticket needs approval: {item['text'][:100]}"
                 }
                 for item in p0_items
             ]
@@ -77,7 +89,30 @@ class PriorityClassifierAgent(BaseAgent):
             outputs=outputs,
             requires_human_review=bool(p0_items),
             review_items=review_items,
+            data={
+                "classified_items": classified,
+                "p0_items": p0_items,
+                "p1_items": p1_items,
+                "p2_items": p2_items,
+            },
         )
+
+    def _classify_offline(self, items: list[dict]) -> list[dict]:
+        """Heuristic classification when no API key is available."""
+        p0_keywords = {"deadline", "demo", "block", "urgent", "critical", "p0", "client"}
+        p1_keywords = {"should", "need", "sprint", "important", "this week"}
+
+        classified = []
+        for item in items:
+            text = (item.get("text", "") or str(item)).lower()
+            if any(kw in text for kw in p0_keywords):
+                priority = "P0"
+            elif any(kw in text for kw in p1_keywords):
+                priority = "P1"
+            else:
+                priority = "P2"
+            classified.append({**item, "priority": priority})
+        return classified
 
     def _classify_items(self, items: list[dict], sprint_focus: str) -> list[dict]:
         """Send items to Claude for priority classification."""

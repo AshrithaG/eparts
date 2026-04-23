@@ -1,0 +1,188 @@
+%%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#6c63ff', 'primaryTextColor': '#e1e4ed', 'primaryBorderColor': '#2a2d3a', 'lineColor': '#6c63ff', 'secondaryColor': '#1a1d27', 'tertiaryColor': '#0f1117'}}}%%
+
+graph TB
+    %% ════════════════════════════════════════════════════════════
+    %% TRIGGERS (left column)
+    %% ════════════════════════════════════════════════════════════
+    subgraph TRIGGERS["🔌 Triggers"]
+        T1[/"Zoom VTT\nTranscript"/]
+        T2[/"Coach Session\nTranscript"/]
+        T3[/"Jira\nWebhook"/]
+        T4[/"GitHub/BB\nPR Event"/]
+        T5[/"POC Result\nJSON"/]
+        T6[/"Cron\nSchedule"/]
+    end
+
+    %% ════════════════════════════════════════════════════════════
+    %% CENTRAL ORCHESTRATOR
+    %% ════════════════════════════════════════════════════════════
+    subgraph ORCH["⚙️ Central Orchestrator"]
+        O1["FastAPI Router"]
+        O2["Pipeline Executor"]
+        O3["Task Queue"]
+        O4["Metrics Collector"]
+        O1 --> O2 --> O3
+        O3 --> O4
+    end
+
+    %% ════════════════════════════════════════════════════════════
+    %% REQUIREMENTS PIPELINE (end-to-end showcase)
+    %% ════════════════════════════════════════════════════════════
+    subgraph REQ["📋 Requirements Engineering Pipeline"]
+        direction LR
+        R1["Transcript\nParser"] --> R2["Priority\nClassifier"]
+        R2 --> R3["Req\nExtractor"]
+        R2 --> R4["Ticket\nCreator"]
+        R1 --> R5["Decision\nLogger"]
+        R1 --> R6["Drift\nDetector"]
+        R1 --> R7["Minutes\nPublisher"]
+    end
+
+    %% ════════════════════════════════════════════════════════════
+    %% COACH SESSION PIPELINE
+    %% ════════════════════════════════════════════════════════════
+    subgraph COACH["🧠 Coach Session Memory Pipeline"]
+        direction LR
+        C1["Session\nMemory"] --> C2["Commitment\nTracker"]
+        C1 --> C3["Concern\nTracker"]
+        C1 --> C4["Coach\nLinker"]
+        C2 --> C5["Briefing\nGenerator"]
+        C3 --> C5
+    end
+
+    %% ════════════════════════════════════════════════════════════
+    %% ARCHITECTURE PIPELINE
+    %% ════════════════════════════════════════════════════════════
+    subgraph ARCH["🏗️ Architecture Pipeline"]
+        direction LR
+        A1["Drift\nDetector"] --> A2["ADR\nGenerator"]
+        A1 --> A3["Diagram\nUpdater"]
+        A2 --> A4["Traceability\nBuilder"]
+    end
+
+    %% ════════════════════════════════════════════════════════════
+    %% CODING PIPELINE
+    %% ════════════════════════════════════════════════════════════
+    subgraph CODE["💻 Coding Pipeline"]
+        direction LR
+        CD1["PR\nReviewer"] --> CD2["Test\nGenerator"]
+        CD1 --> CD3["Doc\nGenerator"]
+        CD1 --> CD4["Prompt\nRegression"]
+    end
+
+    %% ════════════════════════════════════════════════════════════
+    %% ML DECISION PIPELINE
+    %% ════════════════════════════════════════════════════════════
+    subgraph ML["🤖 ML Decision Memory Pipeline"]
+        direction LR
+        M1["Evidence\nAccumulator"] --> M2["Readiness\nDetector"]
+        M1 --> M3["Coach\nLinker"]
+    end
+
+    %% ════════════════════════════════════════════════════════════
+    %% PROJECT MANAGEMENT
+    %% ════════════════════════════════════════════════════════════
+    subgraph PM["📊 Project Management Pipeline"]
+        direction LR
+        P1["WBS\nUpdater"] --> P2["Weekly\nDigest"]
+        P1 --> P3["Alert\nAgent"]
+    end
+
+    %% ════════════════════════════════════════════════════════════
+    %% MCP SERVERS (external integrations)
+    %% ════════════════════════════════════════════════════════════
+    subgraph MCP["🔗 MCP Servers"]
+        MCP1[("Jira")]
+        MCP2[("Slack")]
+        MCP3[("Bitbucket")]
+        MCP4[("Confluence")]
+        MCP5[("ChromaDB")]
+        MCP6[("Google Drive")]
+    end
+
+    %% ════════════════════════════════════════════════════════════
+    %% OUTPUTS
+    %% ════════════════════════════════════════════════════════════
+    subgraph OUT["📤 Outputs"]
+        OUT1["Meeting\nMinutes"]
+        OUT2["REQ Docs\n& ADRs"]
+        OUT3["Jira\nTickets"]
+        OUT4["Slack\nBriefings"]
+        OUT5["Metrics\nDashboard"]
+        OUT6["Human Review\nQueue"]
+    end
+
+    %% ════════════════════════════════════════════════════════════
+    %% MEASUREMENT (overlays everything)
+    %% ════════════════════════════════════════════════════════════
+    subgraph MEASURE["📏 Measurement System"]
+        MS1["Token Usage\n& Cost"]
+        MS2["Latency &\nThroughput"]
+        MS3["Human Correction\nRate"]
+        MS4["Prompt Version\nTracking"]
+    end
+
+    %% ═══ CONNECTIONS ═══
+
+    %% Triggers → Orchestrator
+    T1 --> O1
+    T2 --> O1
+    T3 --> O1
+    T4 --> O1
+    T5 --> O1
+    T6 --> O1
+
+    %% Orchestrator → Pipelines
+    O2 --> REQ
+    O2 --> COACH
+    O2 --> ARCH
+    O2 --> CODE
+    O2 --> ML
+    O2 --> PM
+
+    %% Pipelines → MCP
+    R4 --> MCP1
+    R7 --> MCP4
+    R3 --> MCP3
+    C1 --> MCP5
+    C5 --> MCP2
+    A2 --> MCP3
+    CD1 --> MCP3
+    M2 --> MCP2
+    P2 --> MCP2
+    P2 --> MCP4
+
+    %% MCP → Outputs
+    MCP1 --> OUT3
+    MCP4 --> OUT1
+    MCP3 --> OUT2
+    MCP2 --> OUT4
+
+    %% Measurement
+    O4 --> MEASURE
+    MEASURE --> OUT5
+
+    %% Human review
+    R2 -.->|"P0 items"| OUT6
+    A2 -.->|"ADR drafts"| OUT6
+    CD1 -.->|"Review flags"| OUT6
+
+    %% Cross-pipeline links
+    C4 -.-> M1
+    R6 -.-> A1
+
+    %% Styling
+    classDef trigger fill:#6c63ff,stroke:#6c63ff,color:#fff
+    classDef orch fill:#0f1117,stroke:#6c63ff,color:#e1e4ed
+    classDef agent fill:#1a1d27,stroke:#2a2d3a,color:#e1e4ed
+    classDef mcp fill:#0d3b66,stroke:#3b82f6,color:#e1e4ed
+    classDef output fill:#0a3622,stroke:#22c55e,color:#e1e4ed
+    classDef measure fill:#3d1f00,stroke:#f59e0b,color:#e1e4ed
+    classDef review fill:#3d0a0a,stroke:#ef4444,color:#e1e4ed
+
+    class T1,T2,T3,T4,T5,T6 trigger
+    class O1,O2,O3,O4 orch
+    class MCP1,MCP2,MCP3,MCP4,MCP5,MCP6 mcp
+    class OUT1,OUT2,OUT3,OUT4,OUT5 output
+    class OUT6 review
+    class MS1,MS2,MS3,MS4 measure

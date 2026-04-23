@@ -1,0 +1,1391 @@
+{
+  "meetings": {
+    "GMT20260122": {
+      "date": "2026-01-22",
+      "type": "client",
+      "label": "Client Meeting #1"
+    },
+    "GMT20260212": {
+      "date": "2026-02-12",
+      "type": "client",
+      "label": "Client Meeting #2"
+    },
+    "GMT20260226": {
+      "date": "2026-02-26",
+      "type": "client",
+      "label": "Client Meeting #3"
+    },
+    "GMT20260402": {
+      "date": "2026-04-02",
+      "type": "client",
+      "label": "Client Meeting #4"
+    },
+    "GMT20260416": {
+      "date": "2026-04-16",
+      "type": "client",
+      "label": "Client Meeting #5"
+    },
+    "GMT20260224-220446": {
+      "date": "2026-02-24",
+      "type": "ses_coach",
+      "label": "Cory (SES Coach)"
+    },
+    "GMT20260220-180425": {
+      "date": "2026-02-20",
+      "type": "mentor",
+      "label": "Dennis (Mentor)"
+    },
+    "GMT20260224-190023": {
+      "date": "2026-02-24",
+      "type": "ux_coach",
+      "label": "Ben (UX Coach)"
+    },
+    "GMT20260220-222907": {
+      "date": "2026-02-20",
+      "type": "ai_coach",
+      "label": "Christian (AI Coach)"
+    }
+  },
+  "people": [
+    "Hrishik",
+    "Ashritha",
+    "Jaivard",
+    "Arjun",
+    "Jai",
+    "Harsha (eParts)",
+    "David (eParts)",
+    "Cory (Coach)",
+    "Dennis (Mentor)",
+    "Ben (UX Coach)",
+    "Christian (AI Coach)"
+  ],
+  "requirements": [
+    {
+      "id": "REQ-DATA",
+      "label": "Data Access & Pipeline",
+      "category": "functional",
+      "description": "Access to client data, ETL pipeline, data quality"
+    },
+    {
+      "id": "REQ-ML",
+      "label": "ML Model Selection",
+      "category": "functional",
+      "description": "Choose and validate ML models for parts classification"
+    },
+    {
+      "id": "REQ-SEARCH",
+      "label": "Parts Search System",
+      "category": "functional",
+      "description": "Semantic search for auto parts catalog"
+    },
+    {
+      "id": "REQ-UI",
+      "label": "User Interface",
+      "category": "user_goal",
+      "description": "Frontend for parts search and recommendations"
+    },
+    {
+      "id": "REQ-MONITOR",
+      "label": "Model Monitoring",
+      "category": "nfr",
+      "description": "Drift detection, performance monitoring, alerting"
+    },
+    {
+      "id": "REQ-DEPLOY",
+      "label": "Deployment Pipeline",
+      "category": "nfr",
+      "description": "CI/CD, containerization, Azure deployment"
+    },
+    {
+      "id": "REQ-SEC",
+      "label": "Security & Access",
+      "category": "nfr",
+      "description": "API security, data access controls"
+    },
+    {
+      "id": "REQ-HITL",
+      "label": "Human-in-the-Loop",
+      "category": "user_goal",
+      "description": "Expert review workflows, feedback loops"
+    },
+    {
+      "id": "REQ-PERF",
+      "label": "Performance & Scale",
+      "category": "nfr",
+      "description": "Response time, throughput, scalability targets"
+    },
+    {
+      "id": "REQ-SES",
+      "label": "SE System (Agentic)",
+      "category": "meta",
+      "description": "The agentic framework itself \u2014 agents, pipelines, measurement"
+    }
+  ],
+  "architecture": [
+    {
+      "id": "ARCH-FE",
+      "label": "React Frontend",
+      "layer": "presentation"
+    },
+    {
+      "id": "ARCH-API",
+      "label": "FastAPI Backend",
+      "layer": "application"
+    },
+    {
+      "id": "ARCH-ML",
+      "label": "ML Pipeline",
+      "layer": "ml"
+    },
+    {
+      "id": "ARCH-VECTOR",
+      "label": "Vector Store",
+      "layer": "data"
+    },
+    {
+      "id": "ARCH-DB",
+      "label": "Database (Azure SQL)",
+      "layer": "data"
+    },
+    {
+      "id": "ARCH-ORCH",
+      "label": "Agent Orchestrator",
+      "layer": "meta"
+    },
+    {
+      "id": "ARCH-CHROMA",
+      "label": "ChromaDB (RAG)",
+      "layer": "data"
+    },
+    {
+      "id": "ARCH-AZURE",
+      "label": "Azure Cloud",
+      "layer": "infra"
+    }
+  ],
+  "concerns": [
+    {
+      "id": "CONC-DATA",
+      "label": "Data Access Delay",
+      "severity": "high",
+      "sessions": 3
+    },
+    {
+      "id": "CONC-SCOPE",
+      "label": "Scope Creep Risk",
+      "severity": "medium",
+      "sessions": 2
+    },
+    {
+      "id": "CONC-AZURE",
+      "label": "Azure Tool Constraints",
+      "severity": "medium",
+      "sessions": 2
+    },
+    {
+      "id": "CONC-MEASURE",
+      "label": "Measurement Validity",
+      "severity": "high",
+      "sessions": 2
+    },
+    {
+      "id": "CONC-MODEL",
+      "label": "Model Selection Uncertainty",
+      "severity": "high",
+      "sessions": 3
+    }
+  ],
+  "goals": {
+    "strategic": [
+      {
+        "id": "G-STRATEGIC",
+        "label": "Intelligent Parts Classification System for eParts",
+        "children": [
+          "G-SOFT-1",
+          "G-SOFT-2",
+          "G-SOFT-3",
+          "G-USER-1",
+          "G-USER-2",
+          "G-USER-3"
+        ]
+      }
+    ],
+    "soft_goals": [
+      {
+        "id": "G-SOFT-1",
+        "label": "High Classification Accuracy (>90%)",
+        "type": "quality",
+        "reqs": [
+          "REQ-ML",
+          "REQ-MONITOR"
+        ]
+      },
+      {
+        "id": "G-SOFT-2",
+        "label": "Fast Response Time (<2s)",
+        "type": "performance",
+        "reqs": [
+          "REQ-PERF",
+          "REQ-DEPLOY"
+        ]
+      },
+      {
+        "id": "G-SOFT-3",
+        "label": "Maintainable & Extensible System",
+        "type": "quality",
+        "reqs": [
+          "REQ-SES",
+          "REQ-DEPLOY"
+        ]
+      }
+    ],
+    "user_goals": [
+      {
+        "id": "G-USER-1",
+        "label": "Find correct part quickly",
+        "type": "user",
+        "reqs": [
+          "REQ-SEARCH",
+          "REQ-UI"
+        ]
+      },
+      {
+        "id": "G-USER-2",
+        "label": "Trust AI recommendations",
+        "type": "user",
+        "reqs": [
+          "REQ-HITL",
+          "REQ-MONITOR"
+        ]
+      },
+      {
+        "id": "G-USER-3",
+        "label": "Manage parts data efficiently",
+        "type": "user",
+        "reqs": [
+          "REQ-DATA",
+          "REQ-SEC"
+        ]
+      }
+    ]
+  },
+  "wbs": {
+    "id": "WBS-ROOT",
+    "label": "eParts Project",
+    "children": [
+      {
+        "id": "WBS-1",
+        "label": "1. Requirements & Discovery",
+        "children": [
+          {
+            "id": "WBS-1.1",
+            "label": "1.1 Client Interviews",
+            "status": "done",
+            "meetings": [
+              "GMT20260122",
+              "GMT20260212",
+              "GMT20260226",
+              "GMT20260402",
+              "GMT20260416"
+            ]
+          },
+          {
+            "id": "WBS-1.2",
+            "label": "1.2 Data Assessment",
+            "status": "done"
+          },
+          {
+            "id": "WBS-1.3",
+            "label": "1.3 Requirements Documentation",
+            "status": "in_progress"
+          }
+        ]
+      },
+      {
+        "id": "WBS-2",
+        "label": "2. Architecture & Design",
+        "children": [
+          {
+            "id": "WBS-2.1",
+            "label": "2.1 Architecture Decision Records",
+            "status": "in_progress"
+          },
+          {
+            "id": "WBS-2.2",
+            "label": "2.2 Component Design",
+            "status": "in_progress"
+          },
+          {
+            "id": "WBS-2.3",
+            "label": "2.3 Data Model Design",
+            "status": "in_progress"
+          }
+        ]
+      },
+      {
+        "id": "WBS-3",
+        "label": "3. ML Pipeline",
+        "children": [
+          {
+            "id": "WBS-3.1",
+            "label": "3.1 Data Ingestion & Cleaning",
+            "status": "in_progress"
+          },
+          {
+            "id": "WBS-3.2",
+            "label": "3.2 Model Experimentation",
+            "status": "in_progress"
+          },
+          {
+            "id": "WBS-3.3",
+            "label": "3.3 Model Evaluation & Selection",
+            "status": "not_started"
+          },
+          {
+            "id": "WBS-3.4",
+            "label": "3.4 Model Serving & Monitoring",
+            "status": "not_started"
+          }
+        ]
+      },
+      {
+        "id": "WBS-4",
+        "label": "4. Application Development",
+        "children": [
+          {
+            "id": "WBS-4.1",
+            "label": "4.1 Backend API",
+            "status": "in_progress"
+          },
+          {
+            "id": "WBS-4.2",
+            "label": "4.2 Frontend UI",
+            "status": "not_started"
+          },
+          {
+            "id": "WBS-4.3",
+            "label": "4.3 Search Engine",
+            "status": "not_started"
+          }
+        ]
+      },
+      {
+        "id": "WBS-5",
+        "label": "5. Engineering System (SES)",
+        "children": [
+          {
+            "id": "WBS-5.1",
+            "label": "5.1 Agent Framework",
+            "status": "done"
+          },
+          {
+            "id": "WBS-5.2",
+            "label": "5.2 Measurement System",
+            "status": "done"
+          },
+          {
+            "id": "WBS-5.3",
+            "label": "5.3 Cross-Pipeline Integration",
+            "status": "done"
+          },
+          {
+            "id": "WBS-5.4",
+            "label": "5.4 ETVX Documentation",
+            "status": "done"
+          }
+        ]
+      }
+    ]
+  },
+  "traceability": [
+    {
+      "from": "GMT20260122",
+      "to": "REQ-DATA",
+      "type": "extracted_from"
+    },
+    {
+      "from": "GMT20260122",
+      "to": "REQ-SEARCH",
+      "type": "extracted_from"
+    },
+    {
+      "from": "GMT20260212",
+      "to": "REQ-ML",
+      "type": "extracted_from"
+    },
+    {
+      "from": "GMT20260212",
+      "to": "REQ-DATA",
+      "type": "discussed"
+    },
+    {
+      "from": "GMT20260226",
+      "to": "REQ-DEPLOY",
+      "type": "discussed"
+    },
+    {
+      "from": "GMT20260226",
+      "to": "REQ-UI",
+      "type": "discussed"
+    },
+    {
+      "from": "GMT20260402",
+      "to": "REQ-ML",
+      "type": "discussed"
+    },
+    {
+      "from": "GMT20260402",
+      "to": "REQ-MONITOR",
+      "type": "extracted_from"
+    },
+    {
+      "from": "GMT20260416",
+      "to": "REQ-HITL",
+      "type": "extracted_from"
+    },
+    {
+      "from": "GMT20260416",
+      "to": "REQ-PERF",
+      "type": "discussed"
+    },
+    {
+      "from": "REQ-SEARCH",
+      "to": "ARCH-VECTOR",
+      "type": "implemented_by"
+    },
+    {
+      "from": "REQ-SEARCH",
+      "to": "ARCH-API",
+      "type": "implemented_by"
+    },
+    {
+      "from": "REQ-ML",
+      "to": "ARCH-ML",
+      "type": "implemented_by"
+    },
+    {
+      "from": "REQ-DATA",
+      "to": "ARCH-DB",
+      "type": "implemented_by"
+    },
+    {
+      "from": "REQ-UI",
+      "to": "ARCH-FE",
+      "type": "implemented_by"
+    },
+    {
+      "from": "REQ-DEPLOY",
+      "to": "ARCH-AZURE",
+      "type": "implemented_by"
+    },
+    {
+      "from": "REQ-SES",
+      "to": "ARCH-ORCH",
+      "type": "implemented_by"
+    },
+    {
+      "from": "REQ-MONITOR",
+      "to": "ARCH-ML",
+      "type": "implemented_by"
+    },
+    {
+      "from": "REQ-HITL",
+      "to": "ARCH-FE",
+      "type": "implemented_by"
+    },
+    {
+      "from": "CONC-DATA",
+      "to": "REQ-DATA",
+      "type": "threatens"
+    },
+    {
+      "from": "CONC-MODEL",
+      "to": "REQ-ML",
+      "type": "threatens"
+    },
+    {
+      "from": "CONC-AZURE",
+      "to": "REQ-DEPLOY",
+      "type": "threatens"
+    },
+    {
+      "from": "CONC-MEASURE",
+      "to": "REQ-SES",
+      "type": "threatens"
+    },
+    {
+      "from": "CONC-SCOPE",
+      "to": "REQ-PERF",
+      "type": "threatens"
+    },
+    {
+      "from": "GMT20260224-220446",
+      "to": "CONC-DATA",
+      "type": "raised"
+    },
+    {
+      "from": "GMT20260220-180425",
+      "to": "CONC-DATA",
+      "type": "raised"
+    },
+    {
+      "from": "GMT20260220-180425",
+      "to": "CONC-SCOPE",
+      "type": "raised"
+    },
+    {
+      "from": "GMT20260224-190023",
+      "to": "CONC-DATA",
+      "type": "raised"
+    },
+    {
+      "from": "GMT20260220-222907",
+      "to": "CONC-MEASURE",
+      "type": "raised"
+    },
+    {
+      "from": "GMT20260220-222907",
+      "to": "CONC-MODEL",
+      "type": "raised"
+    },
+    {
+      "from": "GMT20260224-220446",
+      "to": "CONC-AZURE",
+      "type": "raised"
+    }
+  ],
+  "event_flow": [
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.777586+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"I'm a bit confused. Take care. I think there's an echo. I should talk"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.776651+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "4",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.679636+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"Yeah, so, we are targeting that towards the end of this month, we sho"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.678472+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "10",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.557325+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "2",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"I think the primary, goal for the model that we're currently thinking"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.556493+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "10",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.477109+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "3",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"A for, today's agenda. I think your mic is gone. model sound? Yeah, f"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.476052+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "10",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.360586+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "3",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': 'Okay, so the next topic we have is how we are gonna be working togeth"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.359513+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "7",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.237546+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"Consequence format, and, let's start off then. The first one is, we a"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.236411+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.137336+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"Unless, like, you take another team's requirements and try to do them"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.136358+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.058258+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"I'm getting the data from them. So, we\u2026 now we have received, like, I"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:01.057387+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:00.975419+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "2",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': 'Yeah, it is, so basically, we need to get some more information out o"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:00.974767+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "10",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:00.879486+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"I'm getting the data from them. So, we\u2026 now we have received, like, I"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:00.878250+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:00.782232+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"Consequence format, and, let's start off then. The first one is, we a"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:00.781296+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:00.675321+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"Consequence format, and, let's start off then. The first one is, we a"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:54:00.674548+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "coach"
+      }
+    },
+    {
+      "event_type": "recurring_concern",
+      "source_agent": "concern_tracker",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:38.180061+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "alert_agent",
+          "description": "Recurring concerns trigger PM alerts"
+        }
+      ],
+      "data_preview": {
+        "themes": "['general']",
+        "details": "[{'theme': 'general', 'raised_by': 'team', 'total_raised': 4, 'session_count': 1",
+        "total_patterns": "2"
+      }
+    },
+    {
+      "event_type": "new_session_embedded",
+      "source_agent": "session_memory",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:38.176226+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "briefing_generator",
+          "description": "New sessions trigger briefing refresh"
+        }
+      ],
+      "data_preview": {
+        "session_id": "session-2026-02-20-GMT20260220-222907_R",
+        "date": "2026-02-20",
+        "session_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:37.581295+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"Unless, like, you take another team's requirements and try to do them"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:37.580410+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "recurring_concern",
+      "source_agent": "concern_tracker",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:37.453424+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "alert_agent",
+          "description": "Recurring concerns trigger PM alerts"
+        }
+      ],
+      "data_preview": {
+        "themes": "['general']",
+        "details": "[{'theme': 'general', 'raised_by': 'team', 'total_raised': 3, 'session_count': 1",
+        "total_patterns": "1"
+      }
+    },
+    {
+      "event_type": "new_session_embedded",
+      "source_agent": "session_memory",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:37.449903+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "briefing_generator",
+          "description": "New sessions trigger briefing refresh"
+        }
+      ],
+      "data_preview": {
+        "session_id": "session-2026-02-24-GMT20260224-190023_R",
+        "date": "2026-02-24",
+        "session_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:36.194190+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"I'm getting the data from them. So, we\u2026 now we have received, like, I"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:36.193137+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "recurring_concern",
+      "source_agent": "concern_tracker",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:36.057346+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "alert_agent",
+          "description": "Recurring concerns trigger PM alerts"
+        }
+      ],
+      "data_preview": {
+        "themes": "['general']",
+        "details": "[{'theme': 'general', 'raised_by': 'team', 'total_raised': 2, 'session_count': 1",
+        "total_patterns": "1"
+      }
+    },
+    {
+      "event_type": "new_session_embedded",
+      "source_agent": "session_memory",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:36.053657+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "briefing_generator",
+          "description": "New sessions trigger briefing refresh"
+        }
+      ],
+      "data_preview": {
+        "session_id": "session-2026-02-20-GMT20260220-180425_R",
+        "date": "2026-02-20",
+        "session_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:34.844024+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"Consequence format, and, let's start off then. The first one is, we a"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:34.843101+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "new_session_embedded",
+      "source_agent": "session_memory",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:34.627358+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "briefing_generator",
+          "description": "New sessions trigger briefing refresh"
+        }
+      ],
+      "data_preview": {
+        "session_id": "session-2026-02-24-GMT20260224-220446_R",
+        "date": "2026-02-24",
+        "session_type": "coach"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:33.443798+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "2",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': 'Yeah, it is, so basically, we need to get some more information out o"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:33.443209+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "10",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:22.882764+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "1",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"I'm a bit confused. Take care. I think there's an echo. I should talk"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:22.881925+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "4",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:22.768926+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "3",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"A for, today's agenda. I think your mic is gone. model sound? Yeah, f"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:22.768022+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "10",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    },
+    {
+      "event_type": "decision_logged",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:22.645458+00:00",
+      "targets": [
+        {
+          "target_pipeline": "knowledge",
+          "target_agent": "decision_logger",
+          "description": "Decisions get logged to knowledge base"
+        }
+      ],
+      "data_preview": {
+        "count": "2",
+        "meeting_date": "2026-04-23",
+        "decisions": "[{'text': \"I think the primary, goal for the model that we're currently thinking"
+      }
+    },
+    {
+      "event_type": "action_items_extracted",
+      "source_agent": "transcript_parser",
+      "source_pipeline": "",
+      "timestamp": "2026-04-23T18:40:22.644983+00:00",
+      "targets": [
+        {
+          "target_pipeline": "project_mgmt",
+          "target_agent": "ticket_creator",
+          "description": "Action items trigger ticket creation"
+        }
+      ],
+      "data_preview": {
+        "count": "10",
+        "meeting_date": "2026-04-23",
+        "meeting_type": "client"
+      }
+    }
+  ],
+  "wiki_stats": {
+    "total_entries": 40,
+    "total_changes": 96,
+    "namespaces": {
+      "coach_session_memory": 20,
+      "commitments": 4,
+      "concerns": 1,
+      "latest_runs": 8,
+      "meetings": 2,
+      "requirements_engineering": 5
+    }
+  },
+  "bus_stats": {
+    "total_events": 45,
+    "active_subscriptions": 10,
+    "events_by_type": {
+      "action_items_extracted": 19,
+      "decision_logged": 19,
+      "new_session_embedded": 4,
+      "recurring_concern": 3
+    }
+  }
+}

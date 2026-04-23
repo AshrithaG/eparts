@@ -17,6 +17,7 @@ from __future__ import annotations
 import json
 import time
 import logging
+import uuid
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
@@ -73,6 +74,8 @@ class AgentResult:
     errors: list[str] = field(default_factory=list)
     requires_human_review: bool = False
     review_items: list[dict[str, Any]] = field(default_factory=list)
+    # Pipeline data: structured output for downstream agents to consume
+    data: dict[str, Any] = field(default_factory=dict)
 
 
 # ---------------------------------------------------------------------------
@@ -144,7 +147,8 @@ class BaseAgent(ABC):
     Subclasses must implement `run(trigger) -> AgentResult`.
     All LLM calls go through `call_claude()`. All prompts are loaded from
     /prompts/ via `load_prompt()`. Every invocation is logged to the JSONL
-    audit trail.
+    audit trail. Every call is metered into the metrics DB for the SES
+    measurement system (tokens, latency, cost, prompt version).
     """
 
     MAX_RETRIES = 3
@@ -158,6 +162,47 @@ class BaseAgent(ABC):
         self._client = anthropic.Anthropic(api_key=self._settings.anthropic_api_key)
         self._run_llm_calls = 0
         self._run_total_tokens = 0
+        self._run_input_tokens = 0
+        self._run_output_tokens = 0
+        self._run_cost_usd = 0.0
+        self._run_id = ""
+
+        # Lazy-loaded shared infrastructure
+        self._metrics = None
+        self._wiki = None
+        self._event_bus = None
+
+    def _get_metrics(self):
+        if self._metrics is None:
+            from pipeline.metrics import MetricsCollector
+            self._metrics = MetricsCollector()
+        return self._metrics
+
+    @property
+    def wiki(self):
+        """Shared Memory — the project wiki all agents read/write."""
+        if self._wiki is None:
+            from pipeline.shared_memory import SharedMemory
+            self._wiki = SharedMemory()
+        return self._wiki
+
+    @property
+    def events(self):
+        """Event Bus — publish events to trigger cross-pipeline actions."""
+        if self._event_bus is None:
+            from pipeline.event_bus import EventBus
+            self._event_bus = EventBus()
+        return self._event_bus
+
+    def emit(self, event_type: str, data: dict[str, Any] | None = None, pipeline: str = "") -> None:
+        """Convenience: publish an event from this agent."""
+        from pipeline.event_bus import Event
+        self.events.publish(Event(
+            event_type=event_type,
+            source_agent=self.name,
+            source_pipeline=pipeline,
+            data=data or {},
+        ))
 
     # ------ abstract interface ------
 
@@ -182,10 +227,17 @@ class BaseAgent(ABC):
         loads the file contents instead.
 
         Retries up to MAX_RETRIES times with exponential backoff on rate-limit
-        or transient server errors.
+        or transient server errors. Every call is metered into the metrics DB.
         """
-        if PROMPTS_DIR.joinpath(prompt).exists():
-            prompt = self.load_prompt(prompt)
+        prompt_file = "inline"
+        # Only check for prompt file if the string looks like a filename (short, no newlines)
+        if len(prompt) < 256 and "\n" not in prompt:
+            try:
+                if PROMPTS_DIR.joinpath(prompt).exists():
+                    prompt_file = prompt
+                    prompt = self.load_prompt(prompt)
+            except (OSError, ValueError):
+                pass
 
         model = model or self._settings.claude_model
         messages = [{"role": "user", "content": prompt}]
@@ -211,11 +263,37 @@ class BaseAgent(ABC):
                 output_tokens = response.usage.output_tokens
                 self._run_llm_calls += 1
                 self._run_total_tokens += input_tokens + output_tokens
+                self._run_input_tokens += input_tokens
+                self._run_output_tokens += output_tokens
+
+                # Record per-call metrics
+                try:
+                    from pipeline.metrics import LLMCallMetric
+                    call_metric = LLMCallMetric(
+                        agent=self.name,
+                        run_id=self._run_id,
+                        model=model,
+                        prompt_file=prompt_file,
+                        input_tokens=input_tokens,
+                        output_tokens=output_tokens,
+                        latency_ms=elapsed_ms,
+                        temperature=temperature,
+                        attempt=attempt,
+                    )
+                    self._run_cost_usd += call_metric.estimated_cost_usd
+                    self._get_metrics().record_llm_call(call_metric)
+
+                    if prompt_file != "inline":
+                        self._get_metrics().track_prompt_version(prompt_file, prompt)
+                except Exception:
+                    pass  # metrics should never break agent execution
 
                 self.logger.info(
                     f"LLM call completed: model={model} "
+                    f"prompt={prompt_file} "
                     f"input_tokens={input_tokens} output_tokens={output_tokens} "
-                    f"latency_ms={elapsed_ms} attempt={attempt}"
+                    f"latency_ms={elapsed_ms} cost=${call_metric.estimated_cost_usd:.4f} "
+                    f"attempt={attempt}"
                 )
 
                 return response.content[0].text
@@ -263,11 +341,15 @@ class BaseAgent(ABC):
 
     def execute(self, trigger: AgentTrigger) -> AgentResult:
         """
-        Wraps run() with timing, token tracking, and structured logging.
-        Call this instead of run() directly.
+        Wraps run() with timing, token tracking, structured logging, and
+        metrics collection. Call this instead of run() directly.
         """
+        self._run_id = f"{self.name}-{uuid.uuid4().hex[:12]}"
         self._run_llm_calls = 0
         self._run_total_tokens = 0
+        self._run_input_tokens = 0
+        self._run_output_tokens = 0
+        self._run_cost_usd = 0.0
         t0 = time.perf_counter()
 
         try:
@@ -279,6 +361,7 @@ class BaseAgent(ABC):
                 success=False,
                 errors=[f"{type(exc).__name__}: {exc}"],
             )
+            self._record_run_metrics(trigger, result, duration_ms)
             self.logger.log_run(
                 trigger, result, duration_ms,
                 llm_calls=self._run_llm_calls,
@@ -287,9 +370,33 @@ class BaseAgent(ABC):
             return result
 
         duration_ms = int((time.perf_counter() - t0) * 1000)
+        self._record_run_metrics(trigger, result, duration_ms)
         self.logger.log_run(
             trigger, result, duration_ms,
             llm_calls=self._run_llm_calls,
             total_tokens=self._run_total_tokens,
         )
         return result
+
+    def _record_run_metrics(
+        self, trigger: AgentTrigger, result: AgentResult, duration_ms: int
+    ) -> None:
+        try:
+            from pipeline.metrics import AgentRunMetric
+            self._get_metrics().record_agent_run(AgentRunMetric(
+                run_id=self._run_id,
+                agent=self.name,
+                trigger_type=trigger.trigger_type,
+                trigger_source=trigger.source,
+                success=result.success,
+                duration_ms=duration_ms,
+                llm_calls=self._run_llm_calls,
+                total_input_tokens=self._run_input_tokens,
+                total_output_tokens=self._run_output_tokens,
+                estimated_cost_usd=self._run_cost_usd,
+                outputs_count=len(result.outputs),
+                requires_human_review=result.requires_human_review,
+                errors=result.errors,
+            ))
+        except Exception:
+            pass  # metrics should never break agent execution
