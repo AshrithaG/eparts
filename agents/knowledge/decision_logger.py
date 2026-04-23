@@ -26,10 +26,22 @@ class DecisionLoggerAgent(BaseAgent):
         super().__init__(name="decision_logger", mcp_clients=mcp_clients)
 
     def run(self, trigger: AgentTrigger) -> AgentResult:
-        decisions = trigger.metadata.get("decisions", [])
-        date = trigger.metadata.get("date", datetime.now(timezone.utc).strftime("%Y-%m-%d"))
-        source = trigger.source
-        participants = trigger.metadata.get("participants", [])
+        pipeline_ctx = trigger.metadata.get("pipeline_context", {})
+        decisions = (
+            trigger.metadata.get("decisions", [])
+            or pipeline_ctx.get("decisions", [])
+            or pipeline_ctx.get("potential_decisions", [])
+        )
+        date = (
+            trigger.metadata.get("date")
+            or pipeline_ctx.get("meeting_date")
+            or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        )
+        source = trigger.source or pipeline_ctx.get("source", "unknown")
+        participants = (
+            trigger.metadata.get("participants", [])
+            or pipeline_ctx.get("participants", [])
+        )
 
         if not decisions:
             return AgentResult(
@@ -48,12 +60,22 @@ class DecisionLoggerAgent(BaseAgent):
             )
             new_entries.append(entry)
 
-        bitbucket = self.mcp.get("bitbucket")
+        repo = self.mcp.get("github") or self.mcp.get("bitbucket")
         outputs = []
-        if bitbucket:
-            # In production: read existing log, append new entries
+
+        # Deposit each decision to wiki
+        for i, d in enumerate(decisions):
+            text = d.get("text", d) if isinstance(d, dict) else str(d)
+            self.wiki.put("decisions", f"{date}:{i}", {
+                "text": text[:300],
+                "source": source,
+                "date": date,
+                "participants": participants,
+            }, agent=self.name, pipeline="knowledge")
+
+        if repo:
             log_content = self._build_log_update(new_entries, date)
-            bitbucket.commit_file(
+            repo.commit_file(
                 file_path="minutes/decisions.log.md",
                 content=log_content,
                 message=f"Log {len(decisions)} decision(s) from {date}",
