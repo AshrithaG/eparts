@@ -476,6 +476,59 @@ async def jira_issues(jql: str | None = None):
     return jira.search_issues(jql)
 
 
+@app.get("/traceability")
+async def traceability_overview():
+    """Unified traceability — every artifact and its chain."""
+    from pipeline.traceability import TraceabilityStore
+    from pipeline.seed_traceability import seed
+    seed()
+    store = TraceabilityStore()
+    return {
+        "coverage": store.get_coverage(),
+        "concerns": store.get_by_type("concern"),
+        "decisions": store.get_by_type("decision"),
+        "architecture": store.get_by_type("architecture"),
+        "risks": store.get_by_type("risk"),
+        "commitments": store.get_by_type("commitment"),
+    }
+
+
+@app.get("/traceability/{artifact_id}")
+async def trace_artifact(artifact_id: str, direction: str = "forward"):
+    """Follow a single artifact's traceability chain."""
+    from pipeline.traceability import TraceabilityStore
+    store = TraceabilityStore()
+    artifact = store.get_artifact(artifact_id)
+    if not artifact:
+        raise HTTPException(status_code=404, detail=f"Artifact '{artifact_id}' not found")
+    chain = store.get_chain(artifact_id, direction=direction)
+    return {"artifact": artifact, "chain": chain, "chain_length": len(chain)}
+
+
+@app.get("/traceability/gaps/concerns")
+async def unaddressed_concerns():
+    """Concerns with no action taken — traceability gaps."""
+    from pipeline.traceability import TraceabilityStore
+    store = TraceabilityStore()
+    return {"unlinked_concerns": store.get_unlinked("concern")}
+
+
+@app.get("/traceability/gaps/risks")
+async def unmitigated_risks():
+    """Risks without mitigation — traceability gaps."""
+    from pipeline.traceability import TraceabilityStore
+    store = TraceabilityStore()
+    return {"unmitigated_risks": store.get_unlinked("risk")}
+
+
+@app.get("/traceability/chains/{artifact_type}")
+async def all_chains(artifact_type: str):
+    """Get all forward chains for a given artifact type."""
+    from pipeline.traceability import TraceabilityStore
+    store = TraceabilityStore()
+    return {"chains": store.get_all_chains_from_type(artifact_type)}
+
+
 @app.get("/integrations")
 async def integration_status():
     """Status of all external integrations."""
