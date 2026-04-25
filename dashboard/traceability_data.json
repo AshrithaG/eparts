@@ -1,0 +1,6641 @@
+{
+  "summary": {
+    "total_artifacts": 184,
+    "total_links": 760,
+    "by_type": {
+      "jira_ticket": 50,
+      "action_item": 41,
+      "commitment": 31,
+      "risk": 16,
+      "concern": 12,
+      "requirement": 12,
+      "decision": 10,
+      "architecture": 6,
+      "meeting": 5,
+      "coach_session": 1
+    },
+    "by_link_type": {
+      "MITIGATES": 320,
+      "IMPLEMENTS": 204,
+      "RAISED_IN": 122,
+      "BECAME": 60,
+      "DECIDED_BY": 32,
+      "ADDRESSES": 13,
+      "TRIGGERED": 9
+    },
+    "unaddressed_concerns": 0,
+    "unmitigated_risks": 0
+  },
+  "nodes": [
+    {
+      "id": "EPARTS-81",
+      "type": "jira_ticket",
+      "title": "[transcript_parser] [SES] Deploy agentic pipeline orchestrator for live demo",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-80",
+      "type": "jira_ticket",
+      "title": "[transcript_parser] [Coach] Define POC evaluation criteria before development",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-79",
+      "type": "jira_ticket",
+      "title": "[transcript_parser] [Coach] Document architecture decisions as formal ADRs",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-78",
+      "type": "jira_ticket",
+      "title": "[transcript_parser] Create team AI best practices guide",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-77",
+      "type": "jira_ticket",
+      "title": "[transcript_parser] Implement Claude token usage policy for team",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-76",
+      "type": "jira_ticket",
+      "title": "[transcript_parser] Complete and sign Statement of Work with client feedback",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-75",
+      "type": "jira_ticket",
+      "title": "[transcript_parser] Map product attributes to industry standards instead of ALPS",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-74",
+      "type": "jira_ticket",
+      "title": "[transcript_parser] Finalize requirements document by April 15",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-73",
+      "type": "jira_ticket",
+      "title": "[transcript_parser] Schedule deep-dive with catalog team on attribute mapping",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-72",
+      "type": "jira_ticket",
+      "title": "[transcript_parser] Explore Azure AI services beyond LLMs for attribute extracti",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-71",
+      "type": "jira_ticket",
+      "title": "[transcript_parser] Set up Azure Log Analytics access for monitoring",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-70",
+      "type": "jira_ticket",
+      "title": "[transcript_parser] Decide: Bicep vs Terraform for Azure infrastructure deployme",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-69",
+      "type": "jira_ticket",
+      "title": "[transcript_parser] Obtain existing data quality metrics from eParts for baselin",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-68",
+      "type": "jira_ticket",
+      "title": "[transcript_parser] Schedule in-person visit with eParts catalog team",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-67",
+      "type": "jira_ticket",
+      "title": "[transcript_parser] Set up team access to eParts Teams and documentation workspa",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-66",
+      "type": "jira_ticket",
+      "title": "[orchestrator] SES infrastructure setup complete",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-64",
+      "type": "jira_ticket",
+      "title": "Writing ADRs",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-63",
+      "type": "jira_ticket",
+      "title": "Architecture analysis and tradeoffs",
+      "meeting": "",
+      "status": "in_progress"
+    },
+    {
+      "id": "EPARTS-62",
+      "type": "jira_ticket",
+      "title": "Architecture Diagram",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-61",
+      "type": "jira_ticket",
+      "title": "Make task for Critique/Presentation",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-60",
+      "type": "jira_ticket",
+      "title": "ML System Check in",
+      "meeting": "",
+      "status": "in_progress"
+    },
+    {
+      "id": "EPARTS-59",
+      "type": "jira_ticket",
+      "title": "Update Timeline Doc",
+      "meeting": "",
+      "status": "in_progress"
+    },
+    {
+      "id": "EPARTS-58",
+      "type": "jira_ticket",
+      "title": "Review Requirenments Doc",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "EPARTS-57",
+      "type": "jira_ticket",
+      "title": "List out and divide tasks for Agentic System",
+      "meeting": "",
+      "status": "in_progress"
+    },
+    {
+      "id": "EPARTS-56",
+      "type": "jira_ticket",
+      "title": "Prepare agenda for client and mentor meeting",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-55",
+      "type": "jira_ticket",
+      "title": "Agentic Architecture design (draft 1)",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-54",
+      "type": "jira_ticket",
+      "title": "Claude, Bitbucket access",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-53",
+      "type": "jira_ticket",
+      "title": "Cluade, Bitbucket access",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-52",
+      "type": "jira_ticket",
+      "title": "Update the Jira board",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-51",
+      "type": "jira_ticket",
+      "title": "Make a list of all automated processes and how they work",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-50",
+      "type": "jira_ticket",
+      "title": "Make a timeline, detailed for this semester, roughly for next semester",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-49",
+      "type": "jira_ticket",
+      "title": "Mentor Meeting: Diagram Review",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-48",
+      "type": "jira_ticket",
+      "title": "Mentor Meeting: Semester Roadmap",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-47",
+      "type": "jira_ticket",
+      "title": "Mentor Meeting: Review First Half Slides",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-46",
+      "type": "jira_ticket",
+      "title": "Mentor Meeting: Jim's Presentation Plan",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-45",
+      "type": "jira_ticket",
+      "title": "Final Dry Run",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-44",
+      "type": "jira_ticket",
+      "title": "Internal Dry Run (Team Only)",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-43",
+      "type": "jira_ticket",
+      "title": "Individual Presentation Plan",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-42",
+      "type": "jira_ticket",
+      "title": "Slides: Risk & Project Management",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-41",
+      "type": "jira_ticket",
+      "title": "Slides: System Architecture (Arjun)",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-40",
+      "type": "jira_ticket",
+      "title": "Slides: System Architecture (Ashritha)",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-39",
+      "type": "jira_ticket",
+      "title": "Activity: Requirements Gathering",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-38",
+      "type": "jira_ticket",
+      "title": "Slides: Project Context & Intro",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-37",
+      "type": "jira_ticket",
+      "title": "Plan for Jim's Presentation",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-36",
+      "type": "jira_ticket",
+      "title": "Requirements Specification Document",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-35",
+      "type": "jira_ticket",
+      "title": "SES System Overhaul (Change Everything)",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-34",
+      "type": "jira_ticket",
+      "title": "Risk Management Document",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-33",
+      "type": "jira_ticket",
+      "title": "Setup Python to Jira Automation",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-15",
+      "type": "jira_ticket",
+      "title": "Analyse applicable Software Project Management principles",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "EPARTS-14",
+      "type": "jira_ticket",
+      "title": "Context Diagram",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "ACT-597f38",
+      "type": "action_item",
+      "title": "Okay, so the next topic we have is how we are gonna be working together. And the",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "ACT-82934c",
+      "type": "action_item",
+      "title": "I mean, I guess we could use those metrics, Oh, no, I don't know if we have how ",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "ACT-fc05e6",
+      "type": "action_item",
+      "title": "You'd like some metrics to see what the overall process on which it's improved. ",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "ACT-03f53a",
+      "type": "action_item",
+      "title": "And I'm gonna put words in the team's mouth, which is, you know, this is a lot o",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "ACT-7e2e94",
+      "type": "action_item",
+      "title": "We need to be good enough for them does. I think from my point of view, it was j",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "ACT-00aed9",
+      "type": "action_item",
+      "title": "Go snowboarding on Monday if the weather slowed that much down, so you guys shou",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "ACT-274b03",
+      "type": "action_item",
+      "title": "Yep. Let me wait a second thing I want. Are you still there, Dennis? Dennis, let",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "ACT-b8ab78",
+      "type": "action_item",
+      "title": "A for, today's agenda. I think your mic is gone. model sound? Yeah, firstly, we'",
+      "meeting": "2026-02-12",
+      "status": "open"
+    },
+    {
+      "id": "ACT-c36699",
+      "type": "action_item",
+      "title": "Yeah, yeah, I can see. Okay, so again, like, this is not a prescribed solution t",
+      "meeting": "2026-02-12",
+      "status": "open"
+    },
+    {
+      "id": "ACT-ecd59e",
+      "type": "action_item",
+      "title": "But then, don't you want your solution to be extensive? No, no, I mean, we do, I",
+      "meeting": "2026-02-12",
+      "status": "open"
+    },
+    {
+      "id": "ACT-b08ccf",
+      "type": "action_item",
+      "title": "I'm not sure if we do it with Bicep. What we do have our Azure-wide monitors, so",
+      "meeting": "2026-02-12",
+      "status": "open"
+    },
+    {
+      "id": "ACT-0415f9",
+      "type": "action_item",
+      "title": "I didn't get your point on Terraform being\u2026 I think if we deploy something about",
+      "meeting": "2026-02-12",
+      "status": "open"
+    },
+    {
+      "id": "ACT-9bd154",
+      "type": "action_item",
+      "title": "Yeah, I would pick Bicep, mostly because I think it's something that we know. I ",
+      "meeting": "2026-02-12",
+      "status": "open"
+    },
+    {
+      "id": "ACT-041323",
+      "type": "action_item",
+      "title": "Okay. I think with that in mind, we can maybe go forward with Bicep itself. Yeah",
+      "meeting": "2026-02-12",
+      "status": "open"
+    },
+    {
+      "id": "ACT-628a65",
+      "type": "action_item",
+      "title": "Oh, sorry, I'm\u2026 I caught half of that. It was\u2026 the audio's getting a little quie",
+      "meeting": "2026-02-12",
+      "status": "open"
+    },
+    {
+      "id": "ACT-0807b8",
+      "type": "action_item",
+      "title": "Can you, explain a little bit on how, the data is written to Azure Logs, and the",
+      "meeting": "2026-02-12",
+      "status": "open"
+    },
+    {
+      "id": "ACT-9db16b",
+      "type": "action_item",
+      "title": "Yeah, let me\u2026 maybe I can share my screen, and that would help clear up some con",
+      "meeting": "2026-02-12",
+      "status": "open"
+    },
+    {
+      "id": "ACT-ca46d6",
+      "type": "action_item",
+      "title": "So, Ashtar, you added anything to add? Okay. So, Harshal, we spoke to a couple o",
+      "meeting": "2026-02-26",
+      "status": "open"
+    },
+    {
+      "id": "ACT-cd8cde",
+      "type": "action_item",
+      "title": "So, can you guys look at any of the other options available on Azure, other than",
+      "meeting": "2026-02-26",
+      "status": "open"
+    },
+    {
+      "id": "ACT-960218",
+      "type": "action_item",
+      "title": "Yeah, like, I personally have experience with Amazon Bedrock, but not the Azure ",
+      "meeting": "2026-02-26",
+      "status": "open"
+    },
+    {
+      "id": "ACT-80ff9e",
+      "type": "action_item",
+      "title": "Yep, 100%. Again, I don't want to be restrictive in any way, so because this is ",
+      "meeting": "2026-02-26",
+      "status": "open"
+    },
+    {
+      "id": "ACT-a2ba3d",
+      "type": "action_item",
+      "title": "Okay. So, at least for now, before the LEM topic even came up, we were just, pla",
+      "meeting": "2026-02-26",
+      "status": "open"
+    },
+    {
+      "id": "ACT-1a2264",
+      "type": "action_item",
+      "title": "Night. Yeah, I think, I think we will probably should schedule a meeting with th",
+      "meeting": "2026-02-26",
+      "status": "open"
+    },
+    {
+      "id": "ACT-dba71b",
+      "type": "action_item",
+      "title": "Uber. Yeah, so I'll just remove the meeting from next week, next week's calendar",
+      "meeting": "2026-02-26",
+      "status": "open"
+    },
+    {
+      "id": "ACT-7e97b0",
+      "type": "action_item",
+      "title": "Yeah, I'll send out a cancellation thing. Okay. Next we have\u2026 I think, yeah, for",
+      "meeting": "2026-02-26",
+      "status": "open"
+    },
+    {
+      "id": "ACT-c46669",
+      "type": "action_item",
+      "title": "I think the primary, goal for the model that we're currently thinking is to get ",
+      "meeting": "2026-02-26",
+      "status": "open"
+    },
+    {
+      "id": "ACT-88cd1e",
+      "type": "action_item",
+      "title": "This\u2026 the Excel part\u2026 so, the way it is right now is, I mean, this data goes int",
+      "meeting": "2026-02-26",
+      "status": "open"
+    },
+    {
+      "id": "ACT-bb8b09",
+      "type": "action_item",
+      "title": "Yeah, I'll just turn up my speaker. So\u2026 okay. Yep. So, the first item on the age",
+      "meeting": "2026-04-02",
+      "status": "open"
+    },
+    {
+      "id": "ACT-cf744f",
+      "type": "action_item",
+      "title": "Yeah. So\u2026 Yeah, sure, can you, should I share my screen, or can you share your s",
+      "meeting": "2026-04-02",
+      "status": "open"
+    },
+    {
+      "id": "ACT-fc2808",
+      "type": "action_item",
+      "title": "Okay, nevermind, I'll just do it then. So\u2026 Okay. So, is it visible, Harsha, dude",
+      "meeting": "2026-04-02",
+      "status": "open"
+    },
+    {
+      "id": "ACT-bdb951",
+      "type": "action_item",
+      "title": "So, we just wanted to go over and, like, get your feedback. So, for now, what we",
+      "meeting": "2026-04-02",
+      "status": "open"
+    },
+    {
+      "id": "ACT-f1641a",
+      "type": "action_item",
+      "title": "Yeah, so, we are targeting that towards the end of this month, we should have th",
+      "meeting": "2026-04-02",
+      "status": "open"
+    },
+    {
+      "id": "ACT-3d7844",
+      "type": "action_item",
+      "title": "Other than July's missing, but yeah, I think\u2026 I think this makes sense. This is ",
+      "meeting": "2026-04-02",
+      "status": "open"
+    },
+    {
+      "id": "ACT-758b99",
+      "type": "action_item",
+      "title": "Yeah, July was, left out because, the entire development\u2026 there won't be any del",
+      "meeting": "2026-04-02",
+      "status": "open"
+    },
+    {
+      "id": "ACT-620159",
+      "type": "action_item",
+      "title": "Okay, we also have the statement of work, I'll just share that as well. So\u2026 One ",
+      "meeting": "2026-04-02",
+      "status": "open"
+    },
+    {
+      "id": "ACT-ffd2cc",
+      "type": "action_item",
+      "title": "Okay. So, we were, it was encouraged that we have a statement of work, just so t",
+      "meeting": "2026-04-02",
+      "status": "open"
+    },
+    {
+      "id": "ACT-ee7448",
+      "type": "action_item",
+      "title": "Yeah. So, we also have other things, such as, like, You know, that are\u2026 we will ",
+      "meeting": "2026-04-02",
+      "status": "open"
+    },
+    {
+      "id": "ACT-e8d710",
+      "type": "action_item",
+      "title": "Yeah, starting. So\u2026 I think\u2026 So the\u2026 So, the first thing\u2026 Was it regarding the t",
+      "meeting": "2026-04-16",
+      "status": "open"
+    },
+    {
+      "id": "ACT-f910c9",
+      "type": "action_item",
+      "title": "I'm a bit confused. Take care. I think there's an echo. I should talk. This shou",
+      "meeting": "2026-04-16",
+      "status": "open"
+    },
+    {
+      "id": "ACT-61d66d",
+      "type": "action_item",
+      "title": "I think I'll be traveling the end of this month, and then I'll be in India for, ",
+      "meeting": "2026-04-16",
+      "status": "open"
+    },
+    {
+      "id": "ACT-152c51",
+      "type": "action_item",
+      "title": "But he did tumble, right? So\u2026 Yeah. That would have been so bad boys, yeah. Anyw",
+      "meeting": "2026-04-16",
+      "status": "open"
+    },
+    {
+      "id": "COM-2cb319",
+      "type": "commitment",
+      "title": "we'll be primarily using a cursor with the client's data to use it to process it",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-1ac016",
+      "type": "commitment",
+      "title": "we will be using github actions for our testing and deployments, but we haven't ",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-335e55",
+      "type": "commitment",
+      "title": "we'll be building some from scratch, so\u2026",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-bf061b",
+      "type": "commitment",
+      "title": "i will say is that you've got to think about\u2026 it sounds like you're gonna be usi",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-33d81c",
+      "type": "commitment",
+      "title": "we'll probably, yeah, we\u2026 i don't think we have acidic plot code.",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-e00723",
+      "type": "commitment",
+      "title": "we'll probably get access to cursor.",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-c74477",
+      "type": "commitment",
+      "title": "i'll create a repo, and then anything that's relevant",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-a039d6",
+      "type": "commitment",
+      "title": "i'll make sure they're in the repo, so they're alongside of it. and that way, wh",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-b1f5bb",
+      "type": "commitment",
+      "title": "i'll just quickly share my screen, i'll show you the brief of the problem and th",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-8460af",
+      "type": "commitment",
+      "title": "i'll be\u2026 much easier to understand.",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-aa208f",
+      "type": "commitment",
+      "title": "we need to proceed with any of the\u2026",
+      "meeting": "2026-02-20",
+      "status": "open"
+    },
+    {
+      "id": "COM-befb68",
+      "type": "commitment",
+      "title": "we will not have a good enough idea of which to proceed with.",
+      "meeting": "2026-02-20",
+      "status": "open"
+    },
+    {
+      "id": "COM-34bf22",
+      "type": "commitment",
+      "title": "we will not be using any tools that, basically",
+      "meeting": "2026-02-20",
+      "status": "open"
+    },
+    {
+      "id": "COM-7177ed",
+      "type": "commitment",
+      "title": "we'll go back over a bit. we'll go back there. and\u2026",
+      "meeting": "2026-02-20",
+      "status": "open"
+    },
+    {
+      "id": "COM-c26701",
+      "type": "commitment",
+      "title": "we will start missing milestones if, if, we, this continues, and,",
+      "meeting": "2026-02-20",
+      "status": "open"
+    },
+    {
+      "id": "COM-1759ba",
+      "type": "commitment",
+      "title": "i'll share it anyway. it kind of what\u2026",
+      "meeting": "2026-02-20",
+      "status": "open"
+    },
+    {
+      "id": "COM-dc8c00",
+      "type": "commitment",
+      "title": "we'll do that as well. but happy to focus on\u2026 on the risk part.",
+      "meeting": "2026-02-20",
+      "status": "open"
+    },
+    {
+      "id": "COM-2cd2b6",
+      "type": "commitment",
+      "title": "we'll come back to you, and we'll have that discussion, right? and that's the wa",
+      "meeting": "2026-02-20",
+      "status": "open"
+    },
+    {
+      "id": "COM-10ac35",
+      "type": "commitment",
+      "title": "we'll just, i'll just change it to what you just said. yeah, but i would\u2026 i woul",
+      "meeting": "2026-02-20",
+      "status": "open"
+    },
+    {
+      "id": "COM-4c7d65",
+      "type": "commitment",
+      "title": "i'll just move this to constraints.",
+      "meeting": "2026-02-20",
+      "status": "open"
+    },
+    {
+      "id": "COM-23586f",
+      "type": "commitment",
+      "title": "i'll just pull it up, be better with the diagram.",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-3286a2",
+      "type": "commitment",
+      "title": "i will go to the intermediary from this table, and then it will just be synced t",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-2c2aa0",
+      "type": "commitment",
+      "title": "we'll use, which can be\u2026 we'll make it so that it can be easily integrated into ",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-1eed58",
+      "type": "commitment",
+      "title": "we'll probably go on site and meet the team. okay. and when you say data, you're",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-d3f704",
+      "type": "commitment",
+      "title": "we'll be removing the human part, and only it'll be automatically pushed to the ",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-ac8d71",
+      "type": "commitment",
+      "title": "we'll just simply, input it via, like, maybe some listen folder or something lik",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-b7a75c",
+      "type": "commitment",
+      "title": "we need to finalize how the data is being inputted, how they want the data to be",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-fa60d8",
+      "type": "commitment",
+      "title": "we'll have some sort of precise rules to see if particular attributes fits the, ",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-129080",
+      "type": "commitment",
+      "title": "we'll be giving it the content scores. okay. and this table is basically, after ",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-117aea",
+      "type": "commitment",
+      "title": "we'll be able to answer a lot of questions that you've brought up, but currently",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "COM-33b981",
+      "type": "commitment",
+      "title": "we'll probably reach out to you with some kind of data we have as well.",
+      "meeting": "2026-02-20",
+      "status": "open"
+    },
+    {
+      "id": "RIS-f5c786",
+      "type": "risk",
+      "title": "Confidence threshold miscalibration",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "RIS-50bc62",
+      "type": "risk",
+      "title": "Data access delay blocking ML development",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "RIS-d8a886",
+      "type": "risk",
+      "title": "Insufficient training data (<200 labeled examples)",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "RIS-8083f1",
+      "type": "risk",
+      "title": "PIMS staging schema incompatibility (P1-C pending)",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "RIS-5de8fb",
+      "type": "risk",
+      "title": "Catalog team capacity vs review volume",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "RIS-c2f026",
+      "type": "risk",
+      "title": "Drift detection metrics and baselines undefined",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "RIS-11e5db",
+      "type": "risk",
+      "title": "Measurement validity for AI effectiveness",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "RIS-816a97",
+      "type": "risk",
+      "title": "Model selection uncertainty",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "RIS-016cf1",
+      "type": "risk",
+      "title": "Integration dependency on Jake (PIMS schema)",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "RIS-9d7a9e",
+      "type": "risk",
+      "title": "Alpha weighting sensitivity in hybrid scoring",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "RIS-ddd0e1",
+      "type": "risk",
+      "title": "Attribute correlation invalidates per-attribute routing",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "RIS-fc0584",
+      "type": "risk",
+      "title": "Human review interface design not decided",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "RIS-603445",
+      "type": "risk",
+      "title": "Scope creep risk",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "RIS-dd2cc8",
+      "type": "risk",
+      "title": "Azure tool constraints",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "RIS-2119e6",
+      "type": "risk",
+      "title": "Capstone timeline constraint",
+      "meeting": "",
+      "status": "open"
+    },
+    {
+      "id": "RIS-8706ae",
+      "type": "risk",
+      "title": "Knowledge loss from manual processes",
+      "meeting": "",
+      "status": "done"
+    },
+    {
+      "id": "CON-3d2b20",
+      "type": "concern",
+      "title": "Is there\u2026 I know before we talked about the most sensitive thing from the vendor",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "CON-94e376",
+      "type": "concern",
+      "title": "Is there any correction of information about a product that makes it more sensit",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "CON-f8ffc2",
+      "type": "concern",
+      "title": "Is there anything else you want to add on these points",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "CON-8ec1cb",
+      "type": "concern",
+      "title": "How does your current, the code checking process look like",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "CON-f4157d",
+      "type": "concern",
+      "title": "How does that look like",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "CON-daffed",
+      "type": "concern",
+      "title": "Can we at least use the LLM part for, instead of the OCR",
+      "meeting": "2026-02-26",
+      "status": "open"
+    },
+    {
+      "id": "CON-8262ce",
+      "type": "concern",
+      "title": "Is there a timeline from your end that you expect me to give you the data by",
+      "meeting": "2026-04-02",
+      "status": "open"
+    },
+    {
+      "id": "CON-157ee8",
+      "type": "concern",
+      "title": "How do we understand that this matches to a specific category",
+      "meeting": "2026-04-02",
+      "status": "open"
+    },
+    {
+      "id": "CON-b484bf",
+      "type": "concern",
+      "title": "Is there any problem with what I just said",
+      "meeting": "2026-04-02",
+      "status": "open"
+    },
+    {
+      "id": "CON-e800a2",
+      "type": "concern",
+      "title": "Can we Actually, just use a CS",
+      "meeting": "2026-04-16",
+      "status": "open"
+    },
+    {
+      "id": "CON-130d50",
+      "type": "concern",
+      "title": "problem and the concept, so you get a better picture.",
+      "meeting": "2026-02-24",
+      "status": "open"
+    },
+    {
+      "id": "CON-4729a3",
+      "type": "concern",
+      "title": "problem with the first one, the distalbot, is, it's a text model, but then our c",
+      "meeting": "2026-02-20",
+      "status": "open"
+    },
+    {
+      "id": "REQ-001",
+      "type": "requirement",
+      "title": "Extract product attributes from vendor spec sheets",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "REQ-002",
+      "type": "requirement",
+      "title": "Map extracted attributes to industry-standard taxonomy",
+      "meeting": "2026-04-02",
+      "status": "open"
+    },
+    {
+      "id": "REQ-003",
+      "type": "requirement",
+      "title": "ML confidence scoring on every predicted attribute",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "REQ-004",
+      "type": "requirement",
+      "title": "Human review queue for AI-generated catalog data",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "REQ-005",
+      "type": "requirement",
+      "title": "Staging table diff model for catalog review workflow",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "REQ-006",
+      "type": "requirement",
+      "title": "Azure infrastructure with Bicep IaC",
+      "meeting": "2026-02-12",
+      "status": "open"
+    },
+    {
+      "id": "REQ-007",
+      "type": "requirement",
+      "title": "Azure Log Analytics for monitoring and observability",
+      "meeting": "2026-02-12",
+      "status": "open"
+    },
+    {
+      "id": "REQ-008",
+      "type": "requirement",
+      "title": "Support multiple vendor document formats",
+      "meeting": "2026-02-26",
+      "status": "open"
+    },
+    {
+      "id": "REQ-009",
+      "type": "requirement",
+      "title": "POC demonstrating end-to-end attribute extraction",
+      "meeting": "2026-04-02",
+      "status": "open"
+    },
+    {
+      "id": "REQ-010",
+      "type": "requirement",
+      "title": "Statement of Work signed by end of April",
+      "meeting": "2026-04-02",
+      "status": "open"
+    },
+    {
+      "id": "REQ-011",
+      "type": "requirement",
+      "title": "Team AI usage policy and best practices guide",
+      "meeting": "2026-04-16",
+      "status": "open"
+    },
+    {
+      "id": "REQ-012",
+      "type": "requirement",
+      "title": "Formal ADRs for all architecture decisions",
+      "meeting": "coach",
+      "status": "open"
+    },
+    {
+      "id": "DEC-583699",
+      "type": "decision",
+      "title": "Okay, so the next topic we have is how we are gonna be working together. And the",
+      "meeting": "2026-01-22",
+      "status": "done"
+    },
+    {
+      "id": "DEC-afa506",
+      "type": "decision",
+      "title": "You'd like some metrics to see what the overall process on which it's improved. ",
+      "meeting": "2026-01-22",
+      "status": "done"
+    },
+    {
+      "id": "DEC-55bce2",
+      "type": "decision",
+      "title": "We need to be good enough for them does. I think from my point of view, it was j",
+      "meeting": "2026-01-22",
+      "status": "done"
+    },
+    {
+      "id": "DEC-2eced3",
+      "type": "decision",
+      "title": "A for, today's agenda. I think your mic is gone. model sound? Yeah, firstly, we'",
+      "meeting": "2026-02-12",
+      "status": "done"
+    },
+    {
+      "id": "DEC-b0cc07",
+      "type": "decision",
+      "title": "Yeah, yeah, I can see. Okay, so again, like, this is not a prescribed solution t",
+      "meeting": "2026-02-12",
+      "status": "done"
+    },
+    {
+      "id": "DEC-a347d4",
+      "type": "decision",
+      "title": "But then, don't you want your solution to be extensive? No, no, I mean, we do, I",
+      "meeting": "2026-02-12",
+      "status": "done"
+    },
+    {
+      "id": "DEC-e9b865",
+      "type": "decision",
+      "title": "I think the primary, goal for the model that we're currently thinking is to get ",
+      "meeting": "2026-02-26",
+      "status": "done"
+    },
+    {
+      "id": "DEC-b2d23d",
+      "type": "decision",
+      "title": "Yeah, just\u2026 just let us know, and I think\u2026 I think we should be on top of it. At",
+      "meeting": "2026-02-26",
+      "status": "done"
+    },
+    {
+      "id": "DEC-fab886",
+      "type": "decision",
+      "title": "Yeah, so, we are targeting that towards the end of this month, we should have th",
+      "meeting": "2026-04-02",
+      "status": "done"
+    },
+    {
+      "id": "DEC-78fcfd",
+      "type": "decision",
+      "title": "I'm a bit confused. Take care. I think there's an echo. I should talk. This shou",
+      "meeting": "2026-04-16",
+      "status": "done"
+    },
+    {
+      "id": "ARCH-001",
+      "type": "architecture",
+      "title": "Use Bicep over Terraform for Azure IaC",
+      "meeting": "2026-02-12",
+      "status": "done"
+    },
+    {
+      "id": "ARCH-002",
+      "type": "architecture",
+      "title": "Map to industry standards instead of ALPS-specific attributes",
+      "meeting": "2026-04-02",
+      "status": "done"
+    },
+    {
+      "id": "ARCH-003",
+      "type": "architecture",
+      "title": "ML confidence scoring for attribute prediction",
+      "meeting": "2026-01-22",
+      "status": "open"
+    },
+    {
+      "id": "ARCH-004",
+      "type": "architecture",
+      "title": "Staging tables as Git-diff model for data review",
+      "meeting": "2026-01-22",
+      "status": "done"
+    },
+    {
+      "id": "ARCH-005",
+      "type": "architecture",
+      "title": "Human-in-the-loop for all AI-generated data",
+      "meeting": "2026-01-22",
+      "status": "done"
+    },
+    {
+      "id": "ARCH-006",
+      "type": "architecture",
+      "title": "Agent-Augmented Iterative SDLC (bespoke)",
+      "meeting": "internal",
+      "status": "done"
+    },
+    {
+      "id": "MTG-2026-01-22",
+      "type": "meeting",
+      "title": "Client Meeting 2026-01-22",
+      "meeting": "2026-01-22",
+      "status": "done"
+    },
+    {
+      "id": "MTG-2026-02-12",
+      "type": "meeting",
+      "title": "Client Meeting 2026-02-12",
+      "meeting": "2026-02-12",
+      "status": "done"
+    },
+    {
+      "id": "MTG-2026-02-26",
+      "type": "meeting",
+      "title": "Client Meeting 2026-02-26",
+      "meeting": "2026-02-26",
+      "status": "done"
+    },
+    {
+      "id": "MTG-2026-04-02",
+      "type": "meeting",
+      "title": "Client Meeting 2026-04-02",
+      "meeting": "2026-04-02",
+      "status": "done"
+    },
+    {
+      "id": "MTG-2026-04-16",
+      "type": "meeting",
+      "title": "Client Meeting 2026-04-16",
+      "meeting": "2026-04-16",
+      "status": "done"
+    },
+    {
+      "id": "COACH-session-",
+      "type": "coach_session",
+      "title": "Coach Session 2026-02-20 (coach)",
+      "meeting": "2026-02-20",
+      "status": "done"
+    }
+  ],
+  "edges": [
+    {
+      "source": "ACT-00aed9",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-03f53a",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-041323",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-0415f9",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-0807b8",
+      "target": "DEC-2eced3",
+      "type": "TRIGGERED",
+      "source_type": "action_item",
+      "target_type": "decision"
+    },
+    {
+      "source": "ACT-0807b8",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-152c51",
+      "target": "MTG-2026-04-16",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-1a2264",
+      "target": "DEC-e9b865",
+      "type": "TRIGGERED",
+      "source_type": "action_item",
+      "target_type": "decision"
+    },
+    {
+      "source": "ACT-1a2264",
+      "target": "MTG-2026-02-26",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-274b03",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-3d7844",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-597f38",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-61d66d",
+      "target": "MTG-2026-04-16",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-620159",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-628a65",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-758b99",
+      "target": "DEC-fab886",
+      "type": "TRIGGERED",
+      "source_type": "action_item",
+      "target_type": "decision"
+    },
+    {
+      "source": "ACT-758b99",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-7e2e94",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-7e97b0",
+      "target": "DEC-e9b865",
+      "type": "TRIGGERED",
+      "source_type": "action_item",
+      "target_type": "decision"
+    },
+    {
+      "source": "ACT-7e97b0",
+      "target": "MTG-2026-02-26",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-80ff9e",
+      "target": "MTG-2026-02-26",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-82934c",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-88cd1e",
+      "target": "DEC-e9b865",
+      "type": "TRIGGERED",
+      "source_type": "action_item",
+      "target_type": "decision"
+    },
+    {
+      "source": "ACT-88cd1e",
+      "target": "MTG-2026-02-26",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-960218",
+      "target": "MTG-2026-02-26",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-9bd154",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-9db16b",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-a2ba3d",
+      "target": "MTG-2026-02-26",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-b08ccf",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-b8ab78",
+      "target": "DEC-2eced3",
+      "type": "TRIGGERED",
+      "source_type": "action_item",
+      "target_type": "decision"
+    },
+    {
+      "source": "ACT-b8ab78",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-bb8b09",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-bdb951",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-c36699",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-c46669",
+      "target": "DEC-e9b865",
+      "type": "TRIGGERED",
+      "source_type": "action_item",
+      "target_type": "decision"
+    },
+    {
+      "source": "ACT-c46669",
+      "target": "MTG-2026-02-26",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-ca46d6",
+      "target": "MTG-2026-02-26",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-cd8cde",
+      "target": "MTG-2026-02-26",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-cf744f",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-dba71b",
+      "target": "MTG-2026-02-26",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-e8d710",
+      "target": "MTG-2026-04-16",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-ecd59e",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-ee7448",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-f1641a",
+      "target": "DEC-fab886",
+      "type": "TRIGGERED",
+      "source_type": "action_item",
+      "target_type": "decision"
+    },
+    {
+      "source": "ACT-f1641a",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-f910c9",
+      "target": "MTG-2026-04-16",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-fc05e6",
+      "target": "DEC-afa506",
+      "type": "TRIGGERED",
+      "source_type": "action_item",
+      "target_type": "decision"
+    },
+    {
+      "source": "ACT-fc05e6",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-fc2808",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ACT-ffd2cc",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "action_item",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ARCH-001",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "architecture",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ARCH-001",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-001",
+      "target": "RIS-c2f026",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-001",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "COM-2cb319",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "COM-33b981",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "COM-b7a75c",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "COM-d3f704",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "COM-fa60d8",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "CON-3d2b20",
+      "type": "ADDRESSES",
+      "source_type": "architecture",
+      "target_type": "concern"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "CON-8262ce",
+      "type": "ADDRESSES",
+      "source_type": "architecture",
+      "target_type": "concern"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "CON-daffed",
+      "type": "ADDRESSES",
+      "source_type": "architecture",
+      "target_type": "concern"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "architecture",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "RIS-2119e6",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-002",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "COM-2cb319",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "COM-33b981",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "COM-b7a75c",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "COM-d3f704",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "COM-fa60d8",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "CON-3d2b20",
+      "type": "ADDRESSES",
+      "source_type": "architecture",
+      "target_type": "concern"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "CON-8262ce",
+      "type": "ADDRESSES",
+      "source_type": "architecture",
+      "target_type": "concern"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "CON-daffed",
+      "type": "ADDRESSES",
+      "source_type": "architecture",
+      "target_type": "concern"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "architecture",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-003",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "COM-2cb319",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "COM-33b981",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "COM-b7a75c",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "COM-d3f704",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "COM-fa60d8",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "CON-3d2b20",
+      "type": "ADDRESSES",
+      "source_type": "architecture",
+      "target_type": "concern"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "CON-8262ce",
+      "type": "ADDRESSES",
+      "source_type": "architecture",
+      "target_type": "concern"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "CON-daffed",
+      "type": "ADDRESSES",
+      "source_type": "architecture",
+      "target_type": "concern"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "architecture",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-004",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "COM-2cb319",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "COM-33b981",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "COM-b7a75c",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "COM-d3f704",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "COM-fa60d8",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "CON-3d2b20",
+      "type": "ADDRESSES",
+      "source_type": "architecture",
+      "target_type": "concern"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "CON-8262ce",
+      "type": "ADDRESSES",
+      "source_type": "architecture",
+      "target_type": "concern"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "CON-daffed",
+      "type": "ADDRESSES",
+      "source_type": "architecture",
+      "target_type": "concern"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "architecture",
+      "target_type": "meeting"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-005",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-006",
+      "target": "COM-2cb319",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-006",
+      "target": "COM-dc8c00",
+      "type": "IMPLEMENTS",
+      "source_type": "architecture",
+      "target_type": "commitment"
+    },
+    {
+      "source": "ARCH-006",
+      "target": "CON-8ec1cb",
+      "type": "ADDRESSES",
+      "source_type": "architecture",
+      "target_type": "concern"
+    },
+    {
+      "source": "ARCH-006",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "ARCH-006",
+      "target": "RIS-8706ae",
+      "type": "MITIGATES",
+      "source_type": "architecture",
+      "target_type": "risk"
+    },
+    {
+      "source": "COM-10ac35",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-117aea",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-129080",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-1759ba",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-1ac016",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-1eed58",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-23586f",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-2c2aa0",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-2cb319",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-2cb319",
+      "target": "REQ-001",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-2cb319",
+      "target": "REQ-002",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-2cb319",
+      "target": "REQ-003",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-2cb319",
+      "target": "REQ-005",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-2cb319",
+      "target": "REQ-008",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-2cb319",
+      "target": "REQ-009",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-2cb319",
+      "target": "REQ-010",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-2cb319",
+      "target": "REQ-011",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-2cd2b6",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-3286a2",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-335e55",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-33b981",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-33b981",
+      "target": "REQ-001",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-33b981",
+      "target": "REQ-002",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-33b981",
+      "target": "REQ-003",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-33b981",
+      "target": "REQ-005",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-33b981",
+      "target": "REQ-008",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-33b981",
+      "target": "REQ-009",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-33d81c",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-34bf22",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-4c7d65",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-7177ed",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-8460af",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-a039d6",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-aa208f",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-ac8d71",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-b1f5bb",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-b7a75c",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-b7a75c",
+      "target": "REQ-001",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-b7a75c",
+      "target": "REQ-002",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-b7a75c",
+      "target": "REQ-003",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-b7a75c",
+      "target": "REQ-005",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-b7a75c",
+      "target": "REQ-008",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-b7a75c",
+      "target": "REQ-009",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-b7a75c",
+      "target": "REQ-010",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-befb68",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-bf061b",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-c26701",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-c74477",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-d3f704",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-d3f704",
+      "target": "REQ-001",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-d3f704",
+      "target": "REQ-002",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-d3f704",
+      "target": "REQ-003",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-d3f704",
+      "target": "REQ-004",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-d3f704",
+      "target": "REQ-005",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-d3f704",
+      "target": "REQ-008",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-d3f704",
+      "target": "REQ-009",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-dc8c00",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-dc8c00",
+      "target": "REQ-010",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-dc8c00",
+      "target": "REQ-011",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-e00723",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-fa60d8",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "commitment",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "COM-fa60d8",
+      "target": "REQ-001",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-fa60d8",
+      "target": "REQ-002",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-fa60d8",
+      "target": "REQ-003",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-fa60d8",
+      "target": "REQ-005",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-fa60d8",
+      "target": "REQ-008",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "COM-fa60d8",
+      "target": "REQ-009",
+      "type": "BECAME",
+      "source_type": "commitment",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-130d50",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "concern",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "CON-157ee8",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "concern",
+      "target_type": "meeting"
+    },
+    {
+      "source": "CON-3d2b20",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "concern",
+      "target_type": "meeting"
+    },
+    {
+      "source": "CON-3d2b20",
+      "target": "REQ-001",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-3d2b20",
+      "target": "REQ-002",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-3d2b20",
+      "target": "REQ-003",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-3d2b20",
+      "target": "REQ-005",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-3d2b20",
+      "target": "REQ-008",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-3d2b20",
+      "target": "REQ-009",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-4729a3",
+      "target": "COACH-session-",
+      "type": "RAISED_IN",
+      "source_type": "concern",
+      "target_type": "coach_session"
+    },
+    {
+      "source": "CON-8262ce",
+      "target": "DEC-fab886",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "decision"
+    },
+    {
+      "source": "CON-8262ce",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "concern",
+      "target_type": "meeting"
+    },
+    {
+      "source": "CON-8262ce",
+      "target": "REQ-001",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-8262ce",
+      "target": "REQ-002",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-8262ce",
+      "target": "REQ-003",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-8262ce",
+      "target": "REQ-005",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-8262ce",
+      "target": "REQ-008",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-8262ce",
+      "target": "REQ-009",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-8262ce",
+      "target": "REQ-010",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-8ec1cb",
+      "target": "DEC-afa506",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "decision"
+    },
+    {
+      "source": "CON-8ec1cb",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "concern",
+      "target_type": "meeting"
+    },
+    {
+      "source": "CON-8ec1cb",
+      "target": "REQ-010",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-8ec1cb",
+      "target": "REQ-011",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-94e376",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "concern",
+      "target_type": "meeting"
+    },
+    {
+      "source": "CON-b484bf",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "concern",
+      "target_type": "meeting"
+    },
+    {
+      "source": "CON-daffed",
+      "target": "DEC-e9b865",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "decision"
+    },
+    {
+      "source": "CON-daffed",
+      "target": "MTG-2026-02-26",
+      "type": "RAISED_IN",
+      "source_type": "concern",
+      "target_type": "meeting"
+    },
+    {
+      "source": "CON-daffed",
+      "target": "REQ-001",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-daffed",
+      "target": "REQ-002",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-daffed",
+      "target": "REQ-003",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-daffed",
+      "target": "REQ-005",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-daffed",
+      "target": "REQ-008",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-daffed",
+      "target": "REQ-009",
+      "type": "BECAME",
+      "source_type": "concern",
+      "target_type": "requirement"
+    },
+    {
+      "source": "CON-e800a2",
+      "target": "MTG-2026-04-16",
+      "type": "RAISED_IN",
+      "source_type": "concern",
+      "target_type": "meeting"
+    },
+    {
+      "source": "CON-f4157d",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "concern",
+      "target_type": "meeting"
+    },
+    {
+      "source": "CON-f8ffc2",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "concern",
+      "target_type": "meeting"
+    },
+    {
+      "source": "DEC-2eced3",
+      "target": "ARCH-002",
+      "type": "DECIDED_BY",
+      "source_type": "decision",
+      "target_type": "architecture"
+    },
+    {
+      "source": "DEC-2eced3",
+      "target": "ARCH-003",
+      "type": "DECIDED_BY",
+      "source_type": "decision",
+      "target_type": "architecture"
+    },
+    {
+      "source": "DEC-2eced3",
+      "target": "ARCH-004",
+      "type": "DECIDED_BY",
+      "source_type": "decision",
+      "target_type": "architecture"
+    },
+    {
+      "source": "DEC-2eced3",
+      "target": "ARCH-005",
+      "type": "DECIDED_BY",
+      "source_type": "decision",
+      "target_type": "architecture"
+    },
+    {
+      "source": "DEC-2eced3",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "decision",
+      "target_type": "meeting"
+    },
+    {
+      "source": "DEC-55bce2",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "decision",
+      "target_type": "meeting"
+    },
+    {
+      "source": "DEC-583699",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "decision",
+      "target_type": "meeting"
+    },
+    {
+      "source": "DEC-78fcfd",
+      "target": "MTG-2026-04-16",
+      "type": "RAISED_IN",
+      "source_type": "decision",
+      "target_type": "meeting"
+    },
+    {
+      "source": "DEC-a347d4",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "decision",
+      "target_type": "meeting"
+    },
+    {
+      "source": "DEC-afa506",
+      "target": "ARCH-006",
+      "type": "DECIDED_BY",
+      "source_type": "decision",
+      "target_type": "architecture"
+    },
+    {
+      "source": "DEC-afa506",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "decision",
+      "target_type": "meeting"
+    },
+    {
+      "source": "DEC-b0cc07",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "decision",
+      "target_type": "meeting"
+    },
+    {
+      "source": "DEC-b2d23d",
+      "target": "MTG-2026-02-26",
+      "type": "RAISED_IN",
+      "source_type": "decision",
+      "target_type": "meeting"
+    },
+    {
+      "source": "DEC-e9b865",
+      "target": "ARCH-002",
+      "type": "DECIDED_BY",
+      "source_type": "decision",
+      "target_type": "architecture"
+    },
+    {
+      "source": "DEC-e9b865",
+      "target": "ARCH-003",
+      "type": "DECIDED_BY",
+      "source_type": "decision",
+      "target_type": "architecture"
+    },
+    {
+      "source": "DEC-e9b865",
+      "target": "ARCH-004",
+      "type": "DECIDED_BY",
+      "source_type": "decision",
+      "target_type": "architecture"
+    },
+    {
+      "source": "DEC-e9b865",
+      "target": "ARCH-005",
+      "type": "DECIDED_BY",
+      "source_type": "decision",
+      "target_type": "architecture"
+    },
+    {
+      "source": "DEC-e9b865",
+      "target": "MTG-2026-02-26",
+      "type": "RAISED_IN",
+      "source_type": "decision",
+      "target_type": "meeting"
+    },
+    {
+      "source": "DEC-fab886",
+      "target": "ARCH-002",
+      "type": "DECIDED_BY",
+      "source_type": "decision",
+      "target_type": "architecture"
+    },
+    {
+      "source": "DEC-fab886",
+      "target": "ARCH-006",
+      "type": "DECIDED_BY",
+      "source_type": "decision",
+      "target_type": "architecture"
+    },
+    {
+      "source": "DEC-fab886",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "decision",
+      "target_type": "meeting"
+    },
+    {
+      "source": "EPARTS-14",
+      "target": "ARCH-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-14",
+      "target": "ARCH-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-14",
+      "target": "REQ-009",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-14",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-14",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-14",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-15",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-15",
+      "target": "REQ-010",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-15",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-15",
+      "target": "RIS-8706ae",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-33",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "ARCH-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "REQ-010",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "RIS-2119e6",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "RIS-8706ae",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "RIS-9d7a9e",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "RIS-c2f026",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-34",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-35",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-35",
+      "target": "REQ-011",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-36",
+      "target": "ARCH-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-36",
+      "target": "REQ-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-36",
+      "target": "REQ-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-36",
+      "target": "RIS-2119e6",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-36",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-36",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-37",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-37",
+      "target": "REQ-010",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-37",
+      "target": "REQ-011",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-37",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-37",
+      "target": "RIS-8706ae",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-38",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-38",
+      "target": "REQ-010",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-38",
+      "target": "REQ-011",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-38",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-38",
+      "target": "RIS-8706ae",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-39",
+      "target": "REQ-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-39",
+      "target": "REQ-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-39",
+      "target": "REQ-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-40",
+      "target": "ARCH-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-40",
+      "target": "ARCH-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-40",
+      "target": "ARCH-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-40",
+      "target": "REQ-012",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-40",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-40",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-40",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-41",
+      "target": "ARCH-004",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-41",
+      "target": "ARCH-005",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-41",
+      "target": "REQ-012",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-41",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-41",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-41",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "REQ-010",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "RIS-2119e6",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "RIS-8706ae",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "RIS-9d7a9e",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "RIS-c2f026",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-42",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-43",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-43",
+      "target": "REQ-010",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-43",
+      "target": "REQ-011",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-43",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-43",
+      "target": "RIS-8706ae",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-44",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-45",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-46",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-46",
+      "target": "REQ-010",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-46",
+      "target": "REQ-011",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-46",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-46",
+      "target": "RIS-8706ae",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-47",
+      "target": "ARCH-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-47",
+      "target": "ARCH-004",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-47",
+      "target": "ARCH-005",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-47",
+      "target": "REQ-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-47",
+      "target": "REQ-004",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-47",
+      "target": "REQ-005",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-47",
+      "target": "REQ-009",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-47",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-47",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-47",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-47",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-47",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-48",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-48",
+      "target": "REQ-010",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-49",
+      "target": "ARCH-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-49",
+      "target": "REQ-012",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-49",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-49",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-49",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-49",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-49",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-49",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-50",
+      "target": "REQ-010",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-51",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-51",
+      "target": "REQ-011",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-52",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-52",
+      "target": "REQ-010",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-52",
+      "target": "REQ-011",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-52",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-52",
+      "target": "RIS-8706ae",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-53",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-53",
+      "target": "REQ-011",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-54",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-54",
+      "target": "REQ-011",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-55",
+      "target": "ARCH-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-55",
+      "target": "ARCH-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-55",
+      "target": "ARCH-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-55",
+      "target": "ARCH-004",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-55",
+      "target": "ARCH-005",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-55",
+      "target": "REQ-012",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-55",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-55",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-55",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-56",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-57",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-57",
+      "target": "REQ-011",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-58",
+      "target": "ARCH-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-58",
+      "target": "ARCH-004",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-58",
+      "target": "ARCH-005",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-58",
+      "target": "REQ-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-58",
+      "target": "REQ-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-58",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-58",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-58",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-58",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-58",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-59",
+      "target": "ARCH-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-59",
+      "target": "REQ-010",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-59",
+      "target": "RIS-2119e6",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-59",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-59",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-60",
+      "target": "ARCH-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-60",
+      "target": "REQ-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-60",
+      "target": "REQ-009",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-60",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-60",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-60",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-60",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-60",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-60",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-60",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-60",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-60",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-61",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-62",
+      "target": "ARCH-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-62",
+      "target": "ARCH-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-62",
+      "target": "ARCH-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-62",
+      "target": "REQ-012",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-62",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-62",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-62",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-63",
+      "target": "ARCH-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-63",
+      "target": "ARCH-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-63",
+      "target": "ARCH-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-63",
+      "target": "ARCH-004",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-63",
+      "target": "ARCH-005",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-63",
+      "target": "REQ-012",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-63",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-63",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-63",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-64",
+      "target": "ARCH-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-64",
+      "target": "ARCH-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-64",
+      "target": "ARCH-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-64",
+      "target": "ARCH-004",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-64",
+      "target": "ARCH-005",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-64",
+      "target": "REQ-012",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-66",
+      "target": "ARCH-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-66",
+      "target": "REQ-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-66",
+      "target": "REQ-007",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-66",
+      "target": "REQ-009",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-66",
+      "target": "REQ-010",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-66",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-66",
+      "target": "RIS-c2f026",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-66",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-67",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "jira_ticket",
+      "target_type": "meeting"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "ARCH-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "ARCH-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "ARCH-004",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "ARCH-005",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "jira_ticket",
+      "target_type": "meeting"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "REQ-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "REQ-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "RIS-2119e6",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-68",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-69",
+      "target": "ARCH-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-69",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "jira_ticket",
+      "target_type": "meeting"
+    },
+    {
+      "source": "EPARTS-69",
+      "target": "REQ-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-69",
+      "target": "REQ-009",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-69",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-69",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-69",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-69",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-69",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-69",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-69",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-69",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-69",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-69",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-70",
+      "target": "ACT-041323",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-70",
+      "target": "ACT-0415f9",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-70",
+      "target": "ACT-0807b8",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-70",
+      "target": "ARCH-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-70",
+      "target": "ARCH-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-70",
+      "target": "ARCH-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-70",
+      "target": "ARCH-004",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-70",
+      "target": "ARCH-005",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-70",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "jira_ticket",
+      "target_type": "meeting"
+    },
+    {
+      "source": "EPARTS-70",
+      "target": "REQ-012",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-70",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-70",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-70",
+      "target": "RIS-c2f026",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-70",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-70",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-71",
+      "target": "ACT-041323",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-71",
+      "target": "ACT-0415f9",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-71",
+      "target": "ACT-0807b8",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-71",
+      "target": "ARCH-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-71",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "jira_ticket",
+      "target_type": "meeting"
+    },
+    {
+      "source": "EPARTS-71",
+      "target": "REQ-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-71",
+      "target": "REQ-007",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-71",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-71",
+      "target": "RIS-c2f026",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-71",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "ACT-1a2264",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "ACT-7e97b0",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "ACT-88cd1e",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "ACT-960218",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "ACT-c46669",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "ARCH-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "MTG-2026-02-26",
+      "type": "RAISED_IN",
+      "source_type": "jira_ticket",
+      "target_type": "meeting"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "REQ-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "REQ-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "REQ-008",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "RIS-c2f026",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-72",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "ACT-1a2264",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "ACT-7e97b0",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "ACT-88cd1e",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "ACT-c46669",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "ARCH-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "ARCH-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "ARCH-004",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "ARCH-005",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "MTG-2026-02-26",
+      "type": "RAISED_IN",
+      "source_type": "jira_ticket",
+      "target_type": "meeting"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "REQ-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "REQ-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "RIS-2119e6",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-73",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-74",
+      "target": "ACT-758b99",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-74",
+      "target": "ACT-f1641a",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-74",
+      "target": "ARCH-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-74",
+      "target": "ARCH-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-74",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "jira_ticket",
+      "target_type": "meeting"
+    },
+    {
+      "source": "EPARTS-74",
+      "target": "REQ-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-74",
+      "target": "REQ-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-74",
+      "target": "REQ-009",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-74",
+      "target": "REQ-010",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-74",
+      "target": "RIS-2119e6",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-74",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-74",
+      "target": "RIS-c2f026",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-74",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-74",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-75",
+      "target": "ARCH-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-75",
+      "target": "ARCH-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-75",
+      "target": "ARCH-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-75",
+      "target": "ARCH-004",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-75",
+      "target": "ARCH-005",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-75",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "jira_ticket",
+      "target_type": "meeting"
+    },
+    {
+      "source": "EPARTS-75",
+      "target": "REQ-012",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-75",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-75",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-75",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-76",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "jira_ticket",
+      "target_type": "meeting"
+    },
+    {
+      "source": "EPARTS-76",
+      "target": "REQ-010",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-77",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-77",
+      "target": "MTG-2026-04-16",
+      "type": "RAISED_IN",
+      "source_type": "jira_ticket",
+      "target_type": "meeting"
+    },
+    {
+      "source": "EPARTS-77",
+      "target": "REQ-011",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-77",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-77",
+      "target": "RIS-8706ae",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-78",
+      "target": "ACT-e8d710",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "action_item"
+    },
+    {
+      "source": "EPARTS-78",
+      "target": "ARCH-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-78",
+      "target": "MTG-2026-04-16",
+      "type": "RAISED_IN",
+      "source_type": "jira_ticket",
+      "target_type": "meeting"
+    },
+    {
+      "source": "EPARTS-78",
+      "target": "REQ-011",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-78",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-78",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-78",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-78",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-78",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-78",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-78",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-78",
+      "target": "RIS-8706ae",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-78",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-78",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-78",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-79",
+      "target": "ARCH-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-79",
+      "target": "ARCH-002",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-79",
+      "target": "ARCH-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-79",
+      "target": "ARCH-004",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-79",
+      "target": "ARCH-005",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-79",
+      "target": "REQ-012",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-79",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-79",
+      "target": "RIS-2119e6",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-79",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-79",
+      "target": "RIS-8706ae",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-79",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-79",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "ARCH-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "REQ-003",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "REQ-009",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "REQ-012",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "RIS-8706ae",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-80",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-81",
+      "target": "ARCH-001",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "architecture"
+    },
+    {
+      "source": "EPARTS-81",
+      "target": "REQ-006",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-81",
+      "target": "REQ-007",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-81",
+      "target": "REQ-009",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-81",
+      "target": "REQ-010",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-81",
+      "target": "REQ-011",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-81",
+      "target": "REQ-012",
+      "type": "IMPLEMENTS",
+      "source_type": "jira_ticket",
+      "target_type": "requirement"
+    },
+    {
+      "source": "EPARTS-81",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-81",
+      "target": "RIS-c2f026",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "EPARTS-81",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "jira_ticket",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-001",
+      "target": "ARCH-002",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-001",
+      "target": "ARCH-003",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-001",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "requirement",
+      "target_type": "meeting"
+    },
+    {
+      "source": "REQ-001",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-001",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-001",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-001",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-001",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-001",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-001",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-001",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-001",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-002",
+      "target": "ARCH-002",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-002",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "requirement",
+      "target_type": "meeting"
+    },
+    {
+      "source": "REQ-002",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-002",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-002",
+      "target": "RIS-2119e6",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-002",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-002",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-002",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-002",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-002",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-002",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-002",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-002",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-002",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-003",
+      "target": "ARCH-003",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-003",
+      "target": "ARCH-005",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-003",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "requirement",
+      "target_type": "meeting"
+    },
+    {
+      "source": "REQ-003",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-003",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-003",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-003",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-003",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-003",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-003",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-003",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-003",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-003",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-004",
+      "target": "ARCH-004",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-004",
+      "target": "ARCH-005",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-004",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "requirement",
+      "target_type": "meeting"
+    },
+    {
+      "source": "REQ-004",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-004",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-004",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-004",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-004",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-005",
+      "target": "ARCH-004",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-005",
+      "target": "MTG-2026-01-22",
+      "type": "RAISED_IN",
+      "source_type": "requirement",
+      "target_type": "meeting"
+    },
+    {
+      "source": "REQ-005",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-005",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-005",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-005",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-005",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-005",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-005",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-005",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-005",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-005",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-006",
+      "target": "ARCH-001",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-006",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "requirement",
+      "target_type": "meeting"
+    },
+    {
+      "source": "REQ-006",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-006",
+      "target": "RIS-c2f026",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-006",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-007",
+      "target": "ARCH-001",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-007",
+      "target": "MTG-2026-02-12",
+      "type": "RAISED_IN",
+      "source_type": "requirement",
+      "target_type": "meeting"
+    },
+    {
+      "source": "REQ-007",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-007",
+      "target": "RIS-c2f026",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-007",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-008",
+      "target": "ARCH-002",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-008",
+      "target": "ARCH-003",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-008",
+      "target": "MTG-2026-02-26",
+      "type": "RAISED_IN",
+      "source_type": "requirement",
+      "target_type": "meeting"
+    },
+    {
+      "source": "REQ-008",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-008",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-008",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-008",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-008",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-008",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-008",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-008",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-008",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-009",
+      "target": "ARCH-003",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-009",
+      "target": "ARCH-004",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-009",
+      "target": "ARCH-005",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-009",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "requirement",
+      "target_type": "meeting"
+    },
+    {
+      "source": "REQ-009",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-009",
+      "target": "RIS-11e5db",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-009",
+      "target": "RIS-50bc62",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-009",
+      "target": "RIS-5de8fb",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-009",
+      "target": "RIS-8083f1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-009",
+      "target": "RIS-816a97",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-009",
+      "target": "RIS-d8a886",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-009",
+      "target": "RIS-ddd0e1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-009",
+      "target": "RIS-f5c786",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-009",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-010",
+      "target": "MTG-2026-04-02",
+      "type": "RAISED_IN",
+      "source_type": "requirement",
+      "target_type": "meeting"
+    },
+    {
+      "source": "REQ-010",
+      "target": "RIS-2119e6",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-010",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-010",
+      "target": "RIS-8706ae",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-010",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-011",
+      "target": "ARCH-006",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-011",
+      "target": "MTG-2026-04-16",
+      "type": "RAISED_IN",
+      "source_type": "requirement",
+      "target_type": "meeting"
+    },
+    {
+      "source": "REQ-011",
+      "target": "RIS-603445",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-011",
+      "target": "RIS-8706ae",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-012",
+      "target": "ARCH-001",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-012",
+      "target": "ARCH-002",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-012",
+      "target": "ARCH-003",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-012",
+      "target": "ARCH-004",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-012",
+      "target": "ARCH-005",
+      "type": "DECIDED_BY",
+      "source_type": "requirement",
+      "target_type": "architecture"
+    },
+    {
+      "source": "REQ-012",
+      "target": "RIS-016cf1",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-012",
+      "target": "RIS-dd2cc8",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    },
+    {
+      "source": "REQ-012",
+      "target": "RIS-fc0584",
+      "type": "MITIGATES",
+      "source_type": "requirement",
+      "target_type": "risk"
+    }
+  ]
+}
