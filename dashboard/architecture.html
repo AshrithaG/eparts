@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eParts SES — Full System Architecture</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #060a12;
+    color: #c8cee0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    min-height: 100vh;
+    padding: 32px 24px 48px;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .page-title {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #6ee7b7, #3b82f6, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .page-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #4a5568;
+    margin-top: 6px;
+    letter-spacing: 0.08em;
+  }
+  .page-stats {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-top: 16px;
+  }
+  .ps { text-align: center; }
+  .ps-num { font-size: 22px; font-weight: 800; color: #6ee7b7; }
+  .ps-lbl { font-size: 9px; color: #4a5568; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'JetBrains Mono', monospace; }
+
+  /* Layout */
+  .arch { max-width: 1380px; margin: 0 auto; }
+
+  /* Section wrappers */
+  .section {
+    margin-bottom: 6px;
+    position: relative;
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: #374151;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-left: 4px;
+  }
+
+  /* Arrow connector */
+  .arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 24px;
+    color: #1e293b;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    margin: 2px 0;
+  }
+  .arrow-label {
+    color: #475569;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+  }
+
+  /* Flex rows */
+  .flex-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Grid rows */
+  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+
+  /* Cards */
+  .card {
+    border-radius: 10px;
+    padding: 14px 16px;
+    border: 1px solid transparent;
+    position: relative;
+  }
+  .card-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .card-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #64748b;
+    line-height: 1.6;
+  }
+
+  /* Sub agents */
+  .sub {
+    margin-top: 6px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+  .sub-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    margin-bottom: 1px;
+  }
+  .sub-desc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: #475569;
+    line-height: 1.45;
+  }
+
+  /* Status badges */
+  .badge {
+    display: inline-block;
+    border-radius: 3px;
+    padding: 2px 7px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .badge-live { background: #064e3b; color: #34d399; border: 1px solid #059669; }
+  .badge-ready { background: #1e1b4b; color: #818cf8; border: 1px solid #4338ca; }
+  .badge-hitl { background: #451a03; color: #fb923c; border: 1px solid #92400e; margin-top: 6px; }
+  .badge-count { background: rgba(255,255,255,0.06); color: #94a3b8; border: 1px solid rgba(255,255,255,0.08); }
+  .badge-pipe { background: #0c1a2e; color: #60a5fa; border: 1px solid #1e40af; }
+  .badge-event { background: #1a0f2e; color: #c084fc; border: 1px solid #7c3aed; }
+
+  /* Color schemes */
+  .trigger { background: #0c1017; border-color: #1e293b; min-width: 115px; }
+  .trigger .card-title { color: #94a3b8; font-size: 11px; }
+
+  .orchestrator {
+    background: linear-gradient(135deg, #0f0a24, #0a1628);
+    border: 1.5px solid #4f46e5;
+    text-align: center;
+    box-shadow: 0 0 40px #4f46e522;
+    padding: 18px 24px;
+  }
+  .orchestrator .card-title { font-size: 15px; color: #a78bfa; font-weight: 800; }
+  .orchestrator .card-sub { color: #7c3aed; font-size: 10px; }
+
+  .req { background: #061210; border-color: #064e3b; }
+  .req .card-title { color: #34d399; }
+  .req .sub-name { color: #6ee7b7; }
+
+  .arch-card { background: #060d1a; border-color: #1e3a5f; }
+  .arch-card .card-title { color: #60a5fa; }
+  .arch-card .sub-name { color: #93c5fd; }
+
+  .code { background: #14100a; border-color: #78350f; }
+  .code .card-title { color: #fbbf24; }
+  .code .sub-name { color: #fcd34d; }
+
+  .pm { background: #140a10; border-color: #9f1239; }
+  .pm .card-title { color: #fb7185; }
+  .pm .sub-name { color: #fda4af; }
+
+  .know { background: #0c0c1a; border-color: #312e81; }
+  .know .card-title { color: #a5b4fc; }
+  .know .sub-name { color: #c7d2fe; }
+
+  .coach { background: #120e02; border: 1.5px dashed #92400e; }
+  .coach .card-title { color: #fbbf24; }
+  .coach .sub-name { color: #fde68a; }
+
+  .ml { background: #021214; border: 1.5px dashed #155e75; }
+  .ml .card-title { color: #22d3ee; }
+  .ml .sub-name { color: #67e8f9; }
+
+  .infra-card {
+    background: linear-gradient(135deg, #0a0e1a, #0e0a1a);
+    border: 1px solid #312e81;
+    text-align: center;
+  }
+  .infra-card .card-title { color: #a78bfa; font-size: 11px; }
+  .infra-card .card-sub { font-size: 9px; }
+
+  .mcp-card {
+    background: #0a0c14;
+    border: 1px solid #1e293b;
+    text-align: center;
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .mcp-card .card-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; color: #818cf8; }
+  .mcp-card .card-sub { font-size: 8px; }
+
+  .output-card {
+    background: #060f0d;
+    border: 1px solid #064e3b;
+    text-align: center;
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .output-card .card-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; color: #34d399; }
+
+  .db-card {
+    background: #0a0a14;
+    border: 1px solid #374151;
+    text-align: center;
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .db-card .card-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; color: #94a3b8; }
+
+  /* Cross-pipeline events */
+  .events-strip {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    background: #0a0814;
+    border: 1px solid #1e1b4b;
+    border-radius: 10px;
+    margin: 8px 0;
+  }
+  .event-chip {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: #0f0a24;
+    border: 1px solid #312e81;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: #c4b5fd;
+  }
+  .event-arrow { color: #7c3aed; font-weight: 700; }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #64748b;
+  }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+
+  .footnote {
+    text-align: center;
+    margin-top: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #374151;
+    letter-spacing: 0.05em;
+    line-height: 1.8;
+  }
+
+  /* Spec badge for project-specific */
+  .spec-badge {
+    display: inline-block;
+    background: #1c1200;
+    border: 1px solid #78350f;
+    border-radius: 3px;
+    padding: 2px 7px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: #f59e0b;
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-title">eParts Agentic Software Engineering System</div>
+  <div class="page-sub">CMU MSE Studio 2026 · Pimsie Supreme · Built with Agent-Augmented Iterative SDLC</div>
+  <div class="page-stats">
+    <div class="ps"><div class="ps-num">24</div><div class="ps-lbl">Agents</div></div>
+    <div class="ps"><div class="ps-num">7</div><div class="ps-lbl">Pipelines</div></div>
+    <div class="ps"><div class="ps-num">8</div><div class="ps-lbl">MCP Servers</div></div>
+    <div class="ps"><div class="ps-num">29</div><div class="ps-lbl">API Endpoints</div></div>
+    <div class="ps"><div class="ps-num">184</div><div class="ps-lbl">Traced Artifacts</div></div>
+    <div class="ps"><div class="ps-num">760</div><div class="ps-lbl">Trace Links</div></div>
+    <div class="ps"><div class="ps-num">7</div><div class="ps-lbl">SQLite DBs</div></div>
+  </div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#94a3b8"></div>Trigger</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#7c3aed"></div>Orchestrator</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div>Requirements</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#60a5fa"></div>Architecture</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fbbf24"></div>Coding</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fb7185"></div>Project Mgmt</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#a5b4fc"></div>Knowledge</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fbbf24;border:1px dashed #92400e"></div>Coach Memory</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#22d3ee;border:1px dashed #155e75"></div>ML Decision</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#a78bfa"></div>Shared Infra</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#818cf8"></div>MCP Server</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div>Output</div>
+</div>
+
+<div class="arch">
+
+  <!-- ═══ TRIGGERS ═══ -->
+  <div class="section">
+    <div class="section-label">── Triggers / Inputs</div>
+    <div class="flex-row">
+      <div class="card trigger"><div class="card-title">Meeting Transcript</div><div class="card-sub">.vtt file upload<br>5 client + 4 coach</div></div>
+      <div class="card trigger"><div class="card-title">Jira Webhook</div><div class="card-sub">ticket created / closed<br>status transitions</div></div>
+      <div class="card trigger"><div class="card-title">GitHub Event</div><div class="card-sub">PR open / merge<br>commit push</div></div>
+      <div class="card trigger"><div class="card-title">Scheduled Cron</div><div class="card-sub">Mon 8am briefing<br>Fri 6pm digest</div></div>
+      <div class="card trigger"><div class="card-title">Manual / API</div><div class="card-sub">POST /trigger<br>POST /pipeline/{n}</div></div>
+      <div class="card trigger"><div class="card-title">Pipeline Event</div><div class="card-sub">EventBus trigger<br>cross-pipeline</div></div>
+    </div>
+  </div>
+
+  <div class="arrow">↓ · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ↓</div>
+
+  <!-- ═══ ORCHESTRATOR ═══ -->
+  <div class="section">
+    <div class="section-label">── Central Orchestrator <span class="badge badge-pipe">FastAPI</span></div>
+    <div class="flex-row">
+      <div class="card orchestrator" style="width:680px;">
+        <div class="card-title">Central Orchestrator</div>
+        <div class="card-sub">
+          POST /webhook → trigger router → pipeline executor → agent task queue (FIFO)<br>
+          29 REST endpoints · Agent registry · No agent races on shared state · Structured JSONL logging
+        </div>
+        <div style="display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;">
+          <span class="badge badge-pipe">Router</span>
+          <span class="badge badge-pipe">Task Queue</span>
+          <span class="badge badge-pipe">Pipeline Executor</span>
+          <span class="badge badge-pipe">Agent Registry</span>
+          <span class="badge badge-pipe">Static Dashboard</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow">↓ · · · routes to one of 7 pipelines · · · ↓</div>
+
+  <!-- ═══ DOMAIN AGENTS — ROW 1: Core 5 ═══ -->
+  <div class="section">
+    <div class="section-label">── Domain Agent Pipelines <span class="badge badge-count">24 agents · 7 pipelines</span></div>
+    <div class="grid-5">
+
+      <!-- REQUIREMENTS -->
+      <div class="card req">
+        <div class="card-title">Requirements <span class="badge badge-count">7 steps</span></div>
+        <div class="card-sub">Trigger: .vtt transcript</div>
+        <div class="sub"><div class="sub-name">transcript_parser</div><div class="sub-desc">VTT → structured minutes, decisions, actions, concerns</div></div>
+        <div class="sub"><div class="sub-name">req_extractor</div><div class="sub-desc">Format REQ-XXX.md, commit to GitHub</div></div>
+        <div class="sub"><div class="sub-name">priority_classifier</div><div class="sub-desc">P0/P1/P2 classification; P0 → human review</div></div>
+        <div class="sub"><div class="sub-name">stale_detector</div><div class="sub-desc">Flag REQs with no Jira or recent mention</div></div>
+        <div class="sub"><div class="sub-name">drift_detector</div><div class="sub-desc">Compare decisions vs canonical architecture (RAG)</div></div>
+        <div class="sub"><div class="sub-name">decision_logger</div><div class="sub-desc">Log all decisions → decisions.log.md</div></div>
+        <div class="sub"><div class="sub-name">ticket_creator</div><div class="sub-desc">Create Jira tickets from action items</div></div>
+        <div class="badge badge-hitl">human reviews P0 before Jira</div>
+      </div>
+
+      <!-- ARCHITECTURE -->
+      <div class="card arch-card">
+        <div class="card-title">Architecture <span class="badge badge-count">4 steps</span></div>
+        <div class="card-sub">Trigger: transcript, PR</div>
+        <div class="sub"><div class="sub-name">drift_detector</div><div class="sub-desc">Meeting vs architecture.md (ChromaDB RAG)</div></div>
+        <div class="sub"><div class="sub-name">adr_generator</div><div class="sub-desc">Auto-draft ADR.md from detected decisions</div></div>
+        <div class="sub"><div class="sub-name">diagram_updater</div><div class="sub-desc">Propose Mermaid diagram diffs as PR</div></div>
+        <div class="sub"><div class="sub-name">traceability_builder</div><div class="sub-desc">Maintain unified traceability store (184 artifacts, 760 links)</div></div>
+        <div class="badge badge-hitl">all arch changes require PR approval</div>
+      </div>
+
+      <!-- CODING -->
+      <div class="card code">
+        <div class="card-title">Coding <span class="badge badge-count">4 steps</span></div>
+        <div class="card-sub">Trigger: PR event</div>
+        <div class="sub"><div class="sub-name">pr_reviewer</div><div class="sub-desc">Auto-review: style, tests, REQ traceability</div></div>
+        <div class="sub"><div class="sub-name">test_generator</div><div class="sub-desc">Unit test stubs from function signatures</div></div>
+        <div class="sub"><div class="sub-name">boilerplate_generator</div><div class="sub-desc">Scaffold modules from ADR + REQ context</div></div>
+        <div class="sub"><div class="sub-name">doc_generator</div><div class="sub-desc">Auto-update API docs on endpoint change</div></div>
+        <div class="badge badge-hitl">human merges all PRs</div>
+      </div>
+
+      <!-- PROJECT MGMT -->
+      <div class="card pm">
+        <div class="card-title">Project Mgmt <span class="badge badge-count">4 steps</span></div>
+        <div class="card-sub">Trigger: cron (Fri 6pm)</div>
+        <div class="sub"><div class="sub-name">alert_agent</div><div class="sub-desc">Velocity, unlinked REQs, unresolved drift</div></div>
+        <div class="sub"><div class="sub-name">ticket_creator</div><div class="sub-desc">P0/P1 → Jira with labels and priority</div></div>
+        <div class="sub"><div class="sub-name">wbs_updater</div><div class="sub-desc">WBS synced to Jira board state</div></div>
+        <div class="sub"><div class="sub-name">weekly_digest</div><div class="sub-desc">Sprint health, decisions, events → digest</div></div>
+        <div class="badge badge-hitl">P0 ticket needs 1 approval</div>
+      </div>
+
+      <!-- KNOWLEDGE -->
+      <div class="card know">
+        <div class="card-title">Knowledge <span class="badge badge-count">4 steps</span></div>
+        <div class="card-sub">Trigger: cron (pre-meeting)</div>
+        <div class="sub"><div class="sub-name">context_packager</div><div class="sub-desc">Sprint status + ADRs + events → briefing</div></div>
+        <div class="sub"><div class="sub-name">decision_logger</div><div class="sub-desc">Running decision log across all sources</div></div>
+        <div class="sub"><div class="sub-name">minutes_publisher</div><div class="sub-desc">Format minutes → push to Confluence</div></div>
+        <div class="sub"><div class="sub-name">prompt_regression</div><div class="sub-desc">Golden-test prompt changes; block >10% drop</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ ePARTS-SPECIFIC AGENTS ═══ -->
+  <div class="section">
+    <div class="section-label">── eParts-Specific Agent Pipelines <span class="badge badge-event">unique to this project</span></div>
+    <div class="grid-2">
+
+      <!-- COACH SESSION MEMORY -->
+      <div class="card coach">
+        <div class="card-title">Coach Session Memory <span class="badge badge-count">6 steps</span></div>
+        <div class="card-sub">Trigger: coach/mentor .vtt (Christian, Jim, Ben, Dennis)</div>
+        <div class="sub"><div class="sub-name">session_memory</div><div class="sub-desc">Embed session in ChromaDB (ONNX local); SQLite metadata; offline fallback extraction</div></div>
+        <div class="sub"><div class="sub-name">commitment_tracker</div><div class="sub-desc">Cross-check commitments vs Jira "Done" tickets + wiki evidence</div></div>
+        <div class="sub"><div class="sub-name">concern_tracker</div><div class="sub-desc">Detect recurring themes: "monitorability flagged 3 sessions in a row"</div></div>
+        <div class="sub"><div class="sub-name">coach_linker</div><div class="sub-desc">Link coach topics to open ML decision log entries</div></div>
+        <div class="sub"><div class="sub-name">briefing_generator</div><div class="sub-desc">Pre-meeting: what coach said → what you committed → what you delivered</div></div>
+        <div class="sub"><div class="sub-name">context_packager</div><div class="sub-desc">Package sprint + concerns + ADRs as Slack briefing</div></div>
+        <div class="spec-badge">&#9733; capstone-specific — CMU coached structure</div>
+      </div>
+
+      <!-- ML DECISION MEMORY -->
+      <div class="card ml">
+        <div class="card-title">ML Decision Memory <span class="badge badge-count">4 steps</span></div>
+        <div class="card-sub">Trigger: POC result, labeled data commit, meeting transcript</div>
+        <div class="sub"><div class="sub-name">decision_log</div><div class="sub-desc">Living log of unresolved ML decisions: threshold values, alpha weights, routing strategies</div></div>
+        <div class="sub"><div class="sub-name">evidence_accumulator</div><div class="sub-desc">POC results → update decision entries with precision/recall, auto-accept rates</div></div>
+        <div class="sub"><div class="sub-name">readiness_detector</div><div class="sub-desc">Alert when evidence ≥ threshold: "Enough data to close ADR-1 — run calibration"</div></div>
+        <div class="sub"><div class="sub-name">coach_linker</div><div class="sub-desc">When coach asks about thresholds → surface exactly what evidence exists today</div></div>
+        <div class="spec-badge">&#9733; ML-project-specific — requires live empirical signals</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ CROSS-PIPELINE EVENTS ═══ -->
+  <div class="section">
+    <div class="section-label">── Cross-Pipeline Communication <span class="badge badge-event">EventBus pub/sub</span></div>
+    <div class="events-strip">
+      <div class="event-chip">requirements <span class="event-arrow">→</span> action_items_extracted <span class="event-arrow">→</span> project_mgmt</div>
+      <div class="event-chip">requirements <span class="event-arrow">→</span> decision_logged <span class="event-arrow">→</span> architecture</div>
+      <div class="event-chip">requirements <span class="event-arrow">→</span> drift_detected <span class="event-arrow">→</span> architecture</div>
+      <div class="event-chip">coach_session <span class="event-arrow">→</span> new_session_embedded <span class="event-arrow">→</span> knowledge</div>
+      <div class="event-chip">coach_session <span class="event-arrow">→</span> recurring_concern <span class="event-arrow">→</span> requirements</div>
+      <div class="event-chip">architecture <span class="event-arrow">→</span> human_review_needed <span class="event-arrow">→</span> project_mgmt</div>
+    </div>
+  </div>
+
+  <!-- ═══ SHARED INFRASTRUCTURE ═══ -->
+  <div class="section">
+    <div class="section-label">── Shared Infrastructure <span class="badge badge-count">all agents read/write</span></div>
+    <div class="grid-6">
+      <div class="card infra-card">
+        <div class="card-title">SharedMemory</div>
+        <div class="card-sub">Project wiki — namespaced<br>key-value store<br><strong>Karpathy wiki pattern</strong></div>
+      </div>
+      <div class="card infra-card">
+        <div class="card-title">EventBus</div>
+        <div class="card-sub">Pub/sub for cross-pipeline<br>triggers — persistent<br><strong>6 event types</strong></div>
+      </div>
+      <div class="card infra-card">
+        <div class="card-title">TraceabilityStore</div>
+        <div class="card-sub">Unified artifact graph<br>184 artifacts · 760 links<br><strong>10 types · 7 link types</strong></div>
+      </div>
+      <div class="card infra-card">
+        <div class="card-title">PromptRegistry</div>
+        <div class="card-sub">Version-controlled prompts<br>peer review workflow<br><strong>10 team conventions</strong></div>
+      </div>
+      <div class="card infra-card">
+        <div class="card-title">RiskRegister</div>
+        <div class="card-sub">Auto-populated risks<br>16 risks tracked<br><strong>All mitigated</strong></div>
+      </div>
+      <div class="card infra-card">
+        <div class="card-title">MetricsCollector</div>
+        <div class="card-sub">Agent runs · LLM calls<br>Prompt changes · Latency<br><strong>GQIM measurement plan</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow">↓ · · · agents call MCP servers for external actions · · · ↓</div>
+
+  <!-- ═══ MCP SERVERS ═══ -->
+  <div class="section">
+    <div class="section-label">── MCP Servers (Micro-Service Proxies) <span class="badge badge-count">8 servers</span></div>
+    <div class="flex-row">
+      <div class="card mcp-card"><div class="card-title">Jira MCP</div><div class="card-sub">create/search issues<br>board status<br><span class="badge badge-live">LIVE</span></div></div>
+      <div class="card mcp-card"><div class="card-title">GitHub MCP</div><div class="card-sub">commit files, PRs<br>branch management<br><span class="badge badge-live">LIVE</span></div></div>
+      <div class="card mcp-card"><div class="card-title">ChromaDB</div><div class="card-sub">RAG vector store<br>ONNX MiniLM-L6-v2<br><span class="badge badge-live">LIVE</span></div></div>
+      <div class="card mcp-card"><div class="card-title">Bitbucket MCP</div><div class="card-sub">commit artifacts<br>client project code<br><span class="badge badge-ready">READY</span></div></div>
+      <div class="card mcp-card"><div class="card-title">Confluence MCP</div><div class="card-sub">publish pages<br>meeting minutes<br><span class="badge badge-ready">READY</span></div></div>
+      <div class="card mcp-card"><div class="card-title">Slack MCP</div><div class="card-sub">alerts, digests<br>team channel<br><span class="badge badge-ready">READY</span></div></div>
+      <div class="card mcp-card"><div class="card-title">Google Drive</div><div class="card-sub">poll transcripts<br>shared docs<br><span class="badge badge-ready">READY</span></div></div>
+      <div class="card mcp-card"><div class="card-title">Anthropic API</div><div class="card-sub">Claude LLM calls<br>offline fallbacks<br><span class="badge badge-ready">READY</span></div></div>
+    </div>
+  </div>
+
+  <div class="arrow">↓ · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ↓</div>
+
+  <!-- ═══ STORAGE LAYER ═══ -->
+  <div class="section">
+    <div class="section-label">── Storage Layer <span class="badge badge-count">SQLite + ChromaDB</span></div>
+    <div class="flex-row">
+      <div class="card db-card"><div class="card-title">shared_memory.db</div><div class="card-sub">wiki namespaces</div></div>
+      <div class="card db-card"><div class="card-title">events.db</div><div class="card-sub">event bus history</div></div>
+      <div class="card db-card"><div class="card-title">traceability.db</div><div class="card-sub">artifact graph</div></div>
+      <div class="card db-card"><div class="card-title">coach_sessions.db</div><div class="card-sub">RAG metadata</div></div>
+      <div class="card db-card"><div class="card-title">ml_decisions.db</div><div class="card-sub">ML decision log</div></div>
+      <div class="card db-card"><div class="card-title">risk_register.db</div><div class="card-sub">16 risks</div></div>
+      <div class="card db-card"><div class="card-title">prompt_registry.db</div><div class="card-sub">versioned prompts</div></div>
+      <div class="card db-card"><div class="card-title">metrics.db</div><div class="card-sub">agent + LLM runs</div></div>
+      <div class="card db-card" style="border-color:#155e75;"><div class="card-title" style="color:#22d3ee;">ChromaDB</div><div class="card-sub">vector embeddings</div></div>
+    </div>
+  </div>
+
+  <div class="arrow">↓ · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ↓</div>
+
+  <!-- ═══ OUTPUTS ═══ -->
+  <div class="section">
+    <div class="section-label">── Outputs</div>
+    <div class="flex-row">
+      <div class="card output-card"><div class="card-title">REQ-XXX.md</div><div class="card-sub">12 requirements<br>on GitHub</div></div>
+      <div class="card output-card"><div class="card-title">ADR Docs</div><div class="card-sub">6 arch decisions<br>auto-drafted</div></div>
+      <div class="card output-card"><div class="card-title">Jira Tickets</div><div class="card-sub">50 tickets<br>16 AI-generated</div></div>
+      <div class="card output-card"><div class="card-title">Traceability Matrix</div><div class="card-sub">184 artifacts<br>760 links</div></div>
+      <div class="card output-card"><div class="card-title">Risk Register</div><div class="card-sub">16 risks<br>all mitigated</div></div>
+      <div class="card output-card"><div class="card-title">Meeting Minutes</div><div class="card-sub">9 sessions<br>parsed</div></div>
+      <div class="card output-card"><div class="card-title">Weekly Digest</div><div class="card-sub">sprint health<br>Slack + Confluence</div></div>
+      <div class="card output-card"><div class="card-title">Intelligence Dashboard</div><div class="card-sub">5-tab interactive<br>D3 visualizations</div></div>
+      <div class="card output-card"><div class="card-title">Metrics Dashboard</div><div class="card-sub">token usage<br>agent performance</div></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footnote">
+  All 24 agents have offline fallbacks (pattern matching when no LLM API key available) · All agent state is SQLite — no Postgres/Redis<br>
+  Traceability uses zero LLM calls — domain-aware keyword matching in SQLite · Every artifact traced to source meeting, speaker, timestamp<br>
+  HITL = Human-In-The-Loop gate · LIVE = actively connected · READY = configured, awaiting credentials<br>
+  <br>
+  CMU MSE Studio 2026 · Pimsie Supreme · Python 3.12 · FastAPI · SQLite · ChromaDB · D3.js
+</div>
+
+</body>
+</html>
