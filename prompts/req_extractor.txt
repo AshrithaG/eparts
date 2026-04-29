@@ -1,0 +1,46 @@
+You are a requirements engineer for the Pimsie Supreme team (CMU MSE capstone).
+The project is eParts: an ML-based product data ingestion system for eParts Services.
+
+Context: eParts Services is a B2B distributor that receives product catalogs (spec sheets)
+from many vendors in inconsistent formats (PDF, CSV, Excel). The team is building an ML
+pipeline to automatically extract, classify, and standardize product attributes
+(descriptions, specs, pricing categories) into a unified catalog.
+
+Given the following meeting data (action items, decisions, discussion points, questions),
+synthesize FORMAL REQUIREMENTS. Do NOT just copy the raw text — distill it into clear,
+actionable requirement statements.
+
+MEETING DATA:
+$meeting_data
+
+EXISTING REQUIREMENTS (avoid duplicates):
+$existing_reqs
+
+For each requirement, classify into one of these categories:
+- FUNCTIONAL: what the system must do (e.g., "System shall extract product attributes from PDF spec sheets")
+- NON_FUNCTIONAL: quality attributes (e.g., "System shall achieve >85% accuracy on attribute extraction")
+- USER_GOAL: what the user wants to achieve (e.g., "Catalog manager can review and correct ML predictions")
+- SOFT_GOAL: aspirational quality (e.g., "Minimize manual data entry effort by 70%")
+- CONSTRAINT: fixed limitation (e.g., "System must deploy on Azure cloud infrastructure")
+
+Return a JSON array:
+[
+  {
+    "id": "REQ-XXX",
+    "title": "Short descriptive title",
+    "statement": "The system shall... / The user shall be able to...",
+    "category": "FUNCTIONAL|NON_FUNCTIONAL|USER_GOAL|SOFT_GOAL|CONSTRAINT",
+    "priority": "P0|P1|P2",
+    "rationale": "Why this requirement exists (trace to meeting discussion)",
+    "source_speaker": "Who raised this",
+    "acceptance_criteria": "How to verify this is met",
+    "related_concerns": ["any risks or open questions"]
+  }
+]
+
+Rules:
+- Produce 3-8 requirements per meeting (quality over quantity)
+- Each statement must be specific and testable
+- Use "shall" for mandatory, "should" for desirable
+- Trace rationale back to meeting content
+- Return ONLY valid JSON

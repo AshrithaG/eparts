@@ -57,7 +57,7 @@ class TranscriptParserAgent(BaseAgent):
 
         # Try Claude-powered extraction (online) or fall back to structural (offline)
         parsed = None
-        if self._settings.anthropic_api_key:
+        if self._settings.has_llm:
             parsed = self._parse_with_claude(cleaned, date, meeting_type)
 
         if not parsed:
@@ -94,7 +94,7 @@ class TranscriptParserAgent(BaseAgent):
         action_count = len(parsed.get("action_items", []))
         decision_count = len(parsed.get("decisions", []))
         req_count = len(parsed.get("new_requirements", []))
-        mode = "online (Claude)" if self._settings.anthropic_api_key else "offline (structural)"
+        mode = f"online ({self._settings.active_provider})" if self._settings.has_llm else "offline (structural)"
 
         outputs.append(AgentOutput(
             output_type="transcript_parsed",
@@ -196,7 +196,7 @@ class TranscriptParserAgent(BaseAgent):
         return "\n".join(cleaned)
 
     def _parse_with_claude(self, transcript: str, date: str, meeting_type: str) -> dict | None:
-        """Send transcript to Claude for structured extraction."""
+        """Send transcript to LLM for structured extraction. Returns None on failure."""
         prompt = self.load_prompt(
             "transcript_parser.txt",
             transcript=transcript[:12000],
@@ -204,7 +204,11 @@ class TranscriptParserAgent(BaseAgent):
             meeting_type=meeting_type,
         )
 
-        raw_response = self.call_claude(prompt)
+        try:
+            raw_response = self.call_claude(prompt)
+        except Exception as exc:
+            logger.warning(f"LLM call failed, will fall back to offline: {exc}")
+            return None
 
         try:
             return json.loads(raw_response)

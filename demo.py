@@ -1,308 +1,358 @@
 #!/usr/bin/env python3
 """
-eParts Agentic SE System — Live Demo Script
-
-Run this during the presentation to demonstrate the full pipeline
-processing a real meeting transcript end-to-end.
+LIVE DEMO — Run the full Requirements Pipeline on a meeting transcript.
 
 Usage:
-    python demo.py                          # Full demo (all sections)
-    python demo.py --section requirements   # Just requirements pipeline
-    python demo.py --section coach          # Just coach session pipeline
-    python demo.py --section search         # Just semantic search demo
-    python demo.py --section briefing       # Just briefing generation
-    python demo.py --section stats          # Just system stats
+    python demo.py                          # uses the latest client meeting
+    python demo.py transcripts/some.vtt     # specific file
+
+What happens:
+    1. Parses the .vtt transcript into structured data
+    2. Classifies items as P0/P1/P2 (using Gemini/Claude)
+    3. Extracts formal requirements → commits to GitHub
+    4. Creates Jira tickets for action items
+    5. Publishes meeting minutes
+    6. Logs decisions → commits to GitHub
+    7. Detects architecture drift via RAG
+
+Each step prints live progress with colored output.
 """
 from __future__ import annotations
 
-import argparse
+import json
+import logging
 import sys
 import time
+from glob import glob
 from pathlib import Path
 
-# ── Pretty printing ──────────────────────────────────────────────────
-CYAN = "\033[96m"
-GREEN = "\033[92m"
-YELLOW = "\033[93m"
-RED = "\033[91m"
-BOLD = "\033[1m"
-DIM = "\033[2m"
-RESET = "\033[0m"
-PURPLE = "\033[95m"
+PROJECT_ROOT = Path(__file__).resolve().parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
-def banner(text: str) -> None:
-    w = 70
-    print(f"\n{CYAN}{'═' * w}")
-    print(f"  {BOLD}{text}{RESET}{CYAN}")
-    print(f"{'═' * w}{RESET}\n")
+# ── colours ──────────────────────────────────────────────────────────
+CYAN = "\033[96m"; GREEN = "\033[92m"; YELLOW = "\033[93m"
+RED = "\033[91m"; MAGENTA = "\033[95m"; DIM = "\033[2m"
+BOLD = "\033[1m"; RESET = "\033[0m"
 
-def section(text: str) -> None:
-    print(f"\n{PURPLE}{'─' * 50}")
-    print(f"  {BOLD}{text}{RESET}")
-    print(f"{PURPLE}{'─' * 50}{RESET}")
-
-def ok(text: str) -> None:
-    print(f"  {GREEN}✓{RESET} {text}")
-
-def warn(text: str) -> None:
-    print(f"  {YELLOW}⚠{RESET} {text}")
-
-def info(text: str) -> None:
-    print(f"  {DIM}→{RESET} {text}")
-
-def step(n: int, text: str) -> None:
-    print(f"\n  {CYAN}{BOLD}Step {n}{RESET}  {text}")
-
-def pause(msg: str = "Press Enter to continue...") -> None:
-    input(f"\n  {DIM}{msg}{RESET}")
+logging.basicConfig(
+    level=logging.INFO,
+    format=f"{DIM}%(asctime)s{RESET} [%(name)s] %(message)s",
+    datefmt="%H:%M:%S",
+)
+logging.getLogger("urllib3").setLevel(logging.WARNING)
+logging.getLogger("chromadb").setLevel(logging.WARNING)
 
 
-# ── Demo sections ────────────────────────────────────────────────────
+def banner():
+    print(f"""
+{CYAN}{BOLD}╔══════════════════════════════════════════════════════════════════╗
+║          eParts Agentic SE System — Live Pipeline Demo          ║
+║          Requirements Engineering  ·  End-to-End                ║
+╚══════════════════════════════════════════════════════════════════╝{RESET}
+""")
 
-def demo_stats() -> None:
-    """Show system statistics."""
-    banner("SYSTEM INVENTORY")
 
-    from mcp.vector_store import VectorStoreMCP
-    from agents.coach_memory.session_memory import init_db
-    from pipeline.pipelines import ALL_PIPELINES
-    import os
+def show_config(vtt_path: str):
+    from agents.base import AgentSettings
+    from mcp.jira import JiraMCP
+    from mcp.github import GitHubMCP
 
-    db = init_db()
-    vs = VectorStoreMCP()
+    s = AgentSettings()
+    jira = JiraMCP()
+    gh = GitHubMCP()
 
-    sessions = db.execute("SELECT COUNT(*) as c FROM sessions").fetchone()["c"]
-    commitments = db.execute("SELECT COUNT(*) as c FROM commitments").fetchone()["c"]
-    coach_chunks = vs.count("coach_sessions")
-    knowledge_chunks = vs.count("project_knowledge")
+    provider = s.active_provider
+    model = s.gemini_model if provider == "gemini" else (
+        s.claude_model if provider == "anthropic" else "n/a"
+    )
 
-    py_files = 0
-    py_lines = 0
-    for root, dirs, files in os.walk("."):
-        dirs[:] = [d for d in dirs if d not in {".venv", "__pycache__", ".git", "node_modules", "memory"}]
-        for f in files:
-            if f.endswith(".py"):
-                py_files += 1
-                py_lines += sum(1 for _ in open(os.path.join(root, f)))
-
-    total_steps = sum(len(p.steps) for p in ALL_PIPELINES.values())
-    unique_agents = len(set(s.agent_name for p in ALL_PIPELINES.values() for s in p.steps))
-
-    print(f"  {BOLD}Codebase{RESET}")
-    info(f"Python files:    {BOLD}{py_files}{RESET}")
-    info(f"Lines of code:   {BOLD}{py_lines:,}{RESET}")
+    print(f"  {BOLD}Transcript{RESET}   {Path(vtt_path).name}")
+    if provider == "none":
+        print(f"  {BOLD}LLM{RESET}          {YELLOW}Offline (keyword heuristics){RESET}")
+    else:
+        print(f"  {BOLD}LLM{RESET}          {GREEN}{provider}{RESET} / {model}")
+    print(f"  {BOLD}Jira{RESET}         {GREEN}Connected{RESET} ({jira._url})" if jira.is_configured
+          else f"  {BOLD}Jira{RESET}         {YELLOW}Not configured{RESET}")
+    print(f"  {BOLD}GitHub{RESET}       {GREEN}Connected{RESET} ({gh._repo})" if gh.is_configured
+          else f"  {BOLD}GitHub{RESET}       {YELLOW}Not configured{RESET}")
     print()
-    print(f"  {BOLD}Framework{RESET}")
-    info(f"Pipelines:       {BOLD}{len(ALL_PIPELINES)}{RESET}")
-    info(f"Pipeline steps:  {BOLD}{total_steps}{RESET}")
-    info(f"Unique agents:   {BOLD}{unique_agents}{RESET}")
+
+
+def show_step(step_idx: int, total: int, agent_name: str, desc: str):
+    bar = f"[{step_idx+1}/{total}]"
+    print(f"\n{CYAN}{'─'*66}{RESET}")
+    print(f"  {BOLD}{bar}{RESET}  {YELLOW}{agent_name}{RESET}  ·  {desc}")
+    print(f"{CYAN}{'─'*66}{RESET}")
+
+
+def show_step_result(sr):
+    if sr.skipped:
+        print(f"  Result: {DIM}SKIPPED (upstream empty){RESET}")
+        return
+    status = f"{GREEN}OK{RESET}" if sr.success else f"{RED}FAIL{RESET}"
+    print(f"  Result:    {status}  ({sr.duration_ms:,}ms)")
+    if sr.llm_calls > 0:
+        print(f"  LLM:       {sr.llm_calls} call(s), ~{sr.tokens_used:,} tokens")
+    for o in sr.outputs:
+        print(f"  Output:    {GREEN}▸{RESET} {o['description']}")
+    if sr.requires_human_review:
+        print(f"  {YELLOW}⚠  Flagged for human review{RESET}")
+    for e in sr.errors:
+        print(f"  {RED}Error: {e[:140]}{RESET}")
+
+
+def show_summary(result):
+    print(f"\n{CYAN}{BOLD}{'═'*66}{RESET}")
+    print(f"{BOLD}  Pipeline Complete — {result.pipeline_name}{RESET}")
+    print(f"{CYAN}{'═'*66}{RESET}\n")
+
+    c = GREEN if result.success else RED
+    print(f"  Success:        {c}{result.success}{RESET}")
+    print(f"  Steps:          {result.completed_steps}/{result.total_steps} ok, "
+          f"{result.skipped_steps} skipped, {result.failed_steps} failed")
+    print(f"  Duration:       {result.total_duration_ms:,}ms "
+          f"({result.total_duration_ms/1000:.1f}s)")
+    print(f"  LLM Calls:      {result.total_llm_calls}")
+    print(f"  Tokens:         {result.total_tokens:,}")
+    print(f"  Artifacts:      {result.total_artifacts}")
+    if result.requires_human_review:
+        print(f"  Human Review:   {YELLOW}Yes{RESET}")
+
+    if result.artifacts:
+        print(f"\n  {BOLD}Artifacts Produced:{RESET}")
+        for a in result.artifacts:
+            print(f"    {GREEN}▸{RESET} [{a['type']}] {a['description']}")
+
+    print(f"\n{CYAN}{'═'*66}{RESET}\n")
+
+
+def show_wiki_snapshot():
+    """Show what's in shared memory after the pipeline ran."""
+    print(f"\n{BOLD}  Shared Memory (Wiki) — latest entries:{RESET}")
+    try:
+        from pipeline.shared_memory import SharedMemory
+        wiki = SharedMemory()
+        stats = wiki.stats()
+        print(f"    Namespaces: {stats.get('namespaces', 'n/a')}")
+        print(f"    Total entries: {stats.get('total_entries', 'n/a')}")
+    except Exception as e:
+        print(f"    {DIM}(could not read: {e}){RESET}")
+
+
+def show_event_snapshot():
+    """Show events emitted during the pipeline run."""
+    print(f"\n{BOLD}  Event Bus — recent events:{RESET}")
+    try:
+        from pipeline.event_bus import EventBus
+        bus = EventBus()
+        stats = bus.stats()
+        print(f"    Total events: {stats.get('total_events', 'n/a')}")
+        print(f"    Event types: {', '.join(stats.get('event_types', []))}")
+    except Exception as e:
+        print(f"    {DIM}(could not read: {e}){RESET}")
+
+
+def show_next_steps():
+    print(f"\n{BOLD}  Where to see the results:{RESET}")
+    print(f"    {GREEN}▸{RESET} Jira board:     https://epartsmse.atlassian.net/jira/software/projects/EPARTS/board")
+    print(f"    {GREEN}▸{RESET} GitHub repo:     https://github.com/AshrithaG/eparts")
+    print(f"    {GREEN}▸{RESET} Dashboard:       open dashboard/interactive_architecture.html")
+    print(f"    {GREEN}▸{RESET} Intelligence:    open dashboard/intelligence.html")
     print()
-    print(f"  {BOLD}Data Processed{RESET}")
-    info(f"Coach sessions:  {BOLD}{sessions}{RESET}")
-    info(f"Commitments:     {BOLD}{commitments}{RESET}")
-    info(f"ChromaDB chunks: {BOLD}{coach_chunks + knowledge_chunks}{RESET} ({coach_chunks} sessions + {knowledge_chunks} knowledge)")
 
 
-def demo_requirements() -> None:
-    """Run the Requirements pipeline on a real transcript."""
-    banner("REQUIREMENTS PIPELINE — Live Demo")
+# ── monkeypatch PipelineExecutor to show live step progress ──────────
+def _patch_executor(executor, pipeline):
+    """Wrap the real executor so we see each step live."""
+    original = executor.execute
 
-    from pipeline.pipelines import ALL_PIPELINES, PipelineExecutor
+    def wrapped(pipe, trigger_payload):
+        import uuid as _uuid
+        from pipeline.pipelines import (
+            PipelineContext, StepResult, PipelineResult
+        )
+        from agents.base import AgentTrigger
+        from dataclasses import asdict
+
+        pid = f"pipe-{pipe.name}-{_uuid.uuid4().hex[:8]}"
+        ctx = PipelineContext(
+            pipeline_id=pid, pipeline_name=pipe.name,
+            trigger_type=trigger_payload.get("trigger_type", "manual"),
+            source=trigger_payload.get("source", "unknown"),
+            data=dict(trigger_payload),
+        )
+        results = []
+        ok = True
+        t0 = time.perf_counter()
+        tot_llm = tot_tok = 0
+        needs_review = False
+
+        for i, step in enumerate(pipe.steps):
+            ctx.current_step = i
+            show_step(i, len(pipe.steps), step.agent_name, step.description)
+
+            if step.skip_if_empty:
+                val = ctx.get(step.skip_if_empty)
+                if not val:
+                    sr = StepResult(
+                        step_index=i, agent_name=step.agent_name,
+                        description=step.description, success=True,
+                        skipped=True, duration_ms=0, outputs=[], errors=[],
+                        llm_calls=0, tokens_used=0, artifacts_produced=0,
+                        requires_human_review=False,
+                    )
+                    results.append(sr)
+                    show_step_result(sr)
+                    continue
+
+            agent = executor._agents.get(step.agent_name)
+            if not agent:
+                sr = StepResult(
+                    step_index=i, agent_name=step.agent_name,
+                    description=step.description, success=False,
+                    skipped=False, duration_ms=0, outputs=[],
+                    errors=[f"Agent not found: {step.agent_name}"],
+                    llm_calls=0, tokens_used=0, artifacts_produced=0,
+                    requires_human_review=False,
+                )
+                results.append(sr)
+                show_step_result(sr)
+                if step.required:
+                    ok = False; break
+                continue
+
+            trigger = AgentTrigger(
+                trigger_type=ctx.trigger_type,
+                source=ctx.source,
+                metadata={
+                    "pipeline_id": pid,
+                    "pipeline_step": i,
+                    "pipeline_context": ctx.data,
+                },
+            )
+
+            st = time.perf_counter()
+            try:
+                res = agent.execute(trigger)
+                ms = int((time.perf_counter() - st) * 1000)
+                s_llm = getattr(agent, '_run_llm_calls', 0)
+                s_tok = getattr(agent, '_run_total_tokens', 0)
+                tot_llm += s_llm; tot_tok += s_tok
+
+                if step.output_key:
+                    if res.data:
+                        ctx.set(step.output_key, res.data)
+                    elif res.outputs:
+                        ctx.set(step.output_key, [asdict(o) for o in res.outputs])
+                for k, v in res.data.items():
+                    ctx.set(k, v)
+
+                executor._deposit_to_wiki(pipe, step, res)
+
+                for o in res.outputs:
+                    ctx.add_artifact(o.output_type, o.description, o.reference)
+                if res.requires_human_review:
+                    needs_review = True
+
+                sr = StepResult(
+                    step_index=i, agent_name=step.agent_name,
+                    description=step.description, success=res.success,
+                    skipped=False, duration_ms=ms,
+                    outputs=[asdict(o) for o in res.outputs],
+                    errors=res.errors,
+                    llm_calls=s_llm, tokens_used=s_tok,
+                    artifacts_produced=len(res.outputs),
+                    requires_human_review=res.requires_human_review,
+                )
+                results.append(sr)
+                show_step_result(sr)
+                if not res.success and step.required:
+                    ok = False; break
+
+            except Exception as exc:
+                ms = int((time.perf_counter() - st) * 1000)
+                sr = StepResult(
+                    step_index=i, agent_name=step.agent_name,
+                    description=step.description, success=False,
+                    skipped=False, duration_ms=ms, outputs=[],
+                    errors=[f"{type(exc).__name__}: {exc}"],
+                    llm_calls=0, tokens_used=0, artifacts_produced=0,
+                    requires_human_review=False,
+                )
+                results.append(sr)
+                show_step_result(sr)
+                if step.required:
+                    ok = False; break
+
+        total_ms = int((time.perf_counter() - t0) * 1000)
+        from datetime import datetime, timezone
+        comp = sum(1 for s in results if not s.skipped and s.success)
+        skip = sum(1 for s in results if s.skipped)
+        fail = sum(1 for s in results if not s.skipped and not s.success)
+
+        return PipelineResult(
+            pipeline_id=pid, pipeline_name=pipe.name,
+            practice_area=pipe.practice_area,
+            trigger_source=ctx.source, success=ok,
+            total_steps=len(pipe.steps), completed_steps=comp,
+            skipped_steps=skip, failed_steps=fail,
+            total_duration_ms=total_ms, total_llm_calls=tot_llm,
+            total_tokens=tot_tok, total_artifacts=len(ctx.artifacts),
+            requires_human_review=needs_review, step_results=results,
+            artifacts=ctx.artifacts,
+            context_snapshot={k: type(v).__name__ for k, v in ctx.data.items()},
+            started_at=ctx.started_at,
+            completed_at=datetime.now(timezone.utc).isoformat(),
+        )
+
+    executor.execute = wrapped
+
+
+def main():
+    # ── resolve transcript ──────────────────────────────────────────
+    if len(sys.argv) > 1:
+        vtt = sys.argv[1]
+    else:
+        vtts = sorted(glob(str(PROJECT_ROOT / "transcripts" / "*.transcript.vtt")))
+        if not vtts:
+            print(f"{RED}No .vtt files found in transcripts/{RESET}")
+            sys.exit(1)
+        vtt = vtts[-1]
+
+    banner()
+    show_config(vtt)
+
+    input(f"  {MAGENTA}Press ENTER to start the pipeline ▸{RESET} ")
+
+    # ── register agents ─────────────────────────────────────────────
+    print(f"\n{DIM}  Registering agents...{RESET}")
     from orchestrator.registry import register_all_agents
     from orchestrator.queue import TaskQueue
+    from pipeline.pipelines import REQUIREMENTS_PIPELINE, PipelineExecutor
 
-    vtt = "transcripts/GMT20260402-180648_Recording.transcript.vtt"
-    print(f"  {BOLD}Input:{RESET} {vtt}")
-    print(f"  {DIM}Apr 2 sprint review — Jaivard, Hrishik, Harsha, Ashritha{RESET}")
-
-    step(1, "Initialize pipeline executor with all agents")
-    t0 = time.perf_counter()
     tq = TaskQueue()
     agents = register_all_agents(tq)
+    print(f"  {GREEN}✓ {len(agents)} agents registered{RESET}")
+
+    print(f"\n  {BOLD}Pipeline:{RESET} {REQUIREMENTS_PIPELINE.name}")
+    print(f"  {BOLD}Practice Area:{RESET} {REQUIREMENTS_PIPELINE.practice_area}")
+    print(f"  {BOLD}Steps:{RESET} {len(REQUIREMENTS_PIPELINE.steps)}")
+    print(f"  {BOLD}Trigger:{RESET} transcript → {vtt}")
+
+    # ── run pipeline with live output ───────────────────────────────
     executor = PipelineExecutor(agents)
-    ok(f"25 agents registered in {int((time.perf_counter() - t0) * 1000)}ms")
+    _patch_executor(executor, REQUIREMENTS_PIPELINE)
 
-    step(2, "Execute Requirements Pipeline (7 steps)")
-    print()
-    t0 = time.perf_counter()
-    result = executor.execute(
-        ALL_PIPELINES["requirements"],
-        {"trigger_type": "transcript", "source": vtt, "metadata": {"meeting_type": "client"}},
-    )
+    result = executor.execute(REQUIREMENTS_PIPELINE, {
+        "trigger_type": "transcript",
+        "source": vtt,
+    })
 
-    for sr in result.step_results:
-        status = f"{GREEN}OK{RESET}" if sr.success else (f"{DIM}SKIP{RESET}" if sr.skipped else f"{RED}FAIL{RESET}")
-        desc = sr.outputs[0]["description"][:70] if sr.outputs else "skipped"
-        print(f"    {sr.step_index + 1}. [{status}] {BOLD}{sr.agent_name:22s}{RESET} {sr.duration_ms:4d}ms  {desc}")
-
-    elapsed = int((time.perf_counter() - t0) * 1000)
-    status_color = GREEN if result.success else RED
-    status_text = "SUCCESS" if result.success else "FAILED"
-    print(f"\n  {status_color}{BOLD}{status_text}{RESET} — {result.completed_steps}/{result.total_steps} steps, {elapsed}ms, {result.total_artifacts} artifacts")
-
-
-def demo_coach() -> None:
-    """Run the Coach Session pipeline on Cory Gwin's session."""
-    banner("COACH SESSION MEMORY PIPELINE — Live Demo")
-
-    from pipeline.pipelines import ALL_PIPELINES, PipelineExecutor
-    from orchestrator.registry import register_all_agents
-    from orchestrator.queue import TaskQueue
-
-    vtt = "coach_meetings/GMT20260224-220446_Recording.transcript.vtt"
-    print(f"  {BOLD}Input:{RESET} Cory Gwin coaching session (Feb 24)")
-    print(f"  {DIM}Topics: SES, agent feedback loops, code organization, ADRs{RESET}")
-
-    step(1, "Execute Coach Session Pipeline (6 steps)")
-    print()
-    tq = TaskQueue()
-    agents = register_all_agents(tq)
-    executor = PipelineExecutor(agents)
-
-    t0 = time.perf_counter()
-    result = executor.execute(
-        ALL_PIPELINES["coach_session"],
-        {"trigger_type": "coach_transcript", "source": vtt, "metadata": {"meeting_type": "coach"}},
-    )
-
-    for sr in result.step_results:
-        status = f"{GREEN}OK{RESET}" if sr.success else (f"{DIM}SKIP{RESET}" if sr.skipped else f"{RED}FAIL{RESET}")
-        desc = sr.outputs[0]["description"][:70] if sr.outputs else "no output"
-        print(f"    {sr.step_index + 1}. [{status}] {BOLD}{sr.agent_name:22s}{RESET} {sr.duration_ms:4d}ms  {desc}")
-
-    elapsed = int((time.perf_counter() - t0) * 1000)
-    status_color = GREEN if result.success else RED
-    status_text = "SUCCESS" if result.success else "FAILED"
-    print(f"\n  {status_color}{BOLD}{status_text}{RESET} — {result.completed_steps}/{result.total_steps} steps, {elapsed}ms")
-
-    step(2, "ChromaDB state after embedding")
-    from mcp.vector_store import VectorStoreMCP
-    vs = VectorStoreMCP()
-    count = vs.count("coach_sessions")
-    ok(f"{count} total chunks in coach_sessions collection")
-
-
-def demo_search() -> None:
-    """Demonstrate semantic search across the knowledge base."""
-    banner("SEMANTIC SEARCH — Live Demo")
-
-    from mcp.vector_store import VectorStoreMCP
-
-    vs = VectorStoreMCP()
-    queries = [
-        ("coach_sessions", "What did Cory say about agent visibility and code organization?"),
-        ("coach_sessions", "Azure environment constraints and tool lock-in"),
-        ("coach_sessions", "human in the loop review process design"),
-        ("project_knowledge", "confidence threshold calibration for ML model"),
-        ("project_knowledge", "ETVX process documentation and measurement system"),
-        ("project_knowledge", "risk mitigation when blocked on client data"),
-    ]
-
-    for collection, query in queries:
-        section(f"Collection: {collection}")
-        print(f"  {BOLD}Query:{RESET} \"{query}\"")
-        print()
-
-        results = vs.query(collection, query, n_results=2)
-        for i, r in enumerate(results):
-            doc = r["document"][:150].replace("\n", " ")
-            src = r["metadata"].get("source", r["metadata"].get("session_type", "?"))
-            dist = r["distance"]
-            color = GREEN if dist < 0.5 else YELLOW if dist < 0.7 else RED
-            print(f"    {color}[{dist:.3f}]{RESET} ({src})")
-            print(f"    {DIM}{doc}...{RESET}")
-            print()
-
-
-def demo_briefing() -> None:
-    """Generate a pre-meeting briefing from all accumulated data."""
-    banner("PRE-MEETING BRIEFING GENERATOR")
-
-    from agents.coach_memory.briefing_generator import BriefingGeneratorAgent
-    from agents.base import AgentTrigger
-
-    step(1, "Gathering context from SQLite + ChromaDB + concern tracker")
-    agent = BriefingGeneratorAgent(mcp_clients={"vector_store": None})
-    trigger = AgentTrigger(
-        trigger_type="cron_pre_meeting",
-        source="manual",
-        metadata={"meeting_type": "coach"},
-    )
-
-    t0 = time.perf_counter()
-    result = agent.execute(trigger)
-    elapsed = int((time.perf_counter() - t0) * 1000)
-
-    ok(f"Briefing generated in {elapsed}ms")
-    print()
-
-    briefing = result.data.get("briefing", "")
-    for line in briefing.split("\n")[:30]:
-        if line.startswith("#"):
-            print(f"  {BOLD}{CYAN}{line}{RESET}")
-        elif line.startswith("-"):
-            print(f"  {line}")
-        else:
-            print(f"  {DIM}{line}{RESET}")
-
-    if briefing.count("\n") > 30:
-        print(f"  {DIM}... ({briefing.count(chr(10)) - 30} more lines){RESET}")
-
-
-def demo_all() -> None:
-    """Run all demo sections in sequence."""
-    banner("ePARTS AGENTIC SE SYSTEM — FULL DEMO")
-    print(f"  {BOLD}Team:{RESET} Pimsie Supreme")
-    print(f"  {BOLD}Program:{RESET} CMU MSE Studio 2026")
-    print(f"  {BOLD}Client:{RESET} eParts Services LLC")
-    print()
-    print(f"  This demo shows the complete SES infrastructure processing")
-    print(f"  real team data — meeting transcripts, coach sessions, and")
-    print(f"  project documents — through multi-agent pipelines.")
-
-    pause()
-    demo_stats()
-    pause()
-    demo_requirements()
-    pause()
-    demo_coach()
-    pause()
-    demo_search()
-    pause()
-    demo_briefing()
-
-    banner("DEMO COMPLETE")
-    print(f"  {GREEN}{BOLD}All pipelines demonstrated with real data.{RESET}")
-    print(f"  {DIM}Dashboard: open dashboard/metrics.html in browser{RESET}")
-    print()
-
-
-# ── Entry point ──────────────────────────────────────────────────────
-
-def main() -> None:
-    parser = argparse.ArgumentParser(description="eParts SES Demo")
-    parser.add_argument(
-        "--section",
-        choices=["requirements", "coach", "search", "briefing", "stats", "all"],
-        default="all",
-        help="Which demo section to run",
-    )
-    parser.add_argument("--no-pause", action="store_true", help="Skip pauses between sections")
-    args = parser.parse_args()
-
-    if args.no_pause:
-        global pause
-        pause = lambda msg="": None
-
-    dispatch = {
-        "stats": demo_stats,
-        "requirements": demo_requirements,
-        "coach": demo_coach,
-        "search": demo_search,
-        "briefing": demo_briefing,
-        "all": demo_all,
-    }
-    dispatch[args.section]()
+    # ── summary ─────────────────────────────────────────────────────
+    show_summary(result)
+    show_wiki_snapshot()
+    show_event_snapshot()
+    show_next_steps()
 
 
 if __name__ == "__main__":

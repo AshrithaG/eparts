@@ -3,10 +3,16 @@ Base Agent class for the eParts agentic system.
 
 All domain agents inherit from BaseAgent. Provides:
 - Abstract run() method that every agent implements
-- call_claude() for all LLM calls via Anthropic SDK
+- call_llm() / call_claude() for LLM calls (supports Anthropic Claude + Google Gemini)
 - load_prompt() for loading versioned prompt templates from /prompts/
 - Structured JSON logging for every agent invocation
 - Retry with exponential backoff on rate limits
+
+LLM Provider selection (auto-detected from .env):
+  GEMINI_API_KEY  → Google Gemini (gemini-2.0-flash)
+  ANTHROPIC_API_KEY → Anthropic Claude (claude-sonnet)
+  Both set → uses LLM_PROVIDER env var to pick, defaults to gemini
+  Neither → offline mode (agents use keyword/regex fallbacks)
 
 Triggered by: N/A (base class)
 Outputs: N/A (base class)
@@ -43,8 +49,26 @@ LOG_FILE = LOG_DIR / "agent_runs.jsonl"
 
 class AgentSettings(BaseSettings):
     anthropic_api_key: str = ""
+    gemini_api_key: str = ""
+    llm_provider: str = ""  # "gemini", "anthropic", or "" (auto-detect)
     claude_model: str = "claude-sonnet-4-5-20250514"
+    gemini_model: str = "gemini-2.5-flash"
     model_config = {"env_file": ".env", "extra": "ignore"}
+
+    @property
+    def active_provider(self) -> str:
+        """Which LLM provider to use. Auto-detects from available keys."""
+        if self.llm_provider:
+            return self.llm_provider.lower()
+        if self.gemini_api_key:
+            return "gemini"
+        if self.anthropic_api_key:
+            return "anthropic"
+        return "none"
+
+    @property
+    def has_llm(self) -> bool:
+        return self.active_provider != "none"
 
 
 # ---------------------------------------------------------------------------
@@ -159,7 +183,21 @@ class BaseAgent(ABC):
         self.mcp = mcp_clients or {}
         self.logger = StructuredLogger(agent_name=name)
         self._settings = AgentSettings()
-        self._client = anthropic.Anthropic(api_key=self._settings.anthropic_api_key)
+
+        # LLM client setup — supports Anthropic Claude and Google Gemini
+        self._llm_provider = self._settings.active_provider
+        self._anthropic_client = None
+        self._gemini_model = None
+
+        if self._llm_provider == "anthropic":
+            self._anthropic_client = anthropic.Anthropic(
+                api_key=self._settings.anthropic_api_key
+            )
+        elif self._llm_provider == "gemini":
+            import google.generativeai as genai
+            genai.configure(api_key=self._settings.gemini_api_key)
+            self._gemini_model = genai.GenerativeModel(self._settings.gemini_model)
+
         self._run_llm_calls = 0
         self._run_total_tokens = 0
         self._run_input_tokens = 0
@@ -223,14 +261,16 @@ class BaseAgent(ABC):
         temperature: float = 0.0,
     ) -> str:
         """
-        Call the Anthropic API. If `prompt` matches a filename in /prompts/,
-        loads the file contents instead.
+        Call the active LLM provider (Gemini or Anthropic).
 
-        Retries up to MAX_RETRIES times with exponential backoff on rate-limit
-        or transient server errors. Every call is metered into the metrics DB.
+        Auto-resolves prompt files from /prompts/ directory.
+        Retries with exponential backoff on transient errors.
+        All calls are metered into the metrics DB.
+
+        Despite the name 'call_claude', this routes to whichever
+        provider is configured via .env (GEMINI_API_KEY or ANTHROPIC_API_KEY).
         """
         prompt_file = "inline"
-        # Only check for prompt file if the string looks like a filename (short, no newlines)
         if len(prompt) < 256 and "\n" not in prompt:
             try:
                 if PROMPTS_DIR.joinpath(prompt).exists():
@@ -239,9 +279,99 @@ class BaseAgent(ABC):
             except (OSError, ValueError):
                 pass
 
+        if self._llm_provider == "gemini":
+            return self._call_gemini(prompt, system=system, prompt_file=prompt_file,
+                                     max_tokens=max_tokens, temperature=temperature)
+        elif self._llm_provider == "anthropic":
+            return self._call_anthropic(prompt, system=system, model=model,
+                                        prompt_file=prompt_file, max_tokens=max_tokens,
+                                        temperature=temperature)
+        else:
+            raise RuntimeError(
+                "No LLM provider configured. Set GEMINI_API_KEY or ANTHROPIC_API_KEY in .env"
+            )
+
+    def _call_gemini(
+        self, prompt: str, *, system: str | None = None,
+        prompt_file: str = "inline", max_tokens: int = 4096,
+        temperature: float = 0.0,
+    ) -> str:
+        """Call Google Gemini API."""
+        model_name = self._settings.gemini_model
+        full_prompt = f"{system}\n\n{prompt}" if system else prompt
+
+        backoff = self.INITIAL_BACKOFF_S
+        last_error: Exception | None = None
+
+        for attempt in range(1, self.MAX_RETRIES + 1):
+            t0 = time.perf_counter()
+            try:
+                response = self._gemini_model.generate_content(
+                    full_prompt,
+                    generation_config={
+                        "max_output_tokens": max_tokens,
+                        "temperature": temperature,
+                    },
+                )
+                elapsed_ms = int((time.perf_counter() - t0) * 1000)
+
+                text = response.text
+                input_tokens = getattr(response.usage_metadata, "prompt_token_count", 0) or 0
+                output_tokens = getattr(response.usage_metadata, "candidates_token_count", 0) or 0
+                self._run_llm_calls += 1
+                self._run_total_tokens += input_tokens + output_tokens
+                self._run_input_tokens += input_tokens
+                self._run_output_tokens += output_tokens
+
+                try:
+                    from pipeline.metrics import LLMCallMetric
+                    call_metric = LLMCallMetric(
+                        agent=self.name,
+                        run_id=self._run_id,
+                        model=model_name,
+                        prompt_file=prompt_file,
+                        input_tokens=input_tokens,
+                        output_tokens=output_tokens,
+                        latency_ms=elapsed_ms,
+                        temperature=temperature,
+                        attempt=attempt,
+                    )
+                    self._run_cost_usd += call_metric.estimated_cost_usd
+                    self._get_metrics().record_llm_call(call_metric)
+                    if prompt_file != "inline":
+                        self._get_metrics().track_prompt_version(prompt_file, prompt)
+                except Exception:
+                    pass
+
+                self.logger.info(
+                    f"LLM call completed: provider=gemini model={model_name} "
+                    f"prompt={prompt_file} "
+                    f"input_tokens={input_tokens} output_tokens={output_tokens} "
+                    f"latency_ms={elapsed_ms} attempt={attempt}"
+                )
+                return text
+
+            except Exception as exc:
+                last_error = exc
+                self.logger.warning(
+                    f"Gemini error (attempt {attempt}/{self.MAX_RETRIES}): {exc}, "
+                    f"backing off {backoff:.1f}s"
+                )
+                time.sleep(backoff)
+                backoff *= 2
+
+        raise RuntimeError(
+            f"call_gemini failed after {self.MAX_RETRIES} retries: {last_error}"
+        ) from last_error
+
+    def _call_anthropic(
+        self, prompt: str, *, system: str | None = None,
+        model: str | None = None, prompt_file: str = "inline",
+        max_tokens: int = 4096, temperature: float = 0.0,
+    ) -> str:
+        """Call Anthropic Claude API."""
         model = model or self._settings.claude_model
         messages = [{"role": "user", "content": prompt}]
-
         system_param = [{"type": "text", "text": system}] if system else anthropic.NOT_GIVEN
 
         backoff = self.INITIAL_BACKOFF_S
@@ -250,7 +380,7 @@ class BaseAgent(ABC):
         for attempt in range(1, self.MAX_RETRIES + 1):
             t0 = time.perf_counter()
             try:
-                response = self._client.messages.create(
+                response = self._anthropic_client.messages.create(
                     model=model,
                     max_tokens=max_tokens,
                     temperature=temperature,
@@ -266,7 +396,6 @@ class BaseAgent(ABC):
                 self._run_input_tokens += input_tokens
                 self._run_output_tokens += output_tokens
 
-                # Record per-call metrics
                 try:
                     from pipeline.metrics import LLMCallMetric
                     call_metric = LLMCallMetric(
@@ -282,20 +411,17 @@ class BaseAgent(ABC):
                     )
                     self._run_cost_usd += call_metric.estimated_cost_usd
                     self._get_metrics().record_llm_call(call_metric)
-
                     if prompt_file != "inline":
                         self._get_metrics().track_prompt_version(prompt_file, prompt)
                 except Exception:
-                    pass  # metrics should never break agent execution
+                    pass
 
                 self.logger.info(
-                    f"LLM call completed: model={model} "
+                    f"LLM call completed: provider=anthropic model={model} "
                     f"prompt={prompt_file} "
                     f"input_tokens={input_tokens} output_tokens={output_tokens} "
-                    f"latency_ms={elapsed_ms} cost=${call_metric.estimated_cost_usd:.4f} "
-                    f"attempt={attempt}"
+                    f"latency_ms={elapsed_ms} attempt={attempt}"
                 )
-
                 return response.content[0].text
 
             except anthropic.RateLimitError as exc:
@@ -320,7 +446,7 @@ class BaseAgent(ABC):
                     raise
 
         raise RuntimeError(
-            f"call_claude failed after {self.MAX_RETRIES} retries: {last_error}"
+            f"call_anthropic failed after {self.MAX_RETRIES} retries: {last_error}"
         ) from last_error
 
     def load_prompt(self, filename: str, **kwargs: Any) -> str:

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eParts SES - Interactive Architecture</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#06090f;color:#c8cee0;font-family:'Inter',sans-serif;min-height:100vh;padding:40px 24px 60px;
+    background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(99,102,241,0.08),transparent);
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  .page-header{text-align:center;margin-bottom:36px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.04);}
+  .page-title{font-size:28px;font-weight:800;letter-spacing:-0.02em;background:linear-gradient(135deg,#6ee7b7,#3b82f6,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .page-sub{font-size:12px;color:rgba(200,206,224,0.6);margin-top:8px;letter-spacing:0.12em;font-weight:400;}
+
+  .container{max-width:1400px;margin:0 auto;}
+
+  /* Pipeline cards grid */
+  .pipeline-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:12px;}
+
+  .pipe-card{border-radius:12px;padding:18px 18px 16px;cursor:pointer;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);position:relative;border:1px solid transparent;backdrop-filter:blur(8px);}
+  .pipe-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,0.5);}
+  .pipe-card.active{border-color:rgba(255,255,255,0.15)!important;box-shadow:0 0 24px rgba(255,255,255,0.04);}
+  .pipe-card .title{font-size:14px;font-weight:700;margin-bottom:6px;letter-spacing:-0.01em;}
+  .pipe-card .meta{font-size:9px;color:rgba(224,230,240,0.7);line-height:1.6;}
+  .pipe-card .agent-count{display:inline-block;font-size:8px;font-weight:600;padding:3px 9px;border-radius:20px;background:rgba(255,255,255,0.05);color:rgba(224,230,240,0.6);border:1px solid rgba(255,255,255,0.06);letter-spacing:0.04em;margin-top:8px;}
+
+  /* Status-based color schemes */
+  .pipe-req{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);}.pipe-req:hover{background:rgba(34,197,94,0.14);}.pipe-req .title{color:#4ade80;}
+  .pipe-coach{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);}.pipe-coach:hover{background:rgba(34,197,94,0.14);}.pipe-coach .title{color:#4ade80;}
+  .pipe-know{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);}.pipe-know:hover{background:rgba(34,197,94,0.14);}.pipe-know .title{color:#4ade80;}
+  .pipe-arch{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.3);}.pipe-arch:hover{background:rgba(245,158,11,0.14);}.pipe-arch .title{color:#fbbf24;}
+  .pipe-pm{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.3);}.pipe-pm:hover{background:rgba(245,158,11,0.14);}.pipe-pm .title{color:#fbbf24;}
+  .pipe-code{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.25);}.pipe-code:hover{background:rgba(239,68,68,0.14);}.pipe-code .title{color:#f87171;}
+  .pipe-ml{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.25);}.pipe-ml:hover{background:rgba(239,68,68,0.14);}.pipe-ml .title{color:#f87171;}
+
+  /* Expanded detail panel */
+  .detail-panel{display:none;background:rgba(8,12,22,0.95);border:1px solid rgba(30,41,59,0.6);border-radius:16px;padding:28px 32px;margin-bottom:20px;animation:slideIn 0.35s cubic-bezier(0.4,0,0.2,1);backdrop-filter:blur(12px);}
+  .detail-panel.show{display:block;}
+  @keyframes slideIn{from{opacity:0;transform:translateY(-12px);}to{opacity:1;transform:translateY(0);}}
+
+  .dp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid rgba(30,41,59,0.5);}
+  .dp-title{font-size:20px;font-weight:800;letter-spacing:-0.02em;}
+  .dp-practice{font-size:11px;color:rgba(224,230,240,0.6);margin-top:4px;letter-spacing:0.02em;}
+  .dp-close{cursor:pointer;color:rgba(200,206,224,0.4);font-size:20px;padding:6px 10px;border-radius:8px;border:none;background:none;transition:all 0.2s;}
+  .dp-close:hover{color:#e0e6f0;background:rgba(30,41,59,0.5);}
+
+  /* Pipeline flow */
+  .flow{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding:8px 0 16px;}
+  .flow::-webkit-scrollbar{height:4px;}.flow::-webkit-scrollbar-track{background:transparent;}.flow::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:4px;}
+  .flow-step{flex:0 0 auto;min-width:185px;max-width:225px;position:relative;}
+  .flow-card{background:rgba(12,16,23,0.8);border:1px solid rgba(30,41,59,0.5);border-radius:10px;padding:14px 16px;height:100%;transition:border-color 0.2s;}
+  .flow-card:hover{border-color:rgba(30,41,59,0.8);}
+  .flow-card .step-num{font-size:8px;color:rgba(200,206,224,0.4);letter-spacing:0.14em;font-weight:700;margin-bottom:6px;text-transform:uppercase;}
+  .flow-card .agent-name{font-size:11px;font-weight:700;margin-bottom:8px;}
+  .flow-card .agent-desc{font-size:9px;color:rgba(200,206,224,0.75);line-height:1.6;margin-bottom:10px;}
+  .flow-card .io{font-size:8px;line-height:1.7;margin-top:6px;}
+  .flow-card .io-label{color:rgba(160,174,192,0.6);font-weight:600;text-transform:uppercase;letter-spacing:0.1em;}
+  .flow-card .io-val{color:rgba(224,230,240,0.85);}
+  .flow-arrow{display:flex;align-items:center;justify-content:center;width:32px;flex-shrink:0;color:rgba(200,206,224,0.2);font-size:16px;}
+
+  /* Agent name colors per pipeline */
+  .dp-req .agent-name{color:#6ee7b7;}.dp-arch .agent-name{color:#93c5fd;}.dp-code .agent-name{color:#fcd34d;}
+  .dp-pm .agent-name{color:#fda4af;}.dp-know .agent-name{color:#c7d2fe;}.dp-coach .agent-name{color:#fde68a;}.dp-ml .agent-name{color:#67e8f9;}
+
+  /* SE Activity mapping */
+  .se-mapping{margin-top:24px;padding-top:20px;border-top:1px solid rgba(30,41,59,0.4);}
+  .se-mapping h4{font-size:12px;font-weight:700;color:#a78bfa;margin-bottom:14px;letter-spacing:0.02em;}
+  .se-table{width:100%;border-collapse:collapse;font-size:10px;}
+  .se-table th{text-align:left;padding:8px 12px;color:rgba(200,206,224,0.5);font-weight:600;font-size:9px;text-transform:uppercase;letter-spacing:0.1em;border-bottom:1px solid rgba(30,41,59,0.5);}
+  .se-table td{padding:8px 12px;border-bottom:1px solid rgba(15,21,32,0.6);vertical-align:top;color:rgba(224,230,240,0.85);}
+  .se-table tr:hover td{background:rgba(255,255,255,0.015);}
+  .se-table .se-act{color:#a78bfa;font-weight:600;}
+  .se-table .se-agent{color:#6ee7b7;}
+
+  /* Meta-model mapping */
+  .mm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px;}
+  .mm-box{background:rgba(10,14,26,0.6);border:1px solid rgba(30,41,59,0.4);border-radius:10px;padding:14px 16px;transition:border-color 0.2s;}
+  .mm-box:hover{border-color:rgba(30,41,59,0.7);}
+  .mm-box h5{font-size:10px;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em;}
+  .mm-box ul{list-style:none;font-size:9px;color:rgba(224,230,240,0.75);line-height:1.8;}
+  .mm-artifacts h5{color:#34d399;}.mm-processes h5{color:#60a5fa;}.mm-resources h5{color:#fbbf24;}.mm-measures h5{color:#fb7185;}
+
+  /* Badges */
+  .badge{display:inline-block;border-radius:20px;padding:3px 10px;font-size:8px;font-weight:600;letter-spacing:0.04em;}
+  .b-live{background:rgba(6,78,59,0.6);color:#34d399;border:1px solid rgba(5,150,105,0.4);}
+  .b-hitl{background:rgba(69,26,3,0.6);color:#fb923c;border:1px solid rgba(146,64,14,0.4);}
+  .b-event{background:rgba(26,15,46,0.6);color:#c084fc;border:1px solid rgba(124,58,237,0.4);}
+  .b-key{background:rgba(12,26,46,0.6);color:#60a5fa;border:1px solid rgba(30,64,175,0.4);}
+
+  /* Counterfactual bar */
+  .cf-bar{margin-top:20px;padding:16px 20px;background:rgba(10,8,20,0.6);border:1px solid rgba(30,27,75,0.4);border-radius:12px;}
+  .cf-bar h4{font-size:11px;font-weight:700;color:#c084fc;margin-bottom:12px;letter-spacing:0.02em;}
+  .cf-row{display:flex;gap:20px;flex-wrap:wrap;}
+  .cf-item{flex:1;min-width:200px;font-size:9px;line-height:1.7;}
+  .cf-item .cf-label{color:rgba(124,58,237,0.8);font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-size:8px;margin-bottom:4px;}
+  .cf-item .cf-val{color:rgba(224,230,240,0.8);}
+
+  /* Shared infra + storage strip */
+  .infra-strip{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px;}
+  .infra-chip{padding:8px 16px;border-radius:8px;font-size:9px;font-weight:600;border:1px solid rgba(49,46,129,0.3);background:rgba(10,14,26,0.5);color:rgba(200,206,224,0.8);transition:all 0.2s;letter-spacing:0.02em;}
+  .infra-chip:hover{border-color:rgba(49,46,129,0.6);background:rgba(10,14,26,0.8);}
+  .storage-chip{padding:8px 16px;border-radius:8px;font-size:9px;font-weight:600;border:1px solid rgba(55,65,81,0.3);background:rgba(10,10,20,0.4);color:rgba(200,206,224,0.7);transition:all 0.2s;letter-spacing:0.02em;}
+  .storage-chip:hover{border-color:rgba(55,65,81,0.6);background:rgba(10,10,20,0.7);}
+
+  .section-divider{text-align:center;color:rgba(148,163,184,0.4);font-size:9px;letter-spacing:8px;margin:20px 0 4px;padding:4px;text-transform:uppercase;font-weight:600;}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-title">eParts Agentic Software Engineering System</div>
+  <div class="page-sub mono">CMU MSE Studio 2026 · Pimsie Supreme</div>
+</div>
+
+<div class="container">
+
+
+<!-- ═══ PIPELINE GRID ═══ -->
+<!-- Green: Usable -->
+<div class="pipeline-row">
+  <div class="pipe-card pipe-req" onclick="toggle('req')"><div class="title">Requirements</div><div class="meta">Transforms meeting transcripts into structured requirements, Jira tickets, and traceable decisions</div><div class="agent-count mono">7 agents</div></div>
+  <div class="pipe-card pipe-coach" onclick="toggle('coach')"><div class="title">Coach Session</div><div class="meta">Preserves coaching guidance as retrievable memory and surfaces recurring themes</div><div class="agent-count mono">5 agents</div></div>
+  <div class="pipe-card pipe-know" onclick="toggle('know')"><div class="title">Knowledge</div><div class="meta">Aggregates project state into pre-meeting briefings so every participant starts informed</div><div class="agent-count mono">2 agents</div></div>
+</div>
+
+<!-- Orange: Partial -->
+<div class="pipeline-row">
+  <div class="pipe-card pipe-arch" onclick="toggle('arch')"><div class="title">Architecture</div><div class="meta">Detects architectural drift, generates ADRs, and maintains cross-artifact traceability</div><div class="agent-count mono">4 agents</div></div>
+  <div class="pipe-card pipe-pm" onclick="toggle('pm')"><div class="title">Project Management</div><div class="meta">Synchronizes WBS with Jira, produces weekly digests, and flags anomalies</div><div class="agent-count mono">3 agents</div></div>
+</div>
+
+<!-- Red: Future -->
+<div class="pipeline-row">
+  <div class="pipe-card pipe-code" onclick="toggle('code')"><div class="title">Coding</div><div class="meta">Enforces traceability in PRs, generates test stubs, and guards prompt quality</div><div class="agent-count mono">4 agents</div></div>
+  <div class="pipe-card pipe-ml" onclick="toggle('ml')"><div class="title">ML Decision</div><div class="meta">Accumulates experimental evidence and determines decision readiness</div><div class="agent-count mono">3 agents</div></div>
+</div>
+
+<!-- ═══ REQUIREMENTS DETAIL ═══ -->
+<div class="detail-panel dp-req" id="panel-req">
+  <div class="dp-header">
+    <div><div class="dp-title" style="color:#34d399;">Requirements Engineering Pipeline</div><div class="dp-practice mono">Practice Area: Requirements Engineering · 7 sequential agents · Triggered by .vtt transcript upload</div></div>
+    <button class="dp-close" onclick="toggle('req')">&times;</button>
+  </div>
+
+  <div class="flow">
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 1</div><div class="agent-name mono">transcript_parser</div><div class="agent-desc">Converts raw meeting transcript into structured JSON - identifies speakers, extracts decisions, action items, and concerns.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">.vtt transcript</span><br><span class="io-label mono">OUT: </span><span class="io-val">Structured meeting JSON</span><br><span class="io-label mono">WIKI: </span><span class="io-val">meetings/{date}</span><br><span class="io-label mono">EVENTS: </span><span class="io-val">action_items_extracted, decision_logged</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 2</div><div class="agent-name mono">priority_classifier</div><div class="agent-desc">Assigns priority to each extracted item: P0 (blocks delivery), P1 (current sprint), P2 (backlog). P0 items are held for human approval before proceeding.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Structured meeting data</span><br><span class="io-label mono">OUT: </span><span class="io-val">Prioritized item set</span><br><span class="io-label mono">MODE: </span><span class="io-val">LLM-assisted or keyword heuristic (offline)</span></div><div style="margin-top:6px;"><span class="badge b-hitl">P0 → Human-in-the-Loop gate</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 3</div><div class="agent-name mono">req_extractor</div><div class="agent-desc">Synthesizes formal requirement documents (REQ-XXX.md) with title, rationale, category, priority, and acceptance criteria. Commits directly to GitHub.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Prioritized items</span><br><span class="io-label mono">OUT: </span><span class="io-val">REQ-XXX.md files</span><br><span class="io-label mono">WIKI: </span><span class="io-val">requirements/{REQ-ID}</span><br><span class="io-label mono">GITHUB: </span><span class="io-val">requirements/parsed/</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 4</div><div class="agent-name mono">ticket_creator</div><div class="agent-desc">Creates Jira tickets for P1 and P2 items with auto-populated fields: summary, description, labels, and priority mapping.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Prioritized items</span><br><span class="io-label mono">OUT: </span><span class="io-val">EPARTS-XX Jira tickets</span><br><span class="io-label mono">JIRA: </span><span class="io-val">Create Issue API</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 5</div><div class="agent-name mono">minutes_publisher</div><div class="agent-desc">Formats the structured meeting output as a Confluence page, ensuring the entire team has visibility into what was discussed and decided.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Structured meeting data</span><br><span class="io-label mono">OUT: </span><span class="io-val">Confluence page</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 6</div><div class="agent-name mono">decision_logger</div><div class="agent-desc">Isolates architectural and design decisions, deposits them to the project wiki, and appends to the running decision log on GitHub.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Structured meeting data</span><br><span class="io-label mono">WIKI: </span><span class="io-val">decisions/{date}</span><br><span class="io-label mono">GITHUB: </span><span class="io-val">decisions.log.md</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 7</div><div class="agent-name mono">drift_detector</div><div class="agent-desc">Compares newly logged decisions against the canonical architecture document using RAG. Flags contradictions and emits a cross-pipeline event to the Architecture pipeline.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Logged decisions</span><br><span class="io-label mono">RAG: </span><span class="io-val">ChromaDB → architecture report</span><br><span class="io-label mono">EVENT: </span><span class="io-val">drift_detected → Architecture pipeline</span></div></div></div>
+  </div>
+
+  <div class="se-mapping">
+    <h4>Mapping to SE Requirements Activities</h4>
+    <table class="se-table">
+      <tr><th>SE Activity</th><th>What Happens</th><th>Agent(s)</th><th>Human Role</th></tr>
+      <tr><td class="se-act">Inception</td><td>Identify stakeholders, topics, and scope boundaries from the transcript</td><td class="se-agent mono">transcript_parser</td><td>Conducts meeting</td></tr>
+      <tr><td class="se-act">Elicitation</td><td>Extract action items, decisions, and concerns from stakeholder dialogue</td><td class="se-agent mono">transcript_parser</td><td>Leads discussion</td></tr>
+      <tr><td class="se-act">Analysis</td><td>Compare new decisions against the existing architecture for contradictions</td><td class="se-agent mono">drift_detector</td><td>Reviews drift flags</td></tr>
+      <tr><td class="se-act">Negotiation</td><td>Classify priority (P0/P1/P2) and escalate blocking items for human judgment</td><td class="se-agent mono">priority_classifier</td><td>Approves P0 items</td></tr>
+      <tr><td class="se-act">Specification</td><td>Produce formal REQ-XXX.md documents with acceptance criteria</td><td class="se-agent mono">req_extractor</td><td>Reviews specification quality</td></tr>
+      <tr><td class="se-act">Validation</td><td>Detect drift via RAG, identify traceability gaps across artifacts</td><td class="se-agent mono">drift_detector, traceability_builder</td><td>Addresses flagged gaps</td></tr>
+      <tr><td class="se-act">Management</td><td>Create Jira tickets, log decisions, maintain the traceability matrix</td><td class="se-agent mono">ticket_creator, decision_logger</td><td>Triages Jira board</td></tr>
+    </table>
+  </div>
+
+  <div class="mm-grid">
+    <div class="mm-box mm-artifacts"><h5>Artifacts</h5><ul><li>Structured meeting JSON</li><li>REQ-XXX.md requirement docs</li><li>EPARTS-XX Jira tickets</li><li>decisions.log.md</li><li>Drift report</li></ul></div>
+    <div class="mm-box mm-processes"><h5>Processes</h5><ul><li>Parse → Classify → Extract → Ticket → Publish → Log → Drift</li><li>Entry: .vtt transcript upload</li><li>Exit: Requirements on GitHub, tickets on Jira</li></ul></div>
+    <div class="mm-box mm-resources"><h5>Resources</h5><ul><li>7 autonomous AI agents</li><li>Jira and GitHub MCPs</li><li>ChromaDB for RAG retrieval</li><li>Human reviewer for P0 gate</li></ul></div>
+    <div class="mm-box mm-measures"><h5>Measurement</h5><ul><li>Items extracted per meeting</li><li>P0 human override rate</li><li>Drift detection precision</li><li>Ticket retention rate (created vs. deleted)</li></ul></div>
+  </div>
+
+  <div class="cf-bar">
+    <h4>Counterfactual Analysis</h4>
+    <div class="cf-row">
+      <div class="cf-item"><div class="cf-label mono">Without AI</div><div class="cf-val">A team member manually reviews a 45-minute recording, spending 2-3 hours to extract items. Formatting varies across individuals. Jira tickets are created the next day - or not at all. Architectural contradictions go unnoticed.</div></div>
+      <div class="cf-item"><div class="cf-label mono">With AI</div><div class="cf-val">End-to-end processing completes in under 30 seconds. Output format is consistent across every meeting. Jira tickets are created immediately. A human reviews only the P0-flagged items (~15 minutes). Drift is detected automatically.</div></div>
+      <div class="cf-item"><div class="cf-label mono">Net Value</div><div class="cf-val">Applied weekly across 9 client meetings. Including human review overhead, the pipeline saves over 2 hours per meeting. The larger benefit is consistency - every team member works from the same structured output.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ COACH SESSION DETAIL ═══ -->
+<div class="detail-panel dp-coach" id="panel-coach">
+  <div class="dp-header">
+    <div><div class="dp-title" style="color:#fbbf24;">Coach Session Memory Pipeline</div><div class="dp-practice mono">Practice Area: Coach/Mentor Memory · 5 sequential agents · Triggered by coach/mentor .vtt upload</div></div>
+    <button class="dp-close" onclick="toggle('coach')">&times;</button>
+  </div>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 1</div><div class="agent-name mono">transcript_parser</div><div class="agent-desc">Parses the coaching session transcript into structured data - topics discussed, guidance offered, and action items assigned.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Coach .vtt transcript</span><br><span class="io-label mono">OUT: </span><span class="io-val">Structured session JSON</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 2</div><div class="agent-name mono">session_memory</div><div class="agent-desc">Chunks the transcript and generates vector embeddings via a local ONNX model. Stores metadata in SQLite so future agents can query past sessions via RAG.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Raw .vtt content</span><br><span class="io-label mono">CHROMA: </span><span class="io-val">Vector embeddings</span><br><span class="io-label mono">WIKI: </span><span class="io-val">commitments/{session}</span><br><span class="io-label mono">EVENT: </span><span class="io-val">new_session_embedded</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 3</div><div class="agent-name mono">concern_tracker</div><div class="agent-desc">Analyzes all sessions for recurring themes. When a concern surfaces three or more times, it emits an alert to the Project Management pipeline.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">All sessions (SQLite)</span><br><span class="io-label mono">WIKI: </span><span class="io-val">concerns/{theme}</span><br><span class="io-label mono">EVENT: </span><span class="io-val">recurring_concern → Project Management</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 4</div><div class="agent-name mono">coach_linker</div><div class="agent-desc">Connects session content to open ML decisions. If a coach references thresholds or model performance, this agent surfaces the latest experimental evidence.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Session embeddings</span><br><span class="io-label mono">QUERY: </span><span class="io-val">ML Decision log</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 5</div><div class="agent-name mono">decision_logger</div><div class="agent-desc">Records any coaching decisions or guidance into the project wiki and appends to the running decision log on GitHub.</div><div class="io"><span class="io-label mono">WIKI: </span><span class="io-val">decisions/{date}</span><br><span class="io-label mono">GITHUB: </span><span class="io-val">decisions.log.md</span></div></div></div>
+  </div>
+  <div class="cf-bar">
+    <h4>Counterfactual Analysis</h4>
+    <div class="cf-row">
+      <div class="cf-item"><div class="cf-label mono">Without AI</div><div class="cf-val">The team has no reliable record of what was discussed three sessions ago. When a coach asks whether a prior commitment was fulfilled, no one can answer with certainty. Guidance is lost.</div></div>
+      <div class="cf-item"><div class="cf-label mono">With AI</div><div class="cf-val">Every session is embedded for semantic retrieval. Recurring concerns are flagged automatically. Before the next session, the system can surface: "This topic has been raised in 3 of the last 4 sessions without resolution."</div></div>
+      <div class="cf-item"><div class="cf-label mono">Net Value</div><div class="cf-val">Four coach sessions processed to date. The primary value is institutional memory and accountability - ensuring guidance is retained and acted upon, not repeated indefinitely.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ARCHITECTURE DETAIL ═══ -->
+<div class="detail-panel dp-arch" id="panel-arch">
+  <div class="dp-header">
+    <div><div class="dp-title" style="color:#60a5fa;">Architecture Pipeline</div><div class="dp-practice mono">Practice Area: Architecture · 4 sequential agents · Triggered by transcript processing, PR events, or drift_detected events</div></div>
+    <button class="dp-close" onclick="toggle('arch')">&times;</button>
+  </div>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 1</div><div class="agent-name mono">drift_detector</div><div class="agent-desc">Embeds recent meeting decisions and retrieves semantically similar sections from the canonical architecture report via RAG. Identifies contradictions between what was decided and what was documented.</div><div class="io"><span class="io-label mono">RAG: </span><span class="io-val">ChromaDB → eParts_architecture_report.md</span><br><span class="io-label mono">EVENT: </span><span class="io-val">drift_detected</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 2</div><div class="agent-name mono">adr_generator</div><div class="agent-desc">When a significant architectural decision is detected, drafts a formal Architecture Decision Record (ADR) and submits it as a pull request for team review.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Drift report</span><br><span class="io-label mono">GITHUB: </span><span class="io-val">architecture/ADR-XXX.md</span></div><div style="margin-top:6px;"><span class="badge b-hitl">ADR requires PR approval</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 3</div><div class="agent-name mono">diagram_updater</div><div class="agent-desc">Proposes updates to architecture diagrams based on newly recorded decisions, submitted as a reviewable diff.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Drift report</span><br><span class="io-label mono">GITHUB: </span><span class="io-val">Diagram diff as PR</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 4</div><div class="agent-name mono">traceability_builder</div><div class="agent-desc">Updates the unified traceability store by linking concerns, decisions, requirements, risks, and Jira tickets. Identifies gaps - unaddressed concerns, unmitigated risks - and flags them for review.</div><div class="io"><span class="io-label mono">DB: </span><span class="io-val">traceability.db</span><br><span class="io-label mono">EVENT: </span><span class="io-val">human_review_needed</span></div></div></div>
+  </div>
+  <div class="cf-bar">
+    <h4>Counterfactual Analysis</h4>
+    <div class="cf-row">
+      <div class="cf-item"><div class="cf-label mono">Without AI</div><div class="cf-val">A decision made in meeting five may directly contradict a constraint documented in meeting two. Without automated comparison, this drift accumulates silently until it surfaces as a defect.</div></div>
+      <div class="cf-item"><div class="cf-label mono">With AI</div><div class="cf-val">Every new decision is automatically compared against the canonical architecture report. Contradictions are flagged within seconds, and an ADR is drafted for the team to review.</div></div>
+      <div class="cf-item"><div class="cf-label mono">Net Value</div><div class="cf-val">The cost of building against an outdated architecture far exceeds the cost of reviewing false positives. Even at moderate accuracy, automated drift detection prevents costly rework.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CODING DETAIL ═══ -->
+<div class="detail-panel dp-code" id="panel-code">
+  <div class="dp-header">
+    <div><div class="dp-title" style="color:#f87171;">Coding Pipeline</div><div class="dp-practice mono">Practice Area: Construction · 4 planned agents · Will activate during the coding phase</div></div>
+    <button class="dp-close" onclick="toggle('code')">&times;</button>
+  </div>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 1</div><div class="agent-name mono">pr_reviewer</div><div class="agent-desc">Performs automated first-pass PR review - checks code style, verifies test presence, and validates that the PR references a traced requirement.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">PR diff</span><br><span class="io-label mono">OUT: </span><span class="io-val">Review comments</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 2</div><div class="agent-name mono">test_generator</div><div class="agent-desc">Generates unit test stubs from function signatures in the PR and commits the test file to the repository.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Source code</span><br><span class="io-label mono">GITHUB: </span><span class="io-val">tests/test_*.py</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 3</div><div class="agent-name mono">doc_generator</div><div class="agent-desc">Detects endpoint changes in the PR and updates the corresponding API documentation automatically.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Source code</span><br><span class="io-label mono">GITHUB: </span><span class="io-val">docs/api/</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 4</div><div class="agent-name mono">prompt_regression</div><div class="agent-desc">If any prompt was modified in the PR, runs it against a golden test dataset. Blocks merge if output quality degrades beyond the acceptable threshold.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Prompt changes</span><br><span class="io-label mono">OUT: </span><span class="io-val">Pass/fail with quality diff</span></div></div></div>
+  </div>
+  <div class="cf-bar">
+    <h4>Counterfactual Analysis</h4>
+    <div class="cf-row">
+      <div class="cf-item"><div class="cf-label mono">Without AI</div><div class="cf-val">Each PR review takes 30-60 minutes per reviewer. Test coverage is deferred indefinitely. No one verifies whether the PR addresses a documented requirement.</div></div>
+      <div class="cf-item"><div class="cf-label mono">With AI</div><div class="cf-val">An automated first pass covers style, traceability, and test scaffolding. The human reviewer can then focus entirely on design intent and correctness.</div></div>
+      <div class="cf-item"><div class="cf-label mono">Net Value</div><div class="cf-val">Applied to every pull request. The highest-impact contribution is traceability enforcement - guaranteeing that every code change links back to a requirement.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ML DECISION DETAIL ═══ -->
+<div class="detail-panel dp-ml" id="panel-ml">
+  <div class="dp-header">
+    <div><div class="dp-title" style="color:#f87171;">ML Decision Memory Pipeline</div><div class="dp-practice mono">Practice Area: ML Decision Memory · 3 planned agents · Will activate when POC results are submitted</div></div>
+    <button class="dp-close" onclick="toggle('ml')">&times;</button>
+  </div>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 1</div><div class="agent-name mono">evidence_accumulator</div><div class="agent-desc">Parses POC results - precision, recall, auto-accept rates - and logs them as structured evidence against open ML decisions.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">POC result JSON</span><br><span class="io-label mono">DB: </span><span class="io-val">ml_decisions.db</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 2</div><div class="agent-name mono">readiness_detector</div><div class="agent-desc">Evaluates whether sufficient evidence has accumulated to close an open decision. Emits an alert when the evidence threshold is met.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Evidence log</span><br><span class="io-label mono">EVENT: </span><span class="io-val">decision_ready</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 3</div><div class="agent-name mono">coach_linker</div><div class="agent-desc">Links experimental evidence to relevant coaching discussions. When a coach inquires about thresholds or model performance, surfaces the exact data available.</div><div class="io"><span class="io-label mono">QUERY: </span><span class="io-val">ChromaDB coach sessions</span><br><span class="io-label mono">OUT: </span><span class="io-val">Coach context links</span></div></div></div>
+  </div>
+  <div class="cf-bar">
+    <h4>Counterfactual Analysis</h4>
+    <div class="cf-row">
+      <div class="cf-item"><div class="cf-label mono">Without AI</div><div class="cf-val">Experiment results are scattered across Slack threads, notebooks, and individual machines. When a coach asks for the current confidence threshold, the team scrambles to locate the most recent number.</div></div>
+      <div class="cf-item"><div class="cf-label mono">With AI</div><div class="cf-val">Every POC result is logged as structured evidence. Decision readiness is evaluated automatically. The current state of any open ML question can be retrieved in seconds.</div></div>
+      <div class="cf-item"><div class="cf-label mono">Net Value</div><div class="cf-val">Prevents decisions from remaining open indefinitely. Evidence-gated closure ensures that decisions are backed by data, not assumptions.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PROJECT MGMT DETAIL ═══ -->
+<div class="detail-panel dp-pm" id="panel-pm">
+  <div class="dp-header">
+    <div><div class="dp-title" style="color:#fbbf24;">Project Management Pipeline</div><div class="dp-practice mono">Practice Area: Project Management · 3 sequential agents · Runs weekly (scheduled Friday 6 PM)</div></div>
+    <button class="dp-close" onclick="toggle('pm')">&times;</button>
+  </div>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 1</div><div class="agent-name mono">wbs_updater</div><div class="agent-desc">Synchronizes the Work Breakdown Structure with the current Jira board state and commits the updated WBS to GitHub as the single source of truth.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Jira Board API</span><br><span class="io-label mono">WIKI: </span><span class="io-val">project_mgmt/wbs_latest</span><br><span class="io-label mono">GITHUB: </span><span class="io-val">sprint/wbs.md</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 2</div><div class="agent-name mono">weekly_digest</div><div class="agent-desc">Aggregates sprint health from Jira, recent decisions from the wiki, and cross-pipeline events from the EventBus into a single weekly digest.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Jira + SharedMemory + EventBus</span><br><span class="io-label mono">OUT: </span><span class="io-val">Weekly digest (markdown)</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 3</div><div class="agent-name mono">alert_agent</div><div class="agent-desc">Scans for anomalies: velocity drops, requirements without linked tickets, and unresolved drift events. Fires targeted alerts for each finding.</div><div class="io"><span class="io-label mono">CHECK: </span><span class="io-val">Jira velocity + Wiki + EventBus</span><br><span class="io-label mono">WIKI: </span><span class="io-val">project_mgmt/alerts</span></div></div></div>
+  </div>
+  <div class="cf-bar">
+    <h4>Counterfactual Analysis</h4>
+    <div class="cf-row">
+      <div class="cf-item"><div class="cf-label mono">Without AI</div><div class="cf-val">A weekly status meeting where someone manually reviews the Jira board. The WBS lives in a Google Sheet that is perpetually out of date. Unlinked requirements are not discovered until the final presentation review.</div></div>
+      <div class="cf-item"><div class="cf-label mono">With AI</div><div class="cf-val">The WBS is synced automatically, a digest is generated, and anomalies are flagged - all before the team reads a single report. The weekly meeting can focus on decisions instead of status updates.</div></div>
+      <div class="cf-item"><div class="cf-label mono">Net Value</div><div class="cf-val">Runs every week. Replaces a recurring status meeting. The most impactful alerts - unlinked requirements and stale items - surface problems that teams consistently overlook.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ KNOWLEDGE DETAIL ═══ -->
+<div class="detail-panel dp-know" id="panel-know">
+  <div class="dp-header">
+    <div><div class="dp-title" style="color:#a5b4fc;">Knowledge Management Pipeline</div><div class="dp-practice mono">Practice Area: Knowledge Management · 2 sequential agents · Runs pre-meeting or on new_session_embedded event</div></div>
+    <button class="dp-close" onclick="toggle('know')">&times;</button>
+  </div>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 1</div><div class="agent-name mono">context_packager</div><div class="agent-desc">Collects the current sprint status from Jira, open concerns from the wiki, pending ADRs, and recent cross-pipeline events. Packages everything into a single briefing context.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Jira + SharedMemory + EventBus</span><br><span class="io-label mono">OUT: </span><span class="io-val">Context package (JSON)</span></div></div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 2</div><div class="agent-name mono">briefing_generator</div><div class="agent-desc">Produces a concise, human-readable pre-meeting briefing: what has changed since the last meeting, what remains open, and what should be discussed next.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Context package</span><br><span class="io-label mono">OUT: </span><span class="io-val">Briefing document (markdown)</span></div></div></div>
+  </div>
+  <div class="cf-bar">
+    <h4>Counterfactual Analysis</h4>
+    <div class="cf-row">
+      <div class="cf-item"><div class="cf-label mono">Without AI</div><div class="cf-val">Each team member independently reviews Jira, the wiki, Slack, and coaching notes - spending 30 to 60 minutes each. Different people arrive at the meeting with different context. The first ten minutes are spent aligning.</div></div>
+      <div class="cf-item"><div class="cf-label mono">With AI</div><div class="cf-val">A single briefing aggregates information from seven data sources and is delivered before the meeting begins. Every participant starts with the same understanding of project state.</div></div>
+      <div class="cf-item"><div class="cf-label mono">Net Value</div><div class="cf-val">Runs before every meeting. Even a partially useful briefing eliminates hours of redundant context-gathering each week and ensures alignment from the start.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LEGEND ═══ -->
+<div class="infra-strip" style="margin-top:8px;">
+  <div class="infra-chip" style="background:rgba(34,197,94,0.12);border-color:#22c55e;color:#4ade80;">Usable</div>
+  <div class="infra-chip" style="background:rgba(245,158,11,0.12);border-color:#f59e0b;color:#fbbf24;">Partial</div>
+  <div class="infra-chip" style="background:rgba(239,68,68,0.12);border-color:#ef4444;color:#f87171;">Future</div>
+</div>
+
+<!-- ═══ MCP SERVERS ═══ -->
+<div class="section-divider mono">· · · MCP SERVERS · · ·</div>
+<div class="infra-strip">
+  <div class="infra-chip" style="border-color:#059669;">Jira MCP</div>
+  <div class="infra-chip" style="border-color:#059669;">GitHub MCP</div>
+  <div class="infra-chip" style="border-color:#059669;">ChromaDB</div>
+  <div class="infra-chip" style="border-color:#059669;">Confluence MCP</div>
+</div>
+
+<!-- ═══ SHARED INFRA STRIP ═══ -->
+<div class="section-divider mono">· · · SHARED INFRASTRUCTURE · · ·</div>
+<div class="infra-strip">
+  <div class="infra-chip">SharedMemory</div>
+  <div class="infra-chip">EventBus</div>
+  <div class="infra-chip">TraceabilityStore</div>
+  <div class="infra-chip">PromptRegistry</div>
+  <div class="infra-chip">RiskRegister</div>
+  <div class="infra-chip">MetricsCollector</div>
+</div>
+
+<div class="section-divider mono">· · · STORAGE · · ·</div>
+<div class="infra-strip">
+  <div class="storage-chip">shared_memory.db</div>
+  <div class="storage-chip">events.db</div>
+  <div class="storage-chip">traceability.db</div>
+  <div class="storage-chip">coach_sessions.db</div>
+  <div class="storage-chip">ml_decisions.db</div>
+  <div class="storage-chip">risk_register.db</div>
+  <div class="storage-chip">prompt_registry.db</div>
+  <div class="storage-chip">metrics.db</div>
+  <div class="storage-chip">artifact_versions.db</div>
+  <div class="storage-chip" style="border-color:#155e75;color:#22d3ee;">ChromaDB (vectors)</div>
+</div>
+
+</div>
+
+
+<script>
+const panels = {};
+function toggle(id) {
+  const panel = document.getElementById('panel-' + id);
+  const card = document.querySelector('.pipe-' + id);
+  const isShowing = panel.classList.contains('show');
+
+  document.querySelectorAll('.detail-panel').forEach(p => p.classList.remove('show'));
+  document.querySelectorAll('.pipe-card').forEach(c => c.classList.remove('active'));
+
+  if (!isShowing) {
+    panel.classList.add('show');
+    card.classList.add('active');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+</script>
+</body>
+</html>

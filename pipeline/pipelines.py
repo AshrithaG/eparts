@@ -410,6 +410,20 @@ class PipelineExecutor:
 # ============================================================================
 # PIPELINE DEFINITIONS — The Framework
 # ============================================================================
+#
+# NOTE: drift_detector appears in BOTH the requirements and architecture
+# pipelines. This is intentional — they serve different purposes:
+#
+#   REQUIREMENTS_PIPELINE (step 7, ETVX: REQ-DRIFT-CHECK):
+#     A lightweight, quick drift check triggered after every meeting.
+#     Compares the meeting's decisions against the canonical architecture
+#     to catch contradictions early. Runs as a tail-end sanity check.
+#
+#   ARCHITECTURE_PIPELINE (step 1, ETVX: ARCH-DRIFT):
+#     The full drift analysis that kicks off the architecture practice.
+#     Triggered by PRs, manual invocation, or drift_detected events.
+#     Feeds into ADR generation, diagram updates, and traceability.
+#
 
 REQUIREMENTS_PIPELINE = Pipeline(
     name="requirements",
@@ -473,12 +487,12 @@ REQUIREMENTS_PIPELINE = Pipeline(
         ),
         PipelineStep(
             agent_name="drift_detector",
-            description="Check for architectural drift",
+            description="Lightweight post-meeting drift check against canonical architecture",
             input_keys=["parsed_minutes", "decisions"],
             output_key="drift_report",
             skip_if_empty="parsed_minutes",
             required=False,
-            etvx_id="ARCH-DRIFT",
+            etvx_id="REQ-DRIFT-CHECK",
         ),
     ],
 )
@@ -487,8 +501,8 @@ COACH_SESSION_PIPELINE = Pipeline(
     name="coach_session",
     practice_area="Coach Session Memory",
     description=(
-        "Coach/mentor transcript → session embedding → commitment extraction → "
-        "concern detection → ML decision linking → pre-meeting briefing"
+        "Coach/mentor transcript → session embedding → "
+        "concern detection → ML decision linking → decision logging"
     ),
     trigger_types=["coach_transcript"],
     steps=[
@@ -507,14 +521,6 @@ COACH_SESSION_PIPELINE = Pipeline(
             etvx_id="COACH-INGEST",
         ),
         PipelineStep(
-            agent_name="commitment_tracker",
-            description="Extract commitments with owners and deadlines",
-            input_keys=["parsed_session"],
-            output_key="commitments",
-            skip_if_empty="parsed_session",
-            etvx_id="COACH-COMMIT",
-        ),
-        PipelineStep(
             agent_name="concern_tracker",
             description="Detect recurring themes and concerns",
             input_keys=["parsed_session"],
@@ -531,7 +537,7 @@ COACH_SESSION_PIPELINE = Pipeline(
         ),
         PipelineStep(
             agent_name="decision_logger",
-            description="Log any decisions from the session",
+            description="Log any decisions or guidance from the session",
             input_keys=["parsed_session"],
             output_key="decisions",
             skip_if_empty="parsed_session",

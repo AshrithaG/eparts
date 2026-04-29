@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>eParts SES — Event Bus Flow</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0e17; color: #e0e6f0; font-family: 'Segoe UI', system-ui, sans-serif; overflow: hidden; }
+
+  svg { width: 100vw; height: 100vh; }
+
+  .pipeline-box { cursor: pointer; }
+  .pipeline-box rect { rx: 12; ry: 12; stroke-width: 2; }
+  .pipeline-box:hover rect { filter: brightness(1.3); }
+  .pipeline-label { font-size: 13px; font-weight: 700; fill: #fff; text-anchor: middle; pointer-events: none; }
+  .pipeline-sub { font-size: 10px; fill: rgba(255,255,255,0.6); text-anchor: middle; pointer-events: none; }
+
+  .agent-node circle { stroke-width: 2; cursor: pointer; }
+  .agent-node:hover circle { filter: brightness(1.4); }
+  .agent-label { font-size: 9px; fill: #c0c8d8; text-anchor: middle; pointer-events: none; }
+
+  .event-type-box rect { rx: 8; ry: 8; }
+  .event-label { font-size: 10px; font-weight: 600; text-anchor: middle; pointer-events: none; }
+
+  .event-link { fill: none; stroke-width: 2; opacity: 0.7; }
+  .event-link:hover { opacity: 1; stroke-width: 3; }
+
+  .subscription-link { fill: none; stroke-width: 2; stroke-dasharray: 6, 4; opacity: 0.6; }
+  .subscription-link:hover { opacity: 1; }
+
+  .legend { font-size: 11px; fill: #8892a4; }
+  .legend-title { font-size: 13px; fill: #c0c8d8; font-weight: 600; }
+
+  #title { position: absolute; top: 18px; left: 24px; font-size: 22px; font-weight: 700; color: #fff; }
+  #subtitle { position: absolute; top: 46px; left: 24px; font-size: 13px; color: #6b7a90; }
+
+  #tooltip {
+    position: absolute; display: none; background: #1a2035; border: 1px solid #2a3a55;
+    border-radius: 8px; padding: 12px 16px; font-size: 12px; max-width: 320px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5); z-index: 100; pointer-events: none;
+  }
+  #tooltip h3 { color: #7ec8f0; margin-bottom: 6px; font-size: 13px; }
+  #tooltip .tt-row { margin: 3px 0; color: #a0aabb; }
+  #tooltip .tt-val { color: #e0e6f0; font-weight: 600; }
+
+  .stats-bar {
+    position: absolute; bottom: 18px; left: 24px; right: 24px;
+    display: flex; gap: 32px; font-size: 12px; color: #6b7a90;
+  }
+  .stats-bar .stat-val { color: #7ec8f0; font-weight: 700; font-size: 14px; }
+
+  marker path { fill: inherit; }
+
+  @keyframes pulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+  .live-dot { animation: pulse 2s infinite; }
+
+  @keyframes flowDash { to { stroke-dashoffset: -20; } }
+  .sub-animated { animation: flowDash 1.5s linear infinite; }
+</style>
+</head>
+<body>
+<div id="title">Event Bus Flow</div>
+<div id="subtitle">How pipelines communicate through events — solid lines = emitted events, dashed lines = subscriptions (triggers)</div>
+<div id="tooltip"></div>
+<div class="stats-bar">
+  <div>Total Events: <span class="stat-val" id="stat-events">58</span></div>
+  <div>Event Types: <span class="stat-val" id="stat-types">12</span></div>
+  <div>Active Subscriptions: <span class="stat-val" id="stat-subs">10</span></div>
+  <div>Cross-Pipeline Wires: <span class="stat-val" id="stat-wires">10</span></div>
+</div>
+
+<svg id="canvas">
+  <defs>
+    <marker id="arrow-emit" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrow-sub" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#ff6b9d"/>
+    </marker>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="grad-req" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb"/>
+      <stop offset="100%" style="stop-color:#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="grad-coach" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed"/>
+      <stop offset="100%" style="stop-color:#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="grad-arch" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669"/>
+      <stop offset="100%" style="stop-color:#047857"/>
+    </linearGradient>
+    <linearGradient id="grad-code" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d97706"/>
+      <stop offset="100%" style="stop-color:#b45309"/>
+    </linearGradient>
+    <linearGradient id="grad-ml" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dc2626"/>
+      <stop offset="100%" style="stop-color:#b91c1c"/>
+    </linearGradient>
+    <linearGradient id="grad-pm" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0891b2"/>
+      <stop offset="100%" style="stop-color:#0e7490"/>
+    </linearGradient>
+    <linearGradient id="grad-know" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#be185d"/>
+      <stop offset="100%" style="stop-color:#9d174d"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<script>
+const W = window.innerWidth, H = window.innerHeight;
+const svg = document.getElementById('canvas');
+svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+const pipelines = [
+  { id: 'requirements', label: 'Requirements', grad: 'url(#grad-req)', stroke: '#3b82f6',
+    agents: ['transcript_parser','priority_classifier','req_extractor','ticket_creator','minutes_publisher','decision_logger','drift_detector'],
+    x: 130, y: 160 },
+  { id: 'coach_session', label: 'Coach Session', grad: 'url(#grad-coach)', stroke: '#8b5cf6',
+    agents: ['transcript_parser','session_memory','commitment_tracker','concern_tracker','coach_linker','decision_logger'],
+    x: 130, y: 400 },
+  { id: 'architecture', label: 'Architecture', grad: 'url(#grad-arch)', stroke: '#10b981',
+    agents: ['drift_detector','adr_generator','diagram_updater','traceability_builder'],
+    x: W-180, y: 160 },
+  { id: 'ml_decision', label: 'ML Decision', grad: 'url(#grad-ml)', stroke: '#ef4444',
+    agents: ['evidence_accumulator','readiness_detector','coach_linker'],
+    x: W-180, y: 400 },
+  { id: 'project_mgmt', label: 'Project Mgmt', grad: 'url(#grad-pm)', stroke: '#06b6d4',
+    agents: ['wbs_updater','weekly_digest','alert_agent'],
+    x: W/2, y: H-120 },
+  { id: 'knowledge', label: 'Knowledge', grad: 'url(#grad-know)', stroke: '#ec4899',
+    agents: ['context_packager','briefing_generator'],
+    x: W/2, y: 100 },
+  { id: 'coding', label: 'Coding', grad: 'url(#grad-code)', stroke: '#f59e0b',
+    agents: ['pr_reviewer','test_generator','doc_generator','prompt_regression'],
+    x: W/2 + 250, y: H/2 },
+];
+
+const eventTypes = [
+  { id: 'action_items_extracted', label: 'action_items_extracted', count: 24, color: '#4ecdc4' },
+  { id: 'decision_logged', label: 'decision_logged', count: 24, color: '#45b7d1' },
+  { id: 'new_session_embedded', label: 'new_session_embedded', count: 4, color: '#96ceb4' },
+  { id: 'recurring_concern', label: 'recurring_concern', count: 3, color: '#ffeaa7' },
+  { id: 'requirements_extracted', label: 'requirements_extracted', count: 3, color: '#dfe6e9' },
+  { id: 'drift_detected', label: 'drift_detected', count: 0, color: '#ff7675' },
+  { id: 'new_requirements', label: 'new_requirements', count: 0, color: '#74b9ff' },
+  { id: 'priority_changed', label: 'priority_changed', count: 0, color: '#a29bfe' },
+  { id: 'commitment_overdue', label: 'commitment_overdue', count: 0, color: '#fd79a8' },
+  { id: 'decision_ready', label: 'decision_ready', count: 0, color: '#e17055' },
+  { id: 'poc_evidence_logged', label: 'poc_evidence_logged', count: 0, color: '#00b894' },
+  { id: 'human_review_needed', label: 'human_review_needed', count: 0, color: '#fdcb6e' },
+];
+
+const emits = [
+  { from_agent: 'transcript_parser', from_pipeline: 'requirements', event: 'action_items_extracted' },
+  { from_agent: 'transcript_parser', from_pipeline: 'requirements', event: 'decision_logged' },
+  { from_agent: 'req_extractor', from_pipeline: 'requirements', event: 'requirements_extracted' },
+  { from_agent: 'session_memory', from_pipeline: 'coach_session', event: 'new_session_embedded' },
+  { from_agent: 'concern_tracker', from_pipeline: 'coach_session', event: 'recurring_concern' },
+  { from_agent: 'drift_detector', from_pipeline: 'requirements', event: 'drift_detected' },
+  { from_agent: 'priority_classifier', from_pipeline: 'requirements', event: 'priority_changed' },
+  { from_agent: 'commitment_tracker', from_pipeline: 'coach_session', event: 'commitment_overdue' },
+  { from_agent: 'readiness_detector', from_pipeline: 'ml_decision', event: 'decision_ready' },
+  { from_agent: 'evidence_accumulator', from_pipeline: 'ml_decision', event: 'poc_evidence_logged' },
+  { from_agent: 'req_extractor', from_pipeline: 'requirements', event: 'new_requirements' },
+];
+
+const subscriptions = [
+  { event: 'drift_detected', to_pipeline: 'architecture', to_agent: '' },
+  { event: 'new_requirements', to_pipeline: 'architecture', to_agent: 'drift_detector' },
+  { event: 'recurring_concern', to_pipeline: 'project_mgmt', to_agent: 'alert_agent' },
+  { event: 'commitment_overdue', to_pipeline: 'project_mgmt', to_agent: 'alert_agent' },
+  { event: 'new_session_embedded', to_pipeline: 'knowledge', to_agent: 'briefing_generator' },
+  { event: 'decision_ready', to_pipeline: 'coach_session', to_agent: 'coach_linker' },
+  { event: 'action_items_extracted', to_pipeline: 'project_mgmt', to_agent: 'ticket_creator' },
+  { event: 'human_review_needed', to_pipeline: 'project_mgmt', to_agent: 'alert_agent' },
+  { event: 'poc_evidence_logged', to_pipeline: 'ml_decision', to_agent: 'readiness_detector' },
+  { event: 'decision_logged', to_pipeline: 'knowledge', to_agent: 'decision_logger' },
+];
+
+const cx = W / 2, cy = H / 2;
+const eventRingRx = 190, eventRingRy = 140;
+const pipeMap = {};
+pipelines.forEach(p => pipeMap[p.id] = p);
+
+eventTypes.forEach((e, i) => {
+  const angle = (i / eventTypes.length) * 2 * Math.PI - Math.PI / 2;
+  e.x = cx + eventRingRx * Math.cos(angle);
+  e.y = cy + eventRingRy * Math.sin(angle);
+});
+const evtMap = {};
+eventTypes.forEach(e => evtMap[e.id] = e);
+
+function makeCurve(x1, y1, x2, y2) {
+  const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+  const dx = x2 - x1, dy = y2 - y1;
+  const dist = Math.sqrt(dx*dx + dy*dy);
+  const off = Math.min(dist * 0.25, 60);
+  const nx = -dy / dist * off, ny = dx / dist * off;
+  return `M${x1},${y1} Q${mx+nx},${my+ny} ${x2},${y2}`;
+}
+
+const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+svg.appendChild(g);
+
+// Event ring background
+const ringG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+g.appendChild(ringG);
+const ring = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+ring.setAttribute('cx', cx); ring.setAttribute('cy', cy);
+ring.setAttribute('rx', eventRingRx + 15); ring.setAttribute('ry', eventRingRy + 15);
+ring.setAttribute('fill', 'none'); ring.setAttribute('stroke', '#1a2540');
+ring.setAttribute('stroke-width', '40'); ring.setAttribute('opacity', '0.4');
+ringG.appendChild(ring);
+
+const ringLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+ringLabel.setAttribute('x', cx); ringLabel.setAttribute('y', cy - eventRingRy - 35);
+ringLabel.setAttribute('text-anchor', 'middle');
+ringLabel.setAttribute('fill', '#4a5568'); ringLabel.setAttribute('font-size', '11px');
+ringLabel.setAttribute('font-weight', '600');
+ringLabel.textContent = 'EVENT BUS';
+ringG.appendChild(ringLabel);
+
+// Emit lines (solid, agent → event)
+const emitG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+g.appendChild(emitG);
+
+emits.forEach(em => {
+  const pipe = pipeMap[em.from_pipeline];
+  const evt = evtMap[em.event];
+  if (!pipe || !evt) return;
+
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', makeCurve(pipe.x, pipe.y, evt.x, evt.y));
+  path.classList.add('event-link');
+  path.setAttribute('stroke', evt.color);
+  path.setAttribute('marker-end', 'url(#arrow-emit)');
+  path.setAttribute('data-from', em.from_agent);
+  path.setAttribute('data-event', em.event);
+  path.setAttribute('data-pipeline', em.from_pipeline);
+
+  path.addEventListener('mouseenter', (e) => showTooltip(e, {
+    title: `${em.from_agent} → ${em.event}`,
+    rows: [
+      ['Source Pipeline', pipe.label],
+      ['Source Agent', em.from_agent],
+      ['Event', em.event],
+      ['Count', `${evt.count} emitted`],
+      ['Direction', 'Emit (produces event)'],
+    ]
+  }));
+  path.addEventListener('mouseleave', hideTooltip);
+  emitG.appendChild(path);
+});
+
+// Subscription lines (dashed, event → pipeline)
+const subG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+g.appendChild(subG);
+
+subscriptions.forEach(sub => {
+  const evt = evtMap[sub.event];
+  const pipe = pipeMap[sub.to_pipeline];
+  if (!evt || !pipe) return;
+
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', makeCurve(evt.x, evt.y, pipe.x, pipe.y));
+  path.classList.add('subscription-link', 'sub-animated');
+  path.setAttribute('stroke', '#ff6b9d');
+  path.setAttribute('marker-end', 'url(#arrow-sub)');
+
+  path.addEventListener('mouseenter', (e) => showTooltip(e, {
+    title: `${sub.event} → ${pipe.label}`,
+    rows: [
+      ['Event', sub.event],
+      ['Target Pipeline', pipe.label],
+      ['Target Agent', sub.to_agent || '(pipeline-level)'],
+      ['Direction', 'Subscribe (consumes event)'],
+    ]
+  }));
+  path.addEventListener('mouseleave', hideTooltip);
+  subG.appendChild(path);
+});
+
+// Event type nodes (center ring)
+const evtG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+g.appendChild(evtG);
+
+eventTypes.forEach(evt => {
+  const nodeG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  nodeG.classList.add('event-type-box');
+  nodeG.setAttribute('transform', `translate(${evt.x}, ${evt.y})`);
+
+  const w = 14 + evt.id.length * 5.5, h = 22;
+  const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  rect.setAttribute('x', -w/2); rect.setAttribute('y', -h/2);
+  rect.setAttribute('width', w); rect.setAttribute('height', h);
+  rect.setAttribute('fill', evt.count > 0 ? evt.color : '#2a3450');
+  rect.setAttribute('stroke', evt.color);
+  rect.setAttribute('stroke-width', '1.5');
+  rect.setAttribute('opacity', evt.count > 0 ? '0.9' : '0.5');
+  nodeG.appendChild(rect);
+
+  const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  text.classList.add('event-label');
+  text.setAttribute('y', '4');
+  text.setAttribute('fill', evt.count > 0 ? '#0a0e17' : evt.color);
+  text.textContent = evt.id.replace(/_/g, '_');
+  nodeG.appendChild(text);
+
+  if (evt.count > 0) {
+    const badge = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    badge.setAttribute('x', w/2 + 8); badge.setAttribute('y', '4');
+    badge.setAttribute('text-anchor', 'middle');
+    badge.setAttribute('font-size', '9px'); badge.setAttribute('font-weight', '700');
+    badge.setAttribute('fill', evt.color);
+    badge.classList.add('live-dot');
+    badge.textContent = `×${evt.count}`;
+    nodeG.appendChild(badge);
+  }
+
+  nodeG.addEventListener('mouseenter', (e) => {
+    const emitSources = emits.filter(em => em.event === evt.id).map(em => `${em.from_agent} (${em.from_pipeline})`);
+    const subTargets = subscriptions.filter(s => s.event === evt.id).map(s => `${s.to_agent || s.to_pipeline} (${s.to_pipeline})`);
+    showTooltip(e, {
+      title: evt.id,
+      rows: [
+        ['Times Fired', evt.count > 0 ? `${evt.count}` : 'Not yet fired'],
+        ['Emitted By', emitSources.join(', ') || 'none'],
+        ['Consumed By', subTargets.join(', ') || 'none'],
+      ]
+    });
+  });
+  nodeG.addEventListener('mouseleave', hideTooltip);
+  evtG.appendChild(nodeG);
+});
+
+// Pipeline boxes (outer)
+const pipeG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+g.appendChild(pipeG);
+
+pipelines.forEach(p => {
+  const nodeG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  nodeG.classList.add('pipeline-box');
+  nodeG.setAttribute('transform', `translate(${p.x}, ${p.y})`);
+
+  const pw = 140, ph = 50;
+  const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  rect.setAttribute('x', -pw/2); rect.setAttribute('y', -ph/2);
+  rect.setAttribute('width', pw); rect.setAttribute('height', ph);
+  rect.setAttribute('fill', p.grad); rect.setAttribute('stroke', p.stroke);
+  rect.setAttribute('filter', 'url(#glow)');
+  nodeG.appendChild(rect);
+
+  const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  label.classList.add('pipeline-label');
+  label.setAttribute('y', '-2');
+  label.textContent = p.label;
+  nodeG.appendChild(label);
+
+  const sub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  sub.classList.add('pipeline-sub');
+  sub.setAttribute('y', '14');
+  sub.textContent = `${p.agents.length} agents`;
+  nodeG.appendChild(sub);
+
+  nodeG.addEventListener('mouseenter', (e) => {
+    const emitted = emits.filter(em => em.from_pipeline === p.id);
+    const received = subscriptions.filter(s => s.to_pipeline === p.id);
+    showTooltip(e, {
+      title: `${p.label} Pipeline`,
+      rows: [
+        ['Agents', p.agents.join(', ')],
+        ['Events Emitted', emitted.map(em => em.event).join(', ') || 'none'],
+        ['Events Received', received.map(s => s.event).join(', ') || 'none'],
+      ]
+    });
+  });
+  nodeG.addEventListener('mouseleave', hideTooltip);
+  pipeG.appendChild(nodeG);
+});
+
+// Legend
+const legG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+legG.setAttribute('transform', `translate(${W-220}, ${H-100})`);
+g.appendChild(legG);
+
+const legTitle = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+legTitle.classList.add('legend-title'); legTitle.setAttribute('y', '0');
+legTitle.textContent = 'Legend';
+legG.appendChild(legTitle);
+
+// Solid line
+const l1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+l1.setAttribute('x1', '0'); l1.setAttribute('y1', '20'); l1.setAttribute('x2', '40'); l1.setAttribute('y2', '20');
+l1.setAttribute('stroke', '#4ecdc4'); l1.setAttribute('stroke-width', '2');
+legG.appendChild(l1);
+const lt1 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+lt1.classList.add('legend'); lt1.setAttribute('x', '50'); lt1.setAttribute('y', '24');
+lt1.textContent = 'Agent emits event';
+legG.appendChild(lt1);
+
+// Dashed line
+const l2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+l2.setAttribute('x1', '0'); l2.setAttribute('y1', '40'); l2.setAttribute('x2', '40'); l2.setAttribute('y2', '40');
+l2.setAttribute('stroke', '#ff6b9d'); l2.setAttribute('stroke-width', '2');
+l2.setAttribute('stroke-dasharray', '6,4');
+legG.appendChild(l2);
+const lt2 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+lt2.classList.add('legend'); lt2.setAttribute('x', '50'); lt2.setAttribute('y', '44');
+lt2.textContent = 'Pipeline subscribes (triggers)';
+legG.appendChild(lt2);
+
+// Filled box
+const l3r = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+l3r.setAttribute('x', '0'); l3r.setAttribute('y', '54'); l3r.setAttribute('width', '40'); l3r.setAttribute('height', '14');
+l3r.setAttribute('rx', '4'); l3r.setAttribute('fill', '#4ecdc4'); l3r.setAttribute('opacity', '0.8');
+legG.appendChild(l3r);
+const lt3 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+lt3.classList.add('legend'); lt3.setAttribute('x', '50'); lt3.setAttribute('y', '66');
+lt3.textContent = 'Event fired (has data)';
+legG.appendChild(lt3);
+
+// Outline box
+const l4r = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+l4r.setAttribute('x', '0'); l4r.setAttribute('y', '74'); l4r.setAttribute('width', '40'); l4r.setAttribute('height', '14');
+l4r.setAttribute('rx', '4'); l4r.setAttribute('fill', '#2a3450'); l4r.setAttribute('stroke', '#666'); l4r.setAttribute('opacity', '0.6');
+legG.appendChild(l4r);
+const lt4 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+lt4.classList.add('legend'); lt4.setAttribute('x', '50'); lt4.setAttribute('y', '86');
+lt4.textContent = 'Event wired (not yet fired)';
+legG.appendChild(lt4);
+
+// Tooltip
+const tooltip = document.getElementById('tooltip');
+function showTooltip(e, data) {
+  let html = `<h3>${data.title}</h3>`;
+  data.rows.forEach(([k, v]) => {
+    html += `<div class="tt-row">${k}: <span class="tt-val">${v}</span></div>`;
+  });
+  tooltip.innerHTML = html;
+  tooltip.style.display = 'block';
+  const tx = Math.min(e.clientX + 12, W - 340);
+  const ty = Math.min(e.clientY + 12, H - 200);
+  tooltip.style.left = tx + 'px';
+  tooltip.style.top = ty + 'px';
+}
+function hideTooltip() { tooltip.style.display = 'none'; }
+</script>
+</body>
+</html>
