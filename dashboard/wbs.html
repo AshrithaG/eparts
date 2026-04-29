@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eParts WBS Interactive | Pimsie Supreme</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:#06090f;
+    color:#e0e6f0;
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    padding:32px 20px 48px;
+    background-image:radial-gradient(ellipse 85% 45% at 50% -15%,rgba(99,102,241,0.09),transparent);
+  }
+  .mono { font-family:'JetBrains Mono',monospace; }
+
+  .page-header {
+    max-width:1200px;
+    margin:0 auto 28px;
+    text-align:center;
+    padding-bottom:24px;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .page-title {
+    font-size:22px;
+    font-weight:800;
+    letter-spacing:-0.02em;
+    background:linear-gradient(135deg,#6ee7b7,#3b82f6,#a78bfa);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .page-sub {
+    font-size:12px;
+    color:rgba(200,206,224,0.55);
+    margin-top:10px;
+    letter-spacing:0.1em;
+  }
+  .source-note {
+    max-width:1200px;
+    margin:-8px auto 20px;
+    font-size:11px;
+    color:rgba(200,206,224,0.45);
+    text-align:center;
+    line-height:1.55;
+  }
+
+  .toolbar {
+    max-width:1200px;
+    margin:0 auto 20px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .search-wrap {
+    flex:1;
+    min-width:220px;
+    max-width:360px;
+  }
+  .search-wrap input {
+    width:100%;
+    padding:10px 14px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.08);
+    background:rgba(10,14,26,0.8);
+    color:#e0e6f0;
+    font-family:inherit;
+    font-size:13px;
+  }
+  .search-wrap input::placeholder {
+    color:rgba(200,206,224,0.35);
+  }
+  .legend {
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    font-size:10px;
+  }
+  .legend span {
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .dot {
+    width:8px;height:8px;border-radius:50%;
+  }
+  .dot.done { background:#22c55e;}
+  .dot.in_progress { background:#f59e0b;}
+  .dot.not_started { background:#64748b;}
+  .dot.ongoing { background:#38bdf8;}
+
+  .timeline {
+    max-width:1200px;
+    margin:0 auto 24px;
+    padding:14px 16px;
+    border-radius:12px;
+    border:1px solid rgba(30,41,59,0.5);
+    background:rgba(10,14,26,0.5);
+    overflow-x:auto;
+  }
+  .timeline h3 {
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:rgba(167,139,250,0.9);
+    margin-bottom:12px;
+  }
+  .tl-row {
+    display:flex;
+    gap:10px;
+    min-width:min-content;
+    font-size:9px;
+  }
+  .tl-block {
+    padding:10px 12px;
+    border-radius:8px;
+    border:1px solid rgba(255,255,255,0.06);
+    min-width:120px;
+  }
+  .tl-block.spring { background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.2);}
+  .tl-block.summer { background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.2);}
+  .tl-block.fall { background:rgba(168,85,247,0.08);border-color:rgba(168,85,247,0.2);}
+  .tl-label { font-weight:700;color:#c8cee0;margin-bottom:4px;}
+  .tl-dates { color:rgba(200,206,224,0.5);margin-bottom:6px;line-height:1.35;}
+  .tl-phases { font-size:8px;line-height:1.5;color:rgba(224,230,240,0.65);font-family:'JetBrains Mono',monospace; }
+
+  .wbs-shell {
+    max-width:1200px;
+    margin:0 auto;
+    border-radius:14px;
+    border:1px solid rgba(30,41,59,0.5);
+    background:rgba(8,12,22,0.75);
+    padding:20px;
+  }
+
+  details.ws {
+    margin-bottom:12px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.06);
+    background:rgba(12,18,28,0.6);
+    overflow:hidden;
+  }
+  details.ws[open] { border-color:rgba(99,102,241,0.25);}
+  summary.ws-sum {
+    list-style:none;
+    cursor:pointer;
+    padding:14px 16px;
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    justify-content:space-between;
+    user-select:none;
+  }
+  summary.ws-sum::-webkit-details-marker { display:none; }
+  summary.ws-sum:hover {
+    background:rgba(255,255,255,0.02);
+  }
+  .ws-meta {
+    flex:1;
+    min-width:0;
+  }
+  .ws-badge {
+    display:inline-block;
+    font-size:8px;font-weight:700;
+    letter-spacing:0.08em;
+    padding:4px 8px;
+    border-radius:6px;
+    margin-right:10px;
+    vertical-align:middle;
+  }
+  .ws-badge.ws1{background:rgba(34,197,94,0.15);color:#4ade80;}
+  .ws-badge.ws2{background:rgba(245,158,11,0.15);color:#fbbf24;}
+  .ws-badge.ws3{background:rgba(59,130,246,0.15);color:#93c5fd;}
+  .ws-badge.ws4{background:rgba(168,85,247,0.15);color:#c084fc;}
+  .ws-badge.pm{background:rgba(56,189,248,0.15);color:#38bdf8;}
+  .ws-title {
+    font-size:15px;
+    font-weight:700;
+    color:#f1f5f9;
+    display:inline;
+  }
+  .ws-desc {
+    display:block;
+    margin-top:6px;
+    font-size:11px;
+    color:rgba(200,206,224,0.55);
+    line-height:1.45;
+  }
+  summary .chevron {
+    color:rgba(200,206,224,0.35);
+    font-size:14px;
+    transition:transform 0.2s;
+    flex-shrink:0;
+    margin-top:2px;
+  }
+  details[open] summary .chevron { transform:rotate(90deg); }
+
+  .cat-block {
+    margin:0;
+    padding:0 16px 16px;
+  }
+  .category {
+    margin-top:14px;
+  }
+  .cat-title {
+    font-size:11px;font-weight:700;
+    letter-spacing:0.06em;text-transform:uppercase;
+    color:rgba(167,139,250,0.85);
+    margin-bottom:10px;
+    padding-bottom:6px;
+    border-bottom:1px solid rgba(30,41,59,0.5);
+  }
+  ul.leaves {
+    list-style:none;
+  }
+  li.leaf {
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding:6px 0;
+    border-bottom:1px solid rgba(15,21,32,0.6);
+    font-size:11px;line-height:1.45;color:rgba(224,230,240,0.88);
+  }
+  li.leaf:last-child { border-bottom:none;}
+  li.leaf .status-pill {
+    flex-shrink:0;
+    margin-top:1px;
+    font-size:7px;text-transform:uppercase;
+    letter-spacing:0.08em;font-weight:700;
+    padding:3px 7px;border-radius:4px;
+    white-space:nowrap;
+  }
+  .status-pill.done { background:rgba(34,197,94,0.15);color:#4ade80;}
+  .status-pill.in_progress { background:rgba(245,158,11,0.15);color:#fbbf24;}
+  .status-pill.not_started { background:rgba(100,116,139,0.2);color:#94a3b8;}
+  .status-pill.ongoing { background:rgba(56,189,248,0.15);color:#67e8f9;}
+
+  footer {
+    max-width:1200px;
+    margin:28px auto 0;
+    text-align:center;
+    font-size:10px;
+    color:rgba(148,163,184,0.45);
+    line-height:1.7;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-title mono">eParts Intelligent Ingestion Platform</div>
+  <div class="page-sub">Work Breakdown Structure (WBS)</div>
+</div>
+<p class="source-note">Derived from deliverable-oriented workstreams WS1-WS4 plus Project Management (<span class="mono">eParts_WBS_Presentation.pdf</span>). Jan 22 - Dec 11, 2026. Expand each workstream for categories and leaf deliverables.</p>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <input type="search" id="wbs-filter" placeholder="Filter deliverables..." autocomplete="off" />
+  </div>
+  <div class="legend">
+    <span><span class="dot done"></span> Completed</span>
+    <span><span class="dot in_progress"></span> In progress</span>
+    <span><span class="dot not_started"></span> Future</span>
+    <span><span class="dot ongoing"></span> Ongoing</span>
+  </div>
+</div>
+
+<div class="timeline">
+  <h3 class="mono">Project timeline snapshot (from PDF)</h3>
+  <div class="tl-row">
+    <div class="tl-block spring">
+      <div class="tl-label">Spring 2026</div>
+      <div class="tl-dates">Jan 22 - May 11</div>
+      <div class="tl-phases">P1 Discovery+SES - P6 Wrap</div>
+    </div>
+    <div class="tl-block summer">
+      <div class="tl-label">Summer 2026</div>
+      <div class="tl-dates">May 18 - Aug 8</div>
+      <div class="tl-phases">WS3 Core Pipeline, CRIT 2</div>
+    </div>
+    <div class="tl-block fall">
+      <div class="tl-label">Fall 2026</div>
+      <div class="tl-dates">Aug 24 - Dec 11</div>
+      <div class="tl-phases">WS4 Integration/UAT - CRIT 3</div>
+    </div>
+    <div class="tl-block" style="background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.15);">
+      <div class="tl-label">TODAY marker</div>
+      <div class="tl-dates mono">Apr 28, 2026</div>
+      <div class="tl-phases">As on source PDF</div>
+    </div>
+  </div>
+</div>
+
+<div class="wbs-shell" id="wbs-root"></div>
+
+<footer>
+  WBS based on deliverable-oriented decomposition per SOW v2. WS3 allocates ~2,160 team-hours (Summer build-out); WS4 ~2,520 team-hours (Fall). Success criteria excerpt: &ge;70% prediction accuracy; reviewer &ge;10 items/min; &le;15 min E2E latency.
+</footer>
+
+<script>
+const WBS = {
+  project: 'eParts Intelligent Ingestion & Attribute Prediction Platform',
+  subtitle: 'Pimsie Supreme | CMU MSE Studio | Jan 22 - Dec 11, 2026',
+  streams: [
+    {
+      id: 'ws1',
+      badge: 'WS1',
+      badgeClass: 'ws1',
+      title: 'Discovery & Requirements Engineering',
+      period: 'Spring 2026 (Jan 22 - May 4)',
+      note: 'Status on PDF: mostly completed. Aligns with Spring phases P1-P2; deliverables completed and baselined.',
+      defaultOpen: true,
+      categories: [
+        {
+          name: 'Stakeholder & process discovery',
+          items: [
+            { label: 'Catalog team observation (Brian, Dewey)', status: 'done' },
+            { label: 'Technical discovery (PIMS / ML counterparts)', status: 'done' },
+            { label: 'Manual workflow documentation (Excel/VLOOKUP)', status: 'done' },
+            { label: 'Meeting minutes & action items', status: 'in_progress' }
+          ]
+        },
+        {
+          name: 'Requirements documentation',
+          items: [
+            { label: 'HLR-1 - HLR-5 baselined', status: 'done' },
+            { label: 'FR-1 - FR-8 aligned to product spec', status: 'in_progress' },
+            { label: 'Derived requirements DR-1 - DR-3', status: 'in_progress' },
+            { label: 'Quality attribute scenarios', status: 'in_progress' },
+            { label: 'Operational scenarios & constraints', status: 'in_progress' }
+          ]
+        },
+        {
+          name: 'Data extraction & mapping',
+          items: [
+            { label: 'SKU / pricing / spec extraction analysis', status: 'in_progress' },
+            { label: 'Naming convention mapping (canonical)', status: 'in_progress' },
+            { label: 'Missing-attribute handling via DB joins', status: 'in_progress' },
+            { label: 'Initial category: valves & actuators', status: 'done' }
+          ]
+        },
+        {
+          name: 'Confidence metrics definition',
+          items: [
+            { label: 'Confidence scoring approach (target >= 90% where stated)', status: 'done' },
+            { label: 'Auto-accept vs human review thresholds', status: 'in_progress' },
+            { label: 'Routing logic definition', status: 'in_progress' }
+          ]
+        },
+        {
+          name: 'Architecture diagrams',
+          items: [
+            { label: 'Context diagram v3.0', status: 'done' },
+            { label: 'Notional architecture workflow', status: 'done' },
+            { label: 'System boundaries + actors + data flows', status: 'in_progress' },
+            { label: 'PIMS / observability integration points', status: 'in_progress' }
+          ]
+        },
+        {
+          name: 'Roadmap & planning',
+          items: [
+            { label: 'Spring 2026 roadmap (Feb - May milestones)', status: 'done' },
+            { label: 'Summer/fall notional roadmap', status: 'in_progress' },
+            { label: 'MVP scope definition', status: 'in_progress' },
+            { label: 'Backlog in Jira / Linear', status: 'in_progress' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'ws2',
+      badge: 'WS2',
+      badgeClass: 'ws2',
+      title: 'Architecture & prototyping',
+      period: 'Spring - Summer 2026',
+      note: 'Spring portion toward ADRs, ML evaluation & SES baseline complete; ingestion gateway full design + HR UI continues into Summer.',
+      defaultOpen: false,
+      categories: [
+        {
+          name: 'ML model evaluation',
+          items: [
+            { label: 'DistilBERT (unstructured)', status: 'done' },
+            { label: 'CatBoost/LightGBM (tabular)', status: 'done' },
+            { label: 'Semantic Matcher all-MiniLM (selected)', status: 'done' },
+            { label: 'ML findings & comparative report', status: 'in_progress' },
+            { label: 'ADR ML model selection', status: 'in_progress' }
+          ]
+        },
+        {
+          name: 'Architecture decision records',
+          items: [
+            { label: 'ADR pipeline architecture', status: 'in_progress' },
+            { label: 'ADR tech stack Python + React + Azure', status: 'in_progress' },
+            { label: 'ADR confidence threshold strategy', status: 'in_progress' },
+            { label: 'Additional ADRs (ongoing refinement)', status: 'in_progress' }
+          ]
+        },
+        {
+          name: 'Schema & gateway design',
+          items: [
+            { label: 'Canonical / staging schema v1', status: 'in_progress' },
+            { label: 'Field mappings & validation rules', status: 'in_progress' },
+            { label: 'Ingestion gateway design (CSV/PDF)', status: 'in_progress' },
+            { label: 'File validation (type/size/threat scanning)', status: 'not_started' },
+            { label: 'Audit / archival design', status: 'in_progress' }
+          ]
+        },
+        {
+          name: 'Human review UI prototype',
+          items: [
+            { label: 'React prototype: source vs prediction views', status: 'in_progress' },
+            { label: 'Diff views & reviewer hotkeys', status: 'not_started' },
+            { label: 'Throughput target documentation (10 items/min)', status: 'in_progress' }
+          ]
+        },
+        {
+          name: 'Software engineering system (SES)',
+          items: [
+            { label: 'Living SES document (agents, MCPs, memory)', status: 'in_progress' },
+            { label: 'ETVX process surfaces', status: 'in_progress' },
+            { label: 'Measurements (GQIM-aligned)', status: 'in_progress' },
+            { label: 'Resources & coordination model', status: 'in_progress' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'ws3',
+      badge: 'WS3',
+      badgeClass: 'ws3',
+      title: 'Core pipeline development',
+      period: 'Summer - Fall 2026',
+      note: 'Largest WS; PDF: vertical slices prototyped in Spring, full build-out Summer (~2,160 hrs). Primary implementation window.',
+      defaultOpen: false,
+      categories: [
+        {
+          name: 'Data ingestion layer',
+          items: [
+            { label: 'Ingestion gateway impl. (CSV/PDF/SFTP)', status: 'not_started' },
+            { label: 'OCR & document pipeline (scanned PDFs)', status: 'not_started' },
+            { label: 'Source identification + ingestion records', status: 'not_started' },
+            { label: 'Raw-file archival audit trail', status: 'not_started' }
+          ]
+        },
+        {
+          name: 'Normalization layer',
+          items: [
+            { label: 'Intermediate structured layer', status: 'not_started' },
+            { label: 'Schema-based transformations', status: 'not_started' },
+            { label: 'Rule + ML-assisted normalization', status: 'not_started' },
+            { label: 'Constraint checks & validation', status: 'not_started' }
+          ]
+        },
+        {
+          name: 'ML & routing services',
+          items: [
+            { label: 'Attribute prediction service (semantic matcher)', status: 'not_started' },
+            { label: 'Per-attribute confidence & routing engine', status: 'not_started' },
+            { label: 'High-confidence auto-accept path', status: 'not_started' },
+            { label: 'Low-confidence routing to HR queue', status: 'not_started' }
+          ]
+        },
+        {
+          name: 'Human review & writeback',
+          items: [
+            { label: 'Human review queue (full)', status: 'not_started' },
+            { label: 'Accept/edit/reject + audit logs', status: 'not_started' },
+            { label: 'Idempotent PIMS writeback service', status: 'not_started' },
+            { label: 'Intermediary publish / ETL upsert layer', status: 'not_started' }
+          ]
+        },
+        {
+          name: 'Engineering ops & observability',
+          items: [
+            { label: 'Centralized logging (Datadog)', status: 'not_started' },
+            { label: 'Metrics traces dashboards', status: 'not_started' },
+            { label: 'Model drift monitoring', status: 'not_started' },
+            { label: 'Ingestion success rate tracking', status: 'not_started' },
+            { label: 'OpenAPI specs + test harness', status: 'not_started' }
+          ]
+        },
+        {
+          name: 'Engineering artifacts',
+          items: [
+            { label: 'Data flow diagrams per stage', status: 'in_progress' },
+            { label: 'VAL regression test plans', status: 'not_started' },
+            { label: 'Working code in repo', status: 'in_progress' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'ws4',
+      badge: 'WS4',
+      badgeClass: 'ws4',
+      title: 'Integration, testing & pilot deployment',
+      period: 'Fall 2026 (Aug 24 - Dec 11)',
+      note: 'PDF: future work; Final delivery CRIT Dec 2026. Includes UAT sandbox, KT, regression handoff (~2,520 hrs).',
+      defaultOpen: false,
+      categories: [
+        {
+          name: 'Integration & testing',
+          items: [
+            { label: 'End-to-end integration (full pipeline)', status: 'not_started' },
+            { label: 'Latency validation (< 15 min for 90% runs)', status: 'not_started' },
+            { label: 'Idempotency verification (zero dupes)', status: 'not_started' },
+            { label: 'Regression suites + handed-off scripts', status: 'not_started' }
+          ]
+        },
+        {
+          name: 'Pilot deployment',
+          items: [
+            { label: 'Azure sandbox provisioning (Bicep/IaC)', status: 'not_started' },
+            { label: 'UAT environment catalog team', status: 'not_started' },
+            { label: 'Auth0 RBAC hooks', status: 'not_started' },
+            { label: 'Pilot deployment report', status: 'not_started' }
+          ]
+        },
+        {
+          name: 'Feedback & remediation',
+          items: [
+            { label: 'Structured issue logging & triage', status: 'not_started' },
+            { label: 'Bug remediation + threshold tuning loops', status: 'not_started' },
+            { label: 'Performance optimization passes', status: 'not_started' }
+          ]
+        },
+        {
+          name: 'Model retraining pipeline',
+          items: [
+            { label: 'Historical + human-feedback loop', status: 'not_started' },
+            { label: 'Retrain experiments', status: 'not_started' },
+            { label: 'Model metrics review gates', status: 'not_started' }
+          ]
+        },
+        {
+          name: 'Knowledge transfer & release',
+          items: [
+            { label: 'User docs (catalog UI workflows)', status: 'not_started' },
+            { label: 'Developer/API/deploy docs', status: 'not_started' },
+            { label: '>=1 hand-off session independence', status: 'not_started' },
+            { label: 'Release notes & CRIT 3 finale', status: 'not_started' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'pm',
+      badge: 'PM',
+      badgeClass: 'pm',
+      title: 'Project management (cross-cutting)',
+      period: 'Continuous Jan - Dec 2026',
+      note: 'Persistent across all semesters.',
+      defaultOpen: false,
+      categories: [
+        {
+          name: 'Status reporting & communication',
+          items: [
+            { label: 'Weekly mentor reviews (Jira board)', status: 'ongoing' },
+            { label: 'Weekly client meetings Thursdays', status: 'ongoing' },
+            { label: 'Jira backlog hygiene', status: 'ongoing' },
+            { label: 'AI-assisted meeting minutes', status: 'in_progress' }
+          ]
+        },
+        {
+          name: 'Risk & change management',
+          items: [
+            { label: 'Risk doc + top risks mitigation', status: 'in_progress' },
+            { label: 'SOW annotated + change-control (ETVX aligned)', status: 'in_progress' },
+            { label: 'Scope addenda as needed', status: 'ongoing' }
+          ]
+        },
+        {
+          name: 'Team & quality',
+          items: [
+            { label: 'Team charter + rotating roles', status: 'done' },
+            { label: 'Tooling (Jira, Slack, GH, Cursor/Claude w/governance)', status: 'ongoing' },
+            { label: 'ETVX definitions + SES living doc', status: 'in_progress' },
+            { label: 'Code quality gates (e.g., SonarQube where applicable)', status: 'not_started' }
+          ]
+        },
+        {
+          name: 'Critiques & milestones',
+          items: [
+            { label: 'CRIT 1 milestone', status: 'in_progress' },
+            { label: 'CRIT 2 Summer', status: 'not_started' },
+            { label: 'CRIT 3 final delivery Dec 2026', status: 'not_started' },
+            { label: 'Presentations rehearsal + demo assets', status: 'in_progress' }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+function statusLabel(s) {
+  const map = { done:'Completed', in_progress:'In progress', not_started:'Future work', ongoing:'Ongoing' };
+  return map[s] || s;
+}
+
+function renderWBS(filterText = '') {
+  const root = document.getElementById('wbs-root');
+  const q = filterText.trim().toLowerCase();
+  let html = '';
+  WBS.streams.forEach(ws => {
+    let catHtml = '';
+    ws.categories.forEach(cat => {
+      let leaves = '';
+      cat.items.forEach(item => {
+        const hit =
+          !q ||
+          item.label.toLowerCase().includes(q) ||
+          ws.title.toLowerCase().includes(q) ||
+          cat.name.toLowerCase().includes(q);
+        if (!hit) return;
+        leaves += `<li class="leaf"><span class="status-pill ${item.status}">${statusLabel(item.status)}</span><span>${escapeHtml(item.label)}</span></li>`;
+      });
+      if (q && !leaves) return;
+      catHtml += `<div class="category"><div class="cat-title mono">${escapeHtml(cat.name)}</div><ul class="leaves">${leaves || ''}</ul></div>`;
+    });
+    if (q && !catHtml) return;
+    const openAttr = q ? 'open' : (ws.defaultOpen ? 'open' : '');
+    html += `<details class="ws" id="${escapeHtml(ws.id)}" ${openAttr}>
+      <summary class="ws-sum">
+        <div class="ws-meta"><span class="ws-badge ${ws.badgeClass}">${escapeHtml(ws.badge)}</span><strong class="ws-title">${escapeHtml(ws.title)}</strong>
+        <span class="ws-desc mono">${escapeHtml(ws.period)} ${ws.note ? '| ' + escapeHtml(ws.note) : ''}</span></div>
+        <span class="chevron mono">&gt;</span>
+      </summary>
+      <div class="cat-block">${catHtml}</div>
+    </details>`;
+  });
+  root.innerHTML = html;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+renderWBS();
+document.getElementById('wbs-filter').addEventListener('input', e => {
+  renderWBS(e.target.value);
+});
+</script>
+</body>
+</html>

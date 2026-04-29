@@ -1,0 +1,32 @@
+req_id,type,short_description,parent_hlr,satisfied_by,validated_by,scenario_refs,constraint_refs,state,source
+HLR-1,HLR,Ingest product data from diverse supplier formats (Email/SFTP/CSV/PDF),,FR-1;FR-2;DR-1,VAL-1,SCEN-1;SCEN-2,DC-3;C-3,Approved,SOW; eParts General Info; Context Diagram V3
+HLR-2,HLR,Normalize ingested data into a standardized intermediate structure,,,,SCEN-1,C-1,Approved,SOW; Notional Software Workflow Diagram
+HLR-3,HLR,Predict product attributes and assign confidence scores using ML,,FR-3;DR-2,,SCEN-1;SCEN-2,DC-1,Approved,SOW; eParts General Info
+HLR-4,HLR,Provide a UI for human review of low-confidence predictions,,FR-4;FR-5;FR-6;FR-7,VAL-2,SCEN-2,DC-2,Approved,SOW; Persona PS-1
+HLR-5,HLR,Write approved data back to PIMS,,FR-8;DR-3,VAL-3,SCEN-1;SCEN-2,,Approved,SOW
+FR-1,FR,Ingestion Gateway creates ingestion record on file receipt,HLR-1,,VAL-1,SCEN-1; SCEN-2,,Approved,Initial Draft v1.0
+FR-2,FR,Ingestion Gateway validates file integrity (type/size/virus),HLR-1,,VAL-1,SCEN-1,,Approved,Initial Draft v1.0
+FR-3,FR,Prediction Service generates a confidence score (0.0-1.0) per attribute,HLR-3,,VAL-2,SCEN-1; SCEN-2,,Approved,Initial Draft v1.0
+FR-4,FR,Route below-threshold items to Human Review Queue,HLR-4,,VAL-2,SCEN-2,,Approved,Initial Draft v1.0
+FR-5,FR,Review UI shows predicted value alongside source snippet,HLR-4,,,SCEN-2,DC-2,Approved,Initial Draft v1.0
+FR-6,FR,Log every human review action to immutable audit trail,HLR-4,,,SCEN-2,DC-3,Approved,Initial Draft v1.0
+FR-7,FR,Authorized Ops Leads can adjust auto-acceptance confidence threshold,HLR-4,,,,DC-2,Approved,Initial Draft v1.0
+FR-8,FR,On approval write attributes to PIMS via API,HLR-5,,VAL-3,SCEN-1; SCEN-2,,Approved,Initial Draft v1.0
+DR-1,DR,Retain original raw file as evidence for audit,HLR-1,,,,DC-3;C-2,Approved,Initial Draft v1.0
+DR-2,DR,Support manual triggering of model retraining from Review Queue corrections,HLR-3,,,,,Approved,Initial Draft v1.0
+DR-3,DR,Writeback to PIMS must be idempotent (no duplicates on retry),HLR-5,,VAL-3,SCEN-1,,Approved,Initial Draft v1.0
+QAS-1,QAS,Modifiability: integrate new supplier format within 4 hours,HLR-1;HLR-2,,,,C-3,Approved,Initial Draft v1.0
+QAS-2,QAS,Usability: reviewer processes >=10 simple decisions per minute,HLR-4,FR-5,,SCEN-2,,Approved,Initial Draft v1.0
+DC-1,DC,Backend must be Python-based (ML library compatibility),,,,,,,Approved,Team Charter
+DC-2,DC,Must use Auth0 for identity management,,,,,,,Approved,Client Requirement
+DC-3,DC,Raw files preserved indefinitely for re-processing,,,,,,,Approved,Regulatory
+C-1,Constraint,Cost-effective design (avoid linear per-tenant cost growth),,,,,,Approved,SOW
+C-2,Constraint,Privacy compliance (GDPR/CCPA deletion support),,,,,,Approved,SOW
+C-3,Constraint,Breadth-first delivery (full E2E for one supplier first),,,,,,Approved,SOW
+VAL-1,VAL,Ingestion trigger: file upload produces DB record within 30s,,FR-1;FR-2,,SCEN-1,,Approved,Initial Draft v1.0
+VAL-2,VAL,Routing logic: mock conf=0.2 lands item in Review Queue,,FR-3;FR-4,,SCEN-2,,Approved,Initial Draft v1.0
+VAL-3,VAL,PIMS integration: approved item produces 200 OK to PIMS API,,FR-8;DR-3,,SCEN-1; SCEN-2,,Approved,Initial Draft v1.0
+SCEN-1,Scenario,End-to-end happy-path ingestion,HLR-1;HLR-2;HLR-3;HLR-5,FR-1;FR-3;FR-8,VAL-1;VAL-3,,,Approved,Initial Draft v1.0
+SCEN-2,Scenario,Low-confidence human-in-the-loop review,HLR-1;HLR-3;HLR-4;HLR-5,FR-1;FR-3;FR-4;FR-5;FR-6;FR-8,VAL-2;VAL-3,,,Approved,Initial Draft v1.0
+PS-1,Persona,Ops Reviewer (internal domain expert),HLR-4,FR-5;FR-6;FR-7,,SCEN-2,,Approved,Initial Draft v1.0
+PS-2,Persona,Supplier (external manufacturer),HLR-1,FR-1;FR-2,,SCEN-1,,Approved,Initial Draft v1.0
