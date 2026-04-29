@@ -1,0 +1,103 @@
+WEBVTT
+
+NOTE synthetic demo transcript for SES pipeline rehearsal - not from a real Zoom export
+
+1
+00:00:06.000 --> 00:00:28.500
+JaiVardhan (PM): Good morning everyone. Goal for this sixty-minute architectural review block is alignment on ingestion scope for Spring, confirm our confidence thresholds, and capture action items before we freeze ADR drafts for Critique Demo.
+
+2
+00:00:29.200 --> 00:00:51.900
+Dave Wilson (Catalog Operations): Confirming priorities on our side. Wrong data in PIMS is worse than missing data — we talked about keeping auto-accept at high confidence only. For valves and actuators first category scope, reviewer throughput targets around ten reviewed items per minute still stand.
+
+3
+00:00:52.300 --> 00:01:18.750
+Laura Chen (PIMS Integration): Jake's team owes us staging table column mapping for canonical attribute rows — that is blocking idempotent upsert validation. Jake, can we get a definitive schema handshake by end of sprint so we exercise writeback tests against sandbox tables?
+
+4
+00:01:19.400 --> 00:01:45.200
+Jake Molina (PIMS Backend): Absolutely P0 blocking. Deliverable is spreadsheet mapping staging columns into our canonical SKU key plus attribute hash. I owe you staging DDL diff by Thursday. If slips, we escalate to leadership because writeback slips cascade to UAT readiness.
+
+5
+00:01:46.100 --> 00:02:12.400
+Harsh Vadher (ML Engineer): On ML findings — all-MiniLM semantic matcher beats DistilBERT for short description fields in our POC. Threshold discussion: ninety percent routing target for straight accept on name brand attributes; technical specs fluctuate seventy-five percent — we propose per-attribute confidence routing documented in pending ADRs.
+
+6
+00:02:13.050 --> 00:02:38.500
+Sophie Okonkwo (Data Science): Supporting Harsh — per-attribute thresholds reduce false rejects without flooding catalog reviewers. Regression harness must track precision recall uplift week over week once production-like traffic hits staging.
+
+7
+00:02:39.600 --> 00:03:05.750
+Raj Patel (DevOps Azure): Sandbox environment still single App Service unit per baseline architecture slide — we need Datadog dashboards for ingestion success rate latency E2E under fifteen minute SLA ninety percent percentile.
+
+8
+00:03:06.200 --> 00:03:32.100
+Chris Duarte (PM eParts stakeholder): Sponsor note — escalate any scope creep beyond valve categories before allocating engineering time to fasteners. Governance requires backlog scrub before additional SKUs ingest.
+
+9
+00:03:33.000 --> 00:04:08.950
+JaiVardhan (PM): Capturing consensus — Decision one: prioritize per-attribute thresholds P0 blocking before pilot. Decision two: keep human review UI diff-based with keyboard-first interactions for reviewer throughput SLA. Decision three: keep Azure sandbox single unit until summer hardening finishes.
+
+10
+00:04:09.450 --> 00:04:35.800
+Laura Chen (PIMS Integration): Action item Jake — circulate staging DDL plus mapping sheet by Thursday EOP. Sophie — rerun confusion matrix segmentation on actuator attributes by Friday noon.
+
+11
+00:04:36.450 --> 00:05:01.680
+Raj Patel (DevOps Azure): Raj — Datadog ingestion dashboard skeleton + alerting stub by Wednesday. Ownership clear — escalate if infra credential delays block pipeline.
+
+12
+00:05:02.200 --> 00:05:34.940
+JaiVardhan (PM): Closing — next external sync Thursdays client cadence unchanged. Risks flagged today — staging delay and threshold calibration drift remain top three along with reviewer capacity if queue grows unexpectedly.
+
+13
+00:05:35.500 --> 00:06:10.880
+JaiVardhan (PM): Minutes will reflect decisions, prioritized actions, thresholds scope — please flag anything missing asynchronously in Slack twenty-four hour window — thank everyone.
+
+14
+00:06:18.400 --> 00:06:52.780
+Laura Chen (PIMS Integration): Non-functional reminder — throughput on reviewer queue bounded by Postgres connection pool sizing in sandbox; we validated two hundred simultaneous sessions theoretically but throttle at fifty concurrent reviewers during pilot ramp.
+
+15
+00:06:53.300 --> 00:07:22.940
+Dave Wilson (Catalog Operations): Operational scenario — nightly batch file drop from ERP still CSV plus zipped PDF annexes — ingestion gateway accepts PDF OCR path with virus scan prerequisite before unpacking.
+
+16
+00:07:23.500 --> 00:07:58.710
+Sophie Okonkwo (Data Science): Quality attribute scenario QA-AUDIT-HR states every human override gets append-only audit row with reviewer ID UTC timestamp canonical attribute code old value snapshot new value rationale text minimum ten characters soft constraint.
+
+17
+00:07:59.440 --> 00:08:35.090
+Chris Duarte (PM eParts stakeholder): Business constraint remains labor savings — prediction must materially reduce rework compared to spreadsheet macro workflow — target twenty five percent reviewer hours freed by December pilot exit.
+
+18
+00:08:36.050 --> 00:09:10.260
+Raj Patel (DevOps Azure): Deployment constraint stays single Azure Web App staging slot — rotating keys via Key Vault automation — rollback window under ten minutes scripted.
+
+19
+00:09:11.000 --> 00:09:43.870
+JaiVardhan (PM): Requirement trace — link each accepted ADR to at least one HLR and referencing GitHub markdown diff when architecture decision changes — Capstone SES pipeline already generating REQ markdown proposals from meetings.
+
+20
+00:09:44.400 --> 00:10:18.930
+Dave Wilson (Catalog Operations): Derived requirement DR-MONITOR-01 — alerting when low-confidence queue depth exceeds SLA backlog thresholds so leadership gets proactive signal before SLA breach fifteen minute processing window ninety percent SLA.
+
+21
+00:10:19.490 --> 00:10:55.740
+Laura Chen (PIMS Integration): Functional requirement recap — ingestion normalizes heterogeneous vendor columns into staging attribute rows aligning with canonical schema version two point one — mapping spreadsheet lives in Shared Drive link posted after call.
+
+22
+00:10:56.200 --> 00:11:21.870
+JaiVardhan (PM): Acceptance criteria for vertical slice milestone — given sample valve catalog PDF ingest path returns normalized SKU primary key ninety five percent deterministic match against golden file — when mismatch flagged route to reviewer queue stub.
+
+23
+00:11:22.500 --> 00:11:58.940
+Sophie Okonkwo (Data Science): Open risk stays training data scarcity under two hundred labelled rows — mitigation keeps hybrid rules plus embeddings blend until corpus grows — escalate if blocker persists after April iteration.
+
+24
+00:11:59.880 --> 00:12:36.760
+Raj Patel (DevOps Azure): Telemetry requirement pushes stage-level counters to Datadog for each pipeline hop — ingestion parse normalize prediction routing review writeback — dashboard draft shared async.
+
+25
+00:12:37.500 --> 00:13:14.940
+JaiVardhan (PM): Thanks — meeting adjourned — action owners echo in thread — priority zero items human approval before ticketing automation merges — SES standing by to parse this transcript shortly after upload.

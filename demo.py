@@ -4,7 +4,13 @@ LIVE DEMO — Run the full Requirements Pipeline on a meeting transcript.
 
 Usage:
     python demo.py                          # uses the latest client meeting
-    python demo.py transcripts/some.vtt     # specific file
+    python demo.py transcripts/some.vtt   # specific file
+    python demo.py --auto                 # skip all "press ENTER" prompts
+    python demo.py --step                 # press ENTER after each agent (live presentation)
+    python demo.py examples/x.vtt --step  # transcript + step-through
+
+    SES_DEMO_AUTO=1 python demo.py        # same as --auto
+    SES_DEMO_STEP=1 python demo.py        # same as --step (Enter after each step)
 
 What happens:
     1. Parses the .vtt transcript into structured data
@@ -15,12 +21,14 @@ What happens:
     6. Logs decisions → commits to GitHub
     7. Detects architecture drift via RAG
 
-Each step prints live progress with colored output.
+Each step prints a live DAG-style runner view, coloured progress, then a
+specific “Presenter — what to show now” cue (URLs, clicks, narration).
 """
 from __future__ import annotations
 
 import json
 import logging
+import os
 import sys
 import time
 from glob import glob
@@ -33,6 +41,16 @@ sys.path.insert(0, str(PROJECT_ROOT))
 CYAN = "\033[96m"; GREEN = "\033[92m"; YELLOW = "\033[93m"
 RED = "\033[91m"; MAGENTA = "\033[95m"; DIM = "\033[2m"
 BOLD = "\033[1m"; RESET = "\033[0m"
+
+# Deep links referenced in presenter cues (match DEMO_PLAYBOOK / .env URLs)
+GH_REPO = os.environ.get(
+    "DEMO_PRESENT_GITHUB_URL",
+    "https://github.com/AshrithaG/eparts",
+).rstrip("/")
+JIRA_PROJECT_URL = os.environ.get(
+    "DEMO_PRESENT_JIRA_URL",
+    "https://epartsmse.atlassian.net/jira/software/projects/EPARTS/board",
+).rstrip("/")
 
 logging.basicConfig(
     level=logging.INFO,
@@ -83,6 +101,126 @@ def show_step(step_idx: int, total: int, agent_name: str, desc: str):
     print(f"\n{CYAN}{'─'*66}{RESET}")
     print(f"  {BOLD}{bar}{RESET}  {YELLOW}{agent_name}{RESET}  ·  {desc}")
     print(f"{CYAN}{'─'*66}{RESET}")
+
+
+def show_pipeline_execution_view(pipe, *, running_index: int) -> None:
+    """ASCII view of REQUIREMENTS_PIPELINE while a step executes."""
+    steps = getattr(pipe, "steps", ()) or ()
+    total = len(steps)
+    if total == 0:
+        return
+    pct = round(24 * running_index / max(total, 1))
+    prog = "[" + "#" * pct + "-" * (24 - pct) + "]"
+    label = f"{running_index + 1}/{total}"
+    print(f"\n  {BOLD}Pipeline in execution{RESET}  {DIM}{prog}{RESET}  {CYAN}{label}{RESET}")
+    print(f"  {DIM}{pipe.name} · {getattr(pipe, 'practice_area', '')}{RESET}")
+    for i, s in enumerate(steps):
+        name = s.agent_name
+        if i < running_index:
+            mark = f"{GREEN}✓{RESET}"
+            state = f"{DIM}done{RESET}"
+        elif i == running_index:
+            mark = f"{YELLOW}▶{RESET}"
+            state = f"{YELLOW}RUNNING{RESET}"
+        else:
+            mark = f"{DIM}·{RESET}"
+            state = f"{DIM}pending{RESET}"
+        etvx = getattr(s, "etvx_id", "") or ""
+        etvx_s = f" {DIM}({etvx}){RESET}" if etvx else ""
+        print(f"    {mark}  {BOLD}{name}{RESET}{etvx_s}  {state}")
+    print(f"  {CYAN}{'─'*62}{RESET}")
+
+
+def show_presenter_cue(agent_name: str, sr, *, dash_mode: bool) -> None:
+    """What to flash in browser / narration after this REQUIREMENTS_PIPELINE step."""
+
+    lines = _presenter_cue_lines(agent_name, sr)
+    if not lines:
+        return
+    print(f"\n  {MAGENTA}{BOLD}▸ Presenter — what to show now{RESET}")
+    for line in lines:
+        print(f"     {line}")
+    if dash_mode:
+        print(f"  {DIM}— use --step to pause before the next agent after this narration —{RESET}")
+
+
+def _presenter_cue_lines(agent_name: str, sr) -> list[str]:
+    """Renderable lines with terminal-friendly emphasis."""
+
+    skipped = getattr(sr, "skipped", False)
+    failed = getattr(sr, "success", True) is False and not skipped
+
+    if skipped:
+        return [
+            f"{YELLOW}{BOLD}Skipped.{RESET} No downstream writes for this beat — upstream was empty.",
+            f"{DIM}Stay on the terminal; skip Jira/GitHub until a later cue.{RESET}",
+        ]
+    if failed:
+        errs = getattr(sr, "errors", []) or []
+        first = errs[0][:120] if errs else "(see errors above)"
+        return [
+            f"{RED}{BOLD}This step failed.{RESET} Gesture at stderr above and describe "
+            "retry vs heuristic/offline continuation.",
+            f"{RED}Hint:{RESET} {first}",
+        ]
+
+    reqs_tree = f"{GH_REPO}/tree/main/requirements/parsed"
+    reqs_commits = f"{GH_REPO}/commits/main"
+    decisions_blob = f"{GH_REPO}/blob/main/minutes/decisions.log.md"
+
+    cues: dict[str, list[str]] = {
+        "transcript_parser": [
+            f"{BOLD}Terminal:{RESET} Point at stdout — parsed action items / decisions "
+            "that downstream agents reuse.",
+            f"{DIM}Narrative: “Structured minutes from upload — GitHub/Jira stay cold until REQ + tickets.”{RESET}",
+            f"{DIM}(Optional:{RESET} bounce to the `{CYAN}.vtt{DIM}` file on disk — source-of-truth for the ingest.)",
+        ],
+        "priority_classifier": [
+            f"{BOLD}Terminal:{RESET} Walk P0/P1/P2 tagging (risk posture vs schedule wins).",
+            f"{YELLOW}Important:{RESET} P0 items stall for humans — cite the yellow ⚠ cue after "
+            "ticket_creator runs.",
+            f"{DIM}Do not open Jira yet — wait for `ticket_creator` so “Created” sort shows today’s work.{RESET}",
+        ],
+        "req_extractor": [
+            f"{BOLD}GitHub → requirements/parsed:{RESET}",
+            reqs_tree,
+            f"{BOLD}Show:{RESET} the `REQ-***.md` file named by the Output ▸ lines (commit `[agent:req_extractor]`).",
+            f"{BOLD}Commits:{RESET} {reqs_commits} newest entry on `main`.",
+        ],
+        "ticket_creator": [
+            f"{BOLD}Jira backlog / board:{RESET}",
+            JIRA_PROJECT_URL,
+            f"{BOLD}Filter/sort:{RESET} sort by {BOLD}Created (desc){RESET} → fresh rows from this run.",
+            f"{BOLD}Look for labels:{RESET} `AI-generated`, priority tag `P1`/`P2`, `agent-ticket_creator`.",
+            f"{YELLOW}If P0s exist,{RESET} the terminal ⚠ warns — emphasize review queue behaviour "
+            "(not auto-filed tickets).",
+        ],
+        "minutes_publisher": [
+            f"{BOLD}If Confluence is live:{RESET} Space ▸ Client Meetings ▸ page "
+            "`Client — YYYY‑MM‑DD`.",
+            f"{YELLOW}Offline / skipped:{RESET} highlight Output ▸ publish_skipped (expected without secrets).",
+            f"{BOLD}Fallback mirror:{RESET} {GH_REPO}/tree/main/minutes whenever minutes files commit.",
+        ],
+        "decision_logger": [
+            f"{BOLD}GitHub file:{RESET}",
+            decisions_blob,
+            f"{BOLD}Show:{RESET} last rows appended to `{BOLD}minutes/decisions.log.md{RESET}` (markdown table footer).",
+        ],
+        "drift_detector": [
+            f"{BOLD}Terminal:{RESET} summarise drift deltas vs canon architecture excerpt.",
+            f"{BOLD}Local dashboards:{RESET} `{CYAN}{PROJECT_ROOT / 'dashboard' / 'intelligence.html'}{RESET} "
+            f"& `{CYAN}{PROJECT_ROOT / 'dashboard' / 'interactive_architecture.html'}{RESET}`.",
+            f"{DIM}Call out REQ-DRIFT-CHECK ({BOLD}ETVX{RESET}{DIM}) vs deep ARCH drift later.{RESET}",
+        ],
+    }
+
+    raw = cues.get(agent_name)
+    if not raw:
+        return [
+            f"{BOLD}Terminal:{RESET} Re-read Outputs above.",
+            f"{DIM}See DEMO_PLAYBOOK.md § Section 2 (Live Requirements Pipeline).{RESET}",
+        ]
+    return raw
 
 
 def show_step_result(sr):
@@ -154,17 +292,45 @@ def show_event_snapshot():
 
 def show_next_steps():
     print(f"\n{BOLD}  Where to see the results:{RESET}")
-    print(f"    {GREEN}▸{RESET} Jira board:     https://epartsmse.atlassian.net/jira/software/projects/EPARTS/board")
-    print(f"    {GREEN}▸{RESET} GitHub repo:     https://github.com/AshrithaG/eparts")
+    print(f"    {GREEN}▸{RESET} Jira board:     {JIRA_PROJECT_URL}")
+    print(f"    {GREEN}▸{RESET} GitHub repo:     {GH_REPO}")
     print(f"    {GREEN}▸{RESET} Dashboard:       open dashboard/interactive_architecture.html")
     print(f"    {GREEN}▸{RESET} Intelligence:    open dashboard/intelligence.html")
     print()
 
 
+def parse_demo_cli():
+    """Return (vtt_path|None, auto: bool, step_through: bool)."""
+    argv = sys.argv[1:]
+    auto = "--auto" in argv or os.environ.get("SES_DEMO_AUTO", "").lower() in ("1", "true", "yes")
+    step_through = "--step" in argv or os.environ.get("SES_DEMO_STEP", "").lower() in ("1", "true", "yes")
+    filtered = [a for a in argv if a not in ("--auto", "--step")]
+    vtt = None
+    for a in filtered:
+        if ".vtt" in a.lower() or Path(a).suffix.lower() in (".vtt",):
+            vtt = a
+            break
+    return vtt, auto, step_through
+
+
 # ── monkeypatch PipelineExecutor to show live step progress ──────────
-def _patch_executor(executor, pipeline):
+def _patch_executor(executor, pipeline, *, step_through: bool = False, auto: bool = False):
     """Wrap the real executor so we see each step live."""
     original = executor.execute
+
+    def pause_after_step(step_index: int):
+        if not step_through or auto:
+            return
+        if step_index >= len(pipeline.steps) - 1:
+            return
+        input(f"  {MAGENTA}Press ENTER for the next agent ▸{RESET} ")
+
+    dash_present = step_through and not auto
+
+    def finish_step(agent_name: str, sr, idx: int):
+        show_step_result(sr)
+        show_presenter_cue(agent_name, sr, dash_mode=dash_present)
+        pause_after_step(idx)
 
     def wrapped(pipe, trigger_payload):
         import uuid as _uuid
@@ -189,6 +355,7 @@ def _patch_executor(executor, pipeline):
 
         for i, step in enumerate(pipe.steps):
             ctx.current_step = i
+            show_pipeline_execution_view(pipe, running_index=i)
             show_step(i, len(pipe.steps), step.agent_name, step.description)
 
             if step.skip_if_empty:
@@ -202,7 +369,7 @@ def _patch_executor(executor, pipeline):
                         requires_human_review=False,
                     )
                     results.append(sr)
-                    show_step_result(sr)
+                    finish_step(step.agent_name, sr, i)
                     continue
 
             agent = executor._agents.get(step.agent_name)
@@ -216,7 +383,7 @@ def _patch_executor(executor, pipeline):
                     requires_human_review=False,
                 )
                 results.append(sr)
-                show_step_result(sr)
+                finish_step(step.agent_name, sr, i)
                 if step.required:
                     ok = False; break
                 continue
@@ -265,7 +432,7 @@ def _patch_executor(executor, pipeline):
                     requires_human_review=res.requires_human_review,
                 )
                 results.append(sr)
-                show_step_result(sr)
+                finish_step(step.agent_name, sr, i)
                 if not res.success and step.required:
                     ok = False; break
 
@@ -280,7 +447,7 @@ def _patch_executor(executor, pipeline):
                     requires_human_review=False,
                 )
                 results.append(sr)
-                show_step_result(sr)
+                finish_step(step.agent_name, sr, i)
                 if step.required:
                     ok = False; break
 
@@ -309,20 +476,26 @@ def _patch_executor(executor, pipeline):
 
 
 def main():
+    vtt_arg, auto, step_through = parse_demo_cli()
+
     # ── resolve transcript ──────────────────────────────────────────
-    if len(sys.argv) > 1:
-        vtt = sys.argv[1]
-    else:
+    if vtt_arg is None:
         vtts = sorted(glob(str(PROJECT_ROOT / "transcripts" / "*.transcript.vtt")))
         if not vtts:
             print(f"{RED}No .vtt files found in transcripts/{RESET}")
             sys.exit(1)
         vtt = vtts[-1]
+    else:
+        vtt = str(Path(vtt_arg).expanduser().resolve())
+        if not Path(vtt).is_file():
+            print(f"{RED}Transcript not found: {vtt}{RESET}")
+            sys.exit(1)
 
     banner()
     show_config(vtt)
 
-    input(f"  {MAGENTA}Press ENTER to start the pipeline ▸{RESET} ")
+    if not auto:
+        input(f"  {MAGENTA}Press ENTER to start the pipeline ▸{RESET} ")
 
     # ── register agents ─────────────────────────────────────────────
     print(f"\n{DIM}  Registering agents...{RESET}")
@@ -341,7 +514,9 @@ def main():
 
     # ── run pipeline with live output ───────────────────────────────
     executor = PipelineExecutor(agents)
-    _patch_executor(executor, REQUIREMENTS_PIPELINE)
+    _patch_executor(
+        executor, REQUIREMENTS_PIPELINE, step_through=step_through, auto=auto
+    )
 
     result = executor.execute(REQUIREMENTS_PIPELINE, {
         "trigger_type": "transcript",
