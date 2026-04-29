@@ -55,7 +55,7 @@ class PriorityClassifierAgent(BaseAgent):
             )
 
         # Online: use Claude. Offline: heuristic classification
-        if self._settings.anthropic_api_key:
+        if self._settings.has_llm:
             classified = self._classify_items(items, sprint_focus)
         else:
             classified = self._classify_offline(items)
@@ -127,7 +127,11 @@ class PriorityClassifierAgent(BaseAgent):
             sprint_focus=sprint_focus,
         )
 
-        raw_response = self.call_claude(prompt)
+        try:
+            raw_response = self.call_claude(prompt)
+        except Exception as exc:
+            logger.warning(f"LLM call failed, falling back to offline: {exc}")
+            return self._classify_offline(items)
 
         try:
             return json.loads(raw_response)

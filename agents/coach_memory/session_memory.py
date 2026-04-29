@@ -174,7 +174,7 @@ class SessionMemoryAgent(BaseAgent):
         )
 
         # 3. Extract structured data — online (Claude) or offline (pattern matching)
-        if self._settings.anthropic_api_key:
+        if self._settings.has_llm:
             extraction = self._extract_session_data(raw_text, session_id, date)
         else:
             extraction = self._extract_offline(raw_text, session_id, date)

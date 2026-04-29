@@ -145,30 +145,14 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-s
 </div>
 
 <div class="tabs">
-  <div class="tab active" data-view="graph">Knowledge Graph</div>
-  <div class="tab" data-view="goals">Goal Model</div>
+  <div class="tab active" data-view="goals">Goal Model</div>
   <div class="tab" data-view="wbs">WBS</div>
   <div class="tab" data-view="flow">Agent Flow</div>
   <div class="tab" data-view="trace">Traceability</div>
 </div>
 
-<!-- =============== VIEW: Knowledge Graph =============== -->
-<div class="view active" id="view-graph">
-  <div id="graph-container">
-    <svg id="graph-svg"></svg>
-    <div class="graph-legend">
-      <div class="legend-item"><div class="legend-dot" style="background:#a855f7"></div> Meetings</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#4f8cff"></div> Requirements</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#00d68f"></div> Architecture</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#ff6b6b"></div> Concerns</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#ff9f43"></div> People</div>
-    </div>
-    <div class="graph-tooltip" id="graph-tooltip"></div>
-  </div>
-</div>
-
 <!-- =============== VIEW: Goal Model =============== -->
-<div class="view" id="view-goals">
+<div class="view active" id="view-goals">
   <div class="goal-tree" id="goal-tree"></div>
 </div>
 
@@ -254,58 +238,67 @@ const DATA = {
   ],
   "requirements": [
     {
-      "id": "REQ-DATA",
-      "label": "Data Access & Pipeline",
+      "id": "HLR-1",
+      "label": "Ingest diverse supplier formats (Email, SFTP, CSV, PDF)",
       "category": "functional",
-      "description": "Access to client data, ETL pipeline, data quality"
+      "description": "Ingestion Gateway handles heterogeneous vendor inputs",
+      "adrs": ["ADR-001", "ADR-008"]
     },
     {
-      "id": "REQ-ML",
-      "label": "ML Model Selection",
+      "id": "HLR-2",
+      "label": "Normalize data into standardized structure",
       "category": "functional",
-      "description": "Choose and validate ML models for parts classification"
+      "description": "Canonical attribute-row schema for all vendor data",
+      "adrs": ["ADR-007", "ADR-001"]
     },
     {
-      "id": "REQ-SEARCH",
-      "label": "Parts Search System",
+      "id": "HLR-3",
+      "label": "Predict attributes with ML confidence scores",
       "category": "functional",
-      "description": "Semantic search for auto parts catalog"
+      "description": "Hybrid rule engine + semantic similarity with per-attribute scoring",
+      "adrs": ["ADR-003", "ADR-002", "ADR-011"]
     },
     {
-      "id": "REQ-UI",
-      "label": "User Interface",
-      "category": "user_goal",
-      "description": "Frontend for parts search and recommendations"
+      "id": "HLR-4",
+      "label": "Persistent Human Review Queue for low-confidence items",
+      "category": "functional",
+      "description": "Review queue as DB table with persistence and audit",
+      "adrs": ["ADR-009", "ADR-004", "ADR-005"]
     },
     {
-      "id": "REQ-MONITOR",
-      "label": "Model Monitoring",
-      "category": "nfr",
-      "description": "Drift detection, performance monitoring, alerting"
-    },
-    {
-      "id": "REQ-DEPLOY",
-      "label": "Deployment Pipeline",
-      "category": "nfr",
-      "description": "CI/CD, containerization, Azure deployment"
-    },
-    {
-      "id": "REQ-SEC",
-      "label": "Security & Access",
-      "category": "nfr",
-      "description": "API security, data access controls"
+      "id": "HLR-5",
+      "label": "Write approved data to PIMS staging tables",
+      "category": "functional",
+      "description": "Idempotent writeback via composite natural key",
+      "adrs": ["ADR-006", "ADR-008"]
     },
     {
       "id": "REQ-HITL",
-      "label": "Human-in-the-Loop",
+      "label": "Human-in-the-Loop Review Workflow",
       "category": "user_goal",
-      "description": "Expert review workflows, feedback loops"
+      "description": "Confidence-calibrated routing: below threshold → review, above → auto-promote",
+      "adrs": ["ADR-003", "ADR-004", "ADR-009"]
     },
     {
-      "id": "REQ-PERF",
-      "label": "Performance & Scale",
+      "id": "REQ-MONITOR",
+      "label": "Drift Detection & Telemetry",
       "category": "nfr",
-      "description": "Response time, throughput, scalability targets"
+      "description": "Stage-by-stage metrics to Datadog, retraining triggers",
+      "adrs": ["ADR-012", "ADR-011", "ADR-010"]
+    },
+    {
+      "id": "REQ-DEPLOY",
+      "label": "Azure Deployment (Single App Service)",
+      "category": "constraint",
+      "description": "Python App Service + Azure SQL + Blob Storage",
+      "adrs": ["ADR-008"]
+    },
+    {
+      "id": "REQ-SEC",
+      "label": "Audit Trail & Compliance",
+      "category": "nfr",
+      "description": "Append-only audit trail for every action with model version and actor",
+      "adrs": ["ADR-010"]
     },
     {
       "id": "REQ-SES",
@@ -392,73 +385,98 @@ const DATA = {
     "strategic": [
       {
         "id": "G-STRATEGIC",
-        "label": "Intelligent Parts Classification System for eParts",
+        "label": "Automate Product Catalog Ingestion for eParts Services",
+        "description": "Replace manual data entry of vendor spec sheets with ML-powered extraction, classification, and standardization into PIMS",
         "children": [
           "G-SOFT-1",
           "G-SOFT-2",
           "G-SOFT-3",
+          "G-SOFT-4",
           "G-USER-1",
           "G-USER-2",
-          "G-USER-3"
+          "G-USER-3",
+          "G-USER-4"
         ]
       }
     ],
     "soft_goals": [
       {
         "id": "G-SOFT-1",
-        "label": "High Classification Accuracy (>90%)",
+        "label": "Achieve >85% attribute extraction accuracy",
         "type": "quality",
-        "reqs": [
-          "REQ-ML",
-          "REQ-MONITOR"
-        ]
+        "source": "HLR-3, ADR-003, ADR-005",
+        "reqs": ["REQ-ML", "REQ-MONITOR"]
       },
       {
         "id": "G-SOFT-2",
-        "label": "Fast Response Time (<2s)",
-        "type": "performance",
-        "reqs": [
-          "REQ-PERF",
-          "REQ-DEPLOY"
-        ]
+        "label": "Minimize manual data entry effort by 70%",
+        "type": "efficiency",
+        "source": "HLR-4, HLR-5, client meetings",
+        "reqs": ["REQ-HITL", "REQ-DATA"]
       },
       {
         "id": "G-SOFT-3",
-        "label": "Maintainable & Extensible System",
+        "label": "Well-calibrated confidence scores (ECE < 0.05)",
         "type": "quality",
-        "reqs": [
-          "REQ-SES",
-          "REQ-DEPLOY"
-        ]
+        "source": "ADR-001 (threshold calibration), FR-7",
+        "reqs": ["REQ-ML", "REQ-MONITOR"]
+      },
+      {
+        "id": "G-SOFT-4",
+        "label": "Extensible to new product categories without code changes",
+        "type": "maintainability",
+        "source": "ADR-007 (canonical schema), ADR-002 (stable interface)",
+        "reqs": ["REQ-DEPLOY", "REQ-SES"]
       }
     ],
     "user_goals": [
       {
         "id": "G-USER-1",
-        "label": "Find correct part quickly",
+        "label": "Catalog manager can review and correct ML predictions",
         "type": "user",
-        "reqs": [
-          "REQ-SEARCH",
-          "REQ-UI"
-        ]
+        "source": "HLR-4, ADR-009 (review queue), ADR-003",
+        "reqs": ["REQ-HITL", "REQ-UI"]
       },
       {
         "id": "G-USER-2",
-        "label": "Trust AI recommendations",
+        "label": "Vendor spec sheets auto-processed on arrival",
         "type": "user",
-        "reqs": [
-          "REQ-HITL",
-          "REQ-MONITOR"
-        ]
+        "source": "HLR-1, ADR-001 (pipe-and-filter), FR-1",
+        "reqs": ["REQ-DATA", "REQ-ML"]
       },
       {
         "id": "G-USER-3",
-        "label": "Manage parts data efficiently",
+        "label": "Approved data flows to PIMS without manual export",
         "type": "user",
-        "reqs": [
-          "REQ-DATA",
-          "REQ-SEC"
-        ]
+        "source": "HLR-5, ADR-006 (idempotent writeback), FR-8",
+        "reqs": ["REQ-DATA", "REQ-DEPLOY"]
+      },
+      {
+        "id": "G-USER-4",
+        "label": "Transparent audit trail for every catalog change",
+        "type": "user",
+        "source": "ADR-010 (append-only audit), FR-6",
+        "reqs": ["REQ-SEC", "REQ-MONITOR"]
+      }
+    ],
+    "constraints": [
+      {
+        "id": "G-CONST-1",
+        "label": "Deploy on Azure (App Service + SQL)",
+        "type": "constraint",
+        "source": "ADR-008, DC-1, DC-2"
+      },
+      {
+        "id": "G-CONST-2",
+        "label": "5-person team, Spring-Fall 2026 timeline",
+        "type": "constraint",
+        "source": "Capstone requirement"
+      },
+      {
+        "id": "G-CONST-3",
+        "label": "Integrate with existing PIMS staging tables",
+        "type": "constraint",
+        "source": "ADR-006, dependency on Jake (R-009)"
       }
     ]
   },
@@ -1590,7 +1608,6 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('view-' + tab.dataset.view).classList.add('active');
-    if (tab.dataset.view === 'graph' && !graphRendered) renderGraph();
     if (tab.dataset.view === 'flow' && !flowRendered) renderFlow();
   });
 });
@@ -1737,7 +1754,7 @@ function renderGraph() {
     node.attr('transform', d => `translate(${d.x},${d.y})`);
   });
 }
-renderGraph();
+// Knowledge graph removed — use Goal Model, Agent Flow, and Traceability tabs instead.
 
 // ===== GOAL MODEL =====
 (function renderGoals() {
@@ -1747,33 +1764,43 @@ renderGraph();
   // Strategic
   let html = '<div class="goal-level"><div class="goal-level-label">Strategic Goal</div>';
   G.strategic.forEach(g => {
-    html += `<div class="goal-card strategic"><span class="tag">Strategic</span><h3>${g.label}</h3><div class="desc">The overarching objective of the eParts capstone project</div></div>`;
+    html += `<div class="goal-card strategic"><span class="tag">Strategic</span><h3>${g.label}</h3><div class="desc">${g.description || ''}</div></div>`;
   });
-  html += '</div><div class="goal-connectors">│<br>├────────────┬────────────┬────────────┬────────────┬────────────┤</div>';
+  html += '</div><div class="goal-connectors">│<br>├──────────┬──────────┬──────────┬──────────┤</div>';
 
   // Soft goals
-  html += '<div class="goal-level"><div class="goal-level-label">Soft Goals (NFRs / Quality Attributes)</div>';
+  html += '<div class="goal-level"><div class="goal-level-label">Soft Goals (Quality Attributes)</div>';
   G.soft_goals.forEach(g => {
-    html += `<div class="goal-card soft"><span class="tag">${g.type}</span><h3>${g.label}</h3><div class="desc">Linked to: ${g.reqs.join(', ')}</div></div>`;
+    html += `<div class="goal-card soft"><span class="tag">${g.type}</span><h3>${g.label}</h3><div class="desc">Source: ${g.source || g.reqs.join(', ')}</div></div>`;
   });
   html += '</div><div class="goal-connectors">│</div>';
 
   // User goals
   html += '<div class="goal-level"><div class="goal-level-label">User Goals</div>';
   G.user_goals.forEach(g => {
-    html += `<div class="goal-card user"><span class="tag">${g.type}</span><h3>${g.label}</h3><div class="desc">Linked to: ${g.reqs.join(', ')}</div></div>`;
+    html += `<div class="goal-card user"><span class="tag">${g.type}</span><h3>${g.label}</h3><div class="desc">Source: ${g.source || g.reqs.join(', ')}</div></div>`;
   });
   html += '</div><div class="goal-connectors">│</div>';
 
-  // Functional requirements
-  html += '<div class="goal-level"><div class="goal-level-label">Functional Requirements</div>';
-  DATA.requirements.filter(r => r.category === 'functional').forEach(r => {
-    html += `<div class="goal-card functional"><span class="tag">functional</span><h3>${r.label}</h3><div class="desc">${r.description}</div></div>`;
-  });
-  html += '</div><div class="goal-connectors">↑ <span style="color:var(--warn)">threatens</span></div>';
+  // Constraints
+  if (G.constraints && G.constraints.length) {
+    html += '<div class="goal-level"><div class="goal-level-label">Constraints</div>';
+    G.constraints.forEach(g => {
+      html += `<div class="goal-card" style="border-color:var(--warn)"><span class="tag" style="color:var(--warn)">constraint</span><h3>${g.label}</h3><div class="desc">Source: ${g.source || ''}</div></div>`;
+    });
+    html += '</div><div class="goal-connectors">│</div>';
+  }
 
-  // Obstacles (concerns)
-  html += '<div class="goal-level"><div class="goal-level-label">Obstacles / Risks (from Coach Sessions)</div>';
+  // Functional requirements (HLRs)
+  html += '<div class="goal-level"><div class="goal-level-label">High-Level Requirements (HLRs)</div>';
+  DATA.requirements.filter(r => r.category === 'functional').forEach(r => {
+    const adrStr = r.adrs ? r.adrs.join(', ') : '';
+    html += `<div class="goal-card functional"><span class="tag">functional</span><h3>${r.id}: ${r.label}</h3><div class="desc">${r.description}${adrStr ? '<br>ADRs: ' + adrStr : ''}</div></div>`;
+  });
+  html += '</div><div class="goal-connectors">↑ <span style="color:var(--warn)">threatened by</span></div>';
+
+  // Obstacles (concerns/risks)
+  html += '<div class="goal-level"><div class="goal-level-label">Risks & Concerns</div>';
   DATA.concerns.forEach(c => {
     html += `<div class="goal-card obstacle"><span class="tag">risk — ${c.severity}</span><h3>${c.label}</h3><div class="desc">Raised in ${c.sessions} session(s)</div></div>`;
   });

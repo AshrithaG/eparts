@@ -58,7 +58,7 @@ class BriefingGeneratorAgent(BaseAgent):
         rag_context = self._get_rag_context(meeting_type)
 
         # 3. Generate the briefing — online (Claude) or offline (template)
-        if self._settings.anthropic_api_key:
+        if self._settings.has_llm:
             briefing = self._generate_briefing(
                 last_session=last_session,
                 open_commitments=open_commitments,
