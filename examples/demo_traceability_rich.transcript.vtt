@@ -1,0 +1,55 @@
+WEBVTT
+
+NOTE synthetic demo transcript — emphasizes explicit REQUIREMENTS wording, DECISIONS, CONCERNS/risks, and ACTIONS for SES demos (LLM-on or heuristic-offline modes)
+
+1
+00:00:01.000 --> 00:00:26.400
+Jordan Lee (Architecture): Welcome to the ingestion workshop. Agenda is simple: tighten scope to valve categories for spring, expose confidence thresholds, and surface concerns before sprint planning.
+
+2
+00:00:27.100 --> 00:00:52.800
+Morgan Blake (Requirements): Requirement framing first. The catalog ingestion pathway shall normalize inconsistent vendor CSV and Excel and PDF formats into staging tables before production write; we need validation after ML extraction attributes from spec sheets.
+
+3
+00:00:53.200 --> 00:01:18.950
+Taylor Singh (MLE): Confidence scores must sit on every semantic prediction zero through one point zero; we propose per-attribute routing so short brand fields behave differently than long technical specs. Training data remains under two hundred labelled samples today — genuine concern until corpus grows.
+
+4
+00:01:19.400 --> 00:01:45.200
+Riley Chen (Data): Human review queues protect us when thresholds miss — operators approve, reject, or correct low-confidence parses. Feedback loop retrains embeddings after enough corrections accumulate to improve accuracy.
+
+5
+00:01:45.800 --> 00:02:09.950
+Casey Alvarez (Cloud): We agreed to Azure App Service deployment for ingestion APIs with Key Vault secret rotation nightly. Pricing columns stay excluded from automation because pricing stays manual forever.
+
+6
+00:02:10.400 --> 00:02:35.150
+Jordan Lee (Architecture): Reliability concern: staging DDL drift risks bad rows slipping past validators unless we tighten checks. Metrics dashboard must monitor ingestion throughput, latency, reviewer accuracy metrics, and prediction error trends week over week.
+
+7
+00:02:35.600 --> 00:03:00.700
+Taylor Singh (MLE): We decided per-attribute thresholds P0 blocking before pilots — Decision one solid. Decision two: hybrid rule layer plus embeddings until dataset clears two hundred labelled examples.
+
+8
+00:03:01.200 --> 00:03:27.950
+Riley Chen (Data): Decision three we'll use reviewer-first keyboard workflow so manual operator effort shrinks sixty percent versus spreadsheet baseline.
+
+9
+00:03:28.500 --> 00:03:54.300
+Casey Alvarez (Cloud): Decision four the plan is single-region Azure footprint until summer hardening. We'll use scripted rollback under ten minutes whenever deploy fails.
+
+10
+00:03:54.800 --> 00:04:20.120
+Jordan Lee (Architecture): Stakeholder concern on vendor variation keeps backlog noisy; SLA concern if ingestion queue backlog grows past ninety percentile fifteen minute handling window — escalate sooner.
+
+11
+00:04:20.600 --> 00:04:45.900
+Taylor Singh (MLE): Should we escalate immediately if MiniLM regression widens once we swap models next sprint?
+
+12
+00:04:46.300 --> 00:05:12.800
+Jordan Lee (Architecture): Functional requirement recap aligned with REQ trace — staging table validation gates every write; never promote directly into production catalogs until QA signs off extraction attributes from catalogs.
+
+13
+00:05:13.200 --> 00:05:40.500
+Morgan Blake (Requirements): Action wrap — Riley will send Datadog dashboard mocks by Wednesday; Casey verifies Azure quotas by Friday noon; Morgan logs decisions appendix so auditors see full intent.
