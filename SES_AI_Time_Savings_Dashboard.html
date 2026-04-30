@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SES & AI — Time Savings Measurement Dashboard</title>
+<style>
+  :root {
+    --bg: #0b1020;
+    --panel: #131a36;
+    --panel-2: #1a2347;
+    --border: rgba(255,255,255,0.08);
+    --text: #e8ecf6;
+    --muted: #9aa3b8;
+    --accent: #7aa7ff;
+
+    --baseline: #f87171;
+    --assisted: #34d399;
+    --saved: #fbbf24;
+
+    --c-transcripts: #6366f1;
+    --c-reqs:        #06b6d4;
+    --c-sow:         #ec4899;
+    --c-risk:        #f97316;
+    --c-arch:        #a78bfa;
+    --c-plan:        #22c55e;
+    --c-coord:       #38bdf8;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: radial-gradient(1200px 800px at 10% -10%, #1a2347 0%, var(--bg) 60%) fixed,
+                radial-gradient(900px 700px at 110% 10%, #1d2a5e 0%, var(--bg) 60%) fixed,
+                var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+    padding: 32px 24px 80px;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+
+  /* ---------- Header ---------- */
+  header.title { text-align: center; margin-bottom: 28px; }
+  header.title .eyebrow {
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  header.title h1 {
+    font-size: clamp(24px, 3.4vw, 38px);
+    margin: 0 0 8px;
+    background: linear-gradient(90deg, #ffffff, #a9c2ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  header.title p { color: var(--muted); margin: 0; max-width: 820px; margin-left: auto; margin-right: auto; }
+
+  /* ---------- Cards ---------- */
+  .card {
+    background: linear-gradient(180deg, var(--panel), var(--panel-2));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    margin-bottom: 24px;
+  }
+  .card h2 {
+    margin: 0 0 4px;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #cfd6ea;
+  }
+  .card .sub { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+
+  /* ---------- KPI strip ---------- */
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+  }
+  .kpi {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--kpi-color, var(--accent));
+  }
+  .kpi .lbl {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+  }
+  .kpi .val {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 6px 0 2px;
+    background: linear-gradient(90deg, #ffffff, #cfd6ea);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .kpi .delta { font-size: 12px; color: var(--muted); }
+  .kpi .delta strong { color: var(--assisted); }
+
+  /* ---------- Group sections ---------- */
+  .group-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0 14px;
+  }
+  .group-header .swatch { width: 10px; height: 10px; border-radius: 3px; }
+  .group-header h3 {
+    margin: 0; font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #cfd6ea;
+  }
+  .group-header .ref {
+    color: var(--muted);
+    font-size: 11px;
+    margin-left: auto;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  /* ---------- Bar comparison ---------- */
+  .activity {
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .activity:last-child { border-bottom: none; }
+  .activity .row1 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .activity .name { font-size: 14px; font-weight: 600; }
+  .activity .freq { color: var(--muted); font-size: 12px; }
+  .activity .saved-pill {
+    margin-left: auto;
+    background: rgba(52, 211, 153, 0.12);
+    color: var(--assisted);
+    border: 1px solid rgba(52, 211, 153, 0.25);
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .bars {
+    display: grid;
+    grid-template-columns: 90px 1fr 90px;
+    gap: 8px 10px;
+    align-items: center;
+    font-size: 12px;
+  }
+  .bars .tag { color: var(--muted); }
+  .bars .num { color: #d8deef; text-align: right; font-variant-numeric: tabular-nums; }
+  .bars .barwrap {
+    height: 12px; background: rgba(255,255,255,0.06);
+    border-radius: 999px; overflow: hidden; position: relative;
+  }
+  .bars .bar {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--bar-color, var(--baseline));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+  .activity .tools {
+    color: var(--muted);
+    font-size: 11.5px;
+    margin-top: 8px;
+  }
+  .activity .tools strong { color: #cfd6ea; font-weight: 600; }
+
+  /* ---------- Detailed table ---------- */
+  table.detail {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  table.detail th, table.detail td {
+    text-align: left;
+    padding: 10px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table.detail th {
+    color: #cdd5ec;
+    text-transform: uppercase;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    background: rgba(255,255,255,0.02);
+    position: sticky; top: 0;
+  }
+  table.detail td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  table.detail td.pct { color: var(--assisted); font-weight: 600; text-align: right; }
+  table.detail tbody tr:hover { background: rgba(255,255,255,0.03); }
+  .group-tag {
+    display: inline-block;
+    padding: 2px 8px; border-radius: 999px;
+    font-size: 10.5px;
+    background: rgba(255,255,255,0.06);
+    color: #cdd5ec;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  /* ---------- Notes ---------- */
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 10px;
+  }
+  .note {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .note h4 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #cfd6ea;
+  }
+  .note ul { margin: 0; padding-left: 18px; color: #d8deef; font-size: 12.5px; }
+  .note li { margin-bottom: 4px; }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 14px 22px;
+    color: var(--muted); font-size: 12px; margin-top: 12px;
+  }
+  .legend .item { display: inline-flex; align-items: center; gap: 8px; }
+  .legend .sw { width: 12px; height: 12px; border-radius: 3px; }
+
+  footer.foot {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 24px;
+  }
+
+  @media (max-width: 720px) {
+    .bars { grid-template-columns: 70px 1fr 70px; }
+    .activity .saved-pill { margin-left: 0; order: 3; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="title">
+    <div class="eyebrow">eParts AI Cataloging · SES Measurement</div>
+    <h1>Time Saved with SES &amp; AI Usage</h1>
+    <p>Measured on the planning &amp; documentation work the team has completed so far —
+       transcripts, requirements, SOW, risk, architecture diagrams, and project planning.
+       Implementation activities (ingestion, OCR, ML, integration) are out of scope until those phases begin.</p>
+  </header>
+
+  <!-- ============ GROUPED COMPARISONS ============ -->
+  <section class="card">
+    <h2>Activity-Level Time Comparison</h2>
+    <div class="sub">Hours per occurrence. Bars are scaled to the baseline of each activity, so the green bar shows what fraction of the manual effort remained.</div>
+    <div id="groups"></div>
+  </section>
+
+  <!-- ============ DETAILED TABLE ============ -->
+  <section class="card">
+    <h2>Detailed Breakdown</h2>
+    <div class="sub">SES section references and the AI/process supports applied to each activity.</div>
+    <div style="overflow-x:auto">
+      <table class="detail" id="detail">
+        <thead>
+          <tr>
+            <th>SES Group</th>
+            <th>Activity</th>
+            <th>Frequency</th>
+            <th class="num">Baseline (h)</th>
+            <th class="num">Assisted (h)</th>
+            <th class="num">Saved (h)</th>
+            <th class="pct">% Saved</th>
+            <th>Primary AI / SES Support</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ METHODOLOGY ============ -->
+  <section class="card">
+    <h2>Methodology &amp; Assumptions</h2>
+    <div class="sub">How these measurements are derived and how they map to SES §6 metric categories.</div>
+    <div class="notes">
+      <div class="note">
+        <h4>Scope of This Dashboard</h4>
+        <ul>
+          <li>Only work the team has actually completed</li>
+          <li>Transcripts, requirements, SOW, risk, architecture diagrams, project plans</li>
+          <li>No coding, ingestion, OCR, ML, or pipeline work — those phases haven't started</li>
+          <li>Dashboard will be re-baselined as new phases complete</li>
+        </ul>
+      </div>
+      <div class="note">
+        <h4>What "Saved" Means</h4>
+        <ul>
+          <li>Wall-clock hours of human effort removed per occurrence</li>
+          <li>Excludes AI tool runtime (treated as background cost)</li>
+          <li>Includes the human review/edit pass required by SES gates</li>
+          <li>Counts only artifacts that reached "Approved" or "Baselined" state</li>
+        </ul>
+      </div>
+      <div class="note">
+        <h4>SES §6 Metrics Tracked</h4>
+        <ul>
+          <li><strong>6.3 AI Effectiveness:</strong> prompt count, re-prompt rate, correction volume, time saved vs. baseline</li>
+          <li><strong>6.4 Coordination:</strong> meeting time, review latency, documentation churn</li>
+          <li><strong>6.2 Process:</strong> cycle time per artifact, rework frequency</li>
+        </ul>
+      </div>
+      <div class="note">
+        <h4>Caveats</h4>
+        <ul>
+          <li>Figures are team estimates against a manual-only baseline</li>
+          <li>Savings depend on review quality — high re-prompt rates erode the gain</li>
+          <li>No proprietary data is sent to external AI tools (per SES §5.2)</li>
+          <li>Numbers will shift as more transcripts/docs accumulate</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    Sources: <em>Software Engineering System (SES).pdf</em>, <em>Project Timeline &amp; Milestones (2).pdf</em>, current planning artifacts · Visualized April 2026
+  </footer>
+</div>
+
+<script>
+  // ----------------- DATA -----------------
+  // Order matters: transcripts & requirements come first per team direction.
+  // baseline / assisted are hours per occurrence.
+  // occ = number of times the activity has actually happened so far.
+  const groups = [
+    {
+      id: "transcripts",
+      title: "Transcripts & Meeting Synthesis",
+      ref: "SES §4.2.4 · §6.4",
+      color: "var(--c-transcripts)",
+      activities: [
+        { name: "Transcript review & cleanup",          freq: "per meeting", baseline: 2.5, assisted: 0.40, occ: 16,
+          tools: "AI transcript summarization · speaker attribution cleanup" },
+        { name: "Meeting minutes (MOM) drafting",        freq: "per meeting", baseline: 1.5, assisted: 0.55, occ: 16,
+          tools: "AI-drafted MOM from transcript · human edit pass" },
+        { name: "Action item extraction",                freq: "per meeting", baseline: 1.0, assisted: 0.25, occ: 16,
+          tools: "Structured prompts pulling owners + due dates" },
+        { name: "Decision log synthesis",                freq: "per meeting", baseline: 0.75, assisted: 0.35, occ: 16,
+          tools: "AI extraction of decisions + rationale into log" },
+        { name: "Cross-meeting theme synthesis",         freq: "per phase",   baseline: 4.0, assisted: 2.20, occ: 2,
+          tools: "AI thematic clustering across multiple transcripts" },
+      ]
+    },
+    {
+      id: "reqs",
+      title: "Requirements Gathering",
+      ref: "SES §4.2.1",
+      color: "var(--c-reqs)",
+      activities: [
+        { name: "Stakeholder interview synthesis",       freq: "per interview",     baseline: 6.0,  assisted: 2.40,  occ: 4,
+          tools: "AI summarization · gap-vs-existing-docs comparison" },
+        { name: "Requirements document drafting",        freq: "per major version", baseline: 30.0, assisted: 18.00, occ: 2,
+          tools: "AI section drafts · structured templates · human approval (§4.2.1)" },
+        { name: "Requirements completeness checks",      freq: "per draft",         baseline: 6.0,  assisted: 1.20,  occ: 2,
+          tools: "AI completeness/ambiguity detection prompts" },
+        { name: "User stories &amp; acceptance criteria", freq: "per feature group", baseline: 8.0,  assisted: 3.60,  occ: 3,
+          tools: "AI-drafted stories from requirements · human refinement" },
+        { name: "Requirements review cycle",             freq: "per review",        baseline: 4.0,  assisted: 2.60,  occ: 4,
+          tools: "Pre-review summaries · checklist automation" },
+      ]
+    },
+    {
+      id: "sow",
+      title: "Statement of Work & Scope",
+      ref: "SES §3.2 · §4.2.1",
+      color: "var(--c-sow)",
+      activities: [
+        { name: "SOW initial drafting",                 freq: "one-time",          baseline: 20.0, assisted: 11.00, occ: 1,
+          tools: "AI-drafted sections from requirements · template scaffolding" },
+        { name: "SOW revision pass",                    freq: "per revision",      baseline: 8.0,  assisted: 2.40,  occ: 3,
+          tools: "AI diff-summarization · section regeneration" },
+        { name: "Scope &amp; deliverable definition",   freq: "per scoping cycle", baseline: 6.0,  assisted: 3.30,  occ: 2,
+          tools: "AI consolidation of scope across docs" },
+      ]
+    },
+    {
+      id: "risk",
+      title: "Risk &amp; Project Management Documentation",
+      ref: "SES §3.2 · §6 (Risk logs)",
+      color: "var(--c-risk)",
+      activities: [
+        { name: "Risk identification synthesis",         freq: "per workshop",  baseline: 6.0,  assisted: 1.50, occ: 2,
+          tools: "AI cluster of risks from transcripts &amp; docs" },
+        { name: "Risk register drafting",                freq: "per version",   baseline: 10.0, assisted: 6.50, occ: 2,
+          tools: "AI-populated risk fields (likelihood, impact, owner, mitigation)" },
+        { name: "Risk &amp; Project Management doc",    freq: "per version",   baseline: 12.0, assisted: 4.80, occ: 2,
+          tools: "AI section drafting · cross-linking to register" },
+        { name: "Mitigation plan drafting",              freq: "per top risk",  baseline: 2.0,  assisted: 0.70, occ: 6,
+          tools: "AI mitigation patterns · human ownership assignment" },
+      ]
+    },
+    {
+      id: "arch",
+      title: "Architecture &amp; Diagram Drafting",
+      ref: "SES §3.1 · §4.2.2",
+      color: "var(--c-arch)",
+      activities: [
+        { name: "Context diagram drafting",              freq: "per version",   baseline: 4.0,  assisted: 1.40, occ: 3,
+          tools: "AI-suggested entities &amp; relationships · diagram tool" },
+        { name: "Notional workflow diagram",             freq: "per version",   baseline: 5.0,  assisted: 3.00, occ: 2,
+          tools: "AI flow synthesis from process descriptions" },
+        { name: "Agentic architecture HTML diagram",     freq: "per version",   baseline: 6.0,  assisted: 1.20, occ: 2,
+          tools: "AI-generated HTML/JS scaffold · human layout polish" },
+        { name: "ADR / decision narratives",             freq: "per decision",  baseline: 3.0,  assisted: 1.65, occ: 4,
+          tools: "AI-drafted alternatives, trade-offs, and rationale" },
+      ]
+    },
+    {
+      id: "plan",
+      title: "Project Planning Artifacts",
+      ref: "SES §3.3",
+      color: "var(--c-plan)",
+      activities: [
+        { name: "Timeline &amp; milestones drafting",   freq: "per version",   baseline: 8.0,  assisted: 2.00, occ: 2,
+          tools: "AI structured timeline from phase descriptions" },
+        { name: "System task list compilation",          freq: "per version",   baseline: 5.0,  assisted: 1.75, occ: 3,
+          tools: "AI task extraction from architecture &amp; SOW" },
+        { name: "Team ordered assignment plan",          freq: "one-time",      baseline: 4.0,  assisted: 2.40, occ: 1,
+          tools: "AI workload balancing across roles" },
+        { name: "Priority &amp; project health monitor", freq: "per version",   baseline: 4.0,  assisted: 0.80, occ: 1,
+          tools: "AI-drafted dashboard structure &amp; thresholds" },
+      ]
+    },
+    {
+      id: "coord",
+      title: "Process &amp; Coordination",
+      ref: "SES §4.2.3 · §4.2.4",
+      color: "var(--c-coord)",
+      activities: [
+        { name: "SES document drafting",                 freq: "one-time",  baseline: 12.0, assisted: 7.20, occ: 1,
+          tools: "AI-drafted ETVX sections · human review &amp; sign-off" },
+        { name: "Studio orientation framework",          freq: "one-time",  baseline: 6.0,  assisted: 1.80, occ: 1,
+          tools: "AI synthesis of LLM-aided SE framework" },
+        { name: "Status reports / weekly check-ins",     freq: "per week",  baseline: 1.5,  assisted: 0.45, occ: 4,
+          tools: "AI roll-up from action items + risk register" },
+      ]
+    },
+  ];
+
+  // ----------------- TOTALS -----------------
+  let totalBaseline = 0, totalAssisted = 0, totalOcc = 0;
+  groups.forEach(g => g.activities.forEach(a => {
+    a.saved = a.baseline - a.assisted;
+    a.pct = (a.saved / a.baseline) * 100;
+    a.totalBaseline = a.baseline * a.occ;
+    a.totalAssisted = a.assisted * a.occ;
+    a.totalSaved = a.totalBaseline - a.totalAssisted;
+    totalBaseline += a.totalBaseline;
+    totalAssisted += a.totalAssisted;
+    totalOcc += a.occ;
+  }));
+  const fmt = n => n.toLocaleString("en-US", { maximumFractionDigits: 0 });
+
+  // ----------------- GROUPS RENDER -----------------
+  const groupsHost = document.getElementById("groups");
+  groups.forEach(g => {
+    const wrap = document.createElement("div");
+    wrap.style.marginBottom = "22px";
+
+    wrap.innerHTML = `
+      <div class="group-header">
+        <span class="swatch" style="background:${g.color}"></span>
+        <h3>${g.title}</h3>
+        <span class="ref">${g.ref}</span>
+      </div>
+    `;
+
+    g.activities.forEach(a => {
+      const max = a.baseline;
+      const baseW = 100;
+      const assistW = (a.assisted / max) * 100;
+      const item = document.createElement("div");
+      item.className = "activity";
+      item.innerHTML = `
+        <div class="row1">
+          <span class="name">${a.name}</span>
+          <span class="freq">· ${a.freq} · ${a.occ}× to date</span>
+          <span class="saved-pill">${a.pct.toFixed(0)}% saved</span>
+        </div>
+        <div class="bars">
+          <div class="tag">Baseline</div>
+          <div class="barwrap"><div class="bar" style="width:${baseW}%; background:var(--baseline)"></div></div>
+          <div class="num">${a.baseline.toFixed(2)} h</div>
+
+          <div class="tag">Assisted</div>
+          <div class="barwrap"><div class="bar" style="width:${assistW}%; background:var(--assisted)"></div></div>
+          <div class="num">${a.assisted.toFixed(2)} h</div>
+        </div>
+        <div class="tools"><strong>Support:</strong> ${a.tools}</div>
+      `;
+      wrap.appendChild(item);
+    });
+    groupsHost.appendChild(wrap);
+  });
+
+  // ----------------- DETAIL TABLE -----------------
+  const tbody = document.querySelector("#detail tbody");
+  groups.forEach(g => {
+    g.activities.forEach(a => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><span class="group-tag" style="border-color:${g.color}; color:${g.color}">${g.ref}</span></td>
+        <td>${a.name}</td>
+        <td>${a.freq} · ${a.occ}× to date</td>
+        <td class="num">${fmt(a.totalBaseline)}</td>
+        <td class="num">${fmt(a.totalAssisted)}</td>
+        <td class="num" style="color:var(--saved)">${fmt(a.totalSaved)}</td>
+        <td class="pct">${a.pct.toFixed(0)}%</td>
+        <td>${a.tools}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  });
+
+
+</script>
+</body>
+</html>
