@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>eParts AI Cataloging — Project Timeline & Milestones</title>
+<style>
+  :root {
+    --bg: #0b1020;
+    --bg-grad-1: #0b1020;
+    --bg-grad-2: #131a36;
+    --panel: #131a36;
+    --panel-2: #1a2347;
+    --border: rgba(255,255,255,0.08);
+    --text: #e8ecf6;
+    --muted: #9aa3b8;
+    --accent: #7aa7ff;
+
+    --p1: #6366f1;
+    --p2: #06b6d4;
+    --p3: #10b981;
+    --p4: #f59e0b;
+    --p5: #ef4444;
+    --p6: #8b5cf6;
+    --p7: #ec4899;
+    --p8: #22c55e;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: radial-gradient(1200px 800px at 10% -10%, #1a2347 0%, var(--bg) 60%) fixed,
+                radial-gradient(900px 700px at 110% 10%, #1d2a5e 0%, var(--bg) 60%) fixed,
+                var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+    padding: 32px 24px 80px;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+
+  header.title {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  header.title .eyebrow {
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  header.title h1 {
+    font-size: clamp(24px, 3.4vw, 38px);
+    margin: 0 0 8px;
+    background: linear-gradient(90deg, #ffffff, #a9c2ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  header.title p { color: var(--muted); margin: 0; }
+
+  /* ---------- Gantt section ---------- */
+  .card {
+    background: linear-gradient(180deg, var(--panel), var(--panel-2));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    margin-bottom: 28px;
+  }
+  .card h2 {
+    margin: 0 0 16px;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #cfd6ea;
+  }
+
+  .gantt {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    align-items: stretch;
+  }
+  .gantt-header,
+  .gantt-row {
+    display: contents;
+  }
+  .gantt .label,
+  .gantt .track {
+    border-bottom: 1px dashed var(--border);
+    padding: 14px 10px;
+  }
+  .gantt .label {
+    font-size: 16px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+  }
+  .dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    flex: 0 0 12px;
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.06);
+  }
+  .gantt .track {
+    position: relative;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent calc(100%/12 - 1px),
+        rgba(255,255,255,0.06) calc(100%/12 - 1px),
+        rgba(255,255,255,0.06) calc(100%/12)
+      );
+  }
+  .months {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    font-size: 16px;
+    color: #ffffff;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+    font-weight: 700;
+  }
+  .months span {
+    text-align: center;
+    padding: 12px 0;
+  }
+  .bar {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    height: 26px;
+    border-radius: 999px;
+    color: #0b1020;
+    font-weight: 600;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.4),
+      0 6px 16px rgba(0,0,0,0.35);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .milestone {
+    position: absolute;
+    top: 50%;
+    width: 12px; height: 12px;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+  .milestone .diamond {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    transform: rotate(45deg);
+    border: 2px solid #0b1020;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.4), 0 4px 10px rgba(0,0,0,0.5);
+  }
+  .now-line {
+    position: absolute;
+    top: -1px; bottom: -1px;
+    width: 0;
+    border-left: 2px dashed #fbbf24;
+    pointer-events: none;
+    z-index: 4;
+  }
+  .now-line.with-label::before {
+    content: "Today";
+    position: absolute;
+    top: -16px;
+    left: 0;
+    transform: translateX(-50%);
+    background: #fbbf24;
+    color: #0b1020;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 1px 4px;
+    border-radius: 4px;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+  .milestone[title] { cursor: help; }
+
+  .milestone .tip {
+    position: absolute;
+    bottom: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffffff;
+    color: #0b1020;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    white-space: nowrap;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,0,0,0.15);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .15s ease;
+    z-index: 10;
+  }
+  .milestone .tip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 7px solid transparent;
+    border-top-color: #ffffff;
+  }
+  .milestone .tip .date {
+    display: block;
+    color: #4b5563;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .milestone:hover { z-index: 20; }
+  .milestone:hover .tip { opacity: 1; }
+
+  /* ---------- Phase grid ---------- */
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 16px;
+  }
+  .phase {
+    position: relative;
+    background: linear-gradient(180deg, var(--panel), var(--panel-2));
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    overflow: hidden;
+  }
+  .phase::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: var(--phase-color, #fff);
+  }
+  .phase:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255,255,255,0.2);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.4);
+  }
+  .phase .pnum {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+  }
+  .phase .pnum .swatch {
+    width: 10px; height: 10px; border-radius: 3px;
+    background: var(--phase-color, #fff);
+  }
+  .phase h3 {
+    margin: 8px 0 4px;
+    font-size: 16px;
+  }
+  .phase .dates {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+  .section-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #b9c2dc;
+    margin: 10px 0 6px;
+  }
+  .phase ul {
+    list-style: none;
+    padding: 0; margin: 0 0 6px;
+  }
+  .phase li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: #d8deef;
+  }
+  .phase li.hard::before {
+    content: "";
+    position: absolute;
+    left: 2px; top: 6px;
+    width: 8px; height: 8px;
+    background: var(--phase-color, #fff);
+    transform: rotate(45deg);
+  }
+  .phase li.soft::before {
+    content: "";
+    position: absolute;
+    left: 4px; top: 8px;
+    width: 6px; height: 6px;
+    background: transparent;
+    border: 1.5px solid var(--phase-color, #fff);
+    border-radius: 50%;
+  }
+  .phase li .when {
+    color: var(--muted);
+    font-size: 11px;
+    display: block;
+  }
+  .outcome {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: #cfd6ea;
+    font-size: 12.5px;
+  }
+
+  /* ---------- Legend & summary ---------- */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 22px;
+    align-items: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 12px;
+  }
+  .legend .item { display: inline-flex; align-items: center; gap: 8px; }
+  .legend .ms {
+    width: 10px; height: 10px;
+    background: #ffffff;
+    transform: rotate(45deg);
+    border: 1.5px solid #0b1020;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.4);
+  }
+  .legend .sm { width: 8px; height: 8px; border: 1.5px solid #fff; border-radius: 50%; }
+  .legend .bb { width: 24px; height: 8px; border-radius: 999px; background: linear-gradient(90deg, var(--p1), var(--p8)); }
+
+  table.summary {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  table.summary th, table.summary td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  table.summary th {
+    color: #cdd5ec;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+  table.summary tr:last-child td { border-bottom: none; }
+  table.summary td.target { color: var(--muted); width: 220px; }
+
+  footer.foot {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 24px;
+  }
+
+  @media (max-width: 720px) {
+    .gantt { grid-template-columns: 160px 1fr; }
+    .gantt .label { font-size: 13px; }
+    .months { font-size: 12px; }
+    .bar { font-size: 11px; padding: 0 6px; height: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="title">
+    <div class="eyebrow">eParts AI Cataloging</div>
+    <h1>Project Timeline &amp; Milestones</h1>
+    <p>April 2026 – December 2026 · Prepared April 1, 2026</p>
+  </header>
+
+  <!-- =========== GANTT CHART =========== -->
+  <section class="card">
+    <h2>Phase Roadmap</h2>
+
+    <div class="gantt" id="gantt">
+      <!-- header row -->
+      <div class="label" style="border-bottom:1px solid var(--border)"></div>
+      <div class="months">
+        <span>Jan</span><span>Feb</span><span>Mar</span>
+        <span>Apr</span><span>May</span><span>Jun</span>
+        <span>Jul</span><span>Aug</span><span>Sep</span>
+        <span>Oct</span><span>Nov</span><span>Dec</span>
+      </div>
+
+      <!-- rows generated below -->
+    </div>
+
+    <div class="legend">
+      <span class="item"><span class="bb"></span> Phase duration</span>
+      <span class="item"><span class="ms"></span> Hard milestone (date-bound)</span>
+    </div>
+  </section>
+
+  <!-- =========== PHASE CARDS =========== -->
+  <section class="card">
+    <h2>Phase Details</h2>
+    <div class="phases" id="phases"></div>
+  </section>
+
+  <!-- =========== SUMMARY TABLE =========== -->
+  <section class="card">
+    <h2>Summary of Major Delivery Points</h2>
+    <table class="summary">
+      <thead>
+        <tr><th>Target</th><th>Deliverable</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="target">End of April 2026</td><td>Requirements, risks, process, and technical direction defined</td></tr>
+        <tr><td class="target">End of May 2026</td><td>Architecture documented; parallel build underway</td></tr>
+        <tr><td class="target">End of June 2026</td><td>Major technical streams functioning at a basic level</td></tr>
+        <tr><td class="target">End of August 2026</td><td>Core systems built and ready for integration</td></tr>
+        <tr><td class="target">End of September 2026</td><td>Full system integrated</td></tr>
+        <tr><td class="target">End of October 2026</td><td>Testing and validation completed</td></tr>
+        <tr><td class="target">End of November 2026</td><td>System stabilized; stretch goals pursued</td></tr>
+        <tr><td class="target">End of December 2026</td><td>Final project package ready for semester closeout</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer class="foot">
+    Source: <em>Project Timeline &amp; Milestones (2).pdf</em> · Visualized April 2026
+  </footer>
+</div>
+
+<script>
+  // Display window: January 1 → December 31, 2026 (12 months)
+  const START = new Date(2026, 0, 1);   // Jan 1
+  const END   = new Date(2026, 11, 31); // Dec 31
+  const TOTAL_DAYS = (END - START) / 86400000;
+
+  const pct = (d) => ((new Date(d) - START) / 86400000) / TOTAL_DAYS * 100;
+
+  const phases = [
+    {
+      n: 1, color: "var(--p1)", name: "Foundations & Planning",
+      start: "2026-01-15", end: "2026-04-30",
+      hard: [
+        { date: "2026-04-15", text: "Requirements completed" },
+        { date: "2026-04-30", text: "Software Engineering System finalized" },
+        { date: "2026-04-30", text: "Risk document completed" },
+      ],
+      soft: [
+        { when: "Apr 1 – Apr 10", text: "Internal data repository ready" },
+        { when: "Apr 10 – Apr 15", text: "Internal AI system ready and linked with data repository" },
+        { when: "April", text: "POC and analysis: LLM vs. ML approach" },
+      ],
+      outcome: "Project scope, requirements, risks, and core technical direction are defined. Team process is established."
+    },
+    {
+      n: 2, color: "var(--p2)", name: "Architecture & Parallel System Build",
+      start: "2026-04-15", end: "2026-05-31",
+      hard: [
+        { date: "2026-05-09", text: "System architecture finalized and documented" },
+        { date: "2026-05-30", text: "Initial end-to-end pipeline skeleton available" },
+      ],
+      soft: [
+        { when: "May 1 – May 9", text: "System build plan and ownership finalized" },
+        { when: "May", text: "Ingestion pipeline development started" },
+        { when: "May", text: "OCR pipeline development started" },
+        { when: "May", text: "ML component development started" },
+        { when: "May", text: "QA approach and validation workflow defined" },
+      ],
+      outcome: "Architecture documented and approved. Engineering active across all major streams. Initial technical skeleton exists."
+    },
+    {
+      n: 3, color: "var(--p3)", name: "Core Build, ML Model & Pipeline Development",
+      start: "2026-06-01", end: "2026-06-30",
+      hard: [
+        { date: "2026-06-13", text: "Ingestion pipeline handles initial supplier/file inputs" },
+        { date: "2026-06-13", text: "OCR workflow processes first supported document types" },
+        { date: "2026-06-27", text: "QA checks available for core component outputs" },
+      ],
+      soft: [
+        { when: "June", text: "ML component produces initial prediction outputs" },
+        { when: "June", text: "Structured/canonical intermediate layer established" },
+      ],
+      outcome: "Each major technical stream operational at a basic level. Data moves through early stages and outputs can be validated."
+    },
+    {
+      n: 4, color: "var(--p4)", name: "System Maturity",
+      start: "2026-07-01", end: "2026-08-31",
+      hard: [
+        { date: "2026-07-25", text: "ML component reaches usable baseline quality" },
+        { date: "2026-08-31", text: "All core systems ready for integration" },
+      ],
+      soft: [
+        { when: "Jul 1 – Jul 25", text: "Ingestion flow supports primary data sources reliably" },
+        { when: "Jul 1 – Jul 25", text: "OCR pipeline accuracy and extraction quality improved" },
+        { when: "August", text: "Core pipelines connected to intermediate structured layer" },
+        { when: "August", text: "QA workflow supports repeated validation runs" },
+        { when: "August", text: "Human review / exception handling in basic form" },
+        { when: "August", text: "Publish/writeback path available in initial form" },
+      ],
+      outcome: "Core technical components individually functional. Project ready to shift from building to integrating."
+    },
+    {
+      n: 5, color: "var(--p5)", name: "Full Integration",
+      start: "2026-09-01", end: "2026-09-30",
+      hard: [
+        { date: "2026-09-14", text: "End-to-end flow available for internal testing" },
+        { date: "2026-09-30", text: "Full core system integrated" },
+      ],
+      soft: [
+        { when: "Sep 1 – Sep 14", text: "Integrate ingestion, OCR, ML, and intermediate layer" },
+        { when: "September", text: "Human review, approvals, and publish flow integrated" },
+      ],
+      outcome: "All major components work together in a single system flow with limited manual intervention."
+    },
+    {
+      n: 6, color: "var(--p6)", name: "Validation & Testing",
+      start: "2026-10-01", end: "2026-10-31",
+      hard: [
+        { date: "2026-10-24", text: "Performance, reliability, and edge-case testing completed" },
+        { date: "2026-10-31", text: "Major defects identified and prioritized" },
+      ],
+      soft: [
+        { when: "Oct 1 – Oct 24", text: "Functional testing across core workflows" },
+        { when: "October", text: "QA regression process running consistently" },
+      ],
+      outcome: "System behavior is understood. Weak points identified; integrated workflow validated."
+    },
+    {
+      n: 7, color: "var(--p7)", name: "Stabilization & Stretch Goals",
+      start: "2026-11-01", end: "2026-11-30",
+      hard: [
+        { date: "2026-11-14", text: "End-to-end workflow stable for demonstrations" },
+        { date: "2026-11-30", text: "Stretch goals evaluated and incorporated where feasible" },
+      ],
+      soft: [
+        { when: "Nov 1 – Nov 14", text: "Critical issues from testing resolved" },
+        { when: "November", text: "Stretch goal implementation started" },
+      ],
+      outcome: "Core system stable. High-value enhancements attempted (automation, OCR coverage, model quality, monitoring, review UX)."
+    },
+    {
+      n: 8, color: "var(--p8)", name: "Finalization & Presentation Readiness",
+      start: "2026-12-01", end: "2026-12-31",
+      hard: [
+        { date: "2026-12-15", text: "Handover" },
+      ],
+      soft: [
+        { when: "Dec 1 – Dec 10", text: "Final project validation completed" },
+      ],
+      outcome: "System is presentable. Team prepared to present architecture, implementation, validation, risks, and lessons learned."
+    },
+  ];
+
+  // ---------- Build Gantt rows ----------
+  const gantt = document.getElementById("gantt");
+  const NOW_DATE = "2026-04-30";
+  const NOW_PCT = pct(NOW_DATE);
+  phases.forEach((ph, idx) => {
+    const label = document.createElement("div");
+    label.className = "label";
+    label.innerHTML = `<span class="dot" style="background:${ph.color}"></span>
+                       <span><strong>P${ph.n}</strong> · ${ph.name}</span>`;
+    gantt.appendChild(label);
+
+    const track = document.createElement("div");
+    track.className = "track";
+
+    const left = pct(ph.start);
+    const right = pct(ph.end);
+    const width = right - left;
+    const bar = document.createElement("div");
+    bar.className = "bar";
+    bar.style.left = left + "%";
+    bar.style.width = width + "%";
+    bar.style.background = `linear-gradient(90deg, ${ph.color}, ${ph.color}cc)`;
+    track.appendChild(bar);
+
+    ph.hard.forEach(m => {
+      const ms = document.createElement("div");
+      ms.className = "milestone";
+      ms.style.left = pct(m.date) + "%";
+      const dateLabel = new Date(m.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+      ms.innerHTML = `
+        <div class="diamond"></div>
+        <div class="tip"><span class="date">${dateLabel}</span>${m.text}</div>
+      `;
+      track.appendChild(ms);
+    });
+
+    const nowLine = document.createElement("div");
+    nowLine.className = "now-line" + (idx === 0 ? " with-label" : "");
+    nowLine.style.left = NOW_PCT + "%";
+    track.appendChild(nowLine);
+
+    gantt.appendChild(track);
+  });
+
+  // ---------- Build phase cards ----------
+  const phaseHost = document.getElementById("phases");
+  phases.forEach(ph => {
+    const card = document.createElement("div");
+    card.className = "phase";
+    card.style.setProperty("--phase-color", ph.color);
+
+    const fmtRange = (s, e) => {
+      const opts = { month: "short", day: "numeric" };
+      const a = new Date(s).toLocaleDateString("en-US", opts);
+      const b = new Date(e).toLocaleDateString("en-US", opts);
+      return `${a} → ${b}, 2026`;
+    };
+
+    const hardLis = ph.hard.map(m => `
+      <li class="hard">
+        ${m.text}
+        <span class="when">${new Date(m.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
+      </li>`).join("");
+
+    const softLis = ph.soft.map(m => `
+      <li class="soft">
+        ${m.text}
+        <span class="when">${m.when}</span>
+      </li>`).join("");
+
+    card.innerHTML = `
+      <div class="pnum"><span class="swatch"></span> Phase ${ph.n}</div>
+      <h3>${ph.name}</h3>
+      <div class="dates">${fmtRange(ph.start, ph.end)}</div>
+
+      <div class="section-label">Milestones</div>
+      <ul>${hardLis}</ul>
+
+      <div class="section-label">Soft Milestones</div>
+      <ul>${softLis}</ul>
+
+      <div class="outcome"><strong>Outcome —</strong> ${ph.outcome}</div>
+    `;
+    phaseHost.appendChild(card);
+  });
+</script>
+</body>
+</html>
