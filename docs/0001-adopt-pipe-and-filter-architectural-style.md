@@ -21,6 +21,8 @@ The team is five people working from Spring through Fall 2026, so operational si
 
 We will structure the platform as a pipe-and-filter system. Independent filters (Ingestion Gateway, Normalization, Prediction Service, Routing Engine, Review/Auto-accept paths, Writeback) communicate through typed data channels. The pipeline is linear with one branch at the Routing Engine where confidence-based routing splits high-confidence attributes (auto-accept) from low-confidence attributes (human review); both paths merge before writeback.
 
+![Pipe-and-Filter Architecture](../diagrams/pipe-filter-architecture.png)
+
 ## Consequences
 
 - Each filter can be replaced or evolved independently because filters communicate only through defined data contracts. The Prediction Service can be swapped without touching upstream parsing or downstream writeback (supports QA-2).
