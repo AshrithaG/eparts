@@ -12,9 +12,11 @@ Use this file: **`dashboard/interactive_architecture.html`**. Roughly **four to 
 
 ---
 
-## 1. Land the screen (~30 seconds)
+## 1. Land the screen (~45 seconds)
 
-“So this dashboard is titled **eParts Agentic Software Engineering System** — capstone framing is CMU MSE Studio, **Pimsie Supreme**. **[pause]** I’m going to unpack two ideas: the **agentic harness** — how multiple autonomous agents chain together — and the **engineering harness** — how that chain still maps to real **requirements engineering** activities you’d recognize from class: inception, elicitation, specification, validation, management. The UI color-codes **maturity**: green pipelines are ones we actively run, orange is partially there, red is planned for later phases.”
+“So this dashboard is titled **eParts Agentic Software Engineering System** — capstone framing is CMU MSE Studio, **Pimsie Supreme**. **[pause]** Up top you’ll see **four headline numbers**: seven practice pipelines, twenty-eight specialized agents, three pipelines **live** on real transcripts today, and **one traceability graph** in SQLite tying artifacts together.”
+
+“Right under that is the **legend** — **green** means live integrations you can demo; **amber** means the pipeline exists and runs but wiring is still maturing; **red** means **roadmap** for coding-phase and ML evidence scale-up. **[pause]** Then I’m going to unpack **two harnesses**: the **agentic** one — chained agents — and the **engineering** one — the same chain mapped to inception through management.”
 
 ---
 
@@ -31,6 +33,14 @@ Use this file: **`dashboard/interactive_architecture.html`**. Roughly **four to 
 **Point at the bottom row (red).**
 
 “Bottom row: **Coding** and **ML Decision** — **future** phase. Coding is PR review, tests, docs, prompt regression. ML Decision is evidence accumulation and **readiness** to close an open model decision. We show them so the **whole** product story is visible, not just what works this week.”
+
+---
+
+## 2b. Golden traceability — large on-screen example (~45 seconds)
+
+**[Scroll to the wide panel titled “Example: one concern → shipped work” — it sits just under the pipeline cards.]**
+
+“This section is **large type on purpose** — one **end-to-end** chain you can read from the back row. **Meeting** → **concern** → **requirement REQ-006** → **decision** in the log → **Jira** implementing the req → **architecture** validation and drift. The **relationship names** on each node match what we persist: *RAISED_IN*, *BECAME*, *IMPLEMENTS*, and so on. The **pills** underneath call out *MITIGATES* risk, *TRIGGERED* follow-on pipeline, and **traceability.db** — that’s the engineering answer to ‘show me traceability’ without a microscopic matrix.”
 
 ---
 

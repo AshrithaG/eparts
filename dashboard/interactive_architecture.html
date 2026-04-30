@@ -107,6 +107,23 @@
   .storage-chip:hover{border-color:rgba(55,65,81,0.6);background:rgba(10,10,20,0.7);}
 
   .section-divider{text-align:center;color:rgba(148,163,184,0.4);font-size:9px;letter-spacing:8px;margin:20px 0 4px;padding:4px;text-transform:uppercase;font-weight:600;}
+
+  /* Presenter: headline stats + compact legend only */
+  .dash-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;max-width:960px;margin-left:auto;margin-right:auto;}
+  @media(max-width:900px){.dash-stats{grid-template-columns:repeat(2,1fr);}}
+  .dash-stat{text-align:center;padding:18px 14px;background:rgba(15,23,42,0.5);border:1px solid rgba(51,65,85,0.4);border-radius:14px;}
+  .dash-stat .n{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:800;background:linear-gradient(135deg,#6ee7b7,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .dash-stat .lbl{font-size:11px;color:rgba(200,206,224,0.8);margin-top:8px;font-weight:600;}
+  .legend-comp{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:center;align-items:center;margin-bottom:22px;padding:16px 22px;background:rgba(8,12,22,0.55);border:1px solid rgba(51,65,85,0.35);border-radius:14px;}
+  .legend-item{display:flex;align-items:center;gap:10px;}
+  .legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+  .legend-dot.live{background:#22c55e;box-shadow:0 0 12px rgba(34,197,94,0.35);}
+  .legend-dot.partial{background:#f59e0b;box-shadow:0 0 12px rgba(245,158,11,0.25);}
+  .legend-dot.future{background:#ef4444;box-shadow:0 0 12px rgba(239,68,68,0.25);}
+  .legend-item .txt{font-size:14px;font-weight:600;color:#e2e8f0;}
+  .dash-trace-link{text-align:center;margin-bottom:20px;}
+  .dash-trace-link a{font-size:13px;font-weight:600;color:#6ee7b7;text-decoration:none;border-bottom:1px solid rgba(110,231,183,0.35);}
+  .dash-trace-link a:hover{color:#a7f3d0;}
 </style>
 </head>
 <body>
@@ -118,6 +135,20 @@
 
 <div class="container">
 
+<div class="dash-stats">
+  <div class="dash-stat"><div class="n">7</div><div class="lbl">Pipelines</div></div>
+  <div class="dash-stat"><div class="n">28</div><div class="lbl">Agents</div></div>
+  <div class="dash-stat"><div class="n">3</div><div class="lbl">Live now</div></div>
+  <div class="dash-stat"><div class="n">4</div><div class="lbl">MCP integrations</div></div>
+</div>
+
+<div class="legend-comp" aria-label="Pipeline card colours">
+  <div class="legend-item"><span class="legend-dot live" aria-hidden="true"></span><span class="txt">Green: in use</span></div>
+  <div class="legend-item"><span class="legend-dot partial" aria-hidden="true"></span><span class="txt">Amber: partial</span></div>
+  <div class="legend-item"><span class="legend-dot future" aria-hidden="true"></span><span class="txt">Red: roadmap</span></div>
+</div>
+
+<p class="dash-trace-link"><a href="traceability_story.html">End-to-end trace story (separate view) →</a></p>
 
 <!-- ═══ PIPELINE GRID ═══ -->
 <!-- Green: Usable -->
@@ -335,13 +366,6 @@
       <div class="cf-item"><div class="cf-label mono">Net Value</div><div class="cf-val">Runs before every meeting. Even a partially useful briefing eliminates hours of redundant context-gathering each week and ensures alignment from the start.</div></div>
     </div>
   </div>
-</div>
-
-<!-- ═══ LEGEND ═══ -->
-<div class="infra-strip" style="margin-top:8px;">
-  <div class="infra-chip" style="background:rgba(34,197,94,0.12);border-color:#22c55e;color:#4ade80;">Usable</div>
-  <div class="infra-chip" style="background:rgba(245,158,11,0.12);border-color:#f59e0b;color:#fbbf24;">Partial</div>
-  <div class="infra-chip" style="background:rgba(239,68,68,0.12);border-color:#ef4444;color:#f87171;">Future</div>
 </div>
 
 <!-- ═══ MCP SERVERS ═══ -->

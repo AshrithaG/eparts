@@ -127,9 +127,16 @@
   .tl-block.fall { background:rgba(168,85,247,0.08);border-color:rgba(168,85,247,0.2);}
   .tl-label { font-weight:700;color:#c8cee0;margin-bottom:4px;}
   .tl-dates { color:rgba(200,206,224,0.5);margin-bottom:6px;line-height:1.35;}
-  .tl-phases { font-size:8px;line-height:1.5;color:rgba(224,230,240,0.65);font-family:'JetBrains Mono',monospace; }
-
-  .wbs-shell {
+  .tl-row.ppf {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(51,65,85,0.35);
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+  .tl-block.past { background: rgba(34,197,94,0.07); border-color: rgba(34,197,94,0.22);}
+  .tl-block.present { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.22);}
+  .tl-block.future { background: rgba(100,116,139,0.12); border-color: rgba(100,116,139,0.25);}
     max-width:1200px;
     margin:0 auto;
     border-radius:14px;
@@ -177,6 +184,7 @@
   .ws-badge.ws2{background:rgba(245,158,11,0.15);color:#fbbf24;}
   .ws-badge.ws3{background:rgba(59,130,246,0.15);color:#93c5fd;}
   .ws-badge.ws4{background:rgba(168,85,247,0.15);color:#c084fc;}
+  .ws-badge.ws5{background:rgba(45,212,191,0.15);color:#2dd4bf;}
   .ws-badge.pm{background:rgba(56,189,248,0.15);color:#38bdf8;}
   .ws-title {
     font-size:15px;
@@ -256,7 +264,7 @@
   <div class="page-title mono">eParts Intelligent Ingestion Platform</div>
   <div class="page-sub">Work Breakdown Structure (WBS)</div>
 </div>
-<p class="source-note">Derived from deliverable-oriented workstreams WS1-WS4 plus Project Management (<span class="mono">eParts_WBS_Presentation.pdf</span>). Jan 22 - Dec 11, 2026. Expand each workstream for categories and leaf deliverables.</p>
+<p class="source-note">Workstreams <span class="mono">WS1-WS4</span> plus <span class="mono">SES</span> and <span class="mono">PM</span>; phase dates aligned to <span class="mono">eParts_WBS_Presentation.pdf</span> with studio kickoff <strong>Jan 12, 2026</strong>. Spring window shown from kickoff through May 11. Expand each workstream for deliverables.</p>
 
 <div class="toolbar">
   <div class="search-wrap">
@@ -271,27 +279,44 @@
 </div>
 
 <div class="timeline">
-  <h3 class="mono">Project timeline snapshot (from PDF)</h3>
+  <h3 class="mono">Schedule (PDF) + studio kickoff</h3>
   <div class="tl-row">
     <div class="tl-block spring">
       <div class="tl-label">Spring 2026</div>
-      <div class="tl-dates">Jan 22 - May 11</div>
-      <div class="tl-phases">P1 Discovery+SES - P6 Wrap</div>
+      <div class="tl-dates">Jan 12 - May 11</div>
+      <div class="tl-phases">Kickoff · P1 Discovery + SES bootstrap · WS1-WS2 · P6 wrap window</div>
     </div>
     <div class="tl-block summer">
       <div class="tl-label">Summer 2026</div>
       <div class="tl-dates">May 18 - Aug 8</div>
-      <div class="tl-phases">WS3 Core Pipeline, CRIT 2</div>
+      <div class="tl-phases">WS3 Core pipeline · CRIT 2</div>
     </div>
     <div class="tl-block fall">
       <div class="tl-label">Fall 2026</div>
       <div class="tl-dates">Aug 24 - Dec 11</div>
-      <div class="tl-phases">WS4 Integration/UAT - CRIT 3</div>
+      <div class="tl-phases">WS4 Integration/UAT · CRIT 3</div>
     </div>
     <div class="tl-block" style="background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.15);">
-      <div class="tl-label">TODAY marker</div>
-      <div class="tl-dates mono">Apr 28, 2026</div>
-      <div class="tl-phases">As on source PDF</div>
+      <div class="tl-label">Stamp</div>
+      <div class="tl-dates mono">Apr 29, 2026</div>
+      <div class="tl-phases">Present + near-term backlog</div>
+    </div>
+  </div>
+  <div class="tl-row ppf">
+    <div class="tl-block past">
+      <div class="tl-label">Past (done / baselined)</div>
+      <div class="tl-dates mono">Jan 12 - Mar 2026</div>
+      <div class="tl-phases">Discovery, SES skeleton, MCPs + REQ pipeline, dashboards v1</div>
+    </div>
+    <div class="tl-block present">
+      <div class="tl-label">Present (in flight)</div>
+      <div class="tl-dates mono">Apr 2026</div>
+      <div class="tl-phases">ADRs, gateways, SES polish, demos, CRIT readiness</div>
+    </div>
+    <div class="tl-block future">
+      <div class="tl-label">Future</div>
+      <div class="tl-dates mono">May - Dec 2026</div>
+      <div class="tl-phases">WS3 implementation volume · WS4 UAT pilot · SES ops hardening</div>
     </div>
   </div>
 </div>
@@ -299,20 +324,20 @@
 <div class="wbs-shell" id="wbs-root"></div>
 
 <footer>
-  WBS based on deliverable-oriented decomposition per SOW v2. WS3 allocates ~2,160 team-hours (Summer build-out); WS4 ~2,520 team-hours (Fall). Success criteria excerpt: &ge;70% prediction accuracy; reviewer &ge;10 items/min; &le;15 min E2E latency.
+  WBS based on deliverable-oriented decomposition per SOW v2 (<span class="mono">WS1-WS4</span> per PDF); <strong>SES</strong> adds capstone tooling (agents + pipelines). WS3 allocates ~2,160 team-hours (Summer build-out); WS4 ~2,520 team-hours (Fall). Kickoff referenced as Jan 12, 2026. Success criteria excerpt: &ge;70% prediction accuracy; reviewer &ge;10 items/min; &le;15 min E2E latency.
 </footer>
 
 <script>
 const WBS = {
   project: 'eParts Intelligent Ingestion & Attribute Prediction Platform',
-  subtitle: 'Pimsie Supreme | CMU MSE Studio | Jan 22 - Dec 11, 2026',
+  subtitle: 'Pimsie Supreme | CMU MSE Studio | Kickoff Jan 12 - Dec 11, 2026',
   streams: [
     {
       id: 'ws1',
       badge: 'WS1',
       badgeClass: 'ws1',
       title: 'Discovery & Requirements Engineering',
-      period: 'Spring 2026 (Jan 22 - May 4)',
+      period: 'Spring 2026 (Jan 12 - May 4)',
       note: 'Status on PDF: mostly completed. Aligns with Spring phases P1-P2; deliverables completed and baselined.',
       defaultOpen: true,
       categories: [
@@ -378,7 +403,7 @@ const WBS = {
       badgeClass: 'ws2',
       title: 'Architecture & prototyping',
       period: 'Spring - Summer 2026',
-      note: 'Spring portion toward ADRs, ML evaluation & SES baseline complete; ingestion gateway full design + HR UI continues into Summer.',
+      note: 'Spring toward ADRs, ML evaluation baseline, ingestion gateway + HR UI; SES platform workstreams live under WS5.',
       defaultOpen: false,
       categories: [
         {
@@ -416,15 +441,6 @@ const WBS = {
             { label: 'React prototype: source vs prediction views', status: 'in_progress' },
             { label: 'Diff views & reviewer hotkeys', status: 'not_started' },
             { label: 'Throughput target documentation (10 items/min)', status: 'in_progress' }
-          ]
-        },
-        {
-          name: 'Software engineering system (SES)',
-          items: [
-            { label: 'Living SES document (agents, MCPs, memory)', status: 'in_progress' },
-            { label: 'ETVX process surfaces', status: 'in_progress' },
-            { label: 'Measurements (GQIM-aligned)', status: 'in_progress' },
-            { label: 'Resources & coordination model', status: 'in_progress' }
           ]
         }
       ]
@@ -549,12 +565,65 @@ const WBS = {
       ]
     },
     {
+      id: 'ws5',
+      badge: 'SES',
+      badgeClass: 'ws5',
+      title: 'Software Engineering System (agentic SES)',
+      period: 'Jan 12 - Dec 2026 (cross-cutting)',
+      note: 'Capstone tooling: agents, pipelines, shared memory + events, trace graph, MCPs; separate from WS2 product ML architecture but informs it.',
+      defaultOpen: true,
+      categories: [
+        {
+          name: 'Bootstrap & skeleton (past)',
+          items: [
+            { label: 'Repo scaffold: orchestrator, pipeline executor, demo harness', status: 'done' },
+            { label: 'Agent base class + wiki deposit + emit hooks', status: 'done' },
+            { label: 'Pipeline definitions + TRIGGER_PIPELINES registration', status: 'done' },
+            { label: 'SQLite: shared_memory, events, traceability starter', status: 'done' },
+            { label: 'Process + architecture narrative (living SES docs)', status: 'done' },
+            { label: 'ETVX + meta-model linkage (dashboard + docs)', status: 'in_progress' }
+          ]
+        },
+        {
+          name: 'Pipelines & integrations (past / present)',
+          items: [
+            { label: 'Requirements pipeline: transcript parse through drift detector', status: 'done' },
+            { label: 'Coach pipeline + embeddings / session memory path', status: 'done' },
+            { label: 'MCP: Jira · GitHub · Chroma · Confluence', status: 'done' },
+            { label: 'Architecture pipeline slice (ADR + trace stubs)', status: 'in_progress' },
+            { label: 'Project-mgmt pipeline: WBS sync + digest + alerts skeleton', status: 'in_progress' },
+            { label: 'Knowledge / pre-meeting briefing pipeline wiring', status: 'in_progress' },
+            { label: 'Coding + ML-decision pipelines (prod triggers)', status: 'not_started' }
+          ]
+        },
+        {
+          name: 'Traceability & visibility (past / present)',
+          items: [
+            { label: 'Trace graph build + REQ-001 example chains', status: 'done' },
+            { label: 'intelligence.html + traceability_story.html dashboards', status: 'done' },
+            { label: 'interactive_architecture.html + presenter stats strip', status: 'done' },
+            { label: 'Risk register alignment + artifact trace export', status: 'in_progress' }
+          ]
+        },
+        {
+          name: 'Hardening & handoff (present / future)',
+          items: [
+            { label: 'FastAPI webhook queue reliability + retries', status: 'in_progress' },
+            { label: 'Friday cron + pre-meeting jobs (Azure/scheduling)', status: 'not_started' },
+            { label: 'Observability: structured logs metrics for SES runs', status: 'not_started' },
+            { label: 'Runbooks for operators (trigger types, MCP keys)', status: 'not_started' },
+            { label: 'Hand-off demo package for eParts sustaining team', status: 'not_started' }
+          ]
+        }
+      ]
+    },
+    {
       id: 'pm',
       badge: 'PM',
       badgeClass: 'pm',
       title: 'Project management (cross-cutting)',
-      period: 'Continuous Jan - Dec 2026',
-      note: 'Persistent across all semesters.',
+      period: 'Continuous Jan 12 - Dec 2026',
+      note: 'Continuous from Jan 12; cross-cuts WS1-WS5.',
       defaultOpen: false,
       categories: [
         {
