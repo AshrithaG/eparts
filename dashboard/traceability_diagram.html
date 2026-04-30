@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>eParts SES · Traceability diagrams</title>
+<title>SES Traceability · eParts</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Inter:wght@500;600;700&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -124,33 +124,31 @@
   .lw-solid { background: linear-gradient(90deg, #34d399, #38bdf8); box-shadow: 0 0 10px rgba(56, 189, 248, 0.45); }
   .lw-dashed {
     height: 0;
-    border-top: 3px dashed rgba(251, 191, 36, 0.55);
+    border-top: 3px dashed rgba(248, 113, 113, 0.55);
     width: 32px;
+  }
+  .lw-purple {
+    background: linear-gradient(90deg, rgba(129, 140, 248, 0.85), rgba(165, 180, 252, 0.95));
+    box-shadow: 0 0 10px rgba(129, 140, 248, 0.35);
   }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Traceability in two lenses</h1>
-  <p class="sub">Generic model: artifact types live in one <strong class="mono">SQLite graph</strong> (many link types between them). Example: the REQ-001 slice rendered on <span class="mono">traceability_story.html</span>, compressed for slides.</p>
+  <h1>SES Traceability</h1>
 </header>
 
 <nav>
+  <a href="ses_traceability.html">SES Traceability overview</a>
   <a href="traceability_story.html">REQ-001 tree (full text)</a>
   <a href="intelligence.html">Intelligence dashboard</a>
   <a href="interactive_architecture.html">Interactive architecture</a>
 </nav>
 
-<section class="panel" aria-labelledby="g-title">
-  <div class="panel-cap">
-    <span class="tag mono">Generic</span>
-    <h2 id="g-title">How SES thinks about traceability</h2>
-    <p>Everything you see in transcripts, specs, risks, decisions, architecture, tickets can be a node. Directed edges encode meaning: meetings <em>surface</em> concerns, concerns <em>become</em> requirements, requirements <em>decide</em> architecture slices, artifacts <em>mitigate</em> risks and <em>land</em> in Jira. The center is deliberate: commitments stay tied to accountable work.</p>
-  </div>
+<section class="panel" aria-label="SES trace concept graph">
   <div class="svg-wrap">
-    <!-- Generic conceptual graph -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 390" aria-label="Generic trace graph" role="img">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 390" aria-label="SES trace concept graph" role="img">
       <defs>
         <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stop-color="#34d399" stop-opacity="0.95"/>
@@ -252,6 +250,7 @@
   <div class="legend-row">
     <span><span class="lw lw-solid"></span> primary narrative spine</span>
     <span><span class="lw lw-dashed"></span> mitigation / accountability edges</span>
+    <span><span class="lw lw-purple"></span> implements (e.g. requirement → jira_ticket)</span>
   </div>
 </section>
 

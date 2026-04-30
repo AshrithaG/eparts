@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SES Traceability</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Inter:wght@500;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #070a10;
+    color: #cbd5e1;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    padding: 36px 20px 48px;
+    background-image:
+      radial-gradient(ellipse 85% 55% at 50% -15%, rgba(56, 189, 248, 0.1), transparent 52%),
+      linear-gradient(180deg, #070a10 0%, #0c111d 42%, #070a10 100%);
+  }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(52, 211, 153, 0.15);
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #34d399 0%, #22d3ee 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .tagline {
+    margin-top: 10px;
+    font-size: 12px;
+    color: rgba(148, 163, 184, 0.9);
+    line-height: 1.55;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  nav {
+    text-align: center;
+    margin-bottom: 28px;
+    font-size: 13px;
+  }
+  nav a {
+    color: #5eead4;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 0 12px;
+    border-bottom: 1px solid rgba(94, 234, 212, 0.35);
+  }
+  nav a:hover { color: #99f6e4; }
+
+  .panel {
+    max-width: 1100px;
+    margin: 0 auto;
+    border-radius: 18px;
+    border: 1px solid rgba(51, 65, 85, 0.5);
+    background: rgba(10, 14, 24, 0.82);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 24px 56px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+  }
+
+  .svg-wrap {
+    width: 100%;
+    overflow: auto;
+    padding: 14px 12px 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .svg-wrap svg {
+    display: block;
+    min-width: 720px;
+    margin: 0 auto;
+  }
+
+  .legend-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 28px;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 24px 22px;
+    font-size: 10px;
+    color: rgba(148, 163, 184, 0.95);
+    font-family: 'JetBrains Mono', monospace;
+    border-top: 1px solid rgba(51, 65, 85, 0.35);
+  }
+  .legend-row span { display: inline-flex; align-items: center; gap: 8px; }
+  .lw { width: 28px; height: 3px; border-radius: 2px; }
+  .lw-spine {
+    background: linear-gradient(90deg, #34d399, #38bdf8);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+  }
+  .lw-amber {
+    background: rgba(251, 191, 36, 0.75);
+    box-shadow: 0 0 8px rgba(251, 191, 36, 0.25);
+  }
+  .lw-dash {
+    height: 0;
+    border-top: 3px dashed rgba(248, 113, 113, 0.55);
+    width: 32px;
+  }
+  .lw-implements {
+    background: linear-gradient(90deg, #14b8a6, #22d3ee);
+    box-shadow: 0 0 8px rgba(34, 211, 238, 0.35);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SES Traceability</h1>
+  <p class="tagline">How SES work flows in one trace graph: from client conversation into requirements, architecture, risks, and delivery artifacts.</p>
+</header>
+
+<nav>
+  <a href="intelligence.html">Intelligence dashboard</a>
+  <a href="traceability_story.html">REQ-001 story (tree)</a>
+  <a href="traceability_diagram.html">Diagrams · detail slice</a>
+</nav>
+
+<section class="panel" aria-label="Generic SES traceability diagram">
+  <div class="svg-wrap">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 390" aria-label="Generic SES traceability graph" role="img">
+      <defs>
+        <linearGradient id="sesEdgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#34d399" stop-opacity="0.95"/>
+          <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.95"/>
+        </linearGradient>
+        <linearGradient id="sesImplGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#14b8a6" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.9"/>
+        </linearGradient>
+        <linearGradient id="nodeGlowSes" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.1"/>
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="softGlowSes" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="3" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="pulseSes" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="8" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- stage bands -->
+      <rect x="30" y="48" width="190" height="300" rx="14" fill="rgba(96,165,250,0.03)" stroke="rgba(96,165,250,0.12)"/>
+      <rect x="240" y="48" width="180" height="300" rx="14" fill="rgba(251,146,60,0.03)" stroke="rgba(251,146,60,0.1)"/>
+      <rect x="440" y="42" width="200" height="312" rx="14" fill="rgba(52,211,153,0.055)" stroke="rgba(52,211,153,0.2)"/>
+      <rect x="660" y="48" width="190" height="300" rx="14" fill="rgba(34,211,238,0.035)" stroke="rgba(34,211,238,0.14)"/>
+
+      <text x="124" y="72" fill="rgba(148,163,184,0.72)" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="middle">INGRESS</text>
+      <text x="330" y="72" fill="rgba(148,163,184,0.72)" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="middle">UNDERSTANDING</text>
+      <text x="540" y="66" fill="rgba(52,211,153,0.6)" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="middle" font-weight="700">GRAPH CORE</text>
+      <text x="755" y="72" fill="rgba(148,163,184,0.72)" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="middle">DESIGN · RISK · WORK</text>
+
+      <g fill="none" stroke-width="2.2" stroke-linecap="round" filter="url(#softGlowSes)">
+        <path d="M 210 148 Q 318 148 394 174" stroke="url(#sesEdgeGrad)" opacity="0.88"/>
+        <path d="M 210 264 Q 300 268 394 226" stroke="url(#sesEdgeGrad)" opacity="0.78"/>
+        <path d="M 540 218 L 640 218" stroke="rgba(251,191,36,0.58)" stroke-width="2"/>
+        <path d="M 712 246 Q 682 294 548 274" stroke="rgba(248,113,113,0.48)" stroke-dasharray="5 7"/>
+        <path d="M 636 206 Q 694 154 734 174" stroke="rgba(251,191,36,0.52)"/>
+        <path d="M 778 274 L 834 268" stroke="url(#sesImplGrad)" opacity="0.95"/>
+        <path d="M 818 226 Q 834 206 834 186" stroke="rgba(20,184,166,0.55)"/>
+      </g>
+
+      <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="10">
+        <rect x="70" y="118" width="108" height="44" rx="10" fill="rgba(12,18,28,0.95)" stroke="#60a5fa" stroke-width="1.8"/>
+        <text x="124" y="138" fill="#93c5fd" text-anchor="middle" font-weight="700">meeting</text>
+        <text x="124" y="152" fill="rgba(148,163,184,0.82)" text-anchor="middle" font-size="9">transcripts</text>
+
+        <rect x="82" y="244" width="108" height="44" rx="10" fill="rgba(12,18,28,0.95)" stroke="#fb923c" stroke-width="1.8"/>
+        <text x="136" y="264" fill="#fdba74" text-anchor="middle" font-weight="700">concern</text>
+        <text x="136" y="278" fill="rgba(148,163,184,0.82)" text-anchor="middle" font-size="9">what we heard</text>
+
+        <rect x="64" y="312" width="92" height="32" rx="8" fill="rgba(71,85,105,0.12)" stroke="rgba(148,163,184,0.38)" stroke-width="1"/>
+        <text x="110" y="332" fill="#cbd5e1" text-anchor="middle" font-size="9" font-weight="600">coach_session</text>
+
+        <rect x="402" y="184" width="136" height="68" rx="14" fill="rgba(6,95,70,0.32)" stroke="#34d399" stroke-width="2.5" filter="url(#pulseSes)"/>
+        <rect x="408" y="190" width="124" height="22" rx="6" fill="url(#nodeGlowSes)" opacity="0.55"/>
+        <text x="470" y="208" fill="#ecfdf5" text-anchor="middle" font-weight="800" font-size="11">requirement</text>
+        <text x="470" y="232" fill="rgba(209,250,229,0.76)" text-anchor="middle" font-size="9">spec · acceptance · REQ-XXX</text>
+
+        <rect x="644" y="112" width="108" height="44" rx="10" fill="rgba(12,18,28,0.95)" stroke="#fbbf24" stroke-width="1.8"/>
+        <text x="698" y="132" fill="#fcd34d" text-anchor="middle" font-weight="700">decision</text>
+        <text x="698" y="146" fill="rgba(148,163,184,0.82)" text-anchor="middle" font-size="9">locked stance</text>
+
+        <rect x="668" y="216" width="124" height="48" rx="10" fill="rgba(12,18,28,0.95)" stroke="#22d3ee" stroke-width="1.8"/>
+        <text x="730" y="236" fill="#67e8f9" text-anchor="middle" font-weight="700">architecture</text>
+        <text x="730" y="252" fill="rgba(148,163,184,0.82)" text-anchor="middle" font-size="9">ADR canon</text>
+
+        <rect x="820" y="248" width="88" height="40" rx="10" fill="rgba(127,29,29,0.18)" stroke="#f87171" stroke-width="1.8"/>
+        <text x="864" y="272" fill="#fecaca" text-anchor="middle" font-weight="700">risk</text>
+
+        <rect x="806" y="136" width="96" height="40" rx="10" fill="rgba(15,118,110,0.22)" stroke="#2dd4bf" stroke-width="1.85"/>
+        <text x="854" y="158" fill="#ccfbf1" text-anchor="middle" font-weight="700" font-size="9">jira_ticket</text>
+        <text x="854" y="169" fill="rgba(148,163,184,0.88)" text-anchor="middle" font-size="8">backlog linkage</text>
+      </g>
+
+      <g fill="rgba(251,191,36,0.92)" font-size="8.5" font-family="JetBrains Mono, monospace" font-weight="600">
+        <text x="262" y="138" opacity="0.92">raised_in</text>
+        <text x="268" y="268" opacity="0.88">surfaced_as</text>
+        <text x="594" y="210" opacity="0.96">decided_by ↔</text>
+        <text x="732" y="204" opacity="0.88">reflection</text>
+      </g>
+      <g fill="rgba(248,113,113,0.88)" font-size="8.5" font-family="JetBrains Mono, monospace" font-weight="600">
+        <text x="582" y="298">mitigates</text>
+      </g>
+      <g fill="rgba(45,212,191,0.98)" font-size="8.5" font-family="JetBrains Mono, monospace" font-weight="600">
+        <text x="838" y="242">implements</text>
+      </g>
+    </svg>
+  </div>
+  <div class="legend-row">
+    <span><span class="lw lw-spine"></span> primary narrative spine</span>
+    <span><span class="lw lw-amber"></span> decision / reflection</span>
+    <span><span class="lw lw-dash"></span> mitigates (risk linkage)</span>
+    <span><span class="lw lw-implements"></span> implements (requirements → backlog)</span>
+  </div>
+</section>
+
+</body>
+</html>
