@@ -1,82 +1,79 @@
 # Talking script — SES dashboard (6 minutes, technical, no clicks)
 
-**Context:** Agenda **02 — SES + SDLC**. Hand off to **03 — Requirements** when you pivot to trace.  
-**Screens:** **`interactive_architecture.html`**, then **`traceability_story.html`** (tab change only; no interactions).  
-**Pacing:** Short sentences; **[pause]** = breath. If long on time, drop the *[optional]* sentence in §1.
+**Context:** Agenda **02 — SES + SDLC**. Hand off to **Agenda 03 — Requirements** when you pivot to trace.  
+**Screens:** **`interactive_architecture.html`** first, then **`traceability_story.html`** (tab change only).  
+**Timing:** Aim **~6 minutes** of talk; cheatsheet ~15 seconds at end. Short sentences; **[pause]** = breath.  
+**Trim if needed:** drop the chips sentence in §3, or shorten §4 branches line.
 
-Prefer **implementations** over slogans: **pipeline**, **`trigger_type`**, **agent**, **SQLite**, **MCP**, graph **edge**.
-
----
-
-## 0. Agenda hook (~22 s)
-
-“Item **two** is **SDLC choice**, not tooling theater: **SES** treats capstone automation as **versioned pipelines** plus **persisted state**, not lone Chat threads. **[pause]**  
-
-I’ll cover **three things**: tying **engineering practice** to **concrete artifacts and gates**, **how runs execute mechanically**, **what infra is deployed**, then **REQ-001** read off **`traceability.db`** semantics.”
+Plain-language focus: **engineering harness** vs **agentic harness**, **Shared Memory** vs per-run baton, **pipeline → ordered steps → shared agent catalog**, threaded execution—no tour of individual agent class names.
 
 ---
 
-## 1. Engineering harness = practice → artifacts + gates (~55 s)
+## 0. Agenda hook (~20 s)
 
-“**Engineering harness**, on this team, means **each practice area emits inspectable artifacts** with explicit policy. **[pause]**  
+“**Agenda item two** is the **SDLC story**: **SES** runs on **checked-in pipelines** and on **state that survives the chat**—not ask-once tooling. **[pause]**  
 
-Take **requirements**: seven agents in **`PipelineStep` order**, triggered off **`trigger_type`** **`transcript`**. **`transcript_parser`** writes structured **`parsed_minutes`**. **`priority_classifier`** tags **`P0`**, **`P1`**, **`P2`**; **`P0` does not auto-open Jira**—that bypass is deliberate. **`req_extractor`** writes **`REQ-XXX.md`** via **Git**; **`ticket_creator`** uses **MCP-Jira**. **`minutes_publisher`**, **`decision_logger`** write externally where configured. **`drift_detector`** reads **Chroma-retrieved canon** and can **`emit("drift_detected", …)`**. **[pause]**  
-
-That is **engineering harness**: **gates + file formats + external tickets**, enumerated in **`pipeline/pipelines.py`**, not ‘alignment.’ *[optional]* Every step names **`input_keys` / `output_key`** merged into **`PipelineContext`** so downstream reads are deterministic.**[pause]**  
-
-No mysticism—it is **callable code paths** wired to artifacts your sponsor can grep.”
+I’ll do **four beats**: **engineering harness** versus **agentic harness**, **Shared Memory** that keeps adding up, what the **infra page** is listing, then **REQ-001** on **`traceability_story`** to tee up requirements.”
 
 ---
 
-## 2. Agentic harness = DAG + buses (~60 s)
+## 1. Engineering harness versus agentic harness (~75 s)
 
-“**Agentic harness** is **`Pipeline`** composition: register agents in **`orchestrator/registry.py`**, instantiate **`PipelineExecutor`**, run **`execute(pipeline, payload)`**. **[pause]**  
+“The **engineering harness** is our agreement about **what each practice owes in hard form**. **[pause]**  
 
-**Cross-step data** is **`ctx.data`**—upstream **`AgentResult.data`** merges in; **`skip_if_empty`** skips a step cleanly if a prerequisite key is missing. **`BaseAgent`** writes namespaced blobs to **SharedMemory** (namespaced KV); **`emit`** appends **`event_type`** rows to **`events.db`** so **`EventBus.publish`** can fan out to subscribers.**[pause]**  
+A **pipeline** is a **named flow**. Inside it you have **steps in order**, and honest delivery means each step is meant to drop something reviewers can touch—**commits**, **database rows**, **tickets**, **publishes**—not just a narrative. **[pause]**  
 
-**Coding** / **architecture** pipelines show the same skeleton on **`trigger_type`** **`pr_event`**, **`poc_result`**, etc.—not every path is demo-green, but **`TRIGGER_ROUTES`** in **`router`** list what exists today.**[pause]**  
+The **agentic harness** is **how those steps actually run**: **agents** live in **one catalog**, **pipelines** hang together **only** the combinations you registered, and one small **executor** walks the **list step by step**. **[pause]**  
 
-Harness two in one clause: **`PipelineContext`** + **`emit`** + MCP side effects—not one-shot completion APIs.”
+At run time each step inherits a **flat bag** of results from above: upstream **writes keys**, downstream **reads keys**. Steps can **bypass themselves** when a key is missing so the pipeline does not stall. **Same agent type** can repeat in several pipelines—we are **not cloning code** for each flow. **[pause]**  
 
----
-
-## 3. SES infra as inventory (~68 s)
-
-“**`interactive_architecture.html`** is deliberately an **inventory**. **[pause]**  
-
-**Ingress:** transcripts, **`cron_friday_6pm`**, PR hooks—all reduce to **`POST /webhook`** bodies with **`trigger_type`**. **`TaskQueue`** in **FastAPI** runs async **`AgentTrigger`** payloads; **`demo.py`** is synchronous **`PipelineExecutor`** for reproducible scripting.**[pause]**  
-
-You see **seven `Pipeline` constructors** (**requirements**, **`coach_session`**, **`architecture`**, **`project_mgmt`**, **`knowledge`**, **`coding`**, **`ml_decision`**), **twenty-eight agents**. **Green / amber / red**: **deployment maturity** for stakeholder demos, **not subjective quality**. **[pause]**  
-
-**SQLite triple:** **`shared_memory.db`**, **`events.db`**, **`traceability.db`**. Chips list **PromptRegistry**, **risk_register**, metric stores—anything we claim SES ‘owns,’ we pinned on-screen.**[pause]**  
-
-Integrations enumerated are **four MCP-capable backends** (**Jira, GitHub, Chroma, Confluence**). That is the infra list: **routing → execution → persisted buses → outbound MCP**.”
+One line takeaway: **harness one** is **commitments and exits**; **harness two** is **orderly execution and passing the baton** so it behaves like shipped software flows, not like **one mega-prompt** crossing fingers on memory.”
 
 ---
 
-## 4. Traceability → Agenda 03 (~72 s)
+## 2. Shared Memory (~55 s)
 
-“Flip to **`traceability_story.html`**: **REQ-001** root exposes **dual architecture threads** mirrored in ingest: **`MTG-2026-01-22`**, **`ARCH-002`** → **`CON-3d2b20`** → **`REQ-002`** → clustered **risk IDs**; **`ARCH-003`** → **`CON-daffed`** → **`DEC-e9b865`** → **`ARCH-004`**. Tree indent folds graph **`depth`** for readability; **`traceability.db`** edges still encode link types (**`MITIGATES`**, **`BECAME`**, **`DECIDED_BY`**, etc.).**[pause]**  
+“The **per-run baton** differs from **Shared Memory**—the baton **resets when that run completes**; **Shared Memory stays in SQLite** and **keeps growing** across triggers and sessions when we write namespaces on purpose there. **[pause]**  
 
-**Colored pills** enumerate **`artifact_type`** literals—the same taxonomy the **Intelligence** tab loads.**[pause]**  
+So the Tuesday meeting run can stash parsed decisions, the Wednesday follow-up picks them up without retyping the story, telemetry and trace rows can converge on dashboards from the **exported graph**. **[pause]**  
 
-**`traceability_diagram.html`** shows a **concept graph** plus **this REQ skeleton** schematic—optional if slides need a diagram before the text tree.**[pause]**  
+Separate **events SQLite** lets **listeners react** later. **MCP-style** calls to **Jira** or **Git** plug in only where steps say they should. Throughout, the repeatable cord is **pipelines plus memory that piles up** honestly instead of living in **the last transcript alone**.”
 
-Bridge to agenda **three**: requirements here mean **`REQ-*` markdown in Git** wired to **`traceability.db`** link rows, not one-off backlog notes.”
+---
+
+## 3. Infra board (~50 s)
+
+“**`interactive_architecture.html`** reads like a **parts list on one screen**: triggers in, routed pipelines out, persistence spelled out. **[pause]**  
+
+Whatever the source—a **transcript ingest**, **cron**, **Git hook**—you **normalize** to **trigger type** plus **payload**, **routing picks pipeline**, **executor** runs step order you already learned. **[pause]**  
+
+You’ll see **distinct pipelines** pulling from the **same twenty-eight agent registrations**; stripe colors mean **deployment readiness for demos** not product judgment. **Chips** call out **prompts**, **risks**, **ancillary stores**—we put them where **we hide nothing on purpose**.”
+
+---
+
+## 4. Traceability landing (~55 s)
+
+“**`traceability_story.html`** is **REQ-001** as a **fold-out tree**—the **same traced graph** as dashboards, **indented for narration**. **Standards branch** and **extraction branch** mirror how ingest linked **meeting**, **architectures**, **concerns**, **decisions**, **offspring requirements**, and **risks**—**IDs line up** with **`traceability.db`** or the bundled **`traceability_data.json`** the dashboards load. **[pause]**  
+
+For a **diagram first**, open **SES Traceability**—that’s **`ses_traceability.html`**, the SES-wide schematic before you drop into **`traceability_diagram.html`**, which also carries the REQ-001 plus concept panels for slides. **Intelligence** tab holds **full tables same dataset** if auditors ask. **[pause]**  
+
+That primes **Agenda three**—**REQ Markdown in-repo** plus **trace edges**, not orphaned backlog blurbs.”
 
 ---
 
 ## 5. Close (~18 s)
 
-“SES delta vs ‘LLM tooling’: **`PipelineDAG`**, **`SQLite` side effects**, **typed trace edges**. Next: drill **REQ** content—not just graph shape.”
+“What’s distinct here packaged is **ordered automation**, **SQLite memory and trace** that outlast chats, **typed links** you can traverse. Rolling into **Agenda three** opens the **REQ language** itself—not only the topology.”
 
 ---
 
-## Cheatsheet (15 seconds)
+## Cheatsheet (~15 seconds)
 
-| Label | Mechanical meaning |
-|------|---------------------|
-| Engineering harness | **Pipeline-defined outputs**: REQ md, drift emit, ticketing policy. |
-| Agentic harness | **`PipelineExecutor` + `PipelineContext` + `emit`** + MCP **`BaseAgent`**. |
-| Infra chips | Routing, **SQLite buses**, MCP quartet, registries. |
-| REQ-001 slide | Projection of **`traceability.db`** / **`traceability_data.json`** graph. |
+| Label | Plain meaning |
+|------|----------------|
+| Engineering harness | Definition of outputs and gates per practice; pipelines as inspectable promises. |
+| Agentic harness | Registry-backed agents, executor order, keyed hand-offs inside one run. |
+| Shared Memory (+ events SQLite) | Long-lived keyed store; successive runs accumulate. |
+| Infra slide | Trigger → router → pipeline → SQLite (+ optional MCP), agent reuse. |
+| SES Traceability | **`ses_traceability.html`**—generic SES trace schematic (palette / legend on page). |
+| REQ-001 tree | **`traceability_story.html`**—export-accurate fold-out; doorway into REQ docs + trace-backed stories. |
