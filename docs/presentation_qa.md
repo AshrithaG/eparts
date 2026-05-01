@@ -1,5 +1,7 @@
 # eParts Capstone Presentation — Comprehensive Q&A
 
+**SES / SDLC demo (shorter speaker Q&A):** see [`ses_presentation_qa.md`](ses_presentation_qa.md) — harnesses, Shared Memory, trace dashboards, REQ-001 / IDs, Liu handoff.
+
 ---
 
 ## Section 1: Generic Questions
