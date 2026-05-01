@@ -138,7 +138,7 @@
         meeting       (54,108,108,44)  right=162  cy=130
         concern       (54,224,108,44)  right=162  cy=246  bottom=268
         coach_session (52,316, 92,32)  (no connections)
-        requirement  (415,178,140,72)  left=415  right=555  cy=214  bottom=250
+        requirement  (405,178,160,72)  left=405  right=565  cy=214  bottom=250
         decision     (628,106,112,44)  left=628  right=740  cy=128
         architecture (628,222,120,48)  left=628  right=748  cy=246
         jira_ticket  (816,100,104,40)  left=816  cy=120  bottom=140
@@ -208,10 +208,10 @@
       <text x="310" y="72" fill="rgba(148,163,184,0.72)" font-size="10"
             font-family="JetBrains Mono,monospace" text-anchor="middle">UNDERSTANDING</text>
 
-      <!-- GRAPH CORE: x=410–610 -->
-      <rect x="410" y="42" width="200" height="328" rx="14"
+      <!-- GRAPH CORE: x=402–610 -->
+      <rect x="402" y="42" width="208" height="328" rx="14"
             fill="rgba(52,211,153,0.055)" stroke="rgba(52,211,153,0.2)"/>
-      <text x="510" y="66" fill="rgba(52,211,153,0.6)" font-size="10"
+      <text x="506" y="66" fill="rgba(52,211,153,0.6)" font-size="10"
             font-family="JetBrains Mono,monospace" text-anchor="middle"
             font-weight="700">GRAPH CORE</text>
 
@@ -225,22 +225,22 @@
       <g fill="none" stroke-linecap="round">
 
         <!-- 1  meeting → requirement  (raised_in) -->
-        <path d="M 162 130 C 248 130 336 206 415 206"
+        <path d="M 162 130 C 248 130 336 206 405 206"
               stroke="url(#sesEdgeGrad)" stroke-width="2.2" opacity="0.88"
               marker-end="url(#arrowSpine)"/>
 
         <!-- 2  concern → requirement  (surfaced_as) -->
-        <path d="M 162 246 C 248 246 340 228 415 224"
+        <path d="M 162 246 C 248 246 340 228 405 224"
               stroke="url(#sesEdgeGrad)" stroke-width="2.2" opacity="0.78"
               marker-end="url(#arrowSpine)"/>
 
         <!-- 3  requirement → decision  (decides) -->
-        <path d="M 555 205 C 585 178 605 128 628 128"
+        <path d="M 565 205 C 592 178 608 128 628 128"
               stroke="rgba(251,191,36,0.65)" stroke-width="2.1"
               marker-end="url(#arrowAmber)"/>
 
         <!-- 4  requirement → architecture -->
-        <path d="M 555 228 C 585 240 605 246 628 246"
+        <path d="M 565 228 C 592 240 608 246 628 246"
               stroke="rgba(251,191,36,0.45)" stroke-width="2.1"
               marker-end="url(#arrowAmber)"/>
 
@@ -286,8 +286,8 @@
         <rect x="225" y="264" width="68" height="13" rx="3" fill="rgba(7,10,16,0.9)"/>
         <text x="228" y="274" fill="rgba(251,191,36,0.84)">surfaced_as</text>
 
-        <rect x="557" y="142" width="46" height="13" rx="3" fill="rgba(7,10,16,0.9)"/>
-        <text x="560" y="152" fill="rgba(251,191,36,0.92)">decides</text>
+        <rect x="567" y="142" width="46" height="13" rx="3" fill="rgba(7,10,16,0.9)"/>
+        <text x="570" y="152" fill="rgba(251,191,36,0.92)">decides</text>
 
         <rect x="753" y="102" width="48" height="13" rx="3" fill="rgba(7,10,16,0.9)"/>
         <text x="756" y="112" fill="rgba(251,191,36,0.82)">records</text>
@@ -320,15 +320,14 @@
               fill="rgba(71,85,105,0.12)" stroke="rgba(148,163,184,0.38)" stroke-width="1"/>
         <text x="98" y="336" fill="#cbd5e1" text-anchor="middle" font-size="9" font-weight="600">coach_session</text>
 
-        <!-- requirement — central hub -->
-        <rect x="415" y="178" width="140" height="72" rx="14"
+        <!-- requirement — central hub (x=405, w=160 → right=565, center=485) -->
+        <rect x="405" y="178" width="160" height="72" rx="14"
               fill="rgba(6,95,70,0.32)" stroke="#34d399" stroke-width="2.5"
               filter="url(#pulseSes)"/>
-        <rect x="421" y="184" width="128" height="22" rx="6"
+        <rect x="411" y="184" width="148" height="22" rx="6"
               fill="url(#nodeGlowSes)" opacity="0.55"/>
-        <text x="485" y="202" fill="#ecfdf5" text-anchor="middle" font-weight="800" font-size="11">requirement</text>
-        <text x="485" y="224" fill="rgba(209,250,229,0.76)" text-anchor="middle" font-size="9">spec · acceptance · REQ-XXX</text>
-        <text x="485" y="238" fill="rgba(209,250,229,0.50)" text-anchor="middle" font-size="8">confidence_score · threshold</text>
+        <text x="485" y="206" fill="#ecfdf5" text-anchor="middle" font-weight="800" font-size="11">requirement</text>
+        <text x="485" y="228" fill="rgba(209,250,229,0.76)" text-anchor="middle" font-size="9">spec · acceptance · REQ-XXX</text>
 
         <!-- decision -->
         <rect x="628" y="106" width="112" height="44" rx="10"
