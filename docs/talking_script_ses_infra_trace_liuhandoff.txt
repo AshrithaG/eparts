@@ -1,0 +1,66 @@
+Talking script — SES landing · trace weave · REQ-001 → Liu (~4 minutes total)
+
+Flow: high-level infra on interactive_architecture, then SES Traceability (generic), then traceability_story REQ-001, hand SDLC depth to Liu.
+Tone: conversational. Say “saved runs,” “pool of agents,” “memory that survives the chat” instead of jargon unless pressed.
+
+Screens: interactive_architecture.html → ses_traceability.html → traceability_story.html
+
+================================================================================
+PART 1 — What SES is showing you (~2 minutes)
+================================================================================
+
+“On this SES landing view you’re seeing three layers knitted together. 
+First, pipelines. We don’t start from a blank chat every week. Automation is spelled out as a handful of named flows. Each flow is steps in a fixed order—requirements path, coaching path, architecture path, coding checks, whatever we wired into SES. Same pattern everywhere: steps run one after another.
+
+Second, agents—think reusable workers. We register about twenty-eight agent roles once. Different pipelines reuse them in different order. The hierarchy stays simple on purpose: pipelines on top; inside each pipeline, slots in sequence; agents are the interchangeable workers slid into those slots.
+
+Third is the harness—two halves of one idea.
+
+Engineering harness is what we owe in hard copy for each practice: files in Git, requirement markdown, ticket rules, gates we discussed—not vibes alone.
+
+Agentic harness is literally how we march: inside one run earlier steps stash named results later steps consume. A step can bow out politely if upstream left nothing—it doesn’t have to spike the whole pipeline.
+
+Separate from that per-run baton we keep Shared Memory in SQLite—it keeps stacking credible project chunks so tomorrow’s ingest or webhook isn’t rewriting context from fog.
+
+Infrastructure on this slide is just naming what’s real without mysticism: inbound triggers normalize the same shape, routing picks which pipeline wakes up, three small databases anchor shared memory, events, traceability—the plus boxes are integrations we’re not pretending we omitted.
+
+Summed up: ordered pipelines, shared roster of agents, two harness halves plus growing memory—that tees up why traceability later isn’t slideware.” [pause]
+
+
+================================================================================
+PART 2 — We weave that into one trace matrix (~45–55 s)
+================================================================================
+
+“Separate from running jobs we track how artifacts relate.
+
+SES Traceability—that’s ses_traceability.html—is intentionally generic before we deep-dive a requirement: artifact types linked by arrows that encode real relationship names—what rose in a meeting, what became a requirement or decision, how design slices sit on requirements, risks mitigations, backlog hooks.
+
+Think of one matrix tying conversation through commitments into architecture risks and accountable work—we’re not juggling five contradictory decks.” [pause]
+
+
+================================================================================
+PART 3 — REQ-001 in ~1 minute · IDs commits why · hand Liu SDLC (~1 min + handoff)
+================================================================================
+
+“traceability_story unwraps REQ-001 from the same graph the dashboards load—two branches you can read top to bottom—parallel architecture threads off one meeting into concerns, follow-on requirements, decisions, architecture slice, clustered risks—every label is the ingest ID.
+
+Those codes aren’t decoration: REQ numbers match Markdown on disk ARCH anchors ADR-aligned intent CON prefixes what actually worried somebody DEC freezes a stance once we voted it RIS is explicit peril we can mitigation-link.
+
+Because they’re anchored in repos and SQLite exports auditors read provenance—we’re not hallucinating genealogy.
+
+Stakeholder win—one narration from voice recordings into mitigations backlog without archaeology.
+
+Stopping before SDLC religious wars—Liu next walks our deliberate SDLC choice and trade-offs.” 
+
+
+================================================================================
+Whisper cheatsheet (~20 s)
+================================================================================
+
+Pipelines — Named ordered flows
+Agents — Shared pool; pipelines pick sequencing
+Harnesses — Hard outputs + orderly execution mechanics
+Shared Memory — SQLite accumulating context across triggers
+Infra slide — Trigger → routing → pipelines → databases + integrations
+Trace matrix — One graph linking narrative → commitments → architecture → risk → work
+REQ-001 — Demonstrates IDs you can grep in repo + trace export → Liu owns SDLC story

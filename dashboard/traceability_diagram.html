@@ -3,344 +3,264 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SES Traceability · eParts</title>
+<title>Trace diagrams · eParts</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Inter:wght@500;600;700&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    background: #070a10;
-    color: #cbd5e1;
-    font-family: 'Inter', sans-serif;
+    background: #0c0f14;
+    color: #e2e8f0;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    line-height: 1.45;
+    padding: 28px 16px 48px;
     min-height: 100vh;
-    padding: 36px 20px 48px;
-    background-image:
-      radial-gradient(ellipse 90% 60% at 50% -20%, rgba(56, 189, 248, 0.12), transparent 50%),
-      radial-gradient(ellipse 50% 40% at 100% 40%, rgba(139, 92, 246, 0.08), transparent),
-      linear-gradient(180deg, #070a10 0%, #0d111c 45%, #070a10 100%);
   }
-  .mono { font-family: 'JetBrains Mono', monospace; }
+  .mono { font-family: ui-monospace, 'Cascadia Code', monospace; }
 
   header {
     text-align: center;
-    margin-bottom: 28px;
-    padding-bottom: 22px;
-    border-bottom: 1px solid rgba(56, 189, 248, 0.12);
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 28px;
+    max-width: 900px;
+    margin: 0 auto 14px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
   }
-  h1 {
-    font-size: 26px;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #34d399, #38bdf8, #a78bfa);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .sub { margin-top: 10px; font-size: 13px; color: rgba(148, 163, 184, 0.85); max-width: 640px; margin-left: auto; margin-right: auto; line-height: 1.55; }
+  header h1 { font-size: 1.35rem; font-weight: 650; letter-spacing: -0.02em; }
+  header h1 span { color: #2dd4bf; }
 
   nav {
-    text-align: center;
-    margin-bottom: 32px;
-    font-size: 13px;
+    display: flex; flex-wrap: wrap; gap: 8px 16px;
+    justify-content: center;
+    margin-bottom: 26px;
+    font-size: 0.8125rem;
   }
-  nav a {
-    color: #5eead4;
-    font-weight: 600;
-    text-decoration: none;
-    margin: 0 12px;
-    border-bottom: 1px solid rgba(94, 234, 212, 0.35);
-  }
+  nav a { color: #5eead4; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(94,234,212,.35); }
   nav a:hover { color: #99f6e4; }
 
+  .blurb {
+    max-width: 680px;
+    margin: 0 auto 26px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #94a3b8;
+  }
+
   .panel {
-    max-width: 1100px;
-    margin: 0 auto 36px;
-    border-radius: 18px;
-    border: 1px solid rgba(51, 65, 85, 0.5);
-    background: rgba(10, 14, 24, 0.78);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.04),
-      0 24px 64px rgba(0, 0, 0, 0.45),
-      0 0 80px rgba(34, 211, 238, 0.04);
+    max-width: 920px;
+    margin: 0 auto 24px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.09);
+    background: #12171f;
     overflow: hidden;
   }
-  .panel-cap {
-    padding: 20px 24px 6px;
+  .panel-h {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.07);
   }
-  .panel-cap h2 {
-    font-size: 15px;
-    font-weight: 800;
-    color: #f1f5f9;
-    letter-spacing: -0.02em;
-  }
-  .panel-cap p {
-    margin-top: 8px;
-    font-size: 12px;
-    line-height: 1.55;
-    color: rgba(148, 163, 184, 0.95);
-    max-width: 720px;
-  }
-  .panel-cap .tag {
-    display: inline-block;
-    margin-top: 12px;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #22d3ee;
-    border: 1px solid rgba(34, 211, 238, 0.35);
-    padding: 4px 10px;
-    border-radius: 999px;
-  }
+  .panel-h h2 { font-size: 1rem; font-weight: 700; }
+  .panel-h p { margin-top: 6px; font-size: 0.8rem; color: #94a3b8; max-width: 42rem; }
 
-  .svg-wrap {
-    width: 100%;
-    overflow: auto;
-    padding: 8px 12px 20px;
-    -webkit-overflow-scrolling: touch;
+  .simple-flow {
+    padding: 28px 20px 32px;
+    overflow-x: auto;
   }
-  .svg-wrap svg {
-    display: block;
-    min-width: 720px;
+  .flow-row {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 0;
+    min-width: min(100%, 820px);
     margin: 0 auto;
   }
-
-  .legend-row {
+  .flow-step {
+    flex: 1 1 140px;
+    max-width: 200px;
+    background: #1a222e;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 12px;
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .flow-step strong {
+    display: block;
+    font-size: 0.92rem;
+    margin-bottom: 6px;
+    color: #f1f5f9;
+  }
+  .flow-step span.desc {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    line-height: 1.4;
+  }
+  .flow-step.focus {
+    border-color: #34d399;
+    background: rgba(16,185,129,.09);
+    box-shadow: 0 0 0 1px rgba(52,211,153,.2);
+  }
+  .arrow {
     display: flex;
-    flex-wrap: wrap;
-    gap: 16px 28px;
-    justify-content: center;
     align-items: center;
-    padding: 0 24px 20px;
-    font-size: 10px;
-    color: rgba(148, 163, 184, 0.9);
-    font-family: 'JetBrains Mono', monospace;
+    justify-content: center;
+    flex: 0 0 36px;
+    font-size: 1.35rem;
+    color: #64748b;
+    user-select: none;
   }
-  .legend-row span { display: inline-flex; align-items: center; gap: 8px; }
-  .lw { width: 28px; height: 3px; border-radius: 2px; }
-  .lw-solid { background: linear-gradient(90deg, #34d399, #38bdf8); box-shadow: 0 0 10px rgba(56, 189, 248, 0.45); }
-  .lw-dashed {
-    height: 0;
-    border-top: 3px dashed rgba(248, 113, 113, 0.55);
-    width: 32px;
+
+  .foot-note {
+    text-align: center;
+    padding: 0 20px 22px;
+    font-size: 0.76rem;
+    color: #64748b;
   }
-  .lw-purple {
-    background: linear-gradient(90deg, rgba(129, 140, 248, 0.85), rgba(165, 180, 252, 0.95));
-    box-shadow: 0 0 10px rgba(129, 140, 248, 0.35);
+
+  /* REQ-001 */
+  .ex-body { padding: 20px 20px 28px; }
+  .hero-req {
+    text-align: center;
+    padding: 14px 16px;
+    margin-bottom: 22px;
+    border-radius: 12px;
+    border: 2px solid #34d399;
+    background: rgba(16,185,129,.1);
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
   }
+  .hero-req .id { font-size: 1.05rem; font-weight: 800; color: #bbf7d0; }
+  .hero-req .line { font-size: 0.85rem; color: #cbd5e1; margin-top: 4px; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 680px) { .two-col { grid-template-columns: 1fr; } }
+
+  .branch {
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.08);
+    padding: 14px 16px 18px;
+    font-size: 0.82rem;
+  }
+  .branch.a { border-left: 4px solid #34d399; background: rgba(16,185,129,.06); }
+  .branch.b { border-left: 4px solid #22d3ee; background: rgba(34,211,238,.06); }
+  .branch h3 { font-size: 0.82rem; font-weight: 700; margin-bottom: 12px; color: #e2e8f0; }
+  .branch ol { list-style: none; counter-reset: s; padding: 0; }
+  .branch li {
+    counter-increment: s;
+    position: relative;
+    padding: 8px 0 8px 28px;
+    border-bottom: 1px dashed rgba(255,255,255,.06);
+    color: #cbd5e1;
+  }
+  .branch li:last-child { border-bottom: none; }
+  .branch li::before {
+    content: counter(s);
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.08);
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+  }
+  .branch .kind { font-size: 0.68rem; color: #64748b; margin-top: 2px; }
+  .page-foot {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.72rem;
+    color: #64748b;
+  }
+  .page-foot a { color: #5eead4; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>SES Traceability</h1>
+  <h1><span>eParts</span> · trace diagrams (simple)</h1>
 </header>
 
 <nav>
   <a href="ses_traceability.html">SES Traceability overview</a>
-  <a href="traceability_story.html">REQ-001 tree (full text)</a>
+  <a href="traceability_story.html">REQ-001 full tree</a>
   <a href="intelligence.html">Intelligence dashboard</a>
-  <a href="interactive_architecture.html">Interactive architecture</a>
+  <a href="interactive_architecture.html">Architecture</a>
 </nav>
 
-<section class="panel" aria-label="SES trace concept graph">
-  <div class="svg-wrap">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 390" aria-label="SES trace concept graph" role="img">
-      <defs>
-        <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#34d399" stop-opacity="0.95"/>
-          <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.95"/>
-        </linearGradient>
-        <linearGradient id="nodeGlow" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12"/>
-          <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-        </linearGradient>
-        <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
-          <feGaussianBlur stdDeviation="3" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <filter id="pulse" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="8" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
+<p class="blurb">Read left to right. The database keeps real links between these blocks—meetings feed requirements; requirements tie to design, risks, and tickets.</p>
 
-      <!-- faint pillars -->
-      <rect x="30" y="48" width="190" height="300" rx="14" fill="rgba(96,165,250,0.03)" stroke="rgba(96,165,250,0.12)"/>
-      <rect x="240" y="48" width="180" height="300" rx="14" fill="rgba(251,146,60,0.03)" stroke="rgba(251,146,60,0.1)"/>
-      <rect x="440" y="42" width="200" height="312" rx="14" fill="rgba(52,211,153,0.06)" stroke="rgba(52,211,153,0.22)"/>
-      <rect x="660" y="48" width="190" height="300" rx="14" fill="rgba(34,211,238,0.04)" stroke="rgba(34,211,238,0.14)"/>
-
-      <text x="124" y="72" fill="rgba(148,163,184,0.7)" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="middle">INGRESS</text>
-      <text x="330" y="72" fill="rgba(148,163,184,0.7)" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="middle">UNDERSTANDING</text>
-      <text x="540" y="66" fill="rgba(52,211,153,0.55)" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="middle" font-weight="700">GRAPH CORE</text>
-      <text x="755" y="72" fill="rgba(148,163,184,0.7)" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="middle">DESIGN · RISK · WORK</text>
-
-      <!-- edges (under nodes) -->
-      <g fill="none" stroke-width="2.2" stroke-linecap="round" filter="url(#softGlow)">
-        <path d="M 210 148 Q 318 148 394 174" stroke="url(#edgeGrad)" opacity="0.85"/>
-        <path d="M 210 264 Q 300 268 394 226" stroke="url(#edgeGrad)" opacity="0.75"/>
-        <path d="M 540 218 L 640 218" stroke="rgba(251,191,36,0.55)" stroke-width="2"/>
-        <path d="M 712 246 Q 682 294 548 274" stroke="rgba(248,113,113,0.45)" stroke-dasharray="5 7"/>
-        <path d="M 636 206 Q 694 154 734 174" stroke="rgba(251,191,36,0.5)"/>
-        <path d="M 778 274 L 834 268" stroke="rgba(129,140,248,0.55)"/>
-        <path d="M 818 226 Q 834 206 834 186" stroke="rgba(129,140,248,0.35)"/>
-      </g>
-
-      <!-- Nodes -->
-      <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="10">
-        <!-- meeting -->
-        <rect x="70" y="118" width="108" height="44" rx="10" fill="rgba(12,18,28,0.95)" stroke="#60a5fa" stroke-width="1.8"/>
-        <text x="124" y="138" fill="#93c5fd" text-anchor="middle" font-weight="700">meeting</text>
-        <text x="124" y="152" fill="rgba(148,163,184,0.8)" text-anchor="middle" font-size="9">transcripts</text>
-
-        <!-- concern -->
-        <rect x="82" y="244" width="108" height="44" rx="10" fill="rgba(12,18,28,0.95)" stroke="#fb923c" stroke-width="1.8"/>
-        <text x="136" y="264" fill="#fdba74" text-anchor="middle" font-weight="700">concern</text>
-        <text x="136" y="278" fill="rgba(148,163,184,0.8)" text-anchor="middle" font-size="9">what we heard</text>
-
-        <!-- coach optional small -->
-        <rect x="64" y="312" width="92" height="32" rx="8" fill="rgba(192,132,252,0.06)" stroke="rgba(192,132,252,0.38)" stroke-width="1"/>
-        <text x="110" y="332" fill="#d8b4fe" text-anchor="middle" font-size="9" font-weight="600">coach_session</text>
-
-        <!-- requirement CENTER -->
-        <rect x="402" y="184" width="136" height="68" rx="14" fill="rgba(6,95,70,0.35)" stroke="#34d399" stroke-width="2.5" filter="url(#pulse)"/>
-        <rect x="408" y="190" width="124" height="22" rx="6" fill="url(#nodeGlow)" opacity="0.5"/>
-        <text x="470" y="208" fill="#ecfdf5" text-anchor="middle" font-weight="800" font-size="11">requirement</text>
-        <text x="470" y="232" fill="rgba(209,250,229,0.75)" text-anchor="middle" font-size="9">spec + acceptance · REQ-XXX</text>
-
-        <!-- decision -->
-        <rect x="644" y="112" width="108" height="44" rx="10" fill="rgba(12,18,28,0.95)" stroke="#fbbf24" stroke-width="1.8"/>
-        <text x="698" y="132" fill="#fcd34d" text-anchor="middle" font-weight="700">decision</text>
-        <text x="698" y="146" fill="rgba(148,163,184,0.8)" text-anchor="middle" font-size="9">locked stance</text>
-
-        <!-- architecture -->
-        <rect x="668" y="216" width="124" height="48" rx="10" fill="rgba(12,18,28,0.95)" stroke="#22d3ee" stroke-width="1.8"/>
-        <text x="730" y="236" fill="#67e8f9" text-anchor="middle" font-weight="700">architecture</text>
-        <text x="730" y="252" fill="rgba(148,163,184,0.8)" text-anchor="middle" font-size="9">ADR canon</text>
-
-        <!-- risk -->
-        <rect x="820" y="248" width="88" height="40" rx="10" fill="rgba(127,29,29,0.2)" stroke="#f87171" stroke-width="1.8"/>
-        <text x="864" y="272" fill="#fecaca" text-anchor="middle" font-weight="700">risk</text>
-
-        <!-- jira -->
-        <rect x="806" y="136" width="96" height="40" rx="10" fill="rgba(49,46,129,0.35)" stroke="#a5b4fc" stroke-width="1.8"/>
-        <text x="854" y="158" fill="#e0e7ff" text-anchor="middle" font-weight="700" font-size="9">jira_ticket</text>
-        <text x="854" y="169" fill="rgba(148,163,184,0.85)" text-anchor="middle" font-size="8">backlog glue</text>
-      </g>
-
-      <!-- edge labels -->
-      <g fill="rgba(251,191,36,0.9)" font-size="8.5" font-family="JetBrains Mono, monospace" font-weight="600">
-        <text x="262" y="138" opacity="0.9">raised_in</text>
-        <text x="268" y="268" opacity="0.85">surfaced_as</text>
-        <text x="594" y="210" opacity="0.95">decided_by ↔</text>
-        <text x="732" y="204" opacity="0.85">reflection</text>
-      </g>
-      <g fill="rgba(248,113,113,0.85)" font-size="8.5" font-family="JetBrains Mono, monospace" font-weight="600">
-        <text x="582" y="298">mitigates</text>
-      </g>
-      <g fill="rgba(165,180,252,0.95)" font-size="8.5" font-family="JetBrains Mono, monospace" font-weight="600">
-        <text x="838" y="242">implements</text>
-      </g>
-    </svg>
+<section class="panel">
+  <div class="panel-h">
+    <h2>Big picture · one storyline</h2>
+    <p>No graph theory—just “where did this requirement come from, and what did we attach to it?”</p>
   </div>
-  <div class="legend-row">
-    <span><span class="lw lw-solid"></span> primary narrative spine</span>
-    <span><span class="lw lw-dashed"></span> mitigation / accountability edges</span>
-    <span><span class="lw lw-purple"></span> implements (e.g. requirement → jira_ticket)</span>
+  <div class="simple-flow">
+    <div class="flow-row">
+      <div class="flow-step">
+        <strong>1 · Conversations</strong>
+        <span class="desc">Client meetings, coach sessions → we capture worries and commitments.</span>
+      </div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="flow-step focus">
+        <strong>2 · Requirement</strong>
+        <span class="desc">A written REQ (markdown in Git): what “done” means for product work.</span>
+      </div>
+      <span class="arrow">→</span>
+      <div class="flow-step">
+        <strong>3 · Design</strong>
+        <span class="desc">Architecture and decisions—not vague slides; ADR-style intent.</span>
+      </div>
+      <span class="arrow">→</span>
+      <div class="flow-step">
+        <strong>4 · Delivery & safety</strong>
+        <span class="desc">Risks we track · Jira / backlog tying work to those REQs.</span>
+      </div>
+    </div>
+  </div>
+  <p class="foot-note">Technical names in the DB: meetings, concerns, requirements, architectures, decisions, risks, tickets—each gets a stable ID (e.g. REQ-001, ARCH-003).</p>
+</section>
+
+<section class="panel">
+  <div class="panel-h">
+    <h2>Example · REQ-001</h2>
+    <p>One requirement sits in the middle. Two real conversations branched under it—in the ingest this shows up as standards work on the left and ML / extraction work on the right.</p>
+  </div>
+  <div class="ex-body">
+    <div class="hero-req">
+      <div class="mono id">REQ-001</div>
+      <div class="line">Extract product attributes from vendor spec sheets</div>
+    </div>
+    <div class="two-col">
+      <div class="branch a">
+        <h3 class="mono">Standards branch</h3>
+        <ol>
+          <li><span class="mono">MTG-2026-01-22</span><div class="kind">Meeting we traced this to</div></li>
+          <li><span class="mono">ARCH-002</span> Industry standards mapping<div class="kind">Architecture slice</div></li>
+          <li><span class="mono">CON-…</span> Sensitive vendor data<div class="kind">Concern from the transcript</div></li>
+          <li><span class="mono">REQ-002</span> Taxonomy mapping<div class="kind">Follow-on requirement</div></li>
+          <li><span class="mono">RIS-…</span> Related risks flagged & mitigated<div class="kind">Risk records</div></li>
+        </ol>
+      </div>
+      <div class="branch b">
+        <h3 class="mono">ML / extraction branch</h3>
+        <ol>
+          <li>Same starting meeting → <span class="mono">ARCH-003</span><div class="kind">ML confidence scoring</div></li>
+          <li><span class="mono">CON-…</span> LLM vs OCR<div class="kind">Concern</div></li>
+          <li><span class="mono">DEC-…</span> agreed LLM-led extraction goal<div class="kind">Pinned decision</div></li>
+          <li><span class="mono">ARCH-004</span> Staging / review like Git-diff<div class="kind">Architecture</div></li>
+        </ol>
+      </div>
+    </div>
+    <p class="foot-note" style="margin-top:20px">Exact IDs match <span class="mono">traceability_story.html</span> and the trace export—for slides you only need “two threads off one REQ.”</p>
   </div>
 </section>
 
-<section class="panel" aria-labelledby="e-title">
-  <div class="panel-cap">
-    <span class="tag mono">Example slice</span>
-    <h2 id="e-title">REQ-001 chain (dashboard-accurate, compact)</h2>
-    <p>Same topology as your tree board: dual architecture branches under the requirement meeting + standards thread + ML/decision thread. Risks folded as one capsule for readability.</p>
-  </div>
-  <div class="svg-wrap">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 455" aria-label="REQ-001 compact trace diagram" role="img">
-      <defs>
-        <linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.55"/>
-          <stop offset="100%" stop-color="#34d399" stop-opacity="0.45"/>
-        </linearGradient>
-      </defs>
-
-      <rect x="0" y="0" width="920" height="455" fill="transparent"/>
-      <!-- ground line -->
-      <line x1="40" y1="420" x2="880" y2="420" stroke="rgba(51,65,85,0.35)" stroke-width="1"/>
-      <text x="460" y="442" fill="rgba(148,163,184,0.45)" font-size="9" font-family="JetBrains Mono, monospace" text-anchor="middle">traceability_story.html · REQ-001 root</text>
-
-      <g stroke="rgba(71,85,105,0.75)" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M 458 110 L 458 154"/>
-        <path d="M 218 154 L 698 154"/>
-        <path d="M 240 154 L 240 168"/>
-        <path d="M 380 154 L 380 168"/>
-        <path d="M 540 154 L 540 168"/>
-        <path d="M 380 212 L 380 248"/>
-        <path d="M 380 292 L 380 332"/>
-        <path d="M 380 372 L 380 388"/>
-        <path d="M 540 212 L 540 248"/>
-        <path d="M 540 288 L 540 306"/>
-        <path d="M 540 346 L 540 358"/>
-      </g>
-
-      <g font-family="JetBrains Mono, ui-monospace, monospace">
-        <!-- root -->
-        <rect x="350" y="58" width="216" height="52" rx="12" fill="rgba(52,211,153,0.14)" stroke="#34d399" stroke-width="2"/>
-        <text x="458" y="82" fill="#bbf7d0" text-anchor="middle" font-size="11" font-weight="800">REQ-001 requirement</text>
-        <text x="458" y="98" fill="rgba(148,163,184,0.88)" text-anchor="middle" font-size="9">extract vendor attributes</text>
-
-        <!-- L1 -->
-        <rect x="150" y="168" width="180" height="44" rx="10" fill="rgba(12,18,28,0.95)" stroke="#60a5fa" stroke-width="1.7"/>
-        <text x="240" y="190" fill="#dbeafe" text-anchor="middle" font-weight="700" font-size="10">MTG-2026-01-22</text>
-        <text x="240" y="204" fill="rgba(148,163,184,0.8)" text-anchor="middle" font-size="8">meeting</text>
-
-        <rect x="288" y="168" width="184" height="44" rx="10" fill="rgba(12,18,28,0.95)" stroke="#22d3ee" stroke-width="1.7"/>
-        <text x="380" y="190" fill="#bae6fd" text-anchor="middle" font-weight="700" font-size="10">ARCH-002 standards</text>
-        <text x="380" y="204" fill="rgba(148,163,184,0.8)" text-anchor="middle" font-size="8">architecture</text>
-
-        <rect x="448" y="168" width="184" height="44" rx="10" fill="rgba(12,18,28,0.95)" stroke="#22d3ee" stroke-width="1.7"/>
-        <text x="540" y="190" fill="#bae6fd" text-anchor="middle" font-weight="700" font-size="10">ARCH-003 ML scoring</text>
-        <text x="540" y="204" fill="rgba(148,163,184,0.8)" text-anchor="middle" font-size="8">architecture</text>
-
-        <!-- A deep -->
-        <rect x="290" y="248" width="180" height="44" rx="10" fill="rgba(12,18,28,0.95)" stroke="#fb923c" stroke-width="1.7"/>
-        <text x="380" y="270" fill="#ffedd5" text-anchor="middle" font-weight="700" font-size="10">CON-3d2b20 vendor data</text>
-        <text x="380" y="284" fill="rgba(148,163,184,0.78)" text-anchor="middle" font-size="8">concern</text>
-
-        <rect x="294" y="332" width="172" height="40" rx="10" fill="rgba(52,211,153,0.1)" stroke="#34d399" stroke-width="1.6"/>
-        <text x="380" y="352" fill="#d1fae5" text-anchor="middle" font-weight="700" font-size="9">REQ-002 taxonomy</text>
-        <text x="380" y="364" fill="rgba(148,163,184,0.78)" text-anchor="middle" font-size="8">requirement</text>
-
-        <rect x="300" y="372" width="160" height="36" rx="10" fill="rgba(239,68,68,0.12)" stroke="#f87171" stroke-width="1.5"/>
-        <text x="380" y="394" fill="#fecaca" text-anchor="middle" font-weight="700" font-size="9">3 linked risks · mitigated</text>
-
-        <!-- B deep -->
-        <rect x="450" y="248" width="180" height="40" rx="10" fill="rgba(12,18,28,0.95)" stroke="#fb923c" stroke-width="1.7"/>
-        <text x="540" y="268" fill="#ffedd5" text-anchor="middle" font-weight="700" font-size="10">CON-daffed LLM vs OCR</text>
-        <text x="540" y="282" fill="rgba(148,163,184,0.78)" text-anchor="middle" font-size="8">concern</text>
-
-        <rect x="466" y="306" width="148" height="40" rx="10" fill="rgba(251,191,36,0.08)" stroke="#fbbf24" stroke-width="1.6"/>
-        <text x="540" y="326" fill="#fef3c7" text-anchor="middle" font-weight="700" font-size="10">DEC-e9b865 LLM goal</text>
-        <text x="540" y="340" fill="rgba(148,163,184,0.78)" text-anchor="middle" font-size="8">decision</text>
-
-        <rect x="466" y="358" width="148" height="44" rx="10" fill="rgba(12,18,28,0.95)" stroke="#22d3ee" stroke-width="1.7"/>
-        <text x="540" y="378" fill="#bae6fd" text-anchor="middle" font-weight="700" font-size="9">ARCH-004 staging git-diff</text>
-        <text x="540" y="392" fill="rgba(148,163,184,0.78)" text-anchor="middle" font-size="8">architecture</text>
-      </g>
-
-      <!-- ribbons highlight -->
-      <rect x="260" y="144" width="276" height="278" rx="16" fill="none" stroke="url(#ribbon)" stroke-width="1.2" stroke-dasharray="6 10" opacity="0.6"/>
-      <text x="270" y="136" fill="rgba(134,239,172,0.75)" font-size="8.5" font-family="JetBrains Mono, monospace" font-weight="700">standards branch</text>
-      <rect x="430" y="144" width="252" height="278" rx="16" fill="none" stroke="url(#ribbon)" stroke-width="1.2" stroke-dasharray="6 10" opacity="0.35"/>
-      <text x="650" y="136" fill="rgba(103,232,249,0.65)" font-size="8.5" font-family="JetBrains Mono, monospace" font-weight="700">extraction branch</text>
-    </svg>
-  </div>
-</section>
+<p class="page-foot mono">Source data: intelligence ingest · <a href="intelligence.html">intelligence.html</a></p>
 
 </body>
 </html>
