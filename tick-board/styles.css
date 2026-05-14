@@ -1,0 +1,19 @@
+:root {
+  color-scheme: light;
+}
+
+body {
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+}
+
+kbd {
+  font-size: 0.7rem;
+}

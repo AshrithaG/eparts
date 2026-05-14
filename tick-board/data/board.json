@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-05-13T12:00:00Z",
+  "currentTick": {
+    "tickId": "T001",
+    "tickLabel": "Tick A · Week 1",
+    "stream": "A",
+    "startDate": "2026-05-13",
+    "endDate": "2026-05-15",
+    "status": "active"
+  },
+  "cards": [],
+  "ticks": [],
+  "config": {
+    "columns": [
+      "backlog",
+      "spec-ready",
+      "in-build",
+      "in-review",
+      "integrated",
+      "demo-d"
+    ],
+    "tiers": ["T1", "T2", "T3"],
+    "team": [
+      "Hrishikesh",
+      "Ashritha",
+      "Jaivardhan",
+      "Arjun",
+      "Zheliang"
+    ]
+  }
+}
