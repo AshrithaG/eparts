@@ -1,0 +1,37 @@
+# GitHub Pages "Deploy from a branch" only allows publishing from '/' or '/docs',
+# not from '/tick-board'. This workflow publishes the `tick-board/` folder unchanged.
+#
+# After merging: Repo → Settings → Pages → Build & deployment → Source → GitHub Actions.
+name: Deploy tick board (GitHub Pages)
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "tick-board/**"
+      - ".github/workflows/tick-board-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-tick-board
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: tick-board
+      - id: deployment
+        uses: actions/deploy-pages@v4
