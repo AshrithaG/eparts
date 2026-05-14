@@ -6,16 +6,19 @@ The Tick Board is a single-page Kanban web app for **Agentic-Augmented Scrum (AA
 
 ## Live URL
 
-After enabling GitHub Pages for this repo, set:
+**GitHub’s “Deploy from a branch” only allows `/` or `/docs`**, not arbitrary folders like `/tick-board`. This repo publishes the SPA with **GitHub Actions** instead:
 
-- Source: deploy from **`main`** (or default branch).
-- Folder: **`/tick-board`**.
+1. In the repo go to **Settings → Pages**.
+2. Under **Build and deployment**, set **Source** to **GitHub Actions** (not “Deploy from a branch”).
+3. Push or merge commits that touch `tick-board/` or `.github/workflows/tick-board-pages.yml`, or open **Actions** and rerun **Deploy tick board (GitHub Pages)**.
 
-Typical URL:
+Typical URL (board is served at your project site root):
 
-`https://<your-org>.github.io/eparts/tick-board/`
+`https://<your-username>.github.io/eparts/`
 
-(Replace org and repo name if yours differ.)
+(Replace with your GitHub username and repo name.)
+
+**Alternative (no Actions):** copy the static assets (`index.html`, `app.js`, `github-sync.js`, `styles.css`) into `docs/tick-board/` in the repo and set Pages source to **`/docs`**. Keep `tick-board/data/board.json` at repo root for API paths; the UI still talks to GitHub via the API, not that file over HTTP.
 
 ---
 
