@@ -1,0 +1,49 @@
+# Layer 4 — sigma calibration grid + loss weighting.
+# Implements V1_Engineering_Spec §5.3 (with an amended sigma grid — see below).
+#
+# Per-ProductType grid search on the validation split to minimize
+#   val_loss(sigma) = BrierScore + lambda_cal * ECE
+#
+# ---------------------------------------------------------------------------
+# IMPORTANT — sigma grid amendment (2026-05-19, M3c finding)
+# ---------------------------------------------------------------------------
+# The spec §5.3 default grid {0.1, 0.3, 0.5, 1.0, 2.0, 5.0} is empirically
+# INVALID on our actual Mahalanobis-distance distribution and would
+# collapse every full-cluster confidence to ~0:
+#
+#   * Low-sample clusters use implicit-identity Sigma_inv (squared
+#     Euclidean on L2-normalized vectors), d^2 in [0, 4]. Spec grid works.
+#   * Full clusters (N >= 5) use real Ledoit-Wolf Sigma_inv which
+#     amplifies, observed d^2 in [6500, 22700]. With sigma <= 5,
+#     exp(-d^2 / 2 sigma^2) saturates to 0 (exp(-6500/50) ~ 1e-57).
+#
+# Empirical verification: scripts/m3c_semantic_demo.py with the spec grid
+# returns conf_embed = 0.0000 on full clusters across every query.
+#
+# New grid below spans both regimes: small sigmas for low-sample
+# clusters, large sigmas for full clusters. M4's per-PT grid search will
+# pick the right point per ProductType.
+#
+# DO NOT shrink this grid without first reading the finding doc:
+#   memory/project_m3c_sigma_calibration_gap.md
+#
+# Spec-deviation status: §5.3 lists the original grid as TUNABLE
+# (encoder, FAISS params, sigma grid are all listed in §6.2 as
+# design-review-free), so this amendment does not require a client
+# review — but it does need to surface in the M5 evaluation report so
+# downstream readers understand why the published numbers differ from
+# spec §5.3 expectations.
+# ---------------------------------------------------------------------------
+
+sigma_grid: [0.5, 1.0, 5.0, 10.0, 30.0, 80.0, 150.0, 300.0]
+lambda_cal: 0.5
+
+# Secondary calibration pass (post-grid) on OCR'd text from
+# 1A_Product_Document_Links to mitigate the optimism caveat in §5.3.
+# Disabled until the OCR cache exists.
+secondary_calibration:
+  enabled: false
+  ocr_cache_path: "data/ocr_cache/"
+
+# Brier/ECE bin count for the reliability diagram (§5.5).
+reliability_bins: 10

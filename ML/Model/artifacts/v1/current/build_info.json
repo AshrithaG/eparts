@@ -1,0 +1,14 @@
+{
+  "run_id": "run_20260518_193055",
+  "encoder_model_id": "BAAI/bge-small-en-v1.5",
+  "encoder_dim": 384,
+  "n_indexed": 197928,
+  "n_skipped_blank": 219,
+  "limit": null,
+  "faiss_index_type": "IVFFlat",
+  "faiss_nlist": 512,
+  "faiss_nprobe": 16,
+  "faiss_top_k": 50,
+  "encode_seconds": 5903.1,
+  "index_build_seconds": 3.5
+}

@@ -1,0 +1,41 @@
+rank,kind,product_id,attribute_name,true_value,predicted_value,conf_final,pt_id,pt_name
+1,high_conf_miss,213432,COLOR TEMP,4100K,5000K,0.2999999617973926,727,LED Lamps - CF-LED
+2,high_conf_miss,112799,ENCLOSURE SIZE [ H X W ],36 x 24,24 x 24,0.2999979734330281,354,Pre-Fabricated Panels
+3,high_conf_miss,112797,ENCLOSURE SIZE [ H X W ],36 x 30,24 x 24,0.2999977909040327,354,Pre-Fabricated Panels
+4,high_conf_miss,113208,ENCLOSURE SIZE [ H X W ],20 x 16,24 x 24,0.299997639371305,354,Pre-Fabricated Panels
+5,high_conf_miss,265451,FRAME,145T FRAME,143T FRAME,0.29998770819640785,773,Permanent Magnet Motors
+6,high_conf_miss,114495,dValveFailPosition,Electronic Fail-Safe | Normally Open/Fail Open,Non-Spring Return,0.29998216042688164,388,Pressure Independent Valves & Actuators
+7,high_conf_miss,114495,dValveInputSignal,On/Off,On/Off & Floating Point,0.29998216042688164,388,Pressure Independent Valves & Actuators
+8,high_conf_miss,264527,FRAME,182T FRAME,143T FRAME,0.29997685908234456,773,Permanent Magnet Motors
+9,high_conf_miss,263980,FRAME,184T FRAME,143T FRAME,0.2999687752359792,773,Permanent Magnet Motors
+10,high_conf_miss,263980,FRAME,182T FRAME,143T FRAME,0.2999687752359792,773,Permanent Magnet Motors
+11,high_conf_miss,264525,FRAME,143TC FRAME,143T FRAME,0.29993049777853964,773,Permanent Magnet Motors
+12,high_conf_miss,264525,FRAME,145TC FRAME,143T FRAME,0.29993049777853964,773,Permanent Magnet Motors
+13,high_conf_miss,263989,FRAME,213TC FRAME,143T FRAME,0.29992871789680026,773,Permanent Magnet Motors
+14,high_conf_miss,194883,DEPTH,NOMINAL 03.00 IN.,NOMINAL 06.00 IN.,0.29989914734499135,653,NEMA 4X/Non-Metallic
+15,high_conf_miss,194819,KNOCKOUTS,YES,NO,0.29989591815224786,653,NEMA 4X/Non-Metallic
+16,high_conf_miss,386980,KNOCKOUTS,YES,NO,0.29989591815224786,653,NEMA 4X/Non-Metallic
+17,high_conf_miss,385412,KNOCKOUTS,YES,NO,0.29989591815224786,653,NEMA 4X/Non-Metallic
+18,high_conf_miss,194910,KNOCKOUTS,YES,NO,0.29989591815224786,653,NEMA 4X/Non-Metallic
+19,high_conf_miss,194910,SUBPANEL,NO,AVAILABLE,0.2998277560149019,653,NEMA 4X/Non-Metallic
+20,high_conf_miss,385412,SUBPANEL,NO,AVAILABLE,0.2998277560149019,653,NEMA 4X/Non-Metallic
+1,low_conf_hit,203618,MOUNTING STYLE,CEILING MOUNT,CEILING MOUNT,0.0,352,Occupancy Sensors
+2,low_conf_hit,9941,CIRCUIT BREAKER,NO,NO,0.0,32,Control Transformers
+3,low_conf_hit,146431,DISPLAY,NO,NO,0.0,335,Combination Humidity/ Temp Duct
+4,low_conf_hit,395003,NUMBER OF POLES,1 POLE,1 POLE,0.0,93,General Purpose Relays
+5,low_conf_hit,127533,WELL MATERIAL,BRASS,BRASS,0.0,258,Accessories - Temperature
+6,low_conf_hit,19561,LED,YES,YES,0.0,156,Current Sensors
+7,low_conf_hit,373486,DISPLAY,NO,NO,0.0,335,Combination Humidity/ Temp Duct
+8,low_conf_hit,163646,MOUNTING STYLE,CEILING MOUNT,CEILING MOUNT,0.0,352,Occupancy Sensors
+9,low_conf_hit,335626,DISPLAY,NO,NO,0.0,335,Combination Humidity/ Temp Duct
+10,low_conf_hit,395002,NUMBER OF POLES,1 POLE,1 POLE,0.0,93,General Purpose Relays
+11,low_conf_hit,380674,ILLUMINATION,NON-ILLUMINATED,NON-ILLUMINATED,0.0,328,Emergency Operator Stations
+12,low_conf_hit,379841,MANAGED,UNMANAGED,UNMANAGED,0.0,379,Switches
+13,low_conf_hit,259236,DATA LOGGING,NONE,NONE,0.0,104,KW/ KWH Energy/Power Meters
+14,low_conf_hit,259236,DISPLAY,NONE,NONE,0.0,104,KW/ KWH Energy/Power Meters
+15,low_conf_hit,395842,DISPLAY,NO,NO,0.0,335,Combination Humidity/ Temp Duct
+16,low_conf_hit,19561,THRESHOLD,ADJUSTABLE,ADJUSTABLE,0.0,156,Current Sensors
+17,low_conf_hit,273055,OUTPUT SIGNAL,RESISTANCE,RESISTANCE,0.0,896,Remote Probe - Humidity
+18,low_conf_hit,379759,MANAGED,UNMANAGED,UNMANAGED,0.0,379,Switches
+19,low_conf_hit,120193,DISPLAY,NO,NO,0.0,335,Combination Humidity/ Temp Duct
+20,low_conf_hit,380911,MANAGED,UNMANAGED,UNMANAGED,0.0,379,Switches

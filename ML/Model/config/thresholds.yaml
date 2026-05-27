@@ -1,0 +1,38 @@
+# Layer 2 / 3 / 4 — thresholds & confidence scoring constants.
+# Implements V1_Engineering_Spec §4.2, §4.3 [3c]/[3d], §4.4, §6.1.
+#
+# Items marked FROZEN are part of the client-facing Continuity Contract
+# (§6.1) — changing them requires a new design review and a new spec.
+# Items marked TUNABLE may be adjusted by the team per §6.2.
+
+# --- Layer 2 rule-engine confidences (FROZEN: §4.2 output contract) ---
+rule_engine:
+  conf_exact_part_number: 1.0    # terminal — Layer 3 skipped (FROZEN)
+  conf_manufacturer_fuzzy: 0.85
+  conf_partial: 0.65
+  conf_no_match: 0.0
+  manufacturer_fuzzy_min_score: 90   # rapidfuzz.token_set_ratio threshold
+
+# --- Layer 3 ProductType consensus bands (TUNABLE: §6.2) ---
+product_type_consensus:
+  band_high: 0.80         # >= → "high consensus"
+  band_low: 0.60          # < → "ambiguous"; cap conf_final at 0.75
+
+# --- Layer 3 cluster sample bounds (TUNABLE: §6.2) ---
+clusters:
+  min_size: 5             # clusters below this are flagged low-sample
+  low_sample_conf_cap: 0.7
+
+# --- Layer 4 fusion (FROZEN: §6.1) ---
+fusion:
+  alpha: 0.7              # conf_final = alpha * conf_rule + (1-alpha) * conf_embed_final  (FROZEN)
+  pt_ambiguity_cap: 0.75  # cap when PT_conf < band_low
+
+# --- Layer 4 decision thresholds (FROZEN: §6.1) ---
+decision:
+  auto_process: 0.85
+  human_review_floor: 0.50
+
+# --- Layer 4 online updates (FROZEN: §6.1) ---
+online_updates:
+  pushback_lambda: 0.01   # error pushback coefficient (FROZEN)

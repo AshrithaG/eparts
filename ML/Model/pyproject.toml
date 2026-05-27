@@ -1,0 +1,97 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eparts-model"
+version = "0.1.0"
+description = "eParts ML Confidence Scoring System — V1"
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+# ---------------------------------------------------------------------------
+# Test runner
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -q"
+
+# ---------------------------------------------------------------------------
+# Code style — ruff (lint) + black (format)
+# Other teams consume this code; consistent style is non-negotiable.
+# ---------------------------------------------------------------------------
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["data", "the_standard_data", "artifacts", "reports", "pic"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort (import order)
+    "B",    # bugbear (likely bugs)
+    "C4",   # comprehensions
+    "UP",   # pyupgrade
+    "SIM",  # simplifications
+    "N",    # naming (PEP 8) — relaxed for spec vocab below
+    "D",    # pydocstyle — enforce docstrings on public APIs
+    "ANN",  # missing type annotations
+    "RUF",  # ruff-specific
+]
+ignore = [
+    "D100", # missing docstring in public module (already covered case-by-case)
+    "D104", # missing docstring in public package
+    "D107", # missing docstring in __init__ (covered by class docstring)
+    "D203", # one-blank-line-before-class (conflicts with D211)
+    "D213", # multi-line-summary-second-line (conflicts with D212)
+    "ANN101", "ANN102", # self/cls annotations
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D", "ANN"]            # tests don't need docstrings or full annotations
+"scripts/**" = ["D"]                  # scripts use module-level docstring only
+"**/__init__.py" = ["F401"]           # re-exports are intentional
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.pep8-naming]
+# Spec vocabulary (Mahalanobis math, prior coefficients) uses single-letter
+# and Greek-derived names. Keep them readable, don't force snake_case rewrites.
+extend-ignore-names = ["D", "K", "N", "alpha", "lambda_*", "mu_*", "sigma_*", "PT_*"]
+
+# ---------------------------------------------------------------------------
+# Static typing — mypy
+# ---------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+disallow_untyped_decorators = false
+namespace_packages = true
+explicit_package_bases = true
+files = ["src", "scripts"]
+
+[[tool.mypy.overrides]]
+module = [
+    "faiss",
+    "faiss.*",
+    "sentence_transformers",
+    "sentence_transformers.*",
+    "pdfplumber",
+    "pdfplumber.*",
+    "pytesseract",
+    "rapidfuzz",
+    "rapidfuzz.*",
+]
+ignore_missing_imports = true

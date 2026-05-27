@@ -1,0 +1,1474 @@
+Date: Thu, 5 Feb 2026 04:49:30 +0000 (UTC)
+Message-ID: <58405974.29.1770266970488@da9c7b6891d3>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_28_979501760.1770266970488"
+
+------=_Part_28_979501760.1770266970488
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>eParts Product Specification Document</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        table {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+
+        table td, table th {
+            border: solid 1px;
+            padding: 5px;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font: var(--ds-font-body-small, Arial, Helvetica, FreeSans, sans-se=
+rif);
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: var(--ds-surface, #fff) !important;
+        color: var(--ds-text, #000) !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: var(--ds-text, #000);
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        page-break-after: avoid;
+    }
+
+    pre {
+        font: var(--ds-font-code, Monaco, "Courier New", monospace);
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    /* CONF-28544 cannot print multiple pages in IE */
+    #splitter-content {
+        position: relative !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>eParts Product Specification Document</h1>
+    <div class=3D"Section1">
+        <h1 id=3D"ePartsProductSpecificationDocument-ePartsServicesDataStra=
+tegy"><strong>eParts Services Data Strategy</strong></h1>
+<h2 id=3D"ePartsProductSpecificationDocument-ProductSpecificationDocument">=
+<strong>Product Specification Document</strong></h2>
+<p><strong>Version 1.6.</strong></p>
+<h2 id=3D"ePartsProductSpecificationDocument-VersionHistoryTable"><strong>V=
+ersion History Table</strong></h2>
+<div class=3D"table-wrap">
+<table data-table-width=3D"760" data-layout=3D"default" data-local-id=3D"6e=
+3af9c7-ebd3-490d-933d-53c93b4d63b2" class=3D"confluenceTable">
+<tbody>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>Version</strong></p></td>
+<td class=3D"confluenceTd">
+<p><strong>Date</strong></p></td>
+<td class=3D"confluenceTd">
+<p><strong>Change Description</strong></p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p>1.0.</p></td>
+<td class=3D"confluenceTd">
+<p>24th February, 2025</p></td>
+<td class=3D"confluenceTd">
+<p>Initial Document</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p>1.1.</p></td>
+<td class=3D"confluenceTd">
+<p>1st April, 2025</p></td>
+<td class=3D"confluenceTd">
+<p>Structuring Requirements</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p>1.2.</p></td>
+<td class=3D"confluenceTd">
+<p>7th April 2025</p></td>
+<td class=3D"confluenceTd">
+<p>Refined capabilities, added use cases, quality attributes, constraints, =
+operators, and traceability. Updated glossary.</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p>1.3.</p></td>
+<td class=3D"confluenceTd">
+<p>8th April 2025</p></td>
+<td class=3D"confluenceTd">
+<p>Further refinements done addressing comments given during internal team =
+review 1 conducted on April 8. Updated structuring and numbering of the doc=
+ument.</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p>1.4.</p></td>
+<td class=3D"confluenceTd">
+<p>10th April 2025</p></td>
+<td class=3D"confluenceTd">
+<p>Addressing internal review comments and suggestions</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p>1.5</p></td>
+<td class=3D"confluenceTd">
+<p>13th April 2025</p></td>
+<td class=3D"confluenceTd">
+<p>Addressing client comments and suggestions</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p>1.6.</p></td>
+<td class=3D"confluenceTd">
+<p>22nd April 2025</p></td>
+<td class=3D"confluenceTd">
+<p>Prioritization and final remediations</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p>1.7</p></td>
+<td class=3D"confluenceTd">
+<p><time datetime=3D"2025-09-01" class=3D"date-past">2025=E5=B9=B49=E6=9C=
+=881=E6=97=A5</time></p></td>
+<td class=3D"confluenceTd">
+<p>Expanded Machine Learning (CAP-ML) requirements to prioritize MLOps read=
+iness.(Reprioritization of Milestones)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Table of Contents:</strong></p>
+<style type=3D"text/css">/*<![CDATA[*/
+div.rbtoc1770266970466 {padding: 0px;}
+div.rbtoc1770266970466 ul {list-style: none;margin-left: 0px;padding-left: =
+;}
+div.rbtoc1770266970466 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style>
+<div class=3D"toc-macro rbtoc1770266970466">
+<ul class=3D"toc-indentation">
+<li><a href=3D"#ePartsProductSpecificationDocument-ProductSpecificationDocu=
+ment">Product Specification Document</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-VersionHistoryTable">Ver=
+sion History Table</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-1.Purpose">1. Purpose</a=
+></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-2.Operators">2. Operator=
+s</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-3.Personas">3. Personas<=
+/a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-4.ProductDescription">4.=
+ Product Description</a>
+<ul class=3D"toc-indentation">
+<li><a href=3D"#ePartsProductSpecificationDocument-4.1.ConceptualModel">4.1=
+. Conceptual Model</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-4.2.High-LevelRequiremen=
+ts">4.2. High-Level Requirements</a></li>
+</ul></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-5.UseCases">5. Use Cases=
+</a>
+<ul class=3D"toc-indentation">
+<li><a href=3D"#ePartsProductSpecificationDocument-5.1.UC1">5.1. UC1</a></l=
+i>
+<li><a href=3D"#ePartsProductSpecificationDocument-5.2.UC2">5.2. UC2</a></l=
+i>
+<li><a href=3D"#ePartsProductSpecificationDocument-5.3.UC3">5.3. UC3</a></l=
+i>
+<li><a href=3D"#ePartsProductSpecificationDocument-5.4.UC4">5.4. UC4</a></l=
+i>
+<li><a href=3D"#ePartsProductSpecificationDocument-5.5.UC5">5.5. UC5</a></l=
+i>
+<li><a href=3D"#ePartsProductSpecificationDocument-5.6.UC6">5.6. UC6</a></l=
+i>
+<li><a href=3D"#ePartsProductSpecificationDocument-5.7.UC7">5.7. UC7</a></l=
+i>
+<li><a href=3D"#ePartsProductSpecificationDocument-5.8.UC8">5.8. UC8</a></l=
+i>
+<li><a href=3D"#ePartsProductSpecificationDocument-5.9.UC9">5.9. UC9</a></l=
+i>
+</ul></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-6.SystemCapabilities(Fun=
+ctionalRequirements)">6. System Capabilities (Functional Requirements)</a>
+<ul class=3D"toc-indentation">
+<li><a href=3D"#ePartsProductSpecificationDocument-6.1.DataIngestion(CAP-DI=
+)">6.1. Data Ingestion (CAP-DI)</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-6.2.DataStorage&amp;Mana=
+gement(CAP-DSM)">6.2. Data Storage &amp; Management (CAP-DSM)</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-6.3.DataAccess&amp;Query=
+ing(CAP-DAQ)">6.3. Data Access &amp; Querying (CAP-DAQ)</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-6.4.Reporting&amp;Analyt=
+ics(CAP-RA)">6.4. Reporting &amp; Analytics (CAP-RA)</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-6.5.MachineLearning(CAP-=
+ML)">6.5. Machine Learning (CAP-ML)</a></li>
+</ul></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-7.QualityAttributes(Non-=
+FunctionalRequirements)">7. Quality Attributes (Non-Functional Requirements=
+)</a>
+<ul class=3D"toc-indentation">
+<li><a href=3D"#ePartsProductSpecificationDocument-7.1.Security(QA-SEC)">7.=
+1. Security (QA-SEC)</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-7.2.Extensibility(QA-EXT=
+)">7.2. Extensibility (QA-EXT)</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-7.3.Usability(QA-USAB)">=
+7.3. Usability (QA-USAB)</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-7.4.Interoperability(QA-=
+INT)">7.4. Interoperability (QA-INT)</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-7.5.Portability(QA-PORT)=
+">7.5. Portability (QA-PORT)</a></li>
+</ul></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-8.Constraints">8. Constr=
+aints</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-9.OperationalScenarios">=
+9. Operational Scenarios</a>
+<ul class=3D"toc-indentation">
+<li><a href=3D"#ePartsProductSpecificationDocument-9.1.OS-01:TenantBIReport=
+ingviaPowerBI">9.1. OS-01: Tenant BI Reporting via Power BI</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-9.2.OS-02:SearchingforaR=
+ecentOrder(NearReal-Time)">9.2. OS-02: Searching for a Recent Order (Near R=
+eal-Time)</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-9.3.OS-03:CreatingandUsi=
+ngaSavedQuery">9.3. OS-03: Creating and Using a Saved Query</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-9.4.OS-04:Recoveringfrom=
+SimulatedDataLoss">9.4. OS-04: Recovering from Simulated Data Loss</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-9.5.OS-05:ProcessingaVen=
+dorInvoicePDFviaSFTP">9.5. OS-05: Processing a Vendor Invoice PDF via SFTP<=
+/a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-9.6.OS-06:TenantCustomer=
+AccessesOwnOrderHistory">9.6. OS-06: Tenant Customer Accesses Own Order His=
+tory</a></li>
+</ul></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-10.SystemOverview">10. S=
+ystem Overview</a></li>
+<li><a href=3D"#ePartsProductSpecificationDocument-11.Glossary">11. Glossar=
+y</a></li>
+</ul>
+</div>
+<h2 id=3D"ePartsProductSpecificationDocument-1.Purpose"><strong>1. Purpose<=
+/strong></h2>
+<p>The eParts Services Data Strategy aims to establish a modern, secure, po=
+rtable [QA-PORT], performant, and cost-effective data platform. This platfo=
+rm will consolidate data from various sources (initially including those ho=
+sted on Microsoft Azure [CON-03]), enabling data processing, advanced analy=
+tics, enhanced reporting capabilities, MLOps readiness, and secure data acc=
+ess for internal eParts users, tenants (customers), and potentially partner=
+s. The platform will provide MLOps readiness, a managed model registry and =
+promotion workflow, a versioned online/offline feature store, experiment tr=
+acking, secure inference/serving endpoints, telemetry for live model perfor=
+mance &amp; drift, provisioning for model updates (e.g., canary/blue-green)=
+, and a new tenant-scoped API to support MLOps.</p>
+<p>The key objectives are to replace legacy reporting systems, improve data=
+ accessibility and searchability, enable reproducible and governed ML, ensu=
+re robust data governance [CON-01] supporting granular access needs identif=
+ied in personas (e.g., PS1-PS13), support integration with BI tools [CAP-DA=
+Q-03], enhance operational efficiency while managing costs effectively [CON=
+-02], and minimize vendor lock-in [QA-PORT].</p>
+<h2 id=3D"ePartsProductSpecificationDocument-2.Operators">2. Operators</h2>
+<p>The primary operators of the eParts Data Strategy platform will include:=
+</p>
+<p style=3D"margin-left: 30.0px;"><strong>2.1. eParts Developers:</strong> =
+Responsible for building, extending, and maintaining the platform's compone=
+nts, including ingestion pipelines, APIs, and reporting tools. (See Persona=
+s: PS3, PS4)</p>
+<p style=3D"margin-left: 30.0px;"><strong>2.2. eParts MLOps/Data Science Te=
+am:</strong> Responsible for developing, deploying, and managing machine le=
+arning models and the associated infrastructure [CAP-ML-01, CAP-ML-02]. Own=
+s the model registry, experiment tracking, feature store, model serving, an=
+d performance telemetry.</p>
+<p style=3D"margin-left: 30.0px;"><strong>2.3. eParts IT/Infrastructure Tea=
+m:</strong> Responsible for managing the underlying cloud infrastructure (A=
+zure), monitoring system health, and ensuring security and availability [QA=
+-SEC].</p>
+<p style=3D"margin-left: 30.0px;"><strong>2.4. Tenant Administrators:</stro=
+ng> Will have operational roles related to managing their specific users or=
+ accessing certain platform features, governed by RBAC [QA-SEC-01], [CAP-DS=
+M-05]. (See Personas: PS8, PS9)</p>
+<p style=3D"margin-left: 30.0px;"><strong>2.5 Customers of tenants: </stron=
+g>Customers buying from various tenants who are interested in seeing their =
+spending and order metrics through dashboards.</p>
+<h2 id=3D"ePartsProductSpecificationDocument-3.Personas"><strong>3. Persona=
+s</strong></h2>
+<p>Please refer to the <a href=3D"https://epartsservices.atlassian.net/wiki=
+/x/FgC-F" rel=3D"nofollow">Personas</a>.</p>
+<h2 id=3D"ePartsProductSpecificationDocument-4.ProductDescription"><strong>=
+4. Product Description</strong></h2>
+<p>Please refer to the <a href=3D"https://epartsservices.atlassian.net/wiki=
+/x/G4C4F" rel=3D"nofollow">Product Description</a> for in depth product des=
+cription.</p>
+<p>The eParts Data Strategy Platform is envisioned as a cloud-native data p=
+latform solution, designed with <a href=3D"https://epartsservices.atlassian=
+.net/wiki/spaces/CMU2026/pages/818610219/eParts+Product+Specification+Docum=
+ent#7.-Quality-Attributes-(Non-Functional-Requirements)" rel=3D"nofollow">v=
+arious quality attributes</a> in mind. It will ingest data from diverse sou=
+rces including relational databases (SQL Server transitioning to Azure SQL/=
+Managed Instance) [CAP-DI-01, CON-03], file stores (Azure Blob Storage, SFT=
+P) [CAP-DI-02, CON-03], real-time feeds (UPS) [CAP-DI-03], and logs [CAP-DI=
+-04].</p>
+<h3 id=3D"ePartsProductSpecificationDocument-4.1.ConceptualModel"><strong>4=
+.1. Conceptual Model</strong></h3>
+<p>The platform will feature:</p>
+<p style=3D"margin-left: 30.0px;"><strong>4.1.1. Configurable data ingestio=
+n pipelines</strong> supporting batch and near real-time processing (levera=
+ging CDC) [CAP-DI-05, CAP-DI-06, CAP-DI-07], including data transformation =
+[CAP-DI-09].</p>
+<p style=3D"margin-left: 30.0px;"><strong>4.1.2. A centralized cloud-based =
+data repository</strong> A centralized cloud-based data repository [CAP-DSM=
+-01] supporting structured and unstructured data, ensuring logical tenant d=
+ata isolation and potentially customer-level scoping within tenants [CAP-DS=
+M-05].</p>
+<p style=3D"margin-left: 30.0px;"><strong>4.1.3. Robust data governance enf=
+orced via Auth0 integration</strong> Robust data governance enforced via Au=
+th0 integration [CON-01], including multi-level RBAC [QA-SEC-01], user acti=
+vity tracking [CAP-DSM-06], data deletion capabilities [CAP-DSM-04, CON-06]=
+, and data warehouse permissions (wherever required).</p>
+<p style=3D"margin-left: 30.0px;"><strong>4.1.4. Data access layers providi=
+ng APIs </strong>for internal applications, tenant/partner BI tools [CAP-DA=
+Q-02, CAP-DAQ-03], and ad-hoc querying [CAP-DAQ-01], designed using standar=
+d protocols where feasible to enhance portability [QA-PORT].</p>
+<p style=3D"margin-left: 30.0px;"><strong>4.1.5. An enhanced reporting syst=
+em </strong>with template creation, customization, ad-hoc capabilities [CAP=
+-RA-01, CAP-RA-02, CAP-RA-03, CAP-RA-05], saved queries [CAP-RA-08], schedu=
+led delivery [CAP-RA-06], and CSV export [CAP-RA-09].</p>
+<p style=3D"margin-left: 30.0px;"><strong>4.1.6. A dashboarding system </st=
+rong>which would show historical and real-time data suited to the needs of =
+the individuals using it. [CAP-RA-01].</p>
+<p style=3D"margin-left: 30.0px;"><strong>4.1.7. Infrastructure [CAP-ML-01]=
+, tooling [CAP-ML-02], and data access </strong>to support the ML lifecycle=
+<strong> </strong>for use cases like shipping estimation, vendor rating, an=
+omaly detection, and inventory management.</p>
+<p style=3D"margin-left: 30.0px;"><strong>4.1.8. MLOps readiness services</=
+strong>: Managed model registry, feature store, experiment tracking, infere=
+nce/serving endpoints, and live telemetry for model performance &amp; drift=
+.</p>
+<p style=3D"margin-left: 30.0px;"><strong>4.1.9. Mechanisms for automated b=
+ackup [CAP-DSM-07], recovery [CAP-DSM-04, QA-AVRL-01], and resilience [QA-A=
+VRL-02].</strong></p>
+<p>The platform aims to be extensible [QA-MAINT-01], maintainable [QA-MAINT=
+-02], and portable [QA-PORT], providing a foundation for future data-driven=
+ initiatives at eParts while mitigating vendor lock-in risks.</p>
+<p>Please refer to the <a href=3D"https://epartsservices.atlassian.net/wiki=
+/spaces/CMU2026/pages/818610498/Notional+Architecture" data-linked-resource=
+-id=3D"818610498" data-linked-resource-version=3D"1" data-linked-resource-t=
+ype=3D"page">Notional Architecture</a> for further details on the conceptua=
+l model.</p>
+<h3 id=3D"ePartsProductSpecificationDocument-4.2.High-LevelRequirements"><s=
+trong>4.2. High-Level Requirements</strong></h3>
+<p style=3D"margin-left: 30.0px;"><strong>4.2.1.</strong> The system shall =
+support data ingestion from multiple sources within 5 seconds.</p>
+<p style=3D"margin-left: 30.0px;"><strong>4.2.2.</strong> The system shall =
+allow tenants to access only their own data.</p>
+<p style=3D"margin-left: 30.0px;"><strong>4.2.3. </strong>The system shall =
+provide a robust analytics dashboard.</p>
+<p style=3D"margin-left: 30.0px;"><strong>4.2.4.</strong> The system shall =
+provide an end-to-end MLOps platform that supports model training, versioni=
+ng, and operational deployment.</p>
+<p style=3D"margin-left: 30.0px;"><strong>4.2.5.</strong> The MLOps platfor=
+m shall serve model predictions through a secure, tenant-aware API with per=
+formance monitoring.</p>
+<p style=3D"margin-left: 30.0px;"><strong>4.2.6.</strong> The system shall =
+integrate with Elastic Search for writing data.</p>
+<p><strong>Key Assumption:</strong> =E2=80=9CAll the requirements and desig=
+ning is done assuming that all the tenant data can be aggregated together i=
+n a single database=E2=80=9C</p>
+<h2 id=3D"ePartsProductSpecificationDocument-5.UseCases"><strong>5. Use Cas=
+es</strong></h2>
+<p>(Derived primarily from April 1st 2025 Interviews, Persona documents (PS=
+1-PS13) and Client Meetings)</p>
+<h3 id=3D"ePartsProductSpecificationDocument-5.1.UC1"><strong>5.1. UC1</str=
+ong></h3>
+<ul>
+<li>
+<p>Global Tenant &amp; Usage Oversight (eParts Leadership/Admin - e.g., Leo=
+ PS1, Jeb PS2, Diva PS3, Jade PS5):</p>
+<ul>
+<li>
+<p>Goal: Understand overall platform health, tenant activity, sales trends,=
+ and perform administrative actions across all tenants.</p></li>
+<li>
+<p>Scenario: Leo (COO) wants a dashboard showing key operational metrics ac=
+ross all tenants. Jeb (CPO) needs to audit user activity logs [CAP-DSM-06] =
+for a specific tenant. Diva (Architect) needs to manage RBAC roles [QA-SEC-=
+01]. Leo wants to run a saved custom query [CAP-RA-08] showing product perf=
+ormance trends and export the results to CSV [CAP-RA-09] for further analys=
+is in Excel. He also wants this report scheduled monthly [CAP-RA-06].</p></=
+li>
+<li>
+<p>Related Capabilities/Qualities: [CAP-RA-01], [CAP-RA-07], [CAP-DSM-06], =
+[QA-USAB-01], [CAP-DAQ-01], [QA-SEC-01], [CAP-RA-08], [CAP-RA-09], [CAP-RA-=
+06]</p></li>
+</ul></li>
+</ul>
+<h3 id=3D"ePartsProductSpecificationDocument-5.2.UC2"><strong>5.2. UC2</str=
+ong></h3>
+<ul>
+<li>
+<p>Efficient PO Analysis &amp; Shipping Estimation (Tenant Data Manager / T=
+enant Admin - e.g., Eddy PS8, Baron PS9):</p>
+<ul>
+<li>
+<p>Goal: Reduce manual effort in aggregating purchase order data, get relia=
+ble shipping cost estimates, and manage tenant-specific reporting.</p></li>
+<li>
+<p>Scenario: A Data Manager needs to analyze POs for his tenant, check hist=
+orical price changes [CAP-DSM-02], and get shipping estimates. Eddy (Tenant=
+ President) wants to execute a saved report template [CAP-RA-02] showing hi=
+s tenant's monthly spending and export it to CSV [CAP-RA-09]. Baron (Tenant=
+ Sales Mgr) needs to run an ad-hoc query [CAP-RA-03] on sales performance a=
+nd manage user access for his team [CAP-DSM-05].</p></li>
+<li>
+<p>Related Capabilities/Qualities: [CAP-DI-05], [CAP-DSM-02], [CAP-RA-03], =
+[CAP-RA-05], [QA-USAB-01], [CAP-RA-02], [CAP-RA-09], [CAP-DSM-05], [QA-SEC-=
+01]</p></li>
+</ul></li>
+</ul>
+<h3 id=3D"ePartsProductSpecificationDocument-5.3.UC3"><strong>5.3. UC3</str=
+ong></h3>
+<ul>
+<li>
+<p>Scoped Reporting &amp; Support (eParts Global User - e.g., Raine PS4, Dr=
+ew PS6, Brock PS7 / Tenant User - e.g., Carlos PS10, Arnold PS11):</p>
+<ul>
+<li>
+<p>Goal: Access specific data and reports relevant to assigned roles, proje=
+cts, or tenants.</p></li>
+<li>
+<p>Scenario: Raine (Developer) needs access to logs [CAP-DSM-06] and query =
+data [CAP-DAQ-01] for a specific tenant she's working on, but not others [Q=
+A-SEC-01]. Drew (Support) needs to view standard dashboards [CAP-RA-01] for=
+ a tenant to troubleshoot an issue. Brock (Sales) needs user analytics [CAP=
+-RA-07] for his assigned tenants. Carlos (Tenant Acct Mgr) needs to run a s=
+aved query [CAP-RA-08] showing sales history for his accounts and export to=
+ CSV [CAP-RA-09]. Arnold (Tenant CSR) needs access to a subset of standard =
+reports [CAP-RA-01].</p></li>
+<li>
+<p>Related Capabilities/Qualities: [CAP-DSM-01], [CAP-RA-03], [CAP-RA-05], =
+[CAP-DAQ-01], [QA-SEC-01], [CAP-RA-01], [CAP-RA-07], [CAP-RA-08], [CAP-RA-0=
+9]</p></li>
+</ul></li>
+</ul>
+<h3 id=3D"ePartsProductSpecificationDocument-5.4.UC4"><strong>5.4. UC4</str=
+ong></h3>
+<ul>
+<li>
+<p>External BI Tool Integration (Tenant Analyst / Partner):</p>
+<ul>
+<li>
+<p>Goal: Allow tenants or partners to analyze their permitted data using th=
+eir preferred external Business Intelligence tools.</p></li>
+<li>
+<p>Scenario: A tenant analyst wants to connect their company's Power BI ins=
+tance to the eParts data platform [CAP-DAQ-03] to create custom dashboards =
+visualizing their order history. They authenticate via Auth0 [CON-01], acce=
+ss only their tenant's data [QA-SEC-01], and expect reasonable query perfor=
+mance. A partner like Siemens might use a similar API [CAP-DAQ-02] to pull =
+agreed-upon aggregated data.</p></li>
+<li>
+<p>Related Capabilities/Qualities: [CAP-DAQ-03], [CAP-DAQ-04], [QA-SEC-01],=
+ [CAP-DAQ-02]</p></li>
+</ul></li>
+</ul>
+<h3 id=3D"ePartsProductSpecificationDocument-5.5.UC5"><strong>5.5. UC5</str=
+ong></h3>
+<ul>
+<li>
+<p>Near Real-Time Order Tracking (Customer Service - e.g., Jade PS5, Drew P=
+S6):</p>
+<ul>
+<li>
+<p>Goal: Quickly find and provide status updates for recent customer orders=
+.</p></li>
+<li>
+<p>Scenario: A customer calls inquiring about an order. The support agent u=
+ses a search interface to look up the order. The system returns the latest =
+status reflected from near real-time CDC updates [CAP-DI-05, CAP-DAQ-05] wi=
+thin 5 seconds.</p></li>
+<li>
+<p>Related Capabilities/Qualities: [CAP-DI-05], [CAP-DAQ-05]</p></li>
+</ul></li>
+</ul>
+<h3 id=3D"ePartsProductSpecificationDocument-5.6.UC6"><strong>5.6. UC6 </st=
+rong></h3>
+<ul>
+<li>
+<p>Vendor Performance Monitoring (eParts Analyst):</p>
+<ul>
+<li>
+<p>Goal: Track vendor reliability and data quality.</p></li>
+<li>
+<p>Scenario: An analyst reviews vendor metrics like document submission tim=
+es [CAP-DI-10] and data accuracy. The system logs file receipts [CAP-DSM-06=
+] and potentially flags vendors [CAP-DI-02]. This data might feed an ML ven=
+dor scorecard.</p></li>
+<li>
+<p>Related Capabilities/Qualities: [CAP-DI-02], [CAP-DI-10], [CAP-DSM-06] (=
+Ref: Feb 6-Logging, Flagging)</p></li>
+</ul></li>
+</ul>
+<h3 id=3D"ePartsProductSpecificationDocument-5.7.UC7"><strong>5.7. UC7</str=
+ong></h3>
+<ul>
+<li>
+<p>Tenant Customer Reporting (Tenant Customer - e.g., Shawn PS12):</p>
+<ul>
+<li>
+<p>Goal: Allow end-customers of tenants to access reports specific to their=
+ own company's interactions.</p></li>
+<li>
+<p>Scenario: Shawn (Project Engineer at a tenant's customer) needs to run a=
+ monthly report [CAP-RA-06] showing his company's order history for a speci=
+fic product line. He needs access scoped only to his company's data within =
+the tenant's environment [CAP-DSM-05]. He wants to save a custom query [CAP=
+-RA-08] and export results to CSV [CAP-RA-09].</p></li>
+<li>
+<p>Related Capabilities/Qualities: [CAP-RA-01], [CAP-RA-06], [CAP-RA-08], [=
+CAP-RA-09], [CAP-DSM-05], [QA-SEC-01]</p></li>
+</ul></li>
+</ul>
+<h3 id=3D"ePartsProductSpecificationDocument-5.8.UC8"><strong>5.8. UC8</str=
+ong></h3>
+<ul>
+<li>
+<p>Online Inference &amp; Telemetry (Tenant-Facing App / eParts Backend =E2=
+=80=93 e.g. Raine PS4):</p>
+<ul>
+<li>
+<p>Goal<strong>:</strong> Serve low-latency, reliable predictions with live=
+ health/performance visibility.</p></li>
+<li>
+<p>Scenario<strong>:</strong> The support app requests a shipping-time pred=
+iction; the backend calls the inference endpoint [CAP-ML-06] via the MLOps =
+API [CAP-DAQ-07]. The response includes prediction and model/version/stage.=
+ Telemetry captures latency, errors, and data/target drift [CAP-ML-07]; ale=
+rts surface on threshold breaches [QA-OBS-01]. Access is authenticated and =
+tenant-scoped [QA-SEC-01].</p></li>
+<li>
+<p>Related Capabilities/Qualities: [CAP-ML-06], [CAP-ML-07], [CAP-DAQ-07], =
+[QA-SEC-01], [QA-OBS-01]</p></li>
+</ul></li>
+</ul>
+<h3 id=3D"ePartsProductSpecificationDocument-5.9.UC9"><strong>5.9. UC9 </st=
+rong></h3>
+<ul>
+<li>
+<p>Model Registry, Feature Store &amp; Promotion (eParts MLOps/Data Science=
+ =E2=80=93 e.g., Raine PS4):</p>
+<ul>
+<li>
+<p>Goal: Ensure governed, reproducible ML with safe rollout and rollback.</=
+p></li>
+<li>
+<p>Scenario: Raine defines reusable features and publishes them to the feat=
+ure store (online/offline) [CAP-ML-04] with lineage/artifact storage [CAP-D=
+SM-10] and versioning [CAP-DSM-11]. A point-in-time training set is built [=
+CAP-DSM-13], logged to experiment tracking [CAP-ML-05], and the trained mod=
+el is registered [CAP-ML-03]; then reviews KPIs.</p></li>
+<li>
+<p>Related Capabilities/Qualities: [CAP-ML-03], [CAP-ML-04], [CAP-ML-05], [=
+CAP-ML-08], [CAP-DAQ-07], [CAP-DSM-10], [CAP-DSM-11], [CAP-DSM-13], [QA-OBS=
+-01], [QA-SEC-01]</p></li>
+</ul></li>
+</ul>
+<h2 id=3D"ePartsProductSpecificationDocument-6.SystemCapabilities(Functiona=
+lRequirements)"><strong>6. System Capabilities (Functional Requirements)</s=
+trong></h2>
+<h3 id=3D"ePartsProductSpecificationDocument-6.1.DataIngestion(CAP-DI)"><st=
+rong>6.1. Data Ingestion (CAP-DI)</strong></h3>
+<div class=3D"table-wrap">
+<table data-table-width=3D"760" data-layout=3D"default" data-local-id=3D"44=
+91925a-2f64-4842-a09e-a2cfe18664a8" class=3D"confluenceTable">
+<colgroup>
+<col style=3D"width: 144.0px;">
+<col style=3D"width: 516.0px;">
+<col style=3D"width: 98.0px;">
+</colgroup>
+<tbody>
+<tr>
+<th class=3D"confluenceTh">
+<p><strong>Requirement ID</strong></p></th>
+<th class=3D"confluenceTh">
+<p><strong>Description</strong></p></th>
+<th class=3D"confluenceTh">
+<p><strong>Priority</strong></p></th>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DI-01</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall ingest data from designated SQL Server databases (inclu=
+ding source systems planned for migration to Azure SQL/Managed Instance). [=
+CON-03]</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DI-03</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall ingest data from various specified external feeds (e.g.=
+, UPS shipping data). [CON-03]</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DI-05</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall support Change Data Capture (CDC) streams from designat=
+ed SQL Server tables for data synchronization. [UC2], [UC5]</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DI-06</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall provide authorized operators the flexibility to trigger=
+ specific ingestion processes on demand.</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DI-07</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall allow configuration to prioritize ingestion streams bas=
+ed on data criticality or type (e.g., real-time vs. batch).</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DI-08</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall provide a defined process to facilitate the integration=
+ of new data sources in the future. [QA-MAINT-01]</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DI-02</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall ingest files from Azure Blob Storage and SFTP locations=
+, supporting formats including JSON, CSV, and text. [CON-03], [UC6]</p></td=
+>
+<td class=3D"confluenceTd">
+<p>SHOULD</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DI-09</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall provide capabilities for transforming source data based=
+ on defined schemas or mappings (e.g., via a mapping engine).</p></td>
+<td class=3D"confluenceTd">
+<p>SHOULD</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DI-04</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall ingest Application Performance Monitoring (APM) and app=
+lication logging data from specified sources.</p></td>
+<td class=3D"confluenceTd">
+<p>COULD</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id=3D"ePartsProductSpecificationDocument-6.2.DataStorage&amp;Management=
+(CAP-DSM)"><strong>6.2. Data Storage &amp; Management (CAP-DSM)</strong></h=
+3>
+<div class=3D"table-wrap">
+<table data-table-width=3D"760" data-layout=3D"default" data-local-id=3D"35=
+a269c1-03a2-4ac6-b508-ee9c2fef9281" class=3D"confluenceTable">
+<colgroup>
+<col style=3D"width: 142.0px;">
+<col style=3D"width: 526.0px;">
+<col style=3D"width: 90.0px;">
+</colgroup>
+<tbody>
+<tr>
+<th class=3D"confluenceTh">
+<p><strong>Requirement ID</strong></p></th>
+<th class=3D"confluenceTh">
+<p><strong>Description</strong></p></th>
+<th class=3D"confluenceTh">
+<p><strong>Priority</strong></p></th>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DSM-01</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall store ingested and processed data in a centralized clou=
+d-based data warehouse. [UC3]</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DSM-02</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall provide mechanisms for storing and accessing historical=
+ versions of data or data changes (e.g., through processed CDC streams or s=
+napshotting). [UC2]</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DSM-03</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall provide a secure mechanism for authorized personnel to =
+delete specific customer or tenant data upon request, in compliance with pr=
+ivacy regulations. [CON-06]</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DSM-04</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall implement automated, regular (e.g., daily) data backup =
+procedures, storing backups in a detached, secure location, and provide def=
+ined data recovery capabilities aligned with RPO/RTO targets [QA-AVRL-01].<=
+/p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DSM-05</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall implement data governance policies, including role-base=
+d access control (RBAC) integrated with Auth0 [CON-01], to enforce logical =
+separation of tenant data [QA-SEC-01], allow administration of roles/permis=
+sions within a tenant by Tenant Administrators [UC2, PS8, PS9], and support=
+ data scoping to specific customer entities within a tenant where applicabl=
+e [UC7, PS12]. [QA-SEC-01]</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DSM-06</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall log activities performed by users (internal and potenti=
+ally tenant/customer, where appropriate) within the data platform for audit=
+ and monitoring purposes. [UC1], [UC6], [QA-SEC-01], [PS2, PS3, PS4, PS5]</=
+p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DSM-08</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall provide data in a normalized or structured form suitabl=
+e for relational querying and BI tools where required. [QA-PORT-01]</p></td=
+>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong> CAP-DSM-09</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall support the storage and querying of temporal data (data=
+ valid over specific time periods).</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DSM-07</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall allow data retention policies to be configured, potenti=
+ally on a per-tenant or per-data-type basis.</p></td>
+<td class=3D"confluenceTd">
+<p>COULD</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id=3D"ePartsProductSpecificationDocument-6.3.DataAccess&amp;Querying(CA=
+P-DAQ)"><strong>6.3. Data Access &amp; Querying (CAP-DAQ)</strong></h3>
+<div class=3D"table-wrap">
+<table data-table-width=3D"760" data-layout=3D"default" data-local-id=3D"31=
+9bb2b8-1ac4-4907-ace4-f65d431d5c3a" class=3D"confluenceTable">
+<colgroup>
+<col style=3D"width: 139.0px;">
+<col style=3D"width: 527.0px;">
+<col style=3D"width: 92.0px;">
+</colgroup>
+<tbody>
+<tr>
+<th class=3D"confluenceTh">
+<p><strong>Requirement ID</strong></p></th>
+<th class=3D"confluenceTh">
+<p><strong>Description</strong></p></th>
+<th class=3D"confluenceTh">
+<p><strong>Priority</strong></p></th>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong> CAP-DAQ-01</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall allow authorized users (including Global Admins, scoped=
+ Global Users, Tenant Admins, scoped Tenant Users, and scoped Tenant Custom=
+ers) to execute queries against the data they are permitted to access, resp=
+ecting defined governance policies [CAP-DSM-05]. [UC1], [UC3], [QA-SEC-01]<=
+/p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DAQ-02</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall provide documented APIs enabling authorized third-party=
+ applications to retrieve processed data or analytics results.[UC4] [QA-INT=
+-02]</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DAQ-03</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall provide documented APIs specifically designed for integ=
+ration with external Business Intelligence (BI) tools (e.g., Power BI, Tabl=
+eau), using standard protocols where feasible [QA-PORT]. [UC4], [QA-INT-01]=
+, [PS1, PS2, PS3, PS4, PS5, PS6, PS7, PS9] [CON-01]</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DAQ-05</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The search capability shall index data relevant for quick retrieval, spe=
+cifically including shipment and order data. [UC5]</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-DAQ-06</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall support the creation and maintenance of denormalized da=
+ta views specifically optimized for search performance (e.g., for catalog a=
+nd order search).</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id=3D"ePartsProductSpecificationDocument-6.4.Reporting&amp;Analytics(CA=
+P-RA)"><strong>6.4. Reporting &amp; Analytics (CAP-RA)</strong></h3>
+<div class=3D"table-wrap">
+<table data-table-width=3D"760" data-layout=3D"default" data-local-id=3D"a0=
+a4868d-57dd-482a-afe3-b26a31a57b2f" class=3D"confluenceTable">
+<colgroup>
+<col style=3D"width: 140.0px;">
+<col style=3D"width: 523.0px;">
+<col style=3D"width: 95.0px;">
+</colgroup>
+<tbody>
+<tr>
+<th class=3D"confluenceTh">
+<p><strong>Requirement ID</strong></p></th>
+<th class=3D"confluenceTh">
+<p><strong>Description</strong></p></th>
+<th class=3D"confluenceTh">
+<p><strong>Priority</strong></p></th>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-RA-01</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall provide web-based dashboards for visualizing key metric=
+s and exploring data, respecting user access permissions [CAP-DAQ-01, CAP-D=
+SM-05]. [UC1], [UC3], [UC7], [PS1, PS2, PS3, PS5, PS6, PS7, PS8, PS9, PS10,=
+ PS11, PS12]</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-RA-06</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall support scheduling the automatic generation and deliver=
+y (e.g., via email) of predefined reports or saved queries [CAP-RA-08]. [UC=
+1], [UC7], [PS1, PS6, PS7, PS12]</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-RA-07</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall support reporting and analytics on key business dimensi=
+ons including, but not limited to, product performance, brand performance, =
+order volumes, vendor interactions, system usage patterns (user analytics),=
+ and login activity, respecting data access permissions [CAP-DAQ-01, CAP-DS=
+M-05]. [UC1], [UC3], [PS1, PS2, PS3, PS4, PS5, PS7]</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-RA-08</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall allow report results and query results to be exported o=
+r delivered in CSV format. [UC1], [UC2], [UC3], [UC7], [PS1, PS6, PS7, PS8,=
+ PS9, PS10, PS12]</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-RA-02</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall allow authorized eParts users (e.g., Global Admins, cer=
+tain Global Users) to create, manage, and deploy reusable report templates.=
+ Tenant users shall be able to execute permitted templates. [UC2], [UC3], [=
+UC7], [PS8, PS9, PS10, PS12]</p></td>
+<td class=3D"confluenceTd">
+<p>SHOULD</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-RA-03</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall enable authorized users to generate and save ad-hoc rep=
+orts based on the data they are permitted to access [CAP-DAQ-01, CAP-DSM-05=
+]. [UC1], [UC2], [UC3], [PS1, PS2, PS3, PS4, PS5, PS6, PS7, PS9, PS12]</p><=
+/td>
+<td class=3D"confluenceTd">
+<p>SHOULD</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-RA-04</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system architecture shall have a dedicated process for report delive=
+ry (e.g., emailing). [QA-MAINT-02]</p></td>
+<td class=3D"confluenceTd">
+<p>SHOULD</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-RA-05</strong></p></td>
+<td class=3D"confluenceTd">
+<p>The system shall provide a user interface, potentially including drag-an=
+d-drop features, to facilitate report creation for users with varying techn=
+ical skills. [UC2], [UC3], [QA-USAB-01]</p></td>
+<td class=3D"confluenceTd">
+<p>SHOULD</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id=3D"ePartsProductSpecificationDocument-6.5.MachineLearning(CAP-ML)"><=
+strong>6.5. Machine Learning (CAP-ML)</strong></h3>
+<div class=3D"table-wrap">
+<table data-table-width=3D"760" data-layout=3D"default" data-local-id=3D"85=
+599259-3a9b-4d83-8143-623fbb4ca6da" class=3D"confluenceTable">
+<colgroup>
+<col style=3D"width: 139.0px;">
+<col style=3D"width: 525.0px;">
+<col style=3D"width: 94.0px;">
+</colgroup>
+<tbody>
+<tr>
+<th class=3D"confluenceTh">
+<p><strong>Requirement ID</strong></p></th>
+<th class=3D"confluenceTh">
+<p><strong>Description</strong></p></th>
+<th class=3D"confluenceTh">
+<p><strong>Priority</strong></p></th>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-ML-01</strong></p></td>
+<td class=3D"confluenceTd">
+<p><strong>Cloud Resources:</strong> The platform shall provide managed com=
+pute resources, object storage, and network isolation for all ML activities=
+, including training, batch processing, and inference.</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-ML-02</strong></p></td>
+<td class=3D"confluenceTd">
+<p><strong>Feature Store &amp; ML Data Substrate:</strong> The platform sha=
+ll implement open table formats (e.g., Delta Lake, Apache Iceberg, Apache H=
+udi) to serve as the primary data substrate. This system must support versi=
+oned datasets and features, data lineage tracking, and point-in-time reads =
+for both online and offline feature serving.</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-ML-03</strong></p></td>
+<td class=3D"confluenceTd">
+<p><strong>Model Registry &amp; Versioning (MUST):</strong> The platform sh=
+all provide a model registry. The registry must support model versioning, a=
+pproval workflows, and maintain immutable links to the exact dataset and fe=
+ature versions used for training. All experiment runs must be logged for re=
+producibility.</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-ML-04</strong></p></td>
+<td class=3D"confluenceTd">
+<p><strong>Telemetry &amp; Monitoring (MUST):</strong> The platform must pr=
+ovide key model performance indicators, including inference latency, error =
+rates, and data or target drift. It must include a manual workflow for trig=
+gering model retraining and promotion; automated retraining is explicitly d=
+isallowed.</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-ML-05</strong></p></td>
+<td class=3D"confluenceTd">
+<p><strong>Data Quality Framework (MUST):</strong> The platform shall integ=
+rate a data quality framework to define, execute, and monitor quality rules=
+ on both source and transformed datasets.</p></td>
+<td class=3D"confluenceTd">
+<p>MUST</p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p><strong>CAP-ML-06</strong></p></td>
+<td class=3D"confluenceTd">
+<p><strong>Model Training for Shipping Time Estimation:</strong> The platfo=
+rm could support the end-to-end training, validation, and deployment of a r=
+egression model to predict shipping times.</p></td>
+<td class=3D"confluenceTd">
+<p>COULD</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id=3D"ePartsProductSpecificationDocument-7.QualityAttributes(Non-Functi=
+onalRequirements)"><strong>7. Quality Attributes (Non-Functional Requiremen=
+ts)</strong></h2>
+<p><strong>Note: </strong>For simplicity, we have removed the performance q=
+uality attribute since the specific response times are yet to be finalized.=
+</p>
+<h3 id=3D"ePartsProductSpecificationDocument-7.1.Security(QA-SEC)"><strong>=
+7.1. Security (QA-SEC) </strong></h3>
+<p style=3D"margin-left: 30.0px;"><strong>7.1.1. QA-SEC-01:</strong> The sy=
+stem shall provide role based access control(RBAC) to ensure tenant isolati=
+on while querying data.</p>
+<h3 id=3D"ePartsProductSpecificationDocument-7.2.Extensibility(QA-EXT)"><st=
+rong>7.2. Extensibility (QA-EXT)</strong></h3>
+<p style=3D"margin-left: 30.0px;"><strong>7.2.1. QA-EXT-01:</strong> The sy=
+stem shall allow integration of new data sources for ingestion in the futur=
+e.</p>
+<p style=3D"margin-left: 30.0px;"><strong>7.2.2. QA-EXT-02: </strong>The te=
+chnology stack shall minimize the number of disparate third-party vendors t=
+o reduce integration complexity and simplify operational support within the=
+ chosen cloud ecosystem.</p>
+<h3 id=3D"ePartsProductSpecificationDocument-7.3.Usability(QA-USAB)"><stron=
+g>7.3. Usability (QA-USAB)</strong></h3>
+<p style=3D"margin-left: 30.0px;"><strong>7.3.1. QA-USAB-01: </strong>The s=
+ystem shall allow users (both technical and non-technical) to access the re=
+ports easily.</p>
+<h3 id=3D"ePartsProductSpecificationDocument-7.4.Interoperability(QA-INT)">=
+<strong>7.4. Interoperability (QA-INT)</strong></h3>
+<p style=3D"margin-left: 30.0px;"><strong>7.4.1. QA-INT-01: </strong>The sy=
+stem shall integrate with the existing eParts legacy systems and data sourc=
+es.</p>
+<p style=3D"margin-left: 30.0px;"><strong>7.4.2. QA-INT-02: </strong>The sy=
+stem shall allow the use of multiple cloud service providers instead of a v=
+endor lock in.</p>
+<h3 id=3D"ePartsProductSpecificationDocument-7.5.Portability(QA-PORT)"><str=
+ong>7.5. Portability (QA-PORT)</strong></h3>
+<p style=3D"margin-left: 30.0px;"><strong>7.5.1. QA-PORT-01: </strong>The s=
+ystem shall allow migration of core components (processing layer, ingestion=
+ layer etc) in case of adversities.</p>
+<h2 id=3D"ePartsProductSpecificationDocument-8.Constraints"><strong>8. Cons=
+traints</strong></h2>
+<p style=3D"margin-left: 30.0px;"><strong>8.1. CON-01:</strong> User authen=
+tication and authorization for data access and governance capabilities shal=
+l integrate with eParts' existing Auth0 implementation.</p>
+<p style=3D"margin-left: 30.0px;"><strong>8.2. CON-02</strong>: The solutio=
+n architecture must prioritize cost-effectiveness, specifically aiming to a=
+void infrastructure costs that scale linearly per tenant where feasible (e.=
+g., through shared resources for certain tiers or functions).</p>
+<p style=3D"margin-left: 30.0px;"><strong>8.3. CON-03: </strong>The initial=
+ set of primary data sources includes eParts' existing SQL Server (with a p=
+lanned migration path towards Azure SQL Database or Managed Instance), Azur=
+e Blob Storage, user-analytics sources, and specific external APIs/feeds li=
+ke UPS.</p>
+<p style=3D"margin-left: 30.0px;"><strong>8.4. CON-04: </strong>The initial=
+ project implementation approach should favor breadth-first delivery (demon=
+strating end-to-end functionality for a limited scope) over depth-first (fu=
+lly building out one component).</p>
+<p style=3D"margin-left: 30.0px;"><strong>8.5. CON-05: </strong>A formal ev=
+aluation of potential core data platform technologies (including options li=
+ke Azure Synapse, Azure Databricks, Microsoft Fabric, Snowflake, Confluent)=
+ is required before final technology selection. This evaluation must consid=
+er portability implications [QA-PORT-01]. [QA-MAINT-02]</p>
+<p style=3D"margin-left: 30.0px;"><strong>8.6. CON-06:</strong> The system =
+must provide mechanisms to comply with relevant data privacy regulations, i=
+ncluding the ability to delete customer/tenant data upon request [CAP-DSM-0=
+6].</p>
+<p style=3D"margin-left: 30.0px;"><strong>8.6. CON-07:</strong> The ML capa=
+bilities should be compatible with the existing Snowflake Data Lakehouse.</=
+p>
+<h2 id=3D"ePartsProductSpecificationDocument-9.OperationalScenarios"><stron=
+g>9. Operational Scenarios</strong></h2>
+<h3 id=3D"ePartsProductSpecificationDocument-9.1.OS-01:TenantBIReportingvia=
+PowerBI"><strong>9.1. OS-01: Tenant BI Reporting via Power BI</strong></h3>
+<ol start=3D"1">
+<li>
+<p>A Tenant Analyst [UC4] opens Power BI Desktop.</p></li>
+<li>
+<p>They use the eParts Data Platform connector/API endpoint [CAP-DAQ-03, QA=
+-INT-01].</p></li>
+<li>
+<p>Authentication is handled via Auth0 redirect/credentials [CON-01, QA-SEC=
+-01].</p></li>
+<li>
+<p>Power BI displays available datasets permitted for the authenticated ten=
+ant user [CAP-DAQ-01, CAP-DSM-05].</p></li>
+<li>
+<p>The analyst selects the 'Sales Data' view and imports data for the last =
+quarter. The API query responds.</p></li>
+<li>
+<p>The analyst builds visualizations and potentially exports underlying dat=
+a to CSV [CAP-RA-09].</p></li>
+</ol>
+<h3 id=3D"ePartsProductSpecificationDocument-9.2.OS-02:SearchingforaRecentO=
+rder(NearReal-Time)"><strong>9.2. OS-02: Searching for a Recent Order (Near=
+ Real-Time)</strong></h3>
+<ol start=3D"1">
+<li>
+<p>A Customer Service rep [UC5, PS5, PS6] receives an inquiry about a recen=
+t order.</p></li>
+<li>
+<p>They use a global search bar in their CRM/Order Management tool, which q=
+ueries the eParts Data Platform search API [CAP-DAQ-05].</p></li>
+<li>
+<p>The search API queries the search index [CAP-DAQ-05], respecting the rep=
+'s permissions [CAP-DSM-05], using data updated via CDC [CAP-DI-05].</p></l=
+i>
+<li>
+<p>Matching order details are returned quickly and displayed to the rep.</p=
+></li>
+</ol>
+<h3 id=3D"ePartsProductSpecificationDocument-9.3.OS-03:CreatingandUsingaSav=
+edQuery"><strong>9.3. OS-03: Creating and Using a Saved Query</strong></h3>
+<ol start=3D"1">
+<li>
+<p>An authorized eParts Global Admin (e.g., Leo PS1) logs into the Data Pla=
+tform's reporting interface [CAP-RA-05].</p></li>
+<li>
+<p>They create a complex ad-hoc query [CAP-RA-03] to analyze cross-tenant p=
+roduct adoption.</p></li>
+<li>
+<p>They save this query for future use [CAP-RA-08].</p></li>
+<li>
+<p>Later, they execute the saved query, retrieve the results, and export th=
+em to CSV [CAP-RA-09]. They also schedule this query to run monthly [CAP-RA=
+-06].</p></li>
+</ol>
+<h3 id=3D"ePartsProductSpecificationDocument-9.4.OS-04:RecoveringfromSimula=
+tedDataLoss"><strong>9.4. OS-04: Recovering from Simulated Data Loss</stron=
+g></h3>
+<ol start=3D"1">
+<li>
+<p>During a planned test, an eParts IT Operator simulates the loss of the p=
+rimary data warehouse storage.</p></li>
+<li>
+<p>The operator initiates the documented disaster recovery procedure [QA-AV=
+RL-01].</p></li>
+<li>
+<p>The system restores data from the latest detached backup [CAP-DSM-04] to=
+ a new instance.</p></li>
+<li>
+<p>The operator verifies data integrity and system functionality.</p></li>
+<li>
+<p>The total time taken (RTO) and the age of the restored data (RPO) are me=
+asured against the defined objectives [QA-AVRL-01].</p></li>
+</ol>
+<h3 id=3D"ePartsProductSpecificationDocument-9.5.OS-05:ProcessingaVendorInv=
+oicePDFviaSFTP"><strong>9.5. OS-05: Processing a Vendor Invoice PDF via SFT=
+P</strong></h3>
+<ol start=3D"1">
+<li>
+<p>A vendor uploads an invoice PDF to their designated SFTP folder.</p></li=
+>
+<li>
+<p>The ingestion pipeline detects the new file [CAP-DI-02].</p></li>
+<li>
+<p>An OCR process extracts text and key fields from the PDF [CAP-DI-11].</p=
+></li>
+<li>
+<p>A transformation step [CAP-DI-09] maps extracted fields to the standard =
+data warehouse schema.</p></li>
+<li>
+<p>The processed invoice data is loaded into the data warehouse [CAP-DSM-01=
+].</p></li>
+<li>
+<p>The ingestion process logs the successful receipt and processing of the =
+file [CAP-DSM-06]. Potential data quality checks might flag issues [UC6].</=
+p></li>
+</ol>
+<h3 id=3D"ePartsProductSpecificationDocument-9.6.OS-06:TenantCustomerAccess=
+esOwnOrderHistory"><strong>9.6. OS-06: Tenant Customer Accesses Own Order H=
+istory</strong></h3>
+<ol start=3D"1">
+<li>
+<p>Shawn Miller (Tenant Customer) [UC7, PS12] logs into the tenant's storef=
+ront portal which integrates with the Data Platform.</p></li>
+<li>
+<p>He navigates to a reporting section.</p></li>
+<li>
+<p>He executes a predefined report template [CAP-RA-02] showing his company=
+'s order history for the past 6 months. Access is scoped to only his compan=
+y's data [CAP-DSM-05, QA-SEC-01].</p></li>
+<li>
+<p>He exports the report data to CSV [CAP-RA-09].</p></li>
+</ol>
+<h2 id=3D"ePartsProductSpecificationDocument-10.SystemOverview"><strong>10.=
+ System Overview</strong></h2>
+<p>Please refer to the <a class=3D"external-link" href=3D"https://miro.com/=
+app/board/uXjVLi6rZcI=3D/" rel=3D"nofollow">WBS</a> and <a class=3D"externa=
+l-link" href=3D"https://miro.com/app/board/uXjVLgBiP94=3D/" rel=3D"nofollow=
+">Context Diagram</a>.</p>
+<h2 id=3D"ePartsProductSpecificationDocument-11.Glossary"><strong>11. Gloss=
+ary</strong></h2>
+<p>11.1. Auth0: Identity and Access Management platform used by eParts for =
+authentication and authorization. [CON-01]</p>
+<p>11.2. BI: Business Intelligence. Technology-driven process for analyzing=
+ data and presenting actionable information.</p>
+<p>11.3. Blob Storage: Azure's object storage solution for unstructured dat=
+a. [CON-03]</p>
+<p>11.4. CDC: Change Data Capture. Process used to identify and capture cha=
+nges made to data in a database. [CAP-DI-05]</p>
+<p>11.5. Cloud-Agnostic: (In principle) The platform architecture is not fu=
+ndamentally tied to a single cloud provider, although initial data sources =
+and evaluation [CON-05] may favor one.</p>
+<p>11.6. Data Warehouse: A central repository of integrated data from one o=
+r more disparate sources, primarily used for reporting and analysis.</p>
+<p>11.7. Elasticsearch: A distributed search and analytics engine.</p>
+<p>11.8. ETL: Extract, Transform, Load. A type of data integration process.=
+</p>
+<p>11.9. KPI: Key Performance Indicator. A measurable value that demonstrat=
+es how effectively a company is achieving key business objectives.</p>
+<p>11.10. OCR: Optical Character Recognition. Technology that converts diff=
+erent types of documents, such as scanned paper documents or image files, i=
+nto editable and searchable data. [CAP-DI-11]</p>
+<p>11.11. PO: Purchase Order.</p>
+<p>11.12. POC: Proof of Concept. An initial small project to test the feasi=
+bility of an idea or technology.</p>
+<p>11.13. Power BI: Microsoft's interactive data visualization and business=
+ intelligence tool. [UC4]</p>
+<p>11.14. RBAC: Role-Based Access Control. A method of restricting system a=
+ccess to authorized users based on their roles. [QA-SEC-01], [CAP-DSM-05]</=
+p>
+<p>11.15. RPO: Recovery Point Objective. The maximum acceptable amount of d=
+ata loss measured in time (e.g., 1 hour of data). [QA-AVRL-01]</p>
+<p>11.16. RTO: Recovery Time Objective. The targeted duration of time withi=
+n which a business process must be restored after a disaster or disruption.=
+ [QA-AVRL-01]</p>
+<p></p>
+    </div>
+</body>
+</html>
+------=_Part_28_979501760.1770266970488--

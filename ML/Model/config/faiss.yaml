@@ -1,0 +1,24 @@
+# Layer 3 [3b] — FAISS index configuration.
+# Implements V1_Engineering_Spec §4.3 [3b].
+#
+# Index type is swappable per §6.2. Quality / latency / memory implications
+# differ:
+#   IVFFlat (default)  ~290–310 MB  ~5 ms     production target
+#   Flat               ~290 MB     ~30 ms    debug / reference
+#   HNSW               ~600 MB     ~3 ms     trades memory for latency
+#
+# Top-K, nlist, nprobe are tunable but listed in §6.2 as design-review-free.
+
+index_type: IVFFlat
+metric: inner_product            # on L2-normalized vectors → cosine similarity
+nlist: 512                       # number of Voronoi cells
+nprobe: 16                       # query-time probe count. Bumping to 32 was tried
+                                 # during M3b tuning — no measurable PT-accuracy
+                                 # change (top-50 was already saturated). Kept at
+                                 # spec value 16.
+top_k: 50
+training_subset_size: 100000     # random sample from 1B for nlist training
+training_seed: 42
+input_text_columns:              # concatenated in order when populated
+  - Short_Description
+  - Extended_Description_Pre

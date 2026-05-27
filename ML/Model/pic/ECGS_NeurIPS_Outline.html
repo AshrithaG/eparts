@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>ECGS NeurIPS 2025 — 论文大纲</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #232635;
+    --accent: #6c8ef5;
+    --accent2: #a78bfa;
+    --green: #34d399;
+    --yellow: #fbbf24;
+    --red: #f87171;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --border: #2d3149;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; padding: 24px; font-size: 14px; }
+  
+  .header { text-align: center; padding: 32px 0 24px; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
+  .header .badge { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 12px; }
+  .header h1 { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.4; }
+  .header p { color: var(--muted); margin-top: 8px; font-size: 13px; }
+
+  .meta-row { display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+  .meta-card { flex: 1; min-width: 180px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .meta-card .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+  .meta-card .value { font-weight: 600; color: var(--text); font-size: 14px; }
+  .meta-card .value.accent { color: var(--accent); }
+  .meta-card .value.green { color: var(--green); }
+
+  .claim-box { background: linear-gradient(135deg, #1e2240, #1a2035); border: 1px solid var(--accent); border-left: 4px solid var(--accent); border-radius: 8px; padding: 16px 20px; margin-bottom: 28px; }
+  .claim-box .label { font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; font-weight: 700; }
+  .claim-box .text { color: #fff; font-size: 15px; font-weight: 600; line-height: 1.5; }
+
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); margin-bottom: 14px; font-weight: 600; }
+
+  .sections { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; cursor: pointer; transition: border-color .2s; }
+  .section:hover { border-color: var(--accent); }
+  .section-header { display: flex; align-items: center; padding: 14px 16px; gap: 12px; }
+  .section-num { background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-num.green { background: var(--green); color: #000; }
+  .section-num.purple { background: var(--accent2); }
+  .section-num.yellow { background: var(--yellow); color: #000; }
+  .section-title { font-weight: 600; color: #fff; font-size: 14px; flex: 1; }
+  .section-meta { display: flex; gap: 8px; align-items: center; }
+  .pill { font-size: 11px; padding: 2px 8px; border-radius: 12px; font-weight: 500; }
+  .pill.pages { background: #1e2240; color: var(--accent); border: 1px solid var(--accent); }
+  .pill.status-ready { background: #0d2d1e; color: var(--green); border: 1px solid var(--green); }
+  .pill.status-need { background: #2d1a0d; color: var(--yellow); border: 1px solid var(--yellow); }
+  .pill.status-block { background: #2d0d0d; color: var(--red); border: 1px solid var(--red); }
+  .toggle { color: var(--muted); font-size: 16px; transition: transform .2s; }
+  .section.open .toggle { transform: rotate(180deg); }
+
+  .section-body { display: none; padding: 0 16px 16px; border-top: 1px solid var(--border); }
+  .section.open .section-body { display: block; }
+
+  .subsection { margin-top: 12px; }
+  .subsection-title { font-size: 12px; font-weight: 600; color: var(--accent2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .4px; }
+  .items { list-style: none; padding: 0; }
+  .items li { padding: 4px 0 4px 14px; position: relative; color: var(--text); font-size: 13px; line-height: 1.5; }
+  .items li::before { content: "–"; position: absolute; left: 0; color: var(--muted); }
+
+  .note { background: var(--surface2); border-radius: 6px; padding: 10px 12px; margin-top: 10px; font-size: 12px; color: var(--muted); border-left: 3px solid var(--accent); }
+  .note strong { color: var(--accent); }
+  .note.warn { border-color: var(--yellow); }
+  .note.warn strong { color: var(--yellow); }
+  .note.block { border-color: var(--red); }
+  .note.block strong { color: var(--red); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  .data-card { background: var(--surface2); border-radius: 6px; padding: 10px 12px; }
+  .data-card .dc-label { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  .data-card .dc-item { font-size: 12px; color: var(--text); padding: 2px 0; }
+  .data-card .dc-item span { color: var(--green); font-weight: 600; }
+
+  .gap-analysis { margin-top: 16px; }
+  .gap-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .gap-row:last-child { border-bottom: none; }
+  .gap-label { width: 140px; font-size: 12px; color: var(--text); flex-shrink: 0; }
+  .gap-bar-wrap { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
+  .gap-bar { height: 100%; border-radius: 4px; }
+  .gap-status { font-size: 11px; width: 70px; text-align: right; flex-shrink: 0; }
+
+  .schedule { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
+  .sch-item { background: var(--surface2); border-radius: 6px; padding: 10px; text-align: center; }
+  .sch-week { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+  .sch-task { font-size: 12px; color: var(--text); font-weight: 500; }
+  @media (max-width: 600px) { .schedule { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">NeurIPS 2025</div>
+  <h1>Error-Confident Gradient Scaling (ECGS)<br><span style="color:var(--accent)">论文大纲 · 逐节写作规划</span></h1>
+  <p>目标会议：NeurIPS 2025 &nbsp;·&nbsp; 页面限制：9页正文 + 无限附录 &nbsp;·&nbsp; DDL：~May 2025</p>
+</div>
+
+<div class="meta-row">
+  <div class="meta-card">
+    <div class="label">核心主张</div>
+    <div class="value accent">No Clean-Robust Trade-off</div>
+  </div>
+  <div class="meta-card">
+    <div class="label">额外开销</div>
+    <div class="value green">ΔT = O(B log B), ΔS = O(B)</div>
+  </div>
+  <div class="meta-card">
+    <div class="label">调参负担</div>
+    <div class="value">6个参数 → 1个参数 (τ)</div>
+  </div>
+  <div class="meta-card">
+    <div class="label">覆盖数据集</div>
+    <div class="value">Binary / CIFAR-10/100 / SVHN / ImageNet32</div>
+  </div>
+  <div class="meta-card">
+    <div class="label">当前草稿完成度</div>
+    <div class="value" style="color:var(--yellow)">~15% (方法设计完整)</div>
+  </div>
+</div>
+
+<div class="claim-box">
+  <div class="label">🎯 Paper's Central Thesis (建议一句话版本)</div>
+  <div class="text">"We propose ECGS, a training-time gradient scaling mechanism that consistently improves adversarial and corruption robustness across classification tasks with negligible computational overhead and without the clean accuracy degradation characteristic of adversarial training."</div>
+</div>
+
+<h2>📋 论文结构 — 逐节规划（点击展开）</h2>
+
+<div class="sections">
+
+  <!-- ABSTRACT -->
+  <div class="section" onclick="toggle(this)">
+    <div class="section-header">
+      <div class="section-num">A</div>
+      <div class="section-title">Abstract &nbsp;<span style="color:var(--muted);font-weight:400;font-size:12px">~150词</span></div>
+      <div class="section-meta">
+        <span class="pill status-need">需要最终数字</span>
+        <span class="toggle">▼</span>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="subsection">
+        <div class="subsection-title">必须涵盖的要素</div>
+        <ul class="items">
+          <li><strong>问题：</strong>Adversarial training 提升鲁棒性但以 clean accuracy 下降为代价</li>
+          <li><strong>洞察：</strong>仅靠 pmax（最大预测概率）就能识别"自信但错误"的样本，无需 PE</li>
+          <li><strong>方法：</strong>对该类样本的梯度动态放大（scale），全部参数自动化</li>
+          <li><strong>结果：</strong>[X]个数据集上 adversarial error -Xpp，clean error 持平；overhead ≈ 0</li>
+          <li><strong>意义：</strong>plug-and-play，无需额外前向/反向 pass，与现有框架完全兼容</li>
+        </ul>
+      </div>
+      <div class="note warn"><strong>⚠ 待补充：</strong>需要从 wandb 拉取最终 FGSM/PGD/PGD-RS/Corruption 的数字填入 Abstract 中的 highlight 数字</div>
+    </div>
+  </div>
+
+  <!-- INTRODUCTION -->
+  <div class="section" onclick="toggle(this)">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">Introduction &nbsp;<span style="color:var(--muted);font-weight:400;font-size:12px">~1页 · 约500词</span></div>
+      <div class="section-meta">
+        <span class="pill status-ready">材料充分</span>
+        <span class="toggle">▼</span>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="two-col">
+        <div>
+          <div class="subsection-title">叙事结构（5段）</div>
+          <ul class="items">
+            <li><strong>P1 动机：</strong>Robust training 的重要性 + 现有方法（PGD-AT/TRADES/MART）的 trade-off 代价</li>
+            <li><strong>P2 问题：</strong>引用 Tsipras et al. 2019 的理论下界；实践中 clean error ↑、计算成本 ↑</li>
+            <li><strong>P3 洞察：</strong>不需要生成对抗样本，也不需要完整的 PE——仅靠 pmax + gradient scaling 就能形成有效的 correction signal</li>
+            <li><strong>P4 贡献列表：</strong>ECGS 方法 / Auto-ECGS 自动化 / pmax 充分性发现 / 实验覆盖</li>
+            <li><strong>P5 预览：</strong>论文结构一句话说明</li>
+          </ul>
+        </div>
+        <div>
+          <div class="subsection-title">核心对话对象（引用定位）</div>
+          <ul class="items">
+            <li>Madry et al. 2018 (PGD-AT)</li>
+            <li>Zhang et al. 2019 (TRADES)</li>
+            <li>Wang et al. 2020 (MART)</li>
+            <li>Tsipras et al. 2019 (trade-off 下界)</li>
+            <li>Sensoy et al. 2019 / EUAT (uncertainty-aware training)</li>
+            <li>CLUE (uncertainty + loss scaling)</li>
+          </ul>
+          <div class="note"><strong>定位：</strong>ECGS 不是"更好的 AT"，而是"用 CE 级别的代价实现 robust 性提升的新方向"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RELATED WORK -->
+  <div class="section" onclick="toggle(this)">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">Related Work &nbsp;<span style="color:var(--muted);font-weight:400;font-size:12px">~0.6页 · 可移入附录</span></div>
+      <div class="section-meta">
+        <span class="pill status-ready">材料充分</span>
+        <span class="toggle">▼</span>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="subsection">
+        <div class="subsection-title">三条分支 + 与ECGS的区别</div>
+        <ul class="items">
+          <li><strong>① 对抗训练主线：</strong>PGD-AT / TRADES / MART — 需要内循环攻击，overhead = K×(F+G)；ECGS无此成本</li>
+          <li><strong>② 不确定性引导训练：</strong>EUAT / CLUE — 使用完整 PE（O(BC) 额外运算，需要 MC dropout/集成）；ECGS 用 pmax 替代，O(B) 额外运算</li>
+          <li><strong>③ 损失重加权 / Curriculum：</strong>Focal Loss, Self-paced Learning — 都关注"困难样本"，但 ECGS 关注的是"自信且错误"样本（不是简单的 hard example mining）</li>
+          <li><strong>④ Corruption robustness：</strong>AugMix / DeepAugment — 专注数据增强；ECGS 无需改变数据分布</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- METHOD -->
+  <div class="section open" onclick="toggle(this)">
+    <div class="section-header">
+      <div class="section-num green">3</div>
+      <div class="section-title">Method &nbsp;<span style="color:var(--muted);font-weight:400;font-size:12px">~2页 · 核心贡献</span></div>
+      <div class="section-meta">
+        <span class="pill status-ready">材料最充分</span>
+        <span class="toggle">▼</span>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="two-col">
+        <div>
+          <div class="subsection-title">3.1 Problem Setup</div>
+          <ul class="items">
+            <li>符号：logits x, targets y, batch B, classes C</li>
+            <li>定义"自信且错误"样本的形式化</li>
+            <li>pmax = max_c softmax(x)_c 作为 confidence 代理</li>
+          </ul>
+          <div class="subsection-title" style="margin-top:12px">3.2 ECGS Core Mechanism</div>
+          <ul class="items">
+            <li>Confidence gate: σ(k(p_max − τ))</li>
+            <li>Wrong gate: 1 − p_y（真类概率的补）</li>
+            <li>Scale = 1 + λ · g_conf · g_wrong</li>
+            <li>梯度放大通过 ScaleGrad（自定义 autograd Function）实现</li>
+            <li>前向不变，只改反向传播</li>
+          </ul>
+          <div class="subsection-title" style="margin-top:12px">3.3 Auto-ECGS</div>
+          <ul class="items">
+            <li>固定 k=20（anti-oscillation，实验验证）</li>
+            <li>动态 τ：τ_t = Quantile(p_max, q_t) — 自适应 batch 分布</li>
+            <li>auto_q：q 从 q_start 线性升至 0.9（早期宽，后期窄）</li>
+            <li>auto-λ：基于 gate EMA，clip(δ/g_ema, 0, λ_max)</li>
+            <li>最终只剩 1 个参数：τ_start（即 q_start ∈ [0.60, 0.90]）</li>
+          </ul>
+        </div>
+        <div>
+          <div class="subsection-title">3.4 pmax vs PE：充分性分析</div>
+          <ul class="items">
+            <li>理论论证：pmax 包含 PE 的关键控制信号</li>
+            <li>实验：pmax 与 1-PE 曲线的对比（Attachment 4 的图）</li>
+            <li>实践意义：pmax O(1) per sample 而 PE 需要 O(C)</li>
+          </ul>
+          <div class="subsection-title" style="margin-top:12px">3.5 Complexity Analysis</div>
+          <ul class="items">
+            <li>Time: ΔTECGS = O(B log B)（quantile 排序主导）</li>
+            <li>Space: ΔSECGS = O(B)（batch-level vectors）</li>
+            <li>对比 PGD-AT: ΔT = O(K(F(B)+G(B))) — 差 ~10-40× 量级</li>
+            <li>理论最优复用口径下 O(BC) 张量可复用，不额外计算</li>
+          </ul>
+          <div class="note"><strong>建议：</strong>用一个小 Table 或公式框并排展示 CE / ECGS / PGD-AT / TRADES 的复杂度对比，直观冲击力很强</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERIMENTS -->
+  <div class="section open" onclick="toggle(this)">
+    <div class="section-header">
+      <div class="section-num yellow">4</div>
+      <div class="section-title">Experiments &nbsp;<span style="color:var(--muted);font-weight:400;font-size:12px">~3页 · 论文最重要部分</span></div>
+      <div class="section-meta">
+        <span class="pill status-need">需要从 wandb 拉数字</span>
+        <span class="toggle">▼</span>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="subsection">
+        <div class="subsection-title">4.1 Experimental Setup</div>
+        <ul class="items">
+          <li><strong>数据集：</strong>Binary-CIFAR10 (2-cls) · CIFAR-10 · CIFAR-100 · SVHN · ImageNet1k-32</li>
+          <li><strong>Baselines：</strong>CE / CLUE / EUAT / PGD-AT / TRADES / MART（其中 Binary/SVHN 只有 CE/ECGS/PGD-AT/TRADES/MART；ImageNet32 只有 CE/ECGS/CLUE/EUAT）</li>
+          <li><strong>攻击套件：</strong>FGSM / PGD-L∞ (ε=8/255, α=2/255, 10 steps) / PGD-RS / AutoAttack</li>
+          <li><strong>Corruption：</strong>C-suite（gaussian noise, brightness, etc.）</li>
+          <li><strong>模型架构：</strong>[待确认，WideResNet？ResNet18？]</li>
+        </ul>
+      </div>
+      <div class="two-col">
+        <div>
+          <div class="subsection-title">4.2 Main Results（TABLE 1）</div>
+          <ul class="items">
+            <li>每个数据集一行，每个方法一列</li>
+            <li>指标：STD/Error ↓ · PGD/Error ↓ · FGSM/Error ↓</li>
+            <li>预期 highlight：ECGS 在 PGD/Error 上一致最低或次低，STD/Error 贴合 CE</li>
+            <li>需要从 wandb 导出各 run 的 final epoch metrics</li>
+          </ul>
+          <div class="note warn"><strong>⚠ 动作：</strong>请从 wandb 导出所有 final run 的 best/final epoch 数字，我可以帮你格式化成 LaTeX Table</div>
+        </div>
+        <div>
+          <div class="subsection-title">4.3 Robustness Breakdown（TABLE 2）</div>
+          <ul class="items">
+            <li>CIFAR-10 详细：FGSM -2.45pp · PGD -3.62pp · PGD-RS -4.97pp</li>
+            <li>Corruption：gaussian noise -6.08pp · brightness -1.20pp</li>
+            <li>CIFAR-100/SVHN 同格式</li>
+          </ul>
+          <div class="subsection-title" style="margin-top:12px">4.4 Training Dynamics（Figure 1）</div>
+          <ul class="items">
+            <li>STD/Error 和 PGD/Error 的 epoch-wise 曲线</li>
+            <li>展示 ECGS 曲线在 epoch 5 左右就开始分离</li>
+            <li>对比 EUAT spike（0.1067→0.2804）和 MART 的 initial error 升高</li>
+          </ul>
+        </div>
+      </div>
+      <div class="subsection" style="margin-top:12px">
+        <div class="subsection-title">4.5 Ablation Studies</div>
+        <ul class="items">
+          <li><strong>pmax vs 1-PE：</strong>两条曲线几乎重叠 → pmax 充分性的 empirical 证据（Attachment 4 的图直接用）</li>
+          <li><strong>Auto-ECGS vs Grid-search ECGS：</strong>auto 结果 consistently better（来自 emails 的 conclusion）</li>
+          <li><strong>τ 敏感性：</strong>τ_start 在 [0.60, 0.90] 范围内的 sweep — 展示方法稳健性</li>
+          <li><strong>k 固定性验证：</strong>k=20 vs 其他 k 的对比</li>
+          <li><strong>warm-up 依赖：</strong>Auto-ECGS 无需 warmup vs 原始 ECGS 需要（100-class 以上）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYSIS -->
+  <div class="section" onclick="toggle(this)">
+    <div class="section-header">
+      <div class="section-num purple">5</div>
+      <div class="section-title">Analysis &nbsp;<span style="color:var(--muted);font-weight:400;font-size:12px">~0.5页</span></div>
+      <div class="section-meta">
+        <span class="pill status-need">需要补充理论论证</span>
+        <span class="toggle">▼</span>
+      </div>
+    </div>
+    <div class="section-body">
+      <ul class="items">
+        <li><strong>为什么没有 Trade-off？</strong>ECGS 只在反向传播阶段 scale 梯度，前向 loss 不变 → clean distribution 的优化路径不被扭曲</li>
+        <li><strong>为什么 pmax 足够？</strong>pmax 是 softmax 最大值，隐含地编码了 all-class margin 信息；与 PE 的相关性分析</li>
+        <li><strong>为什么曲线分离快？</strong>ECGS 在 epoch 5 就能分离，而 PGD-AT 需要 warmup 才能压低 STD/Error → 梯度信号更清洁</li>
+        <li><strong>Scale 的几何意义：</strong>将高置信错误样本往决策边界"推回"，加强边界处的几何结构</li>
+      </ul>
+      <div class="note"><strong>NeurIPS 建议：</strong>如果有理论 Proposition（哪怕是 heuristic 的），放在这里会显著提升分数。可以尝试证明"在 linear model 下，ECGS 收敛到更大 margin 的解"作为 toy theorem。</div>
+    </div>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="section" onclick="toggle(this)">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div class="section-title">Conclusion &nbsp;<span style="color:var(--muted);font-weight:400;font-size:12px">~0.2页</span></div>
+      <div class="section-meta">
+        <span class="pill status-ready">最后写</span>
+        <span class="toggle">▼</span>
+      </div>
+    </div>
+    <div class="section-body">
+      <ul class="items">
+        <li>总结 ECGS 的核心贡献：pmax-based gradient scaling + Auto-ECGS + 无 trade-off 的 robust 提升</li>
+        <li>Broader impact：极低 overhead → 直接可用于大规模预训练/微调场景</li>
+        <li>Limitations：当前在 ImageNet full-scale 还未完成所有攻击测试；长尾/噪声标签 in progress</li>
+        <li>Future work：理论分析 / 与 AT 方法结合 / 扩展到生成模型</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- GAP ANALYSIS -->
+<h2>🔍 当前材料 vs 投稿需求 — 缺口分析</h2>
+<div class="gap-analysis" style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:28px">
+  <div class="gap-row">
+    <div class="gap-label">方法设计文档</div>
+    <div class="gap-bar-wrap"><div class="gap-bar" style="width:100%;background:var(--green)"></div></div>
+    <div class="gap-status" style="color:var(--green)">✅ 100%</div>
+  </div>
+  <div class="gap-row">
+    <div class="gap-label">代码实现</div>
+    <div class="gap-bar-wrap"><div class="gap-bar" style="width:95%;background:var(--green)"></div></div>
+    <div class="gap-status" style="color:var(--green)">✅ 95%</div>
+  </div>
+  <div class="gap-row">
+    <div class="gap-label">训练曲线/趋势</div>
+    <div class="gap-bar-wrap"><div class="gap-bar" style="width:80%;background:var(--green)"></div></div>
+    <div class="gap-status" style="color:var(--green)">✅ 80%</div>
+  </div>
+  <div class="gap-row">
+    <div class="gap-label">最终数字（wandb）</div>
+    <div class="gap-bar-wrap"><div class="gap-bar" style="width:60%;background:var(--yellow)"></div></div>
+    <div class="gap-status" style="color:var(--yellow)">⚠ 需导出</div>
+  </div>
+  <div class="gap-row">
+    <div class="gap-label">AutoAttack 结果</div>
+    <div class="gap-bar-wrap"><div class="gap-bar" style="width:30%;background:var(--yellow)"></div></div>
+    <div class="gap-status" style="color:var(--yellow)">⚠ 部分有</div>
+  </div>
+  <div class="gap-row">
+    <div class="gap-label">ImageNet32 完整对比</div>
+    <div class="gap-bar-wrap"><div class="gap-bar" style="width:40%;background:var(--yellow)"></div></div>
+    <div class="gap-status" style="color:var(--yellow)">⚠ 待补充</div>
+  </div>
+  <div class="gap-row">
+    <div class="gap-label">长尾/噪声标签实验</div>
+    <div class="gap-bar-wrap"><div class="gap-bar" style="width:15%;background:var(--red)"></div></div>
+    <div class="gap-status" style="color:var(--red)">❌ In progress</div>
+  </div>
+  <div class="gap-row">
+    <div class="gap-label">理论 Proposition</div>
+    <div class="gap-bar-wrap"><div class="gap-bar" style="width:10%;background:var(--red)"></div></div>
+    <div class="gap-status" style="color:var(--red)">❌ 需要构造</div>
+  </div>
+</div>
+
+<!-- WRITING SCHEDULE -->
+<h2>📅 建议写作顺序</h2>
+<div class="schedule">
+  <div class="sch-item">
+    <div class="sch-week">Step 1（先做）</div>
+    <div class="sch-task">从 wandb 导出所有 final metrics → 我帮你整理成表格</div>
+  </div>
+  <div class="sch-item">
+    <div class="sch-week">Step 2</div>
+    <div class="sch-task">写 §3 Method（材料最充分，最容易写好）</div>
+  </div>
+  <div class="sch-item">
+    <div class="sch-week">Step 3</div>
+    <div class="sch-task">写 §4 Experiments + TABLE 1/2 + 训练曲线 Figure</div>
+  </div>
+  <div class="sch-item">
+    <div class="sch-week">Step 4</div>
+    <div class="sch-task">写 §1 Intro + §2 Related Work + §5 Analysis</div>
+  </div>
+  <div class="sch-item">
+    <div class="sch-week">Step 5</div>
+    <div class="sch-task">Abstract + Conclusion + 图表 polish</div>
+  </div>
+  <div class="sch-item">
+    <div class="sch-week">Step 6</div>
+    <div class="sch-task">构造理论 Proposition（可选但强烈建议）</div>
+  </div>
+  <div class="sch-item">
+    <div class="sch-week">Step 7</div>
+    <div class="sch-task">完善长尾/噪声标签实验（如 PSC 恢复后）</div>
+  </div>
+  <div class="sch-item">
+    <div class="sch-week">Step 8</div>
+    <div class="sch-task">完整审稿 · 投 NeurIPS</div>
+  </div>
+</div>
+
+<div style="text-align:center;color:var(--muted);font-size:12px;margin-top:28px;padding-top:16px;border-top:1px solid var(--border)">
+  ECGS Paper Outline · NeurIPS 2025 · 审核完成后开始逐节写作
+</div>
+
+<script>
+function toggle(el) {
+  el.classList.toggle('open');
+}
+</script>
+</body>
+</html>

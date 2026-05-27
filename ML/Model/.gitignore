@@ -1,0 +1,109 @@
+# ML/Model/ — scoped ignores for the ML pipeline subtree.
+#
+# This file is policy: anything matched here MUST NOT enter git. Derived
+# artifacts are kept reproducible via the build scripts in scripts/.
+# Small reproducibility metadata IS committed (see whitelisting below).
+
+# ===========================================================================
+# Raw client data — never committed
+# ===========================================================================
+# the_standard_data/ holds eParts's product catalog (~1.6 GB). Distributed
+# out of band via the team shared drive. The .gitkeep + readme.txt +
+# Data Dictionary.pdf are the only items that survive the wildcard ignore.
+the_standard_data/*
+!the_standard_data/.gitkeep
+!the_standard_data/readme.txt
+!the_standard_data/Data Dictionary.pdf
+
+# ===========================================================================
+# M1 derived splits — reproducible from m1_build_splits.py (seed=42)
+# ===========================================================================
+data/splits/*.parquet
+
+# ===========================================================================
+# Per-channel staging caches + build logs + investigation scratch
+# ===========================================================================
+data/csv/*
+data/email/*
+data/image/*
+data/pdf/*
+data/processed/*
+data/ocr_cache/*
+!data/**/.gitkeep
+# Build / evaluation logs (point-in-time, not deliverables)
+data/*.log
+data/*.log.err
+# Investigation scratch (lead-underscore convention)
+data/_*.py
+data/_*.txt
+
+# ===========================================================================
+# Heavy training artifacts — never to git
+# ===========================================================================
+# faiss.bin     ~293 MB  > GitHub 100 MB hard limit; rebuilt by m3a_build_index.py
+# cluster_cov.npz  ~2.7 GB  > LFS quota; rebuilt by m3b_build_clusters.py
+# centroids.parquet ~21 MB   excluded per upload-scope decision; rebuilt by m3b
+# Everything else under artifacts/v1/* is also excluded except the
+# small reproducibility metadata explicitly whitelisted below.
+artifacts/v1/*/faiss.bin
+artifacts/v1/*/cluster_cov.npz
+artifacts/v1/*/centroids.parquet
+
+# Smoke / debug run directories under artifacts/v1/
+artifacts/v1/run_20260518_164242/
+
+# Compiled regex caches (Tier-1 part-number index pickled at startup)
+*.pkl
+
+# ===========================================================================
+# Reports — only the headline M5 run is committed
+# ===========================================================================
+# Ignore every report directory then un-ignore the one we want to ship.
+reports/v1/*
+!reports/v1/run_20260525_163610/
+!reports/v1/run_20260525_163610/**
+
+# ===========================================================================
+# Model / framework caches
+# ===========================================================================
+.cache/
+.huggingface/
+models--*/
+hub/
+
+# ===========================================================================
+# Editor / IDE / OS noise (root .gitignore covers some; explicit here)
+# ===========================================================================
+.ipynb_checkpoints/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.idea/
+.vscode/
+*.swp
+*.swo
+~$*                    # Word / Excel lock files
+.DS_Store
+Thumbs.db
+
+# ===========================================================================
+# Python build noise (mirrored from root .gitignore for safety)
+# ===========================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ===========================================================================
+# Secrets — never to git regardless of name
+# ===========================================================================
+.env
+*.pem
+*.key
+*.p12
+credentials.json
+secrets.yaml
+secrets.yml

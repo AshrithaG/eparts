@@ -1,0 +1,23 @@
+# Unit-string normalization for Layer 1.
+# Implements V1_Engineering_Spec §4.1 "Unit normalization map".
+#
+# Authoritative: this file. Edit here, NOT in src/. Spec §11.3 forbids
+# hard-coding tunable parameters in source.
+#
+# Rule: case-insensitive lookup of the *normalized* alias string against the
+# `aliases` list for each canonical form. Whitespace inside an alias is
+# matched literally (so "V AC" matches "v ac" only after lower-casing).
+# Layer 1 is responsible for lower-casing and collapsing internal whitespace
+# before lookup.
+
+canonical_units:
+  kohm:
+    aliases: ["kΩ", "kohm", "k ohm", "kilo-ohm", "kilo ohm"]
+  vac:
+    aliases: ["vac", "v ac", "volts ac", "volts alternating current"]
+  vdc:
+    aliases: ["vdc", "v dc", "volts dc", "volts direct current"]
+  f:
+    aliases: ["°f", "deg f", "degf", "fahrenheit"]
+  c:
+    aliases: ["°c", "deg c", "degc", "celsius"]

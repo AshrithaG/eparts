@@ -1,0 +1,17 @@
+# Layer 3 [3a] — Sentence-Transformer encoder configuration.
+# Implements V1_Engineering_Spec §4.3 [3a].
+#
+# The encoder is swappable (§6.2). Downstream layers do not depend on the
+# dimensionality at compile time. To change encoders, edit `model_id` here
+# and rebuild the FAISS index.
+
+model_id: "BAAI/bge-small-en-v1.5"
+dimension: 384
+normalize: l2                # inner product on L2-normalized vectors = cosine
+batch_size: 128                  # CPU-tuned: larger batches amortize per-batch Python overhead
+                                 # and roughly 2-4x throughput vs batch=32. Output is identical.
+device: cpu                  # V1 is CPU-only (§1.2)
+# Alternative encoders documented in §4.3 (do not enable without re-running
+# the M5 evaluation suite):
+#   - sentence-transformers/all-MiniLM-L6-v2    (faster, weaker)
+#   - BAAI/bge-base-en-v1.5                     (stronger, ~3x slower)

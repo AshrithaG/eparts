@@ -1,0 +1,109 @@
+{
+  "run_id": "run_20260525_163610",
+  "model_version": "current",
+  "n_queries_evaluated": 12958,
+  "n_attribute_samples": 143409,
+  "metrics": {
+    "pt_accuracy_overall": 0.9574,
+    "attribute_top1_overall": 0.6041,
+    "attribute_top3_overall": 0.8514,
+    "ece_overall": 0.4138,
+    "brier_overall": 0.4036
+  },
+  "auto_process_at_0_85": {
+    "threshold": 0.85,
+    "coverage": 0.0,
+    "precision": 0.0,
+    "n_total": 143409,
+    "n_auto": 0,
+    "n_correct_among_auto": 0
+  },
+  "threshold_sweep_diagnostic": {
+    "by_threshold": [
+      {
+        "threshold": 0.05,
+        "coverage": 0.9837876283915236,
+        "precision": 0.6078860820504097,
+        "n_total": 143409,
+        "n_auto": 141084,
+        "n_correct_among_auto": 85763
+      },
+      {
+        "threshold": 0.1,
+        "coverage": 0.9516348346338096,
+        "precision": 0.6217859942992386,
+        "n_total": 143409,
+        "n_auto": 136473,
+        "n_correct_among_auto": 84857
+      },
+      {
+        "threshold": 0.15,
+        "coverage": 0.8444518823783723,
+        "precision": 0.6088008455681987,
+        "n_total": 143409,
+        "n_auto": 121102,
+        "n_correct_among_auto": 73727
+      },
+      {
+        "threshold": 0.2,
+        "coverage": 0.3813428724835959,
+        "precision": 0.7000073142188414,
+        "n_total": 143409,
+        "n_auto": 54688,
+        "n_correct_among_auto": 38282
+      },
+      {
+        "threshold": 0.25,
+        "coverage": 0.14641340501642156,
+        "precision": 0.7803019478973187,
+        "n_total": 143409,
+        "n_auto": 20997,
+        "n_correct_among_auto": 16384
+      },
+      {
+        "threshold": 0.3,
+        "coverage": 0.0,
+        "precision": 0.0,
+        "n_total": 143409,
+        "n_auto": 0,
+        "n_correct_among_auto": 0
+      },
+      {
+        "threshold": 0.5,
+        "coverage": 0.0,
+        "precision": 0.0,
+        "n_total": 143409,
+        "n_auto": 0,
+        "n_correct_among_auto": 0
+      },
+      {
+        "threshold": 0.85,
+        "coverage": 0.0,
+        "precision": 0.0,
+        "n_total": 143409,
+        "n_auto": 0,
+        "n_correct_among_auto": 0
+      }
+    ]
+  },
+  "latency_ms": {
+    "p50": 62.554999996791594,
+    "p90": 223.56856998812876,
+    "p95": 286.44703500904126,
+    "p99": 385.28344401216617
+  },
+  "latency_targets": {
+    "p50_ms": 50.0,
+    "p95_ms": 200.0
+  },
+  "targets_met": {
+    "pt_accuracy_ge_0.92": true,
+    "attribute_top1_ge_0.85": false,
+    "attribute_top3_ge_0.95": false,
+    "ece_le_0.05": false,
+    "auto_process_precision_at_0.85_ge_0.95": false,
+    "auto_process_coverage_at_0.85_ge_0.50": false,
+    "p50_latency_le_50ms": false,
+    "p95_latency_le_200ms": false
+  }
+}
