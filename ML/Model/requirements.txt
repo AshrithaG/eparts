@@ -22,6 +22,7 @@ torch>=2.2,<3.0                   # CPU build sufficient (no fine-tuning in V1)
 faiss-cpu>=1.8,<2.0               # IVFFlat index over 1B
 
 # --- Layer 4 / service ---
+filelock>=3.12,<4.0               # cross-platform lock for online μ updates (M6)
 fastapi>=0.110,<1.0               # REST endpoint (M7)
 uvicorn>=0.27,<1.0
 prometheus-client>=0.20,<1.0      # CAP-ML-04 telemetry (M7)
