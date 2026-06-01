@@ -91,8 +91,16 @@ class ClusterStore:
             (s.product_type_id, s.attribute_name, s.value): s for s in stats
         }
         self._attrs_by_pt: dict[int, set[str]] = {}
+        # (pt_id, attribute_name) → ordered list of clusters. Built once so
+        # values_for_pt_attribute() is an O(1) dict hit instead of an
+        # O(total-clusters) linear scan (the dominant Layer-3 score() cost
+        # before this index existed — see M7 score-phase profiling).
+        self._by_pt_attr: dict[tuple[int, str], list[ClusterStats]] = {}
         for s in stats:
             self._attrs_by_pt.setdefault(s.product_type_id, set()).add(s.attribute_name)
+            self._by_pt_attr.setdefault(
+                (s.product_type_id, s.attribute_name), []
+            ).append(s)
 
     def __len__(self) -> int:
         return len(self._stats)
@@ -117,12 +125,12 @@ class ClusterStore:
     def values_for_pt_attribute(
         self, product_type_id: int, attribute_name: str
     ) -> tuple[ClusterStats, ...]:
-        """Return all :class:`ClusterStats` for one (PT, Attribute) pair."""
-        return tuple(
-            s for s in self._stats
-            if s.product_type_id == int(product_type_id)
-            and s.attribute_name == attribute_name
-        )
+        """Return all :class:`ClusterStats` for one (PT, Attribute) pair.
+
+        O(1) dict lookup via the ``(pt_id, attribute_name)`` index built at
+        construction. Order matches insertion order of ``stats`` (stable).
+        """
+        return tuple(self._by_pt_attr.get((int(product_type_id), attribute_name), ()))
 
     # ------------------------------------------------------------------
     # Persistence
