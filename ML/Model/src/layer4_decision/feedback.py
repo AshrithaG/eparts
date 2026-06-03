@@ -273,14 +273,32 @@ class FeedbackStore:
     def snapshot(self) -> Path:
         """Persist the current in-memory store to ``centroids.parquet``.
 
-        After a successful snapshot the audit log no longer needs to be
-        replayed against the prior snapshot — but we do NOT truncate it
-        here. Truncation/rotation is a deliberate operator action
-        (see CLI ``snapshot --rotate-audit``).
+        The snapshot bakes every applied update into ``centroids.parquet``.
+        To keep ``load(snapshot) + replay(live_log)`` drift-free, the audit
+        log is **rotated** here: the current log (whose events are now baked
+        into the snapshot) is moved to a numbered archive, and a fresh empty
+        live log starts. Without rotation, a restart would re-apply the
+        baked-in events on top of the snapshot and ``N`` would drift upward
+        (double-counting).
+
+        Rotation **archives**, never deletes — the full audit trail is
+        retained across ``feedback_audit.archived_NNN.jsonl`` files, as
+        spec §7.2 M6 requires ("audit log entry written for every update").
         """
         with self._lock:
             self._store.save(self._dir)
+            if self._audit_path.exists() and self._audit_path.stat().st_size > 0:
+                self._audit_path.rename(self._next_archive_path())
         return self._dir / "centroids.parquet"
+
+    def _next_archive_path(self) -> Path:
+        """Next unused ``feedback_audit.archived_NNN.jsonl`` path."""
+        i = 1
+        while True:
+            candidate = self._dir / f"feedback_audit.archived_{i:03d}.jsonl"
+            if not candidate.exists():
+                return candidate
+            i += 1
 
     def replay(self) -> int:
         """Reapply the audit log on top of the current in-memory store.

@@ -128,6 +128,7 @@ def _cmd_snapshot(args, settings) -> None:
         print(f"  replayed {n} audit event(s) before snapshot")
     path = fb.snapshot()
     print(f"snapshot written: {path} ({path.stat().st_size / 1024:.1f} KB)")
+    print("  audit log rotated to an archive; live log reset (replay is now a no-op until new updates)")
 
 
 def main(argv: list[str] | None = None) -> None:

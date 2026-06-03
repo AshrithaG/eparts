@@ -293,6 +293,76 @@ def test_snapshot_round_trip(feedback, tmp_path):
     np.testing.assert_allclose(reloaded_c.mu, live.mu, atol=1e-5)
 
 
+def test_snapshot_then_replay_has_no_drift(store, tmp_path):
+    """Regression (PR review): snapshot bakes updates into centroids.parquet;
+    a subsequent reload+replay must NOT re-apply the already-baked events.
+
+    The danger: updates live in BOTH the snapshot and the audit log. If
+    replay re-applies the log on top of a snapshot that already contains
+    those updates, n drifts upward (double-counting). snapshot() rotates
+    the audit log to make load(snapshot)+replay(live_log) drift-free.
+    """
+    fb = FeedbackStore(store, artifact_dir=tmp_path, pushback_lambda=LAMBDA)
+    q = np.array([4.0] + [0.0] * (DIM - 1), dtype=np.float32)
+    fb.confirm(10, "INPUT_VOLTAGE", "24", q, reviewer_id="a")
+    fb.confirm(10, "INPUT_VOLTAGE", "24", q, reviewer_id="a")
+    expected = fb.cluster_store.lookup(10, "INPUT_VOLTAGE", "24")
+    assert expected.n == 12     # 10 + 2 confirms
+
+    fb.snapshot()               # bakes n=12 into centroids.parquet
+
+    # Simulate a service restart: fresh store loaded FROM the snapshot,
+    # then replay the (post-snapshot) audit log.
+    reloaded_store = ClusterStore.load(tmp_path)
+    assert reloaded_store.lookup(10, "INPUT_VOLTAGE", "24").n == 12
+    fb2 = FeedbackStore(reloaded_store, artifact_dir=tmp_path, pushback_lambda=LAMBDA)
+    n_replayed = fb2.replay()
+
+    recovered = fb2.cluster_store.lookup(10, "INPUT_VOLTAGE", "24")
+    # No drift: the two baked-in confirms must NOT be re-applied.
+    assert n_replayed == 0, "snapshot must rotate the audit log so replay is a no-op"
+    assert recovered.n == 12, f"drift! expected n=12, got n={recovered.n}"
+    np.testing.assert_allclose(recovered.mu, expected.mu, atol=1e-6)
+
+
+def test_update_after_snapshot_replays_only_the_new_event(store, tmp_path):
+    """After a snapshot, a NEW update must replay (and only it) on restart."""
+    fb = FeedbackStore(store, artifact_dir=tmp_path, pushback_lambda=LAMBDA)
+    q = np.array([4.0] + [0.0] * (DIM - 1), dtype=np.float32)
+    fb.confirm(10, "INPUT_VOLTAGE", "24", q, reviewer_id="a")   # pre-snapshot
+    fb.snapshot()                                               # n=11 baked in
+    fb.confirm(10, "INPUT_VOLTAGE", "24", q, reviewer_id="a")   # post-snapshot
+    expected = fb.cluster_store.lookup(10, "INPUT_VOLTAGE", "24")
+    assert expected.n == 12
+
+    # Restart from the snapshot (n=11) + replay live log (the 1 new confirm).
+    reloaded = ClusterStore.load(tmp_path)
+    assert reloaded.lookup(10, "INPUT_VOLTAGE", "24").n == 11
+    fb2 = FeedbackStore(reloaded, artifact_dir=tmp_path, pushback_lambda=LAMBDA)
+    n_replayed = fb2.replay()
+    assert n_replayed == 1      # only the post-snapshot confirm
+    recovered = fb2.cluster_store.lookup(10, "INPUT_VOLTAGE", "24")
+    assert recovered.n == 12
+    np.testing.assert_allclose(recovered.mu, expected.mu, atol=1e-6)
+
+
+def test_snapshot_archives_audit_log_for_compliance(feedback, tmp_path):
+    """Rotation must PRESERVE the audit trail (spec §7.2 M6) — archived, not deleted."""
+    feedback.confirm(20, "MOUNTING", "STRAP-ON", np.ones(DIM, dtype=np.float32), reviewer_id="a")
+    assert (tmp_path / AUDIT_LOG_NAME).exists()
+    feedback.snapshot()
+    # Live log gone (rotated)…
+    live_exists = (tmp_path / AUDIT_LOG_NAME).exists()
+    # …and an archive preserves the record.
+    archives = list(tmp_path.glob("feedback_audit.archived_*.jsonl"))
+    assert len(archives) == 1, "snapshot must archive the audit log, not delete it"
+    assert archives[0].read_text(encoding="utf-8").strip(), "archived audit log must retain the events"
+    # A fresh update after snapshot starts a new live log.
+    feedback.confirm(20, "MOUNTING", "STRAP-ON", np.ones(DIM, dtype=np.float32), reviewer_id="b")
+    assert (tmp_path / AUDIT_LOG_NAME).exists()
+    assert len((tmp_path / AUDIT_LOG_NAME).read_text(encoding="utf-8").strip().splitlines()) == 1
+
+
 # ===========================================================================
 # Concurrency — spec §7.2 M6 "concurrent updates do not corrupt cluster state"
 # ===========================================================================
