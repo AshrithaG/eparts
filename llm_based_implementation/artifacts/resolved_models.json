@@ -1,0 +1,18 @@
+﻿[
+    {
+        "requested":  "qwen2.5:14b-instruct",
+        "resolved":  "qwen2.5:14b-instruct"
+    },
+    {
+        "requested":  "phi4",
+        "resolved":  "phi4"
+    },
+    {
+        "requested":  "llama3.1:8b-instruct",
+        "resolved":  "llama3.1:8b"
+    },
+    {
+        "requested":  "llama3.2:3b-instruct",
+        "resolved":  "llama3.2:3b"
+    }
+]

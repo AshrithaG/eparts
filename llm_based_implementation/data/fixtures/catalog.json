@@ -1,0 +1,119 @@
+[
+  {
+    "product_id": 10001,
+    "product_type": "Damper Actuator",
+    "short_description": "Belimo LMB24-3 damper actuator, 24V, 90s, spring return",
+    "extended_description": "Non-spring return damper actuator, 24 VAC/VDC, 0-10 VDC modulating control, strap-on mount, 90 second run time",
+    "attributes": {
+      "INPUT_VOLTAGE": "24 vac",
+      "CONTROL_SIGNAL": "0-10 vdc",
+      "MOUNTING": "spring return",
+      "RUN_TIME": "90 sec"
+    }
+  },
+  {
+    "product_id": 10002,
+    "product_type": "Damper Actuator",
+    "short_description": "Honeywell ML6161 damper motor, 24V, 60s, modulating",
+    "extended_description": "Damper actuator with spring return, 24 VAC input, 2-10 VDC control signal, 60 second run time",
+    "attributes": {
+      "INPUT_VOLTAGE": "24 vac",
+      "CONTROL_SIGNAL": "2-10 vdc",
+      "MOUNTING": "spring return",
+      "RUN_TIME": "60 sec"
+    }
+  },
+  {
+    "product_id": 10003,
+    "product_type": "Damper Actuator",
+    "short_description": "Johnson Controls M9220 actuator, 120V, 30s, modulating",
+    "extended_description": "Damper actuator, 120 VAC, 4-20 mA control signal, 30 second run time, spring return",
+    "attributes": {
+      "INPUT_VOLTAGE": "120 vac",
+      "CONTROL_SIGNAL": "4-20 ma",
+      "MOUNTING": "spring return",
+      "RUN_TIME": "30 sec"
+    }
+  },
+  {
+    "product_id": 20001,
+    "product_type": "Temperature Sensor",
+    "short_description": "Greystone TE-705 strap-on thermistor, 10K, outdoor",
+    "extended_description": "Thermistor temperature sensor, 10000 ohm, strap-on pipe mount, outdoor rated, weather resistant enclosure",
+    "attributes": {
+      "PROBE_TYPE": "thermistor",
+      "MOUNTING": "strap-on",
+      "RESISTANCE_OHM": "10000",
+      "ENVIRONMENT": "outdoor"
+    }
+  },
+  {
+    "product_id": 20002,
+    "product_type": "Temperature Sensor",
+    "short_description": "BAPI BA/10K-S-D duct thermistor, 10K, indoor",
+    "extended_description": "10000 ohm thermistor, duct mount, indoor air handler application, 10K type II curve",
+    "attributes": {
+      "PROBE_TYPE": "thermistor",
+      "MOUNTING": "duct",
+      "RESISTANCE_OHM": "10000",
+      "ENVIRONMENT": "indoor"
+    }
+  },
+  {
+    "product_id": 20003,
+    "product_type": "Temperature Sensor",
+    "short_description": "ACI A/100-3K-S Pt100 RTD, strap-on, outdoor",
+    "extended_description": "RTD temperature sensor, 1000 ohm reference, strap-on pipe mount, outdoor environment, 4-wire",
+    "attributes": {
+      "PROBE_TYPE": "RTD",
+      "MOUNTING": "strap-on",
+      "RESISTANCE_OHM": "1000",
+      "ENVIRONMENT": "outdoor"
+    }
+  },
+  {
+    "product_id": 20004,
+    "product_type": "Temperature Sensor",
+    "short_description": "Johnson Controls T-6000 thermistor probe, 10K",
+    "extended_description": "10000 ohm thermistor probe, immersion well mount, indoor, T-6000 series",
+    "attributes": {
+      "PROBE_TYPE": "thermistor",
+      "MOUNTING": "immersion",
+      "RESISTANCE_OHM": "10000",
+      "ENVIRONMENT": "indoor"
+    }
+  },
+  {
+    "product_id": 30001,
+    "product_type": "Thermostat",
+    "short_description": "Johnson Controls T-6000 wall thermostat, 2-stage, 24V",
+    "extended_description": "Programmable thermostat, 24 VAC, 2-stage heating/cooling, wall mount, T-6000 series",
+    "attributes": {
+      "STAGES": "2-stage",
+      "MOUNTING": "wall",
+      "INPUT_VOLTAGE": "24 vac"
+    }
+  },
+  {
+    "product_id": 30002,
+    "product_type": "Thermostat",
+    "short_description": "Honeywell T87 round wall thermostat, single-stage, 24V",
+    "extended_description": "Single-stage wall thermostat, 24 VAC, mechanical, residential HVAC application",
+    "attributes": {
+      "STAGES": "1-stage",
+      "MOUNTING": "wall",
+      "INPUT_VOLTAGE": "24 vac"
+    }
+  },
+  {
+    "product_id": 30003,
+    "product_type": "Thermostat",
+    "short_description": "Belimo W3 multi-stage commercial thermostat, 24V",
+    "extended_description": "Multi-stage commercial thermostat, 24 VAC input, wall mount, programmable, BACnet capable",
+    "attributes": {
+      "STAGES": "multi-stage",
+      "MOUNTING": "wall",
+      "INPUT_VOLTAGE": "24 vac"
+    }
+  }
+]

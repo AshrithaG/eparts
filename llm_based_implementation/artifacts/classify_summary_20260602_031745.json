@@ -1,0 +1,13 @@
+{
+  "model": "qwen2.5:7b-instruct",
+  "n": 100,
+  "shortlist_size": 12,
+  "seed": 42,
+  "temperature": 0.0,
+  "overall_accuracy": 0.64,
+  "shortlist_recall": 0.97,
+  "accuracy_when_true_in_shortlist": 0.6598,
+  "correct": 64,
+  "elapsed_sec": 94.7,
+  "sec_per_item": 0.95
+}

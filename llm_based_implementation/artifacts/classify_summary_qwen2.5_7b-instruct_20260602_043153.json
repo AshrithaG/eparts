@@ -1,0 +1,21 @@
+{
+  "model": "qwen2.5:7b-instruct",
+  "n": 100,
+  "shortlist_size": 12,
+  "seed": 42,
+  "temperature": 0.0,
+  "overall_accuracy": 0.64,
+  "shortlist_recall": 0.97,
+  "accuracy_when_true_in_shortlist": 0.6598,
+  "correct": 64,
+  "high_conf_count": 85,
+  "high_conf_accuracy": 0.6941,
+  "wrong_asserted_at_conf_1": 26,
+  "n_wrong": 36,
+  "total_prompt_tokens": 30481,
+  "total_completion_tokens": 1923,
+  "total_tokens": 32404,
+  "tokens_per_item": 324.0,
+  "elapsed_sec": 100.1,
+  "sec_per_item": 1.0
+}

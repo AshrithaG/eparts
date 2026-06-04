@@ -1,0 +1,19 @@
+# Backend + model + sampling parameters.
+# Change `model` to swap to any model you have pulled via `ollama pull`.
+# Change `backend` to `mock` for canned-response tests, or `azure_openai` once
+# the Azure client is filled in (currently a stub).
+
+backend: ollama
+model: qwen2.5:7b-instruct
+host: http://localhost:11434
+
+options:
+  # The plan calls for a deterministic primary pass; sample only when
+  # measuring self-consistency for the confidence ensemble (L3).
+  temperature: 0.0
+  num_ctx: 8192
+  # seed kept fixed so identical (prompt, grounding) gives identical output
+  seed: 42
+
+# Retrieval
+top_k: 5

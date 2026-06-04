@@ -1,0 +1,61 @@
+{
+  "INPUT_VOLTAGE": {
+    "values": {
+      "24 vac": 1240,
+      "120 vac": 312,
+      "240 vac": 88,
+      "24 vdc": 76
+    }
+  },
+  "CONTROL_SIGNAL": {
+    "values": {
+      "0-10 vdc": 680,
+      "2-10 vdc": 410,
+      "4-20 ma": 290
+    }
+  },
+  "MOUNTING": {
+    "values": {
+      "spring return": 520,
+      "strap-on": 480,
+      "duct": 360,
+      "immersion": 220,
+      "wall": 540
+    }
+  },
+  "RUN_TIME": {
+    "values": {
+      "30 sec": 95,
+      "60 sec": 240,
+      "90 sec": 310,
+      "120 sec": 88
+    }
+  },
+  "PROBE_TYPE": {
+    "values": {
+      "thermistor": 1820,
+      "RTD": 410,
+      "thermocouple": 215
+    }
+  },
+  "RESISTANCE_OHM": {
+    "values": {
+      "1000": 240,
+      "10000": 1640,
+      "100000": 95
+    }
+  },
+  "ENVIRONMENT": {
+    "values": {
+      "indoor": 1240,
+      "outdoor": 510
+    }
+  },
+  "STAGES": {
+    "values": {
+      "1-stage": 410,
+      "2-stage": 620,
+      "multi-stage": 180
+    }
+  }
+}

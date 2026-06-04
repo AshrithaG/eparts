@@ -1,0 +1,101 @@
+product_id,description,true_type,predicted_type,confidence,true_in_shortlist,correct,n_candidates,prompt_tokens,completion_tokens
+22812,2 Pole Fuse Holder | 18-10 AWG | 600 Max Voltage | 30 Amp Max Current | 1 Piece,Terminal Blocks,Circuit Breakers/ Fuses,1.0,True,False,12,303,22
+10300,Thermostat Cover | Adjustable Set Point Key [0.5 inch] | Exposed Indicator | Concealed Thermometer | Plastic | Desert Beige | Use w/ Model # Siemens 192GC/193HC,Pneumatic Thermostat Covers,Thermostat Guards/Protective Enclosures,0.5,True,False,12,320,24
+8723,General Purpose Relay | Blade | 4PDT | 10A | 120 VAC | Indicator | cURus/CE Listed,General Purpose Relays,General Purpose Relays,1.0,True,True,12,301,19
+25018,Red ABS Plastic Cover with 18 Gauge Corrosion Resistant Steel Back Box | 3.13 inch W x 5.13 inch H x 2.5 inch D,Accessories - Relays,Cabinets/ Enclosures,1.0,True,False,12,321,21
+15141,2 Position Selector Switch - 1 NO Contact (OX) - Key - IP65 Rating - 22 mm Size - Spring Return From Left Control Action,Selector Switches,Selector Switches,1.0,True,True,12,306,18
+15078,Pushbutton | 22 mm | Momentary | Illuminated - Available Voltages - 6 VAC/VDC 12 VAC/VDC 24 VAC/VDC 120 VAC 240 VAC (Full Voltage) | Square - Extended | Availab,Pushbuttons,Pushbuttons,1.0,True,True,12,348,17
+14287,"Pan-Ty Locking Tie | Intermediate Cross Section | 5.6"" Length | Weather Resistant Nylon | Black | 1000/pack",Cable Ties,Accessories - Panel Devices,0.5,True,False,12,296,20
+11776,Wall Mounted Self Acting Thermostatic Actuator Liquid Filled | Temperature Range 5-30ºC/40-85ºF or 20-70ºC/60-185ºF,Thermostatic Actuators,Thermostatic Actuators,1.0,True,True,12,334,22
+25003,SPDT Multi Voltage Relay | 24 VAC/VDC or 120/230 VAC – 10 Amp | 1 Form C Contact | Red LED Indicator | Track Mounted w/ 3.5 inch Snap Track Inclued | 82 mm H x ,Track Mounted Relays,Track Mounted Relays,1.0,True,True,12,336,19
+10096,"Analog To Pneumatic | 14 SCIM Bleed | Gauge | Analog Input (0-5VDC) | Pressure Output (0-15PSI) | Single Valve | 0.005"" Bleed Orifice | 0-10V, 0-15V, 0-20mA Sel",Analog To Pneumatic,Analog To Pneumatic,1.0,True,True,12,352,21
+24263,Analog/Digital Input To Analog Output Device | Accepts Up to 6 Digital Inputs & Outputs A Proportional Analog Signal | Jumper Selectable Input Ranges | 24 VAC |,Analog To Analog,Analog To Pneumatic,0.5,False,False,12,326,21
+25016,Power Relay | Heavy Duty | DPDT | 30A | 120 VAC | Enclosure Mounted | Red,Power Relays,Power Relays,1.0,True,True,12,295,18
+30257,Weather Shield for Characterized Control Valves with AF / LF Actuators,Accessories - Valves,Accessories - Valves,0.5,True,True,12,307,20
+20426,"1/4"" Flame Retardant Pneumatic Control Tubing | Plenum Rated | Stress Crack Resistance | Black With Red Stripe | UL Listed | 4 x 250 ft. Coils",Pneumatic Tubing,Pneumatic Tubing,1.0,True,True,12,322,20
+10030,"Floating Point To Pneumatic | With Feedback | 41 scim Bleed | Gauge | Pressure Output (0-15PSI) | Single Valve, 0.007"" Bleed Orifice (90, 60, 120 sec) (0-15PSI/",Floating Point To Pneumatic,Floating Point To Pneumatic,1.0,True,True,12,349,21
+22051,Outside Air Pressure Pickup Port | Conduit & Tubing Not Included,Accessories - Pressure,Pitot Tubes & Pressure Probes,1.0,True,False,12,298,23
+18436,1 inch | Water & Steam | Linear Flow | Female NPT | Brass | 250 ANSI | Cv 11.6,Globe Valves,Fittings & Connectors,1.0,True,False,12,296,20
+8755,"8.88"" H x 8.75"" W | White Solid Steel Sub Panel | Fits A10106CH Panel",Subpanels,Subpanels,1.0,True,True,12,289,17
+8751,"6.88"" H x 6.75"" W | Solid White Steel Sub Panel | Fits A808CH Panel",Subpanels,Cabinets/ Enclosures,0.5,True,False,12,288,21
+10043,PWM to Pneumatic Feedback | 41 scim Bleed,PWM To Pneumatic,PWM to Pneumatic,1.0,True,False,12,309,20
+14276,Current Switch | Internal w/Contact Status | Operating Range .50-10 Amps | Fixed Threshold | Contact Output | Enclosed w/Relay | SPST | Override Switch | 10-30 ,Current Switches,Current Switches,1.0,True,True,12,319,18
+15041,"Strap-On Temperature Sensor | 1K Platinum RTD w/Transmitter | 4 to 20 mA Output | Optional - BAPI-Box J-Box or BAPI-Box Crossover | Clamp-On Strap - Fits 2"" to ",Strap-On Sensors,Pneumatic Temp Transmitter,0.8,True,False,12,342,21
+19735,"Snap-In Bushing | For 1/2"" Knockout | Nylon",Fittings & Connectors,Fittings & Connectors,0.5,True,True,5,239,20
+22136,"1/2"" 2-Way Pneumatic Flare Valve | CV 1.6 | 3-6# psi | SAE Flare | Normally Open | Brass",Accessories - Valves,Accessories - Valves,1.0,True,True,12,332,20
+8728,Power Relay | Octal | DPDT | 10A | 120 VAC | Indicator | cURus/CE Listed,General Purpose Relays,Power Relays,1.0,True,False,12,300,18
+20671,Pneumatic Damper Actuator | 8-13 # Spring Range with D-9502-5 Positioner | Swivel Mount Bracket | Clevis | Crank Arm,Pneumatic Actuators,Accessories - Dampers,1.0,True,False,12,311,25
+12414,"21.00"" H x 18.50"" W | NEMA 1 | White Solid Sub Panel",Subpanels,Subpanels,1.0,True,True,12,297,17
+24592,"Single Point Polymer Coated Sensing Probe for Detecting Conductive Fluids | 2 10"" Male to Female Lead Cables | For Use With Seahawk Panels",Moisture Sensors,Sensing Cables,1.0,False,False,12,313,19
+22848,Control Transformer | 85 VA | 120 VAC Input - 24 VAC Output | Single Threaded Hub & Foot Mounts | 9.5 Primary and Secondary Wires | UL 506 Listed/RoHS,Control Transformers,Control Transformers,1.0,True,True,12,322,21
+24425,"27.00"" H x 21.00"" W | NEMA 12 | Solid White Steel Sub Panel",Subpanels,Subpanels,1.0,True,True,12,304,17
+18430,1/2 inch | Water & Steam | Linear Flow Characteristic | Brass Material | Cv 4.6|,Globe Valves,Accessories - Valves,1.0,True,False,12,293,20
+14280,Current Switch | External w/Contact Status | Operating Range 1.25-150 Amps | Fixed Threshold | Contact Output | Enclosed w/Relay | SPST | Override Switch | 10-3,Current Switches,Current Switches,1.0,True,True,12,321,18
+18558,18/4 Stranded Control Cable | Plenum Rated | UL Type CMP | Not Shielded | Quantity 1 = 1000 ft | MUST SPECIFY JACKET COLOR & PACKAGING,Control Cables,Control Cables,1.0,True,True,12,316,18
+21850,General Purpose Relay | Blade | 3PDT | 10A | 24 VAC | Indicator | Check Button | cURus/CE Listed,General Purpose Relays,General Purpose Relays,1.0,True,True,12,304,19
+15147,2 Position Selector Switch - 2 NO Contact (OX -OX) - Lever - IP65 Rating - 22 mm Size - Spring Return From Left Control Action,Selector Switches,Selector Switches,1.0,True,True,12,308,18
+27317,"Isolated Linear DC Power Supply | 120 VAC - 1.5-28 VDC 300 mA Adjustable | UL Listed | 4"" & 2.75"" Track Mountable | 2 Position Toggle On/Off",Power Supplies,Power Supplies,1.0,True,True,12,322,17
+30108,Universal Crankarm for use With KG8 Ball Joint,Accessories - Dampers,none_of_these,0.0,True,False,12,294,19
+779,0.25 inch Foam Pad | Closed Cell | Adhesive Backed | QTY 1 = 100 Pieces,Accessories - Temperature,none_of_these,0.0,True,False,12,303,19
+25241,One Case [12] 10 oz Cans of Standard Test Gas | With Test Port Nozzle | For SL-2000 Series Detectors,Test Equipment,Accessories - Panel Devices,0.5,False,False,12,306,20
+27302,Power Supply | Enclosed | Input - 120 VAC | Output - 24 VAC | 10A Main Circuit Breaker | 24 VAC Circuit Breakers | Dual 100 VA | Internal Wires | Class 2 (UL Ap,Enclosed Transformers,Power Supplies,1.0,True,False,12,345,17
+12168,"Pilot Control Relay | Enclosed | 10..30 VAC/VDC / 208..277 VAC | 10 A | SPDT | Override | 20 ms Operate Time | 16"" Wire Leads | LED | Hi/Low Separation | UL Lis",Pre-Packaged Relays (RIB/ PAM/ MR/ CVR),General Purpose Relays,0.5,True,False,12,340,19
+24417,Control Transformer | 50 VA | 120/208/240/480 VAC Input - 24 VAC Output | Dual Threaded Hub & Foot Mounts | 8 Primary and Secondary Wires | Circuit Breaker | UL,Control Transformers,Control Transformers,1.0,True,True,12,330,17
+18437,1-1/4 inch | Water & Steam | Linear Flow | Female NPT | Brass | 250 ANSI | Cv 18.5,Globe Valves,Fittings & Connectors,1.0,True,False,12,312,20
+15836,T22 Series Line Voltage Thermostats with Manual Switch | Heat Control Type | 24-277 VAC Supply Voltage,Non-Configurable Non-Communicating Thermostats,Non-Configurable Non-Communicating Thermostats,1.0,True,True,12,305,26
+12160,"Pilot Control Relay | Enclosed | 10..30 VAC/VDC / 208..277 VAC | 10 A | SPDT | 20 ms Operate Time | 16"" Wire Leads | LED | Hi/Low Separation | uL Listed UL916 U",Pre-Packaged Relays (RIB/ PAM/ MR/ CVR),General Purpose Relays,0.5,True,False,12,339,19
+14269,Current Switch | Internal w/Contact Status | Operating Range .50-10 Amps | Fixed Threshold | Contact Output | Enclosed w/Relay | SPDT | LED On - Activated | 10-,Current Switches,Current Switches,1.0,True,True,12,323,18
+32948,2 inch Square Blue Illuminated Pushbutton with Timer | HANDICAPPED SYMBOL | SPDT 2 Amp Contacts | Additional SPDT 10 Amp Continuous Momentary Action Switch | 1/,Pushbuttons,Pushbuttons,1.0,True,True,12,333,17
+26166,"Restrictor Tee | 1/4"" X 1/4"" X 1/8M | .007",Accessories - Pneumatic Controls,Fittings & Connectors,1.0,True,False,5,252,20
+15828,"24.00"" H x 20.00"" W x 9.25"" D | Control Panel Enclosure | Stainless Steel | Lift-Off Hinges | Key Lock | Knockouts and Vent Louvers | ANSI 61 Gray Powder Coated",NEMA 1,Cabinets/ Enclosures,1.0,True,False,12,351,21
+10041,"Analog To Pneumatic W/Feedback | 750 SCIM S/E | Gauge | Analog Input (0-5VDC) | Pressure Output (0-10PSI) | Dual Valve | Exhausts On Power Failure | 0-10V, 0-15",Analog To Pneumatic,Analog To Pneumatic,1.0,True,True,12,377,21
+16362,T-5210 Pneumatic Temperature Transmitter | 8 ft Copper Averaging Element with 1 ft Copper Capillary | Direct Action | Operating Range 50-150 Deg F,Pneumatic Temp Transmitter,Pneumatic Temp Transmitter,1.0,True,True,12,321,21
+10063,Pulse Width Input to Analog | Voltage or Current Output,PWM To Analog,Analog To Pneumatic,0.5,True,False,12,286,21
+15940,Thermostat | H-C 15 | Reverse Acting | Horizontal,Pneumatic Thermostats,Thermostat,1.0,True,False,12,305,18
+27460,"Power Relay | 30A | DPST-NO/NC | 24 VAC/VDC | 4.0"" Track Mount",Power Relays,Track Mounted Relays,1.0,True,False,12,302,19
+15858,T26 Series Line Voltage Wall Thermostate | Cooling Control Type | 24-277 VAC Supply Voltage | Automatic/Manual Mode Changeover | Liquid Filled Sensing Element |,Non-Configurable Non-Communicating Thermostats,Non-Configurable Non-Communicating Thermostats,1.0,True,True,12,331,26
+22292,General Purpose Relay | Blade | DPDT | 10A | 24 VDC | Indicator | Check Button | cURus/CE Listed,General Purpose Relays,General Purpose Relays,1.0,True,True,12,302,19
+15119,2 Position Selector Switch - 2 NO - 2 NC Contact (2 OX -2 XO) - Lever - IP65 Rating - 22 mm Size - Maintained Control Action - Spring Return From Left,Selector Switches,Selector Switches,1.0,True,True,12,318,18
+27304,Power Supply | Enclosed | Input - 120 VAC | Output - 24 VAC | No Main Circuit Breaker | 24 VAC Circuit Breakers| 100 VA | Internal Wires | Class 2 (UL Approved ,Enclosed Transformers,Power Supplies,1.0,True,False,12,342,17
+8858,"36.5""H x 24.38""W x 9.38"" D | Gray | Panel Door ONLY",Accessories - Enclosures,Enclosures,0.5,True,False,12,298,17
+24704,Chrome Pull Station Guard to Assist in Preventing False Alarms Caused by Inadvertent Blows to Pull Stations | 6.875 inch W x 6.5 inch H x 4.25 inch D | 7 Gauge ,Device Guards,Device Guards,0.5,True,True,12,332,17
+18680,Pushbutton | 22 mm | Momentary | Non-Illuminated | Round - Extended | Available Cap Color - Black Green Red Blue White Yellow | 1 Normally Open | IP65 (Oiltight,Pushbuttons,Pushbuttons,1.0,True,True,12,315,17
+20376,Pilot Light | 22 mm - TW Series | Square | Flat Lens | Engravable Lens | 120 VAC Step Down Transformer | LED Lamp | Multiple Colors Available| IP65,Pilot Lights,Pilot Lights,1.0,True,True,12,313,18
+10838,Marker Card (RC610) | 31-40 | Horizontal | 10 Strips - 10 Per Strip,Accessories - Panel Devices,Accessories - Panel Devices,1.0,True,True,12,306,20
+34333,"18/3 Copper Stranded Low Voltage Cable | Plenum Rated | UL Type CMP/CL2P/FT6 | Non-Shielded | Quantity 1 = 1,000 ft. | MUST SPECIFY [1] PACKAGING & COLOR",Control Cables,Network Cables,1.0,True,False,12,325,18
+32841,600 Pound Single  Door Magnetic Lock With Indicating LED | 12 or 24 VDC | U.L. &C.U.L.,Magnetic Locks,Magnetic Locks,1.0,True,True,12,304,19
+16357,T-5210 Pneumatic Temperature Transmitter | Copper Bulb with 5.5 inch Copper Capillary | Direct Action | Temperature Range 50-100 Deg F,Pneumatic Temp Transmitter,Pneumatic Temp Transmitter,1.0,True,True,12,317,21
+9954,Control Transformer | 375 VA | 120 VAC Input - 24 VAC Output | Dual Threaded Hub & Foot Mounts | 7 Primary and Secondary Wires | UL 506 Recognized/RoHS,Control Transformers,Control Transformers,1.0,True,True,12,322,21
+20489,"Elbow Adaptor | Male | 3/8"" Tube x 3/8"" NPT",Fittings & Connectors,Fittings & Connectors,1.0,True,True,12,298,24
+15178,3 Position Selector Switch - 2 NO - 2 NC Contact ( XOO -OOX -OXX -XXO) - Key - IP65 Rating - 22 mm Size - Spring Return From Left Control Action,Selector Switches,Selector Switches,1.0,True,True,12,320,18
+27367,"Low Coil Input Relay | Enclosed | 120 VAC Power Input & 5..25 VAC/VDC Control Input | 20 A | SPST | Override | 18 ms Operate Time | 16"" Wire Leads | LED | Hi/Lo",Pre-Packaged Relays (RIB/ PAM/ MR/ CVR),Power Relays,1.0,True,False,12,342,18
+22787,DIN Rail | Slotted | 2 m Length | 35 mm Width x 7.5 mm |  Aluminum,DIN Rails / Snap Track,DIN Rails / Snap Track,1.0,True,True,12,291,21
+22762,EV6 Screw & Post Jumper Hardware | 1 Piece,Accessories - Panel Devices,Accessories - Panel Devices,0.5,True,True,12,288,20
+30152,Base Plate For ZS-100,Accessories - Dampers,Accessories - Dampers,1.0,True,True,12,276,21
+27758,General Purpose Relay | Blade | 3PDT | 10A | 240 VAC | Indicator | cURus/CE Listed,General Purpose Relays,Pre-Packaged Relays (RIB/ PAM/ MR/ CVR),0.5,True,False,12,304,31
+15986,Beige Plastic Cover | Horizontal | JCI Logo | Without a Namplate / Thermometer or Setpoint,Accessories - Pneumatic Controls,Thermostat Guards/Protective Enclosures,0.5,True,False,12,300,24
+21572,General Purpose Relay | Blade | SPDT | 10A | 24 VDC | Indicator | cURus/CE Listed,General Purpose Relays,General Purpose Relays,1.0,True,True,12,299,19
+12244,Control Transformer | 50 VA | 120/240/277/480 VAC Input - 24 VAC Output | Dual Threaded Hub & Foot Mounts | 8 Primary and Secondary Wires | Circuit Breaker | UL,Control Transformers,Control Transformers,1.0,True,True,12,331,17
+24482,Power Relay | Blade | DPDT | 10A | 24 VAC | Indicator | cURus/CE Listed,General Purpose Relays,Power Relays,1.0,True,False,12,299,18
+9510,Retro Pneumatic Room Thermostat | Day Direct 18 PSI | Night Direct 25 PSI | Dual Set Point | Single Output | Degrees C | Lens Cover,Pneumatic Thermostats,Pneumatic Thermostats,1.0,True,True,12,321,21
+8863,"19.5""H x 16.13""W x 5.13"" D | Gray | Flush Mount Panel & Kit",Accessories - Enclosures,Subpanels,0.5,True,False,12,304,17
+23054,DIN Rail Mount Socket for RY2S & RY22S Relays,Sockets,DIN Rails / Snap Track,1.0,True,False,12,286,25
+14340,"Static Pressure Probe (Aspiration) | 2.0"" A x 0.5"" B | MUST SPECIFY [1] FITTING",Pitot Tubes & Pressure Probes,Accessories - Pressure,0.5,True,False,12,298,19
+26570,"Duct Temperature Sensor | Low Temperature - -328 to 392 F (-200 to 200 C) | 1K Platinum RTD w/Transmitter | 12"" Probe Length | Optional - 4 to 20 mA 0 to 5 VDC ",Freezer and Extreme Temperature Sensors,Freezer and Extreme Temperature Sensors,1.0,True,True,12,361,21
+15170,3 Position Selector Switch - 2 NO Contact (XOO -OOX) - Knob - IP65 Rating - 22 mm Size - Spring Return From Left Control Action,Selector Switches,Selector Switches,1.0,True,True,12,311,18
+9956,Control Transformer | 50 VA | 277 VAC Input - 24 VAC Output | Single Threaded Hub & Foot Mounts | 7.5 Primary and Secondary Wires | UL 5085-3 Listed/RoHS,Control Transformers,Control Transformers,1.0,True,True,12,325,17
+27493,Access Card w/MAGNETIC STRIP | Dye Sublimation Printable on Both Sides w/Glossary Surface | Programmable In Any Wiegand Format [Including 26 Bit] | Used With Al,Proximity Readers,Accessories - Panel Devices,0.5,True,False,12,341,20
+30101,"Ball Joint (5/16"" - 90 Degrees)",Accessories - Dampers,none_of_these,0.0,True,False,12,303,19
+10093,"Analog to Pneumatic | 73 scim Bleed | Analog Input (0-5VDC) | Pressure Output (0-15PSI) | Single Valve | 0.010"" Bleed Orifice | 0-10V, 0-15V, 0-20mA Selectable",Analog To Pneumatic,Analog To Pneumatic,1.0,True,True,12,351,21
+18568,22/2 Stranded Control Cable | Plenum Rated | UL Type CMP | Shielded | Quantity 1 = 1000 ft | MUST SPECIFY JACKET COLOR & PACKAGING,Control Cables,Control Cables,1.0,True,True,12,313,18
+22804,Double Row Eurostyle Terminal Strip | 3 Pole | 20-10 AWG | 300 V / 30 A | 10 mm Spacing | For Panel/Chassis Mounting,Double Row Terminal Blocks,Double Row Terminal Blocks,0.5,True,True,12,316,19
+27378,"Pilot Control Relay | Enclosed | 10..30 VAC/VDC / 120 VAC | 10 A | 2 x SPST-Normally Closed | 2 x Overrides | 20 ms Operate Time | 16"" Wire Leads | LED | UL Lis",Pre-Packaged Relays (RIB/ PAM/ MR/ CVR),General Purpose Relays,0.5,True,False,12,342,19
+16001,White Plastic Cover | Horizontal,Accessories - Pneumatic Controls,Pneumatic Thermostat Covers,1.0,True,False,12,283,21
+12176,4 Track Mount Relay | 10 Amp | DPDT | 24 VAC/VDC / 208-277 VAC,Track Mounted Relays,Track Mounted Relays,1.0,True,True,12,300,19
+16055,Terminal Connector with Two Angle Fittings for Surface Mounted Thermostats | Exposed Tubing,Accessories - Pneumatic Controls,Accessories - Pneumatic Controls,0.5,True,True,12,294,22
+15926,Stat W/Sw Dir Horiz F,Pneumatic Thermostats,Accessories - Pneumatic Controls,1.0,True,False,3,224,22
+14257,Current Switch | Internal w/Contact Status | Operating Range .50-20 Amps | Fixed Threshold | Contact Output | Enclosed | Normally Open | 24 VAC/VDC Coil,Current Switches,Current Switches,1.0,True,True,12,309,18
+24203,Power Supply | Panel Mount | Input - 120 VAC | Output - 24 VAC | 10A Main Circuit Breaker | 24 VAC Circuit Breakers| 40 VA | Removable Terminal Cover Provided |,Enclosed Transformers,Power Supplies,1.0,True,False,12,345,17
+15124,2 Position Selector Switch - 1 NC Contact (XO) - Knob - IP65 Rating - 22 mm Size - Spring Return From Right Control Action,Selector Switches,Selector Switches,1.0,True,True,12,307,18
+24426,"21.00"" H x 21.00"" W | NEMA 12 | Solid White Steel Sub Panel",Subpanels,Subpanels,1.0,True,True,12,304,17
+32899,2 inch Square Green Illuminated Pushbutton | PUSH TO EXIT | Momentary | SPDT 10 Amp Contacts | Single Gang Plate,Pushbuttons,Pushbuttons,1.0,True,True,12,303,17

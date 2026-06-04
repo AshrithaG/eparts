@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.DS_Store
+
+# Note: artifacts/ (benchmark results + graphs + FINDINGS data) ARE committed
+# on purpose — they are the deliverables of this feasibility study. Only the
+# transient per-run intermediates are pruned by hand before commit.

@@ -1,0 +1,21 @@
+{
+  "model": "llama3.1:8b",
+  "n": 100,
+  "shortlist_size": 12,
+  "seed": 42,
+  "temperature": 0.0,
+  "overall_accuracy": 0.67,
+  "shortlist_recall": 0.97,
+  "accuracy_when_true_in_shortlist": 0.6907,
+  "correct": 67,
+  "high_conf_count": 90,
+  "high_conf_accuracy": 0.7111,
+  "wrong_asserted_at_conf_1": 26,
+  "n_wrong": 33,
+  "total_prompt_tokens": 30277,
+  "total_completion_tokens": 2336,
+  "total_tokens": 32613,
+  "tokens_per_item": 326.1,
+  "elapsed_sec": 123.6,
+  "sec_per_item": 1.24
+}

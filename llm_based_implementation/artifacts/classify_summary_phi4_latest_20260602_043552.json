@@ -1,0 +1,21 @@
+{
+  "model": "phi4:latest",
+  "n": 100,
+  "shortlist_size": 12,
+  "seed": 42,
+  "temperature": 0.0,
+  "overall_accuracy": 0.68,
+  "shortlist_recall": 0.97,
+  "accuracy_when_true_in_shortlist": 0.701,
+  "correct": 68,
+  "high_conf_count": 75,
+  "high_conf_accuracy": 0.7733,
+  "wrong_asserted_at_conf_1": 17,
+  "n_wrong": 32,
+  "total_prompt_tokens": 30378,
+  "total_completion_tokens": 2097,
+  "total_tokens": 32475,
+  "tokens_per_item": 324.8,
+  "elapsed_sec": 113.2,
+  "sec_per_item": 1.13
+}

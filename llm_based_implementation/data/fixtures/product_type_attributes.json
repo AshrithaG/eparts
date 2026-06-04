@@ -1,0 +1,5 @@
+{
+  "Damper Actuator": ["INPUT_VOLTAGE", "CONTROL_SIGNAL", "MOUNTING", "RUN_TIME"],
+  "Temperature Sensor": ["PROBE_TYPE", "MOUNTING", "RESISTANCE_OHM", "ENVIRONMENT"],
+  "Thermostat": ["STAGES", "MOUNTING", "INPUT_VOLTAGE"]
+}

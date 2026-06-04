@@ -1,0 +1,48 @@
+[
+  {
+    "id": 1,
+    "name": "Natural language, clear type",
+    "query": "Looking for a 24V damper motor with spring return, need to control a 0-10V signal, ~90 second run time would work",
+    "expected_product_type": "Damper Actuator",
+    "expected_top_values": {
+      "INPUT_VOLTAGE": "24 vac",
+      "CONTROL_SIGNAL": "0-10 vdc",
+      "MOUNTING": "spring return",
+      "RUN_TIME": "90 sec"
+    },
+    "notes": "From development_memo.docx Scenario 1. Layer 2 produces nothing because of Tier-3 ambiguity suppression; Layer 3 should land all four attributes."
+  },
+  {
+    "id": 2,
+    "name": "Non-standard terminology",
+    "query": "Need a thermistor that clamps onto a pipe, the 10K kind, for an outdoor air handler",
+    "expected_product_type": "Temperature Sensor",
+    "expected_top_values": {
+      "PROBE_TYPE": "thermistor",
+      "MOUNTING": "strap-on",
+      "RESISTANCE_OHM": "10000",
+      "ENVIRONMENT": "outdoor"
+    },
+    "notes": "From development_memo.docx Scenario 2. Tests the LLM's terminology mapping: 'clamps onto a pipe' -> strap-on, '10K' -> 10000 ohm."
+  },
+  {
+    "id": 3,
+    "name": "Ambiguous part-number prefix",
+    "query": "Need pricing on Johnson Controls T-6000 ASAP, qty 5",
+    "expected_product_type": "ambiguous",
+    "expected_top_values": {},
+    "notes": "From development_memo.docx Scenario 3. T-6000 spans Temperature Sensor and Thermostat. Layer 3 should surface low PT confidence; ambiguity cap is applied in Layer 4."
+  },
+  {
+    "id": 4,
+    "name": "Sparse / underspecified",
+    "query": "Hi, do you have something for HVAC pipe temperature monitoring? we just need something basic, send a quote please",
+    "expected_product_type": "Temperature Sensor",
+    "expected_top_values": {
+      "PROBE_TYPE": "thermistor",
+      "MOUNTING": "strap-on",
+      "RESISTANCE_OHM": "10000"
+    },
+    "notes": "From development_memo.docx Scenario 4. Usage_Count prior should dominate; many attributes should land on 'insufficient_evidence' once the calibrator is wired in."
+  }
+]
