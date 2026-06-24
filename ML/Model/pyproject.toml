@@ -18,6 +18,9 @@ include = ["src*"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra -q"
+markers = [
+    "ml_ct: ML component tests — the four ML modules (M3a search, M3b category, M3c scoring, M4 decision/calibration). Run with `pytest -m ml_ct`.",
+]
 
 # ---------------------------------------------------------------------------
 # Code style — ruff (lint) + black (format)

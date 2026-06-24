@@ -11,6 +11,9 @@ import pytest
 from src.config import EncoderConfig
 from src.layer3_semantic import Encoder
 
+# ML-CT component: product search (M3a, encoder) — every test here is ML-CT.
+pytestmark = pytest.mark.ml_ct
+
 
 @pytest.fixture(scope="module")
 def encoder(settings) -> Encoder:
@@ -67,3 +70,22 @@ def test_config_dimension_mismatch_raises(settings):
     enc = Encoder(bad)
     with pytest.raises(ValueError, match="declares dimension=999"):
         enc.encode(["anything"])
+
+
+# ===========================================================================
+# ML-CT P1 boundary test (search) — see eparts_doc/ML_CT_Test_Plan.md Part D
+# ===========================================================================
+
+
+def test_empty_string_encodes_to_valid_vector(encoder):
+    """Spec §4.1 allows empty `text`. The encoder must return a well-formed
+    384-d vector (no crash, no NaN/Inf), so an empty description flows
+    through Layer 3 instead of blowing up. The vector is still L2-normalized
+    (the model emits a non-degenerate embedding for the empty/CLS input)."""
+    v = encoder.encode_one("")
+    assert v.shape == (384,)
+    assert v.dtype == np.float32
+    assert np.isfinite(v).all()                 # no NaN / Inf
+    # L2-normalized like every other output (norm 1, or 0 only if degenerate).
+    norm = float(np.linalg.norm(v))
+    assert np.isclose(norm, 1.0, atol=1e-5)

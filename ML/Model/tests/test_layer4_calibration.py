@@ -18,6 +18,9 @@ from src.layer4_decision.calibration import (
     expected_calibration_error,
 )
 
+# ML-CT component: decision / calibration (M4) — every test here is ML-CT.
+pytestmark = pytest.mark.ml_ct
+
 
 # ===========================================================================
 # Brier + ECE math

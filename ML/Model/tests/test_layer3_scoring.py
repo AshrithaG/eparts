@@ -16,6 +16,9 @@ from src.layer3_semantic.scoring import (
     build_usage_prior_from_2a,
 )
 
+# ML-CT component: attribute-value scoring (M3c) — every test here is ML-CT.
+pytestmark = pytest.mark.ml_ct
+
 
 # ===========================================================================
 # UsagePrior — formula correctness
@@ -329,3 +332,34 @@ def test_usage_count_attached_to_candidate(usage_prior_uniform):
     )
     result = s.score(mu, _pt_pred(10))
     assert result.hits[0].top_candidates[0].usage_count == 42
+
+
+# ===========================================================================
+# ML-CT P1 boundary tests (scoring) — see eparts_doc/ML_CT_Test_Plan.md Part D
+# ===========================================================================
+
+
+def test_score_lower_boundary_far_query_drives_conf_embed_to_zero():
+    """Lower boundary of conf_embed: a query extremely far from μ has a
+    huge Mahalanobis d², so conf_embed = exp(-d²/2σ²) → 0. Complements the
+    existing upper-boundary test (d²=0 → conf_embed=1). Must underflow
+    cleanly to 0.0 — never NaN/Inf/negative — and stay in [0, 1]."""
+    mu = np.zeros(DIM, dtype=np.float32)
+    # Full cluster, identity Σ⁻¹ → d² = ||q - μ||². σ defaults to 1.0.
+    store = ClusterStore([_cluster(0, 10, "A", "v", mu)])
+    s = SemanticScorer(store, UsagePrior(counts={("a", "v"): 50}, max_counts={"a": 50}))
+    far_q = np.full(DIM, 1000.0, dtype=np.float32)   # d² = DIM * 1e6, enormous
+    cand = s.score(far_q, _pt_pred(10)).hits[0].top_candidates[0]
+    assert cand.mahalanobis_d2 > 1e6
+    assert cand.conf_embed == pytest.approx(0.0, abs=1e-12)
+    assert 0.0 <= cand.conf_embed <= 1.0
+    assert 0.0 <= cand.conf_embed_final <= 1.0
+    assert np.isfinite(cand.conf_embed)              # no NaN / Inf underflow
+
+
+def test_default_sigma_is_one():
+    """Pin the production default σ. The existing σ-fallback tests use a
+    fabricated default (2.0); this locks the real default at 1.0 so the
+    137 uncalibrated PTs (those absent from sigma_table) score with σ=1.0
+    rather than some silently-changed value."""
+    assert SemanticScorerConfig().default_sigma == 1.0

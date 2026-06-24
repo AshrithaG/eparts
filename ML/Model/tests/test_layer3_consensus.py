@@ -11,6 +11,9 @@ from src.layer3_semantic.consensus import (
 )
 from src.layer3_semantic.index import SearchHit
 
+# ML-CT component: category prediction (M3b, PT consensus) — all ML-CT.
+pytestmark = pytest.mark.ml_ct
+
 
 @pytest.fixture
 def pt_index() -> ProductTypeIndex:
@@ -141,3 +144,27 @@ def test_build_pt_index_rejects_missing_columns():
     df = pd.DataFrame({"Product_ID": [1], "ProductType_ID": [10]})
     with pytest.raises(ValueError):
         build_pt_index_from_1b(df)
+
+
+# ===========================================================================
+# ML-CT P1 boundary test (category) — see eparts_doc/ML_CT_Test_Plan.md Part D
+# ===========================================================================
+
+
+def test_pt_vote_exact_tie_is_deterministic(pt_index):
+    """Two ProductTypes with an exactly-equal weighted vote: the winner
+    must be deterministic (no crash, no random pick) and pt_conf must be
+    the tied share (0.5). `compute_pt_consensus` uses `max(..., key=vote)`,
+    whose tie-break returns the first key inserted — i.e. the PT whose
+    first hit appears earliest in the list (here PT 10, since pid 1001
+    precedes pid 1004)."""
+    hits = [_hit(1001, 0.8), _hit(1004, 0.8)]   # PT 10 vs PT 20, equal votes
+    pred = compute_pt_consensus(hits, pt_index)
+    assert pred is not None
+    assert pred.product_type_id == 10           # deterministic: first-inserted wins
+    assert pred.pt_conf == pytest.approx(0.5)
+    # Reversing hit order flips the winner deterministically (proves it's
+    # insertion-order, not value-based luck) — pt_conf stays 0.5.
+    pred_rev = compute_pt_consensus([_hit(1004, 0.8), _hit(1001, 0.8)], pt_index)
+    assert pred_rev.product_type_id == 20
+    assert pred_rev.pt_conf == pytest.approx(0.5)

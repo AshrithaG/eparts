@@ -11,6 +11,9 @@ from src.layer3_semantic.clusters import (
     build_clusters,
 )
 
+# ML-CT component: category prediction (M3b) — every test here is ML-CT.
+pytestmark = pytest.mark.ml_ct
+
 
 # ---------------------------------------------------------------------------
 # Test fixtures: synthetic 16-d embeddings + a small 1A-like frame

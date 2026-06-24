@@ -29,6 +29,9 @@ from src.contracts import (
 )
 from src.layer4_decision import Layer4Decision
 
+# ML-CT component: decision / fusion / routing (M4) — every test here is ML-CT.
+pytestmark = pytest.mark.ml_ct
+
 
 # ===========================================================================
 # Fixtures — spec-canonical thresholds
@@ -423,3 +426,58 @@ def test_latency_and_model_version_pass_through(decider):
     )
     assert result.model_version == "run_20260519_120000"
     assert result.latency_ms == 42.5
+
+
+# ===========================================================================
+# ML-CT P1 boundary tests — see eparts_doc/ML_CT_Test_Plan.md Part D
+# Both feed threshold VALUES directly (literals / direct _route calls) to
+# avoid the float-equality trap from 0.7*x + 0.3*y arithmetic.
+# ===========================================================================
+
+
+def test_routing_at_exact_thresholds(thresholds):
+    """Routing uses `>=` (fusion.py:_route). Feed the threshold values
+    directly — exactly 0.85 and exactly 0.50 — bypassing the fused-score
+    float multiply, so the test is deterministic, not flaky.
+
+    `>=` means: 0.85 → AUTO (inclusive), 0.50 → REVIEW (inclusive),
+    just-below each → the next band down."""
+    from src.layer4_decision.fusion import _route
+
+    eps = 1e-9
+    # Auto-process boundary (0.85): inclusive
+    assert _route(0.85, thresholds) == Routing.AUTO_PROCESS
+    assert _route(0.85 - eps, thresholds) == Routing.HUMAN_REVIEW
+    # Human-review floor (0.50): inclusive
+    assert _route(0.50, thresholds) == Routing.HUMAN_REVIEW
+    assert _route(0.50 - eps, thresholds) == Routing.FLAG_UNCLEAR
+
+
+def test_pt_ambiguity_cap_boundary_is_exclusive_at_band_low(decider):
+    """The PT-ambiguity cap fires on `pt_conf < band_low` (fusion.py:138) —
+    strictly less-than. So at pt_conf EXACTLY 0.60 the cap must NOT fire;
+    just below it must. pt_conf is fed as a literal via _semantic(), so no
+    float arithmetic produces the boundary value (non-flaky).
+
+    Note: band_high (0.80) has no hard branch in the four ML-CT components
+    — it is reporting-only (scripts/m3b_pt_accuracy_eval.py:141 uses `>=`),
+    so there is no component-layer 0.80 boundary to assert here."""
+    cand = _candidate(conf_embed_final=1.0)     # high enough that the cap WOULD fire
+    rule = _rule_hit("X", 1.0, RuleTier.MANUFACTURER_FUZZY, predicted_value="v")
+    rer = RuleEngineResult(hits=(rule,), terminated=False)
+
+    # Exactly at band_low (0.60): NOT capped (0.60 < 0.60 is False).
+    at_edge = decider.fuse(
+        _extracted(), rer, _semantic(10, 0.60, _semantic_hit("X", cand)),
+        model_version="v", latency_ms=0.0,
+    )
+    assert at_edge.predictions[0].pt_ambiguity_capped is False
+    assert at_edge.predictions[0].conf_final == pytest.approx(1.0)
+
+    # Just below band_low: capped to 0.75.
+    below = decider.fuse(
+        _extracted(), rer, _semantic(10, 0.60 - 1e-9, _semantic_hit("X", cand)),
+        model_version="v", latency_ms=0.0,
+    )
+    assert below.predictions[0].pt_ambiguity_capped is True
+    assert below.predictions[0].conf_final == pytest.approx(0.75)

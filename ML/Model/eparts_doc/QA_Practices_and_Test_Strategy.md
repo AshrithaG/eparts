@@ -2,33 +2,60 @@
 
 | Field | Value |
 |---|---|
-| **Status** | Draft v0.1 — ML team's current testing posture; for QA team review |
-| **Last updated** | 2026-05-19 |
+| **Status** | Draft v0.2 — ML team's current testing posture; for QA-coach review |
+| **Last updated** | 2026-06-17 |
 | **Audience** | QA / Test Engineering, ML team |
 | **Purpose** | Document what we currently test, how we run it, where the gaps are, and what specific help we want from QA |
 
 This document is a frank inventory — not a marketing piece. We want
 the QA team to read it once, identify the soft spots, and tell us
 what to improve. Sections §8–§10 are the asks; everything before is
-context.
+context. For a verbal-conversation brief, see the one-pager
+[`QA_Coach_Talking_Points.md`](QA_Coach_Talking_Points.md).
+
+> **What kind of "LLM system" is this?** The only LLM component the ML
+> team owns is a **frozen sentence-embedding model** (`bge-small-en-v1.5`)
+> used to turn product descriptions into 384-d vectors — it does not
+> *generate* text. Everything downstream is classical statistics
+> (Mahalanobis distance, Gaussian confidence decay, fixed thresholds).
+> So our QA is **not** generative-LLM QA (no hallucination / prompt-
+> injection / sampling-nondeterminism concerns); it is the QA of a
+> **deterministic retrieval + scoring pipeline**, which is far more
+> testable. Generative LLMs live in the extraction sub-team's Layer 1,
+> out of our scope.
 
 ---
 
 ## 1. Scope of testing in V1
 
-The ML team owns code under [`ML/Model/`](..). The active test
-surface today (2026-05-19):
+The ML team owns code under [`ML/Model/`](..). V1 is now code-complete
+(M1–M7). The active test surface today (2026-06-17):
 
 | Metric | Value |
 |---|---|
 | Test framework | pytest 8.0+ |
-| Test files | **10** (under `tests/`) |
-| Test functions | **94** |
-| Pass rate | 100% (94/94 green) |
-| Wall time, full suite | **~12 s** on stock laptop |
-| Encoder model load | one-time ~60 s on first run; cached for subsequent runs |
-| Layers tested | Layer 0 (data foundation), Layer 2 (rule engine), Layer 3 [3a/3b/3c/3d] |
-| Layers not yet tested | Layer 4 (M4 — pending), service endpoint (M7 — pending) |
+| Test files | **18** (under `tests/`) |
+| Test functions | **219** |
+| Pass rate | 100% (219/219 green) |
+| Wall time, full suite | **~12 s** on stock laptop (encoder cached) |
+| Encoder model load | one-time ~60 s on first run; cached afterward |
+| Layers tested | Layer 0 (data) · Layer 2 (rules) · Layer 3 [3a/b/c/d] · Layer 4 (fusion + σ calibration + **M6 online updates**) · Evaluation harness (M5) · **Service (M7)** |
+| Layers not yet tested | none in V1 scope — all milestones M1–M7 have test coverage |
+
+**Per-file test counts (current):**
+
+| File | Tests | File | Tests |
+|---|---:|---|---:|
+| test_split.py | 10 | test_layer3_scoring.py | 23 |
+| test_part_numbers.py | 10 | test_layer4_fusion.py | 18 |
+| test_manufacturers.py | 6 | test_layer4_calibration.py | 16 |
+| test_numeric_match.py | 9 | test_layer4_feedback.py | 21 |
+| test_guardrail.py | 10 | test_evaluation_metrics.py | 16 |
+| test_engine.py | 11 | test_evaluation_report.py | 10 |
+| test_layer3_encoder.py | 6 | test_evaluation_runner.py | 4 |
+| test_layer3_index.py | 8 | test_service.py | 16 |
+| test_layer3_consensus.py | 12 | test_layer3_clusters.py | 13 |
+| | | **TOTAL** | **219** |
 
 The archived deterministic Layer 1 prototype has 33 additional tests
 under [`archive/m2_layer1_extraction/tests/`](../archive/m2_layer1_extraction/tests/);
@@ -125,13 +152,20 @@ budget.
 | [`test_part_numbers.py:67-83`](../tests/test_part_numbers.py#L67-L83) | Compile a 200K-pattern regex union in < 10 s on synthetic data (spec target 5 s; relaxed for CI) |
 | [`test_part_numbers.py:86-99`](../tests/test_part_numbers.py#L86-L99) | After warmup, 1000 queries against a 50K-pattern index average < 1 ms each |
 
-**Not yet present, but planned:**
+**Measured since v0.1 (benchmarked, not yet a CI gate):**
 
-| Need | When |
+| Item | Result | Spec | How measured |
+|---|---|---|---|
+| End-to-end single-query latency | p50 47.6 ms / p95 188.9 ms | ≤ 50 / ≤ 200 ms | warm benchmark, 300 real queries (M7) |
+| Live `/predict` warm latency | 18–28 ms | — | running M7 service on real artifacts |
+
+**Still not present:**
+
+| Need | Note |
 |---|---|
-| Layer 3 single-query latency gate (≤ 50 ms p50, ≤ 200 ms p95) | M5 |
-| End-to-end pipeline latency under load (≥ 50 req/s sustained) | M7 |
-| FAISS index memory ≤ 500 MB | M5 |
+| Concurrent load test (≥ 50 req/s sustained at p95 ≤ 200 ms) | spec §7.2 M7 — only single-thread warm measured so far; the encoder tail (p99 ≈ 253 ms) is the risk under concurrency |
+| FAISS index memory ≤ 500 MB as an asserted gate | the 2.7 GB covariance artifact already exceeds the spec's 500 MB assumption — known, documented |
+| Any of the above wired as an automatic CI gate | blocked on having CI at all (§8/§10) |
 
 ---
 
@@ -402,13 +436,51 @@ typing (per `[tool.ruff.lint.per-file-ignores]`).
 
 ---
 
+## 7.5 What changed since v0.1 (M4–M7 + a QA win)
+
+This doc's first draft was written at 94 tests (pre-M4). Added since:
+
+| Area | Tests | Notable QA content |
+|---|---:|---|
+| **M4** fusion + caps + routing | +18 | property tests: `conf_final ∈ [0,1]` for any input; `conf_final = 1.0` **iff** Tier-1 exact match |
+| **M4** σ calibration | +16 | Brier/ECE math hand-verified; a perf test asserting `D²` is cached once per (query, cluster), not recomputed per σ candidate |
+| **M5** evaluation harness | +30 | metrics module + report serialization + the inference-runner |
+| **M6** online updates | +21 | confirm/pushback math vs frozen spec formula; **8-thread × 5-confirm concurrency test** (no update lost); audit-log round-trip; replay recovery |
+| **M7** REST service | +16 | FastAPI TestClient — endpoint shape, schema validation, feedback 404/422/503 paths, drift-KL math |
+
+**Test-count progression:** 94 (this doc's v0.1) → 118 (M3c) → 152 (M4)
+→ 200 (M6) → 216 (M7) → **219** (after the PR-review regression below).
+
+### A concrete QA win — review caught a real bug
+
+On the M6 PR a reviewer noted there was **no regression test for
+replay-after-snapshot**. Working it through:
+
+1. We wrote the requested test and ran it against the **unfixed** code — **it failed**, proving it wasn't merely a missing test: there was a real double-counting bug (`replay()` re-applied updates already baked into the snapshot, so cluster `N` drifted upward on restart).
+2. Fixed it — `snapshot()` now rotates the audit log to a numbered archive so `load(snapshot) + replay(live_log)` is drift-free by construction (and the audit trail is preserved, not deleted).
+3. Added 3 regression tests; feedback suite 18 → 21.
+
+This is the loop we want QA to help us systematize: **review surfaces a
+risk → failing test first → fix → regression test prevents recurrence.**
+
+### Production QA — drift monitoring (M7)
+
+QA does not stop at deployment. The M7 service exposes a **drift signal**:
+KL divergence of the live `conf_final` distribution vs the M5 baseline
+(`reports/.../confidence_dist.csv`). A rising KL means production traffic
+has shifted away from what the model was evaluated on → a signal to
+re-evaluate / recalibrate. This is the runtime arm of our QA story
+(CAP-ML-04).
+
+---
+
 ## 8. Known coverage gaps (where QA help is wanted)
 
 These are gaps **we** see; QA may find more.
 
 ### 8.1 Untested edge cases (we know about)
 
-Documented during the M3a meeting-prep investigation (2026-05-18):
+Still-open edge cases (some originally listed at M3a remain open):
 
 | Untested scenario | Layer | Severity |
 |---|---|---|
@@ -418,7 +490,8 @@ Documented during the M3a meeting-prep investigation (2026-05-18):
 | Loading a missing / corrupt `faiss.bin` | L3 | Medium |
 | `ClusterStore.load()` against a `centroids.parquet` whose paired `cluster_cov.npz` is stale | L3 | Medium |
 | Encoder's behavior on identical strings ("are batches deterministic?") | L3 | Low |
-| Race conditions in `m3a_build_index.py` `current/` alias update under concurrent builds | scripts | Low (not a real production scenario) |
+| **Concurrent load on the M7 `/predict` endpoint** (≥ 50 req/s) — single-thread warm only so far | service | Medium |
+| Cold-start behavior (first request lazy-loads the encoder, ~6 s) | service | Low |
 
 ### 8.2 Categories we don't yet have
 
@@ -427,7 +500,7 @@ Documented during the M3a meeting-prep investigation (2026-05-18):
 | **Mutation testing** | Verify that our tests would actually fail if a `==` were silently changed to `!=` (catch trivially-broken assertions) |
 | **Coverage measurement** | Branch + line coverage per module; identify untested code paths |
 | **Property-based testing** | Random-input fuzz with shrinking, via Hypothesis |
-| **Load tests** | Sustained req/s + p95 latency under realistic concurrency (planned for M7) |
+| **Load tests** | Sustained req/s + p95 latency under realistic concurrency — M7 endpoint exists, single-thread warm latency measured; the concurrent ≥ 50 req/s test is still outstanding |
 | **Soak / endurance tests** | Long-running pipeline that exercises memory leaks, FD leaks, etc. |
 | **Snapshot tests** | Capture rich outputs (full PT-accuracy reports, retrieval top-50 lists) as committed reference files; flag drift on every PR |
 | **Contract tests with extraction team** | Validate their team's `ExtractedInput` output against our `src/contracts.py` schema |
@@ -471,23 +544,25 @@ Documented during the M3a meeting-prep investigation (2026-05-18):
 
 ## 10. Specific asks from QA
 
-Ordered by what would help us most in the next two weeks (M4 + M5):
+Now that V1 is code-complete (M1–M7), ordered by impact:
 
-1. **Stand up CI** for ruff + black + mypy + pytest on every PR. This
-   is the single biggest improvement. Tag a maintainer.
-2. **Add Hypothesis** to dev requirements and write 1–2 property-based
-   tests per critical invariant (PSD covariance, L2-normalized vectors,
-   monotonic similarity scores in returned hits). We will write the
-   first one as a working example; QA can extend.
-3. **Coverage measurement** — add `pytest-cov`, agree on a target,
-   surface it in CI. Lift up uncovered branches we should fill.
-4. **Edge cases from §8.1** — pick the medium-severity ones (FAISS
-   error paths, stale `cluster_cov.npz`) and write the tests.
-5. **Performance regression harness** — once M5 has end-to-end
-   latency numbers, lock them as baselines. Fail CI on > 10%
-   regression.
-6. **Snapshot-test the retrieval demo output** for our 3 canonical
-   HVAC queries — flag drift in top-5 product IDs across runs.
+1. **Stand up CI** for ruff + black + mypy + pytest on every push/PR —
+   on whichever host we standardize (GitHub Actions or, now that the
+   code also mirrors to Bitbucket, Bitbucket Pipelines). This is the
+   single biggest gap: 219 tests run manually today. Tag a maintainer.
+2. **Run the M7 concurrent load test** (≥ 50 req/s, p95 ≤ 200 ms) — the
+   one spec §7.2 acceptance item we have not yet measured. Helps us know
+   whether the encoder tail under concurrency breaks the latency budget.
+3. **Coverage measurement** — add `pytest-cov`, agree on a target
+   (branch coverage on `src/`?), surface it in CI.
+4. **Acceptance gates as CI checks** — wire the spec §7.2 numeric
+   targets (PT accuracy ≥ 0.92, ECE ≤ 0.05, …) so a regression fails the
+   build automatically rather than being caught by eye in the M5 report.
+5. **Add Hypothesis** for property-based fuzzing of the invariants we
+   currently hand-pick (PSD covariance, L2-normalized vectors,
+   monotonic returned scores).
+6. **Edge cases from §8.1** — the medium-severity ones (FAISS error
+   paths, stale `cluster_cov.npz`, concurrent `/predict`).
 
 ---
 
