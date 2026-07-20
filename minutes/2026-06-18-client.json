@@ -1,0 +1,88 @@
+{
+  "meeting_date": "2026-06-18",
+  "duration_minutes": 16,
+  "participants": [
+    "Hrishik",
+    "Harsha (eParts)",
+    "Cliff (Mentor)"
+  ],
+  "participant_count": 3,
+  "total_words": 2328,
+  "total_turns": 63,
+  "speaker_stats": {
+    "Hrishik": {
+      "turns": 31,
+      "words": 1168,
+      "pct_words": 50.2
+    },
+    "Harsha (eParts)": {
+      "turns": 31,
+      "words": 1148,
+      "pct_words": 49.3
+    },
+    "Cliff (Mentor)": {
+      "turns": 1,
+      "words": 12,
+      "pct_words": 0.5
+    }
+  },
+  "detected_topics": {
+    "ML/Model": 3,
+    "Architecture": 3,
+    "Data": 3,
+    "Onboarding": 2
+  },
+  "questions_found": 0,
+  "questions_sample": [],
+  "potential_decisions": 1,
+  "decisions_sample": [
+    {
+      "speaker": "Hrishik",
+      "text": "Right now, I think we need to do a little more research. Like, research, and like, I would say it's a roadblock, we're just trying to figure out how best to integrate ETM, at which part of the pipelin"
+    }
+  ],
+  "potential_action_items": 21,
+  "actions_sample": [
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Well, I mean, my gut's saying right now, you know, a thousand bucks a month for\u2026 is\u2026 is fine. If the ongoing cost is that, that might not be fine. So, like, right\u2026 I'm imagining that this process is g"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "That's way too much. Actually, I was, yeah, yeah, I don't think it\u2026 this is preliminary, I cannot give again, but I don't think it should go anywhere near that. So, yeah."
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Sorry, can you\u2026 I'm playing on your speakers, I'm having trouble hearing you."
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Yeah, yeah, I don't think, right now, this is preliminary, but I don't think it should go anywhere near that."
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Okay. I would also recommend that any sort of resource that you guys plan on using, or anything that you do, you should probably start off with, like, the minimum computes for it, and then keep scalin"
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Whoa. Just, just making sure, because if you want to do any models, I would say AI Founty is the way. I was looking into adding you to, like, a separate AI Founty thing, should be done probably today."
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Sorry, can you hear me now? Hello?"
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Yeah, I totally agree with that, though. It's something we should do."
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Sorry, no, I'll just go on, yeah."
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Okay, okay. That's it from my side. And that's all you had for the Azure questions. In the last week, we've been working on the task we told about. There has\u2026 there were some project management kind o"
+    }
+  ],
+  "analysis_mode": "offline (no LLM \u2014 structural extraction only)"
+}

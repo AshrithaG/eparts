@@ -1,0 +1,1326 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.320
+Ashritha: We'll put…
+
+2
+00:00:04.370 --> 00:00:07.079
+Ashritha: So, this is the failed way.
+
+3
+00:00:07.330 --> 00:00:10.969
+Ashritha: last month received from the EPAS.
+
+4
+00:00:11.600 --> 00:00:12.640
+Ashritha: dataset.
+
+5
+00:00:12.920 --> 00:00:27.720
+Ashritha: NFL helps, many, valuable information, and I do some, statistic analyze, and, I…
+
+6
+00:00:28.450 --> 00:00:34.649
+Ashritha: I will use 4 or the 5 bells to… To make our raw engine.
+
+7
+00:00:35.240 --> 00:00:41.599
+Ashritha: value repository and train our semantic machine learning model.
+
+8
+00:00:44.210 --> 00:00:54.520
+Ashritha: And as I said, before. So, this one is, what's the real… Lay of, cases.
+
+9
+00:00:56.770 --> 00:01:01.020
+Ashritha: This is a real, from… you'll…
+
+10
+00:01:02.810 --> 00:01:10.679
+Ashritha: collected from the layout situation, you, like, you correct the… Customers' email, like.
+
+11
+00:01:10.890 --> 00:01:13.830
+Ashritha: There are some… some… there are… some of their…
+
+12
+00:01:14.090 --> 00:01:18.149
+Ashritha: Paragraphs are fake, weak, or fizzy.
+
+13
+00:01:19.160 --> 00:01:22.820
+Ashritha: And, and, we, we needed, a real…
+
+14
+00:01:23.740 --> 00:01:26.859
+Ashritha: Data to train our semantic model.
+
+15
+00:01:27.180 --> 00:01:28.500
+Ashritha: Because we…
+
+16
+00:01:28.630 --> 00:01:39.529
+Ashritha: We just use the synthetic ones could make the model more… problem, more affordable than it real has.
+
+17
+00:01:41.430 --> 00:01:45.040
+Ashritha: And, this is my, 7 milestones.
+
+18
+00:01:45.420 --> 00:01:47.660
+Ashritha: The whole work…
+
+19
+00:01:48.020 --> 00:01:57.709
+Ashritha: could, be, completed in a month. And the first week, I have completed the first tool.
+
+20
+00:01:58.260 --> 00:01:59.440
+Ashritha: Mastomos.
+
+21
+00:02:00.210 --> 00:02:03.200
+Ashritha: Like, the layer 0, layer 1, and layer 2.
+
+22
+00:02:03.680 --> 00:02:07.130
+Ashritha: And, for now, what's,
+
+23
+00:02:07.610 --> 00:02:12.680
+Ashritha: 56 sanity tests are passed.
+
+24
+00:02:15.020 --> 00:02:17.379
+Ashritha: What kind of tests are those?
+
+25
+00:02:17.560 --> 00:02:23.010
+Ashritha: You said some tests are passed, right? Yeah, tests. What tests are those?
+
+26
+00:02:23.190 --> 00:02:29.450
+Ashritha: It's just, like, use some synthetic, information from the…
+
+27
+00:02:29.630 --> 00:02:34.689
+Ashritha: the fourth or five fails. Okay. Yeah.
+
+28
+00:02:38.150 --> 00:02:43.440
+Ashritha: And, I will… is this divide the…
+
+29
+00:02:43.790 --> 00:02:51.420
+Ashritha: third milestone into three parts, because this is the most complexity layer.
+
+30
+00:02:51.800 --> 00:02:55.940
+Ashritha: What was the whole, the whole model.
+
+31
+00:02:56.870 --> 00:02:59.270
+Ashritha: It's, thematic.
+
+32
+00:02:59.810 --> 00:03:01.200
+Ashritha: machine learning model.
+
+33
+00:03:02.150 --> 00:03:11.149
+Ashritha: But our, most stressful dealing with, cases is the…
+
+34
+00:03:11.700 --> 00:03:18.370
+Ashritha: low engine parts. Like, it will directly deal with 80% cases.
+
+35
+00:03:19.170 --> 00:03:30.700
+Ashritha: And, the machine remote part, it will deal with, the case is that… like, use…
+
+36
+00:03:31.990 --> 00:03:36.349
+Ashritha: use the vector matching, doesn't…
+
+37
+00:03:36.790 --> 00:03:42.610
+Ashritha: works, and it will pass through to the layer 3 and Layer 4 to get,
+
+38
+00:03:43.110 --> 00:03:49.250
+Ashritha: confidence score, and combined with the Layer 1 and Layer 2 score to get our final scores.
+
+39
+00:03:49.360 --> 00:03:51.190
+Ashritha: What these layers you are, you know?
+
+40
+00:03:51.640 --> 00:03:57.689
+Ashritha: Yes, I will show you the structure. And, this is the whole…
+
+41
+00:03:59.920 --> 00:04:05.040
+Ashritha: whole big picture, or the machine model piece of the case?
+
+42
+00:04:08.110 --> 00:04:09.660
+Ashritha: How to be seen, okay?
+
+43
+00:04:09.870 --> 00:04:11.030
+Ashritha: Crusade?
+
+44
+00:04:15.440 --> 00:04:16.320
+Ashritha: Okay.
+
+45
+00:04:18.910 --> 00:04:26.040
+Ashritha: So, at first, we received the raw materials, like, the same as we
+
+46
+00:04:26.220 --> 00:04:28.909
+Ashritha: and eval and PDF different files.
+
+47
+00:04:29.560 --> 00:04:35.229
+Ashritha: And, and… and the role fails.
+
+48
+00:04:40.230 --> 00:04:45.260
+Ashritha: Text extraction will… I think Jay will do this part, or work.
+
+49
+00:04:45.780 --> 00:04:48.830
+Ashritha: the text extraction? Yeah, yeah, yeah, because…
+
+50
+00:04:49.500 --> 00:04:52.560
+Ashritha: You have said you will use some…
+
+51
+00:04:52.900 --> 00:04:59.920
+Ashritha: Data extraction model to… to… Like, some scanning, or…
+
+52
+00:05:00.360 --> 00:05:09.760
+Ashritha: optimal, record… No, no, this is in the ML, yeah, yeah, so I leave some…
+
+53
+00:05:09.890 --> 00:05:17.630
+Ashritha: interfaces that opens to you. Yeah, okay. Okay. And from now, so… I…
+
+54
+00:05:18.770 --> 00:05:21.819
+Ashritha: The Lead Zero is designed for
+
+55
+00:05:22.190 --> 00:05:24.509
+Ashritha: Training our model, and
+
+56
+00:05:24.820 --> 00:05:28.339
+Ashritha: Directly use your, table fails.
+
+57
+00:05:28.610 --> 00:05:35.739
+Ashritha: table this dataset to create our model and to form our… Rom engine.
+
+58
+00:05:37.950 --> 00:05:46.069
+Ashritha: So, so layer one… layer zero is… that is how I use your… use your, distance to train our model.
+
+59
+00:05:46.540 --> 00:05:50.580
+Ashritha: It had… had… had been divided into three parts.
+
+60
+00:05:52.130 --> 00:05:56.780
+Ashritha: We have the standard data in the three bells.
+
+61
+00:05:57.970 --> 00:06:05.500
+Ashritha: It contains 3.5 million rows, and 1.6, Teacher bites.
+
+62
+00:06:06.240 --> 00:06:14.509
+Ashritha: It's… And, because the data is so huge, and it could not be directly
+
+63
+00:06:14.630 --> 00:06:17.469
+Ashritha: A load into our laptop.
+
+64
+00:06:17.600 --> 00:06:22.179
+Ashritha: So, I made it to, small chunks.
+
+65
+00:06:22.590 --> 00:06:26.810
+Ashritha: like, the peak memory is less than 1 gigabyte.
+
+66
+00:06:26.960 --> 00:06:32.519
+Ashritha: And, 200,000 laws as a chunk.
+
+67
+00:06:33.320 --> 00:06:37.470
+Ashritha: To fit in… into the… That type of sketch.
+
+68
+00:06:37.860 --> 00:06:47.319
+Ashritha: and wait… stratified the… the dataset into three parts. The first part.
+
+69
+00:06:48.290 --> 00:06:52.440
+Ashritha: The first 80% part as our trend stat.
+
+70
+00:06:52.550 --> 00:06:53.630
+Ashritha: And,
+
+71
+00:06:53.840 --> 00:07:03.290
+Ashritha: the 10% part at our validation set, and the last part is our testing set. And we use a fixed seed to
+
+72
+00:07:04.340 --> 00:07:12.370
+Ashritha: To, keep the… our… you want to keep our, results reproducible.
+
+73
+00:07:13.350 --> 00:07:19.339
+Ashritha: And, the Layer 1 is, I thought it's flu.
+
+74
+00:07:21.860 --> 00:07:23.720
+Ashritha: How you doing? Okay.
+
+75
+00:07:23.920 --> 00:07:29.820
+Ashritha: I can't believe it's spring, it's not spring out there. It's cold and zoomies.
+
+76
+00:07:32.630 --> 00:07:41.520
+Ashritha: Yeah, and the first layer is lived for… the text extraction, so… After this part.
+
+77
+00:07:41.810 --> 00:07:45.279
+Ashritha: Was completed by the extrusion team.
+
+78
+00:07:45.520 --> 00:07:49.990
+Ashritha: like, use the LLM or… Lambda.
+
+79
+00:07:50.900 --> 00:07:56.469
+Ashritha: The correlation machine learning models to… towards, information illustration.
+
+80
+00:07:57.610 --> 00:08:02.660
+Ashritha: I will… we will directly use those data to fit our models.
+
+81
+00:08:04.760 --> 00:08:19.200
+Ashritha: And, After weight gets, the… the… the data, we… use the raw engine to…
+
+82
+00:08:19.380 --> 00:08:21.400
+Ashritha: To our first walk.
+
+83
+00:08:22.120 --> 00:08:30.080
+Ashritha: And this… this path, Well, take 80%, pipeline suggests.
+
+84
+00:08:30.920 --> 00:08:36.490
+Ashritha: Or the work, because… Yes, I…
+
+85
+00:08:36.590 --> 00:08:42.529
+Ashritha: divided the low engine into three parts. The first part uses a parallel number match.
+
+86
+00:08:43.799 --> 00:08:49.320
+Ashritha: method to do a vector matching.
+
+87
+00:08:49.630 --> 00:08:56.500
+Ashritha: It contains 189 kilom… kilomon… Thousand?
+
+88
+00:08:56.690 --> 00:08:59.469
+Ashritha: PL number rejects it.
+
+89
+00:08:59.810 --> 00:09:03.640
+Ashritha: Most of all, it is, is, like, So…
+
+90
+00:09:04.260 --> 00:09:10.780
+Ashritha: product then, and the, venue, units, PELs.
+
+91
+00:09:11.310 --> 00:09:20.719
+Ashritha: it's like the… like this kind of format. And I made it into a regex union.
+
+92
+00:09:21.930 --> 00:09:25.799
+Ashritha: Because the… it's very… it's very long, the unit.
+
+93
+00:09:26.010 --> 00:09:29.539
+Ashritha: So, first loaded into our computer, it would
+
+94
+00:09:29.700 --> 00:09:40.050
+Ashritha: could take, 5 minutes… 5 seconds to load into our… the computer's cage. But after that,
+
+95
+00:09:40.370 --> 00:09:52.650
+Ashritha: it could… Dealing with, advocacy within And 0.1… Maybe 1 minute, millisecond.
+
+96
+00:09:52.820 --> 00:09:53.979
+Ashritha: So it's very fast.
+
+97
+00:09:54.560 --> 00:09:59.069
+Ashritha: And, compared to the, machine learning model.
+
+98
+00:09:59.830 --> 00:10:03.249
+Ashritha: It could consume, like, 50 millions.
+
+99
+00:10:03.680 --> 00:10:05.459
+Ashritha: To deal with every case.
+
+100
+00:10:06.200 --> 00:10:11.159
+Ashritha: What's… what exact, logic are we… are you talking about for partner matching?
+
+101
+00:10:11.490 --> 00:10:15.879
+Ashritha: So I get the regex part, but what's the part and what's the number, even?
+
+102
+00:10:16.230 --> 00:10:25.669
+Ashritha: You mean this layer 2? Yeah, a part number, or is it a partial part number? Yeah, exactly, like, what exactly are you referring to when you say part numbering?
+
+103
+00:10:27.290 --> 00:10:33.000
+Ashritha: Is it the product's part number, or is it the SKU, or is it, like, the…
+
+104
+00:10:33.340 --> 00:10:36.630
+Ashritha: Attributes, description, what are you talking about there?
+
+105
+00:10:41.770 --> 00:10:53.940
+Ashritha: Sometimes, you know, manufacturers have their own part number, then there's SKUs, and then you might have your own different part number. Yeah, exactly. I just want to know what this is, so that it keeps that going, that it's headed in the right direction.
+
+106
+00:10:54.600 --> 00:10:56.510
+Ashritha: Like, you input.
+
+107
+00:10:57.390 --> 00:11:10.589
+Ashritha: A segment, or… Information, and we will divided it into several, roads or information.
+
+108
+00:11:10.960 --> 00:11:22.140
+Ashritha: So, the… The cases is… every… Every information unit is a… Down anyways.
+
+109
+00:11:22.450 --> 00:11:29.440
+Ashritha: Is there a schema for the part numbers? I mean, you know, there can be a schema for a part number, right?
+
+110
+00:11:30.100 --> 00:11:30.800
+Ashritha: Whoa.
+
+111
+00:11:33.770 --> 00:11:49.960
+Ashritha: Yes, don't take this up, I mean, the point being is just trying to understand… Yeah, yeah, yeah. What are you thinking? I understand. Oh, but then, I think the simpler question would be, like, you said there are, like, one 89,000 part number rejected. Oh, so, so, you want to know… well, it's,
+
+112
+00:11:50.650 --> 00:12:01.250
+Ashritha: the number come from? Yeah, and how does it look like? What does the part number look like? Yeah, yeah. The one that you're referring to? What is the part number? Yeah, so if you just look at it, probably… Yeah, yeah, yeah.
+
+113
+00:12:02.020 --> 00:12:07.289
+Ashritha: So from this, in the… The product attribute pairs, so this is primarily just this one.
+
+114
+00:12:08.560 --> 00:12:14.010
+Ashritha: Like, like… So this, this is the most,
+
+115
+00:12:14.250 --> 00:12:23.700
+Ashritha: Detailed and plentiful information we could get, and nearly every… Useful information contains those
+
+116
+00:12:24.870 --> 00:12:28.149
+Ashritha: part numbers. Yeah, so those sway…
+
+117
+00:12:28.940 --> 00:12:36.079
+Ashritha: Can you give us a real example of a partner? Can you open that 1A file?
+
+118
+00:12:36.370 --> 00:12:38.979
+Ashritha: If you have… No, no, it's because it's very large.
+
+119
+00:12:39.850 --> 00:12:43.730
+Ashritha: We can't directly open it. Okay. It's one…
+
+120
+00:12:43.810 --> 00:13:01.290
+Ashritha: Gigabytes. Okay. Long. Okay. Yes. So if you want to say it, I will show you the next… Well, not even that. Can you just open Notepad and, like, can you show me what, like, a part number looks like, and how this would… Will work? …kind of work? Okay.
+
+121
+00:13:01.480 --> 00:13:14.100
+Ashritha: You don't have to do much, it's just, like, for me to visualize what this is. Yeah, I can ask the cloud to show you all some data. You can even, like, use this board if you want, but, like, just anything that just makes me understand.
+
+122
+00:13:20.740 --> 00:13:28.560
+Ashritha: Like, You wanna ride, or you wanna use your screen? Oh, I can.
+
+123
+00:13:28.990 --> 00:13:35.869
+Ashritha: I mean, you can just, you know… Oh, or I can… oh, yeah, check out something. Build the file. It's like…
+
+124
+00:13:36.620 --> 00:13:40.580
+Ashritha: We have so many different products. So we…
+
+125
+00:13:40.850 --> 00:13:46.280
+Ashritha: Just combine what the product use, some regulation method.
+
+126
+00:13:46.590 --> 00:13:50.460
+Ashritha: To make it a very big one, to do the matching.
+
+127
+00:13:51.640 --> 00:13:55.330
+Ashritha: So, we… Just combined with two
+
+128
+00:13:55.350 --> 00:14:14.629
+Ashritha: into three important information. So, the first one is the product attribute pairs. The second one is the manufacturer name. The third one… So you're appending everything into… Yeah, yeah, yeah, yeah, yeah. So I said it's… it could be a little long to load those
+
+129
+00:14:15.150 --> 00:14:19.519
+Ashritha: re… rejects unit into your cage. But after
+
+130
+00:14:19.700 --> 00:14:27.119
+Ashritha: loaded it, it could be… the matching is very, very quick. Less than… One millisecond.
+
+131
+00:14:27.270 --> 00:14:35.019
+Ashritha: I would recommend in a future meeting that you just do an example. Oh, okay, okay. So next time, I will…
+
+132
+00:14:35.020 --> 00:14:50.669
+Ashritha: every box, or the diagram, I will do a simple example. Just have a simple example. Yeah, yeah, yeah. Maybe I don't know how it was, you don't know. Yeah, because the thing is, you're the one who's been working on it, but I don't know what's going on. Oh, yeah, yeah, okay, okay. Yeah, yeah, yeah.
+
+133
+00:14:56.930 --> 00:15:06.189
+Ashritha: Yeah, so… So, the first one is, product and the attribute.
+
+134
+00:15:06.310 --> 00:15:13.850
+Ashritha: Apparels matching, and the second one is the manufacturer… manufacturer matching, and the third one is the value and the unit matching.
+
+135
+00:15:15.240 --> 00:15:20.030
+Ashritha: And the first one, if it could match, it will…
+
+136
+00:15:20.550 --> 00:15:26.139
+Ashritha: Directly gets the highest competence score, and will directly go
+
+137
+00:15:26.480 --> 00:15:31.600
+Ashritha: Go to, like, the dash 9 to the… Therefore.
+
+138
+00:15:31.900 --> 00:15:38.600
+Ashritha: And the other parts, if it got .85…
+
+139
+00:15:39.190 --> 00:15:45.680
+Ashritha: a competence score, or 0.65 competence score, it will towards,
+
+140
+00:15:45.970 --> 00:15:52.809
+Ashritha: semantic matching. This is what the machine learning model will get the work done.
+
+141
+00:15:53.160 --> 00:16:01.430
+Ashritha: And as a layer 4, we will get, conf… confused… confused, squaw.
+
+142
+00:16:03.250 --> 00:16:08.870
+Ashritha: The confidence score. The confidence score, yeah, yeah. Yeah, confidence score. In different ways.
+
+143
+00:16:09.130 --> 00:16:11.010
+Ashritha: And we will get the final one.
+
+144
+00:16:12.430 --> 00:16:13.980
+Ashritha: Yeah, that's the logic.
+
+145
+00:16:14.440 --> 00:16:21.419
+Ashritha: And the… Yeah, and after we get the, the,
+
+146
+00:16:21.740 --> 00:16:24.100
+Ashritha: The first goal we are to,
+
+147
+00:16:24.240 --> 00:16:32.409
+Ashritha: a safe… safety guide will, and then we will choose either census scores into
+
+148
+00:16:32.580 --> 00:16:37.919
+Ashritha: scores and the data information into the layer stray, and all the scores into the layer 4.
+
+149
+00:16:38.620 --> 00:16:43.090
+Ashritha: And, we will, send our…
+
+150
+00:16:44.380 --> 00:16:48.710
+Ashritha: Like, a flag to show how… How's this?
+
+151
+00:16:50.360 --> 00:16:53.489
+Ashritha: possible. If it's working well, or not.
+
+152
+00:16:53.850 --> 00:16:54.790
+Ashritha: Yes.
+
+153
+00:16:55.380 --> 00:16:58.400
+Ashritha: And this is my first week's work.
+
+154
+00:16:58.850 --> 00:17:06.429
+Ashritha: So this is the overview logic that you want to implement. Yeah, yeah, yeah, and this is, it is my milestone.
+
+155
+00:17:06.630 --> 00:17:08.750
+Ashritha: And how do you, how do you plan on testing?
+
+156
+00:17:09.310 --> 00:17:10.049
+Ashritha: Right now.
+
+157
+00:17:10.480 --> 00:17:23.749
+Ashritha: do some segment of this? You're gonna build all of this at once? Yeah, so I… I first… first get the big picture. Right. And I divide… I divide it to the 7 milestone
+
+158
+00:17:24.250 --> 00:17:33.970
+Ashritha: Depends on its… a correction on each part, and it's a… Complexity, or… each layer.
+
+159
+00:17:34.900 --> 00:17:35.620
+Ashritha: Yep.
+
+160
+00:17:36.320 --> 00:17:44.439
+Ashritha: So, the layer space, the most complex part, and it needs time to do pre-trained and fine-tuning.
+
+161
+00:17:45.250 --> 00:17:48.869
+Ashritha: Or may… we may need to change our…
+
+162
+00:17:49.000 --> 00:17:51.790
+Ashritha: Machine learning models to build our dataset.
+
+163
+00:17:51.900 --> 00:17:58.269
+Ashritha: So are you gonna test each layer, or what are you gonna… how are you gonna test this? Yeah, so… so this is…
+
+164
+00:17:58.770 --> 00:18:07.789
+Ashritha: How… this is… What the contribution is for their… the sales, they send it to us.
+
+165
+00:18:09.000 --> 00:18:16.330
+Ashritha: where I decided I used the 4 or 5 belts to…
+
+166
+00:18:16.660 --> 00:18:22.000
+Ashritha: Either, make our grow engine layer.
+
+167
+00:18:22.140 --> 00:18:24.339
+Ashritha: Or training our machine learning model.
+
+168
+00:18:24.740 --> 00:18:33.380
+Ashritha: But… My sanity testing is used also synonymic.
+
+169
+00:18:33.990 --> 00:18:34.870
+Ashritha: Data.
+
+170
+00:18:35.020 --> 00:18:54.130
+Ashritha: from the tables to test if it's work well. I think the main question is, for every layer, how do you implement some sort of testing so that, to make sure that the layer is correctly functioning, or if the layer is giving you what it needs? Yeah, so right now, I just do some unit tests.
+
+171
+00:18:54.600 --> 00:18:56.329
+Ashritha: But after… after…
+
+172
+00:18:57.340 --> 00:19:07.489
+Ashritha: After, contribute, every year, I will do, some basic unit testing and the whole testing.
+
+173
+00:19:07.600 --> 00:19:11.550
+Ashritha: to… What if I just work with well.
+
+174
+00:19:14.220 --> 00:19:27.899
+Ashritha: And obviously, it'd be nice to have a set of data that you know that is good data, and data that you know is going to cause a problem, and see how that reacts to your logic. That's a great point. I mean, like, you have to… I mean, for Layer 1 at least, I would highly recommend, like.
+
+175
+00:19:28.060 --> 00:19:29.230
+Ashritha: you should…
+
+176
+00:19:29.630 --> 00:19:37.440
+Ashritha: Like, someone should take a little bit of time. Yeah, yeah. Make sure that you understand if the data is… Yeah, yeah, to delete some…
+
+177
+00:19:37.640 --> 00:19:45.549
+Ashritha: Like, trash information to keep the vendor warm, and divide those information into like…
+
+178
+00:19:45.660 --> 00:19:51.040
+Ashritha: small elements. Okay. And vintage into… into…
+
+179
+00:19:51.520 --> 00:19:55.250
+Ashritha: To divide these segments into small elements.
+
+180
+00:19:55.600 --> 00:20:02.000
+Ashritha: Small and accompanied elements, and fit into our we want to… Yep.
+
+181
+00:20:02.810 --> 00:20:09.059
+Ashritha: Also, other than just the sheer counting of rows, is there any other sort of,
+
+182
+00:20:09.470 --> 00:20:12.300
+Ashritha: Like, data cleaning that was performed on the data.
+
+183
+00:20:14.080 --> 00:20:21.850
+Ashritha: Just DKing as in, like, just eliminating certain rows which are not, or certain rows which have always…
+
+184
+00:20:22.130 --> 00:20:24.450
+Ashritha: been incorrectly valued.
+
+185
+00:20:26.180 --> 00:20:33.059
+Ashritha: Yes, but… Yeah, yes, we can do this, but we… I think our…
+
+186
+00:20:33.310 --> 00:20:39.789
+Ashritha: Layer 2 and Layer 3 will help us judge if it's, like, a trash information or…
+
+187
+00:20:40.060 --> 00:20:56.570
+Ashritha: valuable information. So we don't need to do those actual work. Well, it'd be nice to have a table that shows, here's our original source data, it came from… Okay, okay. Maybe after I completely explained, I can, self-produce some
+
+188
+00:20:57.240 --> 00:20:59.930
+Ashritha: synthetic information.
+
+189
+00:21:00.280 --> 00:21:14.629
+Ashritha: They're just… they're very flirtatable. I use the data from these parts, you know, the intermediate store, whatever it is. Yeah, yeah, yeah, like, like… And I use data… Let's on those inputs on…
+
+190
+00:21:14.960 --> 00:21:20.580
+Ashritha: Wake information, or… Charging mobilization, or the wave motivation, or some…
+
+191
+00:21:21.080 --> 00:21:24.160
+Ashritha: No, it's not there. So I think what we're trying to say is.
+
+192
+00:21:24.310 --> 00:21:37.709
+Ashritha: we gave you a dataset, right? Yeah. A data set with, for example, 2 million rows. 2 million rows, yeah. And, you've taken that data, and you've made it data that's useful for the year 0 and year 1. Yeah.
+
+193
+00:21:37.900 --> 00:21:45.030
+Ashritha: So it would be good to see what's the difference on how to do your Layer 0, layer 1 data. Oh, okay, how to…
+
+194
+00:21:45.430 --> 00:21:57.380
+Ashritha: Oh, okay. How's that original data first, and manipulate it into doing what you want it to do. And how it works, and this is where you take… Okay, how to deal with different… You take a few examples.
+
+195
+00:21:57.380 --> 00:22:07.619
+Ashritha: And we walk through that, and that gives us a quicker picture. So next meeting, I believe. Yeah, yeah, just show us, how you, yeah, how exactly the samples. Yeah.
+
+196
+00:22:07.620 --> 00:22:09.290
+Ashritha: Pass loads, actually.
+
+197
+00:22:09.410 --> 00:22:32.909
+Ashritha: not pass through each layer. No, like, like, here you have, like, 1.6 GB of data, right? Like, with 3.4. And then you say you chunk them into these many number of rows. Oh, okay, so this one? Yeah, no, like, at every step, how is your data getting transformed? Oh, okay, okay. You want layer-wise? So, so you want… So, so you want the… you want to say some…
+
+198
+00:22:32.960 --> 00:22:34.069
+Ashritha: He told?
+
+199
+00:22:34.230 --> 00:22:44.739
+Ashritha: Design. Not even detailed design. So, what I'm trying to say is, so initially, we sent you data, which is technically data that you're not using in Year Zero directly. Yeah.
+
+200
+00:22:44.740 --> 00:22:55.699
+Ashritha: So, you took the data, you performed some sort of cleaning on it… Yeah, yeah, yeah. You made that data usable for your ML, and then put that in Layer 0, which is your… the standard data.
+
+201
+00:22:55.870 --> 00:23:14.940
+Ashritha: And then you took that standard data, chunked it. From there on, I get it, I get what's happening. Oh, okay. But how did you come to the standard? Oh, the initial one itself, okay. So, from here to here, you did some data transformation, right? Yeah. So that's what they want to see. Okay, just some examples.
+
+202
+00:23:15.300 --> 00:23:21.959
+Ashritha: Okay, okay, okay. Or probably the logic you used for coming to that. Yeah. Yeah, anything works on that end. Okay, okay.
+
+203
+00:23:22.180 --> 00:23:32.090
+Ashritha: Trying to make it more concrete. Yeah. Because there's so much happening underneath here, I would… we would want to see how things are going on underneath.
+
+204
+00:23:32.090 --> 00:23:42.759
+Ashritha: Because if there is, for example, an incorrect assumption on my end or your end, then we just get to know that you've done something wrong, and I could do something better, or you guys could just change something on the order of…
+
+205
+00:23:42.800 --> 00:23:46.369
+Ashritha: something that's happened behind these years. Okay, okay.
+
+206
+00:23:46.650 --> 00:23:52.030
+Ashritha: No, this sort of reasoning is excellent. We just want to have a good sense of…
+
+207
+00:23:52.030 --> 00:24:06.860
+Ashritha: Yeah, because there's no guarantee that even the data I send them is perfect, right? Yeah. So, that's it. I just want to know if there's anything that can be changed for you guys. Oh, okay, okay. Do whatever is better. Okay, yes.
+
+208
+00:24:06.980 --> 00:24:07.820
+Ashritha: Full costs.
+
+209
+00:24:09.210 --> 00:24:13.520
+Ashritha: So… I think that's the end of my journey. Okay.
+
+210
+00:24:21.540 --> 00:24:32.769
+Ashritha: What are you calling this table? What is this diagram table? What is it… what are you calling it? The big picture? What is this? Yeah, the big picture. I don't have a name for it. Okay.
+
+211
+00:24:33.130 --> 00:24:34.980
+Ashritha: But I think it could work.
+
+212
+00:24:35.120 --> 00:24:41.960
+Ashritha: It's… it's a well-designed structure. This is your version 1, or version 0.8? What is it?
+
+213
+00:24:42.430 --> 00:24:47.160
+Ashritha: What you do? Conversion system, okay.
+
+214
+00:24:50.880 --> 00:24:51.830
+Ashritha: Okay.
+
+215
+00:24:51.970 --> 00:25:05.700
+Ashritha: So, only, like, Leo worked on the ML part of it, so basically, we initiate… as per the time… I can stop sharing. On the screen, you can just pull up the plug, the… the cable.
+
+216
+00:25:06.930 --> 00:25:08.540
+Ashritha: Oh, there's…
+
+217
+00:25:15.490 --> 00:25:17.999
+Ashritha: No, it's fine, thank you.
+
+218
+00:25:23.030 --> 00:25:42.520
+Ashritha: We seem to be way behind the timelines we initially put up here. So, like, we initially thought of dividing the whole work into, like, three, the ingestion, OCR, and the ML. Liu will, like, majority be contributing at least the POC part of it on the ML.
+
+219
+00:25:42.520 --> 00:25:53.039
+Ashritha: Arjun and one of us would be doing the OCR, and then two of us would be doing the ingestion pipeline. So we haven't… as of today, we haven't,
+
+220
+00:25:53.100 --> 00:26:09.369
+Ashritha: divided the… this high-level task into subtasks, which we'll be doing by this week. But, by this week, we are planning to finalize the system architecture. So, our document was initially complete, in terms of the doc… The diagram and stuff.
+
+221
+00:26:09.370 --> 00:26:17.170
+Ashritha: But then in the studio session feedback, we had more comments with respect to how we were representing the…
+
+222
+00:26:17.170 --> 00:26:34.950
+Ashritha: the human review, etc. So, we are working on them, and then Friday, we have a meeting with our architecture coach. So, once they're done, at least from the architecture perspective, we'll be done and final. So, then, from Monday onwards, we'll adopt our, tick
+
+223
+00:26:34.980 --> 00:26:43.920
+Ashritha: Scrum, like, 3-day sprint. We have a separate sprint board deployed for it, so, and then we'll track all of this work accordingly.
+
+224
+00:26:43.920 --> 00:26:59.850
+Ashritha: So, you'll see, like, faster progress from next week onwards. No, like, as per what we proposed, the Scrum, the philosophy that we proposed, it actually facilitates faster work, so yeah, you'll see better progress from next week.
+
+225
+00:27:00.600 --> 00:27:06.330
+Ashritha: I would also say, like, isn't… isn't just you working on the initial big…
+
+226
+00:27:06.720 --> 00:27:10.019
+Ashritha: Chunk of work, just, like, gonna hold the entire team back.
+
+227
+00:27:10.360 --> 00:27:16.809
+Ashritha: In me, because, you're all depending on one person to, like, just come to a certain stage. Okay.
+
+228
+00:27:17.070 --> 00:27:20.119
+Ashritha: So I'm not sure if that's… that's gonna be a problem anytime.
+
+229
+00:27:20.370 --> 00:27:37.190
+Ashritha: I think, for the initial parts, we are planning to work parallelly, because the initial OCR part and the initial part, they can be worked inside of at least for the initial part, so I think, the first few weeks, at least, we can all work parallelly. When we try to integrate stuff, then we'll have to
+
+230
+00:27:37.190 --> 00:28:01.680
+Ashritha: Yeah, because by the architecture design that we proposed also, people… our selling point was we have our interface layer that separates the ML part of it with the rest of it, so I don't think they are interconnected. It's like, he can do his work in the background so that we can set up this whole data and the ingestion pipeline in place, everything, like, from scratch with respect to testing and stuff.
+
+231
+00:28:01.810 --> 00:28:09.849
+Ashritha: And then we can just plug and play whatever works. We need to create a standard interface that will track them in pipelines.
+
+232
+00:28:11.770 --> 00:28:16.330
+Ashritha: What about, like, different teams having to,
+
+233
+00:28:16.500 --> 00:28:21.110
+Ashritha: What's it? So for example, when you're connecting the ingestion part to,
+
+234
+00:28:21.820 --> 00:28:28.140
+Ashritha: whatever the above or below year is. How do you know it's gonna work?
+
+235
+00:28:29.830 --> 00:28:33.329
+Ashritha: Probably we'll test with the data that we have.
+
+236
+00:28:33.910 --> 00:28:53.760
+Ashritha: I didn't get your question. I feel like it's going to be a big bag, right? Okay. These different parts of the project are just going to be connected at one point. Yeah, yeah. Like, you're all working towards completing all those individual points, but how do you know those individual points and just, like, work together? So we can target it, what's the format, or the…
+
+237
+00:28:53.800 --> 00:29:00.560
+Ashritha: the data contacts or something. Yeah, yeah, yeah, yeah. So we can use the same format where we… identified.
+
+238
+00:29:00.930 --> 00:29:03.310
+Ashritha: To attribute some synthetic.
+
+239
+00:29:03.650 --> 00:29:20.540
+Ashritha: dataset to test that each part is working well. But, don't you think, yeah, the point that you mentioned, but don't you think the only thing all of us should be aligned with the schema? The schema. True, but I'm just trying to say from, like, a…
+
+240
+00:29:20.670 --> 00:29:35.630
+Ashritha: standpoint where, for example, if a certain level is 40… Okay. And it is probably not giving you the correct information downstream. Okay. Or it's getting the correct information downstream. Okay, okay. How do you know, how do you know
+
+241
+00:29:35.920 --> 00:29:38.860
+Ashritha: How you can identify the correct problem.
+
+242
+00:29:39.260 --> 00:29:44.000
+Ashritha: As in, so for example, someone working on another layer would never know what one.
+
+243
+00:29:44.000 --> 00:29:59.280
+Ashritha: what the issue is. Okay. But, I think, in that case, it'll be like, if you're working in separate layers, the person working in the downstream layer will know the expirator input that the person's layers needs, but if you're not getting it, then we can start tracing it back to
+
+244
+00:29:59.280 --> 00:30:00.480
+Ashritha: by unfair.
+
+245
+00:30:00.590 --> 00:30:09.809
+Ashritha: So I think that is the kind of thing we'll probably be doing. Yeah, makes sense. I mean, my only concern is… the thing is, you can always give inputs in the correct schema.
+
+246
+00:30:09.810 --> 00:30:21.179
+Ashritha: downstream, but the only problem comes in is the input actually correct? Correct. Yeah, yeah. Okay. So, the whole working flow is, like, continuous.
+
+247
+00:30:21.180 --> 00:30:34.030
+Ashritha: pipeline. So we can use, agreed upon date format for each part. So we can test each part is working well or not. And finally, we can compile all the data to,
+
+248
+00:30:34.250 --> 00:30:36.309
+Ashritha: The whole test.
+
+249
+00:30:36.730 --> 00:30:39.479
+Ashritha: What's more… what's a whole budget?
+
+250
+00:30:40.150 --> 00:30:50.510
+Ashritha: I only ask that because, like, you mentioned you're working in silos, and… I think this is the most efficient method, because this is just, like, a…
+
+251
+00:30:50.710 --> 00:30:53.710
+Ashritha: Continuous work booking flow.
+
+252
+00:30:54.650 --> 00:31:09.639
+Ashritha: We initially thought this might be an issue, so we have given a… I think, a few weeks gap for the integration part of it, because working silos will cause some issues while we're integrating everything parts together. So we just thought we'd just give it extra time so that any issues that arise, we can tackle it.
+
+253
+00:31:13.070 --> 00:31:15.769
+Ashritha: I'm trying to find out.
+
+254
+00:31:17.010 --> 00:31:17.840
+Ashritha: Interest.
+
+255
+00:31:22.400 --> 00:31:25.109
+Ashritha: They're good one month for interviews.
+
+256
+00:31:25.410 --> 00:31:28.430
+Ashritha: These things, right? Laws.
+
+257
+00:31:28.930 --> 00:31:35.950
+Ashritha: No, I think the… one of it, from July to August end, we'll be,
+
+258
+00:31:36.730 --> 00:31:39.250
+Ashritha: Okay. One month for our tradition, never been.
+
+259
+00:31:44.340 --> 00:31:48.000
+Ashritha: What is a fiscal name, or how do you find your core system?
+
+260
+00:31:51.050 --> 00:31:59.469
+Ashritha: Core systems are all the individual filters that we have specifically. All the individual components, ingestion, OCR, ML pipeline.
+
+261
+00:32:06.280 --> 00:32:13.630
+Ashritha: The other challenge I have right now is shifting from working cover this week to this Friday, because Thursday.
+
+262
+00:32:13.950 --> 00:32:17.619
+Ashritha: Branding up to that is an initial challenge, usually.
+
+263
+00:32:18.660 --> 00:32:23.800
+Ashritha: And you want to try and make sure that you leverage that time well. Yeah.
+
+264
+00:32:28.170 --> 00:32:31.189
+Ashritha: Well, this is just out of curiosity, is there any sort of,
+
+265
+00:32:31.410 --> 00:32:43.380
+Ashritha: meetings that you guys have internally, which will just, like, catch each and everyone up to speed on what's coming. Yeah, we're gonna have it, 3 alternate days, Monday, Wednesday, and Friday.
+
+266
+00:32:44.110 --> 00:32:52.239
+Ashritha: Stand-ups? Sorry? Stand-ups, where you come in? No, no, no, like, one and a half hours working session. Okay.
+
+267
+00:32:54.960 --> 00:33:07.380
+Ashritha: So that's really working out the details. Yeah, like, we'll work asynchronously, but then those one and a half hour slots are, like, for us to, like, come and sit together if we have any conflicts or blockers as such.
+
+268
+00:33:12.780 --> 00:33:19.340
+Ashritha: Is there a way we can also, like, move this meeting to, like, an hour squad leader, like, 3 to 4, something like that?
+
+269
+00:33:20.770 --> 00:33:28.869
+Ashritha: I think 3 to 4, we have our client meeting. We probably can swap… sorry, sorry, mentor meeting.
+
+270
+00:33:29.000 --> 00:33:31.999
+Ashritha: You can certainly move the fire, and we can document.
+
+271
+00:33:32.210 --> 00:33:51.009
+Ashritha: I mean, I would say I'm just proposing it because, it just… it just makes sense for, like, everyone, me, Jake, and David, for us to show up at that time. I see, okay. It's just easier for us, because we just wrap up working. Okay. Okay. Sure. They're flexible.
+
+272
+00:33:51.370 --> 00:33:52.310
+Ashritha: You've been doing that.
+
+273
+00:33:53.080 --> 00:33:58.040
+Ashritha: Even if it doesn't look at my head. No, yeah, we'll just discuss with Cliff and Dennis and get back.
+
+274
+00:33:59.440 --> 00:34:02.169
+Ashritha: Yeah, I think that's all we had for today.
+
+275
+00:34:05.160 --> 00:34:06.919
+Ashritha: It'll be great to see, like, just
+
+276
+00:34:06.980 --> 00:34:26.869
+Ashritha: other, like, underneath workings of each of these layers, and that's it. Just in terms of examples, that's, that's probably my only, point. Okay. Yeah, and tomorrow, sorry, not tomorrow. Next week, we'll also, like, come up with, the other core systems, like, for the ingestion.
+
+277
+00:34:26.889 --> 00:34:31.669
+Ashritha: sorry, for the ingestion, OCR, and also, like.
+
+278
+00:34:31.739 --> 00:34:55.599
+Ashritha: probably we should also come up with some sort of a QA plan. We obviously will keep on adding to it, but whatever we think of right now, since we'll be breaking up our ingestion and OCR pipeline, maybe we can also spend some time to come up with a QA plan, like, one of the use case… test cases that you just mentioned, like, each one, each of the core components should adhere by one…
+
+279
+00:34:55.600 --> 00:35:04.369
+Ashritha: expected input and output, right? So that could be one. So, a cure plan like that could… maybe we can just get validated by you guys also and see.
+
+280
+00:35:07.960 --> 00:35:08.640
+Ashritha: Something else.
+
+281
+00:35:10.380 --> 00:35:18.970
+Ashritha: So… column… We've got the next decline name in heaven, or… I just had some Okay.
+
+282
+00:35:20.860 --> 00:35:36.410
+Ashritha: Also, I had a quick question, so, if at all, like, not so soon, but maybe, like, 2 weeks from now, if we wanna, like, push some PRs or something, so do we just directly push it to the repository, the Bitbucket repository? Okay.
+
+283
+00:35:36.840 --> 00:35:54.690
+Ashritha: You can do anything there, as long as it's in your own SEO. Okay. Exactly. Okay. You can create your own pipeline, you can set everything up as… Okay. Because your admin's clear workspace. Got it. So you can technically do whatever in there, and you would have to update it on…
+
+284
+00:35:54.920 --> 00:35:56.770
+Ashritha: Okay, makes sense.
+
+285
+00:35:59.020 --> 00:36:06.839
+Ashritha: So, in the current Bitbucket, you… we are also allowed to set up workflows and stuff like that, right? Okay.
+
+286
+00:36:07.710 --> 00:36:19.890
+Ashritha: Can we also, like, publish those… any URLs? Like, a live URL or something? The live URL is for, the UI or whatever. Huh.
+
+287
+00:36:20.050 --> 00:36:26.849
+Ashritha: That'd be through Azure. Okay. So the publishing would be through Azure, but, you could technically connect
+
+288
+00:36:26.960 --> 00:36:30.420
+Ashritha: the workflow.
+
+289
+00:36:30.800 --> 00:36:40.710
+Ashritha: to an Azure deployment cycle, so that the… the end of your workflow would be something getting published to, like, URL. Okay, okay. For sure, make that work.
+
+290
+00:36:41.290 --> 00:36:56.009
+Ashritha: And, and it's also too early for that anyways. Sorry? It's also too early for that anyway. Okay. No, I was thinking we have a, since the tech… generally, whatever print boards we have, they are very, like.
+
+291
+00:36:56.010 --> 00:37:06.569
+Ashritha: traditional ones. So, now we're following a 3-day tick something. So, for that, we're gonna come up with our own custom spec, like, whatever components it requires.
+
+292
+00:37:06.570 --> 00:37:25.419
+Ashritha: So, right now, I was thinking to host it on my own repository, like, making it public, but if we have access to the Bitbucket, and if we could publish it, host it over there, I was just thinking if… can we do it then? I'll try it.
+
+293
+00:37:25.500 --> 00:37:42.559
+Ashritha: We can, we can. It can, right? No, no, like, let's say I move, like, let's assume it's a Kanban board, and then I move a particular one to done. So, we can see the history, right?
+
+294
+00:37:43.900 --> 00:37:48.379
+Ashritha: Linear… Linear supports this kind of a…
+
+295
+00:37:48.870 --> 00:37:54.759
+Ashritha: Scrum setting as well? It's a full Kanban setting. Okay. And you can customize it.
+
+296
+00:37:55.080 --> 00:37:56.309
+Ashritha: Oh, man.
+
+297
+00:37:57.050 --> 00:38:00.519
+Ashritha: I think… did we give you guys access to Leo?
+
+298
+00:38:00.800 --> 00:38:14.219
+Ashritha: I don't think so. Okay, then let me… let me see if I can just add you guys to the India account. Okay. Because it should be easier, because… so let me… I'll just show it to you, how it looks. You'll have a good idea.
+
+299
+00:38:14.530 --> 00:38:15.500
+Ashritha: Oh, God.
+
+300
+00:38:15.700 --> 00:38:16.689
+Ashritha: If I drilled it on.
+
+301
+00:38:25.160 --> 00:38:25.870
+Ashritha: Okay.
+
+302
+00:38:31.220 --> 00:38:32.209
+Ashritha: Is that a single thing.
+
+303
+00:38:38.030 --> 00:38:52.069
+Ashritha: You should just Google linear. Okay. But, linear basically makes you organize projects, so technically there's 3 different, sub-projects going on, so you can create a page for each other.
+
+304
+00:38:52.130 --> 00:39:01.690
+Ashritha: You could take tasks for each of them. Okay. You just move them across a different phase of the lifecycle. Okay. Just drag, drag and drop.
+
+305
+00:39:02.340 --> 00:39:11.390
+Ashritha: Okay, but, let's assume, like, the traditional sprint support that I have worked with on, like, they have, user story points and stuff like that.
+
+306
+00:39:12.360 --> 00:39:17.330
+Ashritha: you… there's nothing. It's a clean slate, and you can just customize it however you want.
+
+307
+00:39:17.860 --> 00:39:19.760
+Ashritha: So, it's…
+
+308
+00:39:20.100 --> 00:39:30.609
+Ashritha: like, underneath everything, it follows a very milestone-driven, epic kind of philosophy, but if you're not working with epics, if you're working with individual tasks itself… Okay.
+
+309
+00:39:30.610 --> 00:39:45.400
+Ashritha: Then, you could just do whatever with them. Okay. You could probably assign priorities if you want to, unless you want to assign priorities. You could, you could do t-shirt sizing. Okay. If you don't want to, just don't do it. You can do, just…
+
+310
+00:39:45.560 --> 00:39:54.510
+Ashritha: like, out of 10, the effort required for a specific task. If you don't want to do that, you can't do that. You don't want to do that. You can avoid that, too. Okay.
+
+311
+00:39:54.510 --> 00:40:06.050
+Ashritha: It could just be a simple, issue with just a heading, the issue description. Oh, but then, if you're allowed to use any… add any new fields, and then… then define them?
+
+312
+00:40:06.110 --> 00:40:07.730
+Ashritha: Then, yeah, then that makes sense.
+
+313
+00:40:10.070 --> 00:40:12.289
+Ashritha: It's, it's like Gina, but like…
+
+314
+00:40:12.910 --> 00:40:17.029
+Ashritha: on a very, very, customizable scale. I see.
+
+315
+00:40:18.470 --> 00:40:19.500
+Ashritha: Makes sense.
+
+316
+00:40:20.410 --> 00:40:22.900
+Ashritha: Linear also integrates really well with that.
+
+317
+00:40:23.250 --> 00:40:27.530
+Ashritha: Oh, okay. So, again, not even… You raised my…
+
+318
+00:40:27.920 --> 00:40:30.830
+Ashritha: Yeah, we also have to, like.
+
+319
+00:40:31.010 --> 00:40:38.859
+Ashritha: we have set up our whole SES one that you have heard the other day. We have to actually put it into practice this semester.
+
+320
+00:40:41.290 --> 00:40:44.650
+Ashritha: And the point I was thinking about was,
+
+321
+00:40:45.400 --> 00:40:47.999
+Ashritha: It was… it was just this stigma of…
+
+322
+00:40:48.780 --> 00:40:54.810
+Ashritha: You should probably invest a little time in thinking about the engineering aspect of it, rather than,
+
+323
+00:40:55.140 --> 00:40:59.270
+Ashritha: Developing too many features for what this specific project is.
+
+324
+00:40:59.380 --> 00:41:04.670
+Ashritha: I would say instead of, like, creating some, Advanced OCRM.
+
+325
+00:41:04.990 --> 00:41:17.629
+Ashritha: OCR way to, like, get all the text out cleanly, you should just probably, think about what's the easiest way to do OCR on a scale, and that's it. Okay. Rather than spend too much time
+
+326
+00:41:17.630 --> 00:41:34.870
+Ashritha: focusing on. Okay. That's it. Because that… that probably is, in the end, more value to you guys, too, right? Okay. Because you actually get to see how it's really implemented in the industry, versus just trying to make an experiment where there's no bounds or carries through the whole thing. Okay.
+
+327
+00:41:40.470 --> 00:41:41.400
+Ashritha: Thank you.
+
+328
+00:41:41.970 --> 00:41:42.919
+Ashritha: We would do.
+
+329
+00:41:43.220 --> 00:41:44.110
+Ashritha: Beautiful.
+
+330
+00:41:44.640 --> 00:41:54.150
+Ashritha: Good seeing you. Yeah, good seeing you. Sorry for delaying getting there right into a friend that I'll catch up with, so… Yeah, that makes sense.
+
+331
+00:41:58.960 --> 00:42:00.200
+Ashritha: Do you guys include…
+

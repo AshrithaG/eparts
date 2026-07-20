@@ -1,0 +1,63 @@
+{
+  "meeting_date": "2026-05-14",
+  "duration_minutes": 42,
+  "participants": [
+    "Ashritha"
+  ],
+  "participant_count": 1,
+  "total_words": 5296,
+  "total_turns": 1,
+  "speaker_stats": {
+    "Ashritha": {
+      "turns": 1,
+      "words": 5296,
+      "pct_words": 100.0
+    }
+  },
+  "detected_topics": {
+    "ML/Model": 5,
+    "Architecture": 3,
+    "Data": 3,
+    "Project Mgmt": 3,
+    "Infrastructure": 3,
+    "Onboarding": 2
+  },
+  "questions_found": 5,
+  "questions_sample": [
+    {
+      "speaker": "Ashritha",
+      "text": "Is there a schema for the part numbers"
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "How do you know it's gonna work"
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "How do you know, how do you know How you can identify the correct problem"
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "Is there a way we can also, like, move this meeting to, like, an hour squad leader, like, 3 to 4, something like that"
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "Can we also, like, publish those\u2026 any URLs"
+    }
+  ],
+  "potential_decisions": 1,
+  "decisions_sample": [
+    {
+      "speaker": "Ashritha",
+      "text": "We'll put\u2026 So, this is the failed way. last month received from the EPAS. dataset. NFL helps, many, valuable information, and I do some, statistic analyze, and, I\u2026 I will use 4 or the 5 bells to\u2026 To m"
+    }
+  ],
+  "potential_action_items": 1,
+  "actions_sample": [
+    {
+      "speaker": "Ashritha",
+      "text": "We'll put\u2026 So, this is the failed way. last month received from the EPAS. dataset. NFL helps, many, valuable information, and I do some, statistic analyze, and, I\u2026 I will use 4 or the 5 bells to\u2026 To m"
+    }
+  ],
+  "analysis_mode": "offline (no LLM \u2014 structural extraction only)"
+}

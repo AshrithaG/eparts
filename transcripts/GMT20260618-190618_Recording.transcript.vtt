@@ -1,0 +1,602 @@
+WEBVTT
+
+1
+00:00:02.000 --> 00:00:09.050
+hrishikb@andrew.cmu.edu: Okay, so primarily, what we wanted to discuss was things around Azure access.
+
+2
+00:00:09.870 --> 00:00:12.489
+hrishikb@andrew.cmu.edu: Arjun Jay, you had a question about Arjun?
+
+3
+00:00:14.470 --> 00:00:16.350
+hrishikb@andrew.cmu.edu: As of Michael. Okay.
+
+4
+00:00:17.020 --> 00:00:24.490
+hrishikb@andrew.cmu.edu: So The only thing for me was, I can get started with the work, but…
+
+5
+00:00:27.930 --> 00:00:36.000
+hrishikb@andrew.cmu.edu: There are no limits, I think, to the account itself in Azure. So, if you could,
+
+6
+00:00:36.180 --> 00:00:47.209
+hrishikb@andrew.cmu.edu: if I could know around how much I could spend, or you could just put a limit in for the amount of training, or… and, like, on the group, or, like, for me specifically, that would be great.
+
+7
+00:00:50.930 --> 00:01:03.060
+Harsha Tummala: David, I think… so they were asking about, like, any limits around how much they can spend on the, Azure group that we created for them, or how they want to use it.
+
+8
+00:01:03.390 --> 00:01:06.540
+Harsha Tummala: What's the ballpark right now?
+
+9
+00:01:07.690 --> 00:01:09.009
+hrishikb@andrew.cmu.edu: We don't know yet.
+
+10
+00:01:09.380 --> 00:01:17.039
+hrishikb@andrew.cmu.edu: So, we didn't want to start working on it, unless we had some kind of, cost monitoring or, like.
+
+11
+00:01:17.200 --> 00:01:35.770
+hrishikb@andrew.cmu.edu: some kind of cost cap, so that we don't overspend. Like, you can set a cap, whatever kind of cap you like, and I can start, and then I can give further feedback. I just didn't want to start, and there is a risk that it may be more than expected, so I didn't start on that.
+
+12
+00:01:39.000 --> 00:01:45.589
+Harsha Tummala: Well, I mean, my gut's saying right now, you know, a thousand bucks a month for… is… is fine.
+
+13
+00:01:46.000 --> 00:01:55.169
+Harsha Tummala: If the ongoing cost is that, that might not be fine.
+
+14
+00:01:55.740 --> 00:02:01.370
+Harsha Tummala: So, like, right… I'm imagining that this process is going to be very training-heavy to start.
+
+15
+00:02:01.680 --> 00:02:07.699
+Harsha Tummala: And then there's gonna be some sort of… ongoing… Costs or spend.
+
+16
+00:02:07.880 --> 00:02:15.820
+Harsha Tummala: I'm… I'm pretty open to… A higher amount.
+
+17
+00:02:16.100 --> 00:02:25.909
+Harsha Tummala: During this development time, any sort of ongoing cost would be much more difficult to justify.
+
+18
+00:02:26.620 --> 00:02:30.350
+Harsha Tummala: I will make that a to-do…
+
+19
+00:02:30.730 --> 00:02:35.629
+Harsha Tummala: And… get back to you. But I'm saying, like, is a…
+
+20
+00:02:36.560 --> 00:02:41.189
+Harsha Tummala: Is 1,000 ridiculously low? Is it way too high? Like, what are…
+
+21
+00:02:41.210 --> 00:02:51.119
+hrishikb@andrew.cmu.edu: That's way too much. Actually, I was, yeah, yeah, I don't think it… this is preliminary, I cannot give again, but I don't think it should go anywhere near that.
+
+22
+00:02:51.540 --> 00:02:53.010
+hrishikb@andrew.cmu.edu: So, yeah.
+
+23
+00:02:53.510 --> 00:02:57.279
+Harsha Tummala: Sorry, can you… I'm playing on your speakers, I'm having trouble hearing you.
+
+24
+00:02:57.280 --> 00:03:03.820
+hrishikb@andrew.cmu.edu: Yeah, yeah, I don't think, right now, this is preliminary, but I don't think it should go anywhere near that.
+
+25
+00:03:04.260 --> 00:03:05.590
+Harsha Tummala: Okay, yeah.
+
+26
+00:03:07.200 --> 00:03:10.570
+Clifford Huff: Are you thinking in the hundreds of dollars, is what you're thinking?
+
+27
+00:03:10.570 --> 00:03:19.270
+hrishikb@andrew.cmu.edu: Yeah, it would be great if you could just set a cap on the group, directly, just because these things are…
+
+28
+00:03:19.390 --> 00:03:27.559
+hrishikb@andrew.cmu.edu: it would be good as a precautionary measure, just so that there's no overflow, it, like, overruns.
+
+29
+00:03:27.840 --> 00:03:32.400
+hrishikb@andrew.cmu.edu: So if you could set it on the group policy, or for me individually, any of that would be fine.
+
+30
+00:03:34.260 --> 00:03:35.050
+Harsha Tummala: Okay.
+
+31
+00:03:35.230 --> 00:03:51.440
+Harsha Tummala: I would also recommend that any sort of resource that you guys plan on using, or anything that you do, you should probably start off with, like, the minimum computes for it, and then keep scaling up, because that is how
+
+32
+00:03:51.920 --> 00:03:55.670
+Harsha Tummala: It is sure we kind of try to keep the costs low for the range.
+
+33
+00:03:55.800 --> 00:04:01.570
+Harsha Tummala: And I would, I would not recommend, like, just setting an estimated,
+
+34
+00:04:01.680 --> 00:04:11.590
+Harsha Tummala: an estimated, compute that you think would be… would give you the best performance for things. Rather than that, you just put the lowest one and then keep scaling up from there.
+
+35
+00:04:12.390 --> 00:04:25.570
+hrishikb@andrew.cmu.edu: Yeah, no, I was thinking of something along those lines, but the thing is, especially with the newer models, there's a tendency for it to, kind of, the cost to go
+
+36
+00:04:25.740 --> 00:04:29.980
+hrishikb@andrew.cmu.edu: hired pretty fast, so that's why I was asking for the limits, just as a…
+
+37
+00:04:29.980 --> 00:04:41.150
+Harsha Tummala: Are you planning on deploying the models on, like, the… like, the resource group, or are you planning on spinning up, like, Container App Center and doing it, or…
+
+38
+00:04:41.340 --> 00:04:42.990
+Harsha Tummala: using GPUs for it.
+
+39
+00:04:44.110 --> 00:04:48.019
+hrishikb@andrew.cmu.edu: No, no, no, not right now, I'm not planning to do that.
+
+40
+00:04:48.520 --> 00:04:49.110
+Harsha Tummala: Whoa.
+
+41
+00:04:49.510 --> 00:05:00.019
+Harsha Tummala: Just, just making sure, because if you want to do any models, I would say AI Founty is the way. I was looking into adding you to, like, a separate AI Founty thing, should be done probably today.
+
+42
+00:05:00.370 --> 00:05:10.210
+Harsha Tummala: But that is an account which is… if… if basically you're doing anything through the UI for your nesting, it should be completely free from what I know.
+
+43
+00:05:11.950 --> 00:05:15.529
+hrishikb@andrew.cmu.edu: Sorry, Harsha, could you repeat? I can barely hear you.
+
+44
+00:05:15.930 --> 00:05:17.920
+Harsha Tummala: Sorry, can you hear me now?
+
+45
+00:05:19.510 --> 00:05:20.380
+Harsha Tummala: Hello?
+
+46
+00:05:20.380 --> 00:05:23.490
+hrishikb@andrew.cmu.edu: Yeah, yeah, it's better now.
+
+47
+00:05:25.050 --> 00:05:27.450
+Harsha Tummala: I'm not sure what the problem is.
+
+48
+00:05:28.030 --> 00:05:32.719
+Harsha Tummala: It looks good from my audio, but I don't know why. Okay.
+
+49
+00:05:33.570 --> 00:05:35.509
+hrishikb@andrew.cmu.edu: Yeah, yeah, go ahead, go ahead.
+
+50
+00:05:36.900 --> 00:05:39.970
+Harsha Tummala: Yeah, so, what I was saying was…
+
+51
+00:05:40.590 --> 00:05:47.340
+Harsha Tummala: If you're planning on deploying GPUs and just running a model randomly, I would highly advise against that.
+
+52
+00:05:47.460 --> 00:06:01.190
+Harsha Tummala: Mainly because that is probably not the way to do it. I was looking into adding you to the Azure Foundry, like a Foundry membership, so that you could just use the UI part of things.
+
+53
+00:06:01.310 --> 00:06:07.999
+Harsha Tummala: Where you can navigate within boundary, go to a model, see, test by sending a few messages to it.
+
+54
+00:06:08.290 --> 00:06:14.019
+Harsha Tummala: Using the UI component of Azure Foundry is negligible cost, or free for the most part.
+
+55
+00:06:14.690 --> 00:06:16.339
+hrishikb@andrew.cmu.edu: Okay, I did not know that.
+
+56
+00:06:16.340 --> 00:06:22.059
+Harsha Tummala: So, chatbot sort of, chatbot sort of interface to actually try and test things through it.
+
+57
+00:06:22.180 --> 00:06:27.490
+Harsha Tummala: Because it's mainly meant for testing and just trying, it's mainly free for that reason.
+
+58
+00:06:27.610 --> 00:06:31.999
+Harsha Tummala: It also gives you an API. When you use the API, it starts charging you.
+
+59
+00:06:33.120 --> 00:06:34.949
+hrishikb@andrew.cmu.edu: Got it, got it.
+
+60
+00:06:35.090 --> 00:06:49.470
+hrishikb@andrew.cmu.edu: Yeah, for testing, a few I could do manually, just to start off and see for myself. But my… like, I have had some experience with using, AWS for this kind of stuff.
+
+61
+00:06:49.550 --> 00:06:59.379
+hrishikb@andrew.cmu.edu: And, setting a cap really helped me there, just because, there are, there is a bit of a risk of it going kind of a…
+
+62
+00:06:59.770 --> 00:07:05.289
+hrishikb@andrew.cmu.edu: a bit too high, so that's why I'm kind of asking for that. That's it.
+
+63
+00:07:05.290 --> 00:07:08.770
+Harsha Tummala: Yeah, I totally agree with that, though. It's something we should do.
+
+64
+00:07:08.770 --> 00:07:12.400
+hrishikb@andrew.cmu.edu: Yeah, because if I set a, like, a few hour training run.
+
+65
+00:07:12.400 --> 00:07:13.210
+Harsha Tummala: Okay.
+
+66
+00:07:13.210 --> 00:07:22.880
+hrishikb@andrew.cmu.edu: if I, kind of, I don't know, maybe I'm, for one hour, I'm not looking at it carefully enough, then it can kind of spike right then.
+
+67
+00:07:24.350 --> 00:07:34.799
+Harsha Tummala: Yeah, that's the thing. I mean, with ML in general, I would say only do it when I think you have, like, your attention towards that task.
+
+68
+00:07:34.930 --> 00:07:49.720
+Harsha Tummala: Because the problem is, especially when you're running training or inference, which just tends to run forever, unless you actually stop it and you're constantly looking at the metrics to monitor how it's performing and then manually stop it.
+
+69
+00:07:49.890 --> 00:07:54.159
+Harsha Tummala: I would recommend not doing it at all. Yeah.
+
+70
+00:07:54.360 --> 00:07:54.890
+Harsha Tummala: But in the.
+
+71
+00:07:54.890 --> 00:07:55.260
+hrishikb@andrew.cmu.edu: No other.
+
+72
+00:07:56.400 --> 00:07:57.960
+Harsha Tummala: Sorry, no, I'll just go on, yeah.
+
+73
+00:07:58.800 --> 00:08:07.250
+hrishikb@andrew.cmu.edu: I, yeah, I'm just, this is just for, precautionary, but, I would, yeah,
+
+74
+00:08:07.500 --> 00:08:10.429
+hrishikb@andrew.cmu.edu: I would prefer to, I guess, go about it this way.
+
+75
+00:08:11.430 --> 00:08:12.060
+Harsha Tummala: Yeah.
+
+76
+00:08:14.630 --> 00:08:15.330
+hrishikb@andrew.cmu.edu: Oh.
+
+77
+00:08:16.190 --> 00:08:23.579
+Harsha Tummala: David already set a limit, by the way, I thought he's not. So, to 1,000, you said, yeah. Your forecast right now is 115.
+
+78
+00:08:24.370 --> 00:08:25.220
+Harsha Tummala: So…
+
+79
+00:08:26.790 --> 00:08:27.920
+hrishikb@andrew.cmu.edu: Okay, okay.
+
+80
+00:08:30.580 --> 00:08:33.029
+hrishikb@andrew.cmu.edu: That's it from my side.
+
+81
+00:08:34.169 --> 00:08:39.459
+hrishikb@andrew.cmu.edu: And that's all you had for the Azure questions.
+
+82
+00:08:39.900 --> 00:08:52.169
+hrishikb@andrew.cmu.edu: In the last week, we've been working on the task we told about. There has… there were some project management kind of work, which we had to do, so that took a bit of the time, but yeah, we are…
+
+83
+00:08:52.710 --> 00:08:57.720
+hrishikb@andrew.cmu.edu: Steady progressing towards the… Next, I'll say milestone.
+
+84
+00:08:59.670 --> 00:09:03.780
+hrishikb@andrew.cmu.edu: Yeah, I think, probably by next week, we might have…
+
+85
+00:09:04.150 --> 00:09:07.429
+hrishikb@andrew.cmu.edu: something to show from the OCR and engine part.
+
+86
+00:09:09.360 --> 00:09:11.550
+hrishikb@andrew.cmu.edu: Yeah, that's something to look forward to.
+
+87
+00:09:15.590 --> 00:09:19.580
+hrishikb@andrew.cmu.edu: I think, yeah, that is pretty much all the updates for this week.
+
+88
+00:09:19.770 --> 00:09:21.810
+hrishikb@andrew.cmu.edu: Many questions from you guys?
+
+89
+00:09:27.690 --> 00:09:35.360
+Harsha Tummala: kind of nothing for now. We were mainly expecting just, to catch up on the updates for things, and that's leadership.
+
+90
+00:09:36.290 --> 00:09:43.239
+hrishikb@andrew.cmu.edu: So, right now, we were working in parallel for our different modules, so now what we're doing is we're putting all the code on…
+
+91
+00:09:43.460 --> 00:09:53.710
+hrishikb@andrew.cmu.edu: Bitbucket, and we're gonna start compiling things which are ready to be compiled. Like, a few parts of OCRN ingestion can be compiled, so we'll be doing that next.
+
+92
+00:09:55.640 --> 00:10:04.240
+hrishikb@andrew.cmu.edu: along with that, we're expecting the LLM POC to finish soon. Then, with those results, we can move forward and see
+
+93
+00:10:04.400 --> 00:10:09.840
+hrishikb@andrew.cmu.edu: Where to go next, and then we'll probably have more manpower towards the other tasks.
+
+94
+00:10:10.280 --> 00:10:12.350
+hrishikb@andrew.cmu.edu: Well, let's just progression further, quickly.
+
+95
+00:10:17.090 --> 00:10:20.740
+Harsha Tummala: Nothing, nothing much from my end, other than that,
+
+96
+00:10:20.890 --> 00:10:32.909
+Harsha Tummala: It's, I'll… I'll probably… if you have some time, sometime early next week, like Monday, Tuesday, I'll probably just sit with you for, like, a few minutes, show you around Azure Foundry, and just,
+
+97
+00:10:33.030 --> 00:10:38.800
+Harsha Tummala: Just, just, like, get you up to speed on how to do things from that.
+
+98
+00:10:39.640 --> 00:10:50.480
+hrishikb@andrew.cmu.edu: Yeah, that would be great. So, you could send me your time, or… I'm free at, on Monday, after, basically, 9.30, the entire day.
+
+99
+00:10:52.310 --> 00:10:53.970
+Harsha Tummala: to Monday, any time in the day is good.
+
+100
+00:10:55.450 --> 00:10:56.839
+hrishikb@andrew.cmu.edu: Yeah.
+
+101
+00:10:59.000 --> 00:11:00.750
+Harsha Tummala: Okay, I'll send you an invite then for it.
+
+102
+00:11:00.750 --> 00:11:01.460
+hrishikb@andrew.cmu.edu: Yeah.
+
+103
+00:11:04.170 --> 00:11:06.350
+Harsha Tummala: It should be short 15 variables, I think.
+
+104
+00:11:06.350 --> 00:11:12.909
+hrishikb@andrew.cmu.edu: Yeah, I just… I've not worked with Azure before. I mean, I know a little bit, but not…
+
+105
+00:11:13.370 --> 00:11:13.950
+Harsha Tummala: Huh.
+
+106
+00:11:15.290 --> 00:11:27.090
+Harsha Tummala: Okay, that makes sense. We'll do that, and yeah, that's pretty much all your updates to me as well. let, like, are there any, sort of roadblocks with ETEM using it?
+
+107
+00:11:27.390 --> 00:11:33.100
+Harsha Tummala: I know we discussed last week on, like, the issues you guys had with Trying to,
+
+108
+00:11:33.680 --> 00:11:38.539
+Harsha Tummala: trying to kind of create the connection between, our databases and intermitt.
+
+109
+00:11:41.230 --> 00:11:54.560
+hrishikb@andrew.cmu.edu: Right now, I think we need to do a little more research. Like, research, and like, I would say it's a roadblock, we're just trying to figure out how best to integrate ETM, at which part of the pipeline, so that it's most useful to you guys.
+
+110
+00:11:56.310 --> 00:12:02.409
+hrishikb@andrew.cmu.edu: Yeah, I think… and plus, yeah, we'll have to, do some sort of mapping with the existing PIMs.
+
+111
+00:12:02.860 --> 00:12:06.950
+hrishikb@andrew.cmu.edu: I think you mentioned you guys are already doing that, or something on the similar lines?
+
+112
+00:12:07.320 --> 00:12:11.050
+hrishikb@andrew.cmu.edu: You can map into the Azure products in your catalogs.
+
+113
+00:12:11.600 --> 00:12:17.639
+Harsha Tummala: No, no, no, we're not doing that yet. What you're talking about in… about that last week was…
+
+114
+00:12:17.850 --> 00:12:29.080
+Harsha Tummala: This is something that would be a value add when we give it to our future clients, which is, mapping our internal product types and attributes to the TIM class.
+
+115
+00:12:29.690 --> 00:12:30.280
+hrishikb@andrew.cmu.edu: Okay.
+
+116
+00:12:30.630 --> 00:12:31.620
+hrishikb@andrew.cmu.edu: Yeah.
+
+117
+00:12:32.980 --> 00:12:34.490
+Harsha Tummala: Yeah, bad.
+
+118
+00:12:34.990 --> 00:12:40.510
+Harsha Tummala: So Jake, I think, is currently putting in placeholders for pimps, which will help us do it.
+
+119
+00:12:40.610 --> 00:12:50.269
+Harsha Tummala: But other than that, there's no reward being done. Placeholders hasn't just had provisions on the UI side of things to see different versions work, right?
+
+120
+00:12:52.560 --> 00:12:59.730
+hrishikb@andrew.cmu.edu: Okay, so yeah, from our side, we are still figuring out how to make the ETEM integration most useful.
+
+121
+00:12:59.920 --> 00:13:05.609
+hrishikb@andrew.cmu.edu: Like, we have a few things we can do, but yeah, we're still figuring out how best to integrate that part.
+
+122
+00:13:07.700 --> 00:13:08.490
+Harsha Tummala: Makes sense.
+
+123
+00:13:10.060 --> 00:13:12.680
+hrishikb@andrew.cmu.edu: But yeah, we do have all the data that's required for eating.
+
+124
+00:13:12.840 --> 00:13:19.719
+hrishikb@andrew.cmu.edu: the particular files we have. Like, we've gone through data, it looks, it's pretty well formatted, so it's a lot, but…
+
+125
+00:13:19.880 --> 00:13:22.820
+hrishikb@andrew.cmu.edu: It's, easy to comprehend what it is.
+
+126
+00:13:23.710 --> 00:13:24.440
+Harsha Tummala: Okay.
+
+127
+00:13:25.250 --> 00:13:33.040
+Harsha Tummala: Then that's pretty much it then. Any other updates, you know, from, like, Rosia or any other… any other part of things?
+
+128
+00:13:33.630 --> 00:13:41.339
+hrishikb@andrew.cmu.edu: From the OCR and ingestion, the, like, there's no particular updates, but we're just trying to,
+
+129
+00:13:41.480 --> 00:13:44.129
+hrishikb@andrew.cmu.edu: I'll combine both of them, integrate them together.
+
+130
+00:13:44.640 --> 00:13:52.950
+hrishikb@andrew.cmu.edu: So, we haven't gotten to that yet, because I still have to finish the OCR on Azure, and I was looking at Azure Document Intelligence.
+
+131
+00:13:53.320 --> 00:14:00.549
+hrishikb@andrew.cmu.edu: And, I think it also has one more thing called Azure AI Document Intelligence, or something like that as well.
+
+132
+00:14:00.740 --> 00:14:09.609
+hrishikb@andrew.cmu.edu: So I was just looking at the pricing, and we just wanted to get more clarity on the, spending cap, and I think we can, finish that by tomorrow, max.
+
+133
+00:14:09.850 --> 00:14:21.780
+hrishikb@andrew.cmu.edu: Once that's done, Rishi has given me access to the ingestion repo as well, then I can, integrate it with the ingestion repo, and then I think by next week, we should have the OCR plus ingestion pipeline complete.
+
+134
+00:14:25.100 --> 00:14:36.379
+hrishikb@andrew.cmu.edu: like, after we have a few, like, we'll run it a few times with the, what do you call it, the PDFs, and, like, we have to still have to figure out… we actually know, we have to kind of implement the…
+
+135
+00:14:36.830 --> 00:14:44.100
+hrishikb@andrew.cmu.edu: way we're gonna pass that data to the ML module. So that indication will be next. First, those CR indications, then…
+
+136
+00:14:44.240 --> 00:14:46.649
+hrishikb@andrew.cmu.edu: ingestion to, I mean.
+
+137
+00:14:50.230 --> 00:14:51.520
+Harsha Tummala: Okay, excellent.
+
+138
+00:14:57.440 --> 00:15:16.449
+Harsha Tummala: No, I'm coming off of, like, 6 hours of meetings, so I'm… I'm terribly hanging on here, to be honest. Yeah. Please let me know what else you need. You guys, you guys were able… right, yep, you were able to get the resource group and add to it. Let me know what else I can do to unblock you.
+
+139
+00:15:16.930 --> 00:15:18.920
+Harsha Tummala: Or whatever questions I can answer.
+
+140
+00:15:20.620 --> 00:15:24.909
+hrishikb@andrew.cmu.edu: Yeah, we're good for now. We'll probably message you on Teams if we have anything.
+
+141
+00:15:25.910 --> 00:15:31.030
+Harsha Tummala: Yeah, I would… I was just gonna say that. I was gonna recommend that if you have any sort of questions, just…
+
+142
+00:15:31.100 --> 00:15:46.479
+Harsha Tummala: Because ad hoc, because I think, I think it's getting to this point where we only catch up on the weekends, and just having one of our meetings, and if there's anything I have blocking you, just let us know. I think, I think, the only other blocker in the last one or two weeks was the Azure Access, and that's it.
+
+143
+00:15:46.510 --> 00:15:52.010
+Harsha Tummala: Yeah. Since that is… since that's resolved, if you have questions on, like, deploying things, understanding.
+
+144
+00:15:52.060 --> 00:15:59.320
+Harsha Tummala: any nuances in things, I would say ping me or David, or, we should be good. We should be able to help you out.
+
+145
+00:16:00.070 --> 00:16:01.429
+hrishikb@andrew.cmu.edu: Yeah, definitely we'll do that.
+
+146
+00:16:06.750 --> 00:16:09.259
+hrishikb@andrew.cmu.edu: I think that's all for the meeting.
+
+147
+00:16:11.690 --> 00:16:16.569
+Harsha Tummala: That's it. I see you guys, then. Nice seeing you. Nice seeing you, Cliff.
+
+148
+00:16:17.760 --> 00:16:18.380
+hrishikb@andrew.cmu.edu: Yeah.
+
+149
+00:16:19.590 --> 00:16:20.960
+hrishikb@andrew.cmu.edu: You guys… Yeah.
+
+150
+00:16:21.180 --> 00:16:21.830
+Harsha Tummala: You guys…
+

@@ -1,0 +1,110 @@
+{
+  "meeting_date": "2026-07-16",
+  "duration_minutes": 23,
+  "participants": [
+    "Ashritha",
+    "Jaivard",
+    "Harsha (eParts)",
+    "Liu",
+    "Hrishik",
+    "Cliff (Mentor)"
+  ],
+  "participant_count": 6,
+  "total_words": 3155,
+  "total_turns": 86,
+  "speaker_stats": {
+    "Ashritha": {
+      "turns": 23,
+      "words": 1437,
+      "pct_words": 45.5
+    },
+    "Jaivard": {
+      "turns": 7,
+      "words": 451,
+      "pct_words": 14.3
+    },
+    "Harsha (eParts)": {
+      "turns": 32,
+      "words": 604,
+      "pct_words": 19.1
+    },
+    "Liu": {
+      "turns": 12,
+      "words": 325,
+      "pct_words": 10.3
+    },
+    "Hrishik": {
+      "turns": 4,
+      "words": 134,
+      "pct_words": 4.2
+    },
+    "Cliff (Mentor)": {
+      "turns": 8,
+      "words": 204,
+      "pct_words": 6.5
+    }
+  },
+  "detected_topics": {
+    "ML/Model": 4,
+    "Architecture": 2,
+    "Data": 2,
+    "Onboarding": 2
+  },
+  "questions_found": 0,
+  "questions_sample": [],
+  "potential_decisions": 2,
+  "decisions_sample": [
+    {
+      "speaker": "Ashritha",
+      "text": "Okay. So, from my end, so this week I've been\u2026 I've been spending some time to bump up the test coverage for the repo, so that's, like, up to 85% right now. And\u2026 but then, there's one thing, that, lik"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "I think this data is pretty similar to the last\u2026 Last update, but right now we are working on getting the output\u2026 In a place where we can send it forward to the ML pipeline. We are\u2026 I would say we hav"
+    }
+  ],
+  "potential_action_items": 15,
+  "actions_sample": [
+    {
+      "speaker": "Ashritha",
+      "text": "So, like Rishi mentioned, we are just working on the integration part of it, like, So basically, I am simultaneously\u2026 like, we found a few bugs on the ML side, so I am resolving those, and we have, li"
+    },
+    {
+      "speaker": "Jaivard",
+      "text": "Yes. So the the class matching and feature. These 2 are done. But the value and unit normalization I'm having a some trouble with. But I'll keep working on it, and I think I can get maybe not all of i"
+    },
+    {
+      "speaker": "Jaivard",
+      "text": "One is much more finicky and. if my initial efforts are only getting 43%, I don't know how I'm supposed to, like, push that to\u2026 close to, you know, 100. So I'll just do everything possible and then ki"
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "Okay. So, from my end, so this week I've been\u2026 I've been spending some time to bump up the test coverage for the repo, so that's, like, up to 85% right now. And\u2026 but then, there's one thing, that, lik"
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "Okay, yeah, I'll send that. Okay. Lee, do you wanna, like, update on your work?"
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "Oh, yeah, can you try now? I've given you the access."
+    },
+    {
+      "speaker": "Liu",
+      "text": "Okay. like, the\u2026 The ML system could choose, could choose the top three, Possible\u2026 match values towards the one product, but it can't choose which one could be the best. So I\u2026 try to find a method to "
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "Yeah, okay. So, but, the right now, the CI pipeline that I was talking about was something specific to the PR's build process, so, like, that has nothing to do with the product, so we haven't gotten y"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "I think this data is pretty similar to the last\u2026 Last update, but right now we are working on getting the output\u2026 In a place where we can send it forward to the ML pipeline. We are\u2026 I would say we hav"
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "Yeah, I think, honestly, like, by next week, we should have something, like, to demo\u2026 not, like, the entire pipeline at least, but, like, some of all the work that we have done so far in, like, a demo"
+    }
+  ],
+  "analysis_mode": "offline (no LLM \u2014 structural extraction only)"
+}

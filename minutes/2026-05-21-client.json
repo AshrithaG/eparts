@@ -1,0 +1,90 @@
+{
+  "meeting_date": "2026-05-21",
+  "duration_minutes": 53,
+  "participants": [
+    "Ashritha",
+    "Harsha (eParts)",
+    "David (eParts)",
+    "Hrishik"
+  ],
+  "participant_count": 4,
+  "total_words": 4973,
+  "total_turns": 75,
+  "speaker_stats": {
+    "Ashritha": {
+      "turns": 35,
+      "words": 3492,
+      "pct_words": 70.2
+    },
+    "Harsha (eParts)": {
+      "turns": 36,
+      "words": 1298,
+      "pct_words": 26.1
+    },
+    "David (eParts)": {
+      "turns": 3,
+      "words": 182,
+      "pct_words": 3.7
+    },
+    "Hrishik": {
+      "turns": 1,
+      "words": 1,
+      "pct_words": 0.0
+    }
+  },
+  "detected_topics": {
+    "Data": 5,
+    "ML/Model": 4,
+    "Infrastructure": 4,
+    "Architecture": 3,
+    "Onboarding": 2
+  },
+  "questions_found": 0,
+  "questions_sample": [],
+  "potential_decisions": 0,
+  "decisions_sample": [],
+  "potential_action_items": 11,
+  "actions_sample": [
+    {
+      "speaker": "Ashritha",
+      "text": "Yeah. So can I directly use your mic? Or use mine. Yeah, you can use my mind. You can't hear it. Me commute? J? Or\u2026 Yeah. Okay, okay. So today, I\u2026 I'd like to introduce you the\u2026 Power layer, the layer"
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Yeah, exactly. I mean, I think I got thrown off by the example that Leo just gave. Okay, okay. Which was\u2026 which was just, like, a customer specifying a certain type of product. Like, if you go back to"
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "Yes. It's, like, in this scenario, So we could\u2026 we could let the customer terminology diverges from, Can you\u2026 Canonical database vocabulary. So it could be\u2026 could understand all the synonymi relations"
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "Okay, so the\u2026 yeah, we\u2026 I signed up for Linear, and I got all the access, I mean, with all the\u2026 the\u2026 I\u2026 I mean, I just\u2026 I thought that\u2026 this is good enough for us to create the custom fields and stuff"
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "It should\u2026 technically, you don't have to set a cycle in linear, right? You could\u2026 Have a sprint board for almost, like, every single Every single 3-day cycle that you're planning to do."
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Makes sense, I mean, if you guys can figure out just hosting and, like, doing everything about it, then more than\u2026 you guys should do whatever you can about it."
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "Yeah, yeah. So, I mean, it's quite\u2026 it's actually good, like, it does not restrict you with any templates or fields, so that's why I thought I would get started with it, but then, I mean, I didn't thi"
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "Yes, if you want to say it, I will send you the four detailed documents. You can see."
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "Yeah, I'll put this along the action items that I'll be sending in the evening today."
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "Oh, okay. I think we'll just think about this as a team, Ellie."
+    }
+  ],
+  "analysis_mode": "offline (no LLM \u2014 structural extraction only)"
+}

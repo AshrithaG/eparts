@@ -1,0 +1,114 @@
+{
+  "meeting_date": "2026-07-02",
+  "duration_minutes": 27,
+  "participants": [
+    "Hrishik",
+    "Harsha (eParts)",
+    "Arjun",
+    "Jaivard",
+    "Cliff (Mentor)",
+    "Liu",
+    "Ashritha"
+  ],
+  "participant_count": 7,
+  "total_words": 3182,
+  "total_turns": 69,
+  "speaker_stats": {
+    "Hrishik": {
+      "turns": 18,
+      "words": 327,
+      "pct_words": 10.3
+    },
+    "Harsha (eParts)": {
+      "turns": 22,
+      "words": 700,
+      "pct_words": 22.0
+    },
+    "Arjun": {
+      "turns": 3,
+      "words": 253,
+      "pct_words": 8.0
+    },
+    "Jaivard": {
+      "turns": 6,
+      "words": 448,
+      "pct_words": 14.1
+    },
+    "Cliff (Mentor)": {
+      "turns": 9,
+      "words": 117,
+      "pct_words": 3.7
+    },
+    "Liu": {
+      "turns": 10,
+      "words": 1260,
+      "pct_words": 39.6
+    },
+    "Ashritha": {
+      "turns": 1,
+      "words": 77,
+      "pct_words": 2.4
+    }
+  },
+  "detected_topics": {
+    "ML/Model": 6,
+    "Data": 6
+  },
+  "questions_found": 0,
+  "questions_sample": [],
+  "potential_decisions": 2,
+  "decisions_sample": [
+    {
+      "speaker": "Liu",
+      "text": "Yeah, so, last week, we\u2026 Have completed all the\u2026 Component test and, integration test. for the ML model. So, this time, I will share you with the results for these two kinds of testing. So, for the ov"
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Also, I think we should also talk about, like, how, how we can combine Jake's findings with your findings, and\u2026 We could have a meeting just for that, if you guys want, sometime next week. I think Jak"
+    }
+  ],
+  "potential_action_items": 19,
+  "actions_sample": [
+    {
+      "speaker": "Hrishik",
+      "text": "So, in the agenda for today, we just have, our updates on what we all have been working on. I'll start, so\u2026 I'm still working on the schema part. For the ingestion gateway. there\u2026 I'm making a lot of,"
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Actually, I wanted to give some input on this, too. Just in the past 3 days, I've actually, managed to import the entire eTIM standard into our schema, that we're going to be using for PIMS to include"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Okay, yeah, that'll be really good. Then I think I'll probably\u2026 for now, what I have is I just imported all the ETEM data. It doesn't correspond to anything in PIMS. It's just that all the ETEM data h"
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Yeah, I think I'll just give that to you as a back file for Postgres."
+    },
+    {
+      "speaker": "Arjun",
+      "text": "Yeah, so, I did what, karsha, you asked me to check out the GPT 5.4 last week, so I checked that out, but, like, the\u2026 Results were not much better. We still need, like, two models, like, two loops. On"
+    },
+    {
+      "speaker": "Arjun",
+      "text": "I tried from\u2026 I think I tried everything from 5 onwards, like, 5, 5 Mini, and then 5.1\u2026 there was 5.5 also, but it said quota exceeded, so I couldn't try that out. Look at him. I think, I'll have to d"
+    },
+    {
+      "speaker": "Jaivard",
+      "text": "Can I scare my screen regarding that, or should I just stop?"
+    },
+    {
+      "speaker": "Jaivard",
+      "text": "So, this is what we currently have for, as we go along, to the coding site. So\u2026 we've made sure that our QA plan focuses on the most important characteristics first, so that those are accuracy. And re"
+    },
+    {
+      "speaker": "Cliff (Mentor)",
+      "text": "Are you going to share this document with the clients and the mentors, or just give us a link to it?"
+    },
+    {
+      "speaker": "Jaivard",
+      "text": "Yes, I will be sharing that. There are a few changes first, but I'll be sharing this."
+    }
+  ],
+  "analysis_mode": "offline (no LLM \u2014 structural extraction only)"
+}

@@ -1,0 +1,50 @@
+{
+  "meeting_date": "2026-05-28",
+  "duration_minutes": 35,
+  "participants": [
+    "Ashritha"
+  ],
+  "participant_count": 1,
+  "total_words": 4757,
+  "total_turns": 1,
+  "speaker_stats": {
+    "Ashritha": {
+      "turns": 1,
+      "words": 4757,
+      "pct_words": 100.0
+    }
+  },
+  "detected_topics": {
+    "Data": 5,
+    "ML/Model": 4,
+    "Infrastructure": 3,
+    "Architecture": 2,
+    "Onboarding": 2
+  },
+  "questions_found": 2,
+  "questions_sample": [
+    {
+      "speaker": "Ashritha",
+      "text": "Is there a different process that needs to go through for a targeted product category"
+    },
+    {
+      "speaker": "Ashritha",
+      "text": "Is there something, like, which is more EFAS-specific, or the entire thing"
+    }
+  ],
+  "potential_decisions": 1,
+  "decisions_sample": [
+    {
+      "speaker": "Ashritha",
+      "text": "Night. It will, collect as a low samples cluster. And if the score is\u2026 the score is less than .70, What's up? A bunch of bills. In the case will pass to a human's review. And flag unclear, it says ret"
+    }
+  ],
+  "potential_action_items": 1,
+  "actions_sample": [
+    {
+      "speaker": "Ashritha",
+      "text": "Night. It will, collect as a low samples cluster. And if the score is\u2026 the score is less than .70, What's up? A bunch of bills. In the case will pass to a human's review. And flag unclear, it says ret"
+    }
+  ],
+  "analysis_mode": "offline (no LLM \u2014 structural extraction only)"
+}

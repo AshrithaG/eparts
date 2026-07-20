@@ -1,0 +1,83 @@
+{
+  "meeting_date": "2026-07-09",
+  "duration_minutes": 26,
+  "participants": [
+    "Hrishik",
+    "Harsha (eParts)",
+    "Jake (eParts)"
+  ],
+  "participant_count": 3,
+  "total_words": 3609,
+  "total_turns": 50,
+  "speaker_stats": {
+    "Hrishik": {
+      "turns": 21,
+      "words": 2984,
+      "pct_words": 82.7
+    },
+    "Harsha (eParts)": {
+      "turns": 10,
+      "words": 160,
+      "pct_words": 4.4
+    },
+    "Jake (eParts)": {
+      "turns": 19,
+      "words": 465,
+      "pct_words": 12.9
+    }
+  },
+  "detected_topics": {
+    "ML/Model": 5,
+    "Data": 5,
+    "Architecture": 3,
+    "Project Mgmt": 2
+  },
+  "questions_found": 0,
+  "questions_sample": [],
+  "potential_decisions": 0,
+  "decisions_sample": [],
+  "potential_action_items": 14,
+  "actions_sample": [
+    {
+      "speaker": "Hrishik",
+      "text": "So, primarily, last\u2026 Thank you, thank you, thank you. Okay, so\u2026 This week, primarily, from the OCR, in addition part of things, we were starting on integration. We have\u2026 Okay. We have\u2026 we have started"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "So we have two products, AccuHMOA, and there's one more, I think, OAW. They have similar, like, similar values. Attributes and values. So, when we run into the pipeline, Let me see if this is\u2026 oh, yea"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "I mean, ideally, the OCR part just puts an order value, and the MN model is supposed to finally pass it out, because that's the main\u2026 Part of this problem. And so where's the hell? a disconnect here. "
+    },
+    {
+      "speaker": "Jake (eParts)",
+      "text": "Yeah, we'll have a different row with ID Standard 3 for when we eventually move to, E-Class. And then same, like, ID standard,"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "duplicated this thing, like, two circuit breakers and fuses, if it has, IHC2 and 1, we'll have 3, the same."
+    },
+    {
+      "speaker": "Jake (eParts)",
+      "text": "Yeah, we'll need some kind of way to link them together, probably another table for us to map alias or map different standards together. But right now, in terms of just storing these, is this the cate"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Okay, okay, okay. So initially, we were thinking about doing a bit of ETM part in the, before the ML portion, but, after\u2026 like, getting a bit further, that seems a bit difficult, so we need more infor"
+    },
+    {
+      "speaker": "Jake (eParts)",
+      "text": "Great, thank you Yeah, and the reason for that, we just want to keep it flexible, too, for, we could\u2026 I think standard 2\u2026 standard ID 2 just says ETIM, but really it should say, ETIM 10.0, and then wh"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Okay, so let me just share my screen. Thomas, let's see. That is the one second. So who's in Puerto Rico? Is this a fun thing in Puerto Rico? Someone with knee parts is in Puerto Ric."
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Thank you. Oh. Hello? Oh, okay. So\u2026 I've been working on, the ETMS class matching, so currently. It is done. I still have to\u2026 Get, do some revisions on this. I have tested it, and it's currently at ar"
+    }
+  ],
+  "analysis_mode": "offline (no LLM \u2014 structural extraction only)"
+}

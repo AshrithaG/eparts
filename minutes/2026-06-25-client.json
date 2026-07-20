@@ -1,0 +1,40 @@
+{
+  "meeting_date": "2026-06-25",
+  "duration_minutes": 39,
+  "participants": [
+    "Hrishik"
+  ],
+  "participant_count": 1,
+  "total_words": 5893,
+  "total_turns": 1,
+  "speaker_stats": {
+    "Hrishik": {
+      "turns": 1,
+      "words": 5893,
+      "pct_words": 100.0
+    }
+  },
+  "detected_topics": {
+    "ML/Model": 6,
+    "Architecture": 5,
+    "Data": 5,
+    "Infrastructure": 2
+  },
+  "questions_found": 0,
+  "questions_sample": [],
+  "potential_decisions": 1,
+  "decisions_sample": [
+    {
+      "speaker": "Hrishik",
+      "text": "Labor Premier. And they don't have air conditioning on sports. Okay, I guess, we can get started. I did not\u2026 I wasn't going to send an agenda, because there were a few things changing last moment. As "
+    }
+  ],
+  "potential_action_items": 1,
+  "actions_sample": [
+    {
+      "speaker": "Hrishik",
+      "text": "Labor Premier. And they don't have air conditioning on sports. Okay, I guess, we can get started. I did not\u2026 I wasn't going to send an agenda, because there were a few things changing last moment. As "
+    }
+  ],
+  "analysis_mode": "offline (no LLM \u2014 structural extraction only)"
+}

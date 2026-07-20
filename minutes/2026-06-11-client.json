@@ -1,0 +1,70 @@
+{
+  "meeting_date": "2026-06-11",
+  "duration_minutes": 6,
+  "participants": [
+    "Hrishik",
+    "Harsha (eParts)"
+  ],
+  "participant_count": 2,
+  "total_words": 977,
+  "total_turns": 31,
+  "speaker_stats": {
+    "Hrishik": {
+      "turns": 16,
+      "words": 344,
+      "pct_words": 35.2
+    },
+    "Harsha (eParts)": {
+      "turns": 15,
+      "words": 633,
+      "pct_words": 64.8
+    }
+  },
+  "detected_topics": {
+    "Data": 4
+  },
+  "questions_found": 0,
+  "questions_sample": [],
+  "potential_decisions": 0,
+  "decisions_sample": [],
+  "potential_action_items": 9,
+  "actions_sample": [
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Can you see\u2026 can you hear us, guys?"
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Yeah, I think there was some network issue, we lost power, and everything restarted. Yeah, that was it. We're all back up. But, I think just to continue what Jake was saying, for when we have a lot of"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "okay, so in that case, I think the mandatory fields part is in PIMS, so we'll have to first map it to those fields so that we know which fields are actually mandatory and not present. Then, after we h"
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "Yeah, I mean, you don't have to be so restrictive also. So, if, for example, mapping all of these all of the attributes that we have on our system to the ETEM, ETM attributes. If it's\u2026 if it's not tha"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Okay, I think that clarifies a few things. Let me see if I have more questions\u2026 Yep, I think that is pretty much it. So, I was able to find a couple of files that I'm using for the ETEM, like, to anal"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "forward. Yeah, and last week I told you I'm gonna be working on the schema part of it, but right now there are a few hiccups. So, I'm not very sure if you can put it in the exact PIM schema. Right now"
+    },
+    {
+      "speaker": "Hrishik",
+      "text": "Yeah, I think that would be pretty helpful. Whenever you guys think we should, yeah, maybe, like, have a demo, like, we'd probably be ready for it."
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "We'll get to it, ideally, next week. Today was kind of hectic. This week has been kind of crazy."
+    },
+    {
+      "speaker": "Harsha (eParts)",
+      "text": "tomorrow or next week is what I would say would be good. We already have it on a priority. Basically, every day we kind of keep talking about it, but we just don't have the time to get to it. That's i"
+    }
+  ],
+  "analysis_mode": "offline (no LLM \u2014 structural extraction only)"
+}

@@ -1,0 +1,1054 @@
+WEBVTT
+
+1
+00:15:04.030 --> 00:15:05.000
+Ashritha: Night.
+
+2
+00:15:05.270 --> 00:15:08.959
+Ashritha: It will, collect as a low samples cluster.
+
+3
+00:15:10.820 --> 00:15:16.860
+Ashritha: And if the score is… the score is less than .70, What's up?
+
+4
+00:15:19.460 --> 00:15:20.579
+Ashritha: A bunch of bills.
+
+5
+00:15:20.800 --> 00:15:24.160
+Ashritha: In the case will pass to a human's review.
+
+6
+00:15:27.240 --> 00:15:31.729
+Ashritha: And flag unclear, it says return to sender. Who's the sender?
+
+7
+00:15:35.350 --> 00:15:36.630
+Ashritha: Cinder.
+
+8
+00:15:36.810 --> 00:15:40.930
+Ashritha: In the red… lower right, that box, keep that down.
+
+9
+00:15:41.050 --> 00:15:44.089
+Ashritha: Confidence final list.
+
+10
+00:15:44.380 --> 00:15:47.670
+Ashritha: Oh, this one. Yeah, it was returned to sender.
+
+11
+00:15:47.810 --> 00:15:48.990
+Ashritha: What is that named?
+
+12
+00:15:54.010 --> 00:15:56.559
+Ashritha: Because this score is less
+
+13
+00:15:56.660 --> 00:16:01.489
+Ashritha: even less than a human-to-use range. So, maybe…
+
+14
+00:16:01.880 --> 00:16:07.410
+Ashritha: This, this, this area is not… And…
+
+15
+00:16:08.480 --> 00:16:12.639
+Ashritha: it's a big problem for the machine learning systems. Like.
+
+16
+00:16:12.930 --> 00:16:21.160
+Ashritha: We don't use this kind of cluster to train the model, so the model… like…
+
+17
+00:16:24.060 --> 00:16:41.409
+Ashritha: Well, I understand the confidence is super low. Yeah, super low, yeah. So, so, we need to talk to the EPA team to procure this land, or…
+
+18
+00:16:41.540 --> 00:16:44.289
+Ashritha: Snack, so we need to move…
+
+19
+00:16:44.700 --> 00:16:48.509
+Ashritha: Like, to build some pressure with that.
+
+20
+00:16:48.630 --> 00:16:50.520
+Ashritha: Within this… this…
+
+21
+00:16:51.990 --> 00:17:06.130
+Ashritha: So you really mean talk to somebody in the catalog team? Yeah, yeah. So you might want to say something like that, as opposed to regarding the sender. Yeah, yeah, because… Because it's a fail.
+
+22
+00:17:06.130 --> 00:17:20.010
+Ashritha: We have nearly 400 product types. Only 200, 250 of them have floor… Data cluster, like…
+
+23
+00:17:20.839 --> 00:17:24.839
+Ashritha: But many of us only had one or two
+
+24
+00:17:27.220 --> 00:17:30.359
+Ashritha: But other types, so it may be noteworthy.
+
+25
+00:17:30.550 --> 00:17:42.920
+Ashritha: clearly to train the model. Yeah, I understand, so I just… So, yeah. Yeah, make a correction there, like, you know, review with the catalog team. Yeah, because maybe their products are… Yes. Yeah, yeah, so…
+
+26
+00:17:43.490 --> 00:18:01.159
+Ashritha: Just a quick question. I like all this so far, just, are we gonna be able to, over time, like, tweak the actual values, like, are these going to be easily modifiable, like, in the future? Like, oh… Oh, yes, yes. Yeah. Like, those values, like, maybe for the local sample plus… Yeah, we designed to…
+
+27
+00:18:01.600 --> 00:18:13.870
+Ashritha: for a frequent retrain. Okay. Were there configuration problems? Yeah, that's what I was gonna ask. Yeah, every, every retrain, the whole retrain, the whole period is about…
+
+28
+00:18:14.140 --> 00:18:28.810
+Ashritha: 5 to 7 hours, you can renew all the artifacts. But I mean, like, is there just an easy config file where I can change, like, the low sample cluster cap from 0.6 to 0.6? Yeah.
+
+29
+00:18:29.680 --> 00:18:35.699
+Ashritha: I guess that would be harsh if I would say that. Yeah, well, one away, it would be judged by film.
+
+30
+00:18:37.500 --> 00:18:44.510
+Ashritha: And another, task for… So they have voiced the…
+
+31
+00:18:45.110 --> 00:18:51.069
+Ashritha: State market duration, or overnight training, because…
+
+32
+00:18:53.810 --> 00:19:05.189
+Ashritha: Since, when we don't have the radio input or the, products, So, I add, sigma.
+
+33
+00:19:05.390 --> 00:19:13.110
+Ashritha: for what the regulation, for the scores. Like, We want the… competence.
+
+34
+00:19:13.470 --> 00:19:21.620
+Ashritha: Produced by the model. It's… It's what, what is real… Is…
+
+35
+00:19:22.570 --> 00:19:29.350
+Ashritha: is dispatched for its real, scores, like…
+
+36
+00:19:31.320 --> 00:19:35.750
+Ashritha: The probability of raining for today is 70%.
+
+37
+00:19:36.020 --> 00:19:45.710
+Ashritha: We just… we want to, like, make sure it's the… it is… it could be the real, producing.
+
+38
+00:19:46.280 --> 00:19:46.980
+Ashritha: Yep.
+
+39
+00:19:47.350 --> 00:19:56.089
+Ashritha: So at, and, to this… And to this…
+
+40
+00:19:56.890 --> 00:20:04.100
+Ashritha: metrics is due to the amount of how long this distance.
+
+41
+00:20:05.300 --> 00:20:06.440
+Ashritha: like.
+
+42
+00:20:09.880 --> 00:20:21.810
+Ashritha: way… No, no. That was… I know you want to make your mark here, but… That's what I'm assuming.
+
+43
+00:20:22.030 --> 00:20:25.220
+Ashritha: Just before going regularly, my dude.
+
+44
+00:20:25.970 --> 00:20:36.540
+Ashritha: That way… Yes. We map the input into a higher dimensional data space.
+
+45
+00:20:37.150 --> 00:20:41.680
+Ashritha: So the trained model done that.
+
+46
+00:20:41.900 --> 00:20:46.090
+Ashritha: We kept, like, 500.
+
+47
+00:20:47.420 --> 00:20:52.330
+Ashritha: different, so, so every different…
+
+48
+00:20:53.020 --> 00:21:00.460
+Ashritha: But that type has its own, own… on… That's third.
+
+49
+00:21:01.270 --> 00:21:12.400
+Ashritha: So, maybe some… Some product types have a big cluster, so… The distribution on the…
+
+50
+00:21:12.660 --> 00:21:14.969
+Ashritha: Data space could be like this.
+
+51
+00:21:15.820 --> 00:21:20.240
+Ashritha: This is… it's a century, century center.
+
+52
+00:21:21.560 --> 00:21:29.490
+Ashritha: So, so this would be guilt of… Big Sigma.
+
+53
+00:21:29.820 --> 00:21:34.339
+Ashritha: Because the distribution of the cluster is very large.
+
+54
+00:21:35.520 --> 00:21:48.100
+Ashritha: Fixigma means if… It can, let, You're a… So, the predictor case is Far from the center.
+
+55
+00:21:48.360 --> 00:21:50.690
+Ashritha: We can still get a high confidence.
+
+56
+00:21:51.180 --> 00:22:03.030
+Ashritha: Because the cluster or is this very large. But if the cluster's distribution is very, very narrow, So, even…
+
+57
+00:22:03.440 --> 00:22:05.500
+Ashritha: a small distance.
+
+58
+00:22:05.680 --> 00:22:08.149
+Ashritha: Or angle from the center.
+
+59
+00:22:09.250 --> 00:22:13.440
+Ashritha: Like, on, like, the display, it could be,
+
+60
+00:22:13.610 --> 00:22:18.990
+Ashritha: have a big influence. So, the Sigma could be small to…
+
+61
+00:22:19.300 --> 00:22:26.450
+Ashritha: Judges, confidence score to make it even more… But… That's brief.
+
+62
+00:22:28.920 --> 00:22:29.720
+Ashritha: Oh, sweet.
+
+63
+00:22:31.680 --> 00:22:50.659
+Ashritha: So what does PTs mean in this context? Product type. What's that? For product type. Product type? Yeah, yes. So, the four, layers, like, four layers, the first layer is categories, the second layer is product type, the third is attributes, and attributes…
+
+64
+00:22:50.710 --> 00:22:51.710
+Ashritha: your needs.
+
+65
+00:22:52.200 --> 00:22:59.409
+Ashritha: You should have a glossary somewhere in your radiations, so they're not this… not ambiguous.
+
+66
+00:22:59.910 --> 00:23:00.900
+Ashritha: Yeah, yeah.
+
+67
+00:23:01.150 --> 00:23:04.520
+Ashritha: As I said, only…
+
+68
+00:23:09.590 --> 00:23:18.229
+Ashritha: as I said, only, 242 of the whole product type.
+
+69
+00:23:18.500 --> 00:23:19.949
+Ashritha: how,
+
+70
+00:23:20.640 --> 00:23:31.580
+Ashritha: large enough cluster to use, sigma. So we… so the… and the last 135 fallback to the fourth sigma.
+
+71
+00:23:34.480 --> 00:23:44.789
+Ashritha: And we've also designed, the last layer, But this, this is not… Company team.
+
+72
+00:23:46.750 --> 00:23:48.789
+Ashritha: Well, we just to make sure.
+
+73
+00:23:50.300 --> 00:23:55.320
+Ashritha: We, when we get some, feedback from the human.
+
+74
+00:23:57.770 --> 00:24:05.959
+Ashritha: We don't need a fully train, but we can slightly change some important metrics for the…
+
+75
+00:24:08.740 --> 00:24:14.040
+Ashritha: So we made… with, I designed a…
+
+76
+00:24:14.300 --> 00:24:17.120
+Ashritha: M6 to use the online update.
+
+77
+00:24:18.380 --> 00:24:27.439
+Ashritha: So this is the next door. So, for the current clustering of data, what's the source of that data that you're using to cluster this? Does that make sense?
+
+78
+00:24:29.020 --> 00:24:31.909
+Ashritha: You're talking about results now that you've…
+
+79
+00:24:32.110 --> 00:24:35.730
+Ashritha: You've run data, and it's clustered in some way.
+
+80
+00:24:35.950 --> 00:24:48.009
+Ashritha: Where… what's the source of that data that you're close to? I'm just asking, is this sample data from eParts, or what was… Yeah, it is just from these… these two files. Okay, alright.
+
+81
+00:24:55.850 --> 00:24:57.460
+Ashritha: So I have a… have a jump.
+
+82
+00:24:58.020 --> 00:25:00.640
+Ashritha: I was just so it's technical.
+
+83
+00:25:09.750 --> 00:25:14.550
+Ashritha: Yes, and after I communicated towards a machine learning model.
+
+84
+00:25:15.090 --> 00:25:20.280
+Ashritha: I used the rare data from the participant.
+
+85
+00:25:20.540 --> 00:25:21.759
+Ashritha: Do you spend any time?
+
+86
+00:25:23.300 --> 00:25:30.100
+Ashritha: to test the… accuracy of the Layer 3 and Layer 4.
+
+87
+00:25:31.070 --> 00:25:40.219
+Ashritha: I used, this document that's included tags, because it contains product description and extended description pairs.
+
+88
+00:25:40.550 --> 00:25:45.889
+Ashritha: So I use it as an input, and I use this file.
+
+89
+00:25:46.530 --> 00:25:57.940
+Ashritha: Because it provides the ground truth labels to verify the accuracy of the output, or the last two layers, the layers 3 and layer 4.
+
+90
+00:25:59.140 --> 00:26:02.899
+Ashritha: Like, we… just a yoga.
+
+91
+00:26:03.430 --> 00:26:14.090
+Ashritha: to split the… this file into these three parts. So we use the… that's the 10%
+
+92
+00:26:15.390 --> 00:26:18.179
+Ashritha: Take a step to test our system.
+
+93
+00:26:21.740 --> 00:26:27.140
+Ashritha: which have… like, 30,000 products.
+
+94
+00:26:30.590 --> 00:26:32.870
+Ashritha: And this is a testing result.
+
+95
+00:26:35.420 --> 00:26:41.279
+Ashritha: The project type accuracy, the result is almost a negative 6%.
+
+96
+00:26:43.110 --> 00:26:47.219
+Ashritha: Which means… So, machine learning can…
+
+97
+00:26:47.770 --> 00:26:52.230
+Ashritha: System could collectively identify what kind of products the customer is asking about.
+
+98
+00:26:52.420 --> 00:26:55.290
+Ashritha: or 19th or early 30 studies cases.
+
+99
+00:26:55.960 --> 00:26:59.650
+Ashritha: And, for the attribute, unit, Todd.
+
+100
+00:26:59.900 --> 00:27:04.950
+Ashritha: The top three, accuracy, reached… 85%.
+
+101
+00:27:11.050 --> 00:27:16.550
+Ashritha: And the whole process, it consumes 20 minutes.
+
+102
+00:27:27.590 --> 00:27:30.869
+Ashritha: So is this document a Google Doc, or what is this document?
+
+103
+00:27:33.550 --> 00:27:37.800
+Ashritha: Just a word. It's a Word document. Okay.
+
+104
+00:27:38.800 --> 00:27:41.309
+Ashritha: stored in your Google Drive, or is it in?
+
+105
+00:27:42.300 --> 00:27:43.520
+Ashritha: No.
+
+106
+00:27:43.880 --> 00:27:48.450
+Ashritha: But just a little… our teams.
+
+107
+00:27:50.360 --> 00:28:00.279
+Ashritha: No, it's not yet on the Google Drive. It's… it was just for today's meeting. Like, he wanted to use this to explain. Right now, it's not on the Google Drive yet.
+
+108
+00:28:02.320 --> 00:28:09.430
+Ashritha: Okay, so is this going to be a document that's stored somewhere? Yeah, after the meeting, all of these will be uploaded, yeah.
+
+109
+00:28:11.390 --> 00:28:14.109
+Ashritha: And finally, I do a statistic work.
+
+110
+00:28:14.880 --> 00:28:27.629
+Ashritha: The test set depends 244 statistics prototype spanning, 140,000 samples.
+
+111
+00:28:30.430 --> 00:28:33.859
+Ashritha: And I just chose the top 5 product type.
+
+112
+00:28:41.650 --> 00:28:48.070
+Ashritha: And for the pressure, independent values and actuators.
+
+113
+00:28:48.690 --> 00:28:50.330
+Ashritha: It's, overwhelmed.
+
+114
+00:28:50.430 --> 00:28:53.210
+Ashritha: accuracy is very low, so I…
+
+115
+00:28:55.840 --> 00:29:00.090
+Ashritha: ask why the spread of love, because…
+
+116
+00:29:05.800 --> 00:29:15.740
+Ashritha: Because it's not from… it's not… it's very… it's wrong, because we… I use… Man, what is…
+
+117
+00:29:16.680 --> 00:29:19.579
+Ashritha: The employment is like this, so it…
+
+118
+00:29:22.470 --> 00:29:25.809
+Ashritha: So, this is the system.
+
+119
+00:29:26.140 --> 00:29:30.429
+Ashritha: justify Islam, but this is incorrectly.
+
+120
+00:29:30.890 --> 00:29:36.150
+Ashritha: If… just to… The message is this one.
+
+121
+00:29:37.930 --> 00:29:44.859
+Ashritha: So the, the result is… Gulza, and it's, is, is, it's estimated.
+
+122
+00:29:50.530 --> 00:29:52.669
+Ashritha: We might be storing some of that.
+
+123
+00:29:53.190 --> 00:30:02.530
+Ashritha: Have you… do you know how, like, the attribute values means, like, the triple tildes, that old hacky legacy thing where, like, you can store multiple values against, like…
+
+124
+00:30:03.010 --> 00:30:07.660
+Ashritha: a single… Product tapes, as you need.
+
+125
+00:30:08.840 --> 00:30:14.329
+Ashritha: a product's value for it. I know it doesn't exist, but I'm not sure that the exact way it's stored.
+
+126
+00:30:14.810 --> 00:30:25.110
+Ashritha: Yeah, but I know what you mean, yeah. Yeah, this is a case we know of, though, like the one you showed, like, we have different… sometimes I think you have different values because of exactly what you showed, like…
+
+127
+00:30:25.390 --> 00:30:33.009
+Ashritha: 24VAC is the exact same thing as 24VAC, so yeah. And the… So, next reason is…
+
+128
+00:30:33.120 --> 00:30:39.629
+Ashritha: The PR wave product distinction is every selectable value, not the accurate shaped value.
+
+129
+00:30:39.880 --> 00:30:45.029
+Ashritha: like, a typical shared way of product description, at least like this.
+
+130
+00:30:46.420 --> 00:30:50.169
+Ashritha: So… It's Mr. Always.
+
+131
+00:30:50.980 --> 00:30:57.150
+Ashritha: So it is maybe hard for the machine learning system to judge which one would be the best.
+
+132
+00:30:58.480 --> 00:31:05.459
+Ashritha: Yeah, so the output could be a little vague, because it has a lot of, true…
+
+133
+00:31:05.820 --> 00:31:09.030
+Ashritha: description. Yeah. Yes, yes, so just,
+
+134
+00:31:09.570 --> 00:31:13.460
+Ashritha: That's why it has a low condensed wall. Makes sense.
+
+135
+00:31:19.670 --> 00:31:22.480
+Ashritha: That is all I want to say about today.
+
+136
+00:31:22.830 --> 00:31:38.579
+Ashritha: Yeah, and I think some of that range stuff, especially, is, it's fine that it's gonna end up having a low confidence and failing, because that's probably going to need more humans to interpret that. Yeah, but the top three attribute, you know, is they all have a high confidence, so…
+
+137
+00:31:39.520 --> 00:31:45.449
+Ashritha: After it passed to… even if it passes the wheel, it will be very quick. Yeah.
+
+138
+00:31:47.660 --> 00:31:57.409
+Ashritha: I mean, this is in respect to the documents you send across, too. I had a few questions on that, but, like, one of the questions was,
+
+139
+00:31:57.670 --> 00:32:01.259
+Ashritha: How does the system deal with a completely new product, which…
+
+140
+00:32:01.570 --> 00:32:04.990
+Ashritha: Doesn't really relate to any of the currently existing products.
+
+141
+00:32:05.380 --> 00:32:09.920
+Ashritha: It could be defined as a low score. Yeah. Just a natural student.
+
+142
+00:32:10.280 --> 00:32:14.089
+Ashritha: I see, okay. And… So, so,
+
+143
+00:32:14.190 --> 00:32:16.410
+Ashritha: I think if you will help out.
+
+144
+00:32:16.580 --> 00:32:25.949
+Ashritha: So you get a change from the data set, like, or you'll need to delete some oldest cluster. You'll need to retrain the model.
+
+145
+00:32:26.640 --> 00:32:31.170
+Ashritha: Because, in some of the layers, the way I saw them made is…
+
+146
+00:32:31.660 --> 00:32:41.020
+Ashritha: they try to understand what is the most similar product to whatever product is the… Yes, yes, yes. So… It is… it's a continuous.
+
+147
+00:32:41.340 --> 00:32:44.859
+Ashritha: a vector in the space. It's like a data cloud. Yeah.
+
+148
+00:32:46.030 --> 00:32:59.840
+Ashritha: Yeah, I mean, just a question. So, for example, so right now, the system is engineered in a way where it tries to map to the most similar existing product, and then, like, figure out all the attributes and the values for it.
+
+149
+00:33:00.150 --> 00:33:10.740
+Ashritha: Based off of, what the most similar product is. But, for example, all we know is a product number and product type. Yeah.
+
+150
+00:33:11.450 --> 00:33:17.859
+Ashritha: how we plan… how are we planning on, like, filling the values? Are the values picked up from the…
+
+151
+00:33:18.020 --> 00:33:19.620
+Ashritha: PDF that we supply.
+
+152
+00:33:19.750 --> 00:33:27.110
+Ashritha: Or are these values just… kind of guessed based on the most successful.
+
+153
+00:33:28.510 --> 00:33:36.020
+Ashritha: Like I said, like I said, for Eric's project type, it's trained,
+
+154
+00:33:36.450 --> 00:33:44.190
+Ashritha: product cluster. So, if the attributes, the value is not very far from the
+
+155
+00:33:44.530 --> 00:33:48.200
+Ashritha: And a distribution range that is…
+
+156
+00:33:48.820 --> 00:33:57.790
+Ashritha: its shape and the distance from it, it could be even to have a relatively high score. But if the, attribute
+
+157
+00:33:58.070 --> 00:34:00.250
+Ashritha: Those unique queries.
+
+158
+00:34:00.380 --> 00:34:08.880
+Ashritha: far from… If each brunk, or from the geometry distance, or the direction of the chain.
+
+159
+00:34:09.909 --> 00:34:15.759
+Ashritha: Even if the instance is very bad, it could be… have a low scores.
+
+160
+00:34:15.760 --> 00:34:40.529
+Ashritha: Is there a different process that needs to go through for a targeted product category? Yeah, I mean, what I'm trying to get to is, you mean a new product and a new product type? Not just the new product? Yes, yes. No, no, no, new product title. New product, but existing product. Okay, because technically, I don't think we can begin together until the standards.
+
+161
+00:34:40.530 --> 00:34:45.640
+Ashritha: That'll have some combined values. So, if you want to add some, you'll put up time.
+
+162
+00:34:46.150 --> 00:34:47.760
+Ashritha: As in the retreats.
+
+163
+00:34:48.020 --> 00:34:58.549
+Ashritha: is needed. But if you just add some new attributes to the pair, since, the new…
+
+164
+00:34:59.500 --> 00:35:00.630
+Ashritha: actually builds.
+
+165
+00:35:00.770 --> 00:35:06.439
+Ashritha: We, we… and they're, familiar with, its existing product.
+
+166
+00:35:06.790 --> 00:35:21.959
+Ashritha: So it can also get a higher permanent score. Got it. So, so basically, a case where there is an attribute value which is… which has never been seen by the system, we'll always have a low permanent score, is what it is.
+
+167
+00:35:25.700 --> 00:35:41.409
+Ashritha: Like, let's say, go in that one, like, 24 volts for, like, the power. Yeah. Let's say that's a common one, but then let's say we get a brand new vendor supplier that sells products that are, like, crazy high voltages that we've never seen, and that'll be outside the system.
+
+168
+00:35:41.470 --> 00:35:48.480
+Ashritha: That's, like, a new value that we don't previously… we didn't previously sell any products. Yeah, yeah, it's a range… if it's a value range is…
+
+169
+00:35:48.720 --> 00:35:58.580
+Ashritha: within this… just politics. Yeah. From… 0 to, 200.
+
+170
+00:35:59.270 --> 00:36:00.399
+Ashritha: And what teacher?
+
+171
+00:36:00.890 --> 00:36:03.619
+Ashritha: But if your new input is
+
+172
+00:36:03.790 --> 00:36:15.339
+Ashritha: 400, it's far from this 200, it can be a low score. But if, if you, like, in the, in this range, you have
+
+173
+00:36:15.470 --> 00:36:32.590
+Ashritha: 0, 10, 100, 200, but your S, like, 550 is within this range, so it could be why I have a high turn that score. This is the… this… this is what I was getting to. So, problem is…
+
+174
+00:36:33.170 --> 00:36:39.519
+Ashritha: The system that's being built is only good at mapping products that are extremely similar to the current products that are there.
+
+175
+00:36:39.760 --> 00:36:50.720
+Ashritha: And that is kind of a problem, too, by the current future, because technically a new person comes in, even though it's a similar prototype, but the values are just completely off of what we have in the system.
+
+176
+00:36:50.720 --> 00:37:01.970
+Ashritha: it'll look pretty quickly. Could… but could we… could we kind of use this same idea with also the standards? Like, so standards have, like.
+
+177
+00:37:02.050 --> 00:37:10.929
+Ashritha: Some standards even go so far as to say, like, this attribute will always have these values. Some standards actually really define, like, values. Could we also use those values?
+
+178
+00:37:10.930 --> 00:37:23.950
+Ashritha: Because then I think that that would allow what you're saying. Yeah, right. Yeah. It's not a value that we have in our existing products, but it is a value that, like, the standard, like, ETIM defines as, like, a potential range for volts or something.
+
+179
+00:37:24.480 --> 00:37:40.760
+Ashritha: It seems like there should be some documentation somewhere that talks about these types. Yeah, the standard, yeah, I'll define it, but yeah, like, the standards, some of the standards for certain things do actually define what the value should be. So, ETEM does. I mean, ETEM's something I think you might mention.
+
+180
+00:37:41.070 --> 00:37:49.060
+Ashritha: ETM is mainly there, I think, because technically, we're just a small subset of whatever exists out in the market, and…
+
+181
+00:37:49.160 --> 00:38:06.599
+Ashritha: If we build whatever this is for the specific subset that we offer, then it'll already stay in the subset, and technically anything that lies outside of this, which is currently what we're trying to do, to go to subsets which are outside of our current subset of products, it'll always kind of not work.
+
+182
+00:38:06.790 --> 00:38:23.140
+Ashritha: So if we… I think rather than sticking to whatever… so the values, if they're more defined by the ETM classification, which provides a range of values that, for a specific attribute, these are the range… these are the different ranges, and this is what you get in the industry.
+
+183
+00:38:23.220 --> 00:38:30.889
+Ashritha: That might be a better… that might be a better plot compared to, the value ranges that we have within our system right now.
+
+184
+00:38:32.960 --> 00:38:41.580
+Ashritha: Or use both, yeah. Or use both. Oh, but the thing is, with our system, it'll always be this… there'll always be this problem that it'll be within the bounds of what you already know.
+
+185
+00:38:41.690 --> 00:38:52.979
+Ashritha: And it might be off for, like, a lot of your specifications. For example, if a product type has a… has an attribute called length or a dimension.
+
+186
+00:38:53.100 --> 00:38:59.519
+Ashritha: It could be vastly different for different… for different products within the same product type, and…
+
+187
+00:38:59.660 --> 00:39:03.530
+Ashritha: I feel like dimension will always be off, given this current system.
+
+188
+00:39:03.760 --> 00:39:08.440
+Ashritha: So, rather than that, if you… if either we have a system which
+
+189
+00:39:09.170 --> 00:39:13.939
+Ashritha: Just gives us what's the most closest value to this attribute.
+
+190
+00:39:14.220 --> 00:39:21.079
+Ashritha: Or, if it's a system which bases it off of a standardized range, which is like an Ethernet classification range.
+
+191
+00:39:21.450 --> 00:39:29.629
+Ashritha: And based off of those product value ranges, like, attribute value ranges, it predicts it, that might be a better system overall.
+
+192
+00:39:29.820 --> 00:39:44.129
+Ashritha: In general. Because this seems to be too narrow for a use case. This might be good for, like, a good POC. Yeah, yes. But as you're trying to, generalize it, or… Yes, yes. Just make it, make it more robust, is what I mean. Yeah.
+
+193
+00:39:45.240 --> 00:39:56.939
+Ashritha: Yes, I… so the first question was assisting just to… gets, high accuracy score, so… So, generalizations…
+
+194
+00:39:57.680 --> 00:40:00.460
+Ashritha: Could not be very good.
+
+195
+00:40:00.970 --> 00:40:17.749
+Ashritha: But if you want, I can make it more challenging. I think it'd be good to lean into, like, some of the standards, too. Yeah, yeah. Yeah, so, so yes, or you have… or you have other things I need to consider you can, but, let's one of them down, so I can…
+
+196
+00:40:18.270 --> 00:40:28.130
+Ashritha: So, what I'll do is I'll actually extract all of the ETM data that's there, and send it across in a similar fashion as I sent the initial data to you guys.
+
+197
+00:40:28.360 --> 00:40:45.929
+Ashritha: mainly so that you can only… the only reason for ETEM is to get the attribute values and different type of product types that are there in the industry, rather than picking those up from the dataset I sent you, which is more or less supposed to be, like, a dataset for the type of data we deal with.
+
+198
+00:40:46.090 --> 00:40:53.299
+Ashritha: A standardized mapping our data into a standardized set of attributes might be the better way to look at this.
+
+199
+00:40:53.900 --> 00:40:58.349
+Ashritha: Because this way… so this way, you'll always be running into these weird hash cases that…
+
+200
+00:40:58.610 --> 00:41:06.850
+Ashritha: we have… we have too small of a data… like, our DSL is too small, and the ranges are too low, and we can never map accurate accurately.
+
+201
+00:41:07.560 --> 00:41:22.809
+Ashritha: So it's EDOM an industry standard? It is, yeah, it's going… and they've come out for a lot of categories and been, like, table… like, tables in general in the world could be made from metal or wood or glass, whereas our eParts catalog, we might only have examples of wood, yeah.
+
+202
+00:41:23.200 --> 00:41:24.479
+Ashritha: That's… that's how it is.
+
+203
+00:41:25.080 --> 00:41:31.369
+Ashritha: I mean, Ethan, do we have any specific ones we showed you? Because, they are multiple
+
+204
+00:41:31.720 --> 00:41:43.809
+Ashritha: files with a lot of value in it. Is there something, like, which is more EFAS-specific, or the entire thing? So, ETM is exactly the industry we're in, technically. So, ETEM captures everything that
+
+205
+00:41:44.430 --> 00:41:49.650
+Ashritha: our industry kind of captures. So, it's, it's, it's like a parent subset.
+
+206
+00:41:53.160 --> 00:42:12.709
+Ashritha: Yeah, we've been wanting… we're looking… like, the standards thing is pretty new to us, too. I mean, like, we're looking more to leverage that for this, and then for other things on our platform, too, but we don't really… we haven't used it too much so far. Yeah, I mean, doing this project in general for a stand… with a standard in mind is a better use case for you guys as well, because…
+
+207
+00:42:12.710 --> 00:42:20.970
+Ashritha: If you go by our product types and, like, our specific data, it'll… it'll just be, like, too narrow for use case for you guys, and that might…
+
+208
+00:42:21.960 --> 00:42:30.760
+Ashritha: that might either lead to over-engineering, or that might either lead to, like, fewer use cases that might never be required. There could be some user.
+
+209
+00:42:30.960 --> 00:42:44.919
+Ashritha: It's like, we've talked about, like, helping… there is a case where… so our new platform, Harrigan, let's say we sign up, like, a plumber down the street, and they could sign up for the purchasing platform.
+
+210
+00:42:45.030 --> 00:42:55.459
+Ashritha: They could just upload all their products that they have and say, like, hey, we have these as our products we normally buy. We want to see these in the platform for, like, us to search and buy these.
+
+211
+00:42:55.520 --> 00:43:13.600
+Ashritha: And in that case, we might already have a lot of those products, so in that case, it would be probably good to say, like, hey, we already know this thing they're uploading, we already have that. And your thing is perfect for that user. Perfect. Yeah, for brand new products, like, the standards might be… Yeah. Like, if it's one we don't have. Yes, yes.
+
+212
+00:43:13.800 --> 00:43:32.239
+Ashritha: So how does the EDAM standard exist? Does it exist as a huge file someplace? It's so… You can find it online? Yeah, so if you search for EDAM, on their website, they have this broad list of files, where they define different type of product types, different types of attributes these product types have.
+
+213
+00:43:32.250 --> 00:43:43.929
+Ashritha: And then they also specify what sort of values these attributes will have. And there's also, like, this synonym thing that they have, which is, this specific product type or this specific attribute can be called these five things.
+
+214
+00:43:44.030 --> 00:43:49.720
+Ashritha: And it's very… it tries to be as generic and as useful as it can be.
+
+215
+00:43:50.010 --> 00:43:59.209
+Ashritha: Which, technically, our dataset is not. So, it's just a better way to, like… you can even find synonyms to what we use in our database in either.
+
+216
+00:43:59.380 --> 00:44:22.740
+Ashritha: Because that's… that's how generic they try to be, and it's just a bunch of files which all map to each other. Someone, somewhere, some organization decided, yeah, to compile all this. It is a non-profit organization. I don't know who makes it. There's a couple, like, one of them's a more European one, is it E-Class, or… That's E-Class, yeah. Yeah, E-Class is more standard in Europe, they use that. That one's pain.
+
+217
+00:44:22.740 --> 00:44:25.529
+Ashritha: Whereas ETEM's actually open to everyone.
+
+218
+00:44:25.700 --> 00:44:33.820
+Ashritha: So, it's… I think it's just, like, a project by some big company who tried to, like, standardize most of these non-gatures, and that's what it is.
+
+219
+00:44:34.900 --> 00:44:40.690
+Ashritha: Do you guys have quarters to it? Obviously, you said… sounded like you did. Yeah, I loaded the item.
+
+220
+00:44:41.410 --> 00:44:47.969
+Ashritha: I'm just trying to figure out how we can use these, or how, like, to visualize it properly, because it's a huge file.
+
+221
+00:44:48.280 --> 00:45:00.980
+Ashritha: All their files are massive. They have so much data, but I would say you can narrow the use case to only the product types we're dealing with right now. The rest of the product types might be our problem for later.
+
+222
+00:45:00.980 --> 00:45:09.080
+Ashritha: Yeah, because we, we, whatever, 400-some product types, like, we kind of specialized so far, with
+
+223
+00:45:09.080 --> 00:45:20.160
+Ashritha: building automation and electric and controls, but we… plumbing stuff, mechanical stuff, like, that's all an ETEM, and those aren't really… we don't have any customers yet, so we just don't have any…
+
+224
+00:45:20.220 --> 00:45:34.890
+Ashritha: customers in those, segments, so we don't really have any data from that. But again, it might be useful to have a documentation of some use case saying, yeah, we want to now incorporate this new product set that we're not familiar with. Yeah. Here's how you ingest
+
+225
+00:45:35.030 --> 00:45:44.630
+Ashritha: the Enum standard for that stuff. Yeah, that's gonna be some rough guidelines. Great for us going into other markets and stuff. Yeah, because I think one of iMag's, like.
+
+226
+00:45:44.800 --> 00:45:47.680
+Ashritha: individually was to… to get.
+
+227
+00:45:47.820 --> 00:46:01.819
+Ashritha: to get almost all of our data mapped into ETM standard as well. Yes. Just so that… I think we've discussed this as well at some point, but, it's… this is mainly to make sure that whatever data we have is stored in a standardized DSL.
+
+228
+00:46:01.960 --> 00:46:04.350
+Ashritha: Just in case we do want to move to…
+
+229
+00:46:04.480 --> 00:46:21.569
+Ashritha: complete ETIM standard, or a completely industry-specific standard. Yeah, as we, like, all of our data right now has been in the Alps control standard, and as we kind of separate from Alps and look to go, we want to take what they have and actually, yeah, turn it into ETEMS, and we want to start using more of the ETIMS standard.
+
+230
+00:46:22.900 --> 00:46:34.769
+Ashritha: I think this was once one of the reasons why, in the last meeting, I had a lot of questions on what was this… what we tried to do? Because technically, that is what I was imagining in my mind, and what you're presenting was not…
+
+231
+00:46:34.770 --> 00:46:46.300
+Ashritha: very clean line with that, and that's why I was confused. But again, that is really good, though, so far for just someone going in and uploading a product, we do that, and we'll instantly know that, hey, they're uploading this product.
+
+232
+00:46:47.780 --> 00:46:48.909
+Ashritha: I don't do it.
+
+233
+00:46:49.610 --> 00:47:08.669
+Ashritha: So you don't like to have a mapping from your current, help stuff to even… we can detect the subset right now, and deal with that. Because only the product types that… so technically, we can only deal with the product types that I've currently sent across to a team.
+
+234
+00:47:08.810 --> 00:47:12.710
+Ashritha: So, only those prototypes from Eden can be utilized, and that's what we can…
+
+235
+00:47:13.070 --> 00:47:16.410
+Ashritha: That's what we can work with right now. So that helps us, like…
+
+236
+00:47:16.650 --> 00:47:35.549
+Ashritha: reduce the whole ETM set to a smaller subset, and also help certify my use cases. So it'd be a big win for eParts to map all your stuff when you get them. Yeah, for sure. 100%. That'll be a great value addition overall, like, if you're able to do this, because this pipeline actually names a lot of these things.
+
+237
+00:47:35.600 --> 00:47:44.330
+Ashritha: But it just needs to be for a slightly broader subset, or a slightly broader set of products and values. That's pretty much it.
+
+238
+00:47:46.430 --> 00:47:49.029
+Ashritha: I think that was a mismatched in the discussion.
+
+239
+00:47:54.460 --> 00:47:57.389
+Ashritha: Okay, well, that's valuable input.
+
+240
+00:47:57.910 --> 00:48:08.340
+Ashritha: I mean, let us know. That's why I keep asking you guys questions on, like, if you guys need any other sort of data which helps you guys work with this current data, or any sort of,
+
+241
+00:48:08.630 --> 00:48:12.130
+Ashritha: any sort of work that I can do for you guys, which can help
+
+242
+00:48:12.440 --> 00:48:15.990
+Ashritha: help with you… help with you dealing with internal, right?
+
+243
+00:48:16.640 --> 00:48:17.769
+Ashritha: Any other way?
+
+244
+00:48:18.350 --> 00:48:23.169
+Ashritha: Yeah, I think there are… I have a few questions about ETM, but I think I'll look into it a bit more than I'll…
+
+245
+00:48:24.430 --> 00:48:37.699
+Ashritha: But then if it's easier for you to, like, extract the data, because you know ePaths better, just align with what you guys work with, so if it is possible, then probably it can help,
+
+246
+00:48:38.100 --> 00:48:43.379
+Ashritha: I can, I can show you that. Okay. Yeah, like, spend, like, a few days on just trying to not beat them.
+
+247
+00:48:43.550 --> 00:48:44.590
+Ashritha: I've got names.
+
+248
+00:48:44.960 --> 00:48:46.730
+Ashritha: If it's…
+
+249
+00:48:47.410 --> 00:48:53.210
+Ashritha: If it's too small of a task, then it's good. If it's too big of a task, I'll just let you guys.
+
+250
+00:48:53.920 --> 00:48:54.610
+Ashritha: Beautiful.
+
+251
+00:48:54.930 --> 00:49:05.430
+Ashritha: We're gonna have to… because we're gonna have to, like, CNS is really wanting us to… so this has been our direction since, like, the last 3 or 4 months, you know, since we built, like, this new…
+
+252
+00:49:05.560 --> 00:49:17.790
+Ashritha: platform very exist. Like, that was… that was… that was the reason why a lot of us weren't available in, like, this whole Feb, initial Feb, end of Jan kind of period, and this is… this is the kind of shift that's overall happening now.
+
+253
+00:49:18.870 --> 00:49:22.459
+Ashritha: And I think since then, we've been trying to focus on it a little bit, like.
+
+254
+00:49:22.590 --> 00:49:25.270
+Ashritha: It's, I think it's got missed somewhere.
+
+255
+00:49:25.490 --> 00:49:27.280
+Ashritha: It's not the discussions we had, okay.
+
+256
+00:49:29.130 --> 00:49:40.850
+Ashritha: Is Eton the only standard, or… There's others, too. Like, UNSPC is another big one, too. But UNSPC doesn't have really good data. It's paid, first of all, and it's also,
+
+257
+00:49:40.850 --> 00:49:49.779
+Ashritha: something was specific to a very small industry, I think. So UNSBC wasn't as good. From what I've seen, ETL was the only thing which kind of…
+
+258
+00:49:50.070 --> 00:49:53.589
+Ashritha: Gives us open source information, along with
+
+259
+00:49:53.850 --> 00:49:57.379
+Ashritha: a lot of level mapping, because ETEM actually maps to eClass.
+
+260
+00:49:57.670 --> 00:50:09.030
+Ashritha: Yeah, they have a code, I think, that's, like, you know, that, like, this corresponds to this and the other standard. So that makes things easier for us, so as long as you guys only work with ETH, that should be enough for, like, the school's project token.
+
+261
+00:50:09.800 --> 00:50:10.630
+Ashritha: Yep.
+
+262
+00:50:16.830 --> 00:50:18.479
+Ashritha: I think, you know,
+
+263
+00:50:18.620 --> 00:50:37.869
+Ashritha: Yeah, we can send it over mail, since you guys have a good idea about the architecture, the components, and the ML, so you can just, like, quickly go over. If you have, like, any outstanding comments, you can just drop in, and we can do a review next week with the updated version.
+
