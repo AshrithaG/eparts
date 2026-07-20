@@ -1,0 +1,70 @@
+# Requirements & ADR extraction — drives the LLM agents over meeting
+# transcripts and opens a PR with the generated requirements + ADR drafts.
+#
+# Closes the gap that the offline minutes pipeline left open: minutes were
+# generated for the summer meetings, but the requirements-extraction and
+# ADR agents were never re-run on that data. This runs them (transcript_parser
+# -> req_extractor -> adr_generator) using the ANTHROPIC_API_KEY repo secret,
+# then opens a PULL REQUEST — the human review of that PR is the approval gate
+# before any requirement/ADR is baselined on main.
+#
+# Manual trigger only (workflow_dispatch): this is a deliberate, reviewed run,
+# not something that should fire on every push.
+
+name: Requirements & ADR extraction
+
+on:
+  workflow_dispatch:
+    inputs:
+      since:
+        description: "Only process transcripts dated on/after this (YYYY-MM-DD)"
+        required: false
+        default: "2026-05-01"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: requirements-extraction
+  cancel-in-progress: false
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Only the light deps the agents' LLM path needs — not chromadb/torch.
+      - name: Install agent deps
+        run: pip install "anthropic>=0.42" "python-dotenv>=1.0" "pydantic-settings>=2.7" "pydantic>=2.10"
+
+      - name: Run requirements + ADR extraction
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # base.py's hardcoded default model id is stale and it always sends
+          # temperature; pin a current, temperature-accepting model.
+          CLAUDE_MODEL: claude-sonnet-4-5-20250929
+          LLM_PROVIDER: anthropic
+        run: |
+          python -m pipeline.extract_from_meetings \
+            --since "${{ github.event.inputs.since }}" \
+            --summary-file /tmp/pr_body.md
+          cat /tmp/pr_body.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Open pull request with generated requirements + ADRs
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: pipeline/requirements-${{ github.run_number }}
+          commit-message: "[agent:req_extractor+adr_generator] Extract requirements & ADRs from meetings (run ${{ github.run_number }})"
+          title: "Agent-generated requirements & ADRs for review (run ${{ github.run_number }})"
+          body-path: /tmp/pr_body.md
+          labels: agent-generated, needs-human-review
+          add-paths: |
+            requirements/parsed/**
+            docs/adr/**
+          delete-branch: true
