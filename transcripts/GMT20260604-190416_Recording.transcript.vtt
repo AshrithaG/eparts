@@ -1,0 +1,1174 @@
+WEBVTT
+
+1
+00:00:06.300 --> 00:00:07.220
+hrishikb@andrew.cmu.edu: Okay.
+
+2
+00:00:09.530 --> 00:00:14.110
+hrishikb@andrew.cmu.edu: So, first we have… On the agenda, the initial OCR endings.
+
+3
+00:00:36.260 --> 00:00:41.969
+hrishikb@andrew.cmu.edu: So, I did a few POCs with whatever was available out there for the OCR part of
+
+4
+00:00:42.120 --> 00:00:49.279
+hrishikb@andrew.cmu.edu: things, which is what I'm doing right away. So, I texted about 8 different, source tools.
+
+5
+00:00:49.460 --> 00:00:55.850
+hrishikb@andrew.cmu.edu: These are, like, there are 3 different, categories of tools that I…
+
+6
+00:00:57.280 --> 00:01:15.059
+hrishikb@andrew.cmu.edu: There's three different strategies that I went through. There's one with just the plain old select, which is, like, capital, which just basically goes through the document and then picks up towards it. It has no idea what a table looks like. That's not fully.
+
+7
+00:01:15.680 --> 00:01:28.090
+hrishikb@andrew.cmu.edu: The second one's a document password, like, DocLink, Mayanuru, Surya, and these are, they build a little more, deeper, finding labels and structure.
+
+8
+00:01:28.090 --> 00:01:36.050
+hrishikb@andrew.cmu.edu: So once it finds, like, a word, and it makes it into a table, then, like, it does a little more recognition than the playoffs there.
+
+9
+00:01:36.050 --> 00:01:40.520
+hrishikb@andrew.cmu.edu: And then there's the ability models. So that's the Chandra tools.
+
+10
+00:01:40.630 --> 00:01:51.249
+hrishikb@andrew.cmu.edu: So, Chamberto is a very, powerful one, but the problem is you have to post it via, Data Lab, which is a service they offer.
+
+11
+00:01:51.690 --> 00:01:58.560
+hrishikb@andrew.cmu.edu: You can self-host it, but the problem is you don't get the performance, you don't get the same amount of performance
+
+12
+00:01:58.770 --> 00:02:01.640
+hrishikb@andrew.cmu.edu: As you would get if you hosted by a data lab.
+
+13
+00:02:02.090 --> 00:02:07.449
+hrishikb@andrew.cmu.edu: And I have a couple of, benchmark scores as well that I got
+
+14
+00:02:07.570 --> 00:02:15.209
+hrishikb@andrew.cmu.edu: So, I have only 8 PDF documents right now, which are based from you guys. Like, if you can give me a bit more, we can…
+
+15
+00:02:15.220 --> 00:02:33.970
+hrishikb@andrew.cmu.edu: do another benchmark on all these platforms. You can use the links itself in the links. The CDN and the… yeah, the CDN link. Oh, those, yeah, the software, you can just use the CD links and, like, how many may want. Okay, I'll do that. So, for now, I just use the 8 PDFs that I had downloaded.
+
+16
+00:02:34.050 --> 00:02:48.860
+hrishikb@andrew.cmu.edu: And, Chandra 2 with the data lab was the most accurate one with 97%, right? At a 3.4% elevate, but this is a paid service, so you wouldn't be paying one cent per page.
+
+17
+00:02:49.440 --> 00:02:51.970
+hrishikb@andrew.cmu.edu: Minor New is another one which…
+
+18
+00:02:52.160 --> 00:03:03.119
+hrishikb@andrew.cmu.edu: I ran locally. You need your own server. Basically you need GPU, that is for this, so I had a model account, and I needed over there on an 800, GPU.
+
+19
+00:03:03.350 --> 00:03:09.970
+hrishikb@andrew.cmu.edu: But, like, I expect if we can run it on Edward as well, and you can run it under that, too.
+
+20
+00:03:10.300 --> 00:03:18.920
+hrishikb@andrew.cmu.edu: That was pretty much similar to Chandra, too, except it had a few things that it must actually work. And,
+
+21
+00:03:18.920 --> 00:03:32.370
+hrishikb@andrew.cmu.edu: I didn't… I did the POC for the rest of it, but I don't want to go anywhere below the 5% error rate, because I don't think it makes sense, because otherwise I would have to, again, come and collect stuff out.
+
+22
+00:03:34.300 --> 00:03:38.209
+hrishikb@andrew.cmu.edu: So how do you actually determine the error rate? Do you…
+
+23
+00:03:38.430 --> 00:03:54.099
+hrishikb@andrew.cmu.edu: Do you manually go back and do that? I mean, how do you know? So, I had, Claude actually go through the PDF document once, Claude is really about Claude and ChatGP perspective, and then I went through the document as well, and we had, like, a comparison benchmark that we ran against.
+
+24
+00:03:54.320 --> 00:03:56.060
+hrishikb@andrew.cmu.edu: So that's probably not the other thing.
+
+25
+00:03:57.340 --> 00:03:58.230
+hrishikb@andrew.cmu.edu: Okay.
+
+26
+00:03:59.270 --> 00:04:09.840
+hrishikb@andrew.cmu.edu: So, if we… I don't think we would be going via data lab, because we are entering tied to it. So,
+
+27
+00:04:10.070 --> 00:04:14.050
+hrishikb@andrew.cmu.edu: I'm guessing if we were going to self-post it, we would be self-posting, right?
+
+28
+00:04:14.290 --> 00:04:18.290
+hrishikb@andrew.cmu.edu: Either on some kind of a GPU service.
+
+29
+00:04:18.890 --> 00:04:38.340
+hrishikb@andrew.cmu.edu: And there's also dockling, which has some amount of error, but it means only a CPU doesn't deploy US dollars. So, you don't… you can get it cheaper as well, but the error rate is still a little bit high. I can see if I can fine-tune the parameters to… I mean, technically, even for general articles, it's…
+
+30
+00:04:38.660 --> 00:04:47.699
+hrishikb@andrew.cmu.edu: If it's a service, as long as we get an output, and we put that output wherever, it doesn't matter. Like, so, if it's easy to host it there, we might as reduce that service.
+
+31
+00:04:48.830 --> 00:04:57.489
+hrishikb@andrew.cmu.edu: Right, but again, we would have to see how many pages, yeah, how expensive it gets reported.
+
+32
+00:04:58.330 --> 00:05:03.490
+hrishikb@andrew.cmu.edu: So I did some research on if there's some alternative options.
+
+33
+00:05:03.610 --> 00:05:08.060
+hrishikb@andrew.cmu.edu: And it did say that there was an EA documented citizens.
+
+34
+00:05:08.210 --> 00:05:27.520
+hrishikb@andrew.cmu.edu: But I have had… I did not have a chance to try it out, because I don't think I have access to the Azure, authentication. Okay. Yeah, so if you give me that, I can just try it out with the current PDF that I've got, create PDFs, and come up with some final benchmarkings.
+
+35
+00:05:28.000 --> 00:05:31.489
+hrishikb@andrew.cmu.edu: And how often… I mean, this is,
+
+36
+00:05:33.270 --> 00:05:35.579
+hrishikb@andrew.cmu.edu: This is not going to need to be run
+
+37
+00:05:37.560 --> 00:05:52.109
+hrishikb@andrew.cmu.edu: It only needs to run when the document changes, right? Correct. Or when there's new documents coming in, and we would ideally be batching those as well. We don't want to run it one by one, because, like, the COPPA, computers on top of that.
+
+38
+00:05:55.000 --> 00:05:58.649
+hrishikb@andrew.cmu.edu: Yeah, I guess I don't know how often that changes,
+
+39
+00:05:59.290 --> 00:06:05.430
+hrishikb@andrew.cmu.edu: You know, doing our entire catalog, call it, 800 bucks.
+
+40
+00:06:05.620 --> 00:06:08.569
+hrishikb@andrew.cmu.edu: Probably about, you know, 10 bucks a year.
+
+41
+00:06:08.750 --> 00:06:10.040
+hrishikb@andrew.cmu.edu: That's pretty good.
+
+42
+00:06:15.630 --> 00:06:20.840
+hrishikb@andrew.cmu.edu: It kind of depends on how many new vendors you onboard quickly.
+
+43
+00:06:20.940 --> 00:06:24.969
+hrishikb@andrew.cmu.edu: If you have, like, how many clinches they make. Yeah, yeah, okay.
+
+44
+00:06:25.540 --> 00:06:30.380
+hrishikb@andrew.cmu.edu: What is an output? Just…
+
+45
+00:06:31.280 --> 00:06:43.939
+hrishikb@andrew.cmu.edu: Just the text? Yeah, so it outputs… my output goes directly to the injection service, what would be agreed. The injection service then passes around to the ML modules for itself. Suppose,
+
+46
+00:06:44.040 --> 00:06:49.810
+hrishikb@andrew.cmu.edu: Supposedly had… I don't know, 40 clients, and they all have the same vendor.
+
+47
+00:06:50.520 --> 00:06:59.350
+hrishikb@andrew.cmu.edu: We're… we might… we might want to segment this data. They might have Contractual requirements that say
+
+48
+00:06:59.490 --> 00:07:11.609
+hrishikb@andrew.cmu.edu: We don't want any data to touch, even public data, right? So, like, if we're paying for such and such a service to help with our catalog ingestion, we want that to be hours and hours alone.
+
+49
+00:07:12.580 --> 00:07:13.610
+hrishikb@andrew.cmu.edu: Oh, cool.
+
+50
+00:07:14.590 --> 00:07:16.060
+hrishikb@andrew.cmu.edu: Sorry, I'm trying to crinkle it.
+
+51
+00:07:18.570 --> 00:07:20.830
+hrishikb@andrew.cmu.edu: ordinance for us, okay?
+
+52
+00:07:23.400 --> 00:07:39.640
+hrishikb@andrew.cmu.edu: Would it be possible just to take the output of that file and store it somewhere? Yeah, we can have it. I think we are planning on doing something on the lines of, the client, with the vendor and having that in the key, so that each client has a distinct,
+
+53
+00:07:39.710 --> 00:07:45.269
+hrishikb@andrew.cmu.edu: client-vendor relationship. So, you know, the same client as multi… like, same vendor, each with multiple clients, they'll all have a different
+
+54
+00:07:45.410 --> 00:07:47.389
+hrishikb@andrew.cmu.edu: basically catalog. Okay.
+
+55
+00:07:48.210 --> 00:07:52.719
+hrishikb@andrew.cmu.edu: Cool. So the data, the Sierra data is structured data that you send to the…
+
+56
+00:07:52.900 --> 00:08:03.219
+hrishikb@andrew.cmu.edu: Yeah, it's structured data. That's the whole, that's the whole reason I did the next part. We want structured data. If it's, like, raw data, the plain OCR model works.
+
+57
+00:08:06.170 --> 00:08:12.260
+hrishikb@andrew.cmu.edu: So, a couple of things that it still did not pick up, even the best model was,
+
+58
+00:08:16.860 --> 00:08:25.350
+hrishikb@andrew.cmu.edu: So, always here… So, over here, there's dimensions, and over here.
+
+59
+00:08:25.600 --> 00:08:28.339
+hrishikb@andrew.cmu.edu: Like, coil diameter and wide length.
+
+60
+00:08:28.830 --> 00:08:33.769
+hrishikb@andrew.cmu.edu: I wasn't able to pick that up, even the, Chandler tool with the data platform.
+
+61
+00:08:35.110 --> 00:08:38.590
+hrishikb@andrew.cmu.edu: So, I don't know if,
+
+62
+00:08:39.429 --> 00:08:44.649
+hrishikb@andrew.cmu.edu: A bit more fine-tuning on the model itself could maybe help it out already.
+
+63
+00:08:45.420 --> 00:08:53.719
+hrishikb@andrew.cmu.edu: What we could probably do is, like, offload some of those which don't really work out to…
+
+64
+00:08:54.100 --> 00:08:58.499
+hrishikb@andrew.cmu.edu: a better than, like, GPT host run already.
+
+65
+00:08:58.610 --> 00:09:06.399
+hrishikb@andrew.cmu.edu: That would be as almost 100%. Yeah, even Azure OCDR might, Mike. Yeah, yeah, I could compare this, yeah.
+
+66
+00:09:07.210 --> 00:09:15.010
+hrishikb@andrew.cmu.edu: There was one which was the Siemens Power Catalog, this one.
+
+67
+00:09:15.480 --> 00:09:24.360
+hrishikb@andrew.cmu.edu: this gave a 0% success rate. Like, all the models paid down this one, just because it has no tables, and it's just paraphors.
+
+68
+00:09:24.700 --> 00:09:28.270
+hrishikb@andrew.cmu.edu: So, this, pretty much requires,
+
+69
+00:09:28.750 --> 00:09:35.280
+hrishikb@andrew.cmu.edu: LLM itself to, like, go through a technical, outcome technicians.
+
+70
+00:09:36.690 --> 00:09:41.750
+hrishikb@andrew.cmu.edu: So there are preferred structures In these documents that would make…
+
+71
+00:09:42.470 --> 00:09:55.409
+hrishikb@andrew.cmu.edu: the analysis better, that's what I'm hearing. Yeah, okay. Is that… is that a very clear path forward? Because what's going to happen immediately is one of the suppliers is going to say, why does your…
+
+72
+00:09:56.330 --> 00:10:00.240
+hrishikb@andrew.cmu.edu: Catalog data looks so much better for my competitor.
+
+73
+00:10:00.380 --> 00:10:06.519
+hrishikb@andrew.cmu.edu: Not for me. We'll say, well, you give us crappy PDFs, and say, what do I have to do to change the PDFs? And we'll go.
+
+74
+00:10:07.070 --> 00:10:08.710
+hrishikb@andrew.cmu.edu: Alright, alright.
+
+75
+00:10:08.820 --> 00:10:23.360
+hrishikb@andrew.cmu.edu: Yeah, I can… it's mostly tabular data. If it's end tables, results here, engines usually make it, much better to scale. Good. But I can dig a little more deeper into how,
+
+76
+00:10:23.430 --> 00:10:31.500
+hrishikb@andrew.cmu.edu: something like Chanda, which is not just an OCR engine, but it has some amount of VA elements underneath the UR as well.
+
+77
+00:10:32.650 --> 00:10:34.970
+hrishikb@andrew.cmu.edu: So, I guess,
+
+78
+00:10:35.190 --> 00:10:41.300
+hrishikb@andrew.cmu.edu: One thing I need is the Azure credentials so that I can test out the Azure OCL.
+
+79
+00:10:42.690 --> 00:10:51.110
+hrishikb@andrew.cmu.edu: I don't think it would be a lot better than Fundra 2, because right now it's state-of-the-art, and every enterprise project…
+
+80
+00:10:51.690 --> 00:10:53.330
+hrishikb@andrew.cmu.edu: But we can try it out.
+
+81
+00:10:53.680 --> 00:11:01.149
+hrishikb@andrew.cmu.edu: And, Datalab does offer zero retention and SOC2, just in case there's something for that.
+
+82
+00:11:02.310 --> 00:11:07.860
+hrishikb@andrew.cmu.edu: If it's self-hosted, then we can just run it on, yeah, machines are everywhere.
+
+83
+00:11:08.010 --> 00:11:13.539
+hrishikb@andrew.cmu.edu: So, all the top contenders, are they commercial, or are they open source? What's the breakdown of that?
+
+84
+00:11:14.190 --> 00:11:18.149
+hrishikb@andrew.cmu.edu: the… the… I haven't, tested out any,
+
+85
+00:11:18.380 --> 00:11:23.830
+hrishikb@andrew.cmu.edu: Oh, I've only tested our open source ones right now. Yeah, these are our open source ones, which…
+
+86
+00:11:24.110 --> 00:11:30.790
+hrishikb@andrew.cmu.edu: Minus Chandra 2, which is, service. It's software as a service, we can upgrade.
+
+87
+00:11:32.430 --> 00:11:39.410
+hrishikb@andrew.cmu.edu: And we can also, if none of this works out, we can always follow back to the GPT on network as well.
+
+88
+00:11:41.080 --> 00:11:43.890
+hrishikb@andrew.cmu.edu: So, yeah, let's movements.
+
+89
+00:11:46.460 --> 00:11:50.290
+hrishikb@andrew.cmu.edu: But, yeah, these are the added dates, basically.
+
+90
+00:11:54.960 --> 00:11:58.579
+hrishikb@andrew.cmu.edu: And the output from this is JSON or KV pairs.
+
+91
+00:11:59.110 --> 00:12:04.720
+hrishikb@andrew.cmu.edu: We can… Signature can configure that too.
+
+92
+00:12:05.950 --> 00:12:20.319
+hrishikb@andrew.cmu.edu: So, like, I was working on the ingestion part, actually, which is the next step. So I also, like, I made a mock this thing, using the, like, test rack and stuff, just to get some information out. So right now, in the ingestion part, we are…
+
+93
+00:12:20.920 --> 00:12:35.470
+hrishikb@andrew.cmu.edu: like, I've not tested it that much, but we are able to, identify which data is, like, corrupted and which data is not, so we are able to see the data in its, like, kind of more defined format.
+
+94
+00:12:35.650 --> 00:12:50.200
+hrishikb@andrew.cmu.edu: we get, basically, JSON data, which has the product name, the values, which document it came from, and basic things like that. So, like, testing is left, but yeah, after we are done to OCR part, we can connect these two, and then we should have a…
+
+95
+00:12:50.440 --> 00:12:55.800
+hrishikb@andrew.cmu.edu: basic running flow. So, I think, some amount of what was the person
+
+96
+00:12:56.220 --> 00:13:05.369
+hrishikb@andrew.cmu.edu: overlap. My module is just, just, like, a using throw kind of thing, and that's not meant to go in the code anyways. It's just so that we can work in parallel.
+
+97
+00:13:05.580 --> 00:13:15.179
+hrishikb@andrew.cmu.edu: Right now, in the addition part, I'm able to get the data in a decent shape. The next part would be maybe to…
+
+98
+00:13:16.950 --> 00:13:25.599
+hrishikb@andrew.cmu.edu: get all the data and put it into a specific schema that you guys already have for PIMS, so that part is not done yet. So, next steps are that we…
+
+99
+00:13:25.770 --> 00:13:33.230
+hrishikb@andrew.cmu.edu: like, first we continue the OCR part, and in the addition part, we go ahead and… Just…
+
+100
+00:13:33.450 --> 00:13:41.979
+hrishikb@andrew.cmu.edu: put the data in canonical tables so that we can use it on the time? So, I think OCR does the passing and extraction, whereas Engine does an operator. Okay.
+
+101
+00:13:42.300 --> 00:13:43.150
+hrishikb@andrew.cmu.edu: Jesus.
+
+102
+00:13:43.360 --> 00:13:54.490
+hrishikb@andrew.cmu.edu: And then expect that from the… by the end one, so… Okay, so this is, like, the first two steps in there. Yeah, then we have the LM models, which will give us a content scores, and…
+
+103
+00:13:55.420 --> 00:13:58.659
+hrishikb@andrew.cmu.edu: So the third step will come back into the second step.
+
+104
+00:13:58.960 --> 00:14:02.450
+hrishikb@andrew.cmu.edu: Where the staging table is available, and then go back in.
+
+105
+00:14:02.600 --> 00:14:04.660
+hrishikb@andrew.cmu.edu: bookings.
+
+106
+00:14:05.270 --> 00:14:21.760
+hrishikb@andrew.cmu.edu: So, for training, we actually are planning to have a separate, database. So, whenever, like, after, let's say, our ML models have given us some output, and we deem that's not good enough, and the human reviewer modifies it, changes it.
+
+107
+00:14:21.760 --> 00:14:28.870
+hrishikb@andrew.cmu.edu: That modification would be fed into our database, and then after a certain amount of time, we'll use that data to train the model again.
+
+108
+00:14:29.030 --> 00:14:36.799
+hrishikb@andrew.cmu.edu: It's basically BIMS data going in one of the database. Okay, yeah. Now, you don't want to touch BIMS with any of the interpreted data?
+
+109
+00:14:38.700 --> 00:14:57.540
+hrishikb@andrew.cmu.edu: I want to go back to the Siemens example for a minute. Isn't there some structure to the Siemens data, or regularity to it? It would seem to me that, you know, they're talking as specs, but if someone were to parse that out, you could go back and digest it that way, just curious. So, the problem here is,
+
+110
+00:14:57.630 --> 00:15:04.910
+hrishikb@andrew.cmu.edu: Every single PDF is very different, and these OCR engines work on some amount of rules.
+
+111
+00:15:05.190 --> 00:15:09.849
+hrishikb@andrew.cmu.edu: written for genetic OCR, by them, so…
+
+112
+00:15:10.080 --> 00:15:20.049
+hrishikb@andrew.cmu.edu: For example, in the semen data, it just looks like a paragraph. As a human, we can just read through and understand that these are the part… the part numbers are the ones we need to
+
+113
+00:15:20.140 --> 00:15:23.949
+hrishikb@andrew.cmu.edu: Take into consideration, pass it downstream, but then…
+
+114
+00:15:23.970 --> 00:15:33.519
+hrishikb@andrew.cmu.edu: For an OCR engine, this is just text, and it doesn't know which part of it to expect and get put into work. I understand, but I'm just saying the… the paragraph of stuff.
+
+115
+00:15:33.520 --> 00:15:46.070
+hrishikb@andrew.cmu.edu: Is that regular or not, or is it… Yeah, it is regular, but it's still not a table. So, I'm sure we can improve the model to, like, fit in things which we would also want, because it's open source.
+
+116
+00:15:46.120 --> 00:15:49.689
+hrishikb@andrew.cmu.edu: But, like, just the base model right now would not fall through that.
+
+117
+00:15:54.300 --> 00:15:57.659
+hrishikb@andrew.cmu.edu: I mean, in general, at least those are Apple, because,
+
+118
+00:15:57.850 --> 00:16:06.200
+hrishikb@andrew.cmu.edu: The way written to work is you exactly define what part of the wage is what, and then it tends to perform the best.
+
+119
+00:16:06.350 --> 00:16:25.270
+hrishikb@andrew.cmu.edu: But if you see, like, invoicing is probably the best case producer, and invoicing is pretty standardized, you point it to what corresponds to what aspect of invoicing, and it performs a variance, but when it's unstructured… Yeah, generally, like, if the data is in tabular format, it's very easy to extract in KV pairs.
+
+120
+00:16:25.380 --> 00:16:28.140
+hrishikb@andrew.cmu.edu: But, like, in this, we have paragraphs and…
+
+121
+00:16:28.240 --> 00:16:37.139
+hrishikb@andrew.cmu.edu: So, that a normal OCR can… at best, it can probably just give us the entire paragraph, but not the exact numbers and values for it. But honestly, like.
+
+122
+00:16:37.480 --> 00:16:40.280
+hrishikb@andrew.cmu.edu: If… I can do a rather benchmark of
+
+123
+00:16:41.290 --> 00:17:04.590
+hrishikb@andrew.cmu.edu: Just using LLM. You'll take the text, chuck it into the… in a way, it's trying to optimize cost, right? So, you can either drop the entire PDF into an LLM and split the data out. Yeah. That would cost more. Technically, it's cheaper to do OCR on it and then chuck it into the LLM, because LLMs work better with JSON, Markdown, and all of these colors, yeah.
+
+124
+00:17:04.589 --> 00:17:10.319
+hrishikb@andrew.cmu.edu: So… And PDF is, like, a bit expensive as well. Yeah, just raw TXT files in a little bit cheaper.
+
+125
+00:17:10.490 --> 00:17:24.069
+hrishikb@andrew.cmu.edu: Rather than, like, a PDF in which it has to be manually. Yeah, I can then probably just use the basic OCR models. Yeah, it could be a two-step thing as well, if it's… if it's just that much easier. Yeah.
+
+126
+00:17:25.079 --> 00:17:34.359
+hrishikb@andrew.cmu.edu: Because GBD5 Mini and, just models of that sort are extremely cheap. So they cost, I think, around,
+
+127
+00:17:35.180 --> 00:17:48.779
+hrishikb@andrew.cmu.edu: 0.3… 0.037 per 10,000 tokens, I think? 1,000 tokens, which is… which would be extremely…
+
+128
+00:17:49.120 --> 00:17:58.110
+hrishikb@andrew.cmu.edu: Because technically, we don't have that many years in the end, the number, 10,000 to 30,000 kind of range there, and the expense will never, like, do our…
+
+129
+00:18:00.510 --> 00:18:11.309
+hrishikb@andrew.cmu.edu: Yeah, I mean, maybe try that. That would, I think, simplify it by a lot. There's also Microsoft Open Source Repository in GitHub. I forgot its name, but you might have mentioned it.
+
+130
+00:18:12.090 --> 00:18:17.810
+hrishikb@andrew.cmu.edu: But that's… that's… that's currently, I think, a standardized one, too. I think it was the iteration one last week.
+
+131
+00:18:18.040 --> 00:18:23.139
+hrishikb@andrew.cmu.edu: It's, it's used to convert all PDFs into markdowns.
+
+132
+00:18:23.420 --> 00:18:32.340
+hrishikb@andrew.cmu.edu: Oh, okay, yeah. Yeah, I think there's a bunch of open source tool, PDF stuff. Yeah, so that… you could probably check with that as well.
+
+133
+00:18:35.000 --> 00:18:42.469
+hrishikb@andrew.cmu.edu: Yeah, also, if it could give some, information to how many of these catalogs are changing every year, that's…
+
+134
+00:18:45.240 --> 00:18:51.069
+hrishikb@andrew.cmu.edu: Then we can… and, like, what the… what kind of budget we work for. So, yeah, that I know.
+
+135
+00:18:51.730 --> 00:19:00.689
+hrishikb@andrew.cmu.edu: what we want to be using, yeah. I mean, technically, you guys would be doing it per day task without… it's more or less a POC of…
+
+136
+00:19:00.850 --> 00:19:02.600
+hrishikb@andrew.cmu.edu: Great, yeah.
+
+137
+00:19:03.380 --> 00:19:06.170
+hrishikb@andrew.cmu.edu: So the budget planning is the biggest it will be.
+
+138
+00:19:06.390 --> 00:19:13.290
+hrishikb@andrew.cmu.edu: So the main thing is, the catalogs which are already present right now in PIM doesn't need to be re-indexed, right?
+
+139
+00:19:13.660 --> 00:19:15.390
+hrishikb@andrew.cmu.edu: That only needs to go…
+
+140
+00:19:16.370 --> 00:19:30.119
+hrishikb@andrew.cmu.edu: What's the ML? What do you mean? Global OCR, and the organization. I mean, we could try to enrich the current catalog as well. That could be a part of it as well. Okay.
+
+141
+00:19:30.330 --> 00:19:37.410
+hrishikb@andrew.cmu.edu: It could be multi… it could be different aspects of things, like trying to edit the current one, trying to…
+
+142
+00:19:37.410 --> 00:19:51.899
+hrishikb@andrew.cmu.edu: experiment with a few new catalogs, and see how it goes, and how it works. So those could be, like, use cases which you can probably gauge your metrics on how it works. Yeah. What about the mapping? Was it the Eagle standard? Is that the standard? Yeah,
+
+143
+00:19:52.300 --> 00:20:08.589
+hrishikb@andrew.cmu.edu: Yeah, that's, like, after we are done with these parts, that's what we'll look at, because we're thinking about using that, standard in the initiation part, but that doesn't seem very feasible to do right now. So we'll probably, try to merge that in with the LLM, sorry, the ML part.
+
+144
+00:20:08.590 --> 00:20:17.070
+hrishikb@andrew.cmu.edu: And then maybe have a small component which matches it up with the standards. Yeah, I mean, ETAM should mainly dictate the attribute values for you guys, and…
+
+145
+00:20:17.090 --> 00:20:23.949
+hrishikb@andrew.cmu.edu: I'm just setting, like, a baseline for what would be the acceptable range of outputs.
+
+146
+00:20:26.260 --> 00:20:41.589
+hrishikb@andrew.cmu.edu: I think we've not really made progress on the ETEM front as of right now. Like, once we go a bit deeper into it, we'll probably have much more questions regarding, like, the last time I checked, I was not able to figure out which data is relevant to us, which is not.
+
+147
+00:20:42.540 --> 00:21:00.159
+hrishikb@andrew.cmu.edu: I think, yeah, after we have the required data, we should be able to use it in a pretty decent way. I would say a good way to probably just experiment with imaging data would be take a small sample of product types and attributes for that product types, and see if you can map it.
+
+148
+00:21:00.200 --> 00:21:08.519
+hrishikb@andrew.cmu.edu: If that mapping is easier, then you could just put it in Cloud and ask it to do your own mapping for all the rock types and avenues, and that might just…
+
+149
+00:21:09.130 --> 00:21:12.319
+hrishikb@andrew.cmu.edu: That you guys pass the whole magic step of mapping anything.
+
+150
+00:21:12.810 --> 00:21:15.870
+hrishikb@andrew.cmu.edu: Right? As long as you can do a small subset, you say anything.
+
+151
+00:21:16.030 --> 00:21:16.930
+hrishikb@andrew.cmu.edu: Right, right.
+
+152
+00:21:17.500 --> 00:21:18.410
+hrishikb@andrew.cmu.edu: Right.
+
+153
+00:21:20.260 --> 00:21:35.790
+hrishikb@andrew.cmu.edu: Yeah, we… yeah, we can do that. Yeah, I think after we… the initial mapping part, we'll use Claude to map all of it with the product, because it is going to be huge. The files are, like, really big. So, a little bit you can do, and then just eat the rest of it.
+
+154
+00:21:36.700 --> 00:21:37.880
+hrishikb@andrew.cmu.edu: Okay.
+
+155
+00:21:39.420 --> 00:21:41.949
+hrishikb@andrew.cmu.edu: Next, February.
+
+156
+00:21:42.290 --> 00:21:42.990
+hrishikb@andrew.cmu.edu: Yeah.
+
+157
+00:21:46.860 --> 00:21:50.380
+hrishikb@andrew.cmu.edu: Next, I think we can discuss the LMP OC update.
+
+158
+00:21:52.390 --> 00:21:54.680
+hrishikb@andrew.cmu.edu: On the phones.
+
+159
+00:21:55.790 --> 00:21:56.640
+hrishikb@andrew.cmu.edu: How about?
+
+160
+00:21:56.950 --> 00:21:57.960
+hrishikb@andrew.cmu.edu: Let me stop sharing.
+
+161
+00:22:02.250 --> 00:22:06.040
+hrishikb@andrew.cmu.edu: Newskeeper,
+
+162
+00:22:07.510 --> 00:22:08.230
+hrishikb@andrew.cmu.edu: Wait.
+
+163
+00:22:09.880 --> 00:22:10.580
+hrishikb@andrew.cmu.edu: Hold on.
+
+164
+00:22:19.880 --> 00:22:20.550
+hrishikb@andrew.cmu.edu: Yeah.
+
+165
+00:22:20.960 --> 00:22:24.839
+hrishikb@andrew.cmu.edu: So… I just tried to see…
+
+166
+00:22:25.660 --> 00:22:32.559
+hrishikb@andrew.cmu.edu: if we could, lose doing his approach, and everyone wanted to see whether there are different LLMs.
+
+167
+00:22:32.840 --> 00:22:38.800
+hrishikb@andrew.cmu.edu: approach would work. So, these were the five models I used. These are all open source, and…
+
+168
+00:22:38.950 --> 00:22:42.700
+hrishikb@andrew.cmu.edu: I just used Olama to, run everything on them.
+
+169
+00:22:42.920 --> 00:22:51.510
+hrishikb@andrew.cmu.edu: So, currently, Llama 3.18 billion priority model, gives pretty, the highest result, pretty much.
+
+170
+00:22:51.690 --> 00:22:59.160
+hrishikb@andrew.cmu.edu: Fee, by 4, 14 billion one gives, like, slightly better results, but there's a bit of a caveat to that.
+
+171
+00:22:59.300 --> 00:23:09.549
+hrishikb@andrew.cmu.edu: I could not see any, regularity. It kind of goes up and down, and there's also the problem of…
+
+172
+00:23:12.980 --> 00:23:15.780
+hrishikb@andrew.cmu.edu: Yeah, so the problem is that
+
+173
+00:23:16.050 --> 00:23:29.759
+hrishikb@andrew.cmu.edu: All these, Lew's model is pretty good with calibration as well. Here, when I try to, structure it in such a way that it gives a confidence, like, how confident is it when it's making the prediction?
+
+174
+00:23:29.770 --> 00:23:37.220
+hrishikb@andrew.cmu.edu: It… it does not improve at all. Quen, 2.5, 14 billion, it's actually…
+
+175
+00:23:37.340 --> 00:23:43.469
+hrishikb@andrew.cmu.edu: Performs worse at conference, accuracy than, everything else.
+
+176
+00:23:43.580 --> 00:23:46.329
+hrishikb@andrew.cmu.edu: There are some exceptions, but,
+
+177
+00:23:46.650 --> 00:23:51.279
+hrishikb@andrew.cmu.edu: there's no trend I can see that, as the models get bigger.
+
+178
+00:23:51.600 --> 00:23:56.789
+hrishikb@andrew.cmu.edu: it gets better. I have not tested with the biggest ones yet.
+
+179
+00:23:56.910 --> 00:23:59.999
+hrishikb@andrew.cmu.edu: Because, when I played around with this,
+
+180
+00:24:00.510 --> 00:24:03.989
+hrishikb@andrew.cmu.edu: there were a lot of errors that I, kind of…
+
+181
+00:24:04.150 --> 00:24:09.710
+hrishikb@andrew.cmu.edu: Had to get through, and doing that with paid models would have been quite expensive.
+
+182
+00:24:10.040 --> 00:24:16.329
+hrishikb@andrew.cmu.edu: So, unless I go and check the really large ones, I don't think any of the ones that you could…
+
+183
+00:24:16.630 --> 00:24:25.519
+hrishikb@andrew.cmu.edu: I guess self-host would work that… I mean, these can all be run on your laptop, but, unless you guys have,
+
+184
+00:24:25.680 --> 00:24:31.780
+hrishikb@andrew.cmu.edu: a full, I guess, server rack, the really big ones, like Kimi 2.5, you could not run that.
+
+185
+00:24:32.000 --> 00:24:44.959
+hrishikb@andrew.cmu.edu: on the 80, like, you cannot even run that with a 5090, or two 1590s and, like, 128GB of RAM. I think that's about the maximum consumer… So, for the confidence part, have you tried experimenting with the temperature of
+
+186
+00:24:47.330 --> 00:25:02.670
+hrishikb@andrew.cmu.edu: Actually, I have not tested that. I have changed other things, how… what kind of format it's been fed in, and that kind of gave… gave some results, but I'm not testing with the temperature. Because it's a simple slider in a grammar. Yeah.
+
+187
+00:25:02.710 --> 00:25:17.730
+hrishikb@andrew.cmu.edu: a temperature of 1 means it will only give you results on things it's completely certain on. So, it'll give you way less output, but it'll… so you can just play around on how different temperatures kind of give you results. Yes sir.
+
+188
+00:25:17.780 --> 00:25:35.379
+hrishikb@andrew.cmu.edu: I actually didn't think about it. I can do that, and if you guys want, I can… now that I've kind of figured it out, it wouldn't take that much for me to test it with, I guess, 3, 4, 3 or 4 of the leading models, and depending on how you want it, I can also test it
+
+189
+00:25:37.920 --> 00:25:54.789
+hrishikb@andrew.cmu.edu: I don't think there should be any problems with data retention or anything like that, because every cloud provider has something which just protects that one. I would also say you… I can give you access to Azure Foundry, and you can experiment with, like, different models. Okay.
+
+190
+00:25:54.790 --> 00:26:12.149
+hrishikb@andrew.cmu.edu: It gives you a simple UI in which you can just test each model out, and that… that UI usage is completely free to live. Okay, so all of the credits you spend on the UI end of Azure Boundary is… is pretty much… since it's testing, it's considered, like.
+
+191
+00:26:13.570 --> 00:26:19.210
+hrishikb@andrew.cmu.edu: The other thing is… basically…
+
+192
+00:26:20.540 --> 00:26:28.219
+hrishikb@andrew.cmu.edu: The amount of, it's not shown here, actually, but… The amount of,
+
+193
+00:26:28.330 --> 00:26:34.300
+hrishikb@andrew.cmu.edu: tokens that are being used do not rise. I thought that as the model size became bigger, it would kind of
+
+194
+00:26:34.710 --> 00:26:47.209
+hrishikb@andrew.cmu.edu: I guess think about it more, or use more tokens, but it stays within, like, 5%, even when… you can go from a 3 billion model to a 14 billion parameters model, and it doesn't increase that much.
+
+195
+00:26:47.490 --> 00:27:03.210
+hrishikb@andrew.cmu.edu: I would like to increase it. I'm not… I'm not certain that even with the highest one, it will actually, like… you can see at the top, it's, like, 94.7% that we can theoretically get. But I'm not even sure that even with the…
+
+196
+00:27:03.450 --> 00:27:16.289
+hrishikb@andrew.cmu.edu: biggest model that you can get that. And there's also the problem that you can kind of need to have some sort of structure around it, because just feeding it in one by one… there's a specific size over which it kind of,
+
+197
+00:27:16.950 --> 00:27:30.479
+hrishikb@andrew.cmu.edu: For these, the specific size is very low, how much you can take in advance, but I would assume that even with Claude or GPT-5 World5, if you try to feed in, like, I don't know, a 10MB PDF, it would just break down.
+
+198
+00:27:31.050 --> 00:27:43.680
+hrishikb@andrew.cmu.edu: So, what is the input for all this? Was it directly the PDF itself, and then you were trying to output? No, no. I took, there was a clean version of that, probably was,
+
+199
+00:27:43.680 --> 00:27:51.240
+hrishikb@andrew.cmu.edu: work, and it basically took it, like, proper clean data, and, it was orbiting it in case.
+
+200
+00:27:51.780 --> 00:27:54.329
+hrishikb@andrew.cmu.edu: Okay, so, you gave in…
+
+201
+00:27:54.530 --> 00:28:00.760
+hrishikb@andrew.cmu.edu: clean inputs. How did it know what sort of, attribute… attributes to map to?
+
+202
+00:28:00.900 --> 00:28:13.000
+hrishikb@andrew.cmu.edu: That, that I also… basically, Lou had a list that, yeah, so I could just take it from this branch, and, that I also just fed it in with instructions, so that…
+
+203
+00:28:13.150 --> 00:28:24.840
+hrishikb@andrew.cmu.edu: I could play around with some, I guess, how… what kind of data, kind of the structure of it, and I… more importantly, how large the chunks that are given all at once are.
+
+204
+00:28:25.070 --> 00:28:29.250
+hrishikb@andrew.cmu.edu: That has helped the most, I would say. But…
+
+205
+00:28:29.980 --> 00:28:43.790
+hrishikb@andrew.cmu.edu: depending on what we… what works best, that does change, so we cannot use… the LAMA coin are very different, and I would like to, like, check with KV2.5.
+
+206
+00:28:44.040 --> 00:28:50.290
+hrishikb@andrew.cmu.edu: And, plaid, and GPT-5.5 and all these things again.
+
+207
+00:28:50.580 --> 00:28:54.190
+hrishikb@andrew.cmu.edu: But, I did not use them here because…
+
+208
+00:28:54.710 --> 00:29:08.000
+hrishikb@andrew.cmu.edu: These are free, and I can just make many mistakes when I'm figuring it out, but doing that with the ones that I talked about, even Kiwi 2.5 can kind of quickly racket the cost up, so…
+
+209
+00:29:08.260 --> 00:29:11.770
+hrishikb@andrew.cmu.edu: So, how do you get the theoretical maximum?
+
+210
+00:29:11.980 --> 00:29:25.889
+hrishikb@andrew.cmu.edu: Oh, that's… that's what Lou figured out when, when he was doing it. He just said that, if you followed certain rules and, you see the regularities in the data, that that would be kind of the maximum that you could get with the pro set.
+
+211
+00:29:26.040 --> 00:29:34.220
+hrishikb@andrew.cmu.edu: So that's what I'm comparing. As for the accuracy itself, I did not have anything, I just…
+
+212
+00:29:34.380 --> 00:29:43.189
+hrishikb@andrew.cmu.edu: I was just, that was just compared against 100% accuracy for how, when it's giving its confidence rating, so…
+
+213
+00:29:43.320 --> 00:29:46.179
+hrishikb@andrew.cmu.edu: That does change, but I don't think…
+
+214
+00:29:46.580 --> 00:29:54.289
+hrishikb@andrew.cmu.edu: The point here is that 67.6% or something accuracy is probably not gonna be good enough in almost
+
+215
+00:29:54.680 --> 00:29:55.840
+hrishikb@andrew.cmu.edu: Any case?
+
+216
+00:29:56.150 --> 00:30:04.059
+hrishikb@andrew.cmu.edu: And… I could basically… this proves that anything that you could self-host, meaning, like.
+
+217
+00:30:04.080 --> 00:30:18.259
+hrishikb@andrew.cmu.edu: Anything you could run on 25090s and 128GB of RAM, that's the… that's the maximum configuration I could see for a consumer PC. That's something you could have in your office. It would not improve it that much, because
+
+218
+00:30:18.580 --> 00:30:33.629
+hrishikb@andrew.cmu.edu: the max you could go to, it would probably top out at 75%, which is way too low to be of any use. So I'll try to work with what you said, and try out the highest models, and kind of give a cost estimate, like, I'll do.
+
+219
+00:30:33.720 --> 00:30:42.110
+hrishikb@andrew.cmu.edu: And, see how that works, and see what kind of silos chunks I should do for those, but yeah, these are…
+
+220
+00:30:42.340 --> 00:30:52.590
+hrishikb@andrew.cmu.edu: I think one more thing is, Azure gives you access to 800 GPUs. Yeah. You can try running the bigger models on that, so I have a couple of hundred models running.
+
+221
+00:30:52.760 --> 00:30:59.249
+hrishikb@andrew.cmu.edu: So, it pretty much easily runs, like, 30 to 40 billion.
+
+222
+00:30:59.790 --> 00:31:01.180
+hrishikb@andrew.cmu.edu: I think we'll get ready.
+
+223
+00:31:01.650 --> 00:31:05.090
+hrishikb@andrew.cmu.edu: Quite opinion model, right? That's still not good.
+
+224
+00:31:06.380 --> 00:31:10.770
+hrishikb@andrew.cmu.edu: It would have to be, like… Poor market.
+
+225
+00:31:11.760 --> 00:31:19.049
+hrishikb@andrew.cmu.edu: Because the KMI 2.5 is not… No, I meant the highest…
+
+226
+00:31:20.740 --> 00:31:30.370
+hrishikb@andrew.cmu.edu: These… I mean, the highest one is a futility. That will never end there. No, that's a mixture of experts, so…
+
+227
+00:31:30.610 --> 00:31:32.899
+hrishikb@andrew.cmu.edu: So it only, kind of…
+
+228
+00:31:33.780 --> 00:31:39.269
+hrishikb@andrew.cmu.edu: has so many of them, that's, working at once. So, for the basic…
+
+229
+00:31:39.270 --> 00:31:54.420
+hrishikb@andrew.cmu.edu: question here is, is a large language model a good substitute for the amount? So I can say that anything, yeah, anything working on a commercial PC is not good enough, basically. Anything less than around, I would say, one…
+
+230
+00:31:54.420 --> 00:32:13.069
+hrishikb@andrew.cmu.edu: I can be pretty sure that anything less than 120 billion parameters would be useless. I have not tested… is that, just experimenting with temperature, experimenting with fine-tuning the models as well. Because the thing is, there's these hyper-specific modules which are exactly tuned to one single use case.
+
+231
+00:32:13.070 --> 00:32:17.639
+hrishikb@andrew.cmu.edu: they actually tend to perform really well. It was, I think it was…
+
+232
+00:32:17.820 --> 00:32:25.110
+hrishikb@andrew.cmu.edu: what was this? What was the model that you wanted? It was… it was basically a Python numpy expert kind of model, which was only good at NumPy package.
+
+233
+00:32:25.260 --> 00:32:36.469
+hrishikb@andrew.cmu.edu: these singular package level 2 point level models were there, right? So, they find… they basically fine-tuned every single model to be just an expert in the single package.
+
+234
+00:32:36.490 --> 00:32:47.629
+hrishikb@andrew.cmu.edu: And they kind of tried to lay around with it, and it got to a really good level. So similarly, like, if you can probably fine-tune it with structured data of what you use or involving with.
+
+235
+00:32:47.890 --> 00:32:51.059
+hrishikb@andrew.cmu.edu: And it could get really good at, like, understanding what's there.
+
+236
+00:32:51.300 --> 00:32:59.560
+hrishikb@andrew.cmu.edu: after a few runs of fine tuning, then you can also try evaluating and see what the performance is. I checked again, the…
+
+237
+00:32:59.860 --> 00:33:02.490
+hrishikb@andrew.cmu.edu: How it was doing myself as well, then.
+
+238
+00:33:02.640 --> 00:33:11.849
+hrishikb@andrew.cmu.edu: Yeah, some changes do help a lot, but I've not played around with the temperature, so I don't do that.
+
+239
+00:33:12.100 --> 00:33:13.100
+hrishikb@andrew.cmu.edu: So…
+
+240
+00:33:13.270 --> 00:33:24.770
+hrishikb@andrew.cmu.edu: You did mention that, I could use the bigger models with, what was the specific thing? With Azure Project. Yeah, Azure Project, yeah. I mean, that gives you access to almost all of OpenAI, and,
+
+241
+00:33:25.180 --> 00:33:26.860
+hrishikb@andrew.cmu.edu: Bigger than what you suspect.
+
+242
+00:33:27.040 --> 00:33:28.029
+hrishikb@andrew.cmu.edu: Good question.
+
+243
+00:33:29.840 --> 00:33:31.530
+hrishikb@andrew.cmu.edu: I like to just move along.
+
+244
+00:33:32.400 --> 00:33:37.460
+hrishikb@andrew.cmu.edu: Yeah, just… just drop me a text, and I'll add you to the actual function.
+
+245
+00:33:39.490 --> 00:33:49.440
+hrishikb@andrew.cmu.edu: I think you also need the Azure access for the… You're all in Azure. The thing is, I don't think you have access for, like, a resource, and I think… I think you can…
+
+246
+00:33:49.720 --> 00:33:56.099
+hrishikb@andrew.cmu.edu: We can just dedicate, like, lands on the resource groups.
+
+247
+00:33:56.640 --> 00:33:57.670
+hrishikb@andrew.cmu.edu: Not sure.
+
+248
+00:33:58.430 --> 00:34:01.419
+hrishikb@andrew.cmu.edu: But just check, and just let us know.
+
+249
+00:34:03.940 --> 00:34:06.300
+hrishikb@andrew.cmu.edu: Let me check the resource group as well.
+
+250
+00:34:09.889 --> 00:34:22.650
+hrishikb@andrew.cmu.edu: It'll be interesting to see what I can do with the biggest ones, and if they kind of, like, go to, like, I don't know, 97, 98%, that would be, depending on the cost, the best approach may be, but I'll have to check that.
+
+251
+00:34:23.989 --> 00:34:27.650
+hrishikb@andrew.cmu.edu: But also, any, any, any approach on, like, how you can…
+
+252
+00:34:27.909 --> 00:34:30.330
+hrishikb@andrew.cmu.edu: How we can work on, like, farm building as well.
+
+253
+00:34:32.690 --> 00:34:54.979
+hrishikb@andrew.cmu.edu: for those, I don't think, you can change the temperature, I guess, but I don't know how you can fine-tune those. So, fine-tuning is basically inference level changes, so what you do is… Oh, okay, okay, yeah, so… Fun in multiple, types of data, and that's the… that's the ground truth for the model, then. Okay, okay. So, because basically a model is nothing but,
+
+254
+00:34:55.330 --> 00:35:01.480
+hrishikb@andrew.cmu.edu: its main ground truth, if you don't fine-tune it, is basically all of redirected. Yeah, you mean,
+
+255
+00:35:02.130 --> 00:35:20.390
+hrishikb@andrew.cmu.edu: I thought, okay, I thought I was getting the wrong thing, because in open source models, you can kind of go in… Inference level fine-tuning is what I was talking about. If you mean inference level, yeah, I did do some of that. It was more about the kind of examples that I gave it, that…
+
+256
+00:35:20.390 --> 00:35:28.630
+hrishikb@andrew.cmu.edu: if you have this kind of input, this is the kind of output that you should have. And there were… I guess there was an entire file that you could use it.
+
+257
+00:35:28.640 --> 00:35:29.510
+hrishikb@andrew.cmu.edu: But…
+
+258
+00:35:30.100 --> 00:35:40.990
+hrishikb@andrew.cmu.edu: at least for these models, the result was, like, less than 2% gain, so… I don't know, like, maybe for the bigger ones, there would be huge accuracy gains, but for these, there were less than 2%.
+
+259
+00:35:41.150 --> 00:35:44.330
+hrishikb@andrew.cmu.edu: Yeah, because Lava 3.1…
+
+260
+00:35:44.450 --> 00:35:54.539
+hrishikb@andrew.cmu.edu: for the bigger one. It actually just… it was pretty good when it worked, but for some of them, it just outright failed with no amount of, like, giving it examples.
+
+261
+00:35:57.130 --> 00:36:12.539
+hrishikb@andrew.cmu.edu: Because I was pretty surprised with the LAMA 3.1. It's really good when it works. Even the 8 building parameter model is… that's the one that's pretty sharpened, but it just fails on some things, and I tried many things, not technical, but other things I need to.
+
+262
+00:36:14.830 --> 00:36:23.440
+hrishikb@andrew.cmu.edu: Also good work, you know, continue to do some more investigation, yeah, very good. It would be, interesting to see what I can do with Teshop.
+
+263
+00:36:23.570 --> 00:36:26.690
+hrishikb@andrew.cmu.edu: I mean, it's all new things.
+
+264
+00:36:28.640 --> 00:36:33.730
+hrishikb@andrew.cmu.edu: That's it.
+
+265
+00:36:34.980 --> 00:36:36.129
+hrishikb@andrew.cmu.edu: Alright, I'm sure.
+
+266
+00:36:37.330 --> 00:36:43.479
+hrishikb@andrew.cmu.edu: I just have, like, a standing group that has access to… Like the resource group.
+
+267
+00:36:43.610 --> 00:36:47.309
+hrishikb@andrew.cmu.edu: Just, like, swap out whoever's… Team the time.
+
+268
+00:36:47.810 --> 00:36:50.270
+hrishikb@andrew.cmu.edu: So, keep doing this, and it hasn't…
+
+269
+00:36:51.390 --> 00:36:55.600
+hrishikb@andrew.cmu.edu: work once the way I want it. It's Microsoft.
+
+270
+00:36:59.070 --> 00:37:03.569
+hrishikb@andrew.cmu.edu: I think after you had a person, it was something other things, like.
+
+271
+00:37:03.830 --> 00:37:15.960
+hrishikb@andrew.cmu.edu: an oddity amount of days ago, I can generate the email for the person. I think it was still their statement. By the way, it was 24 hours to be able to see resources whenever I made myself a contributor on the subscription.
+
+272
+00:37:17.970 --> 00:37:19.000
+hrishikb@andrew.cmu.edu: Thank you.
+
+273
+00:37:20.140 --> 00:37:26.530
+hrishikb@andrew.cmu.edu: I mean, they can't even… they're even… like, the operating system itself is kind of going down a little faster.
+
+274
+00:37:27.110 --> 00:37:29.790
+hrishikb@andrew.cmu.edu: So did I try to move down.
+
+275
+00:37:29.940 --> 00:37:30.930
+hrishikb@andrew.cmu.edu: Excellent.
+
+276
+00:37:31.670 --> 00:37:33.190
+hrishikb@andrew.cmu.edu: It was being tested.
+
+277
+00:37:33.580 --> 00:37:51.739
+hrishikb@andrew.cmu.edu: I mean, even specific things, not vague things, that the performance is going down. There was an outcry recently that they just downgrade your drivers, because they have automated processes in place, which can't figure out that you already have the latest ones, and then they just
+
+278
+00:37:51.840 --> 00:37:55.710
+hrishikb@andrew.cmu.edu: Kind of repeatable ones, and… Yeah.
+
+279
+00:37:55.920 --> 00:37:58.969
+hrishikb@andrew.cmu.edu: And that's a very specific thing that you can hear.
+
+280
+00:38:03.630 --> 00:38:07.539
+hrishikb@andrew.cmu.edu: I think that's all the progress updates we had to share.
+
+281
+00:38:08.020 --> 00:38:10.289
+hrishikb@andrew.cmu.edu: Do you guys have anything you'd like to add?
+
+282
+00:38:10.980 --> 00:38:12.050
+hrishikb@andrew.cmu.edu: impressions?
+
+283
+00:38:12.450 --> 00:38:23.459
+hrishikb@andrew.cmu.edu: Something that will be here. Just probably, I think, when you guys start working with LinkedIn, then I'll probably have a look at what I would say. But otherwise,
+
+284
+00:38:23.780 --> 00:38:28.470
+hrishikb@andrew.cmu.edu: Right now, things are looking good, like, this is late, and the film is…
+
+285
+00:38:29.240 --> 00:38:36.189
+hrishikb@andrew.cmu.edu: I'm interested to, like, hear about Leo's work as well, because it's… his work is insanely complicated.
+
+286
+00:38:36.670 --> 00:38:38.129
+hrishikb@andrew.cmu.edu: I guess it's pharmacy.
+
+287
+00:38:38.520 --> 00:38:41.690
+hrishikb@andrew.cmu.edu: But other than that, I think we just think we'll be able to do.
+
+288
+00:38:42.400 --> 00:38:46.560
+hrishikb@andrew.cmu.edu: I'm curious to see an update to be back again.
+
+289
+00:38:46.920 --> 00:38:48.500
+hrishikb@andrew.cmu.edu: Looks like a lot of progress.
+
+290
+00:38:49.260 --> 00:38:50.160
+hrishikb@andrew.cmu.edu: Oopsin.
+
+291
+00:38:50.900 --> 00:39:10.719
+hrishikb@andrew.cmu.edu: Just, just, just make sure you guys drop me a message. We can work ad hoc as well. I feel like it's come to this point where only in meetings the actual points where we get access, or things like this, they should be very, like, async, in my opinion. You should just let us know, and then I'll get to work on it whenever I get a little time in the room.
+
+292
+00:39:11.110 --> 00:39:13.190
+hrishikb@andrew.cmu.edu: He just… when I pitched on the island.
+
+293
+00:39:15.150 --> 00:39:28.590
+hrishikb@andrew.cmu.edu: Great, great to see y'all. Wonderful day. Yeah, for sure. Yeah, just wait till the weekend beforehand. Well, it's getting hotter next week. Oh, is it? Yeah, okay.
+

@@ -1,7 +1,7 @@
 # eParts Client Meetings — Cross-Meeting Analysis
 
-**Generated:** 2026-04-23 17:47 UTC
-**Meetings analyzed:** 5
+**Generated:** 2026-07-20 05:14 UTC
+**Meetings analyzed:** 15
 
 ---
 
@@ -14,36 +14,50 @@
 | 2026-02-26 | 30min | 2 | 4467 | ML/Model, Architecture, Data |
 | 2026-04-02 | 32min | 4 | 4629 | Data, ML/Model, Architecture |
 | 2026-04-16 | 24min | 3 | 3095 | Data, ML/Model, Architecture |
+| 2026-05-14 | 42min | 1 | 5296 | ML/Model, Architecture, Data |
+| 2026-05-21 | 53min | 4 | 4973 | Data, ML/Model, Infrastructure |
+| 2026-05-28 | 35min | 1 | 4757 | Data, ML/Model, Infrastructure |
+| 2026-06-04 | 39min | 1 | 5774 | ML/Model, Data, Architecture |
+| 2026-06-11 | 6min | 2 | 977 | Data |
+| 2026-06-18 | 16min | 3 | 2328 | ML/Model, Architecture, Data |
+| 2026-06-25 | 39min | 1 | 5893 | ML/Model, Architecture, Data |
+| 2026-07-02 | 27min | 7 | 3182 | ML/Model, Data |
+| 2026-07-09 | 26min | 3 | 3609 | ML/Model, Data, Architecture |
+| 2026-07-16 | 23min | 6 | 3155 | ML/Model, Architecture, Data |
 
 ## Aggregate Statistics
 
-- **Total meeting time:** 198 minutes (3.3 hours)
-- **Total words transcribed:** 28,596
-- **Total speaker turns:** 300
-- **Unique participants:** 7 (Arjun, Ashritha, David Mine, Dennis Grinberg, Harsha (eParts), Hrishik, Jaivard)
-- **Average meeting length:** 39 minutes
-- **Average words per meeting:** 5,719
+- **Total meeting time:** 504 minutes (8.4 hours)
+- **Total words transcribed:** 68,540
+- **Total speaker turns:** 678
+- **Unique participants:** 11 (Arjun, Ashritha, Cliff (Mentor), David (eParts), David Mine, Dennis Grinberg, Harsha (eParts), Hrishik, Jaivard, Jake (eParts), Liu)
+- **Average meeting length:** 33 minutes
+- **Average words per meeting:** 4,569
 
 ## Topic Frequency Across Meetings
 
-- **ML/Model**: █████ (5/5 meetings, 100%)
-- **Data**: █████ (5/5 meetings, 100%)
-- **Architecture**: █████ (5/5 meetings, 100%)
-- **Onboarding**: ████ (4/5 meetings, 80%)
-- **Project Mgmt**: ██ (2/5 meetings, 40%)
-- **Infrastructure**: ██ (2/5 meetings, 40%)
+- **Data**: ███████████████ (15/15 meetings, 100%)
+- **ML/Model**: ██████████████ (14/15 meetings, 93%)
+- **Architecture**: █████████████ (13/15 meetings, 87%)
+- **Onboarding**: █████████ (9/15 meetings, 60%)
+- **Infrastructure**: ███████ (7/15 meetings, 47%)
+- **Project Mgmt**: ████ (4/15 meetings, 27%)
 
 ## Speaker Participation
 
 | Speaker | Meetings | Total Words | Avg Words/Meeting |
 |---------|----------|-------------|-------------------|
-| Hrishik | 4 | 17,600 | 4,400 |
-| Harsha (eParts) | 2 | 4,455 | 2,227 |
-| Jaivard | 2 | 2,588 | 1,294 |
-| Ashritha | 2 | 2,097 | 1,048 |
+| Hrishik | 12 | 34,225 | 2,852 |
+| Ashritha | 7 | 17,156 | 2,450 |
+| Harsha (eParts) | 8 | 8,998 | 1,124 |
+| Jaivard | 4 | 3,487 | 871 |
+| Liu | 2 | 1,585 | 792 |
 | David Mine | 1 | 1,569 | 1,569 |
+| Jake (eParts) | 1 | 465 | 465 |
+| Cliff (Mentor) | 3 | 333 | 111 |
+| Arjun | 2 | 307 | 153 |
 | Dennis Grinberg | 1 | 233 | 233 |
-| Arjun | 1 | 54 | 54 |
+| David (eParts) | 1 | 182 | 182 |
 
 ---
 

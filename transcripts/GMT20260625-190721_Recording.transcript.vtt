@@ -1,0 +1,1078 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.190
+hrishikb@andrew.cmu.edu: Labor Premier.
+
+2
+00:00:02.970 --> 00:00:06.390
+hrishikb@andrew.cmu.edu: And they don't have air conditioning on sports.
+
+3
+00:00:10.060 --> 00:00:17.129
+hrishikb@andrew.cmu.edu: Okay, I guess, we can get started. I did not… I wasn't going to send an agenda, because there were a few things changing last moment.
+
+4
+00:00:17.230 --> 00:00:19.300
+hrishikb@andrew.cmu.edu: As to what Planet discussed.
+
+5
+00:00:19.410 --> 00:00:28.890
+hrishikb@andrew.cmu.edu: So primarily, I'll give you an update of how things are going on. We'll all go around, I'll handle the engine part, and then ML and LLM will go from there.
+
+6
+00:00:29.150 --> 00:00:33.010
+hrishikb@andrew.cmu.edu: So, for the ingestion part,
+
+7
+00:00:33.070 --> 00:00:36.169
+hrishikb@andrew.cmu.edu: Like I said, the next task was gonna be to…
+
+8
+00:00:36.180 --> 00:00:54.349
+hrishikb@andrew.cmu.edu: map the schema, but when I was analyzing the ETEM work that you have to do, so before I can finalize the schema, I had to kind of integrate ETEM into the engine part, so that, like, load all the data from ETEM, like, separate out all the, like, classes, product types.
+
+9
+00:00:54.430 --> 00:01:10.290
+hrishikb@andrew.cmu.edu: And things like that. So, currently, I have done that part, and before we can have a proper schema that we can possibly push to the other module, we need to finalize more details on the ETM side. Like, it is,
+
+10
+00:01:10.890 --> 00:01:26.919
+hrishikb@andrew.cmu.edu: like, it's not something we need help in, it's just something that'll require a bit of work. So, I'm not sharing anything. Like, I don't have much to share. I… I did get Todd to make me an update of how many, like, what sort of data we have.
+
+11
+00:01:27.160 --> 00:01:31.500
+hrishikb@andrew.cmu.edu: kind of, ingested, sir.
+
+12
+00:01:34.860 --> 00:01:45.370
+hrishikb@andrew.cmu.edu: Where did you get the, ETM data from? Oh, from the site. Did you guys get a subscription, or, no, that's completely e-class. Oh, I'm thinking of E-Class, okay.
+
+13
+00:01:45.970 --> 00:01:48.650
+hrishikb@andrew.cmu.edu: We're using ETEM 10.0.
+
+14
+00:01:54.040 --> 00:01:55.620
+hrishikb@andrew.cmu.edu: Got it, one sec.
+
+15
+00:01:59.680 --> 00:02:00.720
+hrishikb@andrew.cmu.edu: Oh…
+
+16
+00:02:13.600 --> 00:02:15.469
+hrishikb@andrew.cmu.edu: So this is the high level of it.
+
+17
+00:02:15.760 --> 00:02:29.200
+hrishikb@andrew.cmu.edu: the, like, varsity product drops around 600 product classes and features, so now we have all that mapped out to a, like, local, database, so whenever we need to… because we cannot really…
+
+18
+00:02:29.200 --> 00:02:36.969
+hrishikb@andrew.cmu.edu: map these values to the, like, stuff we'll get from the OCR, because you don't want to modify the data before we hit the ML pipeline.
+
+19
+00:02:36.970 --> 00:02:48.689
+hrishikb@andrew.cmu.edu: So, we have data ready, which, we want the ML pipeline to use later on, so that we can map the accurate ETEM values for the product, class, all those things. So, we plan to do…
+
+20
+00:02:48.690 --> 00:03:00.100
+hrishikb@andrew.cmu.edu: that after we have done, coordinate score, we'll also match it to a ETEM standard. So, the output would also have, let's say, a couple of ETM columns with the ETEM ID, or whatever flags are necessary.
+
+21
+00:03:00.230 --> 00:03:02.829
+hrishikb@andrew.cmu.edu: So, this is the, kind of, the groundwork for that.
+
+22
+00:03:03.440 --> 00:03:11.769
+hrishikb@andrew.cmu.edu: after this, probably, what's gonna happen in the initial part is, Arjun is currently working on the integration with OCR,
+
+23
+00:03:11.840 --> 00:03:23.840
+hrishikb@andrew.cmu.edu: There's some, like, headway there also. After the ETEM standard is ready to use, that's when, looking into… including that, I'll create a schema of what we're gonna push.
+
+24
+00:03:24.090 --> 00:03:27.830
+hrishikb@andrew.cmu.edu: And like that, that's gonna be the next thing after the 18 work is complete.
+
+25
+00:03:28.050 --> 00:03:33.609
+hrishikb@andrew.cmu.edu: This was not, like… I thought it was gonna be pretty small, but the…
+
+26
+00:03:33.860 --> 00:03:43.540
+hrishikb@andrew.cmu.edu: trying to integrate ETEM is a bit… not tricky, but a bit lengthy. So, yeah, that is primarily what I had been working on.
+
+27
+00:03:43.840 --> 00:03:48.255
+hrishikb@andrew.cmu.edu: And, like, I don't have any questions right now, it is pretty straightforward, but…
+
+28
+00:03:49.980 --> 00:04:02.199
+hrishikb@andrew.cmu.edu: I think later on, we might have to, like, after we have the initial OCL initial part combined, we might have to, like, if it's working, we might have to have someone, like, review it once to see what's missing, what's not.
+
+29
+00:04:03.760 --> 00:04:14.180
+hrishikb@andrew.cmu.edu: Yeah, so did you have to derive the schema, or did they provide you a schema to look at their data? Schema… like, ETEM? Yeah. ETEM is basically, it's a…
+
+30
+00:04:14.330 --> 00:04:20.630
+hrishikb@andrew.cmu.edu: It is kind of like mapping, like, we have actuators and valves, so it has things like this.
+
+31
+00:04:20.649 --> 00:04:40.109
+hrishikb@andrew.cmu.edu: electrically controlled two-way control valves, so the ETEM code is EC104408. So, these are, like, kind of the global standards which are following. So, all of these, they have different standardized values, and when we… we are planning, when we see one of these values, we'll map it to our ETEM code that we have.
+
+32
+00:04:40.640 --> 00:04:45.979
+hrishikb@andrew.cmu.edu: There is no standardized schema, but it's gonna be, like, we'll be mapping
+
+33
+00:04:46.130 --> 00:04:48.509
+hrishikb@andrew.cmu.edu: what we get to the item values.
+
+34
+00:04:49.290 --> 00:04:57.630
+hrishikb@andrew.cmu.edu: We just need to store all this data in a database so we can query it as and when we need it. You're storing all the EDAM data in a database so you can query data, right?
+
+35
+00:04:59.210 --> 00:05:01.970
+hrishikb@andrew.cmu.edu: This is just some brief overviews of your examples.
+
+36
+00:05:02.840 --> 00:05:04.140
+hrishikb@andrew.cmu.edu: Nothing much higher.
+
+37
+00:05:06.280 --> 00:05:19.179
+hrishikb@andrew.cmu.edu: Correct me if I'm wrong, is there… the code, does that also translate to other standards, like eClass? Like, I know that there's a way that they translate to each other with a shared value. Is it that same, like, EC…
+
+38
+00:05:20.150 --> 00:05:23.510
+hrishikb@andrew.cmu.edu: Do you have an available phone?
+
+39
+00:05:23.510 --> 00:05:43.250
+hrishikb@andrew.cmu.edu: I've not, looked into that, but you're saying that if you have EDUM data, and if you have e-class data, there's a way you can convert… Yeah, someone's already gone ahead and, like… There's a one-to-one mapping. Yeah, there is a one-to-one mapping, and we'll… like, whatever field is used to those, we'll probably also want to use that field to map, like, as the key, if you will, to the ePARS data. I imagine we'd want to start storing that.
+
+40
+00:05:43.520 --> 00:05:47.439
+hrishikb@andrew.cmu.edu: Okay. Universal code against our product types and categories.
+
+41
+00:05:48.690 --> 00:06:06.550
+hrishikb@andrew.cmu.edu: eTime is what we want to use overall, but ideally, like, we'll also have a database of eClass at some point, so if we have customers who use eClass, they can… almost like they're translating a page to another language. E-Class is ENClass, right? Yeah. I'll take a look at that.
+
+42
+00:06:06.750 --> 00:06:10.780
+hrishikb@andrew.cmu.edu: I mean, the, like, end goal is, as Jake mentioned, and it's still, like.
+
+43
+00:06:11.040 --> 00:06:23.339
+hrishikb@andrew.cmu.edu: have support for that. Yeah, but we as eParks want to kind of make our standard moving forward mostly based on ETIM. We might have an additional thing or change something, but it's based on the ETIM.
+
+44
+00:06:23.440 --> 00:06:31.159
+hrishikb@andrew.cmu.edu: Okay. And what's the scores of the class in these periods? Two classes, the European one? Okay.
+
+45
+00:06:31.540 --> 00:06:43.119
+hrishikb@andrew.cmu.edu: Then there's another one, too. UNSPC? UNSBC system. I know what's happening. It's a point of this, but…
+
+46
+00:06:45.640 --> 00:06:50.720
+hrishikb@andrew.cmu.edu: Yeah, I think that is about the update I have for the… In Spark.
+
+47
+00:06:51.410 --> 00:06:54.119
+hrishikb@andrew.cmu.edu: Okay, I can go next.
+
+48
+00:06:54.760 --> 00:07:06.200
+hrishikb@andrew.cmu.edu: See, there is a direct marketing, but it's not a one-to-one. It's a one-to-one translation by somebody. Yeah, they've been trying it since 2001.
+
+49
+00:07:06.580 --> 00:07:09.240
+hrishikb@andrew.cmu.edu: Wow, that's…
+
+50
+00:07:10.610 --> 00:07:21.049
+hrishikb@andrew.cmu.edu: to getting different standards organizations on the same page. So, this is the main goal, like, you guys come up with the final standard of the U.S.
+
+51
+00:07:21.530 --> 00:07:29.399
+hrishikb@andrew.cmu.edu: I think ET was probably mostly video sites.
+
+52
+00:07:30.990 --> 00:07:33.809
+hrishikb@andrew.cmu.edu: Okay, I can… Hiking around.
+
+53
+00:07:34.350 --> 00:07:38.040
+hrishikb@andrew.cmu.edu: So… I, I looked through what
+
+54
+00:07:38.470 --> 00:07:41.399
+hrishikb@andrew.cmu.edu: Harsha had, shown me, and…
+
+55
+00:07:41.890 --> 00:07:45.440
+hrishikb@andrew.cmu.edu: This is… oh, yeah, sorry.
+
+56
+00:07:45.890 --> 00:07:47.040
+hrishikb@andrew.cmu.edu: So…
+
+57
+00:07:47.780 --> 00:07:59.439
+hrishikb@andrew.cmu.edu: This is not… sorry, this is GPT 5.4. I could, like Hashan said, I could not use 5.5 because… yeah, so… I just, gave it 2,000 exam… of the examples.
+
+58
+00:07:59.570 --> 00:08:04.750
+hrishikb@andrew.cmu.edu: And it came back with around, it came back with 81.45% accuracy.
+
+59
+00:08:04.910 --> 00:08:15.920
+hrishikb@andrew.cmu.edu: Its confidence is pretty good, it's 94%, so it's… when it says that it's 80% sure in an answer, it's,
+
+60
+00:08:16.320 --> 00:08:25.639
+hrishikb@andrew.cmu.edu: the chances of it being wrong is what they say it is. There's also an ECE calibration error, but that's, I think, on another page.
+
+61
+00:08:25.890 --> 00:08:31.110
+hrishikb@andrew.cmu.edu: The token usage for 2,000 examples was, 320,000 tokens.
+
+62
+00:08:31.490 --> 00:08:37.930
+hrishikb@andrew.cmu.edu: And… So, this is how its confidence was basically distributed.
+
+63
+00:08:38.190 --> 00:08:40.400
+hrishikb@andrew.cmu.edu: She probably got a kid to go convincing it.
+
+64
+00:08:41.120 --> 00:08:47.950
+hrishikb@andrew.cmu.edu: So… It looks at, it looks at… the…
+
+65
+00:08:48.410 --> 00:08:51.290
+hrishikb@andrew.cmu.edu: It gives the confidence scores for each of its predictions.
+
+66
+00:08:51.420 --> 00:08:53.440
+hrishikb@andrew.cmu.edu: That is a bit of text. Yes.
+
+67
+00:08:53.600 --> 00:08:56.660
+hrishikb@andrew.cmu.edu: And then… then we can just check against them. So…
+
+68
+00:08:57.390 --> 00:09:15.400
+hrishikb@andrew.cmu.edu: The thing is, it still, likes to almost, always give a very high con… between 90% to 100%. Yeah, and it's always super confident, but this is much better than what the smaller example I just showed you. It will very rarely, like, you can see that when it gives a…
+
+69
+00:09:15.540 --> 00:09:23.489
+hrishikb@andrew.cmu.edu: smaller score, it is half of the time it is wrong, so there are still issues, but I can actually show the rest and…
+
+70
+00:09:23.650 --> 00:09:27.530
+hrishikb@andrew.cmu.edu: And this is the reliability versus, I would say.
+
+71
+00:09:28.050 --> 00:09:31.640
+hrishikb@andrew.cmu.edu: How good it gets as we increase the number of examples.
+
+72
+00:09:31.930 --> 00:09:42.009
+hrishikb@andrew.cmu.edu: It does take, quite a huge number just to… the perfect calibration would be the dashed line, so it does take, around…
+
+73
+00:09:42.400 --> 00:09:50.319
+hrishikb@andrew.cmu.edu: It's in the thousands of examples. I did not test with on thousands. This is just, how I picked it. What's the price of GBD 5.4 again?
+
+74
+00:09:50.610 --> 00:09:51.810
+hrishikb@andrew.cmu.edu: Did you take it a bit?
+
+75
+00:09:52.390 --> 00:09:55.910
+hrishikb@andrew.cmu.edu: I… I did try to,
+
+76
+00:09:56.100 --> 00:10:10.289
+hrishikb@andrew.cmu.edu: see how much money it was, showing, but it only showed the number of requests. The money amount was always zero, no matter how many requests. No, that's because it's the playground. But, no, no, as in,
+
+77
+00:10:10.290 --> 00:10:28.829
+hrishikb@andrew.cmu.edu: you can just look at the price they charge on the Discover page. I see. You can… they literally list down all the different pricing models, but I can't want any problem. I… I can… it's, I… it's, the… I do have the token total, so I can just divide and, like, give it to you. So it's…
+
+78
+00:10:29.380 --> 00:10:33.390
+hrishikb@andrew.cmu.edu: 160-ish tokens per… and then…
+
+79
+00:10:33.710 --> 00:10:44.419
+hrishikb@andrew.cmu.edu: I think it's better if I gave it in terms of thousand, otherwise the not value would be transparent. Yeah, I mean, total number of tokens mapped to dollar value would actually be a better estimate of, like, how much…
+
+80
+00:10:44.590 --> 00:10:51.770
+hrishikb@andrew.cmu.edu: how feasible that solution actually is. It's $2.5 per 1 million input total, and $15 per 1 million input.
+
+81
+00:10:52.930 --> 00:10:58.429
+hrishikb@andrew.cmu.edu: So, input and output, yeah, okay. I can convert that.
+
+82
+00:10:59.380 --> 00:11:04.530
+hrishikb@andrew.cmu.edu: Deep… this is DeepSeekv4. Before this, I did try to use Cloud.
+
+83
+00:11:04.860 --> 00:11:10.049
+hrishikb@andrew.cmu.edu: But Cloud 4.8, had… it's just not available, I cannot deploy it.
+
+84
+00:11:10.200 --> 00:11:25.519
+hrishikb@andrew.cmu.edu: 4.7… these are all of those. 4.7, it said insufficient quota. 4.6, it also said insufficient quota. Finally, I was… I tried to use Sonic 4.6, but that just is not available in the region, so I just kind of gave us at that point.
+
+85
+00:11:25.790 --> 00:11:41.270
+hrishikb@andrew.cmu.edu: So, this is for deep-seq V4. Ignore the V2, the first one had some errors. So, this is also for the 2,000 examples. It's pretty similar, that one was, there's just a 1% difference, it's also 82%.
+
+86
+00:11:41.570 --> 00:11:48.289
+hrishikb@andrew.cmu.edu: The token amount is also similar. It's also 350, that was 320.
+
+87
+00:11:48.400 --> 00:11:53.119
+hrishikb@andrew.cmu.edu: And this is the calibration, so it gets 13% of the…
+
+88
+00:11:53.590 --> 00:12:01.460
+hrishikb@andrew.cmu.edu: Basically, its confidence scores are wrong, so… And finally, this is Kimi.
+
+89
+00:12:02.050 --> 00:12:12.569
+hrishikb@andrew.cmu.edu: This has, I would say, the highest accuracy, and its confidence is also… its confidence scoring is also good, its calibration error is the lowest.
+
+90
+00:12:12.910 --> 00:12:21.309
+hrishikb@andrew.cmu.edu: But it uses, I don't know why it uses, like, more than twice the amount of tokens, it's 840s.
+
+91
+00:12:23.100 --> 00:12:24.239
+hrishikb@andrew.cmu.edu: Can I check the price.
+
+92
+00:12:25.980 --> 00:12:35.270
+hrishikb@andrew.cmu.edu: This is all on Azure. Yes, these are all on the… So… Yeah.
+
+93
+00:12:35.730 --> 00:12:43.520
+hrishikb@andrew.cmu.edu: basically, it's the best, I think, of all of them, especially for the calibration error, and…
+
+94
+00:12:43.920 --> 00:12:47.639
+hrishikb@andrew.cmu.edu: I can add another column with the prices and stuff.
+
+95
+00:12:47.960 --> 00:12:54.509
+hrishikb@andrew.cmu.edu: But the thing is, 83, 82, and 81%, these are much below what
+
+96
+00:12:54.770 --> 00:13:01.500
+hrishikb@andrew.cmu.edu: Leo has. His is 95.1 or something like that. So… and…
+
+97
+00:13:02.070 --> 00:13:10.899
+hrishikb@andrew.cmu.edu: Even though the calibration errors are 11%, or at the… at the least, the thing is.
+
+98
+00:13:11.650 --> 00:13:15.649
+hrishikb@andrew.cmu.edu: That would still mean a lot of rework, and…
+
+99
+00:13:16.480 --> 00:13:34.000
+hrishikb@andrew.cmu.edu: So I don't think, overall, that this is, suitable. Yeah. Okay, then that's actually lower than the rest, even, even if it's, like, two and a half times the total usage.
+
+100
+00:13:34.250 --> 00:13:44.599
+hrishikb@andrew.cmu.edu: So, these are, I think, the… these are the most latest models that I had. There's also Rock, but that just did not give good results, so I did not even bother including it.
+
+101
+00:13:44.740 --> 00:14:01.900
+hrishikb@andrew.cmu.edu: And plot, as I told you, nothing worked, and I didn't want to go to, like, 4.5 or something weird on here. So these were the latest three that I could use. If they have higher models, they… like, the more late, or, I guess, current models, those don't work.
+
+102
+00:14:02.020 --> 00:14:06.569
+hrishikb@andrew.cmu.edu: Yeah, I think one of the reasons why we keep catching the insufficient thing was
+
+103
+00:14:06.940 --> 00:14:11.899
+hrishikb@andrew.cmu.edu: Azure actually provisions models based on how much the water usage is within the company.
+
+104
+00:14:12.110 --> 00:14:29.429
+hrishikb@andrew.cmu.edu: for their APIs. So if you actually have a very, very high API usage for them, they kind of provision, like, better models, because they know that these guys do. Okay. Because we don't really use that much… that much of, like, self-provisioned AI within the company, or any sort of features we offer.
+
+105
+00:14:29.520 --> 00:14:37.610
+hrishikb@andrew.cmu.edu: It's just one single appointment, let's say. So that's… that's probably the reason why we were… So…
+
+106
+00:14:37.810 --> 00:14:38.700
+hrishikb@andrew.cmu.edu: Yeah.
+
+107
+00:14:38.960 --> 00:14:43.240
+hrishikb@andrew.cmu.edu: it turned out to be pretty cheap. I was thinking that it would take more attempts, but…
+
+108
+00:14:43.390 --> 00:15:03.199
+hrishikb@andrew.cmu.edu: when you told me about the playground stuff, that helped me, like, run through a lot of, errors, because if I had done all the 2,000 examples without those, like, initially, I just fed in 20 examples with structure, so I could see if it was giving kind of the right output, and that helped a lot. So, in total, like,
+
+109
+00:15:03.680 --> 00:15:05.909
+hrishikb@andrew.cmu.edu: You can check them on, but it's Gale.
+
+110
+00:15:06.160 --> 00:15:11.979
+hrishikb@andrew.cmu.edu: And… I can kind of confidently say that with 2,000 examples, the
+
+111
+00:15:14.140 --> 00:15:26.710
+hrishikb@andrew.cmu.edu: It's a very high confidence. The statistical power of the test is enough that I can say that it's much more noise. It's in that no amount of tweaking will get 83 to 95. Yeah, and there's no point. I mean, if you can't…
+
+112
+00:15:26.990 --> 00:15:34.179
+hrishikb@andrew.cmu.edu: like, for 2000 examples, if we were to cross a certain threshold, then it's something else, I think it's just best invested value, so…
+
+113
+00:15:34.820 --> 00:15:42.400
+hrishikb@andrew.cmu.edu: You've done your due diligence to investigate this aspect. I've tried every sample available on that service.
+
+114
+00:15:46.280 --> 00:15:49.369
+hrishikb@andrew.cmu.edu: That is it? I don't know, Ryan.
+
+115
+00:15:50.130 --> 00:16:01.630
+hrishikb@andrew.cmu.edu: I think we didn't move forward from the LLM part. Yeah, no, move forward, I mean, like, we can drop the POC.
+
+116
+00:16:05.090 --> 00:16:07.090
+hrishikb@andrew.cmu.edu: Yeah, we didn't know.
+
+117
+00:16:07.580 --> 00:16:13.410
+hrishikb@andrew.cmu.edu: We'll show up, Pete. Alright, I don't have anything to show, but, like, I finished my POC on my first
+
+118
+00:16:13.550 --> 00:16:19.509
+hrishikb@andrew.cmu.edu: So use document intelligence, which is, yeah, Azure's, like, inbuilt in.
+
+119
+00:16:19.820 --> 00:16:26.409
+hrishikb@andrew.cmu.edu: Along with that, I use GPT4 only, from Foundation, and
+
+120
+00:16:27.040 --> 00:16:34.739
+hrishikb@andrew.cmu.edu: And it was not able to be, Chandra, which was on Data Lab. I think I mentioned this last week, before the 9 export for CS service.
+
+121
+00:16:34.910 --> 00:16:40.509
+hrishikb@andrew.cmu.edu: But then I kept… so one… one issue was that, the prompt.
+
+122
+00:16:40.870 --> 00:16:50.179
+hrishikb@andrew.cmu.edu: So, document information was able to extract everything, but the LLM wasn't able to, like, properly classify them, so that's where the problem started.
+
+123
+00:16:50.370 --> 00:17:03.790
+hrishikb@andrew.cmu.edu: Yeah, I tried with 4.0 after, 4-0 minutes, but it was worse, so I don't know what went up. Then I made the prompt a little better, a little more work, and then, the error rate back down.
+
+124
+00:17:03.890 --> 00:17:18.920
+hrishikb@andrew.cmu.edu: Then what I did is I, combined both Azure Kodomary and Photos, and then I took a union set of both of them, and that gave the least amount of evidence. We almost came down to 2%, and, Chandra updated that was 4%.
+
+125
+00:17:19.140 --> 00:17:27.490
+hrishikb@andrew.cmu.edu: So, two personality was okay, but I wanted to go lower. So, I had Dockering running Looply, that's an open source stuff, mostly running loop.
+
+126
+00:17:27.630 --> 00:17:41.379
+hrishikb@andrew.cmu.edu: So it, ran document intelligence first, and then passed it on to, Poro Mini, Doppling, and, Poro, and got the union set up there, and that got it down to 1.3%. So that's the lowest I've gotten now.
+
+127
+00:17:41.610 --> 00:17:53.060
+hrishikb@andrew.cmu.edu: And I can still keep going till, like, I don't know, like, 0.5% is where I think I feel comfortable, so that we don't need any human intervention there, because we use photo, though.
+
+128
+00:17:53.060 --> 00:18:07.209
+hrishikb@andrew.cmu.edu: Just probably use 5 Mini, because that's the cheapest model that GPD offers. Oh, yeah. Oh, I thought because… I just started with 40, because… I think GPD5 Mini is one of the most widely used, like.
+
+129
+00:18:07.310 --> 00:18:21.720
+hrishikb@andrew.cmu.edu: APIs injected for them. Okay, so they actually give the best price for primary. I would just say, like, look at the Discover page, see all the prices, and I would say, just based on that, just, like, okay, yeah. Because you can even go with something higher as well, but,
+
+130
+00:18:21.720 --> 00:18:39.670
+hrishikb@andrew.cmu.edu: it all depends on how easy it gets, right? For how many tokens… how many tokens are actually consumed versus… Right, so much it has to use. So, looking at the full catalog, which is, like, 5,000 documents, and it comes to 25,000 pages, yeah. So, we're going with this two-reader thing, which was 4AM mini plus 4AM.
+
+131
+00:18:40.140 --> 00:18:51.310
+hrishikb@andrew.cmu.edu: The entire thing would be done in, like, 500 to $750. It's a one-time thing, and then we don't have to worry about it. And, the third reader also, docking is packaging, you can run it…
+
+132
+00:18:51.430 --> 00:19:04.559
+hrishikb@andrew.cmu.edu: On a VBS or something. Yeah, so, but I'll try out with, 5… 5 minutes, 5 minutes. Okay, yeah, I'll try it out with 5 minutes, and then see what it is. So what was the cost again?
+
+133
+00:19:04.990 --> 00:19:13.239
+hrishikb@andrew.cmu.edu: 5 Mini? No, per his result for the photo. Oh, for photo mini plus 40, it comes to $500.
+
+134
+00:19:13.320 --> 00:19:21.319
+hrishikb@andrew.cmu.edu: To find it to 750, that's the problem. That's if I do both of them together and get the unions, so that I can reduce the error percentage.
+
+135
+00:19:21.340 --> 00:19:36.389
+hrishikb@andrew.cmu.edu: But that's for all the documents we have. That's all the documents, right? So that's a… would be an infrequent cost, right? It's… yeah, it's a one-time cost. It's a one-time cost, and then, like, whenever the documents come in, it would probably be, like, $1,000
+
+136
+00:19:38.180 --> 00:19:46.380
+hrishikb@andrew.cmu.edu: Yeah, that's pretty much what I had, along with that, I got Rishi's, report English.
+
+137
+00:19:46.550 --> 00:20:02.560
+hrishikb@andrew.cmu.edu: And, like, we had done some work on TestRack, which was another OCR engine, but, like, I'd also done the same, one. That's just for, like, mock purpose, so I can continue my work. Yeah, so I need to remove TestRack, and then I need to plug in this one. And then, once that's complete, the integrations
+
+138
+00:20:02.690 --> 00:20:18.740
+hrishikb@andrew.cmu.edu: fully done, and then we can continue working on the… Yeah, ETAM and the schema thing is that we push to email. Yeah, ETAM and eta. So, one more thing we wanted to know is, downstream of Aglestion, we are storing… I think right now, locally, we are testing out with Postgres.
+
+139
+00:20:18.870 --> 00:20:38.269
+hrishikb@andrew.cmu.edu: So, how are we planning to, store things? Like, I think we mentioned about some kind of a staging table that you can get. Yeah, it's the exact same, did we not get the staging schema? Maybe not. We… that is schema, we don't have a place to store it. Yeah, the staging tables will be where we want to store the output of all this.
+
+140
+00:20:38.350 --> 00:20:46.630
+hrishikb@andrew.cmu.edu: Yeah, but, I guess, is that your question? Like, what tables? Yeah, yeah, if all the… anything that ends in, underscore staging is…
+
+141
+00:20:46.630 --> 00:21:11.120
+hrishikb@andrew.cmu.edu: Okay, and we get to view that on our job at the stage? I… we can give you access for that. Okay, can you make, like, a duplicate of this table? Duplicate, exactly. Also, the current… the current PIMS is a Microsoft SQL Server. Okay, no, but we will be moving to Postgres, like… Okay, like, I'm doing a big rework for PIMS right now, and I have a Postgres version of it. The tables are a little different, so… Okay. Okay. We'll plan for it to be Postgres.
+
+142
+00:21:11.120 --> 00:21:24.579
+hrishikb@andrew.cmu.edu: field of staging that we can give them that. I think we… yeah, we should do that same… because my schema's a little different. It's mostly the same idea, there's a staging table for every, like, normal product table, and yeah, there's a couple fields that we want to be simplified.
+
+143
+00:21:24.580 --> 00:21:32.030
+hrishikb@andrew.cmu.edu: Okay. So, we'll continue working on post itself, since you have… So, one more thing is, like,
+
+144
+00:21:32.030 --> 00:21:56.730
+hrishikb@andrew.cmu.edu: We need to post this code somewhere, like, I don't know what… where do you… Right now, for, like, the ingestion needs to run on some kind of a server, okay? We're seeing the code exposed so that they can talk to each other. So, we need some place to run this code on, so how do we… the Azure resourcing you have access to? Yeah, you could probably split up a container app. Oh, okay.
+
+145
+00:21:56.730 --> 00:22:08.949
+hrishikb@andrew.cmu.edu: Yeah, I was just asking, there's some container that whether or not you would… the resource actually gives FPG access to create more data. Okay. Okay, we'll just try spinning up a very basic container for working on that.
+
+146
+00:22:09.620 --> 00:22:15.390
+hrishikb@andrew.cmu.edu: And… So right now, you just want us to continue working locally on a Postgres basis.
+
+147
+00:22:15.750 --> 00:22:25.940
+hrishikb@andrew.cmu.edu: Yeah, that's fine. I mean, we need to get you the updated schema, but yeah, that's totally fine. That's what the end goal will be, is outputting all this… Yeah, I think, I mean,
+
+148
+00:22:26.720 --> 00:22:49.779
+hrishikb@andrew.cmu.edu: we could probably just wait to get them into post-list, and we can report them, and once it's finalized from the end, we can actually give them the… Yeah, I don't think… So I think the schema's finalized on my end. I'm still… I'm still doing stuff with the actual, like, rework of the applications and work with the schema, but I think… I think that schema will be useful for the staging part. Like, right now, we have not reached that yet. We are, like, that will be after the ML part, before the staging.
+
+149
+00:22:49.780 --> 00:22:53.829
+hrishikb@andrew.cmu.edu: In a month or a month and a half, we did both provision, like, a…
+
+150
+00:22:53.880 --> 00:23:04.380
+hrishikb@andrew.cmu.edu: Yeah, yeah. I think for now, like, we are using poster, because it's just for our internal use, so that we can, have the data stored and communicate in the components.
+
+151
+00:23:04.410 --> 00:23:22.600
+hrishikb@andrew.cmu.edu: So, I'm still confused as to where this EDIM thing lands in. So, does that also get stored in some kind of a table? Niosity. Oh, so that's a separate table? It would be another table, and it maps to the tablet. I'd be curious, actually, we should… I'm curious…
+
+152
+00:23:22.680 --> 00:23:32.999
+hrishikb@andrew.cmu.edu: I've kind of made something intermediate for kind of mapping and some tables, and users can go in and define that, like, this ouch controls category equals this ETINS category, and…
+
+153
+00:23:33.000 --> 00:23:43.389
+hrishikb@andrew.cmu.edu: But, I'd be curious how you're doing it, too, and maybe come up with what's best for, like, a final thing. I'm still flexible on what we're implementing right now with
+
+154
+00:23:43.440 --> 00:23:47.210
+hrishikb@andrew.cmu.edu: standards and the PIMS rework, so…
+
+155
+00:23:47.950 --> 00:23:57.239
+hrishikb@andrew.cmu.edu: Maybe you guys are doing a better way of storing those mappings as you start to play with that right now? So what we're doing right now is basically,
+
+156
+00:23:57.270 --> 00:24:04.290
+hrishikb@andrew.cmu.edu: like, ETAM already has a very distinguished list of, like, classes and prototypes.
+
+157
+00:24:04.290 --> 00:24:22.799
+hrishikb@andrew.cmu.edu: So, we're just storing that particular data in our, like, in our database, and then we are gonna, like, we haven't figured that part out yet, how we're gonna map it, but we don't have any manual input as of right now. So, the mapping part will be handled by the ML module. So, but if we need to have a, like, some sort of a…
+
+158
+00:24:24.230 --> 00:24:41.440
+hrishikb@andrew.cmu.edu: Well, we want to store the results of that ML model that that map is using for the feature. So that, that, like, we're not mad about the schema yet, but I was thinking about something, like, along with the, like, we have the product, prototype, the attributes, and each of those will map, have their own,
+
+159
+00:24:41.760 --> 00:24:57.679
+hrishikb@andrew.cmu.edu: let's say ETEM IDs, that'll be a separate table. Yeah, so the way I'm doing it right now is kind of what you're saying, like, the categories table, the attributes table, there's just an additional column on there for standard ID, and it just maps to a separate table where we, you know… Yeah, something like that, yeah.
+
+160
+00:24:57.860 --> 00:25:09.240
+hrishikb@andrew.cmu.edu: And that way, you can have all of them in one single table, but within that table is the ops, or the eParts Unified Standard, or the e-standard, or E-Class, and more standards. And we can sort the mapping into the network table, yeah.
+
+161
+00:25:09.830 --> 00:25:27.200
+hrishikb@andrew.cmu.edu: And then, as long as you map ETM product type to the bar's product type, that's enough for the guys. So that could be something people said that that should open those. Yeah. I think that, like, after Devon model's trained on the Ethernet as well, like, we should have a good nodes.
+
+162
+00:25:27.200 --> 00:25:30.769
+hrishikb@andrew.cmu.edu: So, is that the same ML model that we split?
+
+163
+00:25:30.770 --> 00:25:37.820
+hrishikb@andrew.cmu.edu: That, like, that we have to still figure it out. If it is best we do it in the same one, or we have another component which does the EPA mapping.
+
+164
+00:25:37.960 --> 00:25:49.510
+hrishikb@andrew.cmu.edu: Right now, we'll have the content scoring, we'll have the, like, all the ETEM data, then we have to figure out how we map that. We really need an ML model, because it's a one-time thing again, right, for all the current catalog.
+
+165
+00:25:49.950 --> 00:25:51.610
+hrishikb@andrew.cmu.edu: No, but,
+
+166
+00:25:52.480 --> 00:25:57.699
+hrishikb@andrew.cmu.edu: Because I'm thinking the, like, the names might be a bit different, so we need some sort of an accuracy score there also.
+
+167
+00:25:57.810 --> 00:26:05.300
+hrishikb@andrew.cmu.edu: Because ETEM has a very specific standard, like, the one I showed, like, it has two-way valves or something like that, and if…
+
+168
+00:26:05.300 --> 00:26:18.259
+hrishikb@andrew.cmu.edu: a company called something else, we need to be able to map it to that particular thing. Exactly. Like, even after we get the Alps mapping, yeah, we want anyone to come in and maybe they have their own categories that aren't any standard. You want to be able to map those together.
+
+169
+00:26:18.350 --> 00:26:20.680
+hrishikb@andrew.cmu.edu: Anyways.
+
+170
+00:26:22.070 --> 00:26:23.679
+hrishikb@andrew.cmu.edu: Jeez, excuse me.
+
+171
+00:26:24.240 --> 00:26:26.060
+hrishikb@andrew.cmu.edu: Okay Okay.
+
+172
+00:26:26.220 --> 00:26:37.130
+hrishikb@andrew.cmu.edu: Luke, you're… Or just, like, adjust the permits, so, two, two tests.
+
+173
+00:26:37.560 --> 00:26:43.379
+hrishikb@andrew.cmu.edu: That's the integration test for the whole, model and the component test.
+
+174
+00:26:43.630 --> 00:26:54.379
+hrishikb@andrew.cmu.edu: But I haven't completed the report, so I will actually show you all the results next week. But all the tests are passed.
+
+175
+00:26:54.520 --> 00:26:58.919
+hrishikb@andrew.cmu.edu: Right? We only have 150… One has facilities.
+
+176
+00:27:00.810 --> 00:27:05.949
+hrishikb@andrew.cmu.edu: And, I want to show you something about doing this builder.
+
+177
+00:27:11.710 --> 00:27:15.380
+hrishikb@andrew.cmu.edu: Aye. You too.
+
+178
+00:27:35.930 --> 00:27:37.120
+hrishikb@andrew.cmu.edu: Yes.
+
+179
+00:27:37.310 --> 00:27:44.830
+hrishikb@andrew.cmu.edu: So… As the whole model have been completed, the next…
+
+180
+00:27:44.950 --> 00:27:49.240
+hrishikb@andrew.cmu.edu: Since I think I can do… is to do some…
+
+181
+00:27:49.450 --> 00:27:54.129
+hrishikb@andrew.cmu.edu: concurrent both tests, and, try to…
+
+182
+00:27:56.430 --> 00:28:02.699
+hrishikb@andrew.cmu.edu: Lower the… reduce the latency for each component of the model.
+
+183
+00:28:03.040 --> 00:28:06.590
+hrishikb@andrew.cmu.edu: And to test the… Hmm.
+
+184
+00:28:09.300 --> 00:28:10.250
+hrishikb@andrew.cmu.edu: Night.
+
+185
+00:28:11.240 --> 00:28:16.230
+hrishikb@andrew.cmu.edu: I have strong… standards I may preserve.
+
+186
+00:28:16.770 --> 00:28:18.180
+hrishikb@andrew.cmu.edu: for each component.
+
+187
+00:28:22.410 --> 00:28:26.630
+hrishikb@andrew.cmu.edu: And the second is I identified the…
+
+188
+00:28:27.890 --> 00:28:32.820
+hrishikb@andrew.cmu.edu: The heaviest part for the model is the encoded part.
+
+189
+00:28:34.120 --> 00:28:39.440
+hrishikb@andrew.cmu.edu: So I want to… But some ways to…
+
+190
+00:28:40.230 --> 00:28:42.810
+hrishikb@andrew.cmu.edu: reduce the latency are also important.
+
+191
+00:28:43.060 --> 00:28:44.059
+hrishikb@andrew.cmu.edu: For the model.
+
+192
+00:28:44.660 --> 00:28:54.770
+hrishikb@andrew.cmu.edu: And to sit alone, since there are… the model has many, like, super… Hyper… superbitters.
+
+193
+00:28:55.630 --> 00:29:01.969
+hrishikb@andrew.cmu.edu: So, I want to… make, detailed documents for you.
+
+194
+00:29:03.170 --> 00:29:06.819
+hrishikb@andrew.cmu.edu: And, the people I handle.
+
+195
+00:29:07.010 --> 00:29:10.799
+hrishikb@andrew.cmu.edu: just… this model to, to, things.
+
+196
+00:29:11.940 --> 00:29:25.250
+hrishikb@andrew.cmu.edu: And if possible, I want to implement an automatic update overflow based on valuation results after testing, focus on very… focus on the metrics that have to
+
+197
+00:29:25.520 --> 00:29:27.929
+hrishikb@andrew.cmu.edu: Be outstanding, and truly.
+
+198
+00:29:28.840 --> 00:29:30.520
+hrishikb@andrew.cmu.edu: To, to change that movement.
+
+199
+00:29:32.060 --> 00:29:34.810
+hrishikb@andrew.cmu.edu: And, the, the first thing is.
+
+200
+00:29:36.980 --> 00:29:46.629
+hrishikb@andrew.cmu.edu: as I said, I want some, like, 50 or 100 corrections, like, some real data from you.
+
+201
+00:29:47.700 --> 00:29:57.090
+hrishikb@andrew.cmu.edu: But it's still okay if I don't get the gist data, because it's just too… Refines the model.
+
+202
+00:29:58.340 --> 00:30:00.430
+hrishikb@andrew.cmu.edu: And finally, I've got to,
+
+203
+00:30:01.460 --> 00:30:04.189
+hrishikb@andrew.cmu.edu: for test or the HTTP interface.
+
+204
+00:30:04.310 --> 00:30:05.310
+hrishikb@andrew.cmu.edu: And training.
+
+205
+00:30:06.110 --> 00:30:08.710
+hrishikb@andrew.cmu.edu: It's suggest what I want to do in the next few weeks.
+
+206
+00:30:10.560 --> 00:30:19.240
+hrishikb@andrew.cmu.edu: So, repeat collection examples that you mentioned. Yeah. So how do you… what sort of data do you do with that?
+
+207
+00:30:19.460 --> 00:30:23.909
+hrishikb@andrew.cmu.edu: Is it supposed to be, what the original…
+
+208
+00:30:24.020 --> 00:30:29.230
+hrishikb@andrew.cmu.edu: Oh, it's just that… How is it veribly prepared into the system?
+
+209
+00:30:29.430 --> 00:30:32.510
+hrishikb@andrew.cmu.edu: Or, do you want… So,
+
+210
+00:30:35.700 --> 00:30:42.739
+hrishikb@andrew.cmu.edu: even… I can make a jet for you today, and that'll send it to you.
+
+211
+00:30:43.100 --> 00:30:55.520
+hrishikb@andrew.cmu.edu: I will write a logic, but I don't send you yet. Yeah, that makes sense. If you just send us, like, the exact expectation on how we want these connections to look like, I can see how I can get the data. Okay, of course.
+
+212
+00:30:57.780 --> 00:30:58.800
+hrishikb@andrew.cmu.edu: And it's a fool.
+
+213
+00:31:07.650 --> 00:31:11.600
+hrishikb@andrew.cmu.edu: Yeah, I think that was our updates.
+
+214
+00:31:12.480 --> 00:31:15.490
+hrishikb@andrew.cmu.edu: I don't think, we have any…
+
+215
+00:31:15.720 --> 00:31:21.709
+hrishikb@andrew.cmu.edu: Yeah, I think, what we need to focus on in the coming weeks, at least.
+
+216
+00:31:22.500 --> 00:31:36.429
+hrishikb@andrew.cmu.edu: like, we've done a lot of POCs, we want to drop what doesn't work, and move on with… I think we'll be dropping the LM part, we want to work on product, and what's going to move to production, or, like, boost people. So, probably take some time to, like, see…
+
+217
+00:31:36.870 --> 00:31:44.330
+hrishikb@andrew.cmu.edu: how, I mean, how the timeline looks like with things drop and things stand over time?
+
+218
+00:31:44.630 --> 00:32:02.260
+hrishikb@andrew.cmu.edu: Yeah, again, yeah, we should reassess. I think, this ETEM thing should take us some time to fill it out. Initially, I thought it's not really that big a deal, but, like, it's gonna take a bit of work, not, I think.
+
+219
+00:32:02.260 --> 00:32:04.950
+hrishikb@andrew.cmu.edu: not significantly impact anything.
+
+220
+00:32:05.230 --> 00:32:15.310
+hrishikb@andrew.cmu.edu: And you plan to make that mapping between our categories in, like, each end category? Or, like, I guess, what about that part?
+
+221
+00:32:15.510 --> 00:32:33.540
+hrishikb@andrew.cmu.edu: I think we can do both, because mapping to the different categories, that should be a one-time thing. And, like, moving on, normal that in just the new documents that come in, they'll just automatically map to those categories. So I think we can do that part as well. But that'll,
+
+222
+00:32:33.670 --> 00:32:44.769
+hrishikb@andrew.cmu.edu: we might not have to, include that as part of the entire system, because that's going to be a one-time thing. Yeah, that could be essentially… Could be a separate… Yeah, I'm just curious, because I'm…
+
+223
+00:32:44.770 --> 00:33:04.129
+hrishikb@andrew.cmu.edu: I myself am doing a lot of similar things where I'm already kind of… for my test data, as I test this little rework our pins, I've already maxed some, just, like, 10 categories and attributes, but yeah, I'm gonna eventually need the same thing. I'm just wondering, like, should we be parts to it? We could have our catalog team review it, or were you already planning to, like,
+
+224
+00:33:04.200 --> 00:33:16.310
+hrishikb@andrew.cmu.edu: So, if you have something that you're already working on, can you send us, like, what kind of thing? Yeah, again, mine's just a light schema, but I've definitely, like, already started to map some of the categories together. And you're doing this…
+
+225
+00:33:16.710 --> 00:33:33.609
+hrishikb@andrew.cmu.edu: manually? I mean, I'm using Claude, but, like, that's… I mean, but I'm taking just, like, a small mock data set we use that I'm using for my local testing, and based out of those categories I have there and those attributes, I've already found their ETEM equivalents, and as I have these interfaces for switching back and forth.
+
+226
+00:33:33.610 --> 00:33:37.790
+hrishikb@andrew.cmu.edu: Yeah, honestly, we can use Plur, like, if it's a one-time thing… Yeah, exactly.
+
+227
+00:33:38.260 --> 00:33:42.339
+hrishikb@andrew.cmu.edu: Spalling, like, I mean, Sabradi here is, I think.
+
+228
+00:33:42.870 --> 00:33:52.309
+hrishikb@andrew.cmu.edu: Yeah, I think, we can do that, but, that's a bit, laid down the line for us. Okay. To map, like, after we have the initial, like.
+
+229
+00:33:52.540 --> 00:34:04.810
+hrishikb@andrew.cmu.edu: all of it indicated, then we'll probably map it even to the category. Yeah, whenever you get to that, like, I gotta be curious… I would be interested in jumping in there, if I could have a lot of that more Guardian done at that point. Okay, definitely, yeah.
+
+230
+00:34:04.940 --> 00:34:23.209
+hrishikb@andrew.cmu.edu: We'll let you know. And, like, if you have anything done, you could also share that with us, so that… Yeah, yeah, we just don't want to do it again. Like, if it's the same thing, we're implementing what you're doing. Before we move on to that part, we'll let you know, so that we can sync up on that. Yeah, either way, I want to get you those new versions and the staging tables, and at that same time, I can give you the schema I have right now. Yeah, that'll be good.
+
+231
+00:34:24.550 --> 00:34:40.500
+hrishikb@andrew.cmu.edu: Okay, and then, I think one more thing is, like, the whole pipeline is just broken into pieces. Yeah, that's the next part. I'll set up a server, and then we can start with, like, doctors and components and networking and stuff like that.
+
+232
+00:34:41.580 --> 00:34:54.359
+hrishikb@andrew.cmu.edu: We have it, but the components are segregated still. Correct. So we have to integrate all of those, then have a common repo, which we have.
+
+233
+00:34:56.150 --> 00:34:58.590
+hrishikb@andrew.cmu.edu: And I think documentary needs there.
+
+234
+00:34:58.880 --> 00:35:00.700
+hrishikb@andrew.cmu.edu: That's… yeah.
+
+235
+00:35:00.920 --> 00:35:09.840
+hrishikb@andrew.cmu.edu: I would say it's just keep doing a little bit of it as you go. In the end, if you do all of the together, then it gets cloudy. Yeah.
+
+236
+00:35:10.040 --> 00:35:14.880
+hrishikb@andrew.cmu.edu: There's a bit of documentary there, but nothing…
+
+237
+00:35:15.140 --> 00:35:18.760
+hrishikb@andrew.cmu.edu: Yeah, I think with Cloud, it's a lot easier as well.
+
+238
+00:35:20.170 --> 00:35:20.899
+hrishikb@andrew.cmu.edu: Love it.
+
+239
+00:35:22.390 --> 00:35:28.099
+hrishikb@andrew.cmu.edu: Yeah, I think, before we do the Azure part, deploying it, you have to first make it work internally.
+
+240
+00:35:28.470 --> 00:35:35.009
+hrishikb@andrew.cmu.edu: like, connect the OCR and ingestion for them, and that'll take a bit of… some time, at least.
+
+241
+00:35:35.470 --> 00:35:39.950
+hrishikb@andrew.cmu.edu: with that, and then we'll probably move on to Azure, see how it works.
+
+242
+00:35:43.190 --> 00:35:48.849
+hrishikb@andrew.cmu.edu: That's… that's all we have today. Do you have any questions for them?
+
+243
+00:35:50.900 --> 00:35:53.619
+hrishikb@andrew.cmu.edu: Maybe there's an awesome subject.
+
+244
+00:35:54.730 --> 00:36:14.050
+hrishikb@andrew.cmu.edu: So you guys meeting next Thursday? Theoretically, next Thursday is a community day, and theoretically, there's no CMU5, but that's theoretical, it's up to you guys. And Friday's a holiday.
+
+245
+00:36:14.290 --> 00:36:31.350
+hrishikb@andrew.cmu.edu: Yeah. Okay, yeah. I guess you don't have to observe the holiday, because it's a scene… Yeah. To get the day off, you get Friday off? Yeah. Nice, nice.
+
+246
+00:36:34.120 --> 00:36:38.250
+hrishikb@andrew.cmu.edu: You brought to 5,000?
+
+247
+00:36:38.760 --> 00:36:39.470
+hrishikb@andrew.cmu.edu: Weekend.
+
+248
+00:36:41.380 --> 00:36:48.009
+hrishikb@andrew.cmu.edu: Seniors, I mean, Pittsburgh's got great fireworks. They have a great fireworks. There's a lot of things, there's, the,
+
+249
+00:36:48.460 --> 00:36:52.139
+hrishikb@andrew.cmu.edu: What's… what's the bang? Besides that,
+
+250
+00:36:52.460 --> 00:37:05.279
+hrishikb@andrew.cmu.edu: Yeah, I know what you're talking about. They're performing in Point State Park and stuff. Yeah. And there's a bunch of band performing there for Pete.
+
+251
+00:37:05.390 --> 00:37:14.440
+hrishikb@andrew.cmu.edu: Oh, it's gonna be a mess, but, like, the problem is your info profile.
+
+252
+00:37:15.780 --> 00:37:16.580
+hrishikb@andrew.cmu.edu: Where?
+
+253
+00:37:17.180 --> 00:37:33.449
+hrishikb@andrew.cmu.edu: I think this is one of the… It's gonna be crazy coming year. This year, it's gonna be really… Yeah, yeah, yeah.
+
+254
+00:37:33.980 --> 00:37:48.079
+hrishikb@andrew.cmu.edu: The fight already happened. Oh, it hadn't happened. But in general. They had a great flyby for that. They had a combination of Blue Angels and the Thunderbirds.
+
+255
+00:37:52.310 --> 00:38:09.710
+hrishikb@andrew.cmu.edu: Hopefully we come back. Because, like, I know that BC is actually expecting, like, additional traffic. They have a blocking cases up, so that they just…
+
+256
+00:38:10.180 --> 00:38:11.580
+hrishikb@andrew.cmu.edu: Are you playing with Agnes?
+
+257
+00:38:11.580 --> 00:38:34.599
+hrishikb@andrew.cmu.edu: Yeah. It's an easy drive. Well, up until the last hour, and then it can be crazy traffic, depending on the time you get there. Well, if you drive down to the area and then take the transportation. Yeah, the best part, the exchange of road is, like, the farthest one out.
+
+258
+00:38:34.600 --> 00:38:42.840
+hrishikb@andrew.cmu.edu: The metro is actually… it takes too much time to get to the speed. Oh, so, like, the… the tram, the training service, that kind of…
+
+259
+00:38:42.850 --> 00:38:44.170
+hrishikb@andrew.cmu.edu: Oh, it's okay.
+
+260
+00:38:44.610 --> 00:38:45.440
+hrishikb@andrew.cmu.edu: It's…
+
+261
+00:38:45.650 --> 00:38:51.099
+hrishikb@andrew.cmu.edu: as few as done as possible. But it's what's impossible to find a place to park to be driving your car.
+
+262
+00:38:54.670 --> 00:38:58.500
+hrishikb@andrew.cmu.edu: You may not know I'm gonna be the one. But yeah, that's true.
+
+263
+00:39:00.170 --> 00:39:04.950
+hrishikb@andrew.cmu.edu: Well, great seeing y'all. Yeah. Have a good weekend. See you soon.
+
+264
+00:39:05.880 --> 00:39:07.250
+hrishikb@andrew.cmu.edu: It's…
+
+265
+00:39:07.690 --> 00:39:16.019
+hrishikb@andrew.cmu.edu: There you go, guys. Let us know if you need any help yet. We kind of got to things somehow.
+
+266
+00:39:16.020 --> 00:39:28.669
+hrishikb@andrew.cmu.edu: like, the boundary setup and, like, the Azure setup. I actually set up a new project on boundary for my time. Okay. It's very straightforward. So the resource is there, so as long as it's connected to your resource.
+
+267
+00:39:28.670 --> 00:39:41.330
+hrishikb@andrew.cmu.edu: You're good. So the thing is, I didn't do it on Foundry Playground, I did it the other way, because I wanted an API easily. Okay. Does that increase? No, no, so you're deploying the… you're deploying the model, you're not selling a project.
+
+268
+00:39:41.500 --> 00:39:42.220
+hrishikb@andrew.cmu.edu: Okay.
+
+269
+00:39:42.570 --> 00:39:49.260
+hrishikb@andrew.cmu.edu: Yeah, depending on… you can do how many of models you want, as I'll use it. Oh, okay.
+

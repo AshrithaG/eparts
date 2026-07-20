@@ -1,0 +1,1142 @@
+WEBVTT
+
+1
+00:00:02.760 --> 00:00:10.560
+hrishikb@andrew.cmu.edu: So, in the agenda for today, we just have, our updates on what we all have been working on.
+
+2
+00:00:10.700 --> 00:00:16.550
+hrishikb@andrew.cmu.edu: I'll start, so… I'm still working on the schema part.
+
+3
+00:00:16.710 --> 00:00:19.690
+hrishikb@andrew.cmu.edu: For the ingestion gateway.
+
+4
+00:00:20.060 --> 00:00:27.610
+hrishikb@andrew.cmu.edu: there… I'm making a lot of, ETM tables. I'm trying to separate out, each ETM value in a different table.
+
+5
+00:00:27.710 --> 00:00:30.660
+hrishikb@andrew.cmu.edu: For example, ETM feature, unit, values.
+
+6
+00:00:30.780 --> 00:00:34.939
+hrishikb@andrew.cmu.edu: ETM class groups, because there are so many different,
+
+7
+00:00:35.790 --> 00:00:40.010
+hrishikb@andrew.cmu.edu: like, different categories, I'm planning to having each of those as a separate table.
+
+8
+00:00:40.760 --> 00:00:41.600
+hrishikb@andrew.cmu.edu: And then…
+
+9
+00:00:41.600 --> 00:00:56.919
+Harsha Tummala: Actually, I wanted to give some input on this, too. Just in the past 3 days, I've actually, managed to import the entire eTIM standard into our schema, that we're going to be using for PIMS to include all the different values, units.
+
+10
+00:00:57.160 --> 00:01:00.290
+Harsha Tummala: Features, classes, everything. So,
+
+11
+00:01:00.590 --> 00:01:04.440
+Harsha Tummala: I can just give you a drop of that, if that would be helpful.
+
+12
+00:01:04.650 --> 00:01:08.330
+hrishikb@andrew.cmu.edu: Yeah, that would be helpful, because we can use the same thing in our system as well, then.
+
+13
+00:01:09.000 --> 00:01:09.530
+Harsha Tummala: Yep.
+
+14
+00:01:09.530 --> 00:01:10.909
+hrishikb@andrew.cmu.edu: Probably even more in sync.
+
+15
+00:01:11.330 --> 00:01:29.670
+Harsha Tummala: I don't have the mappings, though, in terms of, like, our existing… this category corresponds to this existing ETIMS class, but other words, that I did get classes in his categories, features in his attributes, and then all that… all the other tables that are associated with it. So, yeah, I can send that to you.
+
+16
+00:01:29.940 --> 00:01:31.510
+hrishikb@andrew.cmu.edu: Okay, yeah, that'll be really good.
+
+17
+00:01:32.000 --> 00:01:49.209
+hrishikb@andrew.cmu.edu: Then I think I'll probably… for now, what I have is I just imported all the ETEM data. It doesn't correspond to anything in PIMS. It's just that all the ETEM data has its own, rows and tables and columns. But yeah, if you have already… that already mapped with some of the
+
+18
+00:01:49.770 --> 00:01:51.840
+hrishikb@andrew.cmu.edu: Attributes, then that'll be helpful.
+
+19
+00:01:52.870 --> 00:01:56.790
+Harsha Tummala: Yeah, I think I'll just give that to you as a back file for Postgres.
+
+20
+00:01:56.990 --> 00:01:58.069
+hrishikb@andrew.cmu.edu: Hmm, yeah, that'll work.
+
+21
+00:01:58.850 --> 00:01:59.630
+Harsha Tummala: Boom.
+
+22
+00:02:01.420 --> 00:02:05.170
+hrishikb@andrew.cmu.edu: Yep, that was pretty much for the ingestion site.
+
+23
+00:02:05.690 --> 00:02:11.000
+hrishikb@andrew.cmu.edu: I guess, Arjun, you can tell us a bit about OCR and integration.
+
+24
+00:02:11.000 --> 00:02:12.809
+arjunnai@andrew.cmu.edu: Yeah, so,
+
+25
+00:02:13.510 --> 00:02:22.369
+arjunnai@andrew.cmu.edu: I did what, karsha, you asked me to check out the GPT 5.4 last week, so I checked that out, but, like, the…
+
+26
+00:02:22.730 --> 00:02:36.240
+arjunnai@andrew.cmu.edu: Results were not much better. We still need, like, two models, like, two loops. Once we run it with GPD 5.4, and then with, like, a vision model, which helps us get down the error rates to, like, less than 2%.
+
+27
+00:02:36.450 --> 00:02:41.469
+arjunnai@andrew.cmu.edu: Apart from that, Rishi's ingestion repo.
+
+28
+00:02:41.600 --> 00:02:51.770
+arjunnai@andrew.cmu.edu: Was given to me, so I've integrated, like, my OCR work, along with Rishi's ingestion work, and I've created a new Bitbucket repo.
+
+29
+00:02:51.950 --> 00:02:54.800
+arjunnai@andrew.cmu.edu: So I've put all of that.
+
+30
+00:02:55.260 --> 00:02:59.960
+arjunnai@andrew.cmu.edu: So, I think right now, my main priority would be to still optimize the…
+
+31
+00:03:00.430 --> 00:03:12.059
+arjunnai@andrew.cmu.edu: OCR part a little more, so we can get the error rates done. I'm still figuring out how to do that. But, like, the whole, integration part is pretty much done. The next step would be, like.
+
+32
+00:03:12.900 --> 00:03:20.389
+arjunnai@andrew.cmu.edu: I think, assign it to, like, a schema, and then put it in, like, staging tables, and then we should take it from there.
+
+33
+00:03:23.130 --> 00:03:23.800
+Harsha Tummala: et cetera.
+
+34
+00:03:24.980 --> 00:03:32.029
+Harsha Tummala: Also, I think I mentioned 5 mini, not partners for… Yeah, I…
+
+35
+00:03:32.030 --> 00:03:43.950
+arjunnai@andrew.cmu.edu: I tried from… I think I tried everything from 5 onwards, like, 5, 5 Mini, and then 5.1… there was 5.5 also, but it said quota exceeded, so I couldn't try that out.
+
+36
+00:03:45.230 --> 00:03:46.199
+arjunnai@andrew.cmu.edu: Look at him.
+
+37
+00:03:49.100 --> 00:03:59.679
+arjunnai@andrew.cmu.edu: I think, I'll have to do something. Since it's a base model, I don't know if I can create, like, a fine-tuned model on Foundry itself and try something out with that.
+
+38
+00:04:00.500 --> 00:04:03.139
+arjunnai@andrew.cmu.edu: So I can try that out as well.
+
+39
+00:04:05.940 --> 00:04:07.280
+Harsha Tummala: Makes sense.
+
+40
+00:04:09.220 --> 00:04:10.180
+arjunnai@andrew.cmu.edu: Yeah.
+
+41
+00:04:11.290 --> 00:04:13.059
+Harsha Tummala: Got a lot of questions from you, man.
+
+42
+00:04:16.890 --> 00:04:20.830
+hrishikb@andrew.cmu.edu: Okay, then, Jay can give us a B for the QA plans.
+
+43
+00:04:24.820 --> 00:04:27.999
+jaivards@andrew.cmu.edu: Can I scare my screen regarding that, or should I just stop?
+
+44
+00:04:28.000 --> 00:04:29.290
+hrishikb@andrew.cmu.edu: Yeah, you can share your screen.
+
+45
+00:04:51.100 --> 00:04:52.390
+jaivards@andrew.cmu.edu: Yeah, is it visible?
+
+46
+00:04:53.060 --> 00:04:53.690
+hrishikb@andrew.cmu.edu: Yeah.
+
+47
+00:04:57.670 --> 00:05:03.880
+jaivards@andrew.cmu.edu: So, this is what we currently have for, as we go along, to the coding site.
+
+48
+00:05:04.360 --> 00:05:05.360
+jaivards@andrew.cmu.edu: So…
+
+49
+00:05:05.550 --> 00:05:12.619
+jaivards@andrew.cmu.edu: we've made sure that our QA plan focuses on the most important characteristics first, so that those are accuracy.
+
+50
+00:05:12.790 --> 00:05:16.390
+jaivards@andrew.cmu.edu: And reliability, in our confidence scores.
+
+51
+00:05:16.960 --> 00:05:20.569
+jaivards@andrew.cmu.edu: And then… Accountability that has…
+
+52
+00:05:21.240 --> 00:05:25.939
+jaivards@andrew.cmu.edu: Whenever we make a prediction, and whenever a record comes in, is it being recorded or not?
+
+53
+00:05:26.720 --> 00:05:32.900
+jaivards@andrew.cmu.edu: And from that, we are, designing tests for each of them. So, for the ingestion gateway.
+
+54
+00:05:33.270 --> 00:05:35.329
+jaivards@andrew.cmu.edu: For the normalization.
+
+55
+00:05:36.020 --> 00:05:37.809
+jaivards@andrew.cmu.edu: The prediction service.
+
+56
+00:05:38.840 --> 00:05:40.200
+jaivards@andrew.cmu.edu: And the routing engine?
+
+57
+00:05:42.040 --> 00:05:48.699
+jaivards@andrew.cmu.edu: So… Not all of them, have been implemented as,
+
+58
+00:05:49.000 --> 00:05:51.429
+jaivards@andrew.cmu.edu: Most, most of the, things for,
+
+59
+00:05:51.890 --> 00:05:56.450
+jaivards@andrew.cmu.edu: the ML part, have tests, as you has written a lot of them.
+
+60
+00:05:56.660 --> 00:06:02.260
+jaivards@andrew.cmu.edu: But we're still, going through them, and, we'll be, updating them as they go along.
+
+61
+00:06:02.430 --> 00:06:04.789
+jaivards@andrew.cmu.edu: But this is our current lab, and…
+
+62
+00:06:05.280 --> 00:06:08.240
+jaivards@andrew.cmu.edu: I can go into depth if you want, on any of these.
+
+63
+00:06:08.490 --> 00:06:13.679
+jaivards@andrew.cmu.edu: But, right now, it's mostly the prediction service that has the tests.
+
+64
+00:06:14.210 --> 00:06:15.150
+jaivards@andrew.cmu.edu: And…
+
+65
+00:06:16.100 --> 00:06:23.120
+jaivards@andrew.cmu.edu: this is more of a, I guess, whenever a change is made, or you guys want to make a change, so just to see nothing is breaking.
+
+66
+00:06:23.220 --> 00:06:25.039
+jaivards@andrew.cmu.edu: Or, failing silent.
+
+67
+00:06:25.520 --> 00:06:31.739
+jaivards@andrew.cmu.edu: But, yeah, I'm… Right now, after this document, I'm more focused on
+
+68
+00:06:32.090 --> 00:06:34.550
+jaivards@andrew.cmu.edu: How we will be going about,
+
+69
+00:06:35.790 --> 00:06:38.780
+jaivards@andrew.cmu.edu: Which tests to write first, and how we'll be going about it.
+
+70
+00:06:38.900 --> 00:06:41.490
+jaivards@andrew.cmu.edu: And also collecting metrics for our…
+
+71
+00:06:41.600 --> 00:06:45.630
+jaivards@andrew.cmu.edu: usage of AI during codings, just to see how that's done.
+
+72
+00:06:46.030 --> 00:06:49.690
+jaivards@andrew.cmu.edu: So… Those are my updates.
+
+73
+00:06:50.740 --> 00:06:54.810
+jaivards@andrew.cmu.edu: Does anyone want to get into, like… The details are anymore.
+
+74
+00:06:54.940 --> 00:06:56.229
+jaivards@andrew.cmu.edu: I can go after that.
+
+75
+00:07:05.610 --> 00:07:10.580
+Clifford Huff: Are you going to share this document with the clients and the mentors, or just give us a link to it?
+
+76
+00:07:11.170 --> 00:07:15.980
+jaivards@andrew.cmu.edu: Yes, I will be sharing that. There are a few changes first, but I'll be sharing this.
+
+77
+00:07:26.130 --> 00:07:30.620
+Clifford Huff: And was this suggested based on your meeting with Jeff for the QA pack?
+
+78
+00:07:31.560 --> 00:07:35.610
+jaivards@andrew.cmu.edu: Yeah, Jeff actually… focus more on, I would say.
+
+79
+00:07:36.150 --> 00:07:43.910
+jaivards@andrew.cmu.edu: The… how we are collecting the metrics, and how we know that this is being implemented, rather than changing the document itself.
+
+80
+00:07:44.340 --> 00:07:48.909
+jaivards@andrew.cmu.edu: I think he's pretty okay with the rough shape of the document, but…
+
+81
+00:07:49.030 --> 00:07:52.650
+jaivards@andrew.cmu.edu: He's much more focused on the metrics collection and
+
+82
+00:07:52.920 --> 00:07:56.989
+jaivards@andrew.cmu.edu: That what we have written, like, we have links regarding
+
+83
+00:07:57.840 --> 00:08:02.589
+jaivards@andrew.cmu.edu: These, all these quantity attributes, and exactly how,
+
+84
+00:08:02.730 --> 00:08:05.159
+jaivards@andrew.cmu.edu: You know, equivalence, partition, and stuff like that.
+
+85
+00:08:05.300 --> 00:08:09.629
+jaivards@andrew.cmu.edu: But he's more focused on whether those steps and those metrics are being implemented.
+
+86
+00:08:09.630 --> 00:08:10.689
+Harsha Tummala: It's right.
+
+87
+00:08:12.680 --> 00:08:13.850
+Clifford Huff: Okay, thanks.
+
+88
+00:08:18.990 --> 00:08:25.349
+jaivards@andrew.cmu.edu: I'll try to share, like, concrete metrics next time, as we go and as we're recording them.
+
+89
+00:08:25.800 --> 00:08:31.110
+jaivards@andrew.cmu.edu: And, that will kind of also give a more fair idea, I would say, about
+
+90
+00:08:32.289 --> 00:08:41.600
+jaivards@andrew.cmu.edu: The progress of the project itself, and how ready it is for, you know, any changes, and if you guys want to make them as…
+
+91
+00:08:47.450 --> 00:08:48.370
+jaivards@andrew.cmu.edu: That's it.
+
+92
+00:08:50.180 --> 00:08:50.950
+hrishikb@andrew.cmu.edu: Okay.
+
+93
+00:08:52.100 --> 00:08:57.020
+hrishikb@andrew.cmu.edu: Leo, can you have an update on the ML side?
+
+94
+00:08:58.220 --> 00:08:59.619
+hrishikb@andrew.cmu.edu: The testing you've been doing.
+
+95
+00:09:00.520 --> 00:09:03.230
+zhelianl@andrew.cmu.edu: Yes, could I share my document?
+
+96
+00:09:04.100 --> 00:09:04.680
+hrishikb@andrew.cmu.edu: Yeah.
+
+97
+00:09:14.910 --> 00:09:20.699
+zhelianl@andrew.cmu.edu: Yeah, so, last week, we… Have completed all the…
+
+98
+00:09:21.480 --> 00:09:24.930
+zhelianl@andrew.cmu.edu: Component test and, integration test.
+
+99
+00:09:25.400 --> 00:09:27.749
+zhelianl@andrew.cmu.edu: for the ML model.
+
+100
+00:09:28.320 --> 00:09:35.410
+zhelianl@andrew.cmu.edu: So, this time, I will share you with the results for these two kinds of testing.
+
+101
+00:09:36.430 --> 00:09:42.189
+zhelianl@andrew.cmu.edu: So, for the overview, we mainly have four layers of the…
+
+102
+00:09:42.780 --> 00:09:50.040
+zhelianl@andrew.cmu.edu: machine learning system. The Layer 1 is extraction. This work had depended on TrueJ.
+
+103
+00:09:50.170 --> 00:09:52.919
+zhelianl@andrew.cmu.edu: And, the Layer 2 is the raw engine.
+
+104
+00:09:53.460 --> 00:10:00.269
+zhelianl@andrew.cmu.edu: Because this is just some mapping work, so we don't have many scenes to test.
+
+105
+00:10:00.600 --> 00:10:03.559
+zhelianl@andrew.cmu.edu: And, we put out the most.
+
+106
+00:10:03.700 --> 00:10:12.229
+zhelianl@andrew.cmu.edu: Effort and time on the Layer 3 and Layer 4, and these two layers are the most complicated part of the…
+
+107
+00:10:12.430 --> 00:10:13.589
+zhelianl@andrew.cmu.edu: machine learning model.
+
+108
+00:10:14.150 --> 00:10:26.359
+zhelianl@andrew.cmu.edu: So, for the… this way, the searching is encode the description to a vector and retrieve the most familiar category products. The category prediction part.
+
+109
+00:10:26.540 --> 00:10:31.369
+zhelianl@andrew.cmu.edu: Have to… The retrieved product vote on the product type.
+
+110
+00:10:31.760 --> 00:10:42.170
+zhelianl@andrew.cmu.edu: The attribute scoring scores the negative values for each attribute of the product type, and for the layer 4, the decision part layer.
+
+111
+00:10:42.870 --> 00:10:51.999
+zhelianl@andrew.cmu.edu: They do a decision and the calculation work, combine the low and the semester signals, applying safety capes, and do the result.
+
+112
+00:10:52.980 --> 00:10:59.600
+zhelianl@andrew.cmu.edu: So, from this pathway, The shoot contains, well, 106 component tests.
+
+113
+00:10:59.820 --> 00:11:02.860
+zhelianl@andrew.cmu.edu: Across the four modules, or parts.
+
+114
+00:11:04.330 --> 00:11:11.859
+zhelianl@andrew.cmu.edu: And, those are the… Detailed testing area, or each part of the model.
+
+115
+00:11:12.470 --> 00:11:17.350
+zhelianl@andrew.cmu.edu: So, for the search part, we test the connectedness
+
+116
+00:11:18.180 --> 00:11:21.949
+zhelianl@andrew.cmu.edu: And, index integration and,
+
+117
+00:11:22.250 --> 00:11:27.969
+zhelianl@andrew.cmu.edu: Configuration and the input handling. And, with their validated behavior.
+
+118
+00:11:28.430 --> 00:11:37.890
+zhelianl@andrew.cmu.edu: Like, for the collectors, a product's nearest label is itself at similarity equal to Whoa.
+
+119
+00:11:39.020 --> 00:11:41.180
+zhelianl@andrew.cmu.edu: For the index integration.
+
+120
+00:11:41.500 --> 00:11:48.799
+zhelianl@andrew.cmu.edu: Because the report size and the demonstration are correct, and the save load returns identical results.
+
+121
+00:11:49.220 --> 00:11:55.350
+zhelianl@andrew.cmu.edu: For the configuration, unsupported index types and rejected with a clear arrow.
+
+122
+00:11:56.220 --> 00:12:02.129
+zhelianl@andrew.cmu.edu: And, the input handlings, single queries and batches are handled equivalently.
+
+123
+00:12:03.430 --> 00:12:07.439
+zhelianl@andrew.cmu.edu: For the category prediction, We test voting.
+
+124
+00:12:07.910 --> 00:12:14.250
+zhelianl@andrew.cmu.edu: The validated behavior could be confidence reflects the similarity which the votes show.
+
+125
+00:12:15.050 --> 00:12:17.380
+zhelianl@andrew.cmu.edu: So, and nope, nope.
+
+126
+00:12:17.770 --> 00:12:23.039
+zhelianl@andrew.cmu.edu: Normally those case labels, agrees yield confidence one.
+
+127
+00:12:23.410 --> 00:12:30.090
+zhelianl@andrew.cmu.edu: So, confidence bands, ambiguous less than 0.6 normal and high consensus.
+
+128
+00:12:30.410 --> 00:12:35.270
+zhelianl@andrew.cmu.edu: Great, then… 0.8 bands behavior distinctly.
+
+129
+00:12:36.380 --> 00:12:47.709
+zhelianl@andrew.cmu.edu: And, so, input handle… handling, unlaw products, negative similarities, and empty results are handled very gracefully.
+
+130
+00:12:50.520 --> 00:12:55.760
+zhelianl@andrew.cmu.edu: For the scoring part, we tested the upper bound and the lower bound.
+
+131
+00:12:55.940 --> 00:12:58.860
+zhelianl@andrew.cmu.edu: Or the scores, and the range of the scores.
+
+132
+00:12:59.360 --> 00:13:01.920
+zhelianl@andrew.cmu.edu: And, the popularity.
+
+133
+00:13:02.330 --> 00:13:04.759
+zhelianl@andrew.cmu.edu: a popularity player.
+
+134
+00:13:05.600 --> 00:13:07.480
+zhelianl@andrew.cmu.edu: like.
+
+135
+00:13:07.780 --> 00:13:17.949
+zhelianl@andrew.cmu.edu: The values used more often in the catalog get a small confidence boost, and this adjustment is relevant to stay within safe limits.
+
+136
+00:13:18.510 --> 00:13:27.609
+zhelianl@andrew.cmu.edu: And for the birth date, So values with insufficient training data will fall back to a safe calculation.
+
+137
+00:13:29.040 --> 00:13:32.050
+zhelianl@andrew.cmu.edu: And for the layer 4, we test the field gene.
+
+138
+00:13:32.280 --> 00:13:35.500
+zhelianl@andrew.cmu.edu: The final confidence followed the committee debate.
+
+139
+00:13:35.980 --> 00:13:39.599
+zhelianl@andrew.cmu.edu: 30% do, and, 35% machine learning parts.
+
+140
+00:13:39.950 --> 00:13:41.390
+zhelianl@andrew.cmu.edu: So, safety tapes.
+
+141
+00:13:42.110 --> 00:13:48.110
+zhelianl@andrew.cmu.edu: On certain category Cape and spurs data Cape fail correctly.
+
+142
+00:13:48.240 --> 00:13:52.510
+zhelianl@andrew.cmu.edu: The stricture VIN… the visible supply.
+
+143
+00:13:54.290 --> 00:14:02.510
+zhelianl@andrew.cmu.edu: like, either way, Kent… If the semester Parts cannot give a.
+
+144
+00:14:02.690 --> 00:14:06.200
+zhelianl@andrew.cmu.edu: higher enough category CAPE score.
+
+145
+00:14:06.660 --> 00:14:11.620
+zhelianl@andrew.cmu.edu: Wait, the highest score, or the final result?
+
+146
+00:14:11.860 --> 00:14:14.539
+zhelianl@andrew.cmu.edu: Well, less than 0.75.
+
+147
+00:14:14.890 --> 00:14:25.650
+zhelianl@andrew.cmu.edu: And, if that… If the samples is less than, like, They could fight. We…
+
+148
+00:14:26.760 --> 00:14:29.600
+zhelianl@andrew.cmu.edu: Treat this case as a sparse data.
+
+149
+00:14:29.820 --> 00:14:39.710
+zhelianl@andrew.cmu.edu: So, the final score could narrow higher than 0.6, 0.7, For the routing part.
+
+150
+00:14:40.130 --> 00:14:46.529
+zhelianl@andrew.cmu.edu: Results look to auto-process human review flagged unclear by competence threshold.
+
+151
+00:14:47.930 --> 00:14:51.629
+zhelianl@andrew.cmu.edu: And we've also tested some… the boundary tests.
+
+152
+00:14:51.930 --> 00:14:53.570
+zhelianl@andrew.cmu.edu: And edit these ones.
+
+153
+00:14:54.640 --> 00:14:58.999
+zhelianl@andrew.cmu.edu: We chose turn-test target edge and fatal cases.
+
+154
+00:14:59.470 --> 00:15:07.510
+zhelianl@andrew.cmu.edu: Like, missing or corrupt data, empty import, exact ties, and the precise points where a decision flips.
+
+155
+00:15:07.720 --> 00:15:14.759
+zhelianl@andrew.cmu.edu: The situation is most likely to behave unexpectedly and least likely to be caught by outdated use.
+
+156
+00:15:15.670 --> 00:15:21.390
+zhelianl@andrew.cmu.edu: So, we have 5… Such… Cases.
+
+157
+00:15:21.910 --> 00:15:22.900
+zhelianl@andrew.cmu.edu: Everywhere.
+
+158
+00:15:23.290 --> 00:15:26.339
+zhelianl@andrew.cmu.edu: And, two, one category.
+
+159
+00:15:26.740 --> 00:15:29.219
+zhelianl@andrew.cmu.edu: And test the tool scoring area.
+
+160
+00:15:29.420 --> 00:15:32.020
+zhelianl@andrew.cmu.edu: And the two, decision area.
+
+161
+00:15:33.560 --> 00:15:38.720
+zhelianl@andrew.cmu.edu: The result is all the, 106 component tests pass.
+
+162
+00:15:41.230 --> 00:15:43.469
+zhelianl@andrew.cmu.edu: For the coverage scope.
+
+163
+00:15:44.630 --> 00:15:53.719
+zhelianl@andrew.cmu.edu: The component testing confirms each module is logically correct on controlling inputs, including the boundary cases described above.
+
+164
+00:15:54.310 --> 00:15:59.420
+zhelianl@andrew.cmu.edu: But it doesn't cover real-world accuracy.
+
+165
+00:15:59.610 --> 00:16:05.359
+zhelianl@andrew.cmu.edu: Since the tests use synthetic import phase, With long answers.
+
+166
+00:16:05.800 --> 00:16:09.669
+zhelianl@andrew.cmu.edu: But I think this could be… not be a very big problem.
+
+167
+00:16:10.100 --> 00:16:16.309
+zhelianl@andrew.cmu.edu: Because this could not block our next processing for the model.
+
+168
+00:16:16.720 --> 00:16:20.720
+zhelianl@andrew.cmu.edu: We just need more data, rare data, to refine the model.
+
+169
+00:16:21.070 --> 00:16:23.590
+zhelianl@andrew.cmu.edu: And, for the second one, the…
+
+170
+00:16:24.100 --> 00:16:27.400
+zhelianl@andrew.cmu.edu: Each model is tested in isolation by design.
+
+171
+00:16:27.550 --> 00:16:34.379
+zhelianl@andrew.cmu.edu: So, we don't know how it really works in the LUs or the model.
+
+172
+00:16:36.100 --> 00:16:37.469
+zhelianl@andrew.cmu.edu: The other days.
+
+173
+00:16:37.630 --> 00:16:57.470
+zhelianl@andrew.cmu.edu: A few risk input cases were deliberately left for later on, since, like, unusual loan descriptions, uncommon technical codes, or duplicate category entries, those are skipped, but not because they are uncommon in normal operation and low risk there.
+
+174
+00:16:57.680 --> 00:17:00.090
+zhelianl@andrew.cmu.edu: So, a bunch of cases were prioritized.
+
+175
+00:17:00.470 --> 00:17:05.649
+zhelianl@andrew.cmu.edu: We focus first on the cases most likely to affect everyday results.
+
+176
+00:17:06.480 --> 00:17:10.719
+zhelianl@andrew.cmu.edu: And I also list 3, remaining waste.
+
+177
+00:17:11.640 --> 00:17:18.700
+zhelianl@andrew.cmu.edu: First, it does not establish how accurately the system predicts on real customers' language.
+
+178
+00:17:19.060 --> 00:17:23.849
+zhelianl@andrew.cmu.edu: And the rare import cases noted above are unvalified.
+
+179
+00:17:24.349 --> 00:17:26.819
+zhelianl@andrew.cmu.edu: The tests validate.
+
+180
+00:17:27.260 --> 00:17:36.179
+zhelianl@andrew.cmu.edu: Against our design specifications, like, Integration testing partially covers this by existing in the module together.
+
+181
+00:17:39.510 --> 00:17:44.870
+zhelianl@andrew.cmu.edu: And, for the integration tests, Oh,
+
+182
+00:17:45.020 --> 00:17:53.809
+zhelianl@andrew.cmu.edu: The integration testing confirms they worked correctly when connected into a chain, and when wrong behind the rail web service.
+
+183
+00:17:54.610 --> 00:18:02.780
+zhelianl@andrew.cmu.edu: So the whole change, like, customer description flawed through the road engine, then the domestic matcher.
+
+184
+00:18:03.330 --> 00:18:05.000
+zhelianl@andrew.cmu.edu: The answer decision layer.
+
+185
+00:18:05.500 --> 00:18:09.079
+zhelianl@andrew.cmu.edu: Which combines the signal and the rules… the result.
+
+186
+00:18:11.700 --> 00:18:19.120
+zhelianl@andrew.cmu.edu: And the reverse confirmation or correction fades back into the model to update the model.
+
+187
+00:18:19.830 --> 00:18:29.130
+zhelianl@andrew.cmu.edu: And, the result is… is, like, the… the source contains Sati… 7 integration tests will pass.
+
+188
+00:18:30.230 --> 00:18:39.459
+zhelianl@andrew.cmu.edu: the coverage we test… Like, 9 aerials was a whole chain was modeled.
+
+189
+00:18:39.660 --> 00:18:43.670
+zhelianl@andrew.cmu.edu: And the width is… But they keep behave it.
+
+190
+00:18:44.580 --> 00:18:53.640
+zhelianl@andrew.cmu.edu: We test end-to-end prediction, routine propagation, low-cross category corresponding, Empty category pass.
+
+191
+00:18:53.800 --> 00:18:55.770
+zhelianl@andrew.cmu.edu: Think of fusion end-to-end.
+
+192
+00:18:55.920 --> 00:18:57.159
+zhelianl@andrew.cmu.edu: feedback loop.
+
+193
+00:18:57.530 --> 00:19:01.460
+zhelianl@andrew.cmu.edu: Service contract. Consistency, traceability.
+
+194
+00:19:02.570 --> 00:19:06.110
+zhelianl@andrew.cmu.edu: So, the chemistry scope could…
+
+195
+00:19:06.470 --> 00:19:10.029
+zhelianl@andrew.cmu.edu: It doesn't cover the real-world accuracy.
+
+196
+00:19:10.380 --> 00:19:19.300
+zhelianl@andrew.cmu.edu: And, the test exists correctness, those performance under many simultaneous requests.
+
+197
+00:19:19.950 --> 00:19:26.370
+zhelianl@andrew.cmu.edu: Behaved under sustained… Concurate load is validated separately, and it's still outstanding.
+
+198
+00:19:26.690 --> 00:19:30.110
+zhelianl@andrew.cmu.edu: So, the next step, we need to…
+
+199
+00:19:30.260 --> 00:19:39.130
+zhelianl@andrew.cmu.edu: Do some, performance testing, like, to… to input a lot of…
+
+200
+00:19:39.290 --> 00:19:49.339
+zhelianl@andrew.cmu.edu: cases simultaneously to the system and, to see the latency and other, performers, behavior could…
+
+201
+00:19:49.840 --> 00:19:53.170
+zhelianl@andrew.cmu.edu: Be expected as a… as a way to expect it.
+
+202
+00:19:55.590 --> 00:19:59.280
+zhelianl@andrew.cmu.edu: And the ramenic music list.
+
+203
+00:19:59.650 --> 00:20:05.780
+zhelianl@andrew.cmu.edu: The first is we require real data to test the whole system, and the second
+
+204
+00:20:06.180 --> 00:20:09.010
+zhelianl@andrew.cmu.edu: We need to test the load behavior.
+
+205
+00:20:10.070 --> 00:20:13.650
+zhelianl@andrew.cmu.edu: And, during this test, we…
+
+206
+00:20:14.030 --> 00:20:17.710
+zhelianl@andrew.cmu.edu: Actually found a defect, and we fixed it.
+
+207
+00:20:18.030 --> 00:20:19.230
+zhelianl@andrew.cmu.edu: This is…
+
+208
+00:20:19.500 --> 00:20:30.129
+zhelianl@andrew.cmu.edu: When a reviewer's collection was being recorded, but it could never reach the live prediction, so the online landing loop doesn't actually close.
+
+209
+00:20:30.260 --> 00:20:33.580
+zhelianl@andrew.cmu.edu: It's, it, it's like… the system…
+
+210
+00:20:34.150 --> 00:20:43.239
+zhelianl@andrew.cmu.edu: To create a brand new repository to… To store the…
+
+211
+00:20:44.210 --> 00:20:48.500
+zhelianl@andrew.cmu.edu: The new center was a cluster, but… the system…
+
+212
+00:20:48.800 --> 00:20:55.529
+zhelianl@andrew.cmu.edu: Still use the old one to do the… matching book, so…
+
+213
+00:20:55.850 --> 00:20:58.490
+zhelianl@andrew.cmu.edu: We fixed it. And just water.
+
+214
+00:20:58.810 --> 00:21:00.790
+zhelianl@andrew.cmu.edu: That's what I want to show this.
+
+215
+00:21:14.050 --> 00:21:19.550
+Clifford Huff: So, are these results on your… on production code, or is this proof of concept code?
+
+216
+00:21:19.700 --> 00:21:23.139
+Clifford Huff: I just want to be… I want to be clear about understanding that.
+
+217
+00:21:24.800 --> 00:21:30.530
+zhelianl@andrew.cmu.edu: All the tests are… Hardly tested on the rail code.
+
+218
+00:21:33.610 --> 00:21:36.940
+Clifford Huff: So, your real code is intended to be production code?
+
+219
+00:21:37.730 --> 00:21:38.990
+zhelianl@andrew.cmu.edu: Yes.
+
+220
+00:21:39.930 --> 00:21:40.690
+Clifford Huff: Okay.
+
+221
+00:21:41.030 --> 00:21:45.870
+Clifford Huff: And has other members of the team reviewed that production code yet?
+
+222
+00:21:46.750 --> 00:21:49.429
+zhelianl@andrew.cmu.edu: Yeah, I think Brish and, Jay…
+
+223
+00:21:49.630 --> 00:21:51.769
+zhelianl@andrew.cmu.edu: have reviewed it, and I have…
+
+224
+00:21:52.030 --> 00:21:59.670
+zhelianl@andrew.cmu.edu: Upload all the results and the testing code into the GitHub and, Bitbucket.
+
+225
+00:22:02.820 --> 00:22:03.790
+Clifford Huff: Okay.
+
+226
+00:22:05.060 --> 00:22:06.530
+zhelianl@andrew.cmu.edu: Oh, thank… thank you.
+
+227
+00:22:07.960 --> 00:22:08.990
+zhelianl@andrew.cmu.edu: So…
+
+228
+00:22:11.680 --> 00:22:12.720
+Harsha Tummala: In theory.
+
+229
+00:22:12.830 --> 00:22:19.669
+Harsha Tummala: Actually, coming, to your email as well, you, where you asked for, like, correction… Oh, yes.
+
+230
+00:22:20.070 --> 00:22:36.989
+Harsha Tummala: We… I mean, I was looking into it, mainly the processes to concoct that data, talking to a few people here, and then, see… see… just… just creating it for a few cases, and that's pretty much it.
+
+231
+00:22:37.140 --> 00:22:46.430
+Harsha Tummala: And hopefully I can send you this data by next week, and it won't be too much, it'll just be, like, I think 50 to 100 records at max.
+
+232
+00:22:46.690 --> 00:22:47.830
+Harsha Tummala: Yes.
+
+233
+00:22:47.830 --> 00:22:48.870
+zhelianl@andrew.cmu.edu: I think that's enough.
+
+234
+00:22:49.490 --> 00:22:50.440
+zhelianl@andrew.cmu.edu: Thank you.
+
+235
+00:22:50.930 --> 00:22:53.100
+Harsha Tummala: Yeah.
+
+236
+00:22:53.330 --> 00:22:53.880
+Harsha Tummala: That's it.
+
+237
+00:22:53.880 --> 00:23:00.710
+zhelianl@andrew.cmu.edu: Yeah, yeah, and during the reuse of the system, we could collect more data from the reuse, yeah.
+
+238
+00:23:01.240 --> 00:23:02.249
+Harsha Tummala: Yeah, I agree.
+
+239
+00:23:19.030 --> 00:23:26.399
+hrishikb@andrew.cmu.edu: Yeah, I guess… That is mostly all for update. Ashita, Yatsun, go ahead.
+
+240
+00:23:28.220 --> 00:23:29.580
+Ashritha: So…
+
+241
+00:23:29.650 --> 00:23:46.689
+Ashritha: I, I mean, I hope all of you are doing okay. So, the first… I think I worked the previous week, I was just busy with the code reviews, I didn't do any much of the development task, but then this week, I've picked up the ETIN schema task.
+
+242
+00:23:46.750 --> 00:23:56.830
+Ashritha: So, me and Jay are gonna work on it, and, since Jake just mentioned about, some of his findings, so we'll pick it up from there, yeah.
+
+243
+00:24:02.960 --> 00:24:09.979
+Harsha Tummala: Also, I think we should also talk about, like, how, how we can combine Jake's findings with your findings, and…
+
+244
+00:24:10.450 --> 00:24:22.409
+Harsha Tummala: We could have a meeting just for that, if you guys want, sometime next week. I think Jake is still in the process of, like, finalizing all the things. No,
+
+245
+00:24:22.600 --> 00:24:30.379
+Harsha Tummala: I mean, I'm finalizing, like, interfaces and pimps to utilize it and assign it to products, but in terms of the data in our schema, no, that's…
+
+246
+00:24:30.590 --> 00:24:34.659
+Harsha Tummala: Pretty much finalized on my side. Then…
+
+247
+00:24:35.300 --> 00:24:48.080
+Harsha Tummala: Did we, talk about, how we wanted to, see how the mappings go? I think Rishkesh was working on it. Ending the mappings to, like, the existing categories, the old categories? Yeah, yeah.
+
+248
+00:24:48.080 --> 00:25:02.259
+Harsha Tummala: So, yeah, I think, what we can do is, over next week or the week after, Jake could just show how all of it looks in PIMS, and we could do, like, a PIMS demo with the updated version of how things stand on it.
+
+249
+00:25:02.390 --> 00:25:06.750
+Harsha Tummala: So that we could just get you guys up to speed and empowered.
+
+250
+00:25:07.130 --> 00:25:14.949
+Harsha Tummala: How… how… how progress is looking on our end, and how that translates to, the things that you guys are doing.
+
+251
+00:25:16.680 --> 00:25:19.370
+hrishikb@andrew.cmu.edu: Yeah, I think, that works, that works well.
+
+252
+00:25:19.370 --> 00:25:20.380
+Harsha Tummala: Yeah.
+
+253
+00:25:20.650 --> 00:25:28.870
+hrishikb@andrew.cmu.edu: I think before that, it would be good if, Jake, you could share the, schema that you have in a PEMS, dump, or something similar.
+
+254
+00:25:29.200 --> 00:25:32.059
+hrishikb@andrew.cmu.edu: So, meanwhile, before the meeting, I can also take a look.
+
+255
+00:25:32.160 --> 00:25:36.230
+hrishikb@andrew.cmu.edu: And so that I can get in line with, what are Genesis exactly.
+
+256
+00:25:36.490 --> 00:25:38.549
+hrishikb@andrew.cmu.edu: Then we can have a meeting next week.
+
+257
+00:25:39.750 --> 00:25:41.449
+Harsha Tummala: Yep, makes sense.
+
+258
+00:25:42.300 --> 00:25:44.359
+Harsha Tummala: And I'll remind Jake to send it to us.
+
+259
+00:25:44.660 --> 00:25:51.680
+Harsha Tummala: But that should be good. We should have that data by next week, or next week, hopefully.
+
+260
+00:25:53.440 --> 00:25:54.460
+hrishikb@andrew.cmu.edu: That, that sounds great.
+
+261
+00:25:54.460 --> 00:26:04.239
+Harsha Tummala: I'm in the background right now trying to extort it, but yeah. I think there's some data I want to leave out, some test data that's, like, mixed in with it right now, so yeah, I'll add that to you as soon as I can.
+
+262
+00:26:05.690 --> 00:26:16.229
+Harsha Tummala: And… any other updates from us or you guys? I can't think of any other questions. To be fair, it's a lot of work going on for you providing.
+
+263
+00:26:17.350 --> 00:26:19.120
+hrishikb@andrew.cmu.edu: I think, no.
+
+264
+00:26:20.890 --> 00:26:27.919
+Harsha Tummala: Yeah, and I think… Liu, can you also send across the QA document that you were just talking through?
+
+265
+00:26:28.090 --> 00:26:34.979
+Harsha Tummala: So that… not QA, the testing document that you will put on it through, so that we could also take a look, and I could spend a little more.
+
+266
+00:26:34.980 --> 00:26:35.660
+zhelianl@andrew.cmu.edu: Okay, okay.
+
+267
+00:26:36.340 --> 00:26:38.750
+zhelianl@andrew.cmu.edu: And I can share you a more detailed one.
+
+268
+00:26:39.290 --> 00:26:39.630
+Harsha Tummala: Yeah.
+
+269
+00:26:39.630 --> 00:26:44.150
+zhelianl@andrew.cmu.edu: Yeah, with just some code explan… planning.
+
+270
+00:26:45.360 --> 00:26:47.070
+Harsha Tummala: Yeah, that sounds good, yeah.
+
+271
+00:26:47.360 --> 00:26:53.430
+Harsha Tummala: And yeah, that's pretty much it. Other than that,
+
+272
+00:26:53.840 --> 00:26:57.730
+Harsha Tummala: I can't think of anything else from my own. Any other questions for you guys?
+
+273
+00:27:01.390 --> 00:27:03.180
+hrishikb@andrew.cmu.edu: Nothing relevant right now for me.
+
+274
+00:27:05.870 --> 00:27:10.200
+Harsha Tummala: If anyone's good, then… I'm good. Long meeting, guys.
+
+275
+00:27:10.780 --> 00:27:13.890
+Harsha Tummala: It's pretty much everything that's said.
+
+276
+00:27:14.620 --> 00:27:18.189
+Harsha Tummala: good extra long weekend for the event. Right, yeah. Yeah.
+
+277
+00:27:18.530 --> 00:27:24.750
+Harsha Tummala: Good boy. That's it. See you at another, and have a long… good long weekend, Cliff.
+
+278
+00:27:25.370 --> 00:27:25.970
+Clifford Huff: Same to you.
+
+279
+00:27:25.970 --> 00:27:28.400
+Harsha Tummala: We'll enjoy your holiday.
+
+280
+00:27:28.750 --> 00:27:31.769
+Harsha Tummala: I like the shirt clip, I didn't even see that until…
+
+281
+00:27:31.770 --> 00:27:32.450
+Clifford Huff: Yeah.
+
+282
+00:27:32.750 --> 00:27:38.419
+Clifford Huff: This is a shirt I got from Fort McHenra. I even got to raise the flag at the fort, that was pretty special.
+
+283
+00:27:38.890 --> 00:27:40.450
+Harsha Tummala: Whoa, that's awesome.
+
+284
+00:27:44.070 --> 00:27:47.930
+Harsha Tummala: See you guys for that. See you. Have a good weekend.
+
+285
+00:27:47.930 --> 00:27:49.230
+hrishikb@andrew.cmu.edu: You guys, bye-bye.
+

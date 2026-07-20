@@ -1,0 +1,40 @@
+{
+  "meeting_date": "2026-06-04",
+  "duration_minutes": 39,
+  "participants": [
+    "Hrishik"
+  ],
+  "participant_count": 1,
+  "total_words": 5774,
+  "total_turns": 1,
+  "speaker_stats": {
+    "Hrishik": {
+      "turns": 1,
+      "words": 5774,
+      "pct_words": 100.0
+    }
+  },
+  "detected_topics": {
+    "ML/Model": 6,
+    "Data": 6,
+    "Architecture": 4,
+    "Infrastructure": 2
+  },
+  "questions_found": 0,
+  "questions_sample": [],
+  "potential_decisions": 1,
+  "decisions_sample": [
+    {
+      "speaker": "Hrishik",
+      "text": "Okay. So, first we have\u2026 On the agenda, the initial OCR endings. So, I did a few POCs with whatever was available out there for the OCR part of things, which is what I'm doing right away. So, I texted"
+    }
+  ],
+  "potential_action_items": 1,
+  "actions_sample": [
+    {
+      "speaker": "Hrishik",
+      "text": "Okay. So, first we have\u2026 On the agenda, the initial OCR endings. So, I did a few POCs with whatever was available out there for the OCR part of things, which is what I'm doing right away. So, I texted"
+    }
+  ],
+  "analysis_mode": "offline (no LLM \u2014 structural extraction only)"
+}

@@ -1,0 +1,870 @@
+WEBVTT
+
+1
+00:00:02.240 --> 00:00:09.369
+Ashritha: So, like Rishi mentioned, we are just working on the integration part of it, like,
+
+2
+00:00:09.440 --> 00:00:31.459
+Ashritha: So basically, I am simultaneously… like, we found a few bugs on the ML side, so I am resolving those, and we have, like, few other tasks that are open. We'll give you updates on that pretty soon. And then, so the team is quite busy with the integration part, like Rishi and Arjun are busy wrapping up the…
+
+3
+00:00:31.610 --> 00:00:40.409
+Ashritha: OCR and ingestion pipeline, and Jay is involved with the ETM, side of it. So…
+
+4
+00:00:40.410 --> 00:00:59.509
+Ashritha: I mean, yeah, so individually, we can go ahead and, like, give our own updates, I guess. So, I mean, starting, maybe, like, Jay can start with, what he did, around ETM, and then if he needs any help from Jake or someone, he can ask you guys. So, Jay, you wanna go first?
+
+5
+00:01:00.300 --> 00:01:03.449
+jaivards@andrew.cmu.edu: Sure, sure. You guys can hear me, right?
+
+6
+00:01:04.220 --> 00:01:06.489
+Harsha Tummala: We can hear you, but it's still quiet.
+
+7
+00:01:08.230 --> 00:01:11.130
+jaivards@andrew.cmu.edu: Okay. Sorry, my laptop's,
+
+8
+00:01:11.390 --> 00:01:14.460
+jaivards@andrew.cmu.edu: a bit finicky about its microphone.
+
+9
+00:01:14.910 --> 00:01:18.180
+jaivards@andrew.cmu.edu: Hopefully it's all right right now.
+
+10
+00:01:20.300 --> 00:01:23.130
+jaivards@andrew.cmu.edu: You know.
+
+11
+00:01:23.630 --> 00:01:28.809
+jaivards@andrew.cmu.edu: So… The class matchings were done, and as for the attributes one,
+
+12
+00:01:28.930 --> 00:01:36.479
+jaivards@andrew.cmu.edu: That's also, mostly, it is also done, so it is matching properly,
+
+13
+00:01:36.640 --> 00:01:45.180
+jaivards@andrew.cmu.edu: each of the products, types has their own attribute names. So, for example, access doors have height, material, type, width.
+
+14
+00:01:45.380 --> 00:01:47.340
+jaivards@andrew.cmu.edu: And it does that for all of them.
+
+15
+00:01:47.930 --> 00:01:55.610
+jaivards@andrew.cmu.edu: So… Basically, for… For, product types?
+
+16
+00:01:56.010 --> 00:02:03.629
+jaivards@andrew.cmu.edu: And for features, that part is done. What I'm a bit more unsure about is the
+
+17
+00:02:05.080 --> 00:02:09.540
+jaivards@andrew.cmu.edu: ETM, basically value normalization, so…
+
+18
+00:02:10.690 --> 00:02:15.469
+jaivards@andrew.cmu.edu: There was an example such like this, so 4.7 kilo ohms and yeah.
+
+19
+00:02:15.630 --> 00:02:22.110
+jaivards@andrew.cmu.edu: It's written in different ways. So I'm working through it right now, and I'm able to get around.
+
+20
+00:02:22.340 --> 00:02:30.619
+jaivards@andrew.cmu.edu: This is, a bit, under than what I have gotten currently. It's more like 42%, 43%.
+
+21
+00:02:30.980 --> 00:02:39.950
+jaivards@andrew.cmu.edu: And out of, all those exam out of around 50,000 examples, 43% are work automatically.
+
+22
+00:02:40.070 --> 00:02:48.589
+jaivards@andrew.cmu.edu: And… They're pretty easy to normalize the values for, but the others I'm still having problems on.
+
+23
+00:02:48.870 --> 00:02:56.279
+jaivards@andrew.cmu.edu: And… It's it's not finished yet, so I can. I can. I can. I think I have.
+
+24
+00:02:56.970 --> 00:03:02.100
+jaivards@andrew.cmu.edu: that… Yeah, only around 18,000 out of,
+
+25
+00:03:02.480 --> 00:03:06.229
+jaivards@andrew.cmu.edu: 50,000 have been done, I would say.
+
+26
+00:03:06.920 --> 00:03:11.219
+jaivards@andrew.cmu.edu: Scenely, and then there's some more that have been done, but I'm not sure about.
+
+27
+00:03:11.710 --> 00:03:12.710
+jaivards@andrew.cmu.edu: So…
+
+28
+00:03:12.710 --> 00:03:29.790
+Harsha Tummala: Just from my understanding, you're talking about mapping like the existing ALPS values to ETIMS, like 43 of them were easy to, were able to map right away. And the other ones due to, yeah, different, like one saying KO as opposed to kilo or something like that is all spelled out. Okay.
+
+29
+00:03:29.790 --> 00:03:30.360
+jaivards@andrew.cmu.edu: Yes.
+
+30
+00:03:31.210 --> 00:03:35.749
+jaivards@andrew.cmu.edu: So the the class matching and feature. These 2 are done.
+
+31
+00:03:35.860 --> 00:03:41.130
+jaivards@andrew.cmu.edu: But the value and unit normalization I'm having a some trouble with.
+
+32
+00:03:41.350 --> 00:03:44.349
+jaivards@andrew.cmu.edu: But I'll keep working on it, and
+
+33
+00:03:44.650 --> 00:03:49.350
+jaivards@andrew.cmu.edu: I think I can get maybe not all of it, but
+
+34
+00:03:49.540 --> 00:03:54.040
+jaivards@andrew.cmu.edu: a much higher percentage than the 43% that I have right now.
+
+35
+00:03:54.960 --> 00:03:55.990
+jaivards@andrew.cmu.edu: And.
+
+36
+00:03:56.350 --> 00:04:05.980
+jaivards@andrew.cmu.edu: I think I'll, just message you, Jake, after I'm kind of, like, exhaust everything, because I'm not sure if I can, how high of a percentage I can get this one on.
+
+37
+00:04:06.400 --> 00:04:09.179
+Harsha Tummala: Yeah, no, for sure. I, I think,
+
+38
+00:04:09.570 --> 00:04:18.040
+Harsha Tummala: I'm already anticipating that there's definitely gonna be some things that just are gonna have to be mapped by, like, a human on the catalog team, yeah.
+
+39
+00:04:18.790 --> 00:04:25.960
+jaivards@andrew.cmu.edu: Yeah, because I was initially quite optimistic, because the class and feature matching had gone well.
+
+40
+00:04:26.460 --> 00:04:26.810
+Harsha Tummala: Yeah, hu.
+
+41
+00:04:26.810 --> 00:04:29.239
+jaivards@andrew.cmu.edu: One is much more finicky and.
+
+42
+00:04:30.300 --> 00:04:36.779
+jaivards@andrew.cmu.edu: if my initial efforts are only getting 43%, I don't know how I'm supposed to, like, push that to…
+
+43
+00:04:37.070 --> 00:04:43.999
+jaivards@andrew.cmu.edu: close to, you know, 100. So I'll just do everything possible and then kind of discuss with your teams, I guess.
+
+44
+00:04:44.440 --> 00:04:46.290
+Harsha Tummala: Awesome. Good stuff.
+
+45
+00:04:47.090 --> 00:04:54.190
+jaivards@andrew.cmu.edu: And yeah, I'm still working through it. There are a few more things I can do. I did not do them because I…
+
+46
+00:04:54.300 --> 00:04:59.240
+jaivards@andrew.cmu.edu: They're, they're, quite, I would say… Oh.
+
+47
+00:04:59.890 --> 00:05:03.820
+jaivards@andrew.cmu.edu: They're quite experiment intensive, so I'd have to, like.
+
+48
+00:05:04.400 --> 00:05:12.279
+jaivards@andrew.cmu.edu: We use a few different things and to see what works. But yeah, I've exhausted the easy methods and that, that's only yielding like 42%. Okay.
+
+49
+00:05:15.520 --> 00:05:16.190
+Harsha Tummala: 3.
+
+50
+00:05:17.650 --> 00:05:18.250
+Ashritha: Okay.
+
+51
+00:05:19.340 --> 00:05:20.010
+Ashritha: Yes.
+
+52
+00:05:20.010 --> 00:05:21.410
+jaivards@andrew.cmu.edu: That's it from my end, I.
+
+53
+00:05:21.610 --> 00:05:22.180
+Ashritha: Okay.
+
+54
+00:05:22.400 --> 00:05:34.150
+Ashritha: So, from my end, so this week I've been… I've been spending some time to bump up the test coverage for the repo, so that's, like, up to 85% right now.
+
+55
+00:05:34.150 --> 00:05:43.769
+Ashritha: And… but then, there's one thing, that, like… I mean, like, a significant issue, that I found out is
+
+56
+00:05:43.770 --> 00:05:46.720
+Ashritha: So we have our configuration settings.
+
+57
+00:05:46.720 --> 00:06:02.099
+Ashritha: set, right? So basically, the ones that we decided would control how the model updates itself from the reviewer feedback, and it would get, recalibrated. So, there's one question that I had, like, which of these could
+
+58
+00:06:02.430 --> 00:06:16.739
+Ashritha: like, you guys, like, the client safely, adjust them… adjust yourself. So, and then, which of them were, like, too risky? By adjusting, I mean the configuration settings. So, I…
+
+59
+00:06:16.740 --> 00:06:29.890
+Ashritha: kind of, like, figured out that, most of it should stay logged, and then, the one that should genuinely be adjusted is the calibration setting.
+
+60
+00:06:29.950 --> 00:06:34.159
+Ashritha: And, but it is also, like, very,
+
+61
+00:06:34.160 --> 00:06:58.319
+Ashritha: I mean not dangerous per se but then you should be like aware of the settings that you would edit and so probably I think that we should automate it instead of like hand editing so because even if like suppose a human comes and like tweaks that config file maybe there might be some issues so we could just like automate it
+
+62
+00:06:58.950 --> 00:07:04.629
+Ashritha: the calibration setting also. So, I… like, this is a very… I mean…
+
+63
+00:07:04.700 --> 00:07:13.040
+Ashritha: this is a small feature of the entire thing, but I had a lot of questions, like, this is one of… a question that I just… I'm just putting across.
+
+64
+00:07:13.040 --> 00:07:30.040
+Ashritha: So, I wrote… I wrote up a short doc with some open questions, so I might, send it to you, like, after this meeting, so that, Harsha and, like, you and, sorry, Jake and Harsha, like, you guys can give some feedback on that, and we can adjust our, config file, or…
+
+65
+00:07:30.040 --> 00:07:31.130
+Ashritha: Whatever, yeah.
+
+66
+00:07:33.870 --> 00:07:34.909
+Harsha Tummala: the basics.
+
+67
+00:07:35.050 --> 00:07:50.619
+Ashritha: But otherwise, I think, like I said, to just, like, from the MLOps side of it, just for the whole, pipeline, nothing related to the project, actually, but then, we have set up our CI pipelines.
+
+68
+00:07:50.620 --> 00:08:01.949
+Ashritha: They have been failing for some reason, so, that's something that we have to handle. That's something… that's what I'm working… that's what I've picked up for this week again.
+
+69
+00:08:01.950 --> 00:08:06.569
+Ashritha: Yeah, that's it from my side. Like, there were a few,
+
+70
+00:08:06.570 --> 00:08:30.110
+Ashritha: issues in the evaluation reports that I think, Liu… I'm not sure if Liu had shared with… shared those reports with you guys earlier, like, last month when I was not there, but all… like, all of our reports, like, the milestone reports are published on the repository itself. Like, if you guys are interested, I can point out to those reports, when I send out the meeting minutes, so…
+
+71
+00:08:30.120 --> 00:08:33.519
+Ashritha: So, there were, like, few issues over there, so if you guys can just…
+
+72
+00:08:33.539 --> 00:08:53.510
+Ashritha: spend some time over there and, like, point out some very obvious issues, or, like, maybe, like, we are contradicting ourselves. Like, I found out that, there was one issue with, like, the scoring part of it and the profiling part of it, so I corrected it, and now the report is up to date,
+
+73
+00:08:53.580 --> 00:08:58.420
+Ashritha: So, it was something to do with the encoder piece that we just committed. So…
+
+74
+00:08:58.420 --> 00:09:14.750
+Ashritha: like, I mean, we felt like, like, since you guys know the product better than us and the ML side of it, so I can give… I can point out that link also, you guys can review it and maybe send us some feedback over the next week, like, before we meet or something.
+
+75
+00:09:16.870 --> 00:09:22.160
+Harsha Tummala: make fun. Also send us the links. We look at the report card as well, and
+
+76
+00:09:22.440 --> 00:09:26.539
+Harsha Tummala: See what we can… what we can get.
+
+77
+00:09:26.540 --> 00:09:27.120
+Ashritha: Okay.
+
+78
+00:09:27.340 --> 00:09:34.079
+Harsha Tummala: And, yeah, that's… that sounds pretty good overall. Let us know all the… all the…
+
+79
+00:09:34.230 --> 00:09:39.839
+Harsha Tummala: all the configurations you're talking about as well, and if you can make a list of that in the document, that'll be helpful as well.
+
+80
+00:09:39.840 --> 00:09:40.460
+Ashritha: Okay.
+
+81
+00:09:40.700 --> 00:09:46.249
+Harsha Tummala: So that when they're answering the questions they're not getting lost on, how will this impact the system?
+
+82
+00:09:47.110 --> 00:09:48.640
+Ashritha: Okay, yeah, I'll send that.
+
+83
+00:09:50.210 --> 00:09:53.509
+Ashritha: Okay. Lee, do you wanna, like, update on your work?
+
+84
+00:09:54.080 --> 00:09:54.600
+Harsha Tummala: Yep.
+
+85
+00:09:56.770 --> 00:09:57.770
+zhelianl@andrew.cmu.edu: Oh.
+
+86
+00:09:58.120 --> 00:10:07.010
+zhelianl@andrew.cmu.edu: From my side, I… I have not many things to add, but I… For this week, I just…
+
+87
+00:10:07.190 --> 00:10:09.480
+zhelianl@andrew.cmu.edu: adjust some algorithms.
+
+88
+00:10:09.910 --> 00:10:12.580
+zhelianl@andrew.cmu.edu: like… to adjust the song.
+
+89
+00:10:12.780 --> 00:10:17.430
+zhelianl@andrew.cmu.edu: Combined value clusters outrank specific value clusters.
+
+90
+00:10:17.900 --> 00:10:22.910
+zhelianl@andrew.cmu.edu: like… for some products.
+
+91
+00:10:23.360 --> 00:10:27.260
+zhelianl@andrew.cmu.edu: They have some combined values, and okay.
+
+92
+00:10:28.180 --> 00:10:33.690
+zhelianl@andrew.cmu.edu: our… Can I share?
+
+93
+00:10:39.740 --> 00:10:41.169
+zhelianl@andrew.cmu.edu: Cassius, okay.
+
+94
+00:10:43.400 --> 00:10:46.439
+Ashritha: Oh, yeah, can you try now? I've given you the access.
+
+95
+00:10:47.090 --> 00:10:47.650
+zhelianl@andrew.cmu.edu: Okay.
+
+96
+00:10:51.620 --> 00:11:04.530
+zhelianl@andrew.cmu.edu: like, the… The ML system could choose, could choose the top three, Possible…
+
+97
+00:11:04.680 --> 00:11:14.110
+zhelianl@andrew.cmu.edu: match values towards the one product, but it can't choose which one could be the best.
+
+98
+00:11:14.550 --> 00:11:24.660
+zhelianl@andrew.cmu.edu: So I… try to find a method to solve these problems.
+
+99
+00:11:26.050 --> 00:11:35.679
+zhelianl@andrew.cmu.edu: be… So I chose one method named multiple negatives ranking loss.
+
+100
+00:11:36.260 --> 00:11:41.209
+zhelianl@andrew.cmu.edu: Since we… It's this phenomenon.
+
+101
+00:11:41.850 --> 00:11:51.760
+zhelianl@andrew.cmu.edu: emerge, because or the… the… Not… not… Like, less…
+
+102
+00:11:53.680 --> 00:11:57.039
+zhelianl@andrew.cmu.edu: It's kind of on the training.
+
+103
+00:11:57.740 --> 00:12:05.510
+zhelianl@andrew.cmu.edu: problem, so… I… used this method to
+
+104
+00:12:08.770 --> 00:12:10.579
+zhelianl@andrew.cmu.edu: To to train the model.
+
+105
+00:12:10.970 --> 00:12:21.850
+zhelianl@andrew.cmu.edu: So… This method is still testing, so I can't tell you whether it would without these problems, but
+
+106
+00:12:21.970 --> 00:12:24.100
+zhelianl@andrew.cmu.edu: I will try to resolve this.
+
+107
+00:12:26.280 --> 00:12:33.390
+Harsha Tummala: What was the three values again? I know that the two were very similar, the VAC and then the VACVDC.
+
+108
+00:12:33.390 --> 00:12:34.530
+zhelianl@andrew.cmu.edu: Oh, yes, yes.
+
+109
+00:12:34.910 --> 00:12:37.520
+Harsha Tummala: The 110 over 230.
+
+110
+00:12:39.330 --> 00:12:40.930
+zhelianl@andrew.cmu.edu: On.
+
+111
+00:12:42.940 --> 00:12:44.720
+zhelianl@andrew.cmu.edu: This one, to me.
+
+112
+00:12:45.230 --> 00:12:45.930
+Harsha Tummala: Yeah.
+
+113
+00:12:46.650 --> 00:12:54.439
+zhelianl@andrew.cmu.edu: Yes, maybe, in this example, this one could be the ground truth.
+
+114
+00:12:55.240 --> 00:13:01.290
+zhelianl@andrew.cmu.edu: maybe these tools are similar.
+
+115
+00:13:01.410 --> 00:13:10.959
+zhelianl@andrew.cmu.edu: But our system will choose the most possible three attributes, so they add this, but this could not be
+
+116
+00:13:11.590 --> 00:13:12.970
+zhelianl@andrew.cmu.edu: It's a match.
+
+117
+00:13:13.390 --> 00:13:14.070
+zhelianl@andrew.cmu.edu: So…
+
+118
+00:13:14.070 --> 00:13:16.950
+Harsha Tummala: What do you think? What do you think, Harsha, about
+
+119
+00:13:17.330 --> 00:13:23.670
+Harsha Tummala: It is a case where we would want there to be multiple values against a attribute.
+
+120
+00:13:24.510 --> 00:13:26.240
+Harsha Tummala: Yeah, it's amazing.
+
+121
+00:13:26.240 --> 00:13:29.530
+zhelianl@andrew.cmu.edu: Possible values towards the product.
+
+122
+00:13:30.340 --> 00:13:33.639
+Harsha Tummala: It might not be bad, yeah, if we put them all in.
+
+123
+00:13:33.820 --> 00:13:35.059
+Harsha Tummala: Yeah, we can just send.
+
+124
+00:13:35.060 --> 00:13:36.130
+zhelianl@andrew.cmu.edu: Oh, yes, yes.
+
+125
+00:13:36.550 --> 00:13:54.869
+Harsha Tummala: Yeah, so that could be an alternative to Leo. Instead of like trying to figure out which one out of these three is the correct one by elimination, what we can do is we can just put all three in and make it like a user approved thing where the user chooses which attributes they want.
+
+126
+00:13:55.180 --> 00:13:56.759
+Harsha Tummala: Which values they want.
+
+127
+00:13:57.070 --> 00:13:58.120
+Harsha Tummala: So, like, they might choose.
+
+128
+00:13:58.120 --> 00:14:11.260
+zhelianl@andrew.cmu.edu: Yes, yes. So that's a kind of result method. Like when we first meet this condition, the human.
+
+129
+00:14:11.900 --> 00:14:19.510
+zhelianl@andrew.cmu.edu: If the machine could not choose the best one, human could help it, and the result will…
+
+130
+00:14:19.810 --> 00:14:26.579
+zhelianl@andrew.cmu.edu: Then feed into the systems and next time it will know which one could be the best.
+
+131
+00:14:27.490 --> 00:14:32.690
+zhelianl@andrew.cmu.edu: So that's what I mean, because we have not so many
+
+132
+00:14:32.890 --> 00:14:37.900
+zhelianl@andrew.cmu.edu: data to train the model. It's kind of like on the on the train.
+
+133
+00:14:38.480 --> 00:14:45.800
+zhelianl@andrew.cmu.edu: phenomena, so… Yes, this could definitely be helpful.
+
+134
+00:14:48.320 --> 00:14:48.910
+Harsha Tummala: Good.
+
+135
+00:14:49.530 --> 00:14:52.259
+zhelianl@andrew.cmu.edu: Yeah, that's what I want to share with you.
+
+136
+00:14:58.850 --> 00:15:00.040
+Harsha Tummala: Reasonably.
+
+137
+00:15:00.920 --> 00:15:07.909
+Harsha Tummala: And, also, let us know if you guys have any more issues with, like, the CICD stuff, and…
+
+138
+00:15:08.010 --> 00:15:16.580
+Harsha Tummala: any of the DevOps-y stuff, because they do tend to take a lot of time, because those are things to figure out as you go.
+
+139
+00:15:16.730 --> 00:15:19.719
+Harsha Tummala: And they also do our.
+
+140
+00:15:20.640 --> 00:15:27.890
+Harsha Tummala: you might not be able to, like, find an accurate solution for it just by yourself. In those cases she's creating us.
+
+141
+00:15:28.050 --> 00:15:32.690
+Harsha Tummala: Me, David, we can just hop onto it and see what's going on.
+
+142
+00:15:33.740 --> 00:15:50.839
+Ashritha: Yeah, okay. So, but, the right now, the CI pipeline that I was talking about was something specific to the PR's build process, so, like, that has nothing to do with the product, so we haven't gotten yet there. So, once we have that plan in place, probably we'll, like, take some suggestions, yeah.
+
+143
+00:15:51.350 --> 00:15:58.669
+Harsha Tummala: Yeah, no, I mean, just set up in general, like just the big package pipeline, say, Amplify, that is like a whole beast by itself.
+
+144
+00:15:58.670 --> 00:15:59.600
+Ashritha: Yes.
+
+145
+00:15:59.600 --> 00:16:00.260
+Harsha Tummala: But, yeah.
+
+146
+00:16:00.420 --> 00:16:00.970
+Ashritha: Okay.
+
+147
+00:16:03.460 --> 00:16:14.680
+Ashritha: Rishi is here, like, Rishi, do you wanna, like, update on the, like, urgent OCR work and yours, or… and, like, how the ingestion… Sorry, integration thing is going on?
+
+148
+00:16:15.710 --> 00:16:19.049
+hrishikb@andrew.cmu.edu: I think this data is pretty similar to the last…
+
+149
+00:16:19.330 --> 00:16:24.369
+hrishikb@andrew.cmu.edu: Last update, but right now we are working on getting the output…
+
+150
+00:16:24.570 --> 00:16:29.680
+hrishikb@andrew.cmu.edu: In a place where we can send it forward to the ML pipeline.
+
+151
+00:16:30.200 --> 00:16:32.269
+hrishikb@andrew.cmu.edu: We are…
+
+152
+00:16:33.060 --> 00:16:44.359
+hrishikb@andrew.cmu.edu: I would say we have a few, like, we have planned it out. We have around 5 to 6 tickets that we need to complete. I think we're almost halfway through. Like, we can say we are halfway through, and…
+
+153
+00:16:44.680 --> 00:16:47.560
+hrishikb@andrew.cmu.edu: we should be able to, I guess…
+
+154
+00:16:48.450 --> 00:17:00.569
+hrishikb@andrew.cmu.edu: Complete from our sides by early next week, if there are no issues. We're also writing a few of the test cases, and, like, I did find a couple of bugs, so that's going on parallel.
+
+155
+00:17:01.390 --> 00:17:04.579
+hrishikb@andrew.cmu.edu: Yeah, so that's the thing we're working on right now.
+
+156
+00:17:08.389 --> 00:17:18.469
+Harsha Tummala: We would also love to see, like, things a little more visually, like, not the Android flows, but just, just understanding,
+
+157
+00:17:18.849 --> 00:17:23.919
+Harsha Tummala: The different pipelines that you guys are designing, and how just the architecture will add up to those.
+
+158
+00:17:24.049 --> 00:17:29.329
+Harsha Tummala: Just so that we have a better idea on, like, what party we're taking in.
+
+159
+00:17:30.169 --> 00:17:32.739
+Harsha Tummala: Because it just feels like a black box at this point.
+
+160
+00:17:34.020 --> 00:17:34.900
+hrishikb@andrew.cmu.edu: Okay.
+
+161
+00:17:35.340 --> 00:17:35.960
+Harsha Tummala: Okay.
+
+162
+00:17:37.850 --> 00:17:40.730
+Harsha Tummala: And that's it. That's that's all I have to say.
+
+163
+00:17:45.180 --> 00:18:01.509
+Ashritha: Yeah, I think, honestly, like, by next week, we should have something, like, to demo… not, like, the entire pipeline at least, but, like, some of all the work that we have done so far in, like, a demo-able form, because,
+
+164
+00:18:01.660 --> 00:18:18.900
+Ashritha: I mean, even though, like, you asked us, we have this, end semester presentation coming, and then as part of it, we have to demonstrate our solution, so we already started working towards it. But yeah, you rightly mentioned it, it'd be more visible, for you and for us to, like, if…
+
+165
+00:18:18.900 --> 00:18:26.160
+Ashritha: it's… everything, like, right now, probably, like, everything just feels in the air, and, like, in the documents, or, like, in the Bitbucket code.
+
+166
+00:18:26.160 --> 00:18:36.659
+Ashritha: So, yeah, honestly, it would boost some confidence to us also. So, yeah, I think, we spent some good amount of time this week on the integration part of it, because
+
+167
+00:18:36.760 --> 00:18:53.220
+Ashritha: like, the modules are done, but I think the major lacking is in how, so basically we are now, like, we, know that what the ML pipeline expects the input to be, so Rishi is working on to align with that schema.
+
+168
+00:18:53.220 --> 00:18:57.490
+Ashritha: So once that's there, we can just test out with few batches of examples.
+
+169
+00:18:57.620 --> 00:19:02.849
+Ashritha: At least we would know how much, like, how much of it is white or black or whatever, so…
+
+170
+00:19:03.140 --> 00:19:06.410
+Ashritha: Yeah, I think next week we'll be able to, like.
+
+171
+00:19:06.670 --> 00:19:11.870
+Ashritha: Give a good, like, a short demo or something with, like, a bunch of examples.
+
+172
+00:19:12.230 --> 00:19:21.419
+Harsha Tummala: Yeah, no stress at all. I mean, don't, don't worry yourself with a demo that is working, or, like, a short demo that's working. It could be, like, a flowchart, even though it works.
+
+173
+00:19:21.420 --> 00:19:21.970
+Ashritha: Okay.
+
+174
+00:19:21.970 --> 00:19:23.879
+Harsha Tummala: That's it, just something we should have said.
+
+175
+00:19:23.880 --> 00:19:24.470
+Ashritha: Oh yeah, sure.
+
+176
+00:19:24.470 --> 00:19:25.810
+Harsha Tummala: Yeah, that's it.
+
+177
+00:19:26.010 --> 00:19:26.540
+Ashritha: Okay.
+
+178
+00:19:30.800 --> 00:19:34.000
+Harsha Tummala: That's a good question. No.
+
+179
+00:19:35.370 --> 00:19:36.239
+Harsha Tummala: Nope, I think it.
+
+180
+00:19:36.240 --> 00:19:36.690
+Ashritha: Oh.
+
+181
+00:19:36.690 --> 00:19:37.160
+Harsha Tummala: What do you.
+
+182
+00:19:37.160 --> 00:19:37.720
+Ashritha: I think…
+
+183
+00:19:37.750 --> 00:19:39.330
+Harsha Tummala: But I see a lease.
+
+184
+00:19:40.910 --> 00:19:43.569
+Harsha Tummala: Sorry. Anyone else any updates?
+
+185
+00:19:43.570 --> 00:19:48.800
+Ashritha: No, I think, we are good from our side. Cliff, do you want to add something to it?
+
+186
+00:19:50.320 --> 00:19:53.980
+Clifford Huff: I just want to talk to you for a little bit after the client's done. That's all.
+
+187
+00:19:53.980 --> 00:19:54.630
+Ashritha: Okay.
+
+188
+00:19:56.670 --> 00:20:00.189
+Harsha Tummala: It seems that it's like you have to come back to him.
+
+189
+00:20:00.190 --> 00:20:00.810
+Clifford Huff: Okay.
+
+190
+00:20:01.370 --> 00:20:04.440
+Harsha Tummala: Have a good one. See you guys. Bye-bye. Bye. See.
+
+191
+00:20:05.040 --> 00:20:05.480
+hrishikb@andrew.cmu.edu: Bye by.
+
+192
+00:20:05.480 --> 00:20:07.029
+Harsha Tummala: I'll be here for that.
+
+193
+00:20:11.370 --> 00:20:23.009
+Clifford Huff: Hi, team. So I just had a question about your current CI/CD pipeline. Is this stuff internal or are you trying to work with an eParts flow at this point?
+
+194
+00:20:24.000 --> 00:20:43.050
+Ashritha: When I meant internal, it's for the CI-CD pipeline, as for the code that we check in, so for the Bitbucket pull requests and stuff like that. So, our MLOps for the product is not yet… we have not yet committed any code for that, so I,
+
+195
+00:20:43.090 --> 00:20:56.479
+Ashritha: like, once we thought that once the integration part is done, wherein we test the OCR ingestion and the machine learning part of it, we can just figure out the ML loss, which should be easy, it should not take a lot of time, because
+
+196
+00:20:56.710 --> 00:21:10.629
+Ashritha: we know the plan, it's just that we have to get the coding part of it done, but we have the CI part of it for the build process, like, the code build process, but not for the actual
+
+197
+00:21:10.880 --> 00:21:13.990
+Ashritha: ML part of it. So, MLOps is not there.
+
+198
+00:21:14.170 --> 00:21:17.800
+Ashritha: you could say, like, the CICD for the code is present here.
+
+199
+00:21:18.720 --> 00:21:19.410
+Clifford Huff: Okay.
+
+200
+00:21:19.680 --> 00:21:30.659
+Clifford Huff: So did you guys have a priority interface spec between your pieces of code that you're building? Or is that something you're figuring out as you integrate? That wasn't clear.
+
+201
+00:21:31.430 --> 00:21:43.519
+Clifford Huff: as you guys integrate different components that you've been working on, did you have… originally have a interface spec figured out, or is that something that you're just refining at this point? Does that make sense?
+
+202
+00:21:43.830 --> 00:22:02.120
+Ashritha: Oh, we have that figured out already. Like, when we initially made the specification document for the entire project, Liu, since he was a primary person working on the ML part, he told us initially itself, like, this is the expected input format. So we just kind of…
+
+203
+00:22:02.120 --> 00:22:07.439
+Ashritha: Aligning with it right now, but we are not modifying any of our initial, spec…
+
+204
+00:22:07.440 --> 00:22:19.939
+Ashritha: commitment, so, yeah. We're not refining it. We're just, like, aligning the output that is coming from the intuition with the input that he wants it to be, that's it. So nothing extra that we added recently.
+
+205
+00:22:20.490 --> 00:22:33.689
+Clifford Huff: Okay, sounds good. All right. Are you having the mentor meeting in person, or is it on Zoom? So, I… I noticed that the… the mentor… the client meeting was possibly going to be on Zoom. I just want to confirm about the mentor meeting.
+
+206
+00:22:34.070 --> 00:22:48.439
+Ashritha: Yeah, it's gonna be on Zoom, like, I just dropped a message, like, I mean, the entire team was on remote, so I thought I just… I would ask you and Dennis as well. So Dennis said he would be on Zoom, so yeah, I just stayed on phone.
+
+207
+00:22:48.740 --> 00:22:55.699
+Clifford Huff: Okay. All right. Well, I missed that. I've been troubleshooting things at my church, so I was, I was doing that. Okay.
+
+208
+00:22:55.860 --> 00:22:56.440
+Clifford Huff: Alright.
+
+209
+00:22:56.440 --> 00:22:59.429
+zhelianl@andrew.cmu.edu: I think I'm in the room next to you now.
+
+210
+00:22:59.510 --> 00:23:00.310
+Clifford Huff: Hahaha.
+
+211
+00:23:00.310 --> 00:23:01.469
+zhelianl@andrew.cmu.edu: And also in the cave.
+
+212
+00:23:02.090 --> 00:23:02.920
+Clifford Huff: Okay.
+
+213
+00:23:03.050 --> 00:23:07.809
+Clifford Huff: Well, yeah, I'll stay here until then, and then leave, that's good. Alright.
+
+214
+00:23:07.990 --> 00:23:10.320
+Clifford Huff: See you all at 4 o'clock.
+
+215
+00:23:11.110 --> 00:23:11.640
+zhelianl@andrew.cmu.edu: Okay.
+
+216
+00:23:12.190 --> 00:23:12.720
+Ashritha: Bye.
+
+217
+00:23:12.920 --> 00:23:13.520
+hrishikb@andrew.cmu.edu: Bye.
+

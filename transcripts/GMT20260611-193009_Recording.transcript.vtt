@@ -1,0 +1,254 @@
+WEBVTT
+
+1
+00:00:02.500 --> 00:00:05.519
+hrishikb@andrew.cmu.edu: Great. Whatever you have that began.
+
+2
+00:00:32.759 --> 00:00:34.209
+hrishikb@andrew.cmu.edu: Did I put it on the channels?
+
+3
+00:00:37.040 --> 00:00:40.319
+Harsha Tummala: Can you see… can you hear us, guys?
+
+4
+00:00:40.320 --> 00:00:41.620
+hrishikb@andrew.cmu.edu: Yeah, no, we can hear you.
+
+5
+00:00:42.120 --> 00:00:47.329
+Harsha Tummala: Yeah, I think there was some network issue, we lost power, and everything restarted.
+
+6
+00:00:48.940 --> 00:00:59.089
+Harsha Tummala: Yeah, that was it. We're all back up. But, I think just to continue what Jake was saying, for when we have a lot of features, but we can only map to, for example, like.
+
+7
+00:00:59.440 --> 00:01:08.579
+Harsha Tummala: a few of the features that Eton provides. I would say you should just map to the few features and just show the additional features and empty fields. That's good enough, I would say.
+
+8
+00:01:09.080 --> 00:01:17.809
+hrishikb@andrew.cmu.edu: Okay, so there's not gonna be any mandatory features on… from ETEM side, like, and even from, I think, PIM's side, there's not mandatory features, right? For a particular product?
+
+9
+00:01:20.560 --> 00:01:39.019
+Harsha Tummala: Yeah, kind of. I mean, for a product type, we would want a certain set of attributes, but if we can't map to everything, it is what it is, right? So, it's just that the mindset has to be, like, we want to be curious about more data, as in, we want to push our suppliers towards giving us more data.
+
+10
+00:01:39.320 --> 00:01:45.779
+Harsha Tummala: So, for example, if we have, like, a hundred, eaten features for a set, a specific class.
+
+11
+00:01:45.950 --> 00:01:55.599
+Harsha Tummala: And we can only map to 30 of them. We want to map to the 30, and then show that all these 70 are, like, empty, and these are fields you can give us further information on.
+
+12
+00:01:55.730 --> 00:01:57.130
+Harsha Tummala: And that's what it can be.
+
+13
+00:01:58.240 --> 00:02:01.959
+hrishikb@andrew.cmu.edu: okay, so in that case,
+
+14
+00:02:02.130 --> 00:02:18.839
+hrishikb@andrew.cmu.edu: I think the mandatory fields part is in PIMS, so we'll have to first map it to those fields so that we know which fields are actually mandatory and not present. Then, after we have those values, we can then go ahead and map them with the ETIN categories and ETIN class and the things.
+
+15
+00:02:19.800 --> 00:02:26.390
+Harsha Tummala: Yeah, I mean, you don't have to be so restrictive also. So, if, for example, mapping all of these
+
+16
+00:02:26.930 --> 00:02:34.140
+Harsha Tummala: all of the attributes that we have on our system to the ETEM, ETM attributes.
+
+17
+00:02:34.310 --> 00:02:39.120
+Harsha Tummala: If it's… if it's not that cut and dry, then you should probably just…
+
+18
+00:02:41.370 --> 00:02:43.630
+Harsha Tummala: We should probably just, like.
+
+19
+00:02:44.190 --> 00:02:49.699
+Harsha Tummala: Work with what you can do, and that's… just keep the scope within how much can actually be achieved.
+
+20
+00:02:50.100 --> 00:02:57.380
+Harsha Tummala: And leave the rest to, like, oh, this is all… this is all things that we cannot really, like, see data for or map, or…
+
+21
+00:02:58.090 --> 00:03:01.439
+Harsha Tummala: Okay. It's a clear kind of situation here.
+
+22
+00:03:04.420 --> 00:03:07.670
+hrishikb@andrew.cmu.edu: Okay, I think that clarifies a few things.
+
+23
+00:03:08.920 --> 00:03:12.190
+hrishikb@andrew.cmu.edu: Let me see if I have more questions…
+
+24
+00:03:30.840 --> 00:03:41.489
+hrishikb@andrew.cmu.edu: Yep, I think that is pretty much it. So, I was able to find a couple of files that I'm using for the ETEM, like, to analyze what ETEM does right now.
+
+25
+00:03:41.760 --> 00:03:47.220
+hrishikb@andrew.cmu.edu: the ones that are relevant. I guess those are… Very big names.
+
+26
+00:03:47.990 --> 00:03:54.440
+hrishikb@andrew.cmu.edu: ETEM 10.0 all sectors, and ETEM 10.0 CSV metrics.
+
+27
+00:03:55.060 --> 00:03:55.410
+Harsha Tummala: Yeah.
+
+28
+00:03:55.410 --> 00:03:58.090
+hrishikb@andrew.cmu.edu: What is the latest ones, but… Yeah.
+
+29
+00:03:58.750 --> 00:04:08.169
+Harsha Tummala: Okay. Yeah, I mean, I would say just stick to a version, and that's pretty much it. I wouldn't stress too much about, like, keeping up to date with the latest one, the latest supplies, yeah.
+
+30
+00:04:08.170 --> 00:04:09.480
+hrishikb@andrew.cmu.edu: So, 10.01.
+
+31
+00:04:09.820 --> 00:04:10.889
+Harsha Tummala: Yeah, that's it.
+
+32
+00:04:10.890 --> 00:04:11.550
+hrishikb@andrew.cmu.edu: forward.
+
+33
+00:04:15.320 --> 00:04:21.600
+hrishikb@andrew.cmu.edu: Yeah, and last week I told you I'm gonna be working on the schema part of it, but right now there are a few hiccups.
+
+34
+00:04:21.820 --> 00:04:26.880
+hrishikb@andrew.cmu.edu: So, I'm not very sure if you can put it in the exact PIM schema.
+
+35
+00:04:27.080 --> 00:04:34.870
+hrishikb@andrew.cmu.edu: Right now, so we'll be probably, doing some sort of a key pair thingy, before we reach them in the pipeline, and.
+
+36
+00:04:34.870 --> 00:04:35.260
+Harsha Tummala: Okay.
+
+37
+00:04:35.260 --> 00:04:40.169
+hrishikb@andrew.cmu.edu: So you might have to do some extra work after the pipeline to put it into proper,
+
+38
+00:04:40.800 --> 00:04:43.619
+hrishikb@andrew.cmu.edu: let's say, proper format before we push anything to pens.
+
+39
+00:04:44.380 --> 00:04:53.129
+Harsha Tummala: Yeah, I would say take your time just understanding how to map out all of these classes and features to the attributes and the product types.
+
+40
+00:04:53.660 --> 00:04:54.060
+Harsha Tummala: Right.
+
+41
+00:04:54.650 --> 00:05:07.769
+Harsha Tummala: Yeah, that could… that could probably be a lot of help as we go down the line as well. But, I think another thing I wanted to bring up was, I… I would… I just… I was just talking to Jake about this, but, he's…
+
+42
+00:05:07.900 --> 00:05:13.729
+Harsha Tummala: I asked him if he could do, like, a PIMS demo, because a lot of changes have been happening in PIMS for us.
+
+43
+00:05:14.220 --> 00:05:32.359
+Harsha Tummala: Not right now, but, like, probably in two weeks to a month. We want to do a PIMS demo to you guys, so that you guys can know the state of things, of PIMS as well, so that when it comes to the point of, oh, how well can things integrate with PIMS, or, like, how well can things even, like, work with PIMS, then you'll have a better idea standing.
+
+44
+00:05:32.700 --> 00:05:33.340
+Harsha Tummala: Good morning.
+
+45
+00:05:34.410 --> 00:05:41.980
+hrishikb@andrew.cmu.edu: Yeah, I think that would be pretty helpful. Whenever you guys think we should, yeah, maybe, like, have a demo, like, we'd probably be ready for it.
+
+46
+00:05:42.680 --> 00:05:46.579
+Harsha Tummala: It could be online, it could be in person, whatever you guys are comfortable.
+
+47
+00:05:47.430 --> 00:05:48.080
+hrishikb@andrew.cmu.edu: Sure.
+
+48
+00:05:55.450 --> 00:05:57.480
+hrishikb@andrew.cmu.edu: Okay, I think that's all from our side.
+
+49
+00:05:58.320 --> 00:06:02.369
+hrishikb@andrew.cmu.edu: That's updates for today.
+
+50
+00:06:03.580 --> 00:06:05.639
+hrishikb@andrew.cmu.edu: We just need the access as well.
+
+51
+00:06:05.640 --> 00:06:09.740
+Harsha Tummala: We'll get to it, ideally, next week.
+
+52
+00:06:10.220 --> 00:06:15.339
+Harsha Tummala: Today was kind of hectic. This week has been kind of crazy.
+
+53
+00:06:15.340 --> 00:06:16.720
+hrishikb@andrew.cmu.edu: But.
+
+54
+00:06:16.800 --> 00:06:29.089
+Harsha Tummala: tomorrow or next week is what I would say would be good. We already have it on a priority. Basically, every day we kind of keep talking about it, but we just don't have the time to get to it. That's it.
+
+55
+00:06:29.380 --> 00:06:33.780
+Harsha Tummala: Even the foundry access for, Java, and we'll get to it as well.
+
+56
+00:06:35.460 --> 00:06:36.450
+hrishikb@andrew.cmu.edu: Thanks, thanks.
+
+57
+00:06:37.420 --> 00:06:39.760
+hrishikb@andrew.cmu.edu: Alright, thank you. Thank you.
+
+58
+00:06:40.380 --> 00:06:42.459
+Harsha Tummala: That's it. Thanks, guys. Have a great week.
+
+59
+00:06:43.160 --> 00:06:44.290
+hrishikb@andrew.cmu.edu: See you next week.
+
+60
+00:06:44.290 --> 00:06:46.220
+Harsha Tummala: Hope summer's hitting you as well now.
+
+61
+00:06:46.460 --> 00:06:47.840
+hrishikb@andrew.cmu.edu: Yeah, just for the New York.
+
+62
+00:06:48.230 --> 00:06:50.470
+Harsha Tummala: Okay. See you. Bye-bye.
+
+63
+00:06:50.940 --> 00:06:51.320
+hrishikb@andrew.cmu.edu: Yeah, bye.
+
