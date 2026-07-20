@@ -1,0 +1,71 @@
+# Program Health auto-refresh — the scheduled measurement process.
+#
+# Every Monday morning (and on demand from the Actions tab) this workflow:
+#   1. exports all EPARTS issues from Jira (dashboard/fetch_jira.py, REST API,
+#      credentials from repo secrets — never in code),
+#   2. regenerates dashboard/program_health.html (seeded, reproducible),
+#   3. opens a PULL REQUEST with the refreshed numbers.
+# Human review of the PR stays in the loop before the new numbers land on
+# main — same gate pattern as the transcript pipeline.
+#
+# Metamodel: Process (weekly measurement), Artifacts (jira_issues.json +
+# program_health.html), Resources (CI runner + Jira API), Measurements are
+# the artifact itself.
+
+name: Program health refresh
+
+on:
+  schedule:
+    - cron: "0 12 * * 1"   # Mondays 12:00 UTC (8am ET)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: program-health
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Both scripts are stdlib-only — no pip install.
+      - name: Export Jira issues
+        env:
+          JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        run: python3 dashboard/fetch_jira.py
+
+      - name: Regenerate dashboard
+        run: |
+          python3 dashboard/generate_program_health.py | tee /tmp/summary.txt
+          {
+            echo "## Program health refresh"
+            echo ""
+            echo '```'
+            cat /tmp/summary.txt
+            echo '```'
+            echo ""
+            echo "Provenance: data exported by \`dashboard/fetch_jira.py\` this run;"
+            echo "every figure recomputes from \`dashboard/data/jira_issues.json\`."
+            echo "Review the numbers, then merge — merging publishes the refresh."
+          } > /tmp/pr_body.md
+          cat /tmp/pr_body.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Open pull request with refreshed dashboard
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: pipeline/program-health-${{ github.run_number }}
+          commit-message: "[agent:dashboard] Weekly program health refresh (run ${{ github.run_number }})"
+          title: "Program health refresh (run ${{ github.run_number }})"
+          body-path: /tmp/pr_body.md
+          labels: agent-generated, needs-human-review
+          delete-branch: true
