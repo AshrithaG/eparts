@@ -1,0 +1,56 @@
+# SES transcript pipeline — the "drop a VTT, get reviewed minutes" trigger.
+#
+# Closes the operations gap from the spring critique: the pipeline used to run
+# only on one laptop, manually. Now anyone on the team adds a Zoom
+# *.transcript.vtt to transcripts/inbox/ (git push, or GitHub web "Add file" →
+# "Upload files") and this workflow:
+#   1. runs pipeline.process_inbox (stdlib-only — no dependency install),
+#   2. moves the transcript into transcripts/ and writes minutes/ artifacts,
+#   3. opens a PULL REQUEST with the generated minutes.
+# The PR is the human review gate (metamodel: Process → Artifact → human
+# Verification before the artifact is baselined on main).
+
+name: Transcript pipeline
+
+on:
+  push:
+    branches: ["main"]
+    paths: ["transcripts/inbox/**"]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: transcript-pipeline
+  cancel-in-progress: false
+
+jobs:
+  process-inbox:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # pipeline.ingest / process_inbox are deliberately stdlib-only, so this
+      # step needs no pip install and finishes in seconds.
+      - name: Run inbox processor
+        id: run
+        run: |
+          python -m pipeline.process_inbox --summary-file /tmp/pr_body.md
+          echo "## Transcript pipeline" >> "$GITHUB_STEP_SUMMARY"
+          cat /tmp/pr_body.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Open pull request with generated minutes
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: pipeline/minutes-${{ github.run_number }}
+          commit-message: "[agent:pipeline] Generate minutes from inbox transcripts (run ${{ github.run_number }})"
+          title: "Agent-generated minutes for review (run ${{ github.run_number }})"
+          body-path: /tmp/pr_body.md
+          labels: agent-generated, needs-human-review
+          delete-branch: true
