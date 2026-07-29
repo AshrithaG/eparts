@@ -14,8 +14,8 @@ Written against **Product Specification v2.0 (24 April 2026)**. Several are now 
 | # | Title | Status | ETIM verdict |
 |---|-------|--------|--------------|
 | 0001 | Adopt Pipe-and-Filter as the Primary Architectural Style | Accepted | Valid; the ingestion→ML seam is now explicit (ADR-021) |
-| 0002 | Isolate the Prediction Strategy Behind a Stable Internal Interface | Accepted | Valid; contract enriched by ADR-016 |
-| 0003 | Use a Hybrid Rule Engine and Semantic Similarity for Attribute Prediction | Tentative | Narrowed by ADR-016 to the feature and value stages |
+| 0002 | Isolate the Prediction Strategy Behind a Stable Internal Interface | Accepted | Valid; both ML phases sit behind it, contract enriched by ADR-016 |
+| 0003 | Use a Hybrid Rule Engine and Semantic Similarity for Attribute Prediction | Tentative | Still holds as ML phase 1; reused inside ADR-016 phase 2 |
 | 0004 | Route Confidence Decisions at the Attribute Level, Not the Record Level | Accepted | Extended by ADR-018 |
 | 0005 | Externalize the Confidence Threshold as Runtime Configuration | Tentative | Widened by ADR-018 to class + attribute thresholds |
 | 0006 | Enforce Idempotent PIMS Writeback via a Composite Natural Key | Accepted | Key superseded by ADR-017; mechanism reused |
@@ -28,18 +28,18 @@ Written against **Product Specification v2.0 (24 April 2026)**. Several are now 
 
 ### ETIM change — ADRs 0013–0021 (June–July 2026)
 
-Written against **Product Specification v1.2 (28 July 2026)** — see [`product-spec-changelog.md`](product-spec-changelog.md) and [`etim-requirements-change.md`](etim-requirements-change.md).
+Written against **Product Specification v1.3 (29 July 2026)** — see [`product-spec-changelog.md`](product-spec-changelog.md) and [`etim-requirements-change.md`](etim-requirements-change.md).
 
 | # | Title | Status | Built? |
 |---|-------|--------|--------|
 | 0013 | Establish a Release-Versioned ETIM Reference Data Layer Owned by Ingestion | Accepted | **Yes** — `models/etim.py`, `etim/loader.py`, `cli/etim.py`, Alembic `0005`; verified against the real ETIM 10.0 EI archive |
 | 0014 | Emit a Source-Preserving Product + Attribute Staging Split | Accepted | **Yes** — `models/staging.py`, Alembic `0006` |
 | 0015 | Target PostgreSQL Now; Defer the Azure SQL Conversion | Accepted | **Yes** — running substrate |
-| 0016 | Decompose Attribute Matching into Staged ETIM Class → Feature → Value/Unit Matching | Accepted | No — designed; ML stream, EPARTS-289/290/291 |
+| 0016 | Add ETIM Matching as a Second ML Phase After Attribute Matching | Accepted | Phase 1 exists; **phase 2 designed** — ML stream, EPARTS-289/290/291 |
 | 0017 | Re-key the PIMS Writeback Contract on ETIM Identifiers | Accepted | No — designed; writer rework EPARTS-299 |
 | 0018 | Extend Routing to ETIM Signals, with a Class-Review-First Path | Accepted | No — designed; depends on 0016 |
 | 0019 | Externalize the Client Feature Policy as Per-Class Configuration | Accepted | Seam decided; **policy values blocked on client** (EPARTS-287) |
-| 0020 | Pin ETIM Release 10.0 (EI) for the Project Duration | Accepted | **Yes** — C-4 in spec v1.2; release-scoping kept in the schema for provenance |
+| 0020 | Pin ETIM Release 10.0 (EI) for the Project Duration | Accepted | **Yes** — C-4 introduced in spec v1.2; release-scoping kept in the schema for provenance |
 | 0021 | Formalize the Ingestion → ML Boundary as a Frozen `ExtractedInput` Record | Accepted | **Partly** — spec model, builder, Alembic `0007` merged; orchestrator wiring EPARTS-363 outstanding |
 
 ## Status legend
@@ -50,7 +50,7 @@ Written against **Product Specification v1.2 (28 July 2026)** — see [`product-
 
 ## Requirements traceability
 
-Each ADR ends with a **Requirements Traceability** section. ADRs 0001–0012 cite Product Specification v2.0 (24 April 2026); ADRs 0016–0021 cite Product Specification v1.2 (28 July 2026).
+Each ADR ends with a **Requirements Traceability** section. ADRs 0001–0012 cite Product Specification v2.0 (24 April 2026); ADRs 0016–0021 cite Product Specification v1.3 (29 July 2026).
 
 A consolidated bidirectional view is in [`REQUIREMENTS-TO-ADR-MAPPING.md`](REQUIREMENTS-TO-ADR-MAPPING.md) — sections 1–9 cover the v2.0 requirement set, section 10 covers the ETIM change.
 
@@ -59,7 +59,7 @@ A consolidated bidirectional view is in [`REQUIREMENTS-TO-ADR-MAPPING.md`](REQUI
 - **ADR-001** (pipe-and-filter) is the structural premise the rest build on. **ADR-021** makes its most important filter boundary explicit and schema-enforced.
 - **ADR-002** (`PredictionServiceInterface`) is the boundary that protects ADR-003 and ADR-011 from leaking model details. **ADR-016** decomposes what sits behind that interface without changing the interface's role.
 - **ADR-004**, **ADR-005** and **ADR-007** are mutually reinforcing: per-attribute routing needs the attribute-row schema and a tunable threshold. **ADR-018** extends the routing inputs; **ADR-014** splits the schema.
-- **ADR-013 → 0014 → 0016 → 0017** is the ETIM spine: load the dictionary, split evidence from interpretation, match in stages, publish keyed on the result.
+- **ADR-013 → 0014 → 0016 → 0017** is the ETIM spine: load the dictionary, split evidence from interpretation, match in ML (attribute first, then ETIM), publish keyed on the result.
 - **ADR-019** (client policy) is the only decision gated on an external party, and it gates the validation half of **ADR-018**.
 - **ADR-020** pins the standard to ETIM 10.0 EI and puts upgrades out of scope. `etim_release_id` stays in 0013, 0014 and 0017 for provenance, not for coexistence.
 - **ADR-010** (audit trail) and **ADR-012** (telemetry) provide the observability layer that ADR-011 and drift detection depend on.

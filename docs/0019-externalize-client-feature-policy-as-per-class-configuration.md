@@ -58,7 +58,7 @@ The decision also creates a role that did not exist in the v1.0 baseline: a **fe
 
 ## Requirements Traceability
 
-- **Spec:** Product Specification v1.2 (28 July 2026)
+- **Spec:** Product Specification v1.3 (29 July 2026)
 - **HLRs:** HLR-6 (ETIM classification and enrichment); HLR-4 (human review of items needing attention)
 - **FRs:** FR-9 (ETIM matching — policy validation gates what a match is sufficient for); FR-4 (routing to review); FR-7 (authorized adjustment of auto-acceptance behaviour, of which policy is now part)
 - **Constraints:** C-3 (breadth-first delivery — a full end-to-end flow for one supplier type before optimizing depth; a permissive default is what allows the flow to complete)

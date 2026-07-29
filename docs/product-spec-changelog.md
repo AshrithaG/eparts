@@ -1,6 +1,6 @@
 # Product Specification — change record
 
-Authoritative document: **`product-spec-v1.2.pdf`** — *Product Specification, Intelligent Ingestion & Attribute Prediction System*, eParts Studio Team, **Document Version 1.2, 28 July 2026**. LaTeX source: `product-spec-v1.2.tex`.
+Authoritative document: **`product-spec-v1.3.pdf`** — *Product Specification, Intelligent Ingestion & Attribute Prediction System*, eParts Studio Team, **Document Version 1.3, 29 July 2026**. LaTeX source: `product-spec-v1.3.tex`.
 
 This file is the greppable companion to that PDF. ADRs cite requirement IDs; this is where those IDs resolve.
 
@@ -12,11 +12,12 @@ This file is the greppable companion to that PDF. ADRs cite requirement IDs; thi
 | 0.5 | Feb 10, 2026 | Added detailed functional requirements for Ingestion and ML Service. |
 | 1.0 | Apr 24, 2026 | Baseline specification for development. |
 | 1.1 | July 23, 2026 | Integrated ETIM classification/enrichment; corrected OCR (Azure Document Intelligence) and ingestion (channels, Azure Blob storage, quarantine). |
-| **1.2** | **July 28, 2026** | **Pinned the project to ETIM release 10.0 (language EI) for its duration (new constraint C-4); scoped FR-10 accordingly and removed the implied obligation to adopt later ETIM releases.** |
+| 1.2 | July 28, 2026 | Pinned the project to ETIM release 10.0 (language EI) for its duration (new constraint C-4); scoped FR-10 accordingly and removed the implied obligation to adopt later ETIM releases. |
+| **1.3** | **July 29, 2026** | **Corrected the placement of ETIM matching. ETIM class/feature/value matching is performed by the ML service *after* attribute matching, not by the Intermediate Structured Layer during normalization. HLR-2, §2.1 and SCEN-1 amended; FR-9 attributed to the ML service.** |
 
 Both revisions are **changes against the v1.0 baseline**, not re-baselines. New IDs were *added*; existing HLR and DR numbering was preserved so prior trace links survive.
 
-**v1.1** integrated ETIM. **v1.2** fixed the scope of that integration: we are pinned to one ETIM release and will not chase later ones — see [ADR-020](0020-pin-etim-release-10-0-for-the-project-duration.md).
+**v1.1** integrated ETIM. **v1.2** fixed the *scope* of that integration — we are pinned to one ETIM release and will not chase later ones ([ADR-020](0020-pin-etim-release-10-0-for-the-project-duration.md)). **v1.3** fixed the *placement* — ETIM matching belongs to the ML service, behind attribute matching, not to normalization ([ADR-016](0016-decompose-matching-into-staged-etim-class-feature-value-stages.md)).
 
 ## What ETIM changed
 
@@ -31,7 +32,7 @@ The governing principle, now stated in the spec's glossary and §2.1:
 | ID | Statement (abridged) |
 |---|---|
 | **HLR-6** | The system shall classify products against the ETIM standard and enrich supplier attributes with ETIM identifiers (class, feature, value, unit), keeping the original values as evidence. |
-| **FR-9** | The system shall match normalized attributes to ETIM classes, features, and controlled values/units, attaching a confidence score to each ETIM assignment and preserving the original supplier value. |
+| **FR-9** | After attribute matching, the Attribute Prediction Service (ML) shall match attributes to ETIM classes, features, and controlled values/units, attaching a confidence score to each ETIM assignment and preserving the original supplier value. *(Attributed to ML in v1.3.)* |
 | **FR-10** | The system shall load and maintain the ETIM reference dictionary (product groups, classes, features, values, units, and class–feature–value mappings) as reference data for the pinned ETIM release identified in C-4. *(Wording scoped in v1.2; originally "as versioned reference data".)* |
 | **DR-4** | *(Must, traces HLR-6)* Approved data written to PIMS shall be keyed by ETIM identifiers (release, class, feature); the writeback idempotency key shall include these identifiers. |
 
@@ -42,6 +43,18 @@ The governing principle, now stated in the spec's glossary and §2.1:
 | **C-4** | *(constraint)* The system shall target ETIM release 10.0 (language EI) for the duration of this project. Adopting later ETIM releases, and migrating already-classified products between releases, are out of scope. |
 
 C-4 exists because FR-10 as first written implied an obligation we were not going to meet. Pinning the release is a decision we can defend; a half-built upgrade path is not. The `etim_release_id` field stays in the schema for provenance — see ADR-020.
+
+### Amended in v1.3 — where ETIM matching happens
+
+The v1.1 edit put ETIM keying in the wrong component. ETIM assignment is a *matching decision with a confidence attached*, so it belongs to the ML service and runs **after** attribute matching. Normalization has no model, no confidence, and no route to human review, so it cannot make that decision.
+
+| ID / section | v1.1–v1.2 said | v1.3 says |
+|---|---|---|
+| **HLR-2** | "normalize into a standardized, **ETIM-keyed** intermediate structure (mechanical cleanup followed by mapping to ETIM classes, features, and values)" | "normalize into a standardized intermediate structure through **mechanical cleanup only**… ETIM class, feature, and value assignment is performed **downstream by the ML service** (HLR-6, FR-9), not during normalization" |
+| **§2.1** Intermediate Structured Layer | converts raw inputs into "ETIM-keyed canonical tables" | converts raw inputs into canonical tables holding the supplier's own values as evidence; "it does **not** assign ETIM identifiers" |
+| **§2.1** Attribute Prediction Service | "Runs ML models and heuristic rules" | **"(ML): Owns all matching, in two phases"** — attribute matching, then ETIM matching (class, feature, value/unit, ETIM validation, policy validation) |
+| **FR-9** | "The system shall match normalized attributes…" | "**After attribute matching, the Attribute Prediction Service (ML) shall** match attributes…" |
+| **SCEN-1** step 3 | normalization "maps to ETIM class/features" | "No ETIM assignment happens here"; step 4 now cites FR-3 **and FR-9** and does both matching phases |
 
 ### Requirements amended in v1.1
 
@@ -67,7 +80,7 @@ C-4 exists because FR-10 as first written implied an obligation we were not goin
 - **Derived cascade** (DR-4) — the PIMS idempotency key derives from HLR-6; confidence now attaches **per ETIM assignment**, not per raw attribute.
 - **New constraints** — metric-canonical storage where ETIM expects metric units; one ETIM class per sellable SKU; English (EI) ETIM language; phase-one valve/actuator scope only.
 
-## Requirement ID inventory (v1.2)
+## Requirement ID inventory (v1.3)
 
 - **HLR-1 … HLR-6**
 - **FR-1 … FR-10**
@@ -80,8 +93,8 @@ C-4 exists because FR-10 as first written implied an obligation we were not goin
 
 ## Known traceability defects (owned, not hidden)
 
-1. **Two spec lineages exist.** A parallel document — *Product Specification, "Document Version 2.0", April 24 2026* — carries a different and larger ID set (FR-1…13, QAS-1…5 with QAS-1 = Accuracy ≥95%, C-1…8, DR-1…3). It is **not** an ancestor of this one; this lineage runs 0.1 → 0.5 → 1.0 (Apr 24) → 1.1 → 1.2. That document is not committed here to avoid implying a version chain that does not exist.
-2. **ADRs 0001–0015 cite the other lineage's IDs.** References to QAS-3, QAS-4, QAS-5, C-7, FR-11/12/13 do not resolve against v1.2. Those ADRs are the spring record and are deliberately left unedited (see `ETIM-ADR-ASSESSMENT.md`); ADRs 0016–0021 cite v1.2 IDs. Reconciling the two ID spaces is open work.
+1. **Two spec lineages exist.** A parallel document — *Product Specification, "Document Version 2.0", April 24 2026* — carries a different and larger ID set (FR-1…13, QAS-1…5 with QAS-1 = Accuracy ≥95%, C-1…8, DR-1…3). It is **not** an ancestor of this one; this lineage runs 0.1 → 0.5 → 1.0 (Apr 24) → 1.1 → 1.2 → 1.3. That document is not committed here to avoid implying a version chain that does not exist.
+2. **ADRs 0001–0015 cite the other lineage's IDs.** References to QAS-3, QAS-4, QAS-5, C-7, FR-11/12/13 do not resolve against v1.3. Those ADRs are the spring record and are deliberately left unedited (see `ETIM-ADR-ASSESSMENT.md`); ADRs 0016–0021 cite v1.3 IDs. Reconciling the two ID spaces is open work.
 3. **Two ADR series collide.** `docs/00NN-*.md` (the platform series, 0001–0021) and `docs/adr/ADR-00N-*.md` (an agent-generated series) use overlapping numbers for different decisions. Only the `00NN-` series is authoritative. See `adr-index.md`.
 
 ## Open client decisions that still gate requirements

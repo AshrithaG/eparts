@@ -123,22 +123,22 @@ ADRs derived from the architecture report that the spec does *not* mention expli
 
 ---
 
-# 10. ETIM change — Product Specification v1.2 (28 July 2026) → ADRs 0013–0021
+# 10. ETIM change — Product Specification v1.3 (29 July 2026) → ADRs 0013–0021
 
-Sections 1–9 above map the **v2.0 (24 April 2026)** requirement set to ADRs 0001–0012 and are left intact. This section maps the **v1.2 (28 July 2026)** requirement set — a different, leaner document lineage — to the ETIM ADRs. See [`product-spec-changelog.md`](product-spec-changelog.md) for the two-lineage caveat and [`etim-requirements-change.md`](etim-requirements-change.md) for how the change was managed.
+Sections 1–9 above map the **v2.0 (24 April 2026)** requirement set to ADRs 0001–0012 and are left intact. This section maps the **v1.3 (29 July 2026)** requirement set — a different, leaner document lineage — to the ETIM ADRs. See [`product-spec-changelog.md`](product-spec-changelog.md) for the two-lineage caveat and [`etim-requirements-change.md`](etim-requirements-change.md) for how the change was managed.
 
-## 10.1 High-Level Requirements (v1.2)
+## 10.1 High-Level Requirements (v1.3)
 
 | ID | Requirement | Primary ADRs | Supporting ADRs |
 |---|---|---|---|
 | HLR-1 | Ingest from diverse supplier sources (SFTP and direct upload today; Email and web planned), CSV and PDF | ADR-021 (`source_type` enumerates the channels) | ADR-001 |
-| HLR-2 | Normalize into a standardized, **ETIM-keyed** intermediate structure, preserving original supplier values as evidence | **ADR-014** (evidence/interpretation split), **ADR-016** (ETIM-keying is what the matching stages produce) | ADR-013, ADR-021 |
-| HLR-3 | Predict attributes and assign confidence scores using ML | ADR-016 (per-stage confidence) | ADR-002, ADR-003 |
+| HLR-2 | Normalize into a standardized intermediate structure by **mechanical cleanup only**, preserving original supplier values as evidence; ETIM assignment is downstream *(v1.3)* | **ADR-014** (evidence/interpretation split), **ADR-021** (nothing interpretive crosses the ingestion boundary) | ADR-013 |
+| HLR-3 | Predict attributes and assign confidence scores using ML | **ADR-016** (ML owns both phases — attribute matching, then ETIM matching) | ADR-002, ADR-003 |
 | HLR-4 | Provide a UI for human review of low-confidence predictions | ADR-018 (what reaches the queue and in what order) | ADR-009, ADR-019 |
 | HLR-5 | Write approved data back to PIMS | **ADR-017** | ADR-006 (mechanism) |
 | **HLR-6** | **Classify products against ETIM and enrich attributes with ETIM identifiers (class, feature, value, unit), keeping original values as evidence** | **ADR-013** (the dictionary), **ADR-016** (the classification), **ADR-014** (keeping originals as evidence) | ADR-017, ADR-019, ADR-020 |
 
-## 10.2 Functional Requirements (v1.2)
+## 10.2 Functional Requirements (v1.3)
 
 | ID | Requirement | Primary ADRs | Supporting ADRs |
 |---|---|---|---|
@@ -150,10 +150,10 @@ Sections 1–9 above map the **v2.0 (24 April 2026)** requirement set to ADRs 00
 | FR-6 | Log every human review action to an immutable audit trail | ADR-010 | ADR-016 (the ETIM mapping is what gets logged) |
 | FR-7 | Authorized Ops Leads adjust the auto-acceptance threshold | ADR-018 (class + attribute thresholds) | ADR-005, ADR-019 |
 | FR-8 | Write attributes to PIMS upon final approval | **ADR-017** | ADR-006 |
-| **FR-9** | **Match normalized attributes to ETIM classes, features, controlled values/units, attaching confidence per ETIM assignment and preserving the original supplier value** | **ADR-016** | ADR-013, ADR-014, ADR-018, ADR-019 |
+| **FR-9** | **After attribute matching, the ML service matches attributes to ETIM classes, features, controlled values/units, attaching confidence per ETIM assignment and preserving the original supplier value** *(attributed to ML in v1.3)* | **ADR-016** | ADR-013, ADR-014, ADR-018, ADR-019 |
 | **FR-10** | **Load and maintain the ETIM reference dictionary for the pinned ETIM release identified in C-4** | **ADR-013** (load), **ADR-020** (which release, and why only one) | ADR-015 |
 
-## 10.3 Derived Requirements (v1.2)
+## 10.3 Derived Requirements (v1.3)
 
 | ID | Requirement | Trace | Primary ADRs |
 |---|---|---|---|
@@ -162,16 +162,16 @@ Sections 1–9 above map the **v2.0 (24 April 2026)** requirement set to ADRs 00
 | DR-3 | Writeback must be idempotent; retry must not duplicate | HLR-5 | ADR-017 (mechanism from ADR-006) |
 | **DR-4** | **Approved PIMS data keyed by ETIM identifiers (release, class, feature); the idempotency key shall include them** | HLR-6 | **ADR-017** — direct realization |
 
-## 10.4 Quality Attribute Scenarios (v1.2)
+## 10.4 Quality Attribute Scenarios (v1.3)
 
-v1.2 carries two QAS. The five-QAS set (QAS-1 Accuracy … QAS-5 Monitorability) cited by ADRs 0001–0015 belongs to the v2.0 lineage and is mapped in section 4 above.
+v1.3 carries two QAS. The five-QAS set (QAS-1 Accuracy … QAS-5 Monitorability) cited by ADRs 0001–0015 belongs to the v2.0 lineage and is mapped in section 4 above.
 
 | ID | Scenario | Measure | Primary ADRs | Supporting ADRs |
 |---|---|---|---|---|
 | QAS-1 | **Modifiability** — a new supplier format is added to the pipeline | Integrated and deployed within 4 engineering hours | ADR-021 (a new format is a new `source_type` + parser; nothing downstream changes) | ADR-001, ADR-016 |
 | QAS-2 | **Usability** — reviewer faces 100 low-confidence items | 10 items/minute for simple accept/reject | **ADR-018** (class-review-first stops the queue filling with decisions a class change would void) | ADR-009, ADR-019 |
 
-## 10.5 System Constraints (v1.2: C-1 … C-4)
+## 10.5 System Constraints (v1.3: C-1 … C-4)
 
 | ID | Constraint | ADRs |
 |---|---|---|
@@ -180,7 +180,7 @@ v1.2 carries two QAS. The five-QAS set (QAS-1 Accuracy … QAS-5 Monitorability)
 | C-3 | Breadth-first delivery — full end-to-end flow for one supplier type before optimizing depth | ADR-019 (permissive policy default is what lets the flow complete); ADR-020 (no upgrade path built); phase-one valve/actuator scope |
 | **C-4** | **ETIM release pinned to 10.0 (EI); later releases and cross-release migration out of scope** | **ADR-020** — this ADR is the decision C-4 records |
 
-## 10.6 Design Constraints (v1.2)
+## 10.6 Design Constraints (v1.3)
 
 | ID | Constraint | ADRs |
 |---|---|---|
@@ -188,18 +188,19 @@ v1.2 carries two QAS. The five-QAS set (QAS-1 Accuracy … QAS-5 Monitorability)
 | DC-2 | Auth0 for identity and RBAC | Not addressed by any ETIM ADR — see gaps below |
 | DC-3 | Raw files preserved in Azure Blob for re-processing and traceability | ADR-021 (`source_ref`), ADR-014 (evidence columns), ADR-017 (evidence carried into the published row) |
 
-## 10.7 Operational Scenarios (v1.2)
+## 10.7 Operational Scenarios (v1.3)
 
 | Scenario | Step | ADRs |
 |---|---|---|
-| SCEN-1 | 3 — normalize into the **ETIM-keyed** Canonical Table, retaining original values | ADR-014, ADR-016 |
+| SCEN-1 | 3 — normalize into the Canonical Table, retaining original values; **no ETIM assignment here** *(v1.3)* | ADR-014, ADR-021 |
+| SCEN-1 | 4 — ML matches attributes, then matches them to ETIM class/features/values *(v1.3)* | ADR-016 |
 | SCEN-1 | 5 — auto-accept writes to PIMS | ADR-017, ADR-018 |
 | SCEN-2 | 1 — datasheet PDF via Azure Document Intelligence + LLM extraction | ADR-021 (`pdf_ocr`) |
 | SCEN-2 | 2–3 — 0.45 confidence falls below threshold, routed to review | ADR-018 |
 | SCEN-2 | 4–5 — reviewer sees source evidence, corrects, action logged | ADR-014, ADR-010 |
 | SCEN-2 | 6 — validated value written to PIMS | ADR-017 |
 
-## 10.8 Validation Requirements (v1.2)
+## 10.8 Validation Requirements (v1.3)
 
 | ID | Test | ADRs | Status |
 |---|---|---|---|
@@ -209,16 +210,16 @@ v1.2 carries two QAS. The five-QAS set (QAS-1 Accuracy … QAS-5 Monitorability)
 
 ## 10.9 Coverage check
 
-**Forward trace (completeness).** Every v1.2 requirement maps to at least one ADR, except **DC-2 (Auth0)**, which no ETIM ADR addresses. Auth0 is listed in v1.2 §3.1 as mandatory and in v2.0 as a negotiable stretch goal (C-8/DC-2) — the two lineages disagree, and no ADR resolves it. **This is an open gap.**
+**Forward trace (completeness).** Every v1.3 requirement maps to at least one ADR, except **DC-2 (Auth0)**, which no ETIM ADR addresses. Auth0 is listed in v1.3 §3.1 as mandatory and in v2.0 as a negotiable stretch goal (C-8/DC-2) — the two lineages disagree, and no ADR resolves it. **This is an open gap.**
 
-**Backward trace (currency).** Every ADR 0013–0021 traces to at least one v1.2 requirement:
+**Backward trace (currency).** Every ADR 0013–0021 traces to at least one v1.3 requirement:
 
 | ADR | Anchor requirement |
 |---|---|
 | 0013 | FR-10, HLR-6 |
 | 0014 | HLR-2, HLR-6, FR-5 |
 | 0015 | C-1, FR-10 |
-| 0016 | FR-9, HLR-6 |
+| 0016 | FR-9, HLR-3, HLR-6 |
 | 0017 | DR-4, FR-8, HLR-5 |
 | 0018 | FR-4, QAS-2 |
 | 0019 | FR-9, C-3, VAL-2 |
@@ -229,7 +230,7 @@ No ADR in this set is orphaned, and no ADR was written for work with no requirem
 
 ## 10.10 Known gaps
 
-1. **DC-2 (Auth0)** — mandatory in v1.2, stretch goal in v2.0, no ADR either way.
-2. **The two ID spaces are not reconciled.** ADRs 0001–0015 cite QAS-3/4/5, C-7 and FR-11/12/13, which do not exist in v1.2. Reconciliation is open work; the spring ADRs are deliberately unedited.
+1. **DC-2 (Auth0)** — mandatory in v1.3, stretch goal in v2.0, no ADR either way.
+2. **The two ID spaces are not reconciled.** ADRs 0001–0015 cite QAS-3/4/5, C-7 and FR-11/12/13, which do not exist in v1.3. Reconciliation is open work; the spring ADRs are deliberately unedited.
 3. **VAL-2's ETIM branches are untestable** until the ADR-016 matching stages land and the ADR-019 client policy is supplied. A passing test suite here does not mean the validation requirement is satisfied.
 4. **Cross-team boundary.** FR-9's implementation sits with the ML stream behind the EPARTS-156 contract, and the OCR path behind EPARTS-159. Our traceability stops at those contracts by design; ADR-021 is the ingestion-side half made explicit.

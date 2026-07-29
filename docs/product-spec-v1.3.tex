@@ -36,7 +36,7 @@
 \pretitle{\begin{center}\Huge\bfseries}
 \posttitle{\end{center}}
 \preauthor{\begin{center}\Large \vspace{1.5cm}}
-\postauthor{\\[1cm] \normalsize Client: eParts Services LLC \\[0.5cm] Document Version: 1.2 \end{center}}
+\postauthor{\\[1cm] \normalsize Client: eParts Services LLC \\[0.5cm] Document Version: 1.3 \end{center}}
 \predate{\begin{center}\large}
 \postdate{\end{center}\vfill}
 
@@ -69,6 +69,7 @@
 1.0 & Apr 24, 2026 & Baseline specification for development. \\
 1.1 & Jul 23, 2026 & Integrated ETIM classification/enrichment; corrected OCR (Azure Document Intelligence) and ingestion (channels, Azure Blob storage, quarantine). \\
 1.2 & Jul 28, 2026 & Pinned the project to ETIM release 10.0 (language EI) for its duration (new constraint C-4); scoped FR-10 accordingly and removed the implied obligation to adopt later ETIM releases. \\
+1.3 & Jul 29, 2026 & Corrected the placement of ETIM matching. ETIM class/feature/value matching is performed by the ML service \emph{after} attribute matching, not by the Intermediate Structured Layer during normalization. HLR-2, \S2.1 and SCEN-1 amended accordingly; FR-9 attributed to the ML service. \\
 \bottomrule
 \end{tabular}
 
@@ -156,8 +157,8 @@ The system follows a microservices-based pipeline architecture designed for brea
 \subsection{Component Descriptions}
 \begin{itemize}
     \item \textbf{Ingestion Gateway:} Handles "messy" inputs. Identifies submission source, creates ingestion records, and archives raw files to Azure Blob Storage for auditability. Datasheet PDFs are OCR'd via Azure AI Document Intelligence; text-native CSV/PDF are parsed deterministically.
-    \item \textbf{Intermediate Structured Layer:} Converts raw inputs into standard, ETIM-keyed canonical tables (class / feature / value), preserving original supplier values as evidence. Supports schema-based transformations.
-    \item \textbf{Attribute Prediction Service:} Runs ML models and heuristic rules. Outputs \texttt{{attribute, value, confidence}}.
+    \item \textbf{Intermediate Structured Layer:} Converts raw inputs into standard canonical tables holding the supplier's own values as evidence (product identity plus raw attributes). It performs mechanical cleanup and schema-based transformation only; it does \emph{not} assign ETIM identifiers.
+    \item \textbf{Attribute Prediction Service (ML):} Owns all matching, in two phases. \textbf{Attribute matching} maps a raw supplier label and value onto an attribute identity, value, and confidence. \textbf{ETIM matching} then runs against the ETIM reference dictionary: class match, feature match, value and unit normalization, ETIM validation, and client-policy validation, attaching a confidence score to each ETIM assignment. Outputs the original value as evidence alongside the ETIM identifiers.
     \item \textbf{Confidence Routing:} A logic layer that splits traffic. High confidence $\rightarrow$ Auto-Accept. Low confidence $\rightarrow$ Human Review Queue.
     \item \textbf{Engineering Ops / Observability:} Centralized logging (datadog) and metrics to track model drift and ingestion success rates.
 \end{itemize}
@@ -203,7 +204,7 @@ C-4 & \textbf{ETIM Release Pinned:} The system shall target ETIM release 10.0 (l
 \midrule
 HLR-1 & The system shall ingest product data from diverse supplier sources (SFTP and direct upload today; Email and web sources planned) in CSV and PDF formats. \\
 \addlinespace
-HLR-2 & The system shall normalize ingested data into a standardized, ETIM-keyed intermediate structure (mechanical cleanup followed by mapping to ETIM classes, features, and values), preserving original supplier values as evidence. \\
+HLR-2 & The system shall normalize ingested data into a standardized intermediate structure through mechanical cleanup only, preserving original supplier values as evidence. ETIM class, feature, and value assignment is performed downstream by the ML service (HLR-6, FR-9), not during normalization. \\
 \addlinespace
 HLR-3 & The system shall predict product attributes and assign confidence scores using Machine Learning. \\
 \addlinespace
@@ -246,7 +247,7 @@ FR-7 & The system shall allow authorized Ops Leads to adjust the confidence thre
 \addlinespace
 FR-8 & Upon final approval (auto or human), the system shall write the attributes to PIMS via API. \\
 \addlinespace
-FR-9 & The system shall match normalized attributes to ETIM classes, features, and controlled values/units, attaching a confidence score to each ETIM assignment and preserving the original supplier value. \\
+FR-9 & After attribute matching, the Attribute Prediction Service (ML) shall match attributes to ETIM classes, features, and controlled values/units, attaching a confidence score to each ETIM assignment and preserving the original supplier value. \\
 \addlinespace
 FR-10 & The system shall load and maintain the ETIM reference dictionary (product groups, classes, features, values, units, and class--feature--value mappings) as reference data for the pinned ETIM release identified in C-4. \\
 \end{longtable}
@@ -312,8 +313,8 @@ DR-4 & Must & Approved data written to PIMS shall be keyed by ETIM identifiers (
 \midrule
 Supplier & 1 & - & Uploads a CSV catalog to the designated SFTP folder. \\
 System & 2 & FR-1 & Detects file, creates ingestion record, and archives raw file. \\
-System & 3 & HLR-2 & Cleans and normalizes CSV columns into the ETIM-keyed Canonical Table (maps to ETIM class/features), retaining original values. \\
-System & 4 & FR-3 & ML Service predicts attributes. All confidence scores are $>$ 0.90. \\
+System & 3 & HLR-2 & Cleans and normalizes CSV columns into the Canonical Table, retaining the supplier's original values as evidence. No ETIM assignment happens here. \\
+System & 4 & FR-3, FR-9 & ML Service matches attributes, then matches them to ETIM class, features, and values. All confidence scores are $>$ 0.90. \\
 System & 5 & FR-8 & Auto-Accept logic triggers. Data is written to PIMS. \\
 \bottomrule
 \end{longtable}

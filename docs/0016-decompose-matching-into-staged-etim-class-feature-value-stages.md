@@ -55,7 +55,7 @@ Stage outputs land in `matched_product_attribute` — the interpretation table i
 
 ## Requirements Traceability
 
-- **Spec:** Product Specification v1.2 (28 July 2026)
+- **Spec:** Product Specification v1.3 (29 July 2026)
 - **HLRs:** HLR-6 (classify against ETIM and enrich with class/feature/value/unit identifiers); HLR-2 (ETIM-keyed intermediate structure); HLR-3 (predict with confidence scores)
 - **FRs:** FR-9 (match to ETIM classes, features, controlled values/units with per-assignment confidence, preserving the original value); FR-3 (confidence score per predicted attribute)
 - **DRs:** DR-4 (ETIM-keyed PIMS output — consumes the identifiers this ADR produces)

@@ -56,7 +56,7 @@ Cleaning (spec §3) and unit normalization (spec §4) are injectable seams on th
 
 ## Requirements Traceability
 
-- **Spec:** Product Specification v1.2 (28 July 2026)
+- **Spec:** Product Specification v1.3 (29 July 2026)
 - **HLRs:** HLR-2 (normalize into a standardized intermediate structure preserving original supplier values as evidence); HLR-1 (ingest from diverse supplier sources — `source_type` enumerates the channels); HLR-3 (the ML service that consumes this record)
 - **FRs:** FR-1 (ingestion record with supplier, timestamp, source channel); FR-2 (validation before processing — an invalid handoff record is a validation failure, not a silent pass); FR-9 (matching consumes this record)
 - **DRs:** DR-1 (raw file archived as evidence — `source_ref` is the pointer to it)
