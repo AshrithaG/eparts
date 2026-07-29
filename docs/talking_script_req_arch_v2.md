@@ -30,9 +30,11 @@ The slides carry phrases because everything on them is 20 pt or larger. The sent
 >
 > ETIM makes that classification. Every product gets an ETIM class, and every attribute maps to a controlled vocabulary — class, feature, allowed value, unit.
 >
-> **[left card]** The objective picked up industry-standard classification, prediction became constrained matching, and accuracy is measured against that vocabulary instead of against free text.
+> **[the table]** Nineteen requirements at baseline, twenty-four now. Five new IDs — the ETIM classification requirement, two functional ones for matching and for the dictionary, the PIMS key, and the constraint pinning the release.
 >
-> **[right card]** And some of the original requirements stopped holding. FR-3 said predict attributes — that's matching now, so what we hand the ML team changed. The flat ingestion record couldn't represent any of it, so it split into two tables.
+> **[89%]** But only two of the original nineteen got rewritten, and that's the number I'd point at — HLR-1 on ingestion channels, and HLR-2 on normalization. Everything else still stands as written in April.
+>
+> **[37%]** Churn is 37 percent against the baseline, which sounds like a lot until you see that five of the seven changes are additions rather than rewrites.
 >
 > HLR-2 is worth a word because we got it wrong first time. We wrote it as though normalization produced the ETIM-keyed rows. It doesn't — that's a matching decision with a confidence attached, so it belongs to ML. We corrected it in 1.3.
 
