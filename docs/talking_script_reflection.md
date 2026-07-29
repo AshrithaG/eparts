@@ -1,15 +1,15 @@
-# Talking script — Reflection & Closing (~2 minutes)
+# Talking script — Reflection & Closing (~2¼ minutes)
 
 **Deck:** `eParts_Reflection_Closing.pptx` — its own file, 1 slide, "Two lessons"
 **Slot:** end of the team talk, after Management
 **Rebuild:** `eparts/docs/build_section3_deck.py` builds both decks from one script
 **Evidence:** `dashboard/data/jira_issues.json` — 290 issues, with the JQL and fetch timestamp recorded in the file
 
-~270 words. Two lessons, one of them about AI in software engineering.
+**334 spoken words — 2:13 at 150 wpm.** Two lessons, one of them about AI in software engineering.
 
 ---
 
-## Lesson 1 — the 3-day cycle — 50 sec
+## Lesson 1 — the 3-day cycle — 52 sec
 
 > First one is about our own process. We started the summer planning in 3-day ticks — that came out of the agentic-augmented-scrum doc we wrote — and it didn't hold. We're on 7-day cycles in Jira now.
 >
@@ -19,7 +19,7 @@
 
 ---
 
-## Lesson 2 — AI in software engineering — 70 sec
+## Lesson 2 — AI in software engineering — 81 sec
 
 > Second one, and this is the AI one. We gave the agents control of the paperwork — tickets, documentation, PR comments — because they're reading the same repo we are, so they've actually got more context than one of us typing a ticket at the end of the day.
 >
