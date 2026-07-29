@@ -300,6 +300,30 @@ def seed_risk_register(reg: RiskRegister | None = None) -> RiskRegister:
         related_reqs=["FR-5"], related_arch=["review"],
     )
 
+    reg.add_risk(
+        "RISK-ARCH-09", "ETIM release pin leaves the catalog progressively stale",
+        description="IF the client's suppliers begin publishing against ETIM 11.0 while the platform "
+                    "remains pinned to release 10.0 EI (constraint C-4) "
+                    "THEN new classes, features and values are unavailable to the matcher "
+                    "RESULTING IN affected products falling to ETIM Other handling or manual review, "
+                    "and the catalog drifting further from the standard over time.",
+        category="dependency", source="architecture_report",
+        source_detail="ADR-020 Consequences: deliberately accepted, revisit before production transition",
+        likelihood="medium", impact="medium",
+        mitigation="Release pinned explicitly as constraint C-4 rather than left unspecified. Every ETIM "
+                   "reference row, the interpretation table and the PIMS writeback key all carry "
+                   "etim_release_id (ADR-013/014/017), so each published value names the release it was "
+                   "matched under and provenance survives. The loader rejects an archive whose release "
+                   "does not match the declared one, which is what stops an 11.0 archive being loaded "
+                   "into a 10.0-pinned system by accident.",
+        contingency="Un-pinning is a change request against C-4, not a gap to fill quietly. The governed "
+                    "upgrade path (load releases side by side, diff, re-match affected products through a "
+                    "review queue) is the shape that work would take.",
+        status="mitigating",
+        related_reqs=["FR-10", "HLR-6", "FR-9"],
+        related_arch=["ADR-020", "ADR-013", "ADR-014", "ADR-017", "C-4"],
+    )
+
     # === Coach Session Concerns ===
     reg.add_risk(
         "RISK-COACH-01", "Data access delay blocking ML development",

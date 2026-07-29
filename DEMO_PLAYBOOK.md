@@ -65,7 +65,7 @@ python demo.py transcripts/GMT20260212-190517_Recording.transcript.vtt
 - "This is what makes it a *framework*, not isolated scripts"
 
 ### Section 6: Traceability Store
-**What it shows:** 184 artifacts, 760 links, 10 artifact types, 7 link types, zero orphans.
+**What it shows:** 189 artifacts, 764 links, 10 artifact types, 7 link types, zero orphans.
 **Talking points:**
 - "Every artifact is linked to its origin"
 - "A meeting concern → becomes a requirement → becomes a Jira ticket"
@@ -113,7 +113,7 @@ python demo.py transcripts/GMT20260212-190517_Recording.transcript.vtt
 ### Section 13: Closing Summary
 **Key takeaways to emphasize:**
 - 28 agents as a connected framework
-- End-to-end traceability: 184 artifacts, 760 links
+- End-to-end traceability: 189 artifacts, 764 links
 - Counterfactual: transcript parsing 45min → 30s
 - Graceful degradation: works with or without LLM
 

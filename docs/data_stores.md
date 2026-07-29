@@ -62,7 +62,7 @@ Every write is logged in a `wiki_log` audit table — who wrote it, when, which 
 | `meeting` | 5 | 5 client meetings |
 | `coach_session` | 1 | Coach sessions as a collective source |
 
-760 links across 7 link types. Zero orphaned concerns. Zero unmitigated risks.
+764 links across 7 link types. Zero orphaned concerns. Zero unmitigated risks.
 
 All links are created via domain-aware keyword matching — zero LLM tokens.
 
@@ -74,7 +74,7 @@ All links are created via domain-aware keyword matching — zero LLM tokens.
 
 **Why it exists:** Risks were scattered across meeting notes, coach feedback, and architecture documents. This consolidates them into one queryable store with proper risk statements.
 
-19 risks total: 2 critical, 7 high, 7 medium, 3 team/health risks.
+20 risks total: 2 critical, 7 high, 7 medium, 3 team/health risks.
 
 ---
 

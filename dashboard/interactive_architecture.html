@@ -31,7 +31,8 @@
   /* Status-based color schemes */
   .pipe-req{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);}.pipe-req:hover{background:rgba(34,197,94,0.14);}.pipe-req .title{color:#4ade80;}
   .pipe-coach{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);}.pipe-coach:hover{background:rgba(34,197,94,0.14);}.pipe-coach .title{color:#4ade80;}
-  .pipe-know{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);}.pipe-know:hover{background:rgba(34,197,94,0.14);}.pipe-know .title{color:#4ade80;}
+  .pipe-know{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);}
+.pipe-risk{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);}.pipe-know:hover{background:rgba(34,197,94,0.14);}.pipe-know .title{color:#4ade80;}
   .pipe-arch{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.3);}.pipe-arch:hover{background:rgba(245,158,11,0.14);}.pipe-arch .title{color:#fbbf24;}
   .pipe-pm{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.3);}.pipe-pm:hover{background:rgba(245,158,11,0.14);}.pipe-pm .title{color:#fbbf24;}
   .pipe-code{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.25);}.pipe-code:hover{background:rgba(239,68,68,0.14);}.pipe-code .title{color:#f87171;}
@@ -136,10 +137,10 @@
 <div class="container">
 
 <div class="dash-stats">
-  <div class="dash-stat"><div class="n">7</div><div class="lbl">Pipelines</div></div>
+  <div class="dash-stat"><div class="n">8</div><div class="lbl">Pipelines</div></div>
   <div class="dash-stat"><div class="n">28</div><div class="lbl">Agents</div></div>
-  <div class="dash-stat"><div class="n">3</div><div class="lbl">Live now</div></div>
-  <div class="dash-stat"><div class="n">4</div><div class="lbl">MCP integrations</div></div>
+  <div class="dash-stat"><div class="n">4</div><div class="lbl">Live now</div></div>
+  <div class="dash-stat"><div class="n">6</div><div class="lbl">MCP wired</div></div>
 </div>
 
 <div class="legend-comp" aria-label="Pipeline card colours">
@@ -156,6 +157,7 @@
   <div class="pipe-card pipe-req" onclick="toggle('req')"><div class="title">Requirements</div><div class="meta">Transforms meeting transcripts into structured requirements, Jira tickets, and traceable decisions</div><div class="agent-count mono">7 agents</div></div>
   <div class="pipe-card pipe-coach" onclick="toggle('coach')"><div class="title">Coach Session</div><div class="meta">Preserves coaching guidance as retrievable memory and surfaces recurring themes</div><div class="agent-count mono">5 agents</div></div>
   <div class="pipe-card pipe-know" onclick="toggle('know')"><div class="title">Knowledge</div><div class="meta">Aggregates project state into pre-meeting briefings so every participant starts informed</div><div class="agent-count mono">2 agents</div></div>
+  <div class="pipe-card pipe-risk" onclick="toggle('risk')"><div class="title">Risk Register</div><div class="meta">Turns architecture findings, recurring coach concerns, and ageing action items into classified risks with owners</div><div class="agent-count mono">reuses 3 agents + human gate</div></div>
 </div>
 
 <!-- Orange: Partial -->
@@ -343,6 +345,30 @@
       <div class="cf-item"><div class="cf-label mono">Without AI</div><div class="cf-val">A weekly status meeting where someone manually reviews the Jira board. The WBS lives in a Google Sheet that is perpetually out of date. Unlinked requirements are not discovered until the final presentation review.</div></div>
       <div class="cf-item"><div class="cf-label mono">With AI</div><div class="cf-val">The WBS is synced automatically, a digest is generated, and anomalies are flagged - all before the team reads a single report. The weekly meeting can focus on decisions instead of status updates.</div></div>
       <div class="cf-item"><div class="cf-label mono">Net Value</div><div class="cf-val">Runs every week. Replaces a recurring status meeting. The most impactful alerts - unlinked requirements and stale items - surface problems that teams consistently overlook.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RISK REGISTER DETAIL ═══ -->
+<div class="detail-panel dp-know" id="panel-risk">
+  <div class="dp-header">
+    <div><div class="dp-title" style="color:#4ade80;">Risk Register Generation Pipeline</div><div class="dp-practice mono">Practice Area: Risk Management · 3 source agents + classification + human gate · Runs on architecture update, coach session indexed, or action item ageing past a tick</div></div>
+    <button class="dp-close" onclick="toggle('risk')">&times;</button>
+  </div>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 1</div><div class="agent-name mono">drift_detector &middot; concern_tracker &middot; stale_detector</div><div class="agent-desc">Three independent sources feed candidate risks. Technical risks and sensitivity points come from the architecture report. Recurring concerns come from coach session memory across sessions. And action items that age without being resolved are treated as risks rather than left to rot.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Architecture report &sect;5.4 &middot; coach memory &middot; open action items</span><br><span class="io-label mono">OUT: </span><span class="io-val">Candidate risk with its source recorded</span></div></div></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 2</div><div class="agent-name mono">add_risk (classify)</div><div class="agent-desc">Assigns category, likelihood and impact, derives severity, and drafts a mitigation and contingency. Links the risk to the requirements and architecture artifacts it threatens, which is what makes it traceable later.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Candidate risk</span><br><span class="io-label mono">OUT: </span><span class="io-val">Classified risk, status open</span></div></div></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 3</div><div class="agent-name mono">review_risk (human gate)</div><div class="agent-desc">A person accepts, edits or rejects the risk. Every review writes the reviewer, the old and new status, notes and a timestamp, so we can see who changed a risk and when. Nothing reaches the register without this step.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Classified risk + reviewer decision</span><br><span class="io-label mono">OUT: </span><span class="io-val">Review record in risk_reviews</span></div></div></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 4</div><div class="agent-name mono">risk_register.md</div><div class="agent-desc">The register is regenerated from the database. 20 risks today: 4 critical, 7 high, 9 medium. Exit is not allowed until a risk has both an owner and a mitigation. Anything untouched for 14 days is resurfaced for review.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Reviewed risks</span><br><span class="io-label mono">OUT: </span><span class="io-val">docs/risk_register.md + traceability links</span></div></div></div>
+  </div>
+  <div class="cf-bar">
+    <h4>Counterfactual Analysis</h4>
+    <div class="cf-row">
+      <div class="cf-item"><div class="cf-label mono">Without AI</div><div class="cf-val">Risks are remembered by whoever was in the room. A concern raised twice in coaching sessions six weeks apart is never connected. Action items quietly expire instead of being escalated, and the register is rewritten by hand before each review.</div></div>
+      <div class="cf-item"><div class="cf-label mono">With AI</div><div class="cf-val">The three sources are swept continuously, so a repeated concern becomes a tracked risk with an owner. The human still decides, but on a drafted and classified candidate rather than a blank form. Every risk carries links to what it threatens.</div></div>
     </div>
   </div>
 </div>
