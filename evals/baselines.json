@@ -1,0 +1,25 @@
+{
+  "recorded_at": "2026-07-27T22:56:19+00:00",
+  "scores": {
+    "defect_triage_skill::red_ci_on_main": 1.0,
+    "defect_triage_skill::audit_log_double_apply": 1.0,
+    "defect_triage_skill::client_reported_mapping_error": 1.0,
+    "defect_triage_skill::config_drift_env_only": 1.0,
+    "defect_triage_skill::prompt_caused_bad_artifact": 1.0,
+    "defect_triage_skill::single_artifact_correction_is_not_a_bug": 1.0,
+    "orchestrator_routing::transcript.full_contract": 1.0,
+    "orchestrator_routing::transcript.requirements_capability": 1.0,
+    "orchestrator_routing::transcript.parse_before_extract": 1.0,
+    "orchestrator_routing::coach_transcript.memory_capability": 1.0,
+    "orchestrator_routing::pr_event.review_and_regression_capability": 1.0,
+    "orchestrator_routing::pr_event.full_contract": 1.0,
+    "orchestrator_routing::jira_webhook.traceability_capability": 1.0,
+    "orchestrator_routing::cron_friday_6pm.weekly_digest": 1.0,
+    "orchestrator_routing::cron_pre_meeting.briefing": 1.0,
+    "orchestrator_routing::cron_monday_8am.hygiene": 1.0,
+    "orchestrator_routing::poc_result.evidence": 1.0,
+    "orchestrator_routing::manual.override_isolates_single_agent": 1.0,
+    "orchestrator_routing::unknown_trigger.degrades_quietly": 1.0,
+    "orchestrator_routing::manual.without_override_dispatches_nothing": 1.0
+  }
+}
