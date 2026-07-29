@@ -21,16 +21,26 @@ AMBER = RGBColor(0xD8, 0xA5, 0x2C)
 
 MIN_PT = 20.0                            # nothing on a slide may be smaller
 FONT = "Aptos"
-OUT = "/Users/arjun/Documents/CMU/studio-project/eParts_Section3_SoftwareSystem.pptx"
+BASE = "/Users/arjun/Documents/CMU/studio-project/"
+OUT_SOFTWARE = BASE + "eParts_Section3_SoftwareSystem.pptx"
+OUT_REFLECTION = BASE + "eParts_Reflection_Closing.pptx"
 DIAG = "/Users/arjun/Documents/CMU/studio-project/Diagrams/"
 CONFLUENCE = ("https://cmu-mse.atlassian.net/wiki/spaces/AISDLC/pages/76742657/"
               "Engineering+System+Artifacts")
 ADR_INDEX = "https://github.com/AshrithaG/eparts/blob/main/docs/adr-index.md"
 
-prs = Presentation()
-prs.slide_width = Emu(9144000)           # 720 pt
-prs.slide_height = Emu(5143500)          # 405 pt
-BLANK = prs.slide_layouts[6]
+def new_deck():
+    """A fresh 720x405 pt presentation. Two decks are built from this one script so the
+    palette, grid and 20 pt floor cannot drift between them."""
+    global prs, BLANK
+    prs = Presentation()
+    prs.slide_width = Emu(9144000)       # 720 pt
+    prs.slide_height = Emu(5143500)      # 405 pt
+    BLANK = prs.slide_layouts[6]
+    return prs
+
+
+prs = new_deck()
 
 
 def P(v):
@@ -124,6 +134,32 @@ def footer(s, txt, color=GREEN, y=372.0):
     rect(s, 28.8, y, 4.5, 24.0, color)
     text(s, 42.0, y, 649.2, 24.0, txt.upper(), color=color, bold=True, space=0.5,
          anchor=MSO_ANCHOR.MIDDLE, line=1.0)
+
+
+def save(deck, path, expected_slides):
+    """Write the deck, then repaint theme hyperlink colours.
+
+    python-pptx cannot set them, and the default Office theme forces links to blue,
+    which is unreadable on this black background.
+    """
+    import re as _re, shutil as _shutil, zipfile as _zipfile
+    assert len(deck.slides._sldIdLst) == expected_slides, \
+        f"{path}: expected {expected_slides} slides, got {len(deck.slides._sldIdLst)}"
+    deck.save(path)
+    tmp = path + ".tmp"
+    with _zipfile.ZipFile(path) as zin, \
+         _zipfile.ZipFile(tmp, "w", _zipfile.ZIP_DEFLATED) as zout:
+        for info in zin.infolist():
+            data = zin.read(info.filename)
+            if info.filename.startswith("ppt/theme/theme"):
+                t = data.decode("utf-8")
+                for tag in ("hlink", "folHlink"):
+                    t = _re.sub(rf'(<a:{tag}>).*?(</a:{tag}>)',
+                                rf'\1<a:srgbClr val="70AD47"/>\2', t, flags=_re.S)
+                data = t.encode("utf-8")
+            zout.writestr(info, data)
+    _shutil.move(tmp, path)
+    print(f"wrote {path} — {expected_slides} slide(s), all text >= {MIN_PT} pt")
 
 
 # two-column geometry
@@ -230,30 +266,8 @@ text(s, 42.0, 305.0, 636.0, 42.0, [[
 ]], anchor=MSO_ANCHOR.MIDDLE, line=1.14)
 footer(s, "matching stages designed, not yet built", color=AMBER)
 
-# ─────────────────────────────────────────────────────────── 5. reflection (closing)
-# Presented in the Reflection & Closing slot at the end of the team talk, not
-# immediately after slide 4.
-s = new_slide()
-title(s, "Two lessons")
-LY, LH = 76.0, 282.0
-card(s, LX, LY, CW, LH, AMBER, "3-day cycles didn't hold", [
-    [("Too much changed per tick", False, MUTED)],
-    [("A small blocker ate the whole tick", False, MUTED)],
-    [("Reviewing an agent PR took longer than writing it", False, MUTED)],
-    [("Now ", False, MUTED), ("7-day cycles", True, WHITE), (" on Jira", False, MUTED)],
-], head_color=AMBER)
-card(s, RX, LY, CW, LH, GREEN, "Give AI the paperwork", [
-    [("Drafting: ", False, MUTED), ("3 min → 15 s", True, WHITE)],
-    [("234 tickets ≈ ", False, MUTED), ("11 h saved", True, WHITE)],
-    [("But the real win:", True, GREEN)],
-    [("Spring, by hand: ", False, MUTED), ("0% points", True, WHITE)],
-    [("Agent-drafted: ", False, MUTED), ("90% points,", True, WHITE)],
-    [("94% in the right epic", True, WHITE)],
-], head_color=GREEN)
-footer(s, "forecasting needs points on every ticket")
-
 # ─────────────────────────────────────────────────────────── presenter notes
-NOTES = [
+NOTES_SOFTWARE = [
     "ETIM is a mid-project requirements CHANGE, not a new project.\n\n"
     "One line: we went from predicting free-form attributes to classifying each product "
     "into an ETIM class and matching its attributes to a controlled vocabulary.\n\n"
@@ -313,8 +327,40 @@ NOTES = [
     "If asked what we'd do differently: reconcile the two spec lineages earlier, and "
     "wire the handoff builder into the orchestrator (EPARTS-363) so the boundary is "
     "exercised in production flow, not only in unit tests.",
+]
 
-    # slide 5 — reflection
+
+# ─────────────────────────────────────────────────────────── notes, deck 1
+for slide, note in zip(prs.slides, NOTES_SOFTWARE):
+    slide.notes_slide.notes_text_frame.text = note
+save(prs, OUT_SOFTWARE, 4)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# DECK 2 — Reflection & Closing. Its own file because it is presented in the
+# closing slot at the end of the team talk, not as part of Software System.
+# ══════════════════════════════════════════════════════════════════════════════
+prs = new_deck()
+s = new_slide()
+title(s, "Two lessons")
+LY, LH = 76.0, 282.0
+card(s, LX, LY, CW, LH, AMBER, "3-day cycles didn't hold", [
+    [("Too much changed per tick", False, MUTED)],
+    [("A small blocker ate the whole tick", False, MUTED)],
+    [("Reviewing an agent PR took longer than writing it", False, MUTED)],
+    [("Now ", False, MUTED), ("7-day cycles", True, WHITE), (" on Jira", False, MUTED)],
+], head_color=AMBER)
+card(s, RX, LY, CW, LH, GREEN, "Give AI the paperwork", [
+    [("Drafting: ", False, MUTED), ("3 min → 15 s", True, WHITE)],
+    [("234 tickets ≈ ", False, MUTED), ("11 h saved", True, WHITE)],
+    [("But the real win:", True, GREEN)],
+    [("Spring, by hand: ", False, MUTED), ("0% points", True, WHITE)],
+    [("Agent-drafted: ", False, MUTED), ("90% points,", True, WHITE)],
+    [("94% in the right epic", True, WHITE)],
+], head_color=GREEN)
+footer(s, "forecasting needs points on every ticket")
+
+NOTE_REFLECTION = (
     "Lesson 1 — we tried 3-day ticks from the agentic-augmented-scrum doc and moved to "
     "7-day cycles on Jira.\n\n"
     "Three reasons, and the third is the real one:\n"
@@ -340,25 +386,7 @@ NOTES = [
     "over closed-issue throughput needs points on every ticket. In spring we could not "
     "have produced that chart from our own backlog.\n\n"
     "Honest caveat if pushed: we review every agent-drafted ticket, and the 10 percent "
-    "without points are mostly ones we corrected or closed as duplicates.",
-]
-for slide, note in zip(prs.slides, NOTES):
-    slide.notes_slide.notes_text_frame.text = note
-
-prs.save(OUT)
-
-# python-pptx cannot set theme hlink colours; the theme otherwise forces links to blue.
-import re as _re, shutil as _shutil, zipfile as _zipfile
-_tmp = OUT + ".tmp"
-with _zipfile.ZipFile(OUT) as _zin, _zipfile.ZipFile(_tmp, "w", _zipfile.ZIP_DEFLATED) as _zout:
-    for _i in _zin.infolist():
-        _d = _zin.read(_i.filename)
-        if _i.filename.startswith("ppt/theme/theme"):
-            _t = _d.decode("utf-8")
-            for _tag in ("hlink", "folHlink"):
-                _t = _re.sub(rf'(<a:{_tag}>).*?(</a:{_tag}>)',
-                             rf'\1<a:srgbClr val="70AD47"/>\2', _t, flags=_re.S)
-            _d = _t.encode("utf-8")
-        _zout.writestr(_i, _d)
-_shutil.move(_tmp, OUT)
-print(f"wrote {OUT} — 5 slides, all text >= {MIN_PT} pt")
+    "without points are mostly ones we corrected or closed as duplicates."
+)
+prs.slides[0].notes_slide.notes_text_frame.text = NOTE_REFLECTION
+save(prs, OUT_REFLECTION, 1)
