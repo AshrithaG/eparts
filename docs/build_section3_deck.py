@@ -204,14 +204,9 @@ CY, CH = 126.0, 238.0
 # those minus the four IDs v1.1 introduced (HLR-6, FR-9, FR-10, DR-4); C-4 arrived in v1.2.
 s = new_slide()
 title(s, "Requirements: v1.0 → v1.3")
-banner(s, [
-    ("Baselined 24 April. Three revisions since,", True, WHITE),
-    ("  all driven by ETIM.", False, LEAD),
-], h=44.0)
-
 # ── comparison table (left)
-TX, TW, TY = 28.8, 392.0, 124.0
-rect(s, TX, TY, TW, 208.0, CARD)
+TX, TW, TY = 28.8, 392.0, 86.0
+rect(s, TX, TY, TW, 232.0, CARD)
 COL_L, COL_A, COL_B = TX + 16, TX + 236, TX + 314
 text(s, COL_L, TY + 10, 200, 26, "Requirement set", color=MUTED, bold=True)
 text(s, COL_A, TY + 10, 70, 26, "v1.0", color=MUTED, bold=True, align=PP_ALIGN.RIGHT)
@@ -225,7 +220,7 @@ for label, a, b in ROWS:
     text(s, COL_L, yy, 200, 26, label, color=WHITE)
     text(s, COL_A, yy, 70, 26, a, color=MUTED, align=PP_ALIGN.RIGHT)
     text(s, COL_B, yy, 62, 26, b, color=WHITE, bold=True, align=PP_ALIGN.RIGHT)
-    yy += 28
+    yy += 32
 rect(s, COL_L, yy + 2, TW - 32, 1.2, RULE)
 text(s, COL_L, yy + 10, 200, 26, "Total", color=WHITE, bold=True)
 text(s, COL_A, yy + 10, 70, 26, "19", color=MUTED, bold=True, align=PP_ALIGN.RIGHT)
@@ -240,8 +235,8 @@ def stat(x, y, w, h, big, caption, big_colour):
     text(s, x + 16, y + 62, w - 32, 30, caption, color=MUTED)
 
 SX, SW = 440.0, 251.2
-stat(SX, TY, SW, 100.0, "89%", "of v1.0 unchanged", WHITE)
-stat(SX, TY + 108.0, SW, 100.0, "37%", "churn since April", DIM)
+stat(SX, TY, SW, 112.0, "89%", "of v1.0 unchanged", WHITE)
+stat(SX, TY + 120.0, SW, 112.0, "37%", "churn since April", DIM)
 footer(s, "5 new IDs · 2 rewritten · 17 of 19 untouched",
        link_label="Spec v1.3:", url=CONFLUENCE, shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
 
@@ -264,22 +259,18 @@ footer(s, "trace: HLR-6 → FR-9/10 → tickets → golden tests")
 # ─────────────────────────────────────────────────────────── 3. architecture v5 → v6
 s = new_slide()
 title(s, "How the architecture changed")
-banner(s, [
-    ("v5.0 → v6.0. The spine held.", True, WHITE),
-    ("  Solid = running code. Dashed = designed, not built.", False, LEAD),
-], h=40.0)
-IY = 124.0
-s.shapes.add_picture(DIAG + "pipe-filter-architecturev5-grey.png", P(28.8), P(IY + 20),
+IY = 84.0
+s.shapes.add_picture(DIAG + "pipe-filter-architecturev5-grey.png", P(28.8), P(IY + 24),
                      width=P(163), height=P(150))
-s.shapes.add_picture(DIAG + "pipe-filter-architecture-v6-grey.png", P(201), P(IY),
+s.shapes.add_picture(DIAG + "pipe-filter-architecture-v6-grey.png", P(201), P(IY + 4),
                      width=P(143), height=P(170))
-text(s, 28.8, IY + 174, 163, 24, "v5.0 · MAY", color=MUTED, bold=True)
-text(s, 201, IY + 174, 143, 24, "v6.0 · JULY", color=ACCENT, bold=True)
+text(s, 28.8, IY + 182, 163, 24, "v5.0 · MAY", color=MUTED, bold=True)
+text(s, 201, IY + 182, 143, 24, "v6.0 · JULY", color=ACCENT, bold=True)
 
 DX, DW = 362.0, 329.2
-rect(s, DX, IY, DW, 216.0, CARD)
+rect(s, DX, IY, DW, 228.0, CARD)
 rect(s, DX, IY, DW, 5.04, ACCENT)
-text(s, DX + 12, IY + 12, DW - 24, 28, "Five deltas", size=22, color=ACCENT, bold=True)
+text(s, DX + 12, IY + 12, DW - 24, 28, "Five changes", size=22, color=ACCENT, bold=True)
 yy = IY + 48
 for n, label in [("1", "ETIM dictionary loaded"),
                  ("2", "ML now matches to ETIM"),
@@ -288,14 +279,14 @@ for n, label in [("1", "ETIM dictionary loaded"),
                  ("5", "PIMS keyed by ETIM IDs")]:
     text(s, DX + 12, yy, 16, 26, n, color=ACCENT, bold=True)
     text(s, DX + 30, yy, DW - 44, 26, label, color=WHITE)
-    yy += 30
-footer(s, "verified in code — alembic 0005–0007",
+    yy += 33
+footer(s, "solid = running code · dashed = designed",
        link_label="Full v6.0 diagram:", url=CONFLUENCE, shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
 
 # ─────────────────────────────────────────────────────────── 4. decisions
 s = new_slide()
 title(s, "Decisions, and what we chose against")
-RY, RH, RG = 72.0, 46.0, 6.0
+RY, RH, RG = 76.0, 54.0, 10.0
 decisions = [
     ("ML does the matching", "ingestion only loads the ETIM dictionary"),
     ("Raw supplier values kept in their own table", "so any published value can be "
@@ -310,11 +301,6 @@ for i, (head, why) in enumerate(decisions):
     text(s, 45.0, y, 348.0, RH, head, color=WHITE, bold=True,
          anchor=MSO_ANCHOR.MIDDLE, line=1.0)
     text(s, 400.0, y, 280.0, RH, why, color=MUTED, anchor=MSO_ANCHOR.MIDDLE, line=1.0)
-rect(s, 28.8, 282.0, 662.4, 46.0, BANNER)
-text(s, 42.0, 284.0, 636.0, 42.0, [[
-    ("Five client decisions still open.", True, WHITE),
-    ("  Two of them gate validation.", False, LEAD),
-]], anchor=MSO_ANCHOR.MIDDLE, line=1.14)
 footer(s, "matching stages designed, not yet built", color=DIM,
        link_label="ADR-018:", url=ADR_018,
        shown_url="github.com/AshrithaG/eparts")
@@ -396,7 +382,7 @@ save(prs, OUT_SOFTWARE, 4)
 prs = new_deck()
 s = new_slide()
 title(s, "Two lessons")
-LY, LH = 76.0, 282.0
+LY, LH = 84.0, 262.0
 card(s, LX, LY, CW, LH, DIM, "3-day cycles didn't hold", [
     [("Too much changed per tick", False, MUTED)],
     [("A small blocker ate the whole tick", False, MUTED)],
