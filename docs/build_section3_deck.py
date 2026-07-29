@@ -230,6 +230,28 @@ text(s, 42.0, 305.0, 636.0, 42.0, [[
 ]], anchor=MSO_ANCHOR.MIDDLE, line=1.14)
 footer(s, "matching stages designed, not yet built", color=AMBER)
 
+# ─────────────────────────────────────────────────────────── 5. reflection (closing)
+# Presented in the Reflection & Closing slot at the end of the team talk, not
+# immediately after slide 4.
+s = new_slide()
+title(s, "Two lessons")
+LY, LH = 76.0, 282.0
+card(s, LX, LY, CW, LH, AMBER, "3-day cycles didn't hold", [
+    [("Too much changed per tick", False, MUTED)],
+    [("A small blocker ate the whole tick", False, MUTED)],
+    [("Reviewing an agent PR took longer than writing it", False, MUTED)],
+    [("Now ", False, MUTED), ("7-day cycles", True, WHITE), (" on Jira", False, MUTED)],
+], head_color=AMBER)
+card(s, RX, LY, CW, LH, GREEN, "Give AI the paperwork", [
+    [("Drafting: ", False, MUTED), ("3 min → 15 s", True, WHITE)],
+    [("234 tickets ≈ ", False, MUTED), ("11 h saved", True, WHITE)],
+    [("But the real win:", True, GREEN)],
+    [("Spring, by hand: ", False, MUTED), ("0% points", True, WHITE)],
+    [("Agent-drafted: ", False, MUTED), ("90% points,", True, WHITE)],
+    [("94% in the right epic", True, WHITE)],
+], head_color=GREEN)
+footer(s, "forecasting needs points on every ticket")
+
 # ─────────────────────────────────────────────────────────── presenter notes
 NOTES = [
     "ETIM is a mid-project requirements CHANGE, not a new project.\n\n"
@@ -291,6 +313,34 @@ NOTES = [
     "If asked what we'd do differently: reconcile the two spec lineages earlier, and "
     "wire the handoff builder into the orchestrator (EPARTS-363) so the boundary is "
     "exercised in production flow, not only in unit tests.",
+
+    # slide 5 — reflection
+    "Lesson 1 — we tried 3-day ticks from the agentic-augmented-scrum doc and moved to "
+    "7-day cycles on Jira.\n\n"
+    "Three reasons, and the third is the real one:\n"
+    "  - too much changed inside a single tick to close it cleanly\n"
+    "  - one small blocker consumed the whole cycle, because there was no slack\n"
+    "  - reviewing an agent PR took longer than the agent took to write it\n\n"
+    "The general point: agents moved the constraint from writing code to reviewing it. "
+    "A 3-day cycle was sized for the old constraint. That is also why we plan capacity "
+    "in review hours rather than story points.\n\n"
+    "Lesson 2 — the AI-in-SE one. We gave agents control of ticket writing, "
+    "documentation and comments, because they read the same repo we do and therefore "
+    "carry more context than a person typing a ticket at the end of the day.\n\n"
+    "Numbers, from dashboard/data/jira_issues.json (290 issues; the JQL and fetch time "
+    "are recorded in the file):\n"
+    "  - 3 minutes per ticket by hand, about 15 seconds for an agent\n"
+    "  - 234 tickets created since 1 May, so roughly 11 hours saved\n"
+    "  - that is under an hour a week. Do not oversell it.\n\n"
+    "The number that matters is field completeness. Of the 56 tickets we wrote by hand "
+    "in spring, ZERO had story points and ZERO had an epic parent. Of the 234 "
+    "agent-drafted tickets, 90 percent have points and 94 percent have the right epic. "
+    "A person under time pressure skips those fields; an agent does not.\n\n"
+    "That is what makes the forecasting in the management section possible. Monte Carlo "
+    "over closed-issue throughput needs points on every ticket. In spring we could not "
+    "have produced that chart from our own backlog.\n\n"
+    "Honest caveat if pushed: we review every agent-drafted ticket, and the 10 percent "
+    "without points are mostly ones we corrected or closed as duplicates.",
 ]
 for slide, note in zip(prs.slides, NOTES):
     slide.notes_slide.notes_text_frame.text = note
@@ -311,4 +361,4 @@ with _zipfile.ZipFile(OUT) as _zin, _zipfile.ZipFile(_tmp, "w", _zipfile.ZIP_DEF
             _d = _t.encode("utf-8")
         _zout.writestr(_i, _d)
 _shutil.move(_tmp, OUT)
-print(f"wrote {OUT} — 4 slides, all text >= {MIN_PT} pt")
+print(f"wrote {OUT} — 5 slides, all text >= {MIN_PT} pt")
