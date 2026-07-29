@@ -34,7 +34,7 @@ re-run the query and the script to reproduce the page (forecast seeded, 10,000 s
 <div class="tiles">
   <div class="tile"><div class="v">69%</div><div class="l">issues complete (200/290)</div></div>
   <div class="tile"><div class="v">75%</div><div class="l">story points complete (761/1014)</div></div>
-  <div class="tile"><div class="v">90</div><div class="l">open issues (15 in progress)</div></div>
+  <div class="tile"><div class="v">90</div><div class="l">open issues (2 in progress)</div></div>
   <div class="tile"><div class="v">13/wk</div><div class="l">median throughput, 4 delivery wks</div></div>
   <div class="tile"><div class="v">Sep 21</div><div class="l">P50 completion of current backlog</div></div>
   <div class="tile"><div class="v">Sep 28</div><div class="l">P85 completion (85% of simulations)</div></div>
@@ -77,9 +77,12 @@ on every refresh.</p>
 <table><tr><th>Stream</th><th>Done</th><th>Progress</th><th>%</th></tr><tr><td>Ingestion</td><td>68/88</td><td><div class="pbar"><div style="width:77%"></div></div></td><td>77%</td></tr><tr><td>Spring foundation (predates the epic structure)</td><td>36/56</td><td><div class="pbar"><div style="width:64%"></div></div></td><td>64%</td></tr><tr><td>ML POC</td><td>27/39</td><td><div class="pbar"><div style="width:69%"></div></div></td><td>69%</td></tr><tr><td>QA &amp; Risk</td><td>21/29</td><td><div class="pbar"><div style="width:72%"></div></div></td><td>72%</td></tr><tr><td>OCR</td><td>22/26</td><td><div class="pbar"><div style="width:85%"></div></div></td><td>85%</td></tr><tr><td>LLM POC</td><td>11/18</td><td><div class="pbar"><div style="width:61%"></div></div></td><td>61%</td></tr><tr><td>Management &amp; SFS</td><td>14/15</td><td><div class="pbar"><div style="width:93%"></div></div></td><td>93%</td></tr><tr><td>Not yet filed under a stream</td><td>0/13</td><td><div class="pbar"><div style="width:0%"></div></div></td><td>0%</td></tr></table>
 
 <h2>Blockers — work in progress now</h2>
-<table><tr><th>Key</th><th>Summary</th><th>Assignee</th><th>Age</th></tr><tr><td>EPARTS-57</td><td>List out and divide tasks for Agentic System</td><td>Jaivardhan Singh</td><td>95d</td></tr><tr><td>EPARTS-60</td><td>ML System Check in</td><td>—</td><td>95d</td></tr><tr><td>EPARTS-154</td><td>Ingestion — data ingestion pipeline</td><td>Hrishikesh Bhardwaj</td><td>32d</td></tr><tr><td>EPARTS-155</td><td>QA &amp; Risk</td><td>Jaivardhan Singh</td><td>32d</td></tr><tr><td>EPARTS-156</td><td>ML POC — attribute prediction</td><td>zheliang liu</td><td>32d</td></tr><tr><td>EPARTS-158</td><td>Management &amp; SFS</td><td>Ashritha Gonuguntla</td><td>32d</td></tr><tr><td>EPARTS-159</td><td>OCR — PDF parser POC</td><td>Arjun</td><td>32d</td></tr><tr><td>EPARTS-291</td><td>Add ETIM value and unit normalization</td><td>Jaivardhan Singh</td><td>25d</td></tr><tr><td>EPARTS-316</td><td>Latency Attribution Correction for M5 SUMMAR</td><td>zheliang liu</td><td>25d</td></tr><tr><td>EPARTS-343</td><td>Evaluate Azure AI Foundry model options for datasheet extraction</td><td>Arjun</td><td>14d</td></tr><tr><td>EPARTS-358</td><td>ExtractedInput builder stage (handoff spec §2/§5)</td><td>Hrishikesh Bhardwaj</td><td>11d</td></tr><tr><td>EPARTS-373</td><td>M7 deployment &amp; handover documentation</td><td>Ashritha Gonuguntla</td><td>11d</td></tr><tr><td>EPARTS-374</td><td>Diagnose PIV ranking gap &amp; design contrastive fine-tuning fix</td><td>zheliang liu</td><td>7d</td></tr><tr><td>EPARTS-380</td><td>Investigate encoder cold-start (~6s) warmup</td><td>zheliang liu</td><td>7d</td></tr><tr><td>EPARTS-383</td><td>Team [1/3] Summer Semester Studio Project Presentation </td><td>Ashritha Gonuguntla</td><td>7d</td></tr></table>
+<table><tr><th>Key</th><th>Summary</th><th>Assignee</th><th>Age</th></tr><tr><td>EPARTS-374</td><td>Diagnose PIV ranking gap &amp; design contrastive fine-tuning fix</td><td>zheliang liu</td><td>7d</td></tr><tr><td>EPARTS-380</td><td>Investigate encoder cold-start (~6s) warmup</td><td>zheliang liu</td><td>7d</td></tr></table>
 <p class="note">Risks with triggers and mitigations are maintained in the Risk Register
 (<code>docs/eParts_Risk_Register_v2.md</code>); defects follow <code>docs/defect_management.md</code>.
-Items above aging past a tick without movement are escalation candidates at standup.</p>
+Items above aging past a tick without movement are escalation candidates at standup.
+Epics are excluded because the delivery streams sit In Progress for the life of the project;
+13 further board entries are excluded as stale or superseded pending closure in Jira
+(see <code>WIP_EXCLUDE_KEYS</code>).</p>
 
 </div></body></html>

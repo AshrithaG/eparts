@@ -93,6 +93,26 @@ def fmt_finish(pctile: tuple[int, date | None], long: bool = False) -> str:
 # the page, so the filter is visible rather than a silent adjustment.
 EXCLUDE_SUMMARY_PREFIXES = ("[transcript parser]",)
 
+# The blockers table answers "what is stuck right now", so it shows only
+# actionable work items. Two kinds of entry are kept out:
+#
+#   1. Epics. The six delivery streams sit In Progress for the life of the
+#      project by design. They are containers, not tasks, so listing them as
+#      blockers is a category error and it buries the real ones.
+#   2. Board entries pending closure. These are stale or superseded rather than
+#      blocked: EPARTS-57 and EPARTS-60 have sat In Progress for 95 days;
+#      EPARTS-316 is a duplicate of EPARTS-375, which is Done; EPARTS-383 is
+#      presentation admin rather than delivery work; and 291, 343, 358 and 373
+#      are complete pending a status update.
+#
+# The excluded count is printed on every run and stated under the table, so the
+# filter is visible. The real fix is closing these in Jira, and this list should
+# shrink to nothing as that happens.
+WIP_EXCLUDE_KEYS = {
+    "EPARTS-57", "EPARTS-60", "EPARTS-291", "EPARTS-316",
+    "EPARTS-343", "EPARTS-358", "EPARTS-373", "EPARTS-383",
+}
+
 
 def load() -> tuple[dict, list[dict], int]:
     payload = json.loads(DATA.read_text(encoding="utf-8"))
@@ -445,6 +465,13 @@ def main() -> None:
         if t
     )
 
+    wip_all = list(wip)
+    wip = [
+        i for i in wip_all
+        if i["type"] != "Epic" and i["key"] not in WIP_EXCLUDE_KEYS
+    ]
+    wip_hidden = len(wip_all) - len(wip)
+
     wip_rows = "".join(
         f"<tr><td>{escape(i['key'])}</td><td>{escape(i['summary'] or '')}</td>"
         f"<td>{escape(i['assignee'] or '—')}</td>"
@@ -520,7 +547,10 @@ on every refresh.</p>
 <table><tr><th>Key</th><th>Summary</th><th>Assignee</th><th>Age</th></tr>{wip_rows}</table>
 <p class="note">Risks with triggers and mitigations are maintained in the Risk Register
 (<code>docs/eParts_Risk_Register_v2.md</code>); defects follow <code>docs/defect_management.md</code>.
-Items above aging past a tick without movement are escalation candidates at standup.</p>
+Items above aging past a tick without movement are escalation candidates at standup.
+Epics are excluded because the delivery streams sit In Progress for the life of the project;
+{wip_hidden} further board entries are excluded as stale or superseded pending closure in Jira
+(see <code>WIP_EXCLUDE_KEYS</code>).</p>
 
 </div></body></html>"""
 
@@ -530,6 +560,7 @@ Items above aging past a tick without movement are escalation candidates at stan
     print(f"  forecast: P50 {fmt_finish(p50, True)} · P85 {fmt_finish(p85, True)} · P95 {fmt_finish(p95, True)}")
     print(f"  on-time (by 18 Dec): {on_time * 100:.1f}% of simulations · {horizon} working weeks left")
     print(f"  throughput sample: {sample} (excluded {zero_weeks} zero-activity week(s))")
+    print(f"  blockers: {len(wip)} shown, {wip_hidden} excluded (epics + stale board entries)")
 
 
 if __name__ == "__main__":
