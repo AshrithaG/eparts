@@ -28,6 +28,9 @@ DIAG = "/Users/arjun/Documents/CMU/studio-project/Diagrams/"
 CONFLUENCE = ("https://cmu-mse.atlassian.net/wiki/spaces/AISDLC/pages/76742657/"
               "Engineering+System+Artifacts")
 ADR_INDEX = "https://github.com/AshrithaG/eparts/blob/main/docs/adr-index.md"
+# ADR-018 is the one we open live on slide 4 — it is the exemplar for the format.
+ADR_018 = ("https://github.com/AshrithaG/eparts/blob/main/docs/"
+           "0018-extend-routing-to-etim-signals-with-class-review-first.md")
 
 def new_deck():
     """A fresh 720x405 pt presentation. Two decks are built from this one script so the
@@ -244,7 +247,7 @@ footer(s, "verified in code — alembic 0005–0007")
 # ─────────────────────────────────────────────────────────── 4. decisions
 s = new_slide()
 title(s, "Decisions, and what we chose against")
-artifact_link(s, "ALL 21 ADRs ↗ GITHUB", url=ADR_INDEX)
+artifact_link(s, "ADR-018 ↗ GITHUB", url=ADR_018)
 RY, RH, RG = 74.0, 48.0, 8.0
 decisions = [
     ("ML matches, ingestion loads", "the dictionary is reference data"),
