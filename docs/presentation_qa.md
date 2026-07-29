@@ -28,7 +28,7 @@ Why not just stuff the whole architecture document into every prompt? Because th
 
 ### 1.4 "What is our engineering harness?"
 
-The engineering harness is the infrastructure that agents run on — the non-AI rails. It consists of: **FastAPI orchestrator** (the API layer that exposes pipeline execution), **PipelineExecutor** (runs pipeline steps sequentially with context threading, skip conditions, and ETVX gates — `pipeline/pipelines.py`), **SharedMemory** (the wiki — `pipeline/shared_memory.py`), **EventBus** (cross-pipeline communication — `pipeline/event_bus.py`), **MetricsCollector** (tracks run duration, token count, success rate per agent), **PromptRegistry** (version-controls prompts with SHA-256 hashing — `pipeline/prompt_registry.py`), **TraceabilityStore** (184 artifacts, 760 links — `pipeline/traceability.py`), and **ArtifactVersioning** (tracks changes to committed files — `pipeline/artifact_versioning.py`).
+The engineering harness is the infrastructure that agents run on — the non-AI rails. It consists of: **FastAPI orchestrator** (the API layer that exposes pipeline execution), **PipelineExecutor** (runs pipeline steps sequentially with context threading, skip conditions, and ETVX gates — `pipeline/pipelines.py`), **SharedMemory** (the wiki — `pipeline/shared_memory.py`), **EventBus** (cross-pipeline communication — `pipeline/event_bus.py`), **MetricsCollector** (tracks run duration, token count, success rate per agent), **PromptRegistry** (version-controls prompts with SHA-256 hashing — `pipeline/prompt_registry.py`), **TraceabilityStore** (189 artifacts, 764 links — `pipeline/traceability.py`), and **ArtifactVersioning** (tracks changes to committed files — `pipeline/artifact_versioning.py`).
 
 These components are deterministic — no LLM calls, no probabilistic behavior. They provide the guarantees: every run is logged, every event is persisted, every artifact is versioned.
 
@@ -52,9 +52,9 @@ The event types fired so far include: `action_items_extracted` (from `transcript
 
 ### 1.8 "What is the one strong WHY?"
 
-A 5-person team cannot manually process 5+ client meetings (225 min each to parse), 4 coach sessions (chunking, embedding, theme extraction), extract and categorize requirements from each meeting, create 50 Jira tickets with correct priorities and assignees, maintain 760 traceability links across 184 artifacts, track 23 risks from 3 sources, version and review 12 ADRs, generate pre-meeting briefings, run drift checks against the canonical architecture — and still write the actual ML pipeline code.
+A 5-person team cannot manually process 5+ client meetings (225 min each to parse), 4 coach sessions (chunking, embedding, theme extraction), extract and categorize requirements from each meeting, create 50 Jira tickets with correct priorities and assignees, maintain 760 traceability links across 189 artifacts, track 23 risks from 3 sources, version and review 12 ADRs, generate pre-meeting briefings, run drift checks against the canonical architecture — and still write the actual ML pipeline code.
 
-SES automates the software engineering overhead so the team focuses on the ML pipeline. The numbers from `docs/ai_measurements.md`: 202 min saved per meeting cycle for parsing alone (90% reduction), 182 min saved for priority classification (91%), 128 min saved for requirements extraction (71%). Total cost: $0.069 for 183 agent runs. The traceability store — 760 links across 184 artifacts — simply would not exist without automation; as the measurements document states: "Humans link 15-20 items then give up."
+SES automates the software engineering overhead so the team focuses on the ML pipeline. The numbers from `docs/ai_measurements.md`: 202 min saved per meeting cycle for parsing alone (90% reduction), 182 min saved for priority classification (91%), 128 min saved for requirements extraction (71%). Total cost: $0.069 for 183 agent runs. The traceability store — 764 links across 189 artifacts — simply would not exist without automation; as the measurements document states: "Humans link 15-20 items then give up."
 
 ### 1.9 "For which do we need LLM calls?"
 
@@ -64,7 +64,7 @@ Everything else runs without LLM: drift_detector uses keyword matching against 9
 
 ### 1.10 "Storage? Deployed?"
 
-All data is stored locally in SQLite databases within the `memory/` directory: `shared_memory.db` (wiki — 85 entries, 8 namespaces), `events.db` (EventBus — 58 events), `coach_sessions.db` (session data, concerns, commitments), `traceability.db` (184 artifacts, 760 links), `prompt_registry.db` (prompt versions, reviews, metrics), and `ml_decisions.db` (ML decision tracking). ChromaDB vector data lives in `memory/chroma/`. Committed artifacts (REQ files, ADRs, minutes, decision logs) live in the GitHub repository.
+All data is stored locally in SQLite databases within the `memory/` directory: `shared_memory.db` (wiki — 85 entries, 8 namespaces), `events.db` (EventBus — 58 events), `coach_sessions.db` (session data, concerns, commitments), `traceability.db` (189 artifacts, 764 links), `prompt_registry.db` (prompt versions, reviews, metrics), and `ml_decisions.db` (ML decision tracking). ChromaDB vector data lives in `memory/chroma/`. Committed artifacts (REQ files, ADRs, minutes, decision logs) live in the GitHub repository.
 
 The system is **not cloud-deployed** — it runs locally on a developer machine. There is no Azure App Service deployment for SES itself (Azure is the target for the eParts ML product, not the SES framework). To run: start the FastAPI server locally, execute pipelines via API or directly via `PipelineExecutor`.
 
@@ -326,7 +326,7 @@ The traceability store lives at `memory/traceability.db` (defined in `pipeline/t
 
 **`links` table:** Directed edges between artifacts with fields: source_id, target_id, link_type, description, created_at. Link types include BECAME, DECIDED_BY, IMPLEMENTS, MITIGATES, ADDRESSES, RAISED_IN, ASSIGNED_TO, TRIGGERED, VERIFIED_BY, SUPERSEDES, DEPENDS_ON, RELATES_TO.
 
-The store contains **184 artifacts** and **760 links** across 10 artifact types (meeting, coach_session, concern, decision, action_item, commitment, requirement, architecture, risk, jira_ticket).
+The store contains **189 artifacts** and **764 links** across 10 artifact types (meeting, coach_session, concern, decision, action_item, commitment, requirement, architecture, risk, jira_ticket).
 
 **"Seed from all sources"** means the `seed_traceability.seed()` function (invoked by traceability_builder at line 33) populates the store from every data source in the project:
 - Client meeting JSON files (parsed transcripts)
@@ -363,7 +363,7 @@ This needs to be written. The meta-model framework for the architecture pipeline
 - **Artifacts:** Drift reports (`docs/drift/YYYY-MM-DD.md`), ADR drafts (`docs/adrs/ADR-*.md`), architecture diagrams (`docs/architecture.mmd`), traceability matrix (`docs/traceability.md`)
 - **Processes:** Drift detection (ARCH-DRIFT), ADR generation (ARCH-ADR), diagram update (ARCH-DIAGRAM), traceability linking (ARCH-TRACE)
 - **Resources:** drift_detector (autonomous agent), adr_generator (Claude-assisted), diagram_updater (Claude-assisted), traceability_builder (autonomous agent), human reviewers (PR approval)
-- **Measurements:** Drift detection accuracy (true positive rate, false positive rate), ADR coverage (decisions with ADRs vs. total decisions), traceability coverage (184 artifacts, 760 links, % linked), diagram currency (days since last update)
+- **Measurements:** Drift detection accuracy (true positive rate, false positive rate), ADR coverage (decisions with ADRs vs. total decisions), traceability coverage (189 artifacts, 764 links, % linked), diagram currency (days since last update)
 
 ### 3.14 "Counterfactuals for architecture pipeline"
 
@@ -643,4 +643,4 @@ Yes. An LLM would understand semantic relationships that keyword matching misses
 
 **With LLM:** The LLM would read both artifacts and determine whether a genuine semantic relationship exists. "Concern about data quality from vendors" and "Decision to implement validation rules" would be correctly linked even though they share no keywords. Estimated accuracy: ~95%. The LLM would also identify the correct link type (BECAME vs. ADDRESSES vs. RELATES_TO) rather than relying on heuristics.
 
-**Cost trade-off:** Re-linking all 184 artifacts with 760 candidate links would require ~200 Claude API calls (batch comparisons), costing approximately $0.05 for a full re-linking pass. This is negligible in absolute terms but adds up if run on every pipeline execution. The accepted trade-off: keyword matching is free, runs instantly, and achieves 85% accuracy — good enough for demonstration and daily use. LLM-enhanced linking can be run periodically (e.g., weekly) as a quality pass to correct mislinks and discover missed connections.
+**Cost trade-off:** Re-linking all 189 artifacts with 760 candidate links would require ~200 Claude API calls (batch comparisons), costing approximately $0.05 for a full re-linking pass. This is negligible in absolute terms but adds up if run on every pipeline execution. The accepted trade-off: keyword matching is free, runs instantly, and achieves 85% accuracy — good enough for demonstration and daily use. LLM-enhanced linking can be run periodically (e.g., weekly) as a quality pass to correct mislinks and discover missed connections.

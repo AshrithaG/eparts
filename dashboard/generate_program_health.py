@@ -194,10 +194,25 @@ def monte_carlo(open_count: int, sample_weeks: list[int], start: date):
 # ---------------------------------------------------------------------------
 
 
-def svg_line_chart(weeks, scope, done, w=900, h=340) -> str:
+def svg_line_chart(weeks, scope, done, w=900, h=340, med_thru: int = 0) -> str:
+    """Burnup with a forward projection.
+
+    History is cumulative created vs cumulative resolved. The projection
+    continues the Done line at the measured median throughput across the
+    remaining WORKING weeks, so the chart answers "do we land before 18 Dec"
+    on the same axes as the history rather than in a separate histogram.
+    """
     pad_l, pad_r, pad_t, pad_b = 52, 130, 18, 40
     iw, ih = w - pad_l - pad_r, h - pad_t - pad_b
-    n = len(weeks)
+    proj_weeks = working_weeks_from(weeks[-1] + timedelta(weeks=1)) if med_thru else []
+    proj = []
+    if proj_weeks:
+        v = done[-1]
+        target = scope[-1]
+        for _ in proj_weeks:
+            v = min(v + med_thru, target)
+            proj.append(v)
+    n = len(weeks) + len(proj_weeks)
     ymax = max(scope) * 1.06
 
     def x(i):
@@ -216,20 +231,43 @@ def svg_line_chart(weeks, scope, done, w=900, h=340) -> str:
         grid.append(f'<line x1="{pad_l}" y1="{y(v):.1f}" x2="{w - pad_r}" y2="{y(v):.1f}" stroke="{GRID}" stroke-width="1"/>')
         ticks.append(f'<text x="{pad_l - 8}" y="{y(v) + 4:.1f}" text-anchor="end" font-size="12" fill="{INK2}">{v}</text>')
         v += step
+    axis_weeks = weeks + proj_weeks  # labels must span history + projection
     xlabels = []
     for i in range(0, n, max(1, n // 6)):
-        xlabels.append(
-            f'<text x="{x(i):.1f}" y="{h - 12}" text-anchor="middle" font-size="12" fill="{INK2}">{weeks[i].strftime("%b %d")}</text>'
-        )
+        if i < len(axis_weeks):
+            xlabels.append(
+                f'<text x="{x(i):.1f}" y="{h - 12}" text-anchor="middle" font-size="12" fill="{INK2}">{axis_weeks[i].strftime("%b %d")}</text>'
+            )
     dots = "".join(
         f'<circle cx="{x(i):.1f}" cy="{y(v):.1f}" r="7" fill="transparent">'
         f"<title>Week of {weeks[i]}: {v} done, {scope[i]} in scope</title></circle>"
         for i, v in enumerate(done)
     )
-    return f"""<svg viewBox="0 0 {w} {h}" role="img" aria-label="Burnup: scope vs completed issues by week">
+    proj_path = ""
+    if proj:
+        pts = " L".join(
+            f"{x(len(weeks) - 1 + i + 1):.1f},{y(v):.1f}" for i, v in enumerate(proj)
+        )
+        proj_path = (
+            f'<path d="M{x(len(weeks) - 1):.1f},{y(done[-1]):.1f} L{pts}" fill="none" '
+            f'stroke="{C_DONE}" stroke-width="2" stroke-dasharray="2 5" opacity="0.85"/>'
+            f'<text x="{x(n - 1) + 8:.1f}" y="{y(proj[-1]) + 18:.1f}" font-size="12" '
+            f'fill="{C_DONE}">projected at {med_thru}/wk</text>'
+        )
+    deadline_mark = ""
+    if proj_weeks:
+        dx = x(n - 1)
+        deadline_mark = (
+            f'<line x1="{dx:.1f}" y1="{pad_t}" x2="{dx:.1f}" y2="{pad_t + ih}" '
+            f'stroke="{C_P85}" stroke-width="1.5" stroke-dasharray="5 4"/>'
+            f'<text x="{dx - 6:.1f}" y="{pad_t + 12}" text-anchor="end" font-size="12" '
+            f'font-weight="600" fill="{C_P85}">18 Dec</text>'
+        )
+    return f"""<svg viewBox="0 0 {w} {h}" role="img" aria-label="Burnup: scope vs completed issues by week, with projection to the deadline">
 {''.join(grid)}{''.join(ticks)}{''.join(xlabels)}
 <path d="{path(scope)}" fill="none" stroke="{C_SCOPE}" stroke-width="2" stroke-dasharray="6 4"/>
 <path d="{path(done)}" fill="none" stroke="{C_DONE}" stroke-width="2.5"/>
+{proj_path}{deadline_mark}
 {dots}
 <text x="{x(n - 1) + 8:.1f}" y="{y(scope[-1]) + 4:.1f}" font-size="13" font-weight="600" fill="{C_SCOPE}">Scope {scope[-1]}</text>
 <text x="{x(n - 1) + 8:.1f}" y="{y(done[-1]) + 4:.1f}" font-size="13" font-weight="600" fill="{C_DONE}">Done {done[-1]}</text>
@@ -459,7 +497,7 @@ re-run the query and the script to reproduce the page (forecast seeded, {SIMS:,}
 <h2>How far along — feature burnup, not time</h2>
 <div class="legend"><b style="color:{C_DONE}">— Done</b> (cumulative resolved) ·
 <b style="color:{C_SCOPE}">- - Scope</b> (cumulative created; the gap between the lines is the open backlog)</div>
-{svg_line_chart(weeks, scope, done_cum)}
+{svg_line_chart(weeks, scope, done_cum, med_thru=med_thru)}
 
 <h2>Delivery rate — issues resolved per week</h2>
 <div class="legend">Full-color bars form the {len(sample)}-week sampling window the forecast draws from; earlier weeks are dimmed.</div>

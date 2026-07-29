@@ -73,9 +73,9 @@ Christian's framework: compare total cost WITH AI (including review, correction,
 
 | | Without AI | With AI |
 |---|-----------|---------|
-| Human time | 760 links across 184 artifacts = **gets abandoned** | Auto-linked = **~10 sec** |
+| Human time | 764 links across 189 artifacts = **gets abandoned** | Auto-linked = **~10 sec** |
 | LLM cost | — | **$0.00** (keyword matching) |
-| Quality | Humans link 15-20 items then give up | 760 links, ~85% semantically correct |
+| Quality | Humans link 15-20 items then give up | 764 links, ~85% semantically correct |
 | False positives | — | ~15% false positive rate (keyword matching) |
 | **Verdict** | **Doesn't happen** | **Imperfect but exists** |
 
