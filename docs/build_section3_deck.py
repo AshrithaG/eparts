@@ -16,8 +16,9 @@ CARD = RGBColor(0x1C, 0x1C, 0x1C)
 WHITE = RGBColor(0xFF, 0xFF, 0xFF)
 MUTED = RGBColor(0x99, 0x99, 0x99)      # lifted from 777777 — 20 pt grey needs contrast
 LEAD = RGBColor(0xCC, 0xCC, 0xCC)
-GREEN = RGBColor(0x70, 0xAD, 0x47)
-AMBER = RGBColor(0xD8, 0xA5, 0x2C)
+ACCENT = WHITE                           # emphasis
+DIM = RGBColor(0xAA, 0xAA, 0xAA)         # secondary emphasis, one step under ACCENT
+RULE = RGBColor(0x44, 0x44, 0x44)        # hairlines
 
 MIN_PT = 20.0                            # nothing on a slide may be smaller
 FONT = "Aptos"
@@ -113,7 +114,7 @@ def artifact_link(s, label, url=None):
     r.hyperlink.address = url or CONFLUENCE
     f = r.font
     f.name, f.size, f.bold, f.underline = FONT, Pt(MIN_PT), True, False
-    f.color.rgb = GREEN
+    f.color.rgb = ACCENT
     return tb
 
 
@@ -133,7 +134,7 @@ def card(s, x, y, w, h, bar, head, body, head_color=WHITE, head_size=22):
          body, gap=9)
 
 
-def footer(s, txt, color=GREEN, y=372.0):
+def footer(s, txt, color=ACCENT, y=372.0):
     rect(s, 28.8, y, 4.5, 24.0, color)
     text(s, 42.0, y, 649.2, 24.0, txt.upper(), color=color, bold=True, space=0.5,
          anchor=MSO_ANCHOR.MIDDLE, line=1.0)
@@ -156,9 +157,15 @@ def save(deck, path, expected_slides):
             data = zin.read(info.filename)
             if info.filename.startswith("ppt/theme/theme"):
                 t = data.decode("utf-8")
-                for tag in ("hlink", "folHlink"):
+                # Links white, and the stock Office accent hues greyed out. Nothing on a
+                # slide uses them, but a themed shape inserted later would pick up orange.
+                greys = {"hlink": "FFFFFF", "folHlink": "FFFFFF", "dk2": "1C1C1C",
+                         "lt2": "EEEEEE", "accent1": "FFFFFF", "accent2": "CCCCCC",
+                         "accent3": "AAAAAA", "accent4": "888888", "accent5": "666666",
+                         "accent6": "444444"}
+                for tag, val in greys.items():
                     t = _re.sub(rf'(<a:{tag}>).*?(</a:{tag}>)',
-                                rf'\1<a:srgbClr val="70AD47"/>\2', t, flags=_re.S)
+                                rf'\1<a:srgbClr val="{val}"/>\2', t, flags=_re.S)
                 data = t.encode("utf-8")
             zout.writestr(info, data)
     _shutil.move(tmp, path)
@@ -169,34 +176,57 @@ def save(deck, path, expected_slides):
 LX, RX, CW = 28.8, 368.4, 322.8
 CY, CH = 126.0, 238.0
 
-# ─────────────────────────────────────────────────────────── 1. requirements delta
+# ─────────────────────────────────────────────────────────── 1. requirements v1.0 → v1.3
+# Counts verified from the LaTeX sources: v1.1/v1.3 carry HLR-6, FR-10, DR-4; v1.0 is
+# those minus the four IDs v1.1 introduced (HLR-6, FR-9, FR-10, DR-4); C-4 arrived in v1.2.
 s = new_slide()
-title(s, "How the requirements changed")
+title(s, "Requirements: v1.0 → v1.3")
 artifact_link(s, "SPEC v1.3 ↗")
 banner(s, [
-    ("ETIM was the biggest change.", True, GREEN),
-    ("  Predict free-form attributes  →  classify into an ETIM class, match a "
-     "controlled vocabulary.", False, LEAD),
-])
-card(s, LX, CY, CW, CH, WHITE, "What changed", [
-    [("WHY", True, WHITE), ("  + industry standard", False, MUTED)],
-    [("WHAT", True, WHITE), ("  predict → match", False, MUTED)],
-    [("HOW WELL", True, WHITE), ("  vs. the vocabulary", False, MUTED)],
-    [("NEW", True, WHITE), ("  FR-10, reference data", False, MUTED)],
-])
-card(s, RX, CY, CW, CH, AMBER, "What no longer holds", [
-    [("HLR-2", True, WHITE), ("  cleanup only now", False, MUTED)],
-    [("FR-3", True, WHITE), ("  predict → match", False, MUTED)],
-    [("Flat record", True, WHITE), ("  → two tables", False, MUTED)],
-    [("C-4", True, GREEN), ("  ETIM 10.0 pinned", False, MUTED)],
-], head_color=AMBER)
-footer(s, "ETIM 10.0 EI verified and pinned — 5,640 classes")
+    ("Baselined 24 April. Three revisions since,", True, WHITE),
+    ("  all driven by ETIM.", False, LEAD),
+], h=44.0)
+
+# ── comparison table (left)
+TX, TW, TY = 28.8, 392.0, 124.0
+rect(s, TX, TY, TW, 208.0, CARD)
+COL_L, COL_A, COL_B = TX + 16, TX + 236, TX + 314
+text(s, COL_L, TY + 10, 200, 26, "Requirement set", color=MUTED, bold=True)
+text(s, COL_A, TY + 10, 70, 26, "v1.0", color=MUTED, bold=True, align=PP_ALIGN.RIGHT)
+text(s, COL_B, TY + 10, 62, 26, "v1.3", color=WHITE, bold=True, align=PP_ALIGN.RIGHT)
+rect(s, COL_L, TY + 38, TW - 32, 1.2, RULE)
+
+ROWS = [("High-level", "5", "6"), ("Functional", "8", "10"),
+        ("Derived", "3", "4"), ("Constraints", "3", "4")]
+yy = TY + 46
+for label, a, b in ROWS:
+    text(s, COL_L, yy, 200, 26, label, color=WHITE)
+    text(s, COL_A, yy, 70, 26, a, color=MUTED, align=PP_ALIGN.RIGHT)
+    text(s, COL_B, yy, 62, 26, b, color=WHITE, bold=True, align=PP_ALIGN.RIGHT)
+    yy += 28
+rect(s, COL_L, yy + 2, TW - 32, 1.2, RULE)
+text(s, COL_L, yy + 10, 200, 26, "Total", color=WHITE, bold=True)
+text(s, COL_A, yy + 10, 70, 26, "19", color=MUTED, bold=True, align=PP_ALIGN.RIGHT)
+text(s, COL_B, yy + 10, 62, 26, "24", color=WHITE, bold=True, align=PP_ALIGN.RIGHT)
+
+# ── the two numbers that matter (right)
+def stat(x, y, w, h, big, caption, big_colour):
+    rect(s, x, y, w, h, CARD)
+    rect(s, x, y, w, 5.04, big_colour)
+    text(s, x + 16, y + 12, w - 32, 48, big, size=40, color=big_colour, bold=True,
+         line=1.0)
+    text(s, x + 16, y + 62, w - 32, 30, caption, color=MUTED)
+
+SX, SW = 440.0, 251.2
+stat(SX, TY, SW, 100.0, "89%", "of v1.0 unchanged", WHITE)
+stat(SX, TY + 108.0, SW, 100.0, "37%", "churn since April", DIM)
+footer(s, "5 new IDs · 2 rewritten · 17 of 19 untouched")
 
 # ─────────────────────────────────────────────────────────── 2. managing the change
 s = new_slide()
 title(s, "How we managed the change")
 banner(s, [
-    ("Spec 1.0 → 1.1 → 1.2.", True, WHITE),
+    ("Spec 1.0 → 1.1 → 1.2 → 1.3.", True, WHITE),
     ("  Each version-history entry is the change record.", False, LEAD),
 ])
 card(s, LX, CY, CW, CH, WHITE, "Version control", [
@@ -205,12 +235,12 @@ card(s, LX, CY, CW, CH, WHITE, "Version control", [
     [("Nothing renumbered.", True, WHITE)],
     [("Every existing trace link survives the change.", False, MUTED)],
 ])
-card(s, RX, CY, CW, CH, AMBER, "Blocked on the client", [
+card(s, RX, CY, CW, CH, DIM, "Blocked on the client", [
     [("Phase-one class list", True, WHITE)],
     [("Feature policy per class", True, WHITE)],
     [("ETIM ships no required-field flag, so we can't yet write a firm validation "
       "requirement.", False, MUTED)],
-], head_color=AMBER)
+], head_color=DIM)
 footer(s, "trace: HLR-6 → FR-9/10 → tickets → golden tests")
 
 # ─────────────────────────────────────────────────────────── 3. architecture v5 → v6
@@ -222,24 +252,24 @@ banner(s, [
     ("  Solid = running code. Dashed = designed, not built.", False, LEAD),
 ], h=40.0)
 IY = 124.0
-s.shapes.add_picture(DIAG + "pipe-filter-architecturev5.png", P(28.8), P(IY),
+s.shapes.add_picture(DIAG + "pipe-filter-architecturev5-grey.png", P(28.8), P(IY),
                      width=P(186), height=P(172))
-s.shapes.add_picture(DIAG + "pipe-filter-architecture-v6.png", P(224), P(IY),
+s.shapes.add_picture(DIAG + "pipe-filter-architecture-v6-grey.png", P(224), P(IY),
                      width=P(158), height=P(187))
 text(s, 28.8, IY + 192, 186, 24, "v5.0 · MAY", color=MUTED, bold=True)
-text(s, 224, IY + 192, 158, 24, "v6.0 · JULY", color=GREEN, bold=True)
+text(s, 224, IY + 192, 158, 24, "v6.0 · JULY", color=ACCENT, bold=True)
 
 DX, DW = 404.0, 287.2
 rect(s, DX, IY, DW, 216.0, CARD)
-rect(s, DX, IY, DW, 5.04, GREEN)
-text(s, DX + 12, IY + 12, DW - 24, 28, "Five deltas", size=22, color=GREEN, bold=True)
+rect(s, DX, IY, DW, 5.04, ACCENT)
+text(s, DX + 12, IY + 12, DW - 24, 28, "Five deltas", size=22, color=ACCENT, bold=True)
 yy = IY + 48
 for n, label in [("1", "ETIM reference layer"),
                  ("2", "ETIM matching behind ML"),
                  ("3", "Evidence vs. interpretation"),
                  ("4", "Frozen ML handoff"),
                  ("5", "PIMS re-keyed on ETIM")]:
-    text(s, DX + 12, yy, 16, 26, n, color=GREEN, bold=True)
+    text(s, DX + 12, yy, 16, 26, n, color=ACCENT, bold=True)
     text(s, DX + 30, yy, DW - 44, 26, label, color=WHITE)
     yy += 33
 footer(s, "verified in code — alembic 0005–0007")
@@ -258,7 +288,7 @@ decisions = [
 for i, (head, why) in enumerate(decisions):
     y = RY + i * (RH + RG)
     rect(s, 28.8, y, 662.4, RH, CARD)
-    rect(s, 28.8, y, 4.5, RH, GREEN if i == 3 else WHITE)
+    rect(s, 28.8, y, 4.5, RH, ACCENT if i == 3 else WHITE)
     text(s, 45.0, y, 348.0, RH, head, color=WHITE, bold=True,
          anchor=MSO_ANCHOR.MIDDLE, line=1.0)
     text(s, 400.0, y, 280.0, RH, why, color=MUTED, anchor=MSO_ANCHOR.MIDDLE, line=1.0)
@@ -267,7 +297,7 @@ text(s, 42.0, 305.0, 636.0, 42.0, [[
     ("Five client decisions still open.", True, WHITE),
     ("  Two of them gate validation.", False, LEAD),
 ]], anchor=MSO_ANCHOR.MIDDLE, line=1.14)
-footer(s, "matching stages designed, not yet built", color=AMBER)
+footer(s, "matching stages designed, not yet built", color=DIM)
 
 # ─────────────────────────────────────────────────────────── presenter notes
 NOTES_SOFTWARE = [
@@ -347,20 +377,20 @@ prs = new_deck()
 s = new_slide()
 title(s, "Two lessons")
 LY, LH = 76.0, 282.0
-card(s, LX, LY, CW, LH, AMBER, "3-day cycles didn't hold", [
+card(s, LX, LY, CW, LH, DIM, "3-day cycles didn't hold", [
     [("Too much changed per tick", False, MUTED)],
     [("A small blocker ate the whole tick", False, MUTED)],
     [("Reviewing an agent PR took longer than writing it", False, MUTED)],
     [("Now ", False, MUTED), ("7-day cycles", True, WHITE), (" on Jira", False, MUTED)],
-], head_color=AMBER)
-card(s, RX, LY, CW, LH, GREEN, "Give AI the paperwork", [
+], head_color=DIM)
+card(s, RX, LY, CW, LH, ACCENT, "Give AI the paperwork", [
     [("Drafting: ", False, MUTED), ("3 min → 15 s", True, WHITE)],
     [("234 tickets ≈ ", False, MUTED), ("11 h saved", True, WHITE)],
-    [("But the real win:", True, GREEN)],
+    [("But the real win:", True, ACCENT)],
     [("Spring, by hand: ", False, MUTED), ("0% points", True, WHITE)],
     [("Agent-drafted: ", False, MUTED), ("90% points,", True, WHITE)],
     [("94% in the right epic", True, WHITE)],
-], head_color=GREEN)
+], head_color=ACCENT)
 footer(s, "forecasting needs points on every ticket")
 
 NOTE_REFLECTION = (
