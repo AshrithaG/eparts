@@ -443,7 +443,7 @@ When something important happens in one pipeline, it fires an event that can tri
 **TraceabilityStore** (`memory/traceability.db`)
 - Connects artifacts to each other: concern → requirement → Jira ticket → risk
 - Two tables: `artifacts` (the nodes) and `links` (the edges)
-- Currently: 184 artifacts, 760 links, 10 artifact types, 7 link types
+- Currently: 189 artifacts, 764 links, 10 artifact types, 7 link types
 - All links created via keyword matching — zero LLM calls
 
 **PromptRegistry** (`memory/prompt_registry.db`)
@@ -687,7 +687,7 @@ MEASUREMENT COST    Time to evaluate quality      Automated metrics collection
 | **Classify priority (P0/P1/P2)** | Team discusses each item in a meeting (30-60 min). Subjective, inconsistent across members. | Keyword heuristic: instant but less accurate. With Claude: context-aware but costs tokens. P0 requires human approval regardless. | **AI worth it.** P0 human gate limits downside risk. Consistency across meetings is the real value. |
 | **Create Jira tickets** | Team member does it manually, maybe next day. Forgets context. Inconsistent labels. Some items never get ticketed. | Immediate creation with labels. May create duplicate or low-quality tickets. | **AI worth it for P1/P2.** The cost of a missed ticket (forgotten work) exceeds the cost of deleting a bad ticket. |
 | **Architecture drift detection** | Someone remembers "didn't we say something different last time?" — unreliable. | RAG query + keyword match: detects contradictions automatically. False positive rate unknown. | **AI worth it.** The cost of undetected drift (building the wrong thing) is very high. Even imperfect detection is better than none. |
-| **Traceability matrix** | Manual maintenance: always out of date. Teams skip it because it's tedious. | 760 links via keyword matching, zero tokens. May have false links. | **AI worth it.** Zero marginal cost. The alternative (no traceability) is worse than imperfect traceability. |
+| **Traceability matrix** | Manual maintenance: always out of date. Teams skip it because it's tedious. | 764 links via keyword matching, zero tokens. May have false links. | **AI worth it.** Zero marginal cost. The alternative (no traceability) is worse than imperfect traceability. |
 | **Pre-meeting briefing** | Check Jira, wiki, notes, coach feedback... 30-60 min per person. | Aggregates from 7 sources in seconds. May miss context a human would catch. | **AI worth it.** Repeated weekly. Even a 70% useful briefing saves team 4+ hours/week. |
 
 ### What We Actually Measure (MetricsCollector)
@@ -806,7 +806,7 @@ Every agent has a pattern-matching fallback when no LLM API key is available. Ch
 7 small database files in `memory/`, each serving one purpose. No infrastructure to maintain. Portable — the entire system state is a folder. Cost: zero.
 
 ### 3. Zero LLM Calls for Traceability
-760 links created via domain-aware keyword matching. Structured data (dates, labels, IDs) enables deterministic pattern matching. Cost: zero tokens.
+764 links created via domain-aware keyword matching. Structured data (dates, labels, IDs) enables deterministic pattern matching. Cost: zero tokens.
 
 ### 4. Prompt Governance
 PromptRegistry version-controls every prompt, requires peer review before activation. 10 team conventions ensure consistent AI use across all team members.
