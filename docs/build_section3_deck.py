@@ -134,10 +134,33 @@ def card(s, x, y, w, h, bar, head, body, head_color=WHITE, head_size=22):
          body, gap=9)
 
 
-def footer(s, txt, color=ACCENT, y=372.0):
-    rect(s, 28.8, y, 4.5, 24.0, color)
+def footer(s, txt, color=ACCENT, y=372.0, link_label=None, url=None, shown_url=None):
+    """Evidence strip. With link_label/url it grows a second line carrying the artifact
+    link, which is where the audience expects it — bottom left, not the header."""
+    h = 24.0 if not link_label else 50.0
+    if link_label and y == 372.0:
+        y = 346.0
+    rect(s, 28.8, y, 4.5, h, color)
     text(s, 42.0, y, 649.2, 24.0, txt.upper(), color=color, bold=True, space=0.5,
          anchor=MSO_ANCHOR.MIDDLE, line=1.0)
+    if not link_label:
+        return
+    tb = s.shapes.add_textbox(P(42.0), P(y + 25.0), P(649.2), P(24.0))
+    tf = tb.text_frame
+    tf.word_wrap = False
+    tf.margin_left = tf.margin_right = tf.margin_top = tf.margin_bottom = 0
+    para = tf.paragraphs[0]
+    para.line_spacing = 1.0
+    lab = para.add_run()
+    lab.text = link_label + "  "
+    lab.font.name, lab.font.size, lab.font.bold = FONT, Pt(MIN_PT), True
+    lab.font.color.rgb = WHITE
+    ln = para.add_run()
+    ln.text = shown_url or url
+    ln.hyperlink.address = url
+    ln.font.name, ln.font.size, ln.font.bold = FONT, Pt(MIN_PT), False
+    ln.font.color.rgb = MUTED
+    ln.font.underline = False
 
 
 def save(deck, path, expected_slides):
@@ -181,7 +204,6 @@ CY, CH = 126.0, 238.0
 # those minus the four IDs v1.1 introduced (HLR-6, FR-9, FR-10, DR-4); C-4 arrived in v1.2.
 s = new_slide()
 title(s, "Requirements: v1.0 → v1.3")
-artifact_link(s, "SPEC v1.3 ↗")
 banner(s, [
     ("Baselined 24 April. Three revisions since,", True, WHITE),
     ("  all driven by ETIM.", False, LEAD),
@@ -220,7 +242,8 @@ def stat(x, y, w, h, big, caption, big_colour):
 SX, SW = 440.0, 251.2
 stat(SX, TY, SW, 100.0, "89%", "of v1.0 unchanged", WHITE)
 stat(SX, TY + 108.0, SW, 100.0, "37%", "churn since April", DIM)
-footer(s, "5 new IDs · 2 rewritten · 17 of 19 untouched")
+footer(s, "5 new IDs · 2 rewritten · 17 of 19 untouched",
+       link_label="Spec v1.3:", url=CONFLUENCE, shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
 
 # ─────────────────────────────────────────────────────────── 2. managing the change
 s = new_slide()
@@ -229,61 +252,56 @@ banner(s, [
     ("Spec 1.0 → 1.1 → 1.2 → 1.3.", True, WHITE),
     ("  Each version-history entry is the change record.", False, LEAD),
 ])
-card(s, LX, CY, CW, CH, WHITE, "Version control", [
-    [("IDs were ", False, MUTED), ("added", True, WHITE),
-     (" — HLR-6, FR-9, FR-10, DR-4, C-4", False, MUTED)],
-    [("Nothing renumbered.", True, WHITE)],
-    [("Every existing trace link survives the change.", False, MUTED)],
+card(s, LX, CY, 662.4, CH, WHITE, "What we did", [
+    [("Added new IDs — HLR-6, FR-9, FR-10, DR-4, C-4 — instead of editing the old "
+      "ones.", False, MUTED)],
+    [("Renumbered nothing, so every trace link from April still resolves.", False, MUTED)],
+    [("Wrote each change into the version history, so the spec is its own change "
+      "record.", False, MUTED)],
 ])
-card(s, RX, CY, CW, CH, DIM, "Blocked on the client", [
-    [("Phase-one class list", True, WHITE)],
-    [("Feature policy per class", True, WHITE)],
-    [("ETIM ships no required-field flag, so we can't yet write a firm validation "
-      "requirement.", False, MUTED)],
-], head_color=DIM)
 footer(s, "trace: HLR-6 → FR-9/10 → tickets → golden tests")
 
 # ─────────────────────────────────────────────────────────── 3. architecture v5 → v6
 s = new_slide()
 title(s, "How the architecture changed")
-artifact_link(s, "FULL v6.0 DIAGRAM ↗")
 banner(s, [
     ("v5.0 → v6.0. The spine held.", True, WHITE),
     ("  Solid = running code. Dashed = designed, not built.", False, LEAD),
 ], h=40.0)
 IY = 124.0
-s.shapes.add_picture(DIAG + "pipe-filter-architecturev5-grey.png", P(28.8), P(IY),
-                     width=P(186), height=P(172))
-s.shapes.add_picture(DIAG + "pipe-filter-architecture-v6-grey.png", P(224), P(IY),
-                     width=P(158), height=P(187))
-text(s, 28.8, IY + 192, 186, 24, "v5.0 · MAY", color=MUTED, bold=True)
-text(s, 224, IY + 192, 158, 24, "v6.0 · JULY", color=ACCENT, bold=True)
+s.shapes.add_picture(DIAG + "pipe-filter-architecturev5-grey.png", P(28.8), P(IY + 20),
+                     width=P(163), height=P(150))
+s.shapes.add_picture(DIAG + "pipe-filter-architecture-v6-grey.png", P(201), P(IY),
+                     width=P(143), height=P(170))
+text(s, 28.8, IY + 174, 163, 24, "v5.0 · MAY", color=MUTED, bold=True)
+text(s, 201, IY + 174, 143, 24, "v6.0 · JULY", color=ACCENT, bold=True)
 
-DX, DW = 404.0, 287.2
+DX, DW = 362.0, 329.2
 rect(s, DX, IY, DW, 216.0, CARD)
 rect(s, DX, IY, DW, 5.04, ACCENT)
 text(s, DX + 12, IY + 12, DW - 24, 28, "Five deltas", size=22, color=ACCENT, bold=True)
 yy = IY + 48
-for n, label in [("1", "ETIM reference layer"),
-                 ("2", "ETIM matching behind ML"),
-                 ("3", "Evidence vs. interpretation"),
-                 ("4", "Frozen ML handoff"),
-                 ("5", "PIMS re-keyed on ETIM")]:
+for n, label in [("1", "ETIM dictionary loaded"),
+                 ("2", "ML now matches to ETIM"),
+                 ("3", "Raw values kept separately"),
+                 ("4", "Fixed handoff format to ML"),
+                 ("5", "PIMS keyed by ETIM IDs")]:
     text(s, DX + 12, yy, 16, 26, n, color=ACCENT, bold=True)
     text(s, DX + 30, yy, DW - 44, 26, label, color=WHITE)
-    yy += 33
-footer(s, "verified in code — alembic 0005–0007")
+    yy += 30
+footer(s, "verified in code — alembic 0005–0007",
+       link_label="Full v6.0 diagram:", url=CONFLUENCE, shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
 
 # ─────────────────────────────────────────────────────────── 4. decisions
 s = new_slide()
 title(s, "Decisions, and what we chose against")
-artifact_link(s, "ADR-018 ↗ GITHUB", url=ADR_018)
-RY, RH, RG = 74.0, 48.0, 8.0
+RY, RH, RG = 72.0, 46.0, 6.0
 decisions = [
-    ("ML matches, ingestion loads", "the dictionary is reference data"),
-    ("Evidence + interpretation, not one row", "or you can't trace a value"),
-    ("Supersede forward, not rewrite", "the April ADRs stay intact"),
-    ("Pin ETIM 10.0, not chase releases", "a stated limit beats a half-built path"),
+    ("ML does the matching", "ingestion only loads the ETIM dictionary"),
+    ("Raw supplier values kept in their own table", "so any published value can be "
+                                                    "traced back"),
+    ("New ADRs, not edits to the old ones", "the April decisions stay readable"),
+    ("Stay on ETIM 10.0", "upgrades are out of scope for this project"),
 ]
 for i, (head, why) in enumerate(decisions):
     y = RY + i * (RH + RG)
@@ -292,12 +310,14 @@ for i, (head, why) in enumerate(decisions):
     text(s, 45.0, y, 348.0, RH, head, color=WHITE, bold=True,
          anchor=MSO_ANCHOR.MIDDLE, line=1.0)
     text(s, 400.0, y, 280.0, RH, why, color=MUTED, anchor=MSO_ANCHOR.MIDDLE, line=1.0)
-rect(s, 28.8, 300.0, 662.4, 52.0, BANNER)
-text(s, 42.0, 305.0, 636.0, 42.0, [[
+rect(s, 28.8, 282.0, 662.4, 46.0, BANNER)
+text(s, 42.0, 284.0, 636.0, 42.0, [[
     ("Five client decisions still open.", True, WHITE),
     ("  Two of them gate validation.", False, LEAD),
 ]], anchor=MSO_ANCHOR.MIDDLE, line=1.14)
-footer(s, "matching stages designed, not yet built", color=DIM)
+footer(s, "matching stages designed, not yet built", color=DIM,
+       link_label="ADR-018:", url=ADR_018,
+       shown_url="github.com/AshrithaG/eparts")
 
 # ─────────────────────────────────────────────────────────── presenter notes
 NOTES_SOFTWARE = [
