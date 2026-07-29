@@ -470,6 +470,10 @@ def main() -> None:
         i for i in wip_all
         if i["type"] != "Epic" and i["key"] not in WIP_EXCLUDE_KEYS
     ]
+    wip_epics = sum(1 for i in wip_all if i["type"] == "Epic")
+    wip_stale = sum(
+        1 for i in wip_all if i["type"] != "Epic" and i["key"] in WIP_EXCLUDE_KEYS
+    )
     wip_hidden = len(wip_all) - len(wip)
 
     wip_rows = "".join(
@@ -548,9 +552,9 @@ on every refresh.</p>
 <p class="note">Risks with triggers and mitigations are maintained in the Risk Register
 (<code>docs/eParts_Risk_Register_v2.md</code>); defects follow <code>docs/defect_management.md</code>.
 Items above aging past a tick without movement are escalation candidates at standup.
-Epics are excluded because the delivery streams sit In Progress for the life of the project;
-{wip_hidden} further board entries are excluded as stale or superseded pending closure in Jira
-(see <code>WIP_EXCLUDE_KEYS</code>).</p>
+{wip_hidden} of {len(wip_all)} In Progress items are not shown: {wip_epics} epics, because the
+delivery streams sit In Progress for the life of the project, and {wip_stale} board entries that are
+stale or superseded pending closure in Jira (see <code>WIP_EXCLUDE_KEYS</code>).</p>
 
 </div></body></html>"""
 
