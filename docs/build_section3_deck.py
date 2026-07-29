@@ -284,28 +284,38 @@ footer(s, "solid = running code · dashed = designed",
        link_label="Full v6.0 diagram:", url=CONFLUENCE, shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
 
 # ─────────────────────────────────────────────────────────── 4. decisions
+# The point of this slide is the pairing: each decision beside the alternative we
+# turned down. A reason column would only restate the decision.
 s = new_slide()
 title(s, "Decisions, and what we chose against")
-RY, RH, RG = 76.0, 54.0, 10.0
+
+CHOSE_X, VS_X = 44.0, 420.0
+HDR_Y = 84.0
+text(s, CHOSE_X, HDR_Y, 300, 26, "We chose", color=WHITE, bold=True)
+text(s, VS_X, HDR_Y, 260, 26, "Instead of", color=MUTED, bold=True)
+rect(s, 28.8, HDR_Y + 30, 662.4, 1.2, RULE)
+
 decisions = [
-    ("ML does the matching", "ingestion only loads the ETIM dictionary"),
-    ("Raw supplier values kept in their own table", "so any published value can be "
-                                                    "traced back"),
-    ("New ADRs, not edits to the old ones", "the April decisions stay readable"),
-    ("Stay on ETIM 10.0", "upgrades are out of scope for this project"),
+    ("ML does the matching", "ETIM keys at normalization"),
+    ("Raw values in own table", "one table holding both"),
+    ("New ADRs for new decisions", "editing the April ones"),
+    ("Stay on ETIM 10.0", "building an upgrade path"),
 ]
-for i, (head, why) in enumerate(decisions):
-    y = RY + i * (RH + RG)
-    rect(s, 28.8, y, 662.4, RH, CARD)
-    rect(s, 28.8, y, 4.5, RH, ACCENT if i == 3 else WHITE)
-    text(s, 45.0, y, 348.0, RH, head, color=WHITE, bold=True,
+ry, RH, RG = HDR_Y + 42, 44.0, 8.0
+for chose, instead in decisions:
+    rect(s, 28.8, ry, 662.4, RH, CARD)
+    rect(s, 28.8, ry, 4.5, RH, WHITE)
+    text(s, CHOSE_X, ry, 340, RH, chose, color=WHITE, bold=True,
          anchor=MSO_ANCHOR.MIDDLE, line=1.0)
-    text(s, 400.0, y, 280.0, RH, why, color=MUTED, anchor=MSO_ANCHOR.MIDDLE, line=1.0)
+    text(s, VS_X - 26, ry, 20, RH, "×", color=RGBColor(0x66, 0x66, 0x66),
+         anchor=MSO_ANCHOR.MIDDLE, line=1.0)
+    text(s, VS_X, ry, 262, RH, instead, color=MUTED, anchor=MSO_ANCHOR.MIDDLE,
+         line=1.0)
+    ry += RH + RG
 footer(s, "matching stages designed, not yet built", color=DIM,
        link_label="ADR-018:", url=ADR_018,
        shown_url="github.com/AshrithaG/eparts")
 
-# ─────────────────────────────────────────────────────────── presenter notes
 NOTES_SOFTWARE = [
     "ETIM is a mid-project requirements CHANGE, not a new project.\n\n"
     "One line: we went from predicting free-form attributes to classifying each product "

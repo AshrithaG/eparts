@@ -73,11 +73,11 @@ The slides carry phrases because everything on them is 20 pt or larger. The sent
 
 ## Slide 4 — "Decisions, and what we chose against" — 51 sec
 
-> Last slide — the decisions, and the alternatives we didn't take. Each one is an ADR.
+> Last slide — each decision beside the alternative we turned down. Every one of these is an ADR.
 >
-> **[row 3]** The one I'd defend hardest is the third. We didn't edit our April ADRs. They record what we believed in April, so we superseded forward and wrote an assessment that goes through the old ones and says what ETIM affected in each. Editing in place erases the history.
+> **[row 3]** The one I'd defend hardest is the third. We didn't edit our April ADRs — we wrote new ones and left the old ones alone, plus an assessment that goes through them and says what ETIM affected in each. Editing in place would have lost the history of what we believed and when.
 >
-> **[row 4]** The fourth is newest. We're pinned to ETIM 10.0 for the project. The alternative was an upgrade path — diff the release, re-match everything, second review queue — and that's a lot of work for something that won't happen inside this project. We'd rather state the limit than half-build it.
+> **[row 4]** And the fourth. We're staying on ETIM 10.0 rather than building an upgrade path — a diff against each new release, a bulk re-match, a second review queue. That's a lot of work for something that won't happen inside this project, and nobody's decided who authorizes an upgrade anyway. Five client decisions are still open, and two of them gate validation.
 >
 > And five client decisions are still open — two of them gate validation. The biggest is that ETIM ships no required-field flag, so until the client tells us which features are mandatory we can't write a firm validation requirement.
 
