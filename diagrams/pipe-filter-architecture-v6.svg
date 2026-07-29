@@ -1,0 +1,240 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1790" width="1600" height="1790" font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+<defs>
+  <marker id="aData" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#185FA5"/>
+  </marker>
+  <marker id="aApi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#0F6E56"/>
+  </marker>
+  <marker id="aTel" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#5F5E5A"/>
+  </marker>
+</defs>
+
+<rect width="1600" height="1790" fill="#FFFFFF"/>
+
+<!-- ══ header ══ -->
+<text x="800" y="52" text-anchor="middle" font-size="30" font-weight="600" fill="#1C1B18">Pipe and filter — product data enrichment platform</text>
+<text x="800" y="84" text-anchor="middle" font-size="16" fill="#5F5E5A">v6.0 · July 2026 · post-ETIM</text>
+
+<!-- legend -->
+<rect x="40" y="110" width="690" height="120" rx="10" fill="#FAFAF8" stroke="#D8D6CE"/>
+<text x="60" y="136" font-size="11" font-weight="600" fill="#7A7871" letter-spacing="1.2">LEGEND</text>
+<rect x="60" y="150" width="16" height="16" rx="3" fill="#E1F5EE" stroke="#0F6E56"/><text x="84" y="163" font-size="13" fill="#444441">Processing</text>
+<rect x="182" y="150" width="16" height="16" rx="3" fill="#E6F1FB" stroke="#185FA5"/><text x="206" y="163" font-size="13" fill="#444441">Data store</text>
+<rect x="308" y="150" width="16" height="16" rx="3" fill="#FAECE7" stroke="#993C1D"/><text x="332" y="163" font-size="13" fill="#444441">Human-in-loop</text>
+<rect x="462" y="150" width="16" height="16" rx="3" fill="#FAEEDA" stroke="#854F0B"/><text x="486" y="163" font-size="13" fill="#444441">Feedback / audit</text>
+<rect x="60" y="182" width="16" height="16" rx="3" fill="none" stroke="#534AB7" stroke-dasharray="4 3"/><text x="84" y="195" font-size="13" fill="#444441">Stable interface</text>
+<line x1="196" y1="190" x2="234" y2="190" stroke="#185FA5" stroke-width="2" marker-end="url(#aData)"/><text x="242" y="195" font-size="13" fill="#444441">Data transfer</text>
+<line x1="350" y1="190" x2="388" y2="190" stroke="#5F5E5A" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#aTel)"/><text x="396" y="195" font-size="13" fill="#444441">Telemetry</text>
+<rect x="60" y="205" width="16" height="12" rx="3" fill="#FFFFFF" stroke="#1C1B18" stroke-width="1.8"/><text x="84" y="215" font-size="13" font-weight="600" fill="#1C1B18">Solid outline = running code</text>
+<rect x="330" y="205" width="16" height="12" rx="3" fill="#FFFFFF" stroke="#9A9891" stroke-width="1.8" stroke-dasharray="5 3"/><text x="354" y="215" font-size="13" font-weight="600" fill="#6E6C66">Dashed outline = designed, not yet built</text>
+
+<!-- what changed -->
+<rect x="760" y="110" width="810" height="220" rx="10" fill="#F3FAF6" stroke="#0F6E56" stroke-width="1.2"/>
+<text x="782" y="138" font-size="12" font-weight="700" fill="#0F6E56" letter-spacing="1.2">WHAT CHANGED FROM v5.0 (MAY 2026) — ETIM</text>
+<circle cx="792" cy="163" r="11" fill="#0F6E56"/><text x="792" y="168" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">1</text>
+<text x="812" y="168" font-size="13.5" fill="#1C1B18"><tspan font-weight="600">ETIM reference layer</tspan> — 10 tables, ETIM 10.0 EI, loaded and queryable; pinned (ADR-013, ADR-020)</text>
+<circle cx="792" cy="196" r="11" fill="#0F6E56"/><text x="792" y="201" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">2</text>
+<text x="812" y="201" font-size="13.5" fill="#1C1B18"><tspan font-weight="600">Matching decomposed</tspan> — one matcher becomes class → feature → value/unit → validation (ADR-016)</text>
+<circle cx="792" cy="229" r="11" fill="#0F6E56"/><text x="792" y="234" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">3</text>
+<text x="812" y="234" font-size="13.5" fill="#1C1B18"><tspan font-weight="600">Staging split</tspan> — supplier evidence and ETIM interpretation in separate tables (ADR-014)</text>
+<circle cx="792" cy="262" r="11" fill="#0F6E56"/><text x="792" y="267" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">4</text>
+<text x="812" y="267" font-size="13.5" fill="#1C1B18"><tspan font-weight="600">Explicit ingestion → ML seam</tspan> — frozen <tspan font-family="ui-monospace, monospace" font-size="12.5">ExtractedInput</tspan> record, no interpretation crosses (ADR-021)</text>
+<circle cx="792" cy="295" r="11" fill="#0F6E56"/><text x="792" y="300" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">5</text>
+<text x="812" y="300" font-size="13.5" fill="#1C1B18"><tspan font-weight="600">PIMS contract re-keyed</tspan> — on product + ETIM release + class + feature (ADR-017)</text>
+<text x="782" y="322" font-size="12" fill="#5F5E5A" font-style="italic">Unchanged from v5.0: the pipe-and-filter spine, per-attribute routing granularity, human-in-the-loop, append-only audit.</text>
+
+<!-- ══ spine ══ -->
+
+<!-- supplier sources -->
+<rect x="450" y="370" width="340" height="66" rx="12" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.6"/>
+<text x="620" y="395" text-anchor="middle" font-size="19" font-weight="600" fill="#444441">Supplier data sources</text>
+<text x="620" y="417" text-anchor="middle" font-size="13" fill="#5F5E5A">PDF, CSV, SFTP, direct upload</text>
+<line x1="620" y1="436" x2="620" y2="470" stroke="#185FA5" stroke-width="2" marker-end="url(#aData)"/>
+<text x="632" y="459" font-size="12.5" font-style="italic" fill="#5F5E5A">raw catalog files</text>
+
+<!-- ingestion gateway -->
+<rect x="450" y="478" width="340" height="66" rx="12" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.8"/>
+<text x="620" y="503" text-anchor="middle" font-size="19" font-weight="600" fill="#085041">Ingestion gateway</text>
+<text x="620" y="525" text-anchor="middle" font-size="13" fill="#0F6E56">Parse · Azure Doc Intelligence OCR · normalize</text>
+<line x1="620" y1="544" x2="620" y2="578" stroke="#185FA5" stroke-width="2" marker-end="url(#aData)"/>
+
+<!-- handoff record (4) -->
+<rect x="450" y="586" width="340" height="60" rx="12" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.8"/>
+<text x="620" y="609" text-anchor="middle" font-size="17" font-weight="600" fill="#0C447C" font-family="ui-monospace, monospace">extracted_inputs</text>
+<text x="620" y="630" text-anchor="middle" font-size="12.5" fill="#185FA5">frozen handoff record · evidence only, no confidence</text>
+<circle cx="424" cy="616" r="13" fill="#0F6E56"/><text x="424" y="621" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">4</text>
+<line x1="620" y1="646" x2="620" y2="682" stroke="#185FA5" stroke-width="2" marker-end="url(#aData)"/>
+
+<!-- staging split (3) -->
+<rect x="450" y="690" width="340" height="72" rx="12" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.8"/>
+<text x="620" y="713" text-anchor="middle" font-size="15.5" font-weight="600" fill="#0C447C">Evidence — ingestion owned</text>
+<text x="620" y="734" text-anchor="middle" font-size="13" fill="#185FA5" font-family="ui-monospace, monospace">staging_product · staging_raw_attribute</text>
+<text x="620" y="752" text-anchor="middle" font-size="12" fill="#185FA5">original value, unit, page, row, source text</text>
+<circle cx="424" cy="726" r="13" fill="#0F6E56"/><text x="424" y="731" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">3</text>
+<line x1="620" y1="762" x2="620" y2="806" stroke="#185FA5" stroke-width="2" marker-end="url(#aData)"/>
+
+<!-- ══ matching boundary (2) ══ -->
+<rect x="200" y="810" width="1050" height="212" rx="14" fill="none" stroke="#534AB7" stroke-width="1.6" stroke-dasharray="7 5"/>
+<text x="216" y="833" font-size="13.5" font-style="italic" fill="#3C3489">PredictionServiceInterface — the interface boundary is unchanged (ADR-002); what sits behind it is decomposed (ADR-016)</text>
+<circle cx="1268" cy="828" r="13" fill="#0F6E56"/><text x="1268" y="833" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">2</text>
+
+<g stroke="#0F6E56" stroke-width="1.8" stroke-dasharray="6 4" fill="#E1F5EE">
+  <rect x="219" y="856" width="190" height="140" rx="11"/>
+  <rect x="427" y="856" width="190" height="140" rx="11"/>
+  <rect x="635" y="856" width="190" height="140" rx="11"/>
+  <rect x="843" y="856" width="190" height="140" rx="11"/>
+  <rect x="1051" y="856" width="190" height="140" rx="11"/>
+</g>
+<text x="314" y="890" text-anchor="middle" font-size="15.5" font-weight="600" fill="#085041">Class match</text>
+<text x="314" y="915" text-anchor="middle" font-size="12" fill="#0F6E56">names, descriptions,</text>
+<text x="314" y="932" text-anchor="middle" font-size="12" fill="#0F6E56">synonyms, corrections</text>
+<text x="314" y="960" text-anchor="middle" font-size="12" fill="#0F6E56">→ candidate classes</text>
+<text x="314" y="977" text-anchor="middle" font-size="12" fill="#0F6E56">+ confidence</text>
+
+<text x="522" y="890" text-anchor="middle" font-size="15.5" font-weight="600" fill="#085041">Feature match</text>
+<text x="522" y="915" text-anchor="middle" font-size="12" fill="#0F6E56">only features legal</text>
+<text x="522" y="932" text-anchor="middle" font-size="12" fill="#0F6E56">for the chosen class</text>
+<text x="522" y="960" text-anchor="middle" font-size="12" fill="#0F6E56">rules + similarity</text>
+<text x="522" y="977" text-anchor="middle" font-size="12" fill="#0F6E56">(ADR-003, α = 0.7)</text>
+
+<text x="730" y="890" text-anchor="middle" font-size="15.5" font-weight="600" fill="#085041">Value + unit</text>
+<text x="730" y="915" text-anchor="middle" font-size="12" fill="#0F6E56">type A → value ID</text>
+<text x="730" y="932" text-anchor="middle" font-size="12" fill="#0F6E56">L → boolean</text>
+<text x="730" y="949" text-anchor="middle" font-size="12" fill="#0F6E56">N → number + unit</text>
+<text x="730" y="966" text-anchor="middle" font-size="12" fill="#0F6E56">R → min, max, unit</text>
+
+<text x="938" y="890" text-anchor="middle" font-size="15.5" font-weight="600" fill="#085041">ETIM validation</text>
+<text x="938" y="915" text-anchor="middle" font-size="12" fill="#0F6E56">value in the legal set</text>
+<text x="938" y="932" text-anchor="middle" font-size="12" fill="#0F6E56">for this class-feature?</text>
+<text x="938" y="960" text-anchor="middle" font-size="12" fill="#0F6E56">unit present and</text>
+<text x="938" y="977" text-anchor="middle" font-size="12" fill="#0F6E56">convertible?</text>
+
+<text x="1146" y="890" text-anchor="middle" font-size="15.5" font-weight="600" fill="#085041">Policy validation</text>
+<text x="1146" y="915" text-anchor="middle" font-size="12" fill="#0F6E56">required / recommended</text>
+<text x="1146" y="932" text-anchor="middle" font-size="12" fill="#0F6E56">/ optional per class</text>
+<text x="1146" y="960" text-anchor="middle" font-size="12" fill="#0F6E56">ETIM ships no</text>
+<text x="1146" y="977" text-anchor="middle" font-size="12" fill="#0F6E56">required-field flag</text>
+
+<g stroke="#0F6E56" stroke-width="2" fill="none">
+  <line x1="409" y1="926" x2="419" y2="926" marker-end="url(#aApi)"/>
+  <line x1="617" y1="926" x2="627" y2="926" marker-end="url(#aApi)"/>
+  <line x1="825" y1="926" x2="835" y2="926" marker-end="url(#aApi)"/>
+  <line x1="1033" y1="926" x2="1043" y2="926" marker-end="url(#aApi)"/>
+</g>
+
+<!-- ETIM reference (1) -->
+<rect x="20" y="836" width="160" height="160" rx="12" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.8"/>
+<text x="100" y="864" text-anchor="middle" font-size="15.5" font-weight="600" fill="#0C447C">ETIM reference</text>
+<text x="100" y="887" text-anchor="middle" font-size="12" fill="#185FA5">10 tables · pinned to</text>
+<text x="100" y="904" text-anchor="middle" font-size="12" font-weight="600" fill="#0C447C">ETIM 10.0 EI (C-4)</text>
+<text x="100" y="929" text-anchor="middle" font-size="12" fill="#185FA5">159 groups</text>
+<text x="100" y="946" text-anchor="middle" font-size="12" fill="#185FA5">5,640 classes</text>
+<text x="100" y="963" text-anchor="middle" font-size="12" fill="#185FA5">17,377 features</text>
+<text x="100" y="980" text-anchor="middle" font-size="12" fill="#185FA5">201,284 CFVs</text>
+<circle cx="100" cy="818" r="13" fill="#0F6E56"/><text x="100" y="823" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">1</text>
+<line x1="180" y1="916" x2="215" y2="916" stroke="#185FA5" stroke-width="2" marker-end="url(#aData)"/>
+
+<!-- client feature policy -->
+<rect x="1290" y="856" width="290" height="140" rx="12" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.8" stroke-dasharray="6 4"/>
+<text x="1435" y="884" text-anchor="middle" font-size="15.5" font-weight="600" fill="#412402">Client feature policy</text>
+<text x="1435" y="906" text-anchor="middle" font-size="12" fill="#633806" font-family="ui-monospace, monospace">catalog_feature_policy</text>
+<text x="1435" y="929" text-anchor="middle" font-size="12" fill="#633806">per client · release · class · feature</text>
+<text x="1435" y="955" text-anchor="middle" font-size="12" font-weight="600" fill="#8A2C0B">BLOCKED ON CLIENT (EPARTS-287)</text>
+<text x="1435" y="977" text-anchor="middle" font-size="12" fill="#633806">default permissive until supplied</text>
+<line x1="1288" y1="926" x2="1248" y2="926" stroke="#854F0B" stroke-width="2" marker-end="url(#aData)"/>
+
+<line x1="620" y1="1022" x2="620" y2="1062" stroke="#185FA5" stroke-width="2" marker-end="url(#aData)"/>
+
+<!-- matched_product_attribute (3) -->
+<rect x="450" y="1070" width="340" height="66" rx="12" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.8" stroke-dasharray="6 4"/>
+<text x="620" y="1094" text-anchor="middle" font-size="15.5" font-weight="600" fill="#0C447C">Interpretation — matching owned</text>
+<text x="620" y="1115" text-anchor="middle" font-size="13" fill="#185FA5" font-family="ui-monospace, monospace">matched_product_attribute</text>
+<text x="620" y="1131" text-anchor="middle" font-size="12" fill="#185FA5">ETIM IDs · typed values · confidence per assignment</text>
+<circle cx="424" cy="1103" r="13" fill="#0F6E56"/><text x="424" y="1108" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">3</text>
+<line x1="620" y1="1136" x2="620" y2="1172" stroke="#185FA5" stroke-width="2" marker-end="url(#aData)"/>
+
+<!-- router -->
+<rect x="400" y="1180" width="440" height="80" rx="12" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.8" stroke-dasharray="6 4"/>
+<text x="620" y="1206" text-anchor="middle" font-size="19" font-weight="600" fill="#085041">Request Router</text>
+<text x="620" y="1227" text-anchor="middle" font-size="12.5" fill="#0F6E56">class-review-first, then per attribute on the full ETIM signal set:</text>
+<text x="620" y="1246" text-anchor="middle" font-size="12" fill="#0F6E56">class conf · match conf · ETIM validity · client policy · unit conversion</text>
+<rect x="512" y="1254" width="14" height="12" fill="#0F6E56"/>
+<rect x="714" y="1254" width="14" height="12" fill="#993C1D"/>
+
+<path d="M519,1266 L519,1290 L420,1290 L420,1310" fill="none" stroke="#0F6E56" stroke-width="2" marker-end="url(#aApi)"/>
+<text x="300" y="1284" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0F6E56">high confidence · valid · policy OK</text>
+<path d="M721,1266 L721,1290 L910,1290 L910,1310" fill="none" stroke="#993C1D" stroke-width="2" marker-end="url(#aData)"/>
+<text x="800" y="1284" font-size="12.5" font-weight="600" fill="#993C1D">low confidence, invalid, or required field missing</text>
+
+<!-- auto-accept / human review -->
+<rect x="270" y="1310" width="300" height="76" rx="12" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.8" stroke-dasharray="6 4"/>
+<text x="420" y="1339" text-anchor="middle" font-size="18" font-weight="600" fill="#085041">Auto-accept</text>
+<text x="420" y="1362" text-anchor="middle" font-size="12.5" fill="#0F6E56">writeback approved ETIM assignments</text>
+
+<rect x="760" y="1310" width="300" height="76" rx="12" fill="#FAECE7" stroke="#993C1D" stroke-width="1.8" stroke-dasharray="6 4"/>
+<text x="910" y="1335" text-anchor="middle" font-size="18" font-weight="600" fill="#712B13">Human review</text>
+<text x="910" y="1356" text-anchor="middle" font-size="12.5" fill="#993C1D">suggested class / feature / value,</text>
+<text x="910" y="1373" text-anchor="middle" font-size="12.5" fill="#993C1D">allowed-value dropdowns, source evidence</text>
+
+<path d="M420,1386 L420,1424 L620,1424" fill="none" stroke="#185FA5" stroke-width="2"/>
+<path d="M910,1386 L910,1424 L620,1424" fill="none" stroke="#185FA5" stroke-width="2"/>
+<text x="670" y="1416" font-size="12.5" font-style="italic" fill="#5F5E5A">approve / correct</text>
+<circle cx="620" cy="1424" r="6" fill="#5F5E5A"/>
+<line x1="620" y1="1424" x2="620" y2="1450" stroke="#185FA5" stroke-width="2" marker-end="url(#aData)"/>
+
+<!-- PIMS staging (5) -->
+<rect x="420" y="1458" width="400" height="72" rx="12" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.8" stroke-dasharray="6 4"/>
+<text x="620" y="1482" text-anchor="middle" font-size="16" font-weight="600" fill="#0C447C">PIMS staging — approved output</text>
+<text x="620" y="1503" text-anchor="middle" font-size="12" fill="#185FA5" font-family="ui-monospace, monospace">key: product_id + etim_release_id + etim_class_id + etim_feature_id</text>
+<text x="620" y="1521" text-anchor="middle" font-size="12" fill="#185FA5">ETIM IDs + normalized value + original value + evidence + confidence</text>
+<circle cx="394" cy="1470" r="13" fill="#0F6E56"/><text x="394" y="1475" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">5</text>
+<line x1="620" y1="1530" x2="620" y2="1564" stroke="#185FA5" stroke-width="2" marker-end="url(#aData)"/>
+<text x="632" y="1553" font-size="12.5" font-style="italic" fill="#5F5E5A">idempotent upsert</text>
+
+<!-- publish -->
+<rect x="450" y="1572" width="340" height="66" rx="12" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.8" stroke-dasharray="6 4"/>
+<text x="620" y="1597" text-anchor="middle" font-size="19" font-weight="600" fill="#085041">Publish / sync job</text>
+<text x="620" y="1619" text-anchor="middle" font-size="13" fill="#0F6E56">upsert to target system</text>
+<line x1="620" y1="1638" x2="620" y2="1674" stroke="#0F6E56" stroke-width="2" marker-end="url(#aApi)"/>
+
+<!-- PIMS -->
+<rect x="420" y="1682" width="400" height="72" rx="12" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.8"/>
+<text x="620" y="1710" text-anchor="middle" font-size="20" font-weight="600" fill="#3C3489">PIMS</text>
+<text x="620" y="1733" text-anchor="middle" font-size="13" fill="#534AB7">Product information management system — now ETIM-keyed</text>
+
+<!-- ══ right column ══ -->
+<rect x="1290" y="400" width="290" height="182" rx="12" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.6" stroke-dasharray="6 4"/>
+<text x="1435" y="428" text-anchor="middle" font-size="17" font-weight="600" fill="#444441">Observability</text>
+<text x="1435" y="453" text-anchor="middle" font-size="12.5" font-weight="600" fill="#444441">Datadog — production target</text>
+<text x="1435" y="472" text-anchor="middle" font-size="12" fill="#5F5E5A">(ADR-012)</text>
+<text x="1435" y="498" text-anchor="middle" font-size="12.5" font-weight="600" fill="#444441">Prometheus + OpenTelemetry</text>
+<text x="1435" y="515" text-anchor="middle" font-size="12.5" font-weight="600" fill="#444441">+ structlog — local substrate</text>
+<text x="1435" y="543" text-anchor="middle" font-size="12" fill="#5F5E5A">class confidence · validation-failure rate</text>
+<text x="1435" y="560" text-anchor="middle" font-size="12" fill="#5F5E5A">unit-failure rate · missing-required rate</text>
+<text x="1435" y="574" text-anchor="middle" font-size="12" fill="#5F5E5A">auto-accept rate · PIMS sync success</text>
+<path d="M790,511 L1040,511 L1040,491 L1288,491" fill="none" stroke="#5F5E5A" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#aTel)"/>
+<path d="M840,1220 L1268,1220 L1268,1060 L1435,1060 L1435,584" fill="none" stroke="#5F5E5A" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#aTel)"/>
+
+<!-- audit trail -->
+<rect x="1290" y="1310" width="290" height="104" rx="12" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.8"/>
+<text x="1435" y="1338" text-anchor="middle" font-size="17" font-weight="600" fill="#412402">Audit trail</text>
+<text x="1435" y="1360" text-anchor="middle" font-size="12" fill="#633806">append-only · every routing and review decision</text>
+<text x="1435" y="1381" text-anchor="middle" font-size="12" fill="#633806">now also records suggested class / feature / value,</text>
+<text x="1435" y="1398" text-anchor="middle" font-size="12" fill="#633806">validation status, and the ETIM release in force</text>
+<line x1="1062" y1="1348" x2="1288" y2="1348" stroke="#993C1D" stroke-width="2" marker-end="url(#aData)"/>
+<line x1="1435" y1="1414" x2="1435" y2="1446" stroke="#854F0B" stroke-width="2" marker-end="url(#aData)"/>
+
+<!-- correction store -->
+<rect x="1290" y="1454" width="290" height="96" rx="12" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.8" stroke-dasharray="6 4"/>
+<text x="1435" y="1481" text-anchor="middle" font-size="16" font-weight="600" fill="#0C447C">Correction store</text>
+<text x="1435" y="1503" text-anchor="middle" font-size="12" fill="#185FA5">a reviewer's decision resolves the same</text>
+<text x="1435" y="1520" text-anchor="middle" font-size="12" fill="#185FA5">mapping for later products — consulted</text>
+<text x="1435" y="1537" text-anchor="middle" font-size="12" fill="#185FA5">before every matching stage (ADR-016)</text>
+
+<!-- footer -->
+<text x="40" y="1762" font-size="12.5" fill="#5F5E5A"><tspan font-weight="600">Built and merged:</tspan> ETIM reference layer (Alembic 0005) · evidence staging split (0006) · <tspan font-family="ui-monospace, monospace" font-size="12">extracted_inputs</tspan> handoff (0007).</text>
+<text x="40" y="1780" font-size="12.5" fill="#5F5E5A"><tspan font-weight="600">Designed, not yet built:</tspan> the matching stages, ETIM-aware routing, and the re-keyed writeback (EPARTS-289–295, 299).</text>
+<text x="1560" y="1771" text-anchor="end" font-size="12.5" fill="#5F5E5A">Pimsie Supreme · eParts Studio</text>
+</svg>
