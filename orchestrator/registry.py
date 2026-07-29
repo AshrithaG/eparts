@@ -116,6 +116,8 @@ def register_all_agents(task_queue: TaskQueue) -> dict[str, Any]:
     from agents.coding.pr_reviewer import PRReviewerAgent
     from agents.coding.test_generator import TestGeneratorAgent
     from agents.coding.doc_generator import DocGeneratorAgent
+    from agents.coding.refactor_agent import RefactorAgent
+    from agents.coding.test_review_agent import TestReviewAgent
 
     agents["boilerplate_generator"] = BoilerplateGeneratorAgent(
         mcp_clients={"bitbucket": mcp["bitbucket"], "github": mcp["github"]}
@@ -127,6 +129,25 @@ def register_all_agents(task_queue: TaskQueue) -> dict[str, Any]:
         mcp_clients={"bitbucket": mcp["bitbucket"], "github": mcp["github"]}
     )
     agents["doc_generator"] = DocGeneratorAgent(
+        mcp_clients={"bitbucket": mcp["bitbucket"], "github": mcp["github"]}
+    )
+    # Cleanup is a separate stage from build: a build agent optimises for
+    # working code, so a second agent reviews organisation with fresh eyes.
+    # Comment-only — neither agent commits (Cory Gwin session, 2026-07-24).
+    agents["refactor_agent"] = RefactorAgent(
+        mcp_clients={"bitbucket": mcp["bitbucket"], "github": mcp["github"]}
+    )
+    agents["test_review_agent"] = TestReviewAgent(
+        mcp_clients={"bitbucket": mcp["bitbucket"], "github": mcp["github"]}
+    )
+
+    # --- Planning Domain ---
+    # Every spec is translated into a reviewable implementation plan before any
+    # code is written; the plan is the artifact a human accepts or rejects while
+    # change is still cheap.
+    from agents.planning.plan_generator import PlanGeneratorAgent
+
+    agents["plan_generator"] = PlanGeneratorAgent(
         mcp_clients={"bitbucket": mcp["bitbucket"], "github": mcp["github"]}
     )
 
