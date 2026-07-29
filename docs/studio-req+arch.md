@@ -1,6 +1,6 @@
 # Studio Crit — Requirements & Architecture
 
-**Section:** Software System (requirements + architecture) · ~5 minutes, 4 slides · script: [`talking_script_req_arch_v2.md`](talking_script_req_arch_v2.md)
+**Section:** Software System (requirements + architecture) · ~5 minutes, 4 slides · script: [`talking_script.md`](talking_script.md)
 **Closing:** Reflection is a separate deck — `eParts_Reflection_Closing.pptx` · script: [`talking_script_reflection.md`](talking_script_reflection.md)
 **Crit:** Thursday 30 July 2026, MSE 265, 300 South Craig Street
 **Deck:** [`eParts_Section3_SoftwareSystem.pptx`](../../eParts_Section3_SoftwareSystem.pptx) · rebuild with [`build_section3_deck.py`](build_section3_deck.py)
