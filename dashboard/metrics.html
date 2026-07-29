@@ -167,13 +167,13 @@
   <div class="kpi-grid">
     <div class="kpi green">
       <div class="kpi-label">Meetings Processed</div>
-      <div class="kpi-value">8</div>
-      <div class="kpi-sub">5 client + 3 coach/mentor</div>
+      <div class="kpi-value">15</div>
+      <div class="kpi-sub">5 spring + 10 summer, weekly cadence</div>
     </div>
     <div class="kpi blue">
       <div class="kpi-label">Total Words Analyzed</div>
-      <div class="kpi-value">53,745</div>
-      <div class="kpi-sub">~6.7K words/session avg</div>
+      <div class="kpi-value">68,540</div>
+      <div class="kpi-sub">~4.6K words/meeting avg</div>
     </div>
     <div class="kpi cyan">
       <div class="kpi-label">ChromaDB Chunks</div>
@@ -182,18 +182,18 @@
     </div>
     <div class="kpi pink">
       <div class="kpi-label">Action Items Extracted</div>
-      <div class="kpi-value">123</div>
-      <div class="kpi-sub">across all 8 meetings</div>
+      <div class="kpi-value">178</div>
+      <div class="kpi-sub">across all 15 meetings</div>
     </div>
     <div class="kpi">
       <div class="kpi-label">Pipelines Defined</div>
-      <div class="kpi-value">7</div>
-      <div class="kpi-sub">29 steps, 25 agents</div>
+      <div class="kpi-value">8</div>
+      <div class="kpi-sub">32 steps, 25 agents</div>
     </div>
     <div class="kpi yellow">
       <div class="kpi-label">Codebase</div>
-      <div class="kpi-value">7,558</div>
-      <div class="kpi-sub">lines across 56 Python files</div>
+      <div class="kpi-value">19,841</div>
+      <div class="kpi-sub">lines across 80 Python files</div>
     </div>
     <div class="kpi green">
       <div class="kpi-label">Commitments Tracked</div>
@@ -223,6 +223,16 @@
   <div class="section" style="margin-top: 20px;">
     <h2>Practice Area Coverage</h2>
     <div class="three-col">
+      <div class="pipeline-card">
+        <div class="pipeline-name">Risk Register Generation</div>
+        <div class="pipeline-area">3 steps — 3 sources, human-reviewed</div>
+        <div class="pipeline-steps">
+          <span class="step-chip">add_risk (classify)</span><span class="step-arrow">&rarr;</span>
+          <span class="step-chip">review_risk (human gate)</span><span class="step-arrow">&rarr;</span>
+          <span class="step-chip">risk_register.md</span>
+        </div>
+        <div class="pipeline-area" style="margin-top:6px">Sources: architecture &sect;5.4 sensitivity points &middot; recurring coach-session concerns &middot; action items aged past a tick</div>
+      </div>
       <div class="pipeline-card">
         <div class="pipeline-name">Requirements Engineering</div>
         <div class="pipeline-area">7 steps — End-to-end connected</div>
@@ -337,7 +347,7 @@
   <div class="kpi-grid">
     <div class="kpi green"><div class="kpi-label">Requirements Pipeline</div><div class="kpi-value">7/7</div><div class="kpi-sub">steps run successfully on all transcripts</div></div>
     <div class="kpi blue"><div class="kpi-label">Coach Session Pipeline</div><div class="kpi-value">6/6</div><div class="kpi-sub">steps run on all 3 coach sessions</div></div>
-    <div class="kpi"><div class="kpi-label">Total Agents</div><div class="kpi-value">25</div><div class="kpi-sub">unique agents across 7 pipelines</div></div>
+    <div class="kpi"><div class="kpi-label">Total Agents</div><div class="kpi-value">25</div><div class="kpi-sub">unique agents across 8 pipelines</div></div>
     <div class="kpi cyan"><div class="kpi-label">MCP Servers</div><div class="kpi-value">6</div><div class="kpi-sub">Jira, Bitbucket, Confluence, Slack, Drive, Vector Store</div></div>
   </div>
 
