@@ -835,7 +835,7 @@ description TEXT
 | Total artifacts | 184 |
 | Total links | 760 |
 | Concern → Requirement chains | 12 |
-| Risk mitigations | 320 links |
+| Risk mitigations | 324 links |
 | Jira implementations | 204 links |
 
 ### 8.4 Metrics Database
@@ -1022,7 +1022,7 @@ Every pipeline run produces a `PipelineResult` record logged via `MetricsCollect
 |---------|------|---------|------|
 | `memory/shared_memory.db` | SQLite | Project wiki (namespaced key-value) | ~1 MB |
 | `memory/events.db` | SQLite | Cross-pipeline event history + subscriptions | ~0.5 MB |
-| `memory/traceability.db` | SQLite | 184 artifacts, 760 links | ~1 MB |
+| `memory/traceability.db` | SQLite | 189 artifacts, 764 links | ~1 MB |
 | `memory/coach_sessions.db` | SQLite | Session records, commitments, concerns | ~0.5 MB |
 | `memory/risk_register.db` | SQLite | 16 risks with mitigations | ~0.1 MB |
 | `memory/prompt_registry.db` | SQLite | Prompt versions, reviews, A/B tests | ~0.5 MB |

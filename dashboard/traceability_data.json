@@ -1,27 +1,27 @@
 {
   "summary": {
-    "total_artifacts": 184,
-    "total_links": 760,
+    "total_artifacts": 189,
+    "total_links": 764,
     "by_type": {
       "jira_ticket": 50,
       "action_item": 41,
       "commitment": 31,
-      "risk": 16,
+      "risk": 17,
       "concern": 12,
       "requirement": 12,
       "decision": 10,
-      "architecture": 6,
+      "architecture": 10,
       "meeting": 5,
       "coach_session": 1
     },
     "by_link_type": {
-      "MITIGATES": 320,
-      "IMPLEMENTS": 204,
       "RAISED_IN": 122,
-      "BECAME": 60,
-      "DECIDED_BY": 32,
+      "TRIGGERED": 9,
+      "MITIGATES": 324,
+      "IMPLEMENTS": 204,
       "ADDRESSES": 13,
-      "TRIGGERED": 9
+      "BECAME": 60,
+      "DECIDED_BY": 32
     },
     "unaddressed_concerns": 0,
     "unmitigated_risks": 0
@@ -1314,6 +1314,41 @@
       "title": "Coach Session 2026-02-20 (coach)",
       "meeting": "2026-02-20",
       "status": "done"
+    },
+    {
+      "id": "RIS-a5798c",
+      "type": "risk",
+      "title": "ETIM release pin leaves the catalog progressively stale",
+      "meeting": "",
+      "status": "mitigating"
+    },
+    {
+      "id": "ADR-020",
+      "type": "architecture",
+      "title": "Pin ETIM release 10.0 (EI) for the project duration",
+      "meeting": "",
+      "status": "accepted"
+    },
+    {
+      "id": "ADR-013",
+      "type": "architecture",
+      "title": "ETIM reference tables scoped by release",
+      "meeting": "",
+      "status": "accepted"
+    },
+    {
+      "id": "ADR-014",
+      "type": "architecture",
+      "title": "Matched product attribute carries the release",
+      "meeting": "",
+      "status": "accepted"
+    },
+    {
+      "id": "ADR-017",
+      "type": "architecture",
+      "title": "PIMS writeback key includes the release",
+      "meeting": "",
+      "status": "accepted"
     }
   ],
   "edges": [
@@ -6636,6 +6671,34 @@
       "type": "MITIGATES",
       "source_type": "requirement",
       "target_type": "risk"
+    },
+    {
+      "source": "RIS-a5798c",
+      "target": "ADR-020",
+      "type": "MITIGATES",
+      "source_type": "risk",
+      "target_type": "architecture"
+    },
+    {
+      "source": "RIS-a5798c",
+      "target": "ADR-013",
+      "type": "MITIGATES",
+      "source_type": "risk",
+      "target_type": "architecture"
+    },
+    {
+      "source": "RIS-a5798c",
+      "target": "ADR-014",
+      "type": "MITIGATES",
+      "source_type": "risk",
+      "target_type": "architecture"
+    },
+    {
+      "source": "RIS-a5798c",
+      "target": "ADR-017",
+      "type": "MITIGATES",
+      "source_type": "risk",
+      "target_type": "architecture"
     }
   ]
 }

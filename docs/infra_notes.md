@@ -56,7 +56,7 @@ Decisions are tracked automatically:
 - The `decision_logger` agent extracts decisions from every meeting and commits them to `minutes/decisions.log.md` on GitHub
 - Architectural decisions become ADRs (tracked in `artifact_versions.db` with version history)
 - The risk register auto-populates from architecture docs, coach sessions, and meetings
-- Everything is linked in the traceability store (184 artifacts, 760 links)
+- Everything is linked in the traceability store (189 artifacts, 764 links)
 
 ---
 
