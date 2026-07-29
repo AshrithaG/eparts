@@ -133,7 +133,7 @@ CY, CH = 126.0, 238.0
 # ─────────────────────────────────────────────────────────── 1. requirements delta
 s = new_slide()
 title(s, "How the requirements changed")
-artifact_link(s, "SPEC v1.2 ↗")
+artifact_link(s, "SPEC v1.3 ↗")
 banner(s, [
     ("ETIM was the biggest change.", True, GREEN),
     ("  Predict free-form attributes  →  classify into an ETIM class, match a "
@@ -146,9 +146,9 @@ card(s, LX, CY, CW, CH, WHITE, "What changed", [
     [("NEW", True, WHITE), ("  FR-10, reference data", False, MUTED)],
 ])
 card(s, RX, CY, CW, CH, AMBER, "What no longer holds", [
-    [("HLR-2", True, WHITE), ("  now ETIM-keyed", False, MUTED)],
-    [("FR-3", True, WHITE), ("  now constrained matching", False, MUTED)],
-    [("Flat record", True, WHITE), ("  → product + attribute", False, MUTED)],
+    [("HLR-2", True, WHITE), ("  cleanup only now", False, MUTED)],
+    [("FR-3", True, WHITE), ("  predict → match", False, MUTED)],
+    [("Flat record", True, WHITE), ("  → two tables", False, MUTED)],
     [("C-4", True, GREEN), ("  ETIM 10.0 pinned", False, MUTED)],
 ], head_color=AMBER)
 footer(s, "ETIM 10.0 EI verified and pinned — 5,640 classes")
@@ -186,9 +186,9 @@ IY = 124.0
 s.shapes.add_picture(DIAG + "pipe-filter-architecturev5.png", P(28.8), P(IY),
                      width=P(186), height=P(172))
 s.shapes.add_picture(DIAG + "pipe-filter-architecture-v6.png", P(224), P(IY),
-                     width=P(168), height=P(188))
+                     width=P(158), height=P(187))
 text(s, 28.8, IY + 192, 186, 24, "v5.0 · MAY", color=MUTED, bold=True)
-text(s, 224, IY + 192, 168, 24, "v6.0 · JULY", color=GREEN, bold=True)
+text(s, 224, IY + 192, 158, 24, "v6.0 · JULY", color=GREEN, bold=True)
 
 DX, DW = 404.0, 287.2
 rect(s, DX, IY, DW, 216.0, CARD)
@@ -196,7 +196,7 @@ rect(s, DX, IY, DW, 5.04, GREEN)
 text(s, DX + 12, IY + 12, DW - 24, 28, "Five deltas", size=22, color=GREEN, bold=True)
 yy = IY + 48
 for n, label in [("1", "ETIM reference layer"),
-                 ("2", "Matching in five stages"),
+                 ("2", "ETIM matching behind ML"),
                  ("3", "Evidence vs. interpretation"),
                  ("4", "Frozen ML handoff"),
                  ("5", "PIMS re-keyed on ETIM")]:
@@ -211,7 +211,7 @@ title(s, "Decisions, and what we chose against")
 artifact_link(s, "ALL 21 ADRs ↗ GITHUB", url=ADR_INDEX)
 RY, RH, RG = 74.0, 48.0, 8.0
 decisions = [
-    ("Ingestion owns ETIM, not ML", "reference data, its own cadence"),
+    ("ML matches, ingestion loads", "the dictionary is reference data"),
     ("Evidence + interpretation, not one row", "or you can't trace a value"),
     ("Supersede forward, not rewrite", "the April ADRs stay intact"),
     ("Pin ETIM 10.0, not chase releases", "a stated limit beats a half-built path"),

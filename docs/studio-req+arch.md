@@ -26,13 +26,15 @@ The rubric asks for exactly this — *"if the architecture and requirements have
 
 | Artifact | What it is |
 |---|---|
-| [`product-spec-v1.2.pdf`](product-spec-v1.2.pdf) · [`.tex`](product-spec-v1.2.tex) | The authoritative spec. **Version 1.2, 28 July 2026.** The version-history table *is* the change record: 1.1 integrated ETIM, 1.2 pinned the release. |
+| [`product-spec-v1.3.pdf`](product-spec-v1.3.pdf) · [`.tex`](product-spec-v1.3.tex) | The authoritative spec. **Version 1.3, 29 July 2026.** The version-history table *is* the change record: 1.1 integrated ETIM, 1.2 pinned the release, 1.3 corrected where ETIM matching happens. |
 | [`product-spec-changelog.md`](product-spec-changelog.md) | Greppable companion: every ID added and amended, what no longer holds, the requirement inventory, and three owned defects. |
 | [`etim-requirements-change.md`](etim-requirements-change.md) | How the change was **managed** — the four classes of requirements management, the re-scoped baseline, risks with handling tactics, open client decisions. |
 
 **Added in v1.1:** HLR-6 (classify against ETIM, enrich with class/feature/value/unit IDs) · FR-9 (match to ETIM classes/features/controlled values+units, confidence per assignment, preserve the original) · FR-10 (load and maintain the ETIM dictionary) · DR-4 (PIMS writes keyed by ETIM identifiers).
 
 **Added in v1.2:** C-4 — the project targets **ETIM release 10.0 (EI) for its duration**; later releases and cross-release migration are out of scope. FR-10 is scoped to that pinned release.
+
+**Corrected in v1.3:** ETIM matching is performed by the **ML service, after attribute matching** — not by the Intermediate Structured Layer during normalization. HLR-2, §2.1 and SCEN-1 amended; FR-9 attributed to ML. The v1.1 edit had put ETIM keying in the wrong component.
 
 **Amended:** HLR-1, HLR-2, §2.1, §3.1, glossary, SCEN-1 step 3, SCEN-2 step 1.
 **No longer holds:** FR-3 "predict attributes" · the flat `IngestedRecord`.
@@ -54,7 +56,7 @@ New IDs were **added, not renumbered** — deliberately, so every existing trace
 | # | Delta | ADR | Built? |
 |---|---|---|---|
 | 1 | **ETIM reference layer** — 10 release-scoped tables, ETIM 10.0 EI (pinned, C-4) | 0013 | Yes — alembic `0005` |
-| 2 | **Matching decomposed** — class → feature → value/unit → ETIM validation → policy validation | 0016 | No — EPARTS-289/290/291 |
+| 2 | **ETIM matching added behind ML** — attribute matching unchanged; then class → feature → value/unit → ETIM validation → policy validation | 0016 | Phase 1 exists; phase 2 no — EPARTS-289/290/291 |
 | 3 | **Staging split** — evidence (`staging_product` + `staging_raw_attribute`) vs. interpretation (`matched_product_attribute`) | 0014 | Evidence yes (alembic `0006`); interpretation no |
 | 4 | **Explicit ingestion → ML seam** — frozen `ExtractedInput`, `extra="forbid"` so no interpretation can cross | 0021 | Partly — alembic `0007` merged; orchestrator wiring EPARTS-363 outstanding |
 | 5 | **PIMS contract re-keyed** — `product_id + etim_release_id + etim_class_id + etim_feature_id` | 0017 | No — writer rework EPARTS-299 |
@@ -63,11 +65,11 @@ New IDs were **added, not renumbered** — deliberately, so every existing trace
 
 ### New ETIM ADRs (0016–0021)
 
-Written this cycle, against spec v1.2. ADRs 0001–0012 were **deliberately left unedited** — they record what the team decided in April. New ADRs supersede *forward* by reference.
+Written this cycle, against spec v1.3. ADRs 0001–0012 were **deliberately left unedited** — they record what the team decided in April. New ADRs supersede *forward* by reference.
 
 | ADR | Decision | Status |
 |---|---|---|
-| [0016](0016-decompose-matching-into-staged-etim-class-feature-value-stages.md) | Decompose matching into staged class → feature → value/unit | Accepted |
+| [0016](0016-decompose-matching-into-staged-etim-class-feature-value-stages.md) | Add ETIM matching as a second ML phase after attribute matching | Accepted |
 | [0017](0017-rekey-pims-writeback-contract-on-etim-identifiers.md) | Re-key the PIMS writeback contract on ETIM identifiers | Accepted |
 | [0018](0018-extend-routing-to-etim-signals-with-class-review-first.md) | Extend routing to ETIM signals, class-review-first | Accepted |
 | [0019](0019-externalize-client-feature-policy-as-per-class-configuration.md) | Externalize the client feature policy as per-class configuration | Accepted (values blocked on client) |
@@ -87,9 +89,9 @@ business objective (industry-standard catalog)
           → golden test set (EPARTS-296) / VAL-1–3
 ```
 
-**Forward trace = completeness.** Every v1.2 requirement maps to at least one ADR, except **DC-2 (Auth0)** — an open gap, recorded rather than hidden.
+**Forward trace = completeness.** Every v1.3 requirement maps to at least one ADR, except **DC-2 (Auth0)** — an open gap, recorded rather than hidden.
 
-**Backward trace = currency.** All nine ETIM ADRs anchor to a v1.2 requirement; none is orphaned, and none was written for work with no requirement behind it.
+**Backward trace = currency.** All nine ETIM ADRs anchor to a v1.3 requirement; none is orphaned, and none was written for work with no requirement behind it.
 
 **Boundary.** Tracing stops at two cross-team interface contracts — ML input (EPARTS-156) and OCR output (EPARTS-159). We own those requirements; another stream implements them. ADR-021 is the ingestion-side half made explicit and schema-enforced.
 
@@ -102,6 +104,7 @@ business objective (industry-standard catalog)
 | ETIM 10.0 EI: 159 groups, 5,640 classes, 17,377 features, 201,284 class-feature-values | `e2e-ocr-ing/docs/INGESTION_ETIM_PLAN.md`; loader tested against the real archive |
 | 10 release-scoped reference tables | `src/eparts_ingestion/models/etim.py` — 10 model classes |
 | ETIM 10.0 EI pinned; release-mismatch rejected on import | `src/eparts_ingestion/etim/loader.py` (checksum + release validation), C-4 in spec v1.2 |
+| Ingestion does not assign ETIM identifiers | `e2e-ocr-ing/docs/architecture.md` decision log Q1.2 — "preserve source vocabulary only"; ETIM matching is ML stream EPARTS-156 |
 | Idempotent checksummed import | `src/eparts_ingestion/etim/loader.py`, `cli/etim.py` |
 | Evidence/interpretation split | `src/eparts_ingestion/models/staging.py`, `alembic/versions/0006_create_staging_tables.py` |
 | Handoff record forbids interpretation | `src/eparts_ingestion/handoff/spec_model.py` — `extra="forbid"`, `frozen=True` |
@@ -114,10 +117,10 @@ business objective (industry-standard catalog)
 
 Naming these is worth more than hiding them.
 
-1. **Two spec lineages exist.** This one runs 0.1 → 0.5 → 1.0 (24 Apr) → 1.1 → 1.2, with FR-1…10, QAS-1…2, C-1…4. A parallel *"Document Version 2.0"* (24 Apr) carries FR-1…13, QAS-1…5 (QAS-1 = Accuracy ≥95%), C-1…8. It is **not** an ancestor of this one, so it is not committed here — pairing them would imply a version chain that does not exist.
-2. **ADRs 0001–0015 cite the other lineage's IDs.** QAS-3/4/5, C-7, FR-11/12/13 do not resolve against v1.2. Reconciling the two ID spaces is open work; the spring ADRs stay unedited.
+1. **Two spec lineages exist.** This one runs 0.1 → 0.5 → 1.0 (24 Apr) → 1.1 → 1.2 → 1.3, with FR-1…10, QAS-1…2, C-1…4. A parallel *"Document Version 2.0"* (24 Apr) carries FR-1…13, QAS-1…5 (QAS-1 = Accuracy ≥95%), C-1…8. It is **not** an ancestor of this one, so it is not committed here — pairing them would imply a version chain that does not exist.
+2. **ADRs 0001–0015 cite the other lineage's IDs.** QAS-3/4/5, C-7, FR-11/12/13 do not resolve against v1.3. Reconciling the two ID spaces is open work; the spring ADRs stay unedited.
 3. **Two ADR series collide.** `docs/00NN-*.md` (authoritative) and `docs/adr/ADR-00N-*.md` (agent-generated) use overlapping numbers for different decisions, and `.github/workflows/requirements-extraction.yml` writes into `docs/adr/**`, so the collision will grow until that workflow is repointed.
-4. **DC-2 (Auth0)** — mandatory in v1.2, a stretch goal in the April document, no ADR either way.
+4. **DC-2 (Auth0)** — mandatory in v1.3, a stretch goal in the April document, no ADR either way.
 5. **Nothing exercises a second ETIM release**, and under C-4 nothing will. The release-scoping columns are kept for provenance, so they will look redundant to anyone reading the schema without ADR-020.
 
 ---
@@ -137,6 +140,8 @@ ADR-019 holds the policy seam open so the build does not stall waiting on it. AD
 ## Q&A prep
 
 **Telemetry — the one visible inconsistency.** `ETIM-ADR-ASSESSMENT.md` says the stack is Prometheus + OpenTelemetry + structlog and recommends superseding ADR-012, and the code backs that up. The actual position is narrower: **Datadog is the production target; Prometheus + OTel + structlog is the local development substrate.** ADR-012 stands, and the assessment's Bucket A verdict on it is wrong — it was written from the code alone, without the deployment intent. The v6 diagram carries both labels so it reads as a two-environment choice.
+
+**Where does ETIM matching happen?** In the ML service, after attribute matching. ML owns all matching — attribute matching maps a supplier label onto an attribute, then ETIM matching maps that onto a class, feature, value and unit. Normalization does mechanical cleanup only; it has no model, no confidence and no route to review, so it cannot make an ETIM assignment. The v1.1 spec briefly read otherwise in HLR-2 and §2.1; v1.3 corrects it and ADR-016 records why that alternative was rejected.
 
 **What's running vs. what's designed.** Reference layer, evidence staging split, and the `ExtractedInput` handoff are built and merged. The matching stages, ETIM-aware routing, and the re-keyed writeback are designed only. The diagram marks the distinction; do not claim more.
 

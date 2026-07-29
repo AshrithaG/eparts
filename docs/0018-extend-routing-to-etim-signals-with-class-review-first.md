@@ -57,7 +57,7 @@ Thresholds are externalized per ADR-005, now generalized to at least two — cla
 
 ## Requirements Traceability
 
-- **Spec:** Product Specification v1.2 (28 July 2026)
+- **Spec:** Product Specification v1.3 (29 July 2026)
 - **HLRs:** HLR-4 (human review of low-confidence predictions); HLR-6 (ETIM classification and enrichment)
 - **FRs:** FR-4 (route below-threshold items to the review queue); FR-7 (authorized Ops Leads adjust the auto-acceptance threshold); FR-9 (per-ETIM-assignment confidence is the signal being routed on); FR-3 (confidence score per prediction)
 - **QASs:** QAS-2 Usability — class-review-first is what keeps the reviewer at 10 items/minute by not queuing work that a class change would void

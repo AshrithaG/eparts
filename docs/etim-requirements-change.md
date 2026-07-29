@@ -1,8 +1,8 @@
 # ETIM — requirements change record
 
-**Framing:** ETIM is not a new project. It is a **mid-project requirements change against the v1.0 baseline**, managed as a change and recorded as versions 1.1 and 1.2 of the Product Specification (23 and 28 July 2026).
+**Framing:** ETIM is not a new project. It is a **mid-project requirements change against the v1.0 baseline**, managed as a change and recorded as versions 1.1, 1.2 and 1.3 of the Product Specification (23, 28 and 29 July 2026).
 
-Companion artifacts: [`product-spec-v1.2.pdf`](product-spec-v1.2.pdf) · [`product-spec-changelog.md`](product-spec-changelog.md) · [`ETIM-ADR-ASSESSMENT.md`](ETIM-ADR-ASSESSMENT.md) · ADRs 0013–0021 in [`adr-index.md`](adr-index.md).
+Companion artifacts: [`product-spec-v1.3.pdf`](product-spec-v1.3.pdf) · [`product-spec-changelog.md`](product-spec-changelog.md) · [`ETIM-ADR-ASSESSMENT.md`](ETIM-ADR-ASSESSMENT.md) · ADRs 0013–0021 in [`adr-index.md`](adr-index.md).
 
 ## What ETIM is
 
@@ -27,7 +27,7 @@ Framed on the four dimensions of requirements:
 | Dimension | Before ETIM | After ETIM |
 |---|---|---|
 | **WHY** (objectives) | Automate manual entry into PIMS | **+ New business objective: standardize the catalog to an industry standard** (cross-supplier comparability, website filtering, Compare Tool). Data integrity sharpened to "evidence vs. interpretation." |
-| **WHAT** (function) | Predict attributes (Voltage, Material…) with confidence | **Match to ETIM class / feature / value** against a controlled vocabulary. **+ New requirement type: reference-data management** (load and maintain the ETIM dictionary for one pinned release). |
+| **WHAT** (function) | Predict attributes (Voltage, Material…) with confidence | Attribute matching is unchanged; **ETIM matching is added behind it** — class / feature / value / unit against a controlled vocabulary, still owned by ML. **+ New requirement type: reference-data management** (load and maintain the ETIM dictionary for one pinned release). |
 | **WHO** (responsibility) | Ops Reviewer, Supplier | **+ Feature-policy owner** (declares required/optional features per class), **+ Compare-Tool and website-filter consumers** |
 | **HOW WELL** (quality) | ≥95% attribute accuracy | Accuracy measured **against a controlled vocabulary**; **+ new modifiability axis: "add a new ETIM class"**; **+ metric-canonical storage constraint** |
 
@@ -40,10 +40,10 @@ Structured on the four classes of requirements management.
 ### (a) Change control
 ETIM is treated as a formal change against the v1.0 baseline, not a rewrite. The spec is bumped to **v1.1 with a version-history entry** — that entry *is* the change record. Impact was analysed on Wiegers' dimensions (benefit, penalty, cost, risk, effort, quality impact) through ticket gap-analysis.
 
-The same discipline was applied again a week later: pinning the ETIM release removed an obligation FR-10 implied, so it went in as **v1.2 with its own history entry and a new constraint (C-4)** rather than as a silent edit to v1.1.
+The same discipline was applied twice more. Pinning the ETIM release removed an obligation FR-10 implied, so it went in as **v1.2 with its own history entry and a new constraint (C-4)**. Then we found that the v1.1 edit had put ETIM keying in the wrong component — it read as though normalization produced ETIM-keyed rows, when ETIM matching is an ML decision that runs after attribute matching — and that correction went in as **v1.3**. Neither was edited quietly into v1.1.
 
 ### (b) Version control
-Doc versioned 1.0 → 1.1 → 1.2. New IDs were **added** (HLR-6, FR-9/FR-10, DR-4, then C-4) rather than renumbering the existing set — deliberately, to **preserve existing trace links**. Only items that changed, are reused, or are depended upon were versioned.
+Doc versioned 1.0 → 1.1 → 1.2 → 1.3. New IDs were **added** (HLR-6, FR-9/FR-10, DR-4, then C-4) rather than renumbering the existing set — deliberately, to **preserve existing trace links**. Only items that changed, are reused, or are depended upon were versioned.
 
 ### (c) Status tracking
 

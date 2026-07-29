@@ -20,7 +20,7 @@ Three options were considered.
 
 **The platform targets ETIM release 10.0, language EI, for the duration of this project.** Adopting later ETIM releases, and migrating already-classified products between releases, are **out of scope**.
 
-This is recorded as **constraint C-4** in Product Specification **v1.2**, and FR-10 is scoped to "the pinned ETIM release identified in C-4" rather than to versioned reference data generally.
+This is recorded as **constraint C-4**, introduced in Product Specification **v1.2**, and FR-10 is scoped to "the pinned ETIM release identified in C-4" rather than to versioned reference data generally.
 
 The **release-scoping mechanism in the schema stays exactly as it is.** Every ETIM reference row carries `etim_release_id`, with composite primary keys on `(etim_release_id, …)` across all ten tables (ADR-013); the release is carried through `matched_product_attribute` (ADR-014) and forms part of the PIMS writeback key (ADR-017). Under a pin that field is constant in practice, and we are keeping it for two reasons:
 
@@ -43,7 +43,7 @@ If the client later asks for a new ETIM release, that is a **change request agai
 
 ## Requirements Traceability
 
-- **Spec:** Product Specification **v1.2** (28 July 2026) — this ADR is the reason for that version
+- **Spec:** Product Specification **v1.3** (29 July 2026); C-4 was introduced in v1.2 (28 July) — this ADR is the reason for that version
 - **Constraints:** **C-4** (ETIM Release Pinned) — this ADR is the decision C-4 records
 - **HLRs:** HLR-6 (classify against the ETIM standard — this ADR fixes *which* ETIM)
 - **FRs:** **FR-10** (load and maintain the ETIM reference dictionary for the pinned release); FR-9 (matching is always against release 10.0 EI)
