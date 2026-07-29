@@ -44,11 +44,10 @@ The slides carry phrases because everything on them is 20 pt or larger. The sent
 
 > The point of this slide is that we handled ETIM as a change to the baseline, not a restart.
 >
-> **[left card]** The spec went 1.0 to 1.1 to 1.2 to 1.3, and each version-history entry is the change record. New requirements got new IDs and we renumbered nothing, because renumbering breaks every trace link you already have.
+> The spec went 1.0 to 1.1 to 1.2 to 1.3, and each version-history entry is the change record. New requirements got new IDs and we renumbered nothing, because renumbering breaks every trace link you already have.
 >
 > Three revisions in a week, and two of them were us correcting ourselves. That's deliberate — none of it got quietly edited back into 1.1.
 >
-> **[right card]** Two things are blocked on the client. ETIM doesn't ship a required-field flag — the file mapping features to classes has no column saying which are mandatory. Until the client defines that, we can't write a firm validation requirement for what blocks publishing.
 
 ---
 
@@ -60,7 +59,7 @@ The slides carry phrases because everything on them is 20 pt or larger. The sent
 >
 > First, what didn't change. Pipe-and-filter, per-attribute routing, the human in the loop, the audit trail — all of it survived, which we take as a sign the April architecture was sound.
 >
-> Five things did change. Two matter.
+> Five things changed. Two matter.
 >
 > **[delta 2]** Matching — specifically where it sits. ML already did attribute matching; that's unchanged. ETIM adds a second phase behind it, in the same module: once you know the attribute, you match the product to a class, the attribute to a feature in that class, and the value to an allowed value and unit.
 >
@@ -80,7 +79,7 @@ The slides carry phrases because everything on them is 20 pt or larger. The sent
 >
 > **[row 4]** The fourth is newest. We're pinned to ETIM 10.0 for the project. The alternative was an upgrade path — diff the release, re-match everything, second review queue — and that's a lot of work for something that won't happen inside this project. We'd rather state the limit than half-build it.
 >
-> Five client decisions still open, two of which gate validation.
+> And five client decisions are still open — two of them gate validation. The biggest is that ETIM ships no required-field flag, so until the client tells us which features are mandatory we can't write a firm validation requirement.
 
 ---
 
