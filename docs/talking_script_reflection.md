@@ -1,7 +1,8 @@
 # Talking script — Reflection & Closing (~2 minutes)
 
-**Slide:** `eParts_Section3_SoftwareSystem.pptx` **slide 5**, "Two lessons"
-**Slot:** end of the team talk, after Management — not straight after slide 4
+**Deck:** `eParts_Reflection_Closing.pptx` — its own file, 1 slide, "Two lessons"
+**Slot:** end of the team talk, after Management
+**Rebuild:** `eparts/docs/build_section3_deck.py` builds both decks from one script
 **Evidence:** `dashboard/data/jira_issues.json` — 290 issues, with the JQL and fetch timestamp recorded in the file
 
 ~270 words. Two lessons, one of them about AI in software engineering.
