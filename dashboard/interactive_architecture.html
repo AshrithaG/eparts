@@ -33,10 +33,10 @@
   .pipe-coach{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);}.pipe-coach:hover{background:rgba(34,197,94,0.14);}.pipe-coach .title{color:#4ade80;}
   .pipe-know{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);}
 .pipe-risk{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);}.pipe-know:hover{background:rgba(34,197,94,0.14);}.pipe-know .title{color:#4ade80;}
-  .pipe-arch{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.3);}.pipe-arch:hover{background:rgba(245,158,11,0.14);}.pipe-arch .title{color:#fbbf24;}
-  .pipe-pm{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.3);}.pipe-pm:hover{background:rgba(245,158,11,0.14);}.pipe-pm .title{color:#fbbf24;}
-  .pipe-code{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.25);}.pipe-code:hover{background:rgba(239,68,68,0.14);}.pipe-code .title{color:#f87171;}
-  .pipe-ml{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.25);}.pipe-ml:hover{background:rgba(239,68,68,0.14);}.pipe-ml .title{color:#f87171;}
+  .pipe-arch{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);}.pipe-arch:hover{background:rgba(34,197,94,0.14);}.pipe-arch .title{color:#4ade80;}
+  .pipe-pm{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);}.pipe-pm:hover{background:rgba(34,197,94,0.14);}.pipe-pm .title{color:#4ade80;}
+  .pipe-code{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);}.pipe-code:hover{background:rgba(34,197,94,0.14);}.pipe-code .title{color:#4ade80;}
+  .pipe-ml{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.3);}.pipe-ml:hover{background:rgba(34,197,94,0.14);}.pipe-ml .title{color:#4ade80;}
 
   /* Expanded detail panel */
   .detail-panel{display:none;background:rgba(8,12,22,0.95);border:1px solid rgba(30,41,59,0.6);border-radius:16px;padding:28px 32px;margin-bottom:20px;animation:slideIn 0.35s cubic-bezier(0.4,0,0.2,1);backdrop-filter:blur(12px);}
@@ -83,7 +83,7 @@
   .mm-box:hover{border-color:rgba(30,41,59,0.7);}
   .mm-box h5{font-size:10px;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em;}
   .mm-box ul{list-style:none;font-size:9px;color:rgba(224,230,240,0.75);line-height:1.8;}
-  .mm-artifacts h5{color:#34d399;}.mm-processes h5{color:#60a5fa;}.mm-resources h5{color:#fbbf24;}.mm-measures h5{color:#fb7185;}
+  .mm-artifacts h5{color:#34d399;}.mm-processes h5{color:#60a5fa;}.mm-resources h5{color:#4ade80;}.mm-measures h5{color:#fb7185;}
 
   /* Badges */
   .badge{display:inline-block;border-radius:20px;padding:3px 10px;font-size:8px;font-weight:600;letter-spacing:0.04em;}
@@ -119,8 +119,6 @@
   .legend-item{display:flex;align-items:center;gap:10px;}
   .legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
   .legend-dot.live{background:#22c55e;box-shadow:0 0 12px rgba(34,197,94,0.35);}
-  .legend-dot.partial{background:#f59e0b;box-shadow:0 0 12px rgba(245,158,11,0.25);}
-  .legend-dot.future{background:#ef4444;box-shadow:0 0 12px rgba(239,68,68,0.25);}
   .legend-item .txt{font-size:14px;font-weight:600;color:#e2e8f0;}
   .dash-trace-link{text-align:center;margin-bottom:20px;}
   .dash-trace-link a{font-size:13px;font-weight:600;color:#6ee7b7;text-decoration:none;border-bottom:1px solid rgba(110,231,183,0.35);}
@@ -139,20 +137,18 @@
 <div class="dash-stats">
   <div class="dash-stat"><div class="n">8</div><div class="lbl">Pipelines</div></div>
   <div class="dash-stat"><div class="n">28</div><div class="lbl">Agents</div></div>
-  <div class="dash-stat"><div class="n">4</div><div class="lbl">Live now</div></div>
+  <div class="dash-stat"><div class="n">8</div><div class="lbl">Live now</div></div>
   <div class="dash-stat"><div class="n">6</div><div class="lbl">MCP wired</div></div>
 </div>
 
-<div class="legend-comp" aria-label="Pipeline card colours">
-  <div class="legend-item"><span class="legend-dot live" aria-hidden="true"></span><span class="txt">Green: in use</span></div>
-  <div class="legend-item"><span class="legend-dot partial" aria-hidden="true"></span><span class="txt">Amber: partial</span></div>
-  <div class="legend-item"><span class="legend-dot future" aria-hidden="true"></span><span class="txt">Red: roadmap</span></div>
+<div class="legend-comp" aria-label="Pipeline status">
+  <div class="legend-item"><span class="legend-dot live" aria-hidden="true"></span><span>All eight pipelines in use as of the summer semester</span></div>
 </div>
 
 <p class="dash-trace-link"><a href="traceability_story.html">End-to-end trace story (separate view) →</a></p>
 
 <!-- ═══ PIPELINE GRID ═══ -->
-<!-- Green: Usable -->
+<!-- All pipelines in use as of the summer semester -->
 <div class="pipeline-row">
   <div class="pipe-card pipe-req" onclick="toggle('req')"><div class="title">Requirements</div><div class="meta">Transforms meeting transcripts into structured requirements, Jira tickets, and traceable decisions</div><div class="agent-count mono">7 agents</div></div>
   <div class="pipe-card pipe-coach" onclick="toggle('coach')"><div class="title">Coach Session</div><div class="meta">Preserves coaching guidance as retrievable memory and surfaces recurring themes</div><div class="agent-count mono">5 agents</div></div>
@@ -160,7 +156,7 @@
   <div class="pipe-card pipe-risk" onclick="toggle('risk')"><div class="title">Risk Register</div><div class="meta">Turns architecture findings, recurring coach concerns, and ageing action items into classified risks with owners</div><div class="agent-count mono">reuses 3 agents + human gate</div></div>
 </div>
 
-<!-- Orange: Partial -->
+
 <div class="pipeline-row">
   <div class="pipe-card pipe-arch" onclick="toggle('arch')"><div class="title">Architecture</div><div class="meta">Detects architectural drift, generates ADRs, and maintains cross-artifact traceability</div><div class="agent-count mono">4 agents</div></div>
   <div class="pipe-card pipe-pm" onclick="toggle('pm')"><div class="title">Project Management</div><div class="meta">Synchronizes WBS with Jira, produces weekly digests, and flags anomalies</div><div class="agent-count mono">3 agents</div></div>
@@ -229,7 +225,7 @@
 <!-- ═══ COACH SESSION DETAIL ═══ -->
 <div class="detail-panel dp-coach" id="panel-coach">
   <div class="dp-header">
-    <div><div class="dp-title" style="color:#fbbf24;">Coach Session Memory Pipeline</div><div class="dp-practice mono">Practice Area: Coach/Mentor Memory · 5 sequential agents · Triggered by coach/mentor .vtt upload</div></div>
+    <div><div class="dp-title" style="color:#4ade80;">Coach Session Memory Pipeline</div><div class="dp-practice mono">Practice Area: Coach/Mentor Memory · 5 sequential agents · Triggered by coach/mentor .vtt upload</div></div>
     <button class="dp-close" onclick="toggle('coach')">&times;</button>
   </div>
   <div class="flow">
@@ -254,7 +250,7 @@
 </div>
 
 <!-- ═══ ARCHITECTURE DETAIL ═══ -->
-<div class="detail-panel dp-arch" id="panel-arch">
+<div class="detail-panel dp-know" id="panel-arch">
   <div class="dp-header">
     <div><div class="dp-title" style="color:#60a5fa;">Architecture Pipeline</div><div class="dp-practice mono">Practice Area: Architecture · 4 sequential agents · Triggered by transcript processing, PR events, or drift_detected events</div></div>
     <button class="dp-close" onclick="toggle('arch')">&times;</button>
@@ -279,9 +275,9 @@
 </div>
 
 <!-- ═══ CODING DETAIL ═══ -->
-<div class="detail-panel dp-code" id="panel-code">
+<div class="detail-panel dp-know" id="panel-code">
   <div class="dp-header">
-    <div><div class="dp-title" style="color:#f87171;">Coding Pipeline</div><div class="dp-practice mono">Practice Area: Construction · 4 planned agents · Will activate during the coding phase</div></div>
+    <div><div class="dp-title" style="color:#4ade80;">Coding Pipeline</div><div class="dp-practice mono">Practice Area: Construction · 4 planned agents · Will activate during the coding phase</div></div>
     <button class="dp-close" onclick="toggle('code')">&times;</button>
   </div>
   <div class="flow">
@@ -304,9 +300,9 @@
 </div>
 
 <!-- ═══ ML DECISION DETAIL ═══ -->
-<div class="detail-panel dp-ml" id="panel-ml">
+<div class="detail-panel dp-know" id="panel-ml">
   <div class="dp-header">
-    <div><div class="dp-title" style="color:#f87171;">ML Decision Memory Pipeline</div><div class="dp-practice mono">Practice Area: ML Decision Memory · 3 planned agents · Will activate when POC results are submitted</div></div>
+    <div><div class="dp-title" style="color:#4ade80;">ML Decision Memory Pipeline</div><div class="dp-practice mono">Practice Area: ML Decision Memory · 3 planned agents · Will activate when POC results are submitted</div></div>
     <button class="dp-close" onclick="toggle('ml')">&times;</button>
   </div>
   <div class="flow">
@@ -327,9 +323,9 @@
 </div>
 
 <!-- ═══ PROJECT MGMT DETAIL ═══ -->
-<div class="detail-panel dp-pm" id="panel-pm">
+<div class="detail-panel dp-know" id="panel-pm">
   <div class="dp-header">
-    <div><div class="dp-title" style="color:#fbbf24;">Project Management Pipeline</div><div class="dp-practice mono">Practice Area: Project Management · 3 sequential agents · Runs weekly (scheduled Friday 6 PM)</div></div>
+    <div><div class="dp-title" style="color:#4ade80;">Project Management Pipeline</div><div class="dp-practice mono">Practice Area: Project Management · 3 sequential agents · Runs weekly (scheduled Friday 6 PM)</div></div>
     <button class="dp-close" onclick="toggle('pm')">&times;</button>
   </div>
   <div class="flow">
