@@ -1,0 +1,145 @@
+{
+  "name": "defect_triage_skill",
+  "kind": "skill_selection",
+  "description": "For the /defect-triage skill: given a finding, does it select the correct tools and classify on the four axes defined in docs/defect_management.md? This is the entry point Cory Gwin recommended (2026-07-24) — define scenarios per skill and validate tool/skill selection under each. Offline, the harness validates every expected label against the controlled vocabulary and every tool against the declared tool surface (a real check: an off-vocabulary label silently drops the defect out of the JQL-derived metrics). Live, with ANTHROPIC_API_KEY, the model is run and its choices are scored against these expectations.",
+  "vocabularies": {
+    "stage_found": [
+      "found-spec",
+      "found-build",
+      "found-review",
+      "found-ci",
+      "found-integrated",
+      "found-client"
+    ],
+    "root_cause": [
+      "rc-logic",
+      "rc-data",
+      "rc-interface",
+      "rc-config",
+      "rc-requirements",
+      "rc-env",
+      "rc-prompt"
+    ],
+    "found_by": ["by-test", "by-ci", "by-human-review", "by-ai-review", "by-client"],
+    "module": [
+      "mod-ingestion",
+      "mod-normalization",
+      "mod-prediction",
+      "mod-routing",
+      "mod-review-queue",
+      "mod-writeback",
+      "mod-publish",
+      "mod-audit",
+      "mod-retraining",
+      "mod-monitoring",
+      "mod-ses"
+    ],
+    "priority": ["Highest", "High", "Medium", "Low"],
+    "tools": [
+      "atlassianUserInfo",
+      "createJiraIssue",
+      "searchJiraIssuesUsingJql",
+      "addCommentToJiraIssue"
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "red_ci_on_main",
+      "description": "Intake rule 1: red CI on main is an S1 filed the same day. Must preflight auth before creating the issue.",
+      "critical": true,
+      "given": {
+        "finding": "Pipeline #31 on master failed: pytest step exited 1 with 3 failing tests in tests/test_layer4_fusion.py. main is red.",
+        "context": "Bitbucket Pipelines, branch master"
+      },
+      "expect": {
+        "tools_required": ["atlassianUserInfo", "createJiraIssue"],
+        "tool_order": [["atlassianUserInfo", "createJiraIssue"]],
+        "labels": {
+          "stage_found": "found-ci",
+          "found_by": "by-ci",
+          "module": "mod-ses"
+        },
+        "priority": "Highest"
+      }
+    },
+    {
+      "id": "audit_log_double_apply",
+      "description": "The real snapshot-to-replay double-apply defect caught in PR review. Wrong data could reach PIMS, so it is S1 despite being found pre-merge; found by a human, not a test, which is itself the signal that test gates had a blind spot.",
+      "critical": true,
+      "given": {
+        "finding": "In PR review of the audit-log component: after a snapshot, replay re-applies changes that were already persisted, double-applying writes.",
+        "context": "Pull request review comment, not yet merged"
+      },
+      "expect": {
+        "tools_required": ["createJiraIssue"],
+        "labels": {
+          "stage_found": "found-review",
+          "found_by": "by-human-review",
+          "root_cause": "rc-logic",
+          "module": "mod-audit"
+        },
+        "priority": "Highest"
+      }
+    },
+    {
+      "id": "client_reported_mapping_error",
+      "description": "Intake rule 4: a client-reported problem is found-client / by-client and links to the meeting where it was raised.",
+      "given": {
+        "finding": "In the July 16 client meeting, eParts reported that several supplier attributes were mapped to the wrong PIMS attribute in the review queue.",
+        "context": "Client meeting minutes"
+      },
+      "expect": {
+        "tools_required": ["createJiraIssue"],
+        "labels": {
+          "stage_found": "found-client",
+          "found_by": "by-client",
+          "module": "mod-review-queue"
+        }
+      }
+    },
+    {
+      "id": "config_drift_env_only",
+      "description": "A configuration defect, not a logic defect. Tests the root-cause axis discriminating rc-config from rc-logic — the axis that drives where prevention effort goes.",
+      "given": {
+        "finding": "The OTel exporter retries endlessly in local runs because .env.example ships a non-empty OTEL endpoint that does not resolve outside CI.",
+        "context": "Developer local environment"
+      },
+      "expect": {
+        "tools_required": ["createJiraIssue"],
+        "labels": {
+          "root_cause": "rc-config",
+          "stage_found": "found-build"
+        },
+        "priority": "Low"
+      }
+    },
+    {
+      "id": "prompt_caused_bad_artifact",
+      "description": "The AI-era root cause the classic IEEE-1044 taxonomies lack: code and model were fine, the prompt produced the wrong artifact. Systematic, so it is ticketed as rc-prompt.",
+      "given": {
+        "finding": "The requirements extractor has generated over-generalized requirements from three consecutive meeting transcripts; reviewers rewrote all of them. The extraction prompt, not the code, is producing the wrong shape.",
+        "context": "Recurring correction at the human review gate"
+      },
+      "expect": {
+        "tools_required": ["createJiraIssue"],
+        "labels": {
+          "root_cause": "rc-prompt",
+          "module": "mod-ses"
+        }
+      }
+    },
+    {
+      "id": "single_artifact_correction_is_not_a_bug",
+      "description": "Intake rule 5, the restraint case: a one-off generated artifact corrected at human review is NOT a defect — it is a correction counted by the artifact-quality measurement. The skill must decline to file, which tests that it does not manufacture tickets to look busy.",
+      "critical": true,
+      "given": {
+        "finding": "The agent-drafted meeting minutes for one standup needed two wording corrections before the PR was approved.",
+        "context": "Single occurrence, human review gate worked as designed"
+      },
+      "expect": {
+        "should_create_issue": false,
+        "tools_forbidden": ["createJiraIssue"]
+      }
+    }
+  ]
+}
