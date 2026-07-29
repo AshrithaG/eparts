@@ -43,6 +43,12 @@ SEED = 42
 # contribute to the *rate* the forecast projects forward.
 VELOCITY_SAMPLE_FROM = date(2026, 6, 22)
 
+# The week the board was migrated into Jira. Marked on the burnup and the
+# delivery-rate chart, because the vertical step in the scope and done lines at
+# this point is a data import and not a week of extraordinary delivery. Without
+# the marker the chart invites exactly the wrong reading.
+MIGRATION_WEEK = date(2026, 6, 15)
+
 # Academic calendar. The forecast converts "working weeks of effort needed" into
 # a calendar date, so it must not spend effort in weeks the team does not exist.
 # Summer ends 30 Jul; fall runs 24 Aug – 18 Dec. The ~3.5 week gap between them
@@ -256,8 +262,26 @@ def svg_line_chart(weeks, scope, done, w=900, h=340, med_thru: int = 0) -> str:
     for i in range(0, n, max(1, n // 6)):
         if i < len(axis_weeks):
             xlabels.append(
-                f'<text x="{x(i):.1f}" y="{h - 12}" text-anchor="middle" font-size="12" fill="{INK2}">{axis_weeks[i].strftime("%b %d")}</text>'
+                f'<text x="{x(i):.1f}" y="{h - 22}" text-anchor="middle" font-size="12" fill="{INK2}">{axis_weeks[i].strftime("%b %d")}</text>'
             )
+    axis_titles = (
+        f'<text x="{pad_l + iw / 2:.1f}" y="{h - 3}" text-anchor="middle" font-size="12" '
+        f'font-weight="650" fill="{INK2}">Week (Monday) →</text>'
+        f'<text x="14" y="{pad_t + ih / 2:.1f}" text-anchor="middle" font-size="12" '
+        f'font-weight="650" fill="{INK2}" transform="rotate(-90 14 {pad_t + ih / 2:.1f})">'
+        f"Issues (cumulative)</text>"
+    )
+    # Mark the board migration. The step in both lines here is imported history.
+    migration_mark = ""
+    if MIGRATION_WEEK and week_of(MIGRATION_WEEK) in weeks:
+        mi = weeks.index(week_of(MIGRATION_WEEK))
+        mx = x(mi)
+        migration_mark = (
+            f'<line x1="{mx:.1f}" y1="{pad_t + 26}" x2="{mx:.1f}" y2="{pad_t + ih}" '
+            f'stroke="{INK2}" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.75"/>'
+            f'<text x="{mx + 6:.1f}" y="{pad_t + 14}" font-size="11.5" font-weight="650" '
+            f'fill="{INK2}">15 Jun: board imported into Jira</text>'
+        )
     dots = "".join(
         f'<circle cx="{x(i):.1f}" cy="{y(v):.1f}" r="7" fill="transparent">'
         f"<title>Week of {weeks[i]}: {v} done, {scope[i]} in scope</title></circle>"
@@ -284,18 +308,18 @@ def svg_line_chart(weeks, scope, done, w=900, h=340, med_thru: int = 0) -> str:
             f'font-weight="600" fill="{C_P85}">18 Dec</text>'
         )
     return f"""<svg viewBox="0 0 {w} {h}" role="img" aria-label="Burnup: scope vs completed issues by week, with projection to the deadline">
-{''.join(grid)}{''.join(ticks)}{''.join(xlabels)}
+{''.join(grid)}{''.join(ticks)}{''.join(xlabels)}{axis_titles}
 <path d="{path(scope)}" fill="none" stroke="{C_SCOPE}" stroke-width="2" stroke-dasharray="6 4"/>
 <path d="{path(done)}" fill="none" stroke="{C_DONE}" stroke-width="2.5"/>
-{proj_path}{deadline_mark}
+{migration_mark}{proj_path}{deadline_mark}
 {dots}
 <text x="{x(n - 1) + 8:.1f}" y="{y(scope[-1]) + 4:.1f}" font-size="13" font-weight="600" fill="{C_SCOPE}">Scope {scope[-1]}</text>
 <text x="{x(n - 1) + 8:.1f}" y="{y(done[-1]) + 4:.1f}" font-size="13" font-weight="600" fill="{C_DONE}">Done {done[-1]}</text>
 </svg>"""
 
 
-def svg_bar_chart(weeks, resolved_w, window_start, w=900, h=260) -> str:
-    pad_l, pad_r, pad_t, pad_b = 52, 20, 16, 40
+def svg_bar_chart(weeks, resolved_w, window_start, w=900, h=280) -> str:
+    pad_l, pad_r, pad_t, pad_b = 52, 20, 16, 58
     iw, ih = w - pad_l - pad_r, h - pad_t - pad_b
     n = len(weeks)
     ymax = max(max(resolved_w), 1) * 1.1
@@ -314,27 +338,46 @@ def svg_bar_chart(weeks, resolved_w, window_start, w=900, h=260) -> str:
         )
         if i % max(1, n // 6) == 0:
             xlabels.append(
-                f'<text x="{bx + bw / 2:.1f}" y="{h - 12}" text-anchor="middle" font-size="12" fill="{INK2}">{wk.strftime("%b %d")}</text>'
+                f'<text x="{bx + bw / 2:.1f}" y="{h - 24}" text-anchor="middle" font-size="12" fill="{INK2}">{wk.strftime("%b %d")}</text>'
             )
+    axis_titles = (
+        f'<text x="{pad_l + iw / 2:.1f}" y="{h - 5}" text-anchor="middle" font-size="12" '
+        f'font-weight="650" fill="{INK2}">Week (Monday) →</text>'
+        f'<text x="14" y="{pad_t + ih / 2:.1f}" text-anchor="middle" font-size="12" '
+        f'font-weight="650" fill="{INK2}" transform="rotate(-90 14 {pad_t + ih / 2:.1f})">'
+        f"Issues resolved</text>"
+    )
+    migration_mark = ""
+    if week_of(MIGRATION_WEEK) in weeks:
+        mi = weeks.index(week_of(MIGRATION_WEEK))
+        mx = pad_l + iw * mi / n + bw / 2 + 1
+        migration_mark = (
+            f'<line x1="{mx:.1f}" y1="{pad_t}" x2="{mx:.1f}" y2="{pad_t + ih}" '
+            f'stroke="{INK2}" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.75"/>'
+            # Right-anchored: this week sits near the end of the axis, so a
+            # left-anchored label would run off the viewBox.
+            f'<text x="{mx - 6:.1f}" y="{pad_t + 12}" text-anchor="end" font-size="11.5" '
+            f'font-weight="650" fill="{INK2}">15 Jun import: excluded from the sample →</text>'
+        )
     ticks = "".join(
         f'<line x1="{pad_l}" y1="{pad_t + ih - ih * t / ymax:.1f}" x2="{w - pad_r}" y2="{pad_t + ih - ih * t / ymax:.1f}" stroke="{GRID}"/>'
         f'<text x="{pad_l - 8}" y="{pad_t + ih - ih * t / ymax + 4:.1f}" text-anchor="end" font-size="12" fill="{INK2}">{t}</text>'
         for t in range(0, int(ymax) + 1, max(1, int(ymax) // 4))
     )
     return f"""<svg viewBox="0 0 {w} {h}" role="img" aria-label="Issues resolved per week">
-{ticks}{''.join(bars)}{''.join(xlabels)}
+{ticks}{''.join(bars)}{''.join(xlabels)}{axis_titles}{migration_mark}
 <line x1="{pad_l}" y1="{pad_t + ih}" x2="{w - pad_r}" y2="{pad_t + ih}" stroke="{INK2}" stroke-width="1"/>
 </svg>"""
 
 
-def svg_forecast_hist(hist, p50, p85, start, w=900, h=260) -> str:
+def svg_forecast_hist(hist, p50, p85, start, w=900, h=300) -> str:
     cal = working_weeks_from(start)
 
     def wk_date(wk: int) -> date:
         """Calendar week for the wk-th working week (clamped to the last one)."""
         return cal[min(max(wk - 1, 0), len(cal) - 1)]
 
-    pad_l, pad_r, pad_t, pad_b = 52, 20, 26, 44
+    pad_l, pad_r, pad_t, pad_b = 62, 20, 26, 62
     iw, ih = w - pad_l - pad_r, h - pad_t - pad_b
     wmin, wmax = min(hist), max(hist)
     span = list(range(wmin, wmax + 1))
@@ -351,20 +394,42 @@ def svg_forecast_hist(hist, p50, p85, start, w=900, h=260) -> str:
         for wk in span
     )
     xlabels = "".join(
-        f'<text x="{x(wk) + bw / 2:.1f}" y="{h - 12}" text-anchor="middle" font-size="12" fill="{INK2}">{wk_date(wk).strftime("%b %d")}</text>'
+        f'<text x="{x(wk) + bw / 2:.1f}" y="{h - 28}" text-anchor="middle" font-size="12" fill="{INK2}">{wk_date(wk).strftime("%b %d")}</text>'
         for wk in span[:: max(1, len(span) // 6)]
     )
+    axis_titles = (
+        f'<text x="{pad_l + iw / 2:.1f}" y="{h - 8}" text-anchor="middle" font-size="12" '
+        f'font-weight="650" fill="{INK2}">Week the simulated run finished the backlog →</text>'
+        f'<text x="16" y="{pad_t + ih / 2:.1f}" text-anchor="middle" font-size="12" '
+        f'font-weight="650" fill="{INK2}" transform="rotate(-90 16 {pad_t + ih / 2:.1f})">'
+        f"Share of {SIMS:,} runs</text>"
+    )
+    # Y ticks in percent of runs, so the bar heights are readable as "how often".
+    yticks = ""
+    for frac in (0.10, 0.20, 0.30):
+        yv = frac * SIMS
+        if yv > ymax:
+            continue
+        yy = pad_t + ih - ih * yv / ymax
+        yticks += (
+            f'<line x1="{pad_l}" y1="{yy:.1f}" x2="{w - pad_r}" y2="{yy:.1f}" stroke="{GRID}"/>'
+            f'<text x="{pad_l - 8}" y="{yy + 4:.1f}" text-anchor="end" font-size="12" '
+            f'fill="{INK2}">{frac * 100:.0f}%</text>'
+        )
     marks = ""
-    for pctile, color, label in ((p50, C_P50, "P50"), (p85, C_P85, "P85")):
+    for pctile, color, label, dy in (
+        (p50, C_P50, "P50 · half the runs are done by", 6),
+        (p85, C_P85, "P85 · 85% of the runs are done by", 24),
+    ):
         wks = pctile[0]
         if pctile[1] is None:
             continue  # percentile lands past the deadline; nothing to mark
         marks += (
             f'<line x1="{x(wks) + bw / 2:.1f}" y1="{pad_t - 6}" x2="{x(wks) + bw / 2:.1f}" y2="{pad_t + ih}" stroke="{color}" stroke-width="2" stroke-dasharray="4 3"/>'
-            f'<text x="{x(wks) + bw / 2 + 5:.1f}" y="{pad_t + 6}" font-size="13" font-weight="700" fill="{color}">{label} · {fmt_finish(pctile)}</text>'
+            f'<text x="{x(wks) + bw / 2 + 5:.1f}" y="{pad_t + dy}" font-size="12.5" font-weight="700" fill="{color}">{label} {fmt_finish(pctile)}</text>'
         )
     return f"""<svg viewBox="0 0 {w} {h}" role="img" aria-label="Monte Carlo completion date distribution">
-{bars}{xlabels}{marks}
+{yticks}{bars}{xlabels}{axis_titles}{marks}
 <line x1="{pad_l}" y1="{pad_t + ih}" x2="{w - pad_r}" y2="{pad_t + ih}" stroke="{INK2}" stroke-width="1"/>
 </svg>"""
 
@@ -412,6 +477,22 @@ def main() -> None:
     p50, p85, p95, hist, on_time, horizon = monte_carlo(
         len(open_issues), sample, week_of(today)
     )
+
+    # Figures for the plain-language explainer. The percentile dates sit only a
+    # week apart, which reads as false precision unless the page says why: the
+    # whole distribution is squeezed into a few weeks, so a single week carries a
+    # large share of the runs, and a week is the smallest step the model can take.
+    total_sims = sum(hist.values())
+    def share_by(wk: int) -> float:
+        return sum(v for k, v in hist.items() if k <= wk) / total_sims * 100
+    p50_share, p85_share = share_by(p50[0]), share_by(p85[0])
+    week_jump = p85_share - p50_share
+    band_lo, band_hi = min(hist), max(hist)
+
+    # Buffer. The forecast needs p85[0] working weeks; horizon is what is left to
+    # 18 Dec. The difference is the buffer, and the page has to say why it is
+    # large rather than let it read as slack.
+    buffer_weeks = horizon - p85[0]
 
     # Stream progress. The project has exactly six Epics, and those are the six
     # delivery streams. Every other issue is resolved to one of them by walking
@@ -506,29 +587,48 @@ def main() -> None:
   .note {{ font-size:13.5px; color:{INK2}; background:#f7f6f3; border-left:3px solid {GRID}; padding:10px 14px; border-radius:0 8px 8px 0; }}
   .legend {{ font-size:13px; color:{INK2}; margin:2px 0 6px; }}
   .legend b {{ font-weight:650; }}
+  /* Depth without wall-of-text: one line visible, the defence one click away. */
+  details {{ font-size:13.5px; color:{INK2}; margin:10px 0; }}
+  details summary {{ cursor:pointer; font-weight:600; color:{INK}; padding:2px 0; }}
+  details summary:hover {{ color:{C_DONE}; }}
+  details .body {{ padding:8px 0 2px 14px; border-left:2px solid {GRID}; margin-top:6px; }}
+  details p {{ margin:0 0 7px; }}
   svg {{ width:100%; height:auto; }}
 </style></head><body><div class="wrap">
 
 <h1>eParts — Project Health</h1>
 
-<div class="prov"><b>Provenance.</b> Every number on this page is computed from
-<code>dashboard/data/jira_issues.json</code> — {total} issues exported from {escape(prov["source"])}
-with <code>{escape(prov["jql"])}</code> at {escape(prov["fetched_at_utc"])}. No figure is hand-typed;
-re-run the query and the script to reproduce the page (forecast seeded, {SIMS:,} simulations).</div>
+<div class="prov"><b>Provenance.</b> No figure on this page is hand-typed. Every one is recomputed
+from a recorded Jira export of {total} issues, and the forecast is seeded.
+<details style="margin:6px 0 0"><summary style="font-size:13px">the query and the timestamp</summary>
+<div class="body"><code>dashboard/data/jira_issues.json</code>, {total} issues from
+{escape(prov["source"])}, <code>{escape(prov["jql"])}</code>, fetched
+{escape(prov["fetched_at_utc"])}. Re-run the query and
+<code>dashboard/generate_program_health.py</code> to reproduce the page byte for byte
+({SIMS:,} simulations, seed 42).</div></details></div>
 
 <div class="tiles">
   <div class="tile"><div class="v">{len(done_issues) / total * 100:.0f}%</div><div class="l">issues complete ({len(done_issues)}/{total})</div></div>
   <div class="tile"><div class="v">{pts_done / pts_total * 100:.0f}%</div><div class="l">story points complete ({pts_done:.0f}/{pts_total:.0f})</div></div>
   <div class="tile"><div class="v">{len(open_issues)}</div><div class="l">open issues ({len(wip)} in progress)</div></div>
   <div class="tile"><div class="v">{med_thru}/wk</div><div class="l">median throughput, {len(sample)} delivery wks</div></div>
-  <div class="tile"><div class="v">{fmt_finish(p50)}</div><div class="l">P50 completion of current backlog</div></div>
-  <div class="tile"><div class="v">{fmt_finish(p85)}</div><div class="l">P85 completion (85% of simulations)</div></div>
+  <div class="tile"><div class="v">{fmt_finish(p50)}</div><div class="l">P50 — half of runs finish by here</div></div>
+  <div class="tile"><div class="v">{fmt_finish(p85)}</div><div class="l">P85 — 85% of runs finish by here</div></div>
+  <div class="tile"><div class="v">{fmt_finish(p95)}</div><div class="l">P95 — 95% of runs finish by here</div></div>
 </div>
+
+<div class="legend">The backlog is run forward {SIMS:,} times. <b>P50</b> is the date half those
+runs beat, <b>P85</b> the date 85% beat, <b>P95</b> the conservative end. We commit on P85.</div>
 
 <h2>How far along — feature burnup, not time</h2>
 <div class="legend"><b style="color:{C_DONE}">— Done</b> (cumulative resolved) ·
 <b style="color:{C_SCOPE}">- - Scope</b> (cumulative created; the gap between the lines is the open backlog)</div>
 {svg_line_chart(weeks, scope, done_cum, med_thru=med_thru)}
+<details><summary>Why both lines jump at 15 June</summary>
+<div class="body"><p>The board was tracked in a different tool until mid-June, so several weeks of
+already-finished work all carry a mid-June timestamp. The work is real and counts toward percent
+complete; the <i>date</i> is an import artifact. That week is excluded from the delivery rate the
+forecast projects forward.</p></div></details>
 
 <h2>Delivery rate — issues resolved per week</h2>
 <div class="legend">Full-color bars form the {len(sample)}-week sampling window the forecast draws from; earlier weeks are dimmed.</div>
@@ -537,24 +637,45 @@ re-run the query and the script to reproduce the page (forecast seeded, {SIMS:,}
 <h2>When will it be done — Monte Carlo forecast</h2>
 <div class="legend">Distribution of completion dates for the current {len(open_issues)}-issue open backlog across {SIMS:,} simulations.</div>
 {svg_forecast_hist(hist, p50, p85, week_of(today))}
-<p class="note"><b>Method &amp; assumptions.</b> Each simulation draws weekly throughput (with replacement)
-from the last {len(sample)} weeks of actual resolved counts and consumes the open backlog of
-{len(open_issues)} issues. P50 {fmt_finish(p50, True)} / P85 {fmt_finish(p85, True)} / P95 {fmt_finish(p95, True)}. Assumes scope stays at today's
-backlog — the burnup's scope line shows how much that assumption has moved historically — and that summer
-throughput continues. This is a forecast with stated uncertainty, not a promise; it re-derives from data
-on every refresh.</p>
+<p class="note">P85 needs <b>{p85[0]} working weeks</b>; <b>{horizon}</b> remain before 18 Dec.
+The {buffer_weeks}-week gap is sized for integration uncertainty, not slack.</p>
+
+<details><summary>Method, in one paragraph</summary>
+<div class="body"><p>Each run draws a weekly throughput figure at random (with replacement) from our
+last {len(sample)} delivery weeks {sample}, subtracts it from the {len(open_issues)}-issue backlog,
+and repeats until the backlog is empty. That is one run; the chart is {SIMS:,} of them. Working
+weeks are mapped onto the academic calendar, so the between-semester gap and one week of fall break
+are not counted as productive time. Seeded, so it reproduces.</p></div></details>
+
+<details><summary>Why P50 and P85 sit only one week apart</summary>
+<div class="body"><p>Every run lands between
+{fmt_finish((band_lo, working_weeks_from(week_of(today))[band_lo - 1]))} and
+{fmt_finish((band_hi, working_weeks_from(week_of(today))[min(band_hi - 1, horizon - 1)]))}, so one
+week carries a large share of them: P50 to P85 is one calendar week but {week_jump:.0f} percentage
+points more of the runs. A week is also the smallest step the model can take. Read the tightness as
+a limitation, not confidence: it comes from having only {len(sample)} clean weeks to sample. Adding
+two ordinary slow weeks by hand moves P85 out about five weeks.</p></div></details>
+
+<details><summary>Why the headroom is not slack</summary>
+<div class="body"><p><b>It only covers ticketed work.</b> Fall integration is not decomposed yet, so
+the capacity plan covers it, not this chart.</p>
+<p><b>The work changes character.</b> Summer was building on our own machines, where we are the
+bottleneck. Fall is integration against the client's environment, waiting on schema confirmations
+and sign-offs from outside the team. A bootstrap of our own throughput cannot represent that.</p>
+<p><b>It assumes scope holds</b>, and the scope line above shows it has not. So: no schedule alarm
+from work we can see, and buffer for what we cannot.</p></div></details>
 
 <h2>Stream progress (features by delivery stream)</h2>
 <table><tr><th>Stream</th><th>Done</th><th>Progress</th><th>%</th></tr>{stream_rows}</table>
 
 <h2>Blockers — work in progress now</h2>
 <table><tr><th>Key</th><th>Summary</th><th>Assignee</th><th>Age</th></tr>{wip_rows}</table>
-<p class="note">Risks with triggers and mitigations are maintained in the Risk Register
-(<code>docs/eParts_Risk_Register_v2.md</code>); defects follow <code>docs/defect_management.md</code>.
-Items above aging past a tick without movement are escalation candidates at standup.
-{wip_hidden} of {len(wip_all)} In Progress items are not shown: {wip_epics} epics, because the
-delivery streams sit In Progress for the life of the project, and {wip_stale} board entries that are
-stale or superseded pending closure in Jira (see <code>WIP_EXCLUDE_KEYS</code>).</p>
+<details><summary>{wip_hidden} of {len(wip_all)} In Progress items are not shown</summary>
+<div class="body"><p>{wip_epics} are epics: the delivery streams sit In Progress for the life of the
+project, so listing them buries the real blockers. {wip_stale} are board entries that are stale or
+superseded pending closure in Jira (see <code>WIP_EXCLUDE_KEYS</code>). Risks with triggers and
+mitigations live in <code>docs/eParts_Risk_Register_v2.md</code>; defects follow
+<code>docs/defect_management.md</code>.</p></div></details>
 
 </div></body></html>"""
 

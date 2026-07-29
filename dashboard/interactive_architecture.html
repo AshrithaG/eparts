@@ -358,7 +358,14 @@
     <div class="flow-arrow">&rarr;</div>
     <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 3</div><div class="agent-name mono">review_risk (human gate)</div><div class="agent-desc">A person accepts, edits or rejects the risk. Every review writes the reviewer, the old and new status, notes and a timestamp, so we can see who changed a risk and when. Nothing reaches the register without this step.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Classified risk + reviewer decision</span><br><span class="io-label mono">OUT: </span><span class="io-val">Review record in risk_reviews</span></div></div></div>
     <div class="flow-arrow">&rarr;</div>
-    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 4</div><div class="agent-name mono">risk_register.md</div><div class="agent-desc">The register is regenerated from the database. 20 risks today: 4 critical, 7 high, 9 medium. Exit is not allowed until a risk has both an owner and a mitigation. Anything untouched for 14 days is resurfaced for review.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Reviewed risks</span><br><span class="io-label mono">OUT: </span><span class="io-val">docs/risk_register.md + traceability links</span></div></div></div>
+    <div class="flow-step"><div class="flow-card"><div class="step-num mono">STEP 4</div><div class="agent-name mono">risk_register.md</div><div class="agent-desc">The candidate register is regenerated from the database, 20 risks today, and the Risk Manager merges accepted entries into the authoritative register, which holds 26. Exit is not allowed until a risk has both an owner and a mitigation. Anything untouched for 14 days is resurfaced for review.</div><div class="io"><span class="io-label mono">IN: </span><span class="io-val">Reviewed risks</span><br><span class="io-label mono">OUT: </span><span class="io-val">docs/eParts_Risk_Register_v2.md + traceability links</span></div></div></div>
+  </div>
+  <div class="cf-bar">
+    <h4>How good is it, measured</h4>
+    <div class="cf-row">
+      <div class="cf-item"><div class="cf-label mono">Agents proposed 20 &middot; 17 accepted as written</div><div class="cf-val">One more was restated by the reviewer, one is accepted and waiting to be merged, and one was rejected as a topic label rather than a risk. 19 of the 26 risks on the authoritative register trace back to something an agent surfaced, and 19 of the 26 cite a meeting as their source.</div></div>
+      <div class="cf-item"><div class="cf-label mono">7 risks the agents never found</div><div class="cf-val">They cluster: the team's own process, compliance, which client contact holds which sign-off, and the reliability of the register itself. The agents are dependable on technical and data risk, where the source material states it outright. They have no view of the rest, which is what the human gate is for. Measured in <span class="mono">docs/risk_coverage.md</span>.</div></div>
+    </div>
   </div>
   <div class="cf-bar">
     <h4>Counterfactual Analysis</h4>
