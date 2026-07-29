@@ -1,0 +1,136 @@
+{
+  "name": "orchestrator_routing",
+  "kind": "routing",
+  "description": "Asserts the orchestrator still dispatches the correct agents for each trigger type. Deterministic (no model, no API key), so this runs as a blocking gate on every PR. Scenarios marked critical encode capabilities the engineering system is required to have: if an edit to orchestrator/router.py drops one, the run fails and names the lost ability.",
+  "scenarios": [
+    {
+      "id": "transcript.full_contract",
+      "description": "A client/team transcript drives the full requirements pipeline; the dispatch set is the contract, so extras are flagged too.",
+      "given": { "trigger_type": "transcript" },
+      "expect": {
+        "agents_exact": [
+          "transcript_parser",
+          "priority_classifier",
+          "req_extractor",
+          "drift_detector",
+          "decision_logger"
+        ]
+      }
+    },
+    {
+      "id": "transcript.requirements_capability",
+      "description": "Requirements extraction and architecture-drift detection must survive any routing edit — these are the client-facing artifacts of the pipeline.",
+      "critical": true,
+      "given": { "trigger_type": "transcript" },
+      "expect": {
+        "agents_required": ["transcript_parser", "req_extractor", "drift_detector"]
+      }
+    },
+    {
+      "id": "transcript.parse_before_extract",
+      "description": "Ordering is a correctness property, not a preference: requirements and decisions can only be extracted from an already-parsed transcript.",
+      "critical": true,
+      "given": { "trigger_type": "transcript" },
+      "expect": {
+        "order": [
+          ["transcript_parser", "req_extractor"],
+          ["transcript_parser", "priority_classifier"],
+          ["transcript_parser", "decision_logger"]
+        ]
+      }
+    },
+    {
+      "id": "coach_transcript.memory_capability",
+      "description": "Coach sessions must still populate persistent memory plus commitment and concern tracking — the inputs to pre-meeting briefings.",
+      "critical": true,
+      "given": { "trigger_type": "coach_transcript" },
+      "expect": {
+        "agents_required": [
+          "transcript_parser",
+          "session_memory",
+          "commitment_tracker",
+          "concern_tracker"
+        ],
+        "order": [["transcript_parser", "session_memory"]]
+      }
+    },
+    {
+      "id": "pr_event.review_and_regression_capability",
+      "description": "Every PR must still get AI review and prompt-regression checking. Losing prompt_regression would silently disable the team's only automated guard against prompt quality decay.",
+      "critical": true,
+      "given": { "trigger_type": "pr_event" },
+      "expect": {
+        "agents_required": ["pr_reviewer", "prompt_regression", "traceability_builder"]
+      }
+    },
+    {
+      "id": "pr_event.full_contract",
+      "description": "Full PR dispatch set, including documentation generation.",
+      "given": { "trigger_type": "pr_event" },
+      "expect": {
+        "agents_exact": [
+          "pr_reviewer",
+          "traceability_builder",
+          "doc_generator",
+          "prompt_regression"
+        ]
+      }
+    },
+    {
+      "id": "jira_webhook.traceability_capability",
+      "description": "Jira changes must keep feeding the traceability graph; without this, provenance in the Program Health dashboard degrades silently.",
+      "critical": true,
+      "given": { "trigger_type": "jira_webhook" },
+      "expect": {
+        "agents_required": ["traceability_builder", "wbs_updater"]
+      }
+    },
+    {
+      "id": "cron_friday_6pm.weekly_digest",
+      "description": "Stakeholder visibility: the weekly digest is a scheduled commitment, not an ad-hoc report.",
+      "given": { "trigger_type": "cron_friday_6pm" },
+      "expect": { "agents_exact": ["weekly_digest"] }
+    },
+    {
+      "id": "cron_pre_meeting.briefing",
+      "description": "Pre-meeting briefings must still be generated from coach memory.",
+      "given": { "trigger_type": "cron_pre_meeting" },
+      "expect": { "agents_exact": ["briefing_generator"] }
+    },
+    {
+      "id": "cron_monday_8am.hygiene",
+      "description": "Monday hygiene pass: stale-work detection and context packaging.",
+      "given": { "trigger_type": "cron_monday_8am" },
+      "expect": { "agents_exact": ["stale_detector", "context_packager"] }
+    },
+    {
+      "id": "poc_result.evidence",
+      "description": "POC results must accumulate evidence and re-evaluate readiness rather than being read once and forgotten.",
+      "given": { "trigger_type": "poc_result" },
+      "expect": { "agents_exact": ["evidence_accumulator", "readiness_detector"] }
+    },
+    {
+      "id": "manual.override_isolates_single_agent",
+      "description": "A manual trigger runs exactly the requested agent and nothing else — no surprise side effects when a human invokes one agent by hand.",
+      "critical": true,
+      "given": { "trigger_type": "manual", "agent_override": "req_extractor" },
+      "expect": {
+        "agents_exact": ["req_extractor"],
+        "agents_forbidden": ["transcript_parser", "drift_detector", "pr_reviewer"]
+      }
+    },
+    {
+      "id": "unknown_trigger.degrades_quietly",
+      "description": "An unrecognized trigger dispatches nothing instead of raising — an unknown webhook must not take the orchestrator down.",
+      "critical": true,
+      "given": { "trigger_type": "definitely_not_a_real_trigger" },
+      "expect": { "agents_exact": [] }
+    },
+    {
+      "id": "manual.without_override_dispatches_nothing",
+      "description": "A manual trigger with no agent named is a no-op, not a fan-out to every agent.",
+      "given": { "trigger_type": "manual" },
+      "expect": { "agents_exact": [] }
+    }
+  ]
+}
