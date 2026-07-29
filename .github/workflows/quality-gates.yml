@@ -1,0 +1,132 @@
+# Quality gates — the deterministic first line of defence, plus agent evals.
+#
+# Design premise (AI-tools coaching session with Cory Gwin, GitHub Copilot,
+# 2026-07-24): "A great deal of quality assurance is deterministic and consumes
+# no tokens." He pushed back on treating types/linters/coverage/security tooling
+# as merely basic checks — they are the first line of defence and should be
+# leaned into hard, because they run continuously at zero marginal cost. Only
+# behaviour that is genuinely non-deterministic needs a model in the loop, and
+# that is what the eval job covers.
+#
+# Three jobs, cheapest first:
+#   1. deterministic  — custom SES linter (tools/lint_ses.py) + ruff
+#   2. security       — Trivy: vulnerabilities, misconfiguration, secrets
+#   3. evals          — agent behaviour regression detection (evals/), offline
+#
+# All three are stdlib-only or action-provided; jobs 1 and 3 need no API key and
+# no network, so they are cheap enough to block every push. The model-dependent
+# eval tier costs tokens and is therefore opt-in via workflow_dispatch.
+#
+# Metamodel: Process (quality gate), Artifacts (violation reports, eval report),
+# Resources (CI runner, Trivy, the eval harness), Measurements (violation counts,
+# eval scores and detected regressions).
+
+name: Quality gates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      live_evals:
+        description: "Also run the model-dependent eval tier (costs tokens)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-gates-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deterministic:
+    name: Deterministic gates (SES linter + ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # The SES linter is stdlib-only by design — it must run even when the
+      # agent dependencies (anthropic, chromadb, torch...) are not installed.
+      - name: Custom SES linter
+        run: python3 tools/lint_ses.py
+
+      # Advisory rules (currently SES005: commit_file() defaulting to main)
+      # are reported but do not fail the build yet. Flip to --strict once the
+      # affected call sites are fixed; see docs/ses_product_repo_integration.md
+      # §4, where fixing SES005 is a precondition for granting the harness
+      # write access to the product repo.
+      - name: Custom SES linter (strict — advisory findings, non-blocking)
+        continue-on-error: true
+        run: python3 tools/lint_ses.py --strict
+
+      - name: Install ruff
+        run: python -m pip install --upgrade pip ruff
+
+      # ruff is advisory for now: it reports 79 pre-existing violations in code
+      # written before any linting was enforced here. Ratcheting those down is
+      # tracked separately — turning it blocking today would just train the team
+      # to ignore a permanently-red gate. The custom SES linter above IS
+      # blocking, because its rules were introduced clean.
+      - name: ruff (advisory — pre-existing violations being ratcheted down)
+        continue-on-error: true
+        run: ruff check .
+
+  security:
+    name: Security scan (Trivy)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Repo scan: dependency vulnerabilities, IaC/config misconfiguration, and
+      # hardcoded secrets. Fails the build on HIGH/CRITICAL only — anything
+      # noisier trains the team to ignore the gate, which is worse than no gate.
+      - name: Trivy filesystem scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          scanners: vuln,misconfig,secret
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          exit-code: "1"
+          format: table
+
+  evals:
+    name: Agent evals (offline tier)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Offline tier: routing evals execute the real routing table and the
+      # skill suites validate their controlled vocabularies. No model, no API
+      # key, no network — so this gates every PR. A failure here means an
+      # agent lost an ability it previously had; the report names which.
+      - name: Run offline evals
+        run: python3 -m evals.runner --json eval-report.json
+
+      # Model-dependent tier: runs the skill scenarios against a real model and
+      # scores its tool/label selections. Opt-in because it costs tokens.
+      - name: Run live evals
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.live_evals }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 -m evals.runner --live --json eval-report-live.json
+
+      - name: Upload eval report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-report
+          path: eval-report*.json
+          if-no-files-found: ignore
