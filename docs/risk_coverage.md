@@ -32,6 +32,7 @@ The risk practice area claims that agents propose and a human decides. This file
 | `RISK-H1` | Team burnout from capstone + coursework overlap | `R-019` | **rewritten** | Proposed as team burnout, which names a cause and not a consequence. Restated as a member becoming unavailable and role coverage being lost, which is the thing that can be mitigated. |
 | `RISK-H2` | Single point of failure — key person unavailable | `R-020` | **accepted** |  |
 | `RISK-H3` | Communication gaps between distributed team members | — | **rejected** | Communication gaps between distributed members. The reviewer judged it a topic label rather than a risk: no condition, no consequence, nothing to mitigate against. |
+| `RISK-PM-04` | Throughput estimates do not transfer from construction to integration | — | **human** | Raised by the mentors in the 2026-07-29 studio review, not by an agent: the forecast samples construction weeks to predict integration work. Seeded by hand along with the weighting mitigation they suggested. Queued for the human register. |
 | `RISK-PM-01` | Capstone timeline constraint | `R-015` | **accepted** |  |
 | `RISK-PM-02` | Integration dependency on Jake (PIMS schema) | `R-009` | **accepted** |  |
 | `RISK-PM-03` | Knowledge loss from manual processes | `R-016` | **accepted** |  |

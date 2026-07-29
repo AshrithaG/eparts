@@ -1,11 +1,13 @@
 {
   "generated_at": "2026-07-29",
   "candidates_proposed": 20,
+  "human_seeded": 1,
   "dispositions": {
     "accepted": 17,
     "pending": 1,
     "rewritten": 1,
-    "rejected": 1
+    "rejected": 1,
+    "human": 1
   },
   "survived_review": 19,
   "precision_pct": 95,
@@ -53,6 +55,7 @@
     "RISK-PM-01": "Capstone timeline constraint",
     "RISK-PM-02": "Integration dependency on Jake (PIMS schema)",
     "RISK-PM-03": "Knowledge loss from manual processes",
+    "RISK-PM-04": "Throughput estimates do not transfer from construction to integration",
     "RISK-H1": "Team burnout from capstone + coursework overlap",
     "RISK-H2": "Single point of failure \u2014 key person unavailable",
     "RISK-H3": "Communication gaps between distributed team members"

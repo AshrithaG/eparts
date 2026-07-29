@@ -142,12 +142,13 @@
 </div>
 
 <p class="board-caption">
-  <b>What this page is for.</b> Every requirement we are building, every design
-  decision behind it and every risk that threatens it is one connected graph:
-  189 artifacts and 764 links. That lets us ask two questions we could not answer
-  before. Given a requirement, what could stop us delivering it. And given a
-  decision, did we ever write down the risk it created. The second question is
-  the one that catches things, and the second board below is an example.
+  <b>What this page is for.</b> Our requirements, design decisions, meeting
+  commitments and risks are one connected graph: 189 artifacts and 764 links.
+  The reason that is worth the effort is rework. When an output further down the
+  chain turns out to be wrong, we can walk back and find the input that made it
+  wrong, instead of arguing about it. Twice now the cause was an early step, and
+  fixing it there meant the three artifacts downstream did not have to be redone.
+  The second board is the clearest case.
 </p>
 
 <div class="trace-board">
@@ -157,12 +158,11 @@
     <span style="color:#64748b"> (42 artifacts, 8 types)</span>
   </p>
   <p class="board-caption">
-    <b>Board 1 &middot; from a requirement to the risks against it.</b> This starts at
-    one requirement the client asked for in a January meeting, and walks down
-    through the design decisions we took to satisfy it, the concerns raised along
-    the way, and the three risks currently threatening it. This is how we track
-    delivery progress against risk rather than against a date: for anything on the
-    board, we can see what is in the way of it.
+    <b>Board 1 &middot; one requirement, all the way down.</b> This starts at a
+    requirement the client asked for in a January meeting and walks through the
+    meeting it came from, the design decisions we took to satisfy it, the concerns
+    raised along the way, and the risks attached to it. The chain is the useful
+    part: any artifact here can be explained by pointing at the one above it.
   </p>
 
   <div class="legend" aria-label="Artifact types in this chain">

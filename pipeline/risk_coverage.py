@@ -48,6 +48,11 @@ OUT_JSON = REPO / "dashboard" / "data" / "risk_coverage.json"
 #               the agent found the right subject and the wrong framing
 #   rejected  — the reviewer judged it not a risk and it appears nowhere
 #   pending   — accepted as valid but not yet merged into the human register
+#   human     — a person wrote this entry and seeded it directly. No agent
+#               proposed it, so it is EXCLUDED from the precision figures. It
+#               would be dishonest to credit the agents with a risk a mentor
+#               handed us, and the whole point of this file is that the numbers
+#               survive being checked.
 #
 # `becomes` lists the human entry IDs. One candidate can become two entries: the
 # reviewer split the scope-creep candidate into a scope risk and a stakeholder
@@ -98,6 +103,15 @@ DISPOSITIONS: list[dict] = [
         "note": "Communication gaps between distributed members. The reviewer "
                 "judged it a topic label rather than a risk: no condition, no "
                 "consequence, nothing to mitigate against.",
+    },
+    {
+        "candidate": "RISK-PM-04",
+        "becomes": [],
+        "disposition": "human",
+        "note": "Raised by the mentors in the 2026-07-29 studio review, not by an "
+                "agent: the forecast samples construction weeks to predict "
+                "integration work. Seeded by hand along with the weighting "
+                "mitigation they suggested. Queued for the human register.",
     },
     {"candidate": "RISK-PM-01", "becomes": ["R-015"], "disposition": "accepted"},
     {"candidate": "RISK-PM-02", "becomes": ["R-009"], "disposition": "accepted"},
@@ -187,16 +201,20 @@ def compute() -> dict:
 
     counts = Counter(d["disposition"] for d in DISPOSITIONS)
     survived = counts["accepted"] + counts["rewritten"] + counts["pending"]
+    # Human-seeded entries are in the database but were not proposed by an agent,
+    # so they are not part of the denominator for any agent-quality figure.
+    proposed = len(DISPOSITIONS) - counts["human"]
     meeting_sourced = [r for r in v2 if _is_meeting(r["source"])]
 
     return {
         "generated_at": date.today().isoformat(),
-        "candidates_proposed": len(DISPOSITIONS),
+        "candidates_proposed": proposed,
+        "human_seeded": counts["human"],
         "dispositions": dict(counts),
         "survived_review": survived,
-        "precision_pct": round(survived / len(DISPOSITIONS) * 100),
-        "accepted_as_proposed_pct": round(counts["accepted"] / len(DISPOSITIONS) * 100),
-        "rejected_pct": round(counts["rejected"] / len(DISPOSITIONS) * 100),
+        "precision_pct": round(survived / proposed * 100),
+        "accepted_as_proposed_pct": round(counts["accepted"] / proposed * 100),
+        "rejected_pct": round(counts["rejected"] / proposed * 100),
         "register_total": len(v2),
         "register_from_agents": len(claimed),
         "register_from_agents_pct": round(len(claimed) / len(v2) * 100),
