@@ -199,32 +199,30 @@ def save(deck, path, expected_slides):
 LX, RX, CW = 28.8, 368.4, 322.8
 CY, CH = 126.0, 238.0
 
-# ─────────────────────────────────────────────────────────── 1. requirements v1.0 → v1.3
-# Counts verified from the LaTeX sources: v1.1/v1.3 carry HLR-6, FR-10, DR-4; v1.0 is
-# those minus the four IDs v1.1 introduced (HLR-6, FR-9, FR-10, DR-4); C-4 arrived in v1.2.
+# ─────────────────────────────────────────────────────────── 1. requirements v1.0 → v1.4
+# Counts verified against product-spec-v1.4.tex. v1.0 baseline: HLR-1..5, FR-1..8,
+# DR-1..3, C-1..3, QAS-1..2, VAL-1..3 = 24. v1.4 adds HLR-6, FR-9, FR-10, DR-4 (v1.1),
+# C-4 (v1.2), QAS-3, VAL-4, VAL-5 (v1.4) = 8 added, total 32. 2 rewritten (HLR-2, FR-1).
 s = new_slide()
-title(s, "Requirements: v1.0 → v1.3")
+title(s, "Requirements: v1.0 → v1.4")
 # ── comparison table (left)
 TX, TW, TY = 28.8, 392.0, 86.0
 rect(s, TX, TY, TW, 232.0, CARD)
 COL_L, COL_A, COL_B = TX + 16, TX + 236, TX + 314
 text(s, COL_L, TY + 10, 200, 26, "Requirement set", color=MUTED, bold=True)
 text(s, COL_A, TY + 10, 70, 26, "v1.0", color=MUTED, bold=True, align=PP_ALIGN.RIGHT)
-text(s, COL_B, TY + 10, 62, 26, "v1.3", color=WHITE, bold=True, align=PP_ALIGN.RIGHT)
+text(s, COL_B, TY + 10, 62, 26, "v1.4", color=WHITE, bold=True, align=PP_ALIGN.RIGHT)
 rect(s, COL_L, TY + 38, TW - 32, 1.2, RULE)
 
 ROWS = [("High-level", "5", "6"), ("Functional", "8", "10"),
-        ("Derived", "3", "4"), ("Constraints", "3", "4")]
+        ("Derived", "3", "4"), ("Constraints", "3", "4"),
+        ("Quality scenarios", "2", "3"), ("Validation tests", "3", "5")]
 yy = TY + 46
 for label, a, b in ROWS:
     text(s, COL_L, yy, 200, 26, label, color=WHITE)
     text(s, COL_A, yy, 70, 26, a, color=MUTED, align=PP_ALIGN.RIGHT)
     text(s, COL_B, yy, 62, 26, b, color=WHITE, bold=True, align=PP_ALIGN.RIGHT)
-    yy += 32
-rect(s, COL_L, yy + 2, TW - 32, 1.2, RULE)
-text(s, COL_L, yy + 10, 200, 26, "Total", color=WHITE, bold=True)
-text(s, COL_A, yy + 10, 70, 26, "19", color=MUTED, bold=True, align=PP_ALIGN.RIGHT)
-text(s, COL_B, yy + 10, 62, 26, "24", color=WHITE, bold=True, align=PP_ALIGN.RIGHT)
+    yy += 30
 
 # ── the two numbers that matter (right)
 def stat(x, y, w, h, big, caption, big_colour):
@@ -235,26 +233,26 @@ def stat(x, y, w, h, big, caption, big_colour):
     text(s, x + 16, y + 62, w - 32, 30, caption, color=MUTED)
 
 SX, SW = 440.0, 251.2
-stat(SX, TY, SW, 112.0, "89%", "of v1.0 unchanged", WHITE)
-stat(SX, TY + 120.0, SW, 112.0, "37%", "churn since April", DIM)
-footer(s, "5 new IDs · 2 rewritten · 17 of 19 untouched",
-       link_label="Spec v1.3:", url=CONFLUENCE, shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
+stat(SX, TY, SW, 112.0, "92%", "of v1.0 unchanged", WHITE)
+stat(SX, TY + 120.0, SW, 112.0, "42%", "churn since April", DIM)
+footer(s, "24 in April · 32 now · 8 added, 2 rewritten",
+       link_label="Spec v1.4:", url=CONFLUENCE, shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
 
 # ─────────────────────────────────────────────────────────── 2. managing the change
 s = new_slide()
 title(s, "How we managed the change")
 banner(s, [
-    ("Spec 1.0 → 1.1 → 1.2 → 1.3.", True, WHITE),
+    ("Spec 1.0 → 1.1 → 1.2 → 1.3 → 1.4.", True, WHITE),
     ("  Each version-history entry is the change record.", False, LEAD),
 ])
 card(s, LX, CY, 662.4, CH, WHITE, "What we did", [
-    [("Added new IDs — HLR-6, FR-9, FR-10, DR-4, C-4 — instead of editing the old "
-      "ones.", False, MUTED)],
+    [("Added new IDs instead of editing old ones — HLR-6, FR-9/10, DR-4, C-4, QAS-3.",
+      False, MUTED)],
     [("Renumbered nothing, so every trace link from April still resolves.", False, MUTED)],
-    [("Wrote each change into the version history, so the spec is its own change "
-      "record.", False, MUTED)],
+    [("Every ETIM decision traces to a requirement, and forward to code and a test.",
+      False, MUTED)],
 ])
-footer(s, "trace: HLR-6 → FR-9/10 → tickets → golden tests")
+footer(s, "HLR-6 → FR-9 → ADR-16 → migration 0005 → 11 tests")
 
 # ─────────────────────────────────────────────────────────── 3. architecture v5 → v6
 s = new_slide()
