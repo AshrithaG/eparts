@@ -30,9 +30,12 @@ DIAG = "/Users/arjun/Documents/CMU/studio-project/Diagrams/"
 CONFLUENCE = ("https://cmu-mse.atlassian.net/wiki/spaces/AISDLC/pages/76742657/"
               "Engineering+System+Artifacts")
 ADR_INDEX = "https://github.com/AshrithaG/eparts/blob/main/docs/adr-index.md"
-# ADR-018 is the one we open live on slide 4 — it is the exemplar for the format.
-ADR_018 = ("https://github.com/AshrithaG/eparts/blob/main/docs/"
-           "0018-extend-routing-to-etim-signals-with-class-review-first.md")
+# ADR-018 is the one we open live — it is the exemplar for the format. Points at
+# Confluence rather than GitHub now that the ADRs are published there, so the room
+# lands on a rendered page instead of raw Markdown.
+ADR_018 = ("https://cmu-mse.atlassian.net/wiki/spaces/AISDLC/pages/78708738/"
+           "ADR-018+Extend+Routing+to+ETIM+Signals+with+a+Class-Review-First+Path")
+ADR_018_SHOWN = "cmu-mse.atlassian.net/wiki/spaces/AISDLC/pages/78708738"
 
 def new_deck():
     """A fresh 720x405 pt presentation. Two decks are built from this one script so the
@@ -88,11 +91,11 @@ def obox(s, x, y, w, h, color=RULE, dashed=False, fill=CARD):
 
 
 def text(s, x, y, w, h, runs, size=MIN_PT, color=MUTED, bold=False, space=0,
-         align=PP_ALIGN.LEFT, anchor=MSO_ANCHOR.TOP, line=1.18, gap=7):
+         align=PP_ALIGN.LEFT, anchor=MSO_ANCHOR.TOP, line=1.18, gap=7, wrap=True):
     assert size >= MIN_PT, f"{size} pt is below the {MIN_PT} pt projection floor"
     tb = s.shapes.add_textbox(P(x), P(y), P(w), P(h))
     tf = tb.text_frame
-    tf.word_wrap = True
+    tf.word_wrap = wrap
     tf.vertical_anchor = anchor
     tf.margin_left = tf.margin_right = tf.margin_top = tf.margin_bottom = 0
     paras = runs if isinstance(runs, list) else [runs]
@@ -346,40 +349,50 @@ text(s, BX0, ROW2_Y + BH + 14, 662.4, 26,
      line=1.0)
 footer(s, "dashed = designed, not built", color=DIM,
        link_label="ADR-018:", url=ADR_018,
-       shown_url="github.com/AshrithaG/eparts/blob/main/docs/0018-…md")
+       shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
 
 # ─────────────────────────────────────────────────────────── 5. decisions
 # The point of this slide is the pairing: each decision beside the alternative we
 # turned down. A reason column would only restate the decision.
+#
+# The ADR column is what turns four claims into four artifact references, which is
+# what the rubric's "architectural descriptions and decisions" is asking for. Row 3
+# has no single ADR — the artifacts *are* 16 through 21 — so it cites the range
+# rather than inventing a number.
 s = new_slide()
 title(s, "Decisions, and what we chose against")
 
-CHOSE_X, VS_X = 44.0, 420.0
+ADR_X, CHOSE_X, VS_X = 42.0, 116.0, 440.0
 HDR_Y = 84.0
-text(s, CHOSE_X, HDR_Y, 300, 26, "We chose", color=WHITE, bold=True)
-text(s, VS_X, HDR_Y, 260, 26, "Instead of", color=MUTED, bold=True)
+text(s, ADR_X, HDR_Y, 68, 26, "ADR", color=MUTED, bold=True)
+text(s, CHOSE_X, HDR_Y, 296, 26, "We chose", color=WHITE, bold=True)
+text(s, VS_X, HDR_Y, 248, 26, "Instead of", color=MUTED, bold=True)
 rect(s, 28.8, HDR_Y + 30, 662.4, 1.2, RULE)
 
 decisions = [
-    ("ML does the matching", "ETIM keys at normalization"),
-    ("Raw values in own table", "one table holding both"),
-    ("New ADRs for new decisions", "editing the April ones"),
-    ("Stay on ETIM 10.0", "building an upgrade path"),
+    ("16", "ML does the matching", "ETIM keys at normalization"),
+    ("14", "Raw values in own table", "one table holding both"),
+    ("16–21", "New ADRs, not edits", "editing the April ones"),
+    ("20", "Stay on ETIM 10.0", "building an upgrade path"),
 ]
 ry, RH, RG = HDR_Y + 42, 44.0, 8.0
-for chose, instead in decisions:
+for adr, chose, instead in decisions:
     rect(s, 28.8, ry, 662.4, RH, CARD)
     rect(s, 28.8, ry, 4.5, RH, WHITE)
-    text(s, CHOSE_X, ry, 340, RH, chose, color=WHITE, bold=True,
+    # wrap=False on both text cells: a wrapped ADR range dragged the decision onto
+    # two lines, and neither column is ever long enough to need wrapping.
+    text(s, ADR_X, ry, 68, RH, adr, color=DIM, bold=True,
+         anchor=MSO_ANCHOR.MIDDLE, line=1.0, wrap=False)
+    text(s, CHOSE_X, ry, 296, RH, chose, color=WHITE, bold=True,
+         anchor=MSO_ANCHOR.MIDDLE, line=1.0, wrap=False)
+    text(s, VS_X - 24, ry, 18, RH, "×", color=RGBColor(0x66, 0x66, 0x66),
          anchor=MSO_ANCHOR.MIDDLE, line=1.0)
-    text(s, VS_X - 26, ry, 20, RH, "×", color=RGBColor(0x66, 0x66, 0x66),
-         anchor=MSO_ANCHOR.MIDDLE, line=1.0)
-    text(s, VS_X, ry, 262, RH, instead, color=MUTED, anchor=MSO_ANCHOR.MIDDLE,
-         line=1.0)
+    text(s, VS_X, ry, 248, RH, instead, color=MUTED, anchor=MSO_ANCHOR.MIDDLE,
+         line=1.0, wrap=False)
     ry += RH + RG
 footer(s, "matching stages designed, not yet built", color=DIM,
        link_label="ADR-018:", url=ADR_018,
-       shown_url="github.com/AshrithaG/eparts")
+       shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
 
 NOTES_SOFTWARE = [
     "ETIM is a mid-project requirements CHANGE, not a new project.\n\n"
