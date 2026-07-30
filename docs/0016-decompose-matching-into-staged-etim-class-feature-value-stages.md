@@ -61,7 +61,7 @@ Stage outputs land in `matched_product_attribute` — the interpretation table i
 - **DRs:** DR-4 (ETIM-keyed PIMS output — consumes the identifiers this ADR produces)
 - **QASs:** QAS-1 Modifiability — a new supplier format changes the parse stage only, not the matching stages
 - **Scenarios:** SCEN-1 step 4 (the ML service matches attributes, then matches them to ETIM class, features and values); SCEN-2 steps 2–3 (per-assignment confidence is what routes the item to review)
-- **Validation:** VAL-5 (class review precedes attribute routing) — added in spec v1.4 as the test for this ADR; **specified, not yet executable**, because these stages are designed and not built. VAL-4 covers the reference layer this ADR reads and does run today.
+- **Validation:** VAL-5 (class review precedes attribute routing) — added in spec v1.4 as the test for this ADR; **specified, not yet executable**, because these stages are designed and not built. VAL-4 covers the reference layer this ADR reads; its 10 unit tests pass, and its integration half skips without the real archive.
 - **Source:** `ETIM_IMPLEMENTATION_BRIEF.md` — End-to-End Process steps 7–15, ML/AI Attribute Matching, ETIM Feature Types
 - **Tickets:** EPARTS-289 (class matching), EPARTS-290 (feature matching), EPARTS-291 (value/unit matching), EPARTS-296 (golden test set); parent EPARTS-156 (ML)
 - **Related ADRs:** narrows ADR-003 (hybrid rule + semantic similarity) to the feature and value stages; enriches the contract of ADR-002 (`PredictionServiceInterface`); writes into the interpretation table of ADR-014; reads the reference layer of ADR-013; feeds the routing signals of ADR-018 and the policy gate of ADR-019

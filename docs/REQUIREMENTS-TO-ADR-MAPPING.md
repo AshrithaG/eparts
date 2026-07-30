@@ -210,7 +210,7 @@ v1.4 carries three QAS. The five-QAS set (QAS-1 Accuracy … QAS-5 Monitorabilit
 | VAL-1 | Upload to SFTP → ingestion record within 30s | ADR-021, ADR-001 | Ingestion path built |
 | VAL-2 | Mock ML response Conf=0.2 → item in Review Queue | ADR-018 | Confidence branch designed; **validation-failure, unit-failure and required-field branches not testable until ADR-016 lands and the ADR-019 policy is supplied** |
 | VAL-3 | Approve an item → PIMS write succeeds, retry does not duplicate | ADR-017 | Designed; retry case must be re-tested against the ETIM key, not the ADR-006 key |
-| **VAL-4** | **Load ETIM 10.0, then load it again → all 159/5,640/17,377/201,284 rows present, second run is a no-op** | **ADR-013**, ADR-020 | **Covered by automated tests** — `tests/unit/test_etim_loader.py` (10 tests) and `tests/integration/test_etim_real_files.py` (1 test, real release files); both need a DB fixture and run locally, not in CI |
+| **VAL-4** | **Load ETIM 10.0, then load it again → all 159/5,640/17,377/201,284 rows present, second run is a no-op** | **ADR-013**, ADR-020 | **10 unit tests passing** (`tests/unit/test_etim_loader.py`). `tests/integration/test_etim_real_files.py` covers the same load against the real archive but **skips unless `.tmp_etim_csv` is present**, and that archive is not committed. Neither runs in CI. |
 | **VAL-5** | **Below-threshold class assignment → item routes to class review, no attribute-level routing** | **ADR-018**, ADR-016 | **Specified, not executable** — the matching stages are designed and not built. Recorded rather than deferred silently. |
 
 ## 10.9 Coverage check
