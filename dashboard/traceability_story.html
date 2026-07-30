@@ -197,19 +197,20 @@
   <p class="trace-headline mono">
     <span class="req-id">ADR-020</span><span style="color:#64748b">:</span>
     <span class="req-title">Pin one published release of the outside product-category standard</span>
-    <span style="color:#64748b"> (4 decisions depend on it, 1 risk &mdash; added July)</span>
+    <span style="color:#64748b"> (3 decisions depend on it &middot; 1 risk, added July)</span>
   </p>
   <p class="board-caption">
     <b>Board 2 &middot; the gap this found.</b> We depend on an outside industry standard
     for product categories, and we deliberately locked ourselves to one published
     version of it so the data stays consistent. When we wrote that decision up we
     stated the consequence out loud: if suppliers move to a newer version before we
-    do, some products stop classifying and fall to manual review. Four later design
-    decisions were built on that lock. The consequence was accepted in writing and
-    never appeared in the risk register, so nobody owned it and nothing would have
-    told us it had started happening. We found it by walking these links from the
-    decision back towards risks and landing on nothing. It is now a tracked risk
-    with an owner and a trigger.
+    do, some products stop classifying and fall to manual review. Three later design
+    decisions were built on that pin. The consequence was accepted in writing in
+    April and did not reach the risk register until July, so for three months nobody
+    owned it and nothing would have told us it had started happening. We found it by
+    walking these links from the decision down towards risks and landing on nothing.
+    It is tracked now, with an owner and a trigger, and ADR-020 itself says to
+    revisit it before any production transition.
   </p>
 
   <div class="tree">
