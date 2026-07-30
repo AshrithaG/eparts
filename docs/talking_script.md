@@ -46,23 +46,21 @@ Walk the thread with your finger as you say it.
 
 Let them look at both diagrams for a beat before you start.
 
-> Left is May, right is now. You're not meant to read these — the full drawing is linked below. Look at the outline.
+> Left is May, right is now. Side by side they're almost the same drawing, and that's the point.
 >
-> Most of the structure didn't move. Still pipe-and-filter, routing still happens attribute by attribute, a person still reviews anything the system isn't sure about, and the audit trail is unchanged. ETIM was a large change and it didn't force a restructure. That's the modifiability claim we made in April, and this is the first time it was tested against something real.
+> One box is new. Everything else is where it was — still pipe-and-filter, routing still per attribute, a person still reviewing anything the system isn't sure about, same audit trail, same staging. ETIM was a large change and it didn't force a restructure. That's the modifiability claim we made in April, and this is the first time it was tested against something real.
 >
-> Two of the five changes need explaining.
+> Five things changed, and only the first one shows up on the drawing. The other four are inside components — the dictionary we load, staging holding the supplier's raw values separately, the handoff format to ML, and the PIMS key.
 
-Point at change three.
+Point at the new box on the right-hand diagram.
 
-> The quick one is that we split staging into two tables. One holds what the supplier sent us, the other holds our ETIM interpretation of it. In a single row you can't separate the two later, and then you can't explain where a published value came from.
->
-> The other one is on the next slide.
+> The new box is ETIM matching, sitting behind attribute matching inside the same interface. That's the one worth opening up.
 
 ---
 
-## Slide 4 — Change 2, up close
+## Slide 4 — Inside the new box
 
-> This is change two, drawn large enough to read.
+> This is what's inside that box, drawn large enough to read.
 >
 > ML was already matching attributes and that part hasn't changed — that's the box at the top. What ETIM adds is a second pass behind it, inside the same service. Once you know which attribute you're looking at, you work out the product's ETIM class, then which ETIM feature that attribute maps to, then the allowed value and unit, then two validation steps.
 >
@@ -95,16 +93,16 @@ Measured from the blockquotes at 150 wpm.
 | Handoff | 44 | 18 s |
 | Slide 1 | 128 | 51 s |
 | Slide 2 | 204 | 82 s |
-| Slide 3 | 146 | 58 s |
-| Slide 4 | 163 | 65 s |
+| Slide 3 | 141 | 56 s |
+| Slide 4 | 165 | 66 s |
 | Slide 5 | 161 | 64 s |
-| **Total** | **846** | **5:38** |
+| **Total** | **843** | **5:37** |
 
-You are 38 seconds over. The first two cuts land you at 5:03; the first three put you at 4:43.
+You are 37 seconds over. The first two cuts land you at 5:02; the first three put you at 4:42.
 
 | Cut | Saves |
 |---|---|
-| Slide 5, the raw-values line — slide 3 already made the point | 8 s |
+| Slide 5, the raw-values line — slide 3's list already names it | 8 s |
 | Slide 1, the paragraph about the June gap | 17 s |
 | Slide 2, the two sentences about the integration test skipping — keep it for the Q&A instead | 20 s |
 | Slide 5, the second half of the ETIM 10.0 paragraph, keeping "none of that gets exercised before we finish" | 10 s |
@@ -114,7 +112,7 @@ You are 38 seconds over. The first two cuts land you at 5:03; the first three pu
 ## Delivery notes
 
 - Slide 2's trace thread is the most valuable thirty seconds in the section. Slow down and point at each hop rather than reciting it.
-- Slide 3, the thumbnails are a silhouette comparison, nothing more. Say the "you're not meant to read these" line without apologising for it and move to the outline — slide 4 is where the detail lands.
+- Slide 3, the two thumbnails are a silhouette comparison, nothing more — v6 is v5 with one box added, so they should look near-identical. Don't invite anyone to read them; the whole argument is that the outlines match. Slide 4 is where the detail lands.
 - Slide 4 is the one slide where you're explaining a design decision rather than reporting one. Slow down on the confidently-wrong argument.
 - Say the dashed part plainly and move on. State it once, don't sell it.
 - The ten unit tests were run on 29 July and all passed, in about 3m40s (`pytest tests/unit/test_etim_loader.py` in `e2e-ocr-ing`). The integration test skips unless `.tmp_etim_csv` is present, and it is gitignored — so if anyone runs the suite in front of you, expect `10 passed, 1 skipped`. Say the skip before they ask.
