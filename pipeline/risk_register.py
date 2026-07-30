@@ -412,6 +412,41 @@ def seed_risk_register(reg: RiskRegister | None = None) -> RiskRegister:
         status="mitigating",
     )
 
+    # Raised by the mentors in the 2026-07-29 studio review, along with the
+    # mitigation below. The forecast bootstraps our own past weekly throughput,
+    # but every one of those weeks was construction work done on our own
+    # machines. The fall is integration against the client's environment, where
+    # progress waits on people outside the team. A sample drawn entirely from
+    # construction weeks cannot represent that, so the forecast is optimistic by
+    # construction rather than by choice.
+    reg.add_risk(
+        "RISK-PM-04", "Throughput estimates do not transfer from construction to integration",
+        description="IF the completion forecast samples weekly throughput from weeks that were "
+                    "entirely construction work, AND the remaining work shifts to integration "
+                    "against the client's PIMS environment where progress depends on external "
+                    "schema confirmations and sign-offs "
+                    "THEN story points per week are overestimated and the per-ticket estimates "
+                    "themselves are understated "
+                    "RESULTING IN a forecast that reads as comfortable while the real finish date "
+                    "moves later, and late-stage schedule compression.",
+        category="schedule", source="mentor_review",
+        source_detail="Studio review 2026-07-29: 'the work you have been doing is different from "
+                      "the work you are going to be doing ... a very optimistic view of things'",
+        likelihood="high", impact="medium",
+        mitigation="Reduces impact: weight recent weeks more heavily than older ones once "
+                   "integration work starts, so the sample tracks the kind of work actually being "
+                   "done, and quote the conservative end of the throughput range in all planning. "
+                   "Reduces likelihood: decompose the fall integration work into tickets before "
+                   "the semester starts rather than relying on aggregate capacity, and re-estimate "
+                   "after the first two integration tickets close. "
+                   "Regenerate Project Health weekly and treat a moving forecast as the signal.",
+        contingency="If measured integration throughput comes in below the conservative end for "
+                    "two consecutive weeks, re-baseline the plan and take the shortfall to the "
+                    "client as a scope conversation rather than absorbing it in the buffer.",
+        status="open", owner="Ashritha Gonuguntla",
+        related_arch=["C-4"],
+    )
+
     # === Health & Team Risks ===
     reg.add_risk(
         "RISK-H1", "Team burnout from capstone + coursework overlap",

@@ -1,0 +1,63 @@
+{
+  "generated_at": "2026-07-29",
+  "candidates_proposed": 20,
+  "human_seeded": 1,
+  "dispositions": {
+    "accepted": 17,
+    "pending": 1,
+    "rewritten": 1,
+    "rejected": 1,
+    "human": 1
+  },
+  "survived_review": 19,
+  "precision_pct": 95,
+  "accepted_as_proposed_pct": 85,
+  "rejected_pct": 5,
+  "register_total": 26,
+  "register_from_agents": 19,
+  "register_from_agents_pct": 73,
+  "register_human_only": 7,
+  "register_human_only_pct": 27,
+  "human_only_ids": [
+    "R-017",
+    "R-018",
+    "R-021",
+    "R-022",
+    "R-023",
+    "R-025",
+    "R-026"
+  ],
+  "human_only_categories": [
+    "Business / Stakeholder",
+    "Compliance / Security",
+    "Data / Technical",
+    "Process / Measurement",
+    "Process / Methodology",
+    "Tooling"
+  ],
+  "meeting_sourced": 19,
+  "meeting_sourced_pct": 73,
+  "candidate_titles": {
+    "RISK-ARCH-01": "Confidence threshold miscalibration",
+    "RISK-ARCH-02": "Insufficient training data (<200 labeled examples)",
+    "RISK-ARCH-03": "PIMS staging schema incompatibility (P1-C pending)",
+    "RISK-ARCH-04": "Alpha weighting sensitivity in hybrid scoring",
+    "RISK-ARCH-05": "Attribute correlation invalidates per-attribute routing",
+    "RISK-ARCH-06": "Catalog team capacity vs review volume",
+    "RISK-ARCH-07": "Drift detection metrics and baselines undefined",
+    "RISK-ARCH-08": "Human review interface design not decided",
+    "RISK-ARCH-09": "ETIM release pin leaves the catalog progressively stale",
+    "RISK-COACH-01": "Data access delay blocking ML development",
+    "RISK-COACH-02": "Scope creep risk",
+    "RISK-COACH-03": "Azure tool constraints",
+    "RISK-COACH-04": "Measurement validity for AI effectiveness",
+    "RISK-COACH-05": "Model selection uncertainty",
+    "RISK-PM-01": "Capstone timeline constraint",
+    "RISK-PM-02": "Integration dependency on Jake (PIMS schema)",
+    "RISK-PM-03": "Knowledge loss from manual processes",
+    "RISK-PM-04": "Throughput estimates do not transfer from construction to integration",
+    "RISK-H1": "Team burnout from capstone + coursework overlap",
+    "RISK-H2": "Single point of failure \u2014 key person unavailable",
+    "RISK-H3": "Communication gaps between distributed team members"
+  }
+}

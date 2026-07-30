@@ -103,6 +103,20 @@
 
   .nid { font-weight: 600; color: #e9edf4; padding-left: 2px; }
   .titl { font-weight: 400; color: #8b93a8; padding-left: 8px; }
+  .board-caption {
+    max-width: 900px;
+    margin: 0 auto 18px;
+    padding: 12px 16px;
+    border-left: 3px solid rgba(94, 234, 212, 0.45);
+    background: rgba(148, 163, 184, 0.07);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #aab3c5;
+  }
+  .board-caption b { color: #e9edf4; font-weight: 650; }
+
+  .footer-note {
     margin-top: 24px;
     padding-top: 18px;
     border-top: 1px solid rgba(55, 65, 81, 0.35);
@@ -127,11 +141,28 @@
   <a href="intelligence.html">Full intelligence dashboard →</a>
 </div>
 
+<p class="board-caption">
+  <b>What this page is for.</b> Our requirements, design decisions, meeting
+  commitments and risks are one connected graph: 189 artifacts and 764 links.
+  The reason that is worth the effort is rework. When an output further down the
+  chain turns out to be wrong, we can walk back and find the input that made it
+  wrong, instead of arguing about it. Twice now the cause was an early step, and
+  fixing it there meant the three artifacts downstream did not have to be redone.
+  The second board is the clearest case.
+</p>
+
 <div class="trace-board">
   <p class="trace-headline mono">
     <span class="req-id">REQ-001</span><span style="color:#64748b">:</span>
     <span class="req-title">Extract product attributes from vendor spec sheets</span>
     <span style="color:#64748b"> (42 artifacts, 8 types)</span>
+  </p>
+  <p class="board-caption">
+    <b>Board 1 &middot; one requirement, all the way down.</b> This starts at a
+    requirement the client asked for in a January meeting and walks through the
+    meeting it came from, the design decisions we took to satisfy it, the concerns
+    raised along the way, and the risks attached to it. The chain is the useful
+    part: any artifact here can be explained by pointing at the one above it.
   </p>
 
   <div class="legend" aria-label="Artifact types in this chain">
@@ -159,6 +190,36 @@
     <div class="trow"><span class="prefix">&nbsp;&nbsp;&nbsp;&nbsp;└── </span><span class="tt tt-concern">[concern]</span><span class="nid">CON-daffed</span><span class="titl">Can we use LLM instead of OCR</span></div>
     <div class="trow"><span class="prefix">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── </span><span class="tt tt-decision">[decision]</span><span class="nid">DEC-e9b865</span><span class="titl">Primary goal: LLM for attribute extraction from spec sheets</span></div>
     <div class="trow"><span class="prefix">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── </span><span class="tt tt-architecture">[architecture]</span><span class="nid">ARCH-004</span><span class="titl">Staging tables as Git-diff model for data review</span></div>
+  </div>
+</div>
+
+<div class="trace-board">
+  <p class="trace-headline mono">
+    <span class="req-id">ADR-020</span><span style="color:#64748b">:</span>
+    <span class="req-title">Pin one published release of the outside product-category standard</span>
+    <span style="color:#64748b"> (3 decisions depend on it &middot; 1 risk, added July)</span>
+  </p>
+  <p class="board-caption">
+    <b>Board 2 &middot; the gap this found.</b> We depend on an outside industry standard
+    for product categories, and we deliberately locked ourselves to one published
+    version of it so the data stays consistent. When we wrote that decision up we
+    stated the consequence out loud: if suppliers move to a newer version before we
+    do, some products stop classifying and fall to manual review. Three later design
+    decisions were built on that pin. The consequence was accepted in writing in
+    April and did not reach the risk register until July, so for three months nobody
+    owned it and nothing would have told us it had started happening. We found it by
+    walking these links from the decision down towards risks and landing on nothing.
+    It is tracked now, with an owner and a trigger, and ADR-020 itself says to
+    revisit it before any production transition.
+  </p>
+
+  <div class="tree">
+    <div class="trow"><span class="tt tt-requirement">[requirement]</span><span class="nid">REQ-002</span><span class="titl">Map extracted attributes to an industry-standard taxonomy</span></div>
+    <div class="trow"><span class="prefix">└── </span><span class="tt tt-decision">[decision]</span><span class="nid">ADR-020</span><span class="titl">Pin one published release of the standard for the project duration</span></div>
+    <div class="trow"><span class="prefix">&nbsp;&nbsp;&nbsp;&nbsp;├── </span><span class="tt tt-architecture">[architecture]</span><span class="nid">ADR-013</span><span class="titl">Reference tables scoped by release</span></div>
+    <div class="trow"><span class="prefix">&nbsp;&nbsp;&nbsp;&nbsp;├── </span><span class="tt tt-architecture">[architecture]</span><span class="nid">ADR-014</span><span class="titl">Every matched attribute records the release it was matched under</span></div>
+    <div class="trow"><span class="prefix">&nbsp;&nbsp;&nbsp;&nbsp;├── </span><span class="tt tt-architecture">[architecture]</span><span class="nid">ADR-017</span><span class="titl">Write-back key to the client system includes the release</span></div>
+    <div class="trow"><span class="prefix">&nbsp;&nbsp;&nbsp;&nbsp;└── </span><span class="tt tt-risk">[risk]</span><span class="nid">RIS-a5798c</span><span class="titl">Pinning the release leaves the catalogue progressively stale &nbsp;&larr;&nbsp;this link did not exist until July</span></div>
   </div>
 </div>
 
