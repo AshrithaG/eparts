@@ -1,5 +1,7 @@
 # ADR-017: Re-key the PIMS Writeback Contract on ETIM Identifiers
 
+> Source of truth: [`0017-rekey-pims-writeback-contract-on-etim-identifiers.md`](https://github.com/AshrithaG/eparts/blob/main/docs/0017-rekey-pims-writeback-contract-on-etim-identifiers.md) in the eparts repo. This page is a copy for reading; edit the repo, not this page.
+
 ## Status
 
 Accepted

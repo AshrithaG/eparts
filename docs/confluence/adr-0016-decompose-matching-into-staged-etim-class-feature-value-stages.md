@@ -1,5 +1,7 @@
 # ADR-016: Decompose Attribute Matching into Staged ETIM Class → Feature → Value/Unit Matching
 
+> Source of truth: [`0016-decompose-matching-into-staged-etim-class-feature-value-stages.md`](https://github.com/AshrithaG/eparts/blob/main/docs/0016-decompose-matching-into-staged-etim-class-feature-value-stages.md) in the eparts repo. This page is a copy for reading; edit the repo, not this page.
+
 ## Status
 
 Accepted
