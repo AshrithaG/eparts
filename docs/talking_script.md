@@ -64,7 +64,9 @@ Point at the new box on the right-hand diagram.
 >
 > ML was already matching attributes and that part hasn't changed — that's the box at the top. What ETIM adds is a second pass behind it, inside the same service. Once you know which attribute you're looking at, you work out the product's ETIM class, then which ETIM feature that attribute maps to, then the allowed value and unit, then two validation steps.
 >
-> The order matters. Which features are valid depends on the class, so a wrong class makes everything under it wrong, and wrong at high confidence, which means routing won't flag it. A low-confidence answer is safe, it goes to a person. A confidently wrong one isn't. That's why a person confirms the class before we route attribute by attribute.
+> The order matters, because in ETIM the features belong to the class — the class is what says which features a product is even allowed to have. So if we call a ball valve a butterfly valve, we match its attributes against the wrong feature list. The torque number is right, the feature it's attached to is wrong, and that's true for every attribute on the product.
+>
+> And each of those matches scores high, because it was the best match in the list we gave it. So routing sees confidence and auto-accepts. A wrong class doesn't produce something you can catch, which is why a person confirms the class first.
 >
 > Every box on that row is dashed. None of it is built yet. The dictionary it reads and the tables it writes are built; the five stages are designed and not written.
 
@@ -94,11 +96,13 @@ Measured from the blockquotes at 150 wpm.
 | Slide 1 | 128 | 51 s |
 | Slide 2 | 204 | 82 s |
 | Slide 3 | 141 | 56 s |
-| Slide 4 | 165 | 66 s |
+| Slide 4 | 216 | 86 s |
 | Slide 5 | 161 | 64 s |
-| **Total** | **843** | **5:37** |
+| **Total** | **894** | **5:57** |
 
-You are 37 seconds over. The first two cuts land you at 5:02; the first three put you at 4:42.
+You are 57 seconds over. The first three cuts land you at 5:12; all four put you at 5:02.
+Slide 4 is the longest section and it should stay that way — it is the only place you
+explain a decision rather than report one.
 
 | Cut | Saves |
 |---|---|

@@ -341,8 +341,8 @@ for i, label in enumerate(["Class", "Feature", "Value\n+ unit", "ETIM\ncheck",
              anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER, line=1.0)
 
 text(s, BX0, ROW2_Y + BH + 14, 662.4, 26,
-     [[("Get the class wrong", True, WHITE),
-       (" and everything under it is wrong too.", False, MUTED)]],
+     [[("Wrong class, wrong feature list.", True, WHITE),
+       (" Every attribute under it is wrong.", False, MUTED)]],
      line=1.0)
 footer(s, "dashed = designed, not built", color=DIM,
        link_label="ADR-018:", url=ADR_018,
