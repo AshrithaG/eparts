@@ -305,7 +305,7 @@ def svg_line_chart(weeks, scope, done, w=900, h=340, med_thru: int = 0) -> str:
             f'<line x1="{dx:.1f}" y1="{pad_t}" x2="{dx:.1f}" y2="{pad_t + ih}" '
             f'stroke="{C_P85}" stroke-width="1.5" stroke-dasharray="5 4"/>'
             f'<text x="{dx - 6:.1f}" y="{pad_t + 12}" text-anchor="end" font-size="12" '
-            f'font-weight="600" fill="{C_P85}">18 Dec</text>'
+            f'font-weight="600" fill="{C_P85}">deadline 18 Dec</text>'
         )
     return f"""<svg viewBox="0 0 {w} {h}" role="img" aria-label="Burnup: scope vs completed issues by week, with projection to the deadline">
 {''.join(grid)}{''.join(ticks)}{''.join(xlabels)}{axis_titles}
@@ -624,11 +624,6 @@ runs beat, <b>P85</b> the date 85% beat, <b>P95</b> the conservative end. We com
 <div class="legend"><b style="color:{C_DONE}">— Done</b> (cumulative resolved) ·
 <b style="color:{C_SCOPE}">- - Scope</b> (cumulative created; the gap between the lines is the open backlog)</div>
 {svg_line_chart(weeks, scope, done_cum, med_thru=med_thru)}
-<details><summary>Why both lines jump at 15 June</summary>
-<div class="body"><p>The board was tracked in a different tool until mid-June, so several weeks of
-already-finished work all carry a mid-June timestamp. The work is real and counts toward percent
-complete; the <i>date</i> is an import artifact. That week is excluded from the delivery rate the
-forecast projects forward.</p></div></details>
 
 <h2>Delivery rate — issues resolved per week</h2>
 <div class="legend">Full-color bars form the {len(sample)}-week sampling window the forecast draws from; earlier weeks are dimmed.</div>
@@ -639,31 +634,6 @@ forecast projects forward.</p></div></details>
 {svg_forecast_hist(hist, p50, p85, week_of(today))}
 <p class="note">P85 needs <b>{p85[0]} working weeks</b>; <b>{horizon}</b> remain before 18 Dec.
 The {buffer_weeks}-week gap is sized for integration uncertainty, not slack.</p>
-
-<details><summary>Method, in one paragraph</summary>
-<div class="body"><p>Each run draws a weekly throughput figure at random (with replacement) from our
-last {len(sample)} delivery weeks {sample}, subtracts it from the {len(open_issues)}-issue backlog,
-and repeats until the backlog is empty. That is one run; the chart is {SIMS:,} of them. Working
-weeks are mapped onto the academic calendar, so the between-semester gap and one week of fall break
-are not counted as productive time. Seeded, so it reproduces.</p></div></details>
-
-<details><summary>Why P50 and P85 sit only one week apart</summary>
-<div class="body"><p>Every run lands between
-{fmt_finish((band_lo, working_weeks_from(week_of(today))[band_lo - 1]))} and
-{fmt_finish((band_hi, working_weeks_from(week_of(today))[min(band_hi - 1, horizon - 1)]))}, so one
-week carries a large share of them: P50 to P85 is one calendar week but {week_jump:.0f} percentage
-points more of the runs. A week is also the smallest step the model can take. Read the tightness as
-a limitation, not confidence: it comes from having only {len(sample)} clean weeks to sample. Adding
-two ordinary slow weeks by hand moves P85 out about five weeks.</p></div></details>
-
-<details><summary>Why the headroom is not slack</summary>
-<div class="body"><p><b>It only covers ticketed work.</b> Fall integration is not decomposed yet, so
-the capacity plan covers it, not this chart.</p>
-<p><b>The work changes character.</b> Summer was building on our own machines, where we are the
-bottleneck. Fall is integration against the client's environment, waiting on schema confirmations
-and sign-offs from outside the team. A bootstrap of our own throughput cannot represent that.</p>
-<p><b>It assumes scope holds</b>, and the scope line above shows it has not. So: no schedule alarm
-from work we can see, and buffer for what we cannot.</p></div></details>
 
 <h2>Stream progress (features by delivery stream)</h2>
 <table><tr><th>Stream</th><th>Done</th><th>Progress</th><th>%</th></tr>{stream_rows}</table>
