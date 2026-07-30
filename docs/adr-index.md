@@ -28,7 +28,7 @@ Written against **Product Specification v2.0 (24 April 2026)**. Several are now 
 
 ### ETIM change — ADRs 0013–0021 (June–July 2026)
 
-Written against **Product Specification v1.3 (29 July 2026)** — see [`product-spec-changelog.md`](product-spec-changelog.md) and [`etim-requirements-change.md`](etim-requirements-change.md).
+Written against **Product Specification v1.4 (29 July 2026)** — see [`product-spec-changelog.md`](product-spec-changelog.md) and [`etim-requirements-change.md`](etim-requirements-change.md).
 
 | # | Title | Status | Built? |
 |---|-------|--------|--------|
@@ -50,7 +50,7 @@ Written against **Product Specification v1.3 (29 July 2026)** — see [`product-
 
 ## Requirements traceability
 
-Each ADR ends with a **Requirements Traceability** section. ADRs 0001–0012 cite Product Specification v2.0 (24 April 2026); ADRs 0016–0021 cite Product Specification v1.3 (29 July 2026).
+Each ADR ends with a **Requirements Traceability** section. ADRs 0001–0012 cite Product Specification v2.0 (24 April 2026); ADRs 0016–0021 cite Product Specification v1.4 (29 July 2026).
 
 A consolidated bidirectional view is in [`REQUIREMENTS-TO-ADR-MAPPING.md`](REQUIREMENTS-TO-ADR-MAPPING.md) — sections 1–9 cover the v2.0 requirement set, section 10 covers the ETIM change.
 

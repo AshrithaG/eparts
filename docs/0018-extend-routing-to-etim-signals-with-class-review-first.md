@@ -57,12 +57,12 @@ Thresholds are externalized per ADR-005, now generalized to at least two — cla
 
 ## Requirements Traceability
 
-- **Spec:** Product Specification v1.3 (29 July 2026)
+- **Spec:** Product Specification v1.4 (29 July 2026)
 - **HLRs:** HLR-4 (human review of low-confidence predictions); HLR-6 (ETIM classification and enrichment)
 - **FRs:** FR-4 (route below-threshold items to the review queue); FR-7 (authorized Ops Leads adjust the auto-acceptance threshold); FR-9 (per-ETIM-assignment confidence is the signal being routed on); FR-3 (confidence score per prediction)
 - **QASs:** QAS-2 Usability — class-review-first is what keeps the reviewer at 10 items/minute by not queuing work that a class change would void
 - **Scenarios:** SCEN-2 steps 2–3 (a 0.45-confidence value routes to review; under this ADR it would also route on a validation or unit failure at any confidence)
-- **Validation:** VAL-2 (mock a low-confidence response; the item appears in the review queue) — extended to cover validation-failure and unit-failure routing at high confidence
+- **Validation:** VAL-2 (mock a low-confidence response; the item appears in the review queue) — extended to cover validation-failure and unit-failure routing at high confidence. **VAL-5** (added in spec v1.4) is the specific test for class-review-first: a below-threshold class assignment routes to class review and no attribute-level routing happens for that item. Specified, not yet executable.
 - **Source:** `ETIM_IMPLEMENTATION_BRIEF.md` — Request Router, Human Review, End-to-End Process steps 13–17
 - **Tickets:** EPARTS-289 (class matching and class routing), EPARTS-294 (ETIM-aware review queue); parent EPARTS-156 (ML)
 - **Related ADRs:** extends ADR-004 (per-attribute routing) and ADR-005 (externalized thresholds); consumes the staged outputs of ADR-016; depends on the policy overlay of ADR-019; the review-queue contract it feeds is ADR-009

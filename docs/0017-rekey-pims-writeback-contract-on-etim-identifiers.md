@@ -56,7 +56,7 @@ Two distinctions this ADR preserves deliberately: PIMS may remain SQL Server eve
 
 ## Requirements Traceability
 
-- **Spec:** Product Specification v1.3 (29 July 2026)
+- **Spec:** Product Specification v1.4 (29 July 2026)
 - **HLRs:** HLR-6 (enrich with ETIM identifiers); HLR-5 (write approved data back to PIMS)
 - **FRs:** FR-8 (write attributes to PIMS upon final approval); FR-9 (preserve the original supplier value alongside the ETIM assignment)
 - **DRs:** **DR-4** — *"Approved data written to PIMS shall be keyed by ETIM identifiers (release, class, feature); the writeback idempotency key shall include these identifiers"* — this ADR is the direct realization of DR-4; DR-3 (writeback must be idempotent; retry must not duplicate)

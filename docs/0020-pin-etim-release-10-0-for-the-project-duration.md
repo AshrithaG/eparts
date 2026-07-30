@@ -43,7 +43,7 @@ If the client later asks for a new ETIM release, that is a **change request agai
 
 ## Requirements Traceability
 
-- **Spec:** Product Specification **v1.3** (29 July 2026); C-4 was introduced in v1.2 (28 July) — this ADR is the reason for that version
+- **Spec:** Product Specification **v1.4** (29 July 2026); C-4 was introduced in v1.2 (28 July) — this ADR is the reason for that version
 - **Constraints:** **C-4** (ETIM Release Pinned) — this ADR is the decision C-4 records
 - **HLRs:** HLR-6 (classify against the ETIM standard — this ADR fixes *which* ETIM)
 - **FRs:** **FR-10** (load and maintain the ETIM reference dictionary for the pinned release); FR-9 (matching is always against release 10.0 EI)
