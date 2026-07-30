@@ -9,6 +9,7 @@ from pptx import Presentation
 from pptx.util import Pt, Emu
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
+from pptx.enum.dml import MSO_LINE_DASH_STYLE
 
 BLACK = RGBColor(0x00, 0x00, 0x00)
 BANNER = RGBColor(0x11, 0x11, 0x11)
@@ -66,6 +67,22 @@ def rect(s, x, y, w, h, color):
     sh.fill.solid()
     sh.fill.fore_color.rgb = color
     sh.line.fill.background()
+    sh.shadow.inherit = False
+    return sh
+
+
+def obox(s, x, y, w, h, color=RULE, dashed=False, fill=CARD):
+    """Outlined box. The detail slide needs dashed strokes for designed-not-built."""
+    sh = s.shapes.add_shape(1, P(x), P(y), P(w), P(h))
+    if fill is None:
+        sh.fill.background()
+    else:
+        sh.fill.solid()
+        sh.fill.fore_color.rgb = fill
+    sh.line.color.rgb = color
+    sh.line.width = Pt(1.25)
+    if dashed:
+        sh.line.dash_style = MSO_LINE_DASH_STYLE.DASH
     sh.shadow.inherit = False
     return sh
 
@@ -201,8 +218,9 @@ CY, CH = 126.0, 238.0
 
 # ─────────────────────────────────────────────────────────── 1. requirements v1.0 → v1.4
 # Counts verified against product-spec-v1.4.tex. v1.0 baseline: HLR-1..5, FR-1..8,
-# DR-1..3, C-1..3, QAS-1..2, VAL-1..3 = 24. v1.4 adds HLR-6, FR-9, FR-10, DR-4 (v1.1),
-# C-4 (v1.2), QAS-3, VAL-4, VAL-5 (v1.4) = 8 added, total 32. 2 rewritten (HLR-2, FR-1).
+# DR-1..3, C-1..3 = 19. v1.4 adds HLR-6, FR-9, FR-10, DR-4 (v1.1) and C-4 (v1.2) = 24.
+# 2 rewritten (HLR-2, FR-1). QAS-3/VAL-4/VAL-5 also arrived in v1.4 but are deliberately
+# left off this table — Arjun narrates them instead of adding two more rows.
 s = new_slide()
 title(s, "Requirements: v1.0 → v1.4")
 # ── comparison table (left)
@@ -215,14 +233,17 @@ text(s, COL_B, TY + 10, 62, 26, "v1.4", color=WHITE, bold=True, align=PP_ALIGN.R
 rect(s, COL_L, TY + 38, TW - 32, 1.2, RULE)
 
 ROWS = [("High-level", "5", "6"), ("Functional", "8", "10"),
-        ("Derived", "3", "4"), ("Constraints", "3", "4"),
-        ("Quality scenarios", "2", "3"), ("Validation tests", "3", "5")]
+        ("Derived", "3", "4"), ("Constraints", "3", "4")]
 yy = TY + 46
 for label, a, b in ROWS:
     text(s, COL_L, yy, 200, 26, label, color=WHITE)
     text(s, COL_A, yy, 70, 26, a, color=MUTED, align=PP_ALIGN.RIGHT)
     text(s, COL_B, yy, 62, 26, b, color=WHITE, bold=True, align=PP_ALIGN.RIGHT)
-    yy += 30
+    yy += 32
+rect(s, COL_L, yy + 2, TW - 32, 1.2, RULE)
+text(s, COL_L, yy + 10, 200, 26, "Total", color=WHITE, bold=True)
+text(s, COL_A, yy + 10, 70, 26, "19", color=MUTED, bold=True, align=PP_ALIGN.RIGHT)
+text(s, COL_B, yy + 10, 62, 26, "24", color=WHITE, bold=True, align=PP_ALIGN.RIGHT)
 
 # ── the two numbers that matter (right)
 def stat(x, y, w, h, big, caption, big_colour):
@@ -233,9 +254,9 @@ def stat(x, y, w, h, big, caption, big_colour):
     text(s, x + 16, y + 62, w - 32, 30, caption, color=MUTED)
 
 SX, SW = 440.0, 251.2
-stat(SX, TY, SW, 112.0, "92%", "of v1.0 unchanged", WHITE)
-stat(SX, TY + 120.0, SW, 112.0, "42%", "churn since April", DIM)
-footer(s, "24 in April · 32 now · 8 added, 2 rewritten",
+stat(SX, TY, SW, 112.0, "89%", "of v1.0 unchanged", WHITE)
+stat(SX, TY + 120.0, SW, 112.0, "37%", "churn since April", DIM)
+footer(s, "5 new IDs · 2 rewritten · 17 of 19 untouched",
        link_label="Spec v1.4:", url=CONFLUENCE, shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
 
 # ─────────────────────────────────────────────────────────── 2. managing the change
@@ -252,7 +273,7 @@ card(s, LX, CY, 662.4, CH, WHITE, "What we did", [
     [("Every ETIM decision traces to a requirement, and forward to code and a test.",
       False, MUTED)],
 ])
-footer(s, "HLR-6 → FR-9 → ADR-16 → migration 0005 → 10 tests")
+footer(s, "HLR-6 → FR-9 → ADR-16 → ETIM tables in code → 10 tests")
 
 # ─────────────────────────────────────────────────────────── 3. architecture v5 → v6
 s = new_slide()
@@ -278,10 +299,53 @@ for n, label in [("1", "ETIM dictionary loaded"),
     text(s, DX + 12, yy, 16, 26, n, color=ACCENT, bold=True)
     text(s, DX + 30, yy, DW - 44, 26, label, color=WHITE)
     yy += 33
-footer(s, "solid = running code · dashed = designed",
+footer(s, "same structure · five changes inside it",
        link_label="Full v6.0 diagram:", url=CONFLUENCE, shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
 
-# ─────────────────────────────────────────────────────────── 4. decisions
+# ─────────────────────────────────────────── 4. the one change that needs explaining
+# The v6 diagram is portrait 1600x1898. At full slide height it is 253 pt wide and its
+# stage labels land near 1.4 pt, so neither scaling nor cropping the bitmap can make it
+# readable on a projector. This slide redraws the changed region as native shapes so
+# every label is 20 pt. Slide 3 keeps the thumbnails, whose only job is silhouette
+# comparison — you don't have to read those to see that the shape didn't move.
+s = new_slide()
+title(s, "Change 2: matching is now two passes")
+
+BW, BG = 121.0, 14.35           # five boxes across 662.4 pt of usable width
+BX0, ROW2_Y, BH = 28.8, 236.0, 62.0
+
+# ── pass one: what already existed
+obox(s, BX0, 108.0, 662.4, 52.0, color=WHITE, fill=CARD)
+text(s, BX0 + 16, 108.0, 400, 52.0, "ML attribute matching", color=WHITE, bold=True,
+     anchor=MSO_ANCHOR.MIDDLE, line=1.0)
+text(s, BX0 + 430, 108.0, 216, 52.0, "already existed", color=MUTED,
+     anchor=MSO_ANCHOR.MIDDLE, line=1.0, align=PP_ALIGN.RIGHT)
+
+# ── the seam
+text(s, BX0, 168.0, 662.4, 26, "then, in the same service", color=DIM, line=1.0)
+text(s, BX0, 200.0, 400, 26, "ML ETIM matching  ·  NEW", color=WHITE, bold=True,
+     space=0.6, line=1.0)
+
+# ── pass two: five stages, dashed because none of this is built yet
+for i, label in enumerate(["Class", "Feature", "Value\n+ unit", "ETIM\ncheck",
+                           "Policy\ncheck"]):
+    bx = BX0 + i * (BW + BG)
+    obox(s, bx, ROW2_Y, BW, BH, color=DIM, dashed=True, fill=None)
+    text(s, bx + 6, ROW2_Y, BW - 12, BH, label.split("\n"), color=WHITE, bold=True,
+         anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER, line=1.0, gap=0)
+    if i < 4:
+        text(s, bx + BW, ROW2_Y, BG, BH, "→", color=DIM,
+             anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER, line=1.0)
+
+text(s, BX0, ROW2_Y + BH + 14, 662.4, 26,
+     [[("Get the class wrong", True, WHITE),
+       (" and everything under it is wrong too.", False, MUTED)]],
+     line=1.0)
+footer(s, "dashed = designed, not built", color=DIM,
+       link_label="ADR-018:", url=ADR_018,
+       shown_url="github.com/AshrithaG/eparts/blob/main/docs/0018-…md")
+
+# ─────────────────────────────────────────────────────────── 5. decisions
 # The point of this slide is the pairing: each decision beside the alternative we
 # turned down. A reason column would only restate the decision.
 s = new_slide()
@@ -380,7 +444,7 @@ NOTES_SOFTWARE = [
 # ─────────────────────────────────────────────────────────── notes, deck 1
 for slide, note in zip(prs.slides, NOTES_SOFTWARE):
     slide.notes_slide.notes_text_frame.text = note
-save(prs, OUT_SOFTWARE, 4)
+save(prs, OUT_SOFTWARE, 5)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
