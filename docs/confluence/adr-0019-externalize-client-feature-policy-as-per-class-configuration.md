@@ -1,5 +1,7 @@
 # ADR-019: Externalize the Client Feature Policy as Per-Class Configuration
 
+> Source of truth: [`0019-externalize-client-feature-policy-as-per-class-configuration.md`](https://github.com/AshrithaG/eparts/blob/main/docs/0019-externalize-client-feature-policy-as-per-class-configuration.md) in the eparts repo. This page is a copy for reading; edit the repo, not this page.
+
 ## Status
 
 Accepted

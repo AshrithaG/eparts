@@ -123,11 +123,11 @@ ADRs derived from the architecture report that the spec does *not* mention expli
 
 ---
 
-# 10. ETIM change — Product Specification v1.3 (29 July 2026) → ADRs 0013–0021
+# 10. ETIM change — Product Specification v1.4 (29 July 2026) → ADRs 0013–0021
 
 Sections 1–9 above map the **v2.0 (24 April 2026)** requirement set to ADRs 0001–0012 and are left intact. This section maps the **v1.3 (29 July 2026)** requirement set — a different, leaner document lineage — to the ETIM ADRs. See [`product-spec-changelog.md`](product-spec-changelog.md) for the two-lineage caveat and [`etim-requirements-change.md`](etim-requirements-change.md) for how the change was managed.
 
-## 10.1 High-Level Requirements (v1.3)
+## 10.1 High-Level Requirements (v1.4)
 
 | ID | Requirement | Primary ADRs | Supporting ADRs |
 |---|---|---|---|
@@ -138,7 +138,7 @@ Sections 1–9 above map the **v2.0 (24 April 2026)** requirement set to ADRs 00
 | HLR-5 | Write approved data back to PIMS | **ADR-017** | ADR-006 (mechanism) |
 | **HLR-6** | **Classify products against ETIM and enrich attributes with ETIM identifiers (class, feature, value, unit), keeping original values as evidence** | **ADR-013** (the dictionary), **ADR-016** (the classification), **ADR-014** (keeping originals as evidence) | ADR-017, ADR-019, ADR-020 |
 
-## 10.2 Functional Requirements (v1.3)
+## 10.2 Functional Requirements (v1.4)
 
 | ID | Requirement | Primary ADRs | Supporting ADRs |
 |---|---|---|---|
@@ -153,7 +153,7 @@ Sections 1–9 above map the **v2.0 (24 April 2026)** requirement set to ADRs 00
 | **FR-9** | **After attribute matching, the ML service matches attributes to ETIM classes, features, controlled values/units, attaching confidence per ETIM assignment and preserving the original supplier value** *(attributed to ML in v1.3)* | **ADR-016** | ADR-013, ADR-014, ADR-018, ADR-019 |
 | **FR-10** | **Load and maintain the ETIM reference dictionary for the pinned ETIM release identified in C-4** | **ADR-013** (load), **ADR-020** (which release, and why only one) | ADR-015 |
 
-## 10.3 Derived Requirements (v1.3)
+## 10.3 Derived Requirements (v1.4)
 
 | ID | Requirement | Trace | Primary ADRs |
 |---|---|---|---|
@@ -162,16 +162,19 @@ Sections 1–9 above map the **v2.0 (24 April 2026)** requirement set to ADRs 00
 | DR-3 | Writeback must be idempotent; retry must not duplicate | HLR-5 | ADR-017 (mechanism from ADR-006) |
 | **DR-4** | **Approved PIMS data keyed by ETIM identifiers (release, class, feature); the idempotency key shall include them** | HLR-6 | **ADR-017** — direct realization |
 
-## 10.4 Quality Attribute Scenarios (v1.3)
+## 10.4 Quality Attribute Scenarios (v1.4)
 
-v1.3 carries two QAS. The five-QAS set (QAS-1 Accuracy … QAS-5 Monitorability) cited by ADRs 0001–0015 belongs to the v2.0 lineage and is mapped in section 4 above.
+v1.4 carries three QAS. The five-QAS set (QAS-1 Accuracy … QAS-5 Monitorability) cited by ADRs 0001–0015 belongs to the v2.0 lineage and is mapped in section 4 above.
+
+⚠️ **ID collision, owned not hidden.** This lineage's **QAS-3 (Modifiability — client feature policy)** is a different scenario from the v2.0 lineage's **QAS-3 (Accuracy)**. QAS-3 is the next free number in *this* document, and skipping it to dodge a foreign document's numbering would be worse. Reconciling the two ID spaces is the same open work already recorded in `product-spec-changelog.md`.
 
 | ID | Scenario | Measure | Primary ADRs | Supporting ADRs |
 |---|---|---|---|---|
 | QAS-1 | **Modifiability** — a new supplier format is added to the pipeline | Integrated and deployed within 4 engineering hours | ADR-021 (a new format is a new `source_type` + parser; nothing downstream changes) | ADR-001, ADR-016 |
 | QAS-2 | **Usability** — reviewer faces 100 low-confidence items | 10 items/minute for simple accept/reject | **ADR-018** (class-review-first stops the queue filling with decisions a class change would void) | ADR-009, ADR-019 |
+| **QAS-3** | **Modifiability** — the client changes which ETIM features are mandatory for a class | Takes effect for the next batch with no code deployment | **ADR-019** — added in v1.4 to hold this decision | ADR-016, ADR-018 |
 
-## 10.5 System Constraints (v1.3: C-1 … C-4)
+## 10.5 System Constraints (v1.4: C-1 … C-4)
 
 | ID | Constraint | ADRs |
 |---|---|---|
@@ -180,7 +183,7 @@ v1.3 carries two QAS. The five-QAS set (QAS-1 Accuracy … QAS-5 Monitorability)
 | C-3 | Breadth-first delivery — full end-to-end flow for one supplier type before optimizing depth | ADR-019 (permissive policy default is what lets the flow complete); ADR-020 (no upgrade path built); phase-one valve/actuator scope |
 | **C-4** | **ETIM release pinned to 10.0 (EI); later releases and cross-release migration out of scope** | **ADR-020** — this ADR is the decision C-4 records |
 
-## 10.6 Design Constraints (v1.3)
+## 10.6 Design Constraints (v1.4)
 
 | ID | Constraint | ADRs |
 |---|---|---|
@@ -188,7 +191,7 @@ v1.3 carries two QAS. The five-QAS set (QAS-1 Accuracy … QAS-5 Monitorability)
 | DC-2 | Auth0 for identity and RBAC | Not addressed by any ETIM ADR — see gaps below |
 | DC-3 | Raw files preserved in Azure Blob for re-processing and traceability | ADR-021 (`source_ref`), ADR-014 (evidence columns), ADR-017 (evidence carried into the published row) |
 
-## 10.7 Operational Scenarios (v1.3)
+## 10.7 Operational Scenarios (v1.4)
 
 | Scenario | Step | ADRs |
 |---|---|---|
@@ -200,13 +203,15 @@ v1.3 carries two QAS. The five-QAS set (QAS-1 Accuracy … QAS-5 Monitorability)
 | SCEN-2 | 4–5 — reviewer sees source evidence, corrects, action logged | ADR-014, ADR-010 |
 | SCEN-2 | 6 — validated value written to PIMS | ADR-017 |
 
-## 10.8 Validation Requirements (v1.3)
+## 10.8 Validation Requirements (v1.4)
 
 | ID | Test | ADRs | Status |
 |---|---|---|---|
 | VAL-1 | Upload to SFTP → ingestion record within 30s | ADR-021, ADR-001 | Ingestion path built |
 | VAL-2 | Mock ML response Conf=0.2 → item in Review Queue | ADR-018 | Confidence branch designed; **validation-failure, unit-failure and required-field branches not testable until ADR-016 lands and the ADR-019 policy is supplied** |
 | VAL-3 | Approve an item → PIMS write succeeds, retry does not duplicate | ADR-017 | Designed; retry case must be re-tested against the ETIM key, not the ADR-006 key |
+| **VAL-4** | **Load ETIM 10.0, then load it again → all 159/5,640/17,377/201,284 rows present, second run is a no-op** | **ADR-013**, ADR-020 | **10 unit tests passing** (`tests/unit/test_etim_loader.py`). `tests/integration/test_etim_real_files.py` covers the same load against the real archive but **skips unless `.tmp_etim_csv` is present**, and that archive is not committed. Neither runs in CI. |
+| **VAL-5** | **Below-threshold class assignment → item routes to class review, no attribute-level routing** | **ADR-018**, ADR-016 | **Specified, not executable** — the matching stages are designed and not built. Recorded rather than deferred silently. |
 
 ## 10.9 Coverage check
 

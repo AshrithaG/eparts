@@ -27,7 +27,7 @@ The rubric asks for exactly this — *"if the architecture and requirements have
 
 | Artifact | What it is |
 |---|---|
-| [`product-spec-v1.3.pdf`](product-spec-v1.3.pdf) · [`.tex`](product-spec-v1.3.tex) | The authoritative spec. **Version 1.3, 29 July 2026.** The version-history table *is* the change record: 1.1 integrated ETIM, 1.2 pinned the release, 1.3 corrected where ETIM matching happens. |
+| [`product-spec-v1.4.pdf`](product-spec-v1.4.pdf) · [`.tex`](product-spec-v1.4.tex) | The authoritative spec. **Version 1.4, 29 July 2026.** The version-history table *is* the change record: 1.1 integrated ETIM, 1.2 pinned the release, 1.3 corrected where ETIM matching happens, 1.4 closed our own trace gap (QAS-3, VAL-4, VAL-5). |
 | [`product-spec-changelog.md`](product-spec-changelog.md) | Greppable companion: every ID added and amended, what no longer holds, the requirement inventory, and three owned defects. |
 | [`etim-requirements-change.md`](etim-requirements-change.md) | How the change was **managed** — the four classes of requirements management, the re-scoped baseline, risks with handling tactics, open client decisions. |
 
@@ -66,7 +66,7 @@ New IDs were **added, not renumbered** — deliberately, so every existing trace
 
 ### New ETIM ADRs (0016–0021)
 
-Written this cycle, against spec v1.3. ADRs 0001–0012 were **deliberately left unedited** — they record what the team decided in April. New ADRs supersede *forward* by reference.
+Written this cycle, against spec v1.4. ADRs 0001–0012 were **deliberately left unedited** — they record what the team decided in April. New ADRs supersede *forward* by reference.
 
 | ADR | Decision | Status |
 |---|---|---|
@@ -90,9 +90,9 @@ business objective (industry-standard catalog)
           → golden test set (EPARTS-296) / VAL-1–3
 ```
 
-**Forward trace = completeness.** Every v1.3 requirement maps to at least one ADR, except **DC-2 (Auth0)** — an open gap, recorded rather than hidden.
+**Forward trace = completeness.** Every v1.4 requirement maps to at least one ADR, except **DC-2 (Auth0)** — an open gap, recorded rather than hidden.
 
-**Backward trace = currency.** All nine ETIM ADRs anchor to a v1.3 requirement; none is orphaned, and none was written for work with no requirement behind it.
+**Backward trace = currency.** All nine ETIM ADRs anchor to a v1.4 requirement; none is orphaned, and none was written for work with no requirement behind it.
 
 **Boundary.** Tracing stops at two cross-team interface contracts — ML input (EPARTS-156) and OCR output (EPARTS-159). We own those requirements; another stream implements them. ADR-021 is the ingestion-side half made explicit and schema-enforced.
 
@@ -118,10 +118,10 @@ business objective (industry-standard catalog)
 
 Naming these is worth more than hiding them.
 
-1. **Two spec lineages exist.** This one runs 0.1 → 0.5 → 1.0 (24 Apr) → 1.1 → 1.2 → 1.3, with FR-1…10, QAS-1…2, C-1…4. A parallel *"Document Version 2.0"* (24 Apr) carries FR-1…13, QAS-1…5 (QAS-1 = Accuracy ≥95%), C-1…8. It is **not** an ancestor of this one, so it is not committed here — pairing them would imply a version chain that does not exist.
-2. **ADRs 0001–0015 cite the other lineage's IDs.** QAS-3/4/5, C-7, FR-11/12/13 do not resolve against v1.3. Reconciling the two ID spaces is open work; the spring ADRs stay unedited.
+1. **Two spec lineages exist.** This one runs 0.1 → 0.5 → 1.0 (24 Apr) → 1.1 → 1.2 → 1.3 → 1.4, with FR-1…10, QAS-1…3, C-1…4, VAL-1…5. A parallel *"Document Version 2.0"* (24 Apr) carries FR-1…13, QAS-1…5 (QAS-1 = Accuracy ≥95%), C-1…8. It is **not** an ancestor of this one, so it is not committed here — pairing them would imply a version chain that does not exist.
+2. **ADRs 0001–0015 cite the other lineage's IDs.** QAS-4/5, C-7 and FR-11/12/13 do not resolve against v1.4, and their QAS-3 (Accuracy) is a different scenario from this lineage's QAS-3 (client feature policy, added in v1.4). Reconciling the two ID spaces is open work; the spring ADRs stay unedited.
 3. **Two ADR series collide.** `docs/00NN-*.md` (authoritative) and `docs/adr/ADR-00N-*.md` (agent-generated) use overlapping numbers for different decisions, and `.github/workflows/requirements-extraction.yml` writes into `docs/adr/**`, so the collision will grow until that workflow is repointed.
-4. **DC-2 (Auth0)** — mandatory in v1.3, a stretch goal in the April document, no ADR either way.
+4. **DC-2 (Auth0)** — mandatory in v1.4, a stretch goal in the April document, no ADR either way.
 5. **Nothing exercises a second ETIM release**, and under C-4 nothing will. The release-scoping columns are kept for provenance, so they will look redundant to anyone reading the schema without ADR-020.
 
 ---
@@ -142,7 +142,7 @@ ADR-019 holds the policy seam open so the build does not stall waiting on it. AD
 
 **Telemetry — the one visible inconsistency.** `ETIM-ADR-ASSESSMENT.md` says the stack is Prometheus + OpenTelemetry + structlog and recommends superseding ADR-012, and the code backs that up. The actual position is narrower: **Datadog is the production target; Prometheus + OTel + structlog is the local development substrate.** ADR-012 stands, and the assessment's Bucket A verdict on it is wrong — it was written from the code alone, without the deployment intent. The v6 diagram carries both labels so it reads as a two-environment choice.
 
-**Where does ETIM matching happen?** In the ML service, after attribute matching. ML owns all matching — attribute matching maps a supplier label onto an attribute, then ETIM matching maps that onto a class, feature, value and unit. Normalization does mechanical cleanup only; it has no model, no confidence and no route to review, so it cannot make an ETIM assignment. The v1.1 spec briefly read otherwise in HLR-2 and §2.1; v1.3 corrects it and ADR-016 records why that alternative was rejected.
+**Where does ETIM matching happen?** In the ML service, after attribute matching. ML owns all matching — attribute matching maps a supplier label onto an attribute, then ETIM matching maps that onto a class, feature, value and unit. Normalization does mechanical cleanup only; it has no model, no confidence and no route to review, so it cannot make an ETIM assignment. The v1.1 spec briefly read otherwise in HLR-2 and §2.1; v1.3 corrected it and ADR-016 records why that alternative was rejected.
 
 **What's running vs. what's designed.** Reference layer, evidence staging split, and the `ExtractedInput` handoff are built and merged. The matching stages, ETIM-aware routing, and the re-keyed writeback are designed only. The diagram marks the distinction; do not claim more.
 

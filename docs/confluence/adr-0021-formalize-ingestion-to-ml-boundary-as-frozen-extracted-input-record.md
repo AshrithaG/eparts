@@ -1,5 +1,7 @@
 # ADR-021: Formalize the Ingestion → ML Boundary as a Frozen `ExtractedInput` Record
 
+> Source of truth: [`0021-formalize-ingestion-to-ml-boundary-as-frozen-extracted-input-record.md`](https://github.com/AshrithaG/eparts/blob/main/docs/0021-formalize-ingestion-to-ml-boundary-as-frozen-extracted-input-record.md) in the eparts repo. This page is a copy for reading; edit the repo, not this page.
+
 ## Status
 
 Accepted

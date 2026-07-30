@@ -36,7 +36,7 @@
 \pretitle{\begin{center}\Huge\bfseries}
 \posttitle{\end{center}}
 \preauthor{\begin{center}\Large \vspace{1.5cm}}
-\postauthor{\\[1cm] \normalsize Client: eParts Services LLC \\[0.5cm] Document Version: 1.3 \end{center}}
+\postauthor{\\[1cm] \normalsize Client: eParts Services LLC \\[0.5cm] Document Version: 1.4 \end{center}}
 \predate{\begin{center}\large}
 \postdate{\end{center}\vfill}
 
@@ -70,6 +70,7 @@
 1.1 & Jul 23, 2026 & Integrated ETIM classification/enrichment; corrected OCR (Azure Document Intelligence) and ingestion (channels, Azure Blob storage, quarantine). \\
 1.2 & Jul 28, 2026 & Pinned the project to ETIM release 10.0 (language EI) for its duration (new constraint C-4); scoped FR-10 accordingly and removed the implied obligation to adopt later ETIM releases. \\
 1.3 & Jul 29, 2026 & Corrected the placement of ETIM matching. ETIM class/feature/value matching is performed by the ML service \emph{after} attribute matching, not by the Intermediate Structured Layer during normalization. HLR-2, \S2.1 and SCEN-1 amended accordingly; FR-9 attributed to the ML service. \\
+1.4 & Jul 29, 2026 & Closed a trace gap opened by 1.1: the Quality Attribute Scenarios and Validation Requirements sections had not been revised for ETIM. Added QAS-3 (client feature policy applied as configuration, per ADR-019) and VAL-4/VAL-5 (ETIM dictionary load; class review before attribute routing). Also corrected three descriptions left inconsistent by the 1.3 amendment --- the Canonical Table glossary entry and \S1.2 both still implied ETIM keying during normalization, and \S1.2 did not mention ETIM matching at all --- and replaced the \S2 architecture figure with the current v6.0 diagram. No existing requirement was changed. \\
 \bottomrule
 \end{tabular}
 
@@ -100,7 +101,7 @@ Human-in-the-Loop & A workflow where low-confidence ML predictions are routed to
 \addlinespace
 ETIM & A standardized technical product-classification model (product groups $\rightarrow$ classes $\rightarrow$ features $\rightarrow$ allowed values / units) used to normalize and enrich supplier attributes. It is reference data layered onto the pipeline, not supplier product data. This project targets ETIM release \textbf{10.0}, language \textbf{EI}, and does not adopt later releases (C-4). \\
 \addlinespace
-Canonical Table & A standardized, intermediate database schema used to normalize disparate supplier formats before prediction. Its attribute rows are ETIM-keyed (class / feature / value), while the original supplier values are always retained as evidence. \\
+Canonical Table & A standardized, intermediate database schema used to normalize disparate supplier formats before prediction. It holds the supplier's own product identity and attribute values as evidence. ETIM identifiers are \emph{not} assigned here; the ML service attaches them afterwards into a separate interpretation table (ADR-014). \\
 \end{longtable}
 \newpage
 
@@ -119,8 +120,8 @@ The purpose of this system is to automate the ingestion, classification, and att
 \subsection{Product Description}
 The system is a cloud-native data pipeline composed of three primary stages:
 \begin{enumerate}
-    \item \textbf{Ingestion \& Normalization:} A gateway that accepts raw files via SFTP or direct upload (Email and web sources planned), validates them, and converts them into a structured intermediate format aligned to the ETIM classification standard. Text-native CSV/PDF are parsed deterministically; datasheet PDFs are OCR'd (Azure AI Document Intelligence) before extraction.
-    \item \textbf{Prediction Service:} An ML-driven engine that predicts attributes (e.g., Voltage, Dimensions, Material) and assigns a confidence score.
+    \item \textbf{Ingestion \& Normalization:} A gateway that accepts raw files via SFTP or direct upload (Email and web sources planned), validates them, and converts them into a structured intermediate format holding the supplier's own values. Text-native CSV/PDF are parsed deterministically; datasheet PDFs are OCR'd (Azure AI Document Intelligence) before extraction.
+    \item \textbf{Prediction Service:} An ML-driven engine that matches attributes (e.g., Voltage, Dimensions, Material) and then matches them onto the ETIM classification standard, assigning a confidence score at each step.
     \item \textbf{Review \& Writeback:} A routing layer that auto-accepts high-confidence data into PIMS and flags low-confidence data for a React-based Human Review UI.
 \end{enumerate}
 
@@ -148,9 +149,8 @@ The system follows a microservices-based pipeline architecture designed for brea
 
 \begin{figure}[H]
   \centering
-  % REPLACE THIS WITH YOUR FILE: 'Notional Software Architecture_version2 (02_11).jpg'
-  \includegraphics[width=\textwidth]{arch.png}
-  \caption{eParts Reference Architecture.}
+  \includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{arch.png}
+  \caption{eParts reference architecture, v6.0. Solid outlines are running code; dashed outlines are designed and not yet built.}
   \label{fig:architecture}
 \end{figure}
 
@@ -298,6 +298,20 @@ DR-4 & Must & Approved data written to PIMS shall be keyed by ETIM identifiers (
 \bottomrule
 \end{longtable}
 
+\subsection*{QAS-3: Modifiability (Client Feature Policy)}
+\begin{longtable}{@{}lp{12cm}@{}}
+\toprule
+\textbf{Attribute} & \textbf{Scenario} \\
+\midrule
+\textbf{ID} & QAS-3 \\
+\textbf{Attribute} & Modifiability \\
+\textbf{Source} & Client / Ops Lead \\
+\textbf{Stimulus} & The client changes which ETIM features are mandatory for a given product class. ETIM itself carries no required-field flag, so this policy is ours to hold. \\
+\textbf{Response} & The change is applied as per-class configuration; no matching, routing or validation code is modified (ADR-019). \\
+\textbf{Measure} & The revised policy takes effect for the next ingested batch without a code deployment. \\
+\bottomrule
+\end{longtable}
+
 \newpage
 \section{Operational Scenarios}
 
@@ -365,7 +379,14 @@ VAL-1 & \textbf{Ingestion Trigger} & Upload file to SFTP. & Ingestion record app
 VAL-2 & \textbf{Routing Logic} & Mock ML response with Conf=0.2. & Item appears in Human Review Queue. \\
 \addlinespace
 VAL-3 & \textbf{PIMS Integration} & Approve item in UI. & API call to PIMS returns 200 OK. \\
+\addlinespace
+VAL-4 & \textbf{ETIM Dictionary Load} (FR-10) & Load the ETIM 10.0 (EI) release files, then run the same load again. & All 159 groups, 5{,}640 classes, 17{,}377 features and 201{,}284 class-feature-values are present, and the second run is a no-op. \\
+\addlinespace
+VAL-5 & \textbf{Class Review Before Attribute Routing} (FR-9) & Supply a product whose ETIM class assignment falls below the class-confidence threshold. & The item is routed to class review and no attribute-level routing is performed for it. \\
 \bottomrule
 \end{longtable}
+
+\vspace{0.5cm}
+\noindent VAL-4 is covered by \texttt{tests/unit/test\_etim\_loader.py} --- 10 tests, all passing --- which exercise the load, the row counts and the idempotent re-import against an in-memory database. \texttt{tests/integration/test\_etim\_real\_files.py} performs the same load against the real ETIM 10.0 archive; it skips automatically unless that archive is present locally, and the archive is not committed, so it does not run on a clean checkout. Neither runs in CI. VAL-5 is specified but not yet executable: the ETIM matching stages are designed and not built, so the test exists as a specification only. This is recorded rather than deferred silently.
 
 \end{document}

@@ -1,5 +1,7 @@
 # ADR-020: Pin ETIM Release 10.0 (EI) for the Project Duration
 
+> Source of truth: [`0020-pin-etim-release-10-0-for-the-project-duration.md`](https://github.com/AshrithaG/eparts/blob/main/docs/0020-pin-etim-release-10-0-for-the-project-duration.md) in the eparts repo. This page is a copy for reading; edit the repo, not this page.
+
 ## Status
 
 Accepted

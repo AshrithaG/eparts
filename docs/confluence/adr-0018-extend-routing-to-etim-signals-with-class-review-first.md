@@ -1,5 +1,7 @@
 # ADR-018: Extend Routing to ETIM Signals, with a Class-Review-First Path
 
+> Source of truth: [`0018-extend-routing-to-etim-signals-with-class-review-first.md`](https://github.com/AshrithaG/eparts/blob/main/docs/0018-extend-routing-to-etim-signals-with-class-review-first.md) in the eparts repo. This page is a copy for reading; edit the repo, not this page.
+
 ## Status
 
 Accepted

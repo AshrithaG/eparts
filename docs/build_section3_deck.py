@@ -9,6 +9,7 @@ from pptx import Presentation
 from pptx.util import Pt, Emu
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
+from pptx.enum.dml import MSO_LINE_DASH_STYLE
 
 BLACK = RGBColor(0x00, 0x00, 0x00)
 BANNER = RGBColor(0x11, 0x11, 0x11)
@@ -29,9 +30,12 @@ DIAG = "/Users/arjun/Documents/CMU/studio-project/Diagrams/"
 CONFLUENCE = ("https://cmu-mse.atlassian.net/wiki/spaces/AISDLC/pages/76742657/"
               "Engineering+System+Artifacts")
 ADR_INDEX = "https://github.com/AshrithaG/eparts/blob/main/docs/adr-index.md"
-# ADR-018 is the one we open live on slide 4 — it is the exemplar for the format.
-ADR_018 = ("https://github.com/AshrithaG/eparts/blob/main/docs/"
-           "0018-extend-routing-to-etim-signals-with-class-review-first.md")
+# ADR-018 is the one we open live — it is the exemplar for the format. Points at
+# Confluence rather than GitHub now that the ADRs are published there, so the room
+# lands on a rendered page instead of raw Markdown.
+ADR_018 = ("https://cmu-mse.atlassian.net/wiki/spaces/AISDLC/pages/78708738/"
+           "ADR-018+Extend+Routing+to+ETIM+Signals+with+a+Class-Review-First+Path")
+ADR_018_SHOWN = "cmu-mse.atlassian.net/wiki/spaces/AISDLC/pages/78708738"
 
 def new_deck():
     """A fresh 720x405 pt presentation. Two decks are built from this one script so the
@@ -70,12 +74,28 @@ def rect(s, x, y, w, h, color):
     return sh
 
 
+def obox(s, x, y, w, h, color=RULE, dashed=False, fill=CARD):
+    """Outlined box. The detail slide needs dashed strokes for designed-not-built."""
+    sh = s.shapes.add_shape(1, P(x), P(y), P(w), P(h))
+    if fill is None:
+        sh.fill.background()
+    else:
+        sh.fill.solid()
+        sh.fill.fore_color.rgb = fill
+    sh.line.color.rgb = color
+    sh.line.width = Pt(1.25)
+    if dashed:
+        sh.line.dash_style = MSO_LINE_DASH_STYLE.DASH
+    sh.shadow.inherit = False
+    return sh
+
+
 def text(s, x, y, w, h, runs, size=MIN_PT, color=MUTED, bold=False, space=0,
-         align=PP_ALIGN.LEFT, anchor=MSO_ANCHOR.TOP, line=1.18, gap=7):
+         align=PP_ALIGN.LEFT, anchor=MSO_ANCHOR.TOP, line=1.18, gap=7, wrap=True):
     assert size >= MIN_PT, f"{size} pt is below the {MIN_PT} pt projection floor"
     tb = s.shapes.add_textbox(P(x), P(y), P(w), P(h))
     tf = tb.text_frame
-    tf.word_wrap = True
+    tf.word_wrap = wrap
     tf.vertical_anchor = anchor
     tf.margin_left = tf.margin_right = tf.margin_top = tf.margin_bottom = 0
     paras = runs if isinstance(runs, list) else [runs]
@@ -199,18 +219,20 @@ def save(deck, path, expected_slides):
 LX, RX, CW = 28.8, 368.4, 322.8
 CY, CH = 126.0, 238.0
 
-# ─────────────────────────────────────────────────────────── 1. requirements v1.0 → v1.3
-# Counts verified from the LaTeX sources: v1.1/v1.3 carry HLR-6, FR-10, DR-4; v1.0 is
-# those minus the four IDs v1.1 introduced (HLR-6, FR-9, FR-10, DR-4); C-4 arrived in v1.2.
+# ─────────────────────────────────────────────────────────── 1. requirements v1.0 → v1.4
+# Counts verified against product-spec-v1.4.tex. v1.0 baseline: HLR-1..5, FR-1..8,
+# DR-1..3, C-1..3 = 19. v1.4 adds HLR-6, FR-9, FR-10, DR-4 (v1.1) and C-4 (v1.2) = 24.
+# 2 rewritten (HLR-2, FR-1). QAS-3/VAL-4/VAL-5 also arrived in v1.4 but are deliberately
+# left off this table — Arjun narrates them instead of adding two more rows.
 s = new_slide()
-title(s, "Requirements: v1.0 → v1.3")
+title(s, "Requirements: v1.0 → v1.4")
 # ── comparison table (left)
 TX, TW, TY = 28.8, 392.0, 86.0
 rect(s, TX, TY, TW, 232.0, CARD)
 COL_L, COL_A, COL_B = TX + 16, TX + 236, TX + 314
 text(s, COL_L, TY + 10, 200, 26, "Requirement set", color=MUTED, bold=True)
 text(s, COL_A, TY + 10, 70, 26, "v1.0", color=MUTED, bold=True, align=PP_ALIGN.RIGHT)
-text(s, COL_B, TY + 10, 62, 26, "v1.3", color=WHITE, bold=True, align=PP_ALIGN.RIGHT)
+text(s, COL_B, TY + 10, 62, 26, "v1.4", color=WHITE, bold=True, align=PP_ALIGN.RIGHT)
 rect(s, COL_L, TY + 38, TW - 32, 1.2, RULE)
 
 ROWS = [("High-level", "5", "6"), ("Functional", "8", "10"),
@@ -238,83 +260,139 @@ SX, SW = 440.0, 251.2
 stat(SX, TY, SW, 112.0, "89%", "of v1.0 unchanged", WHITE)
 stat(SX, TY + 120.0, SW, 112.0, "37%", "churn since April", DIM)
 footer(s, "5 new IDs · 2 rewritten · 17 of 19 untouched",
-       link_label="Spec v1.3:", url=CONFLUENCE, shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
+       link_label="Spec v1.4:", url=CONFLUENCE, shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
 
 # ─────────────────────────────────────────────────────────── 2. managing the change
 s = new_slide()
 title(s, "How we managed the change")
 banner(s, [
-    ("Spec 1.0 → 1.1 → 1.2 → 1.3.", True, WHITE),
+    ("Spec 1.0 → 1.1 → 1.2 → 1.3 → 1.4.", True, WHITE),
     ("  Each version-history entry is the change record.", False, LEAD),
 ])
 card(s, LX, CY, 662.4, CH, WHITE, "What we did", [
-    [("Added new IDs — HLR-6, FR-9, FR-10, DR-4, C-4 — instead of editing the old "
-      "ones.", False, MUTED)],
+    [("Added new IDs instead of editing old ones — HLR-6, FR-9/10, DR-4, C-4, QAS-3.",
+      False, MUTED)],
     [("Renumbered nothing, so every trace link from April still resolves.", False, MUTED)],
-    [("Wrote each change into the version history, so the spec is its own change "
-      "record.", False, MUTED)],
+    [("Every ETIM decision traces to a requirement, and forward to code and a test.",
+      False, MUTED)],
 ])
-footer(s, "trace: HLR-6 → FR-9/10 → tickets → golden tests")
+footer(s, "HLR-6 → FR-9 → ADR-16 → ETIM tables in code → 10 tests")
 
 # ─────────────────────────────────────────────────────────── 3. architecture v5 → v6
 s = new_slide()
 title(s, "How the architecture changed")
 IY = 84.0
+# v6 is v5 plus one box, so the two thumbnails are near-identical in aspect (1.09 and
+# 1.01). Same height, same baseline — the eye is meant to compare silhouettes.
 s.shapes.add_picture(DIAG + "pipe-filter-architecturev5-grey.png", P(28.8), P(IY + 24),
                      width=P(163), height=P(150))
-s.shapes.add_picture(DIAG + "pipe-filter-architecture-v6-grey.png", P(201), P(IY + 4),
-                     width=P(143), height=P(170))
+s.shapes.add_picture(DIAG + "pipe-filter-architecture-v6-grey.png", P(199), P(IY + 24),
+                     width=P(151), height=P(150))
 text(s, 28.8, IY + 182, 163, 24, "v5.0 · MAY", color=MUTED, bold=True)
-text(s, 201, IY + 182, 143, 24, "v6.0 · JULY", color=ACCENT, bold=True)
+text(s, 199, IY + 182, 151, 24, "v6.0 · JULY", color=ACCENT, bold=True)
 
 DX, DW = 362.0, 329.2
 rect(s, DX, IY, DW, 228.0, CARD)
 rect(s, DX, IY, DW, 5.04, ACCENT)
-text(s, DX + 12, IY + 12, DW - 24, 28, "Five changes", size=22, color=ACCENT, bold=True)
+text(s, DX + 12, IY + 12, DW - 24, 28, "What ETIM changed", size=22, color=ACCENT,
+     bold=True)
 yy = IY + 48
-for n, label in [("1", "ETIM dictionary loaded"),
-                 ("2", "ML now matches to ETIM"),
+for n, label in [("1", "ETIM matching, a new phase"),
+                 ("2", "ETIM dictionary loaded"),
                  ("3", "Raw values kept separately"),
                  ("4", "Fixed handoff format to ML"),
                  ("5", "PIMS keyed by ETIM IDs")]:
     text(s, DX + 12, yy, 16, 26, n, color=ACCENT, bold=True)
     text(s, DX + 30, yy, DW - 44, 26, label, color=WHITE)
     yy += 33
-footer(s, "solid = running code · dashed = designed",
+footer(s, "one new box · nothing else moved",
        link_label="Full v6.0 diagram:", url=CONFLUENCE, shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
 
-# ─────────────────────────────────────────────────────────── 4. decisions
+# ─────────────────────────────────────────── 4. the one change that needs explaining
+# The v6 diagram is portrait 1600x1898. At full slide height it is 253 pt wide and its
+# stage labels land near 1.4 pt, so neither scaling nor cropping the bitmap can make it
+# readable on a projector. This slide redraws the changed region as native shapes so
+# every label is 20 pt. Slide 3 keeps the thumbnails, whose only job is silhouette
+# comparison — you don't have to read those to see that the shape didn't move.
+s = new_slide()
+title(s, "Inside the new box: two passes")
+
+BW, BG = 121.0, 14.35           # five boxes across 662.4 pt of usable width
+BX0, ROW2_Y, BH = 28.8, 236.0, 62.0
+
+# ── pass one: what already existed
+obox(s, BX0, 108.0, 662.4, 52.0, color=WHITE, fill=CARD)
+text(s, BX0 + 16, 108.0, 400, 52.0, "ML attribute matching", color=WHITE, bold=True,
+     anchor=MSO_ANCHOR.MIDDLE, line=1.0)
+text(s, BX0 + 430, 108.0, 216, 52.0, "already existed", color=MUTED,
+     anchor=MSO_ANCHOR.MIDDLE, line=1.0, align=PP_ALIGN.RIGHT)
+
+# ── the seam
+text(s, BX0, 168.0, 662.4, 26, "then, in the same service", color=DIM, line=1.0)
+text(s, BX0, 200.0, 400, 26, "ML ETIM matching  ·  NEW", color=WHITE, bold=True,
+     space=0.6, line=1.0)
+
+# ── pass two: five stages, dashed because none of this is built yet
+for i, label in enumerate(["Class", "Feature", "Value\n+ unit", "ETIM\ncheck",
+                           "Policy\ncheck"]):
+    bx = BX0 + i * (BW + BG)
+    obox(s, bx, ROW2_Y, BW, BH, color=DIM, dashed=True, fill=None)
+    text(s, bx + 6, ROW2_Y, BW - 12, BH, label.split("\n"), color=WHITE, bold=True,
+         anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER, line=1.0, gap=0)
+    if i < 4:
+        text(s, bx + BW, ROW2_Y, BG, BH, "→", color=DIM,
+             anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER, line=1.0)
+
+text(s, BX0, ROW2_Y + BH + 14, 662.4, 26,
+     [[("Wrong class, wrong feature list.", True, WHITE),
+       (" Every attribute under it is wrong.", False, MUTED)]],
+     line=1.0)
+footer(s, "dashed = designed, not built", color=DIM,
+       link_label="ADR-018:", url=ADR_018,
+       shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
+
+# ─────────────────────────────────────────────────────────── 5. decisions
 # The point of this slide is the pairing: each decision beside the alternative we
 # turned down. A reason column would only restate the decision.
+#
+# The ADR column is what turns four claims into four artifact references, which is
+# what the rubric's "architectural descriptions and decisions" is asking for. Row 3
+# has no single ADR — the artifacts *are* 16 through 21 — so it cites the range
+# rather than inventing a number.
 s = new_slide()
 title(s, "Decisions, and what we chose against")
 
-CHOSE_X, VS_X = 44.0, 420.0
+ADR_X, CHOSE_X, VS_X = 42.0, 116.0, 440.0
 HDR_Y = 84.0
-text(s, CHOSE_X, HDR_Y, 300, 26, "We chose", color=WHITE, bold=True)
-text(s, VS_X, HDR_Y, 260, 26, "Instead of", color=MUTED, bold=True)
+text(s, ADR_X, HDR_Y, 68, 26, "ADR", color=MUTED, bold=True)
+text(s, CHOSE_X, HDR_Y, 296, 26, "We chose", color=WHITE, bold=True)
+text(s, VS_X, HDR_Y, 248, 26, "Instead of", color=MUTED, bold=True)
 rect(s, 28.8, HDR_Y + 30, 662.4, 1.2, RULE)
 
 decisions = [
-    ("ML does the matching", "ETIM keys at normalization"),
-    ("Raw values in own table", "one table holding both"),
-    ("New ADRs for new decisions", "editing the April ones"),
-    ("Stay on ETIM 10.0", "building an upgrade path"),
+    ("16", "ML does the matching", "ETIM keys at normalization"),
+    ("14", "Raw values in own table", "one table holding both"),
+    ("16–21", "New ADRs, not edits", "editing the April ones"),
+    ("20", "Stay on ETIM 10.0", "building an upgrade path"),
 ]
 ry, RH, RG = HDR_Y + 42, 44.0, 8.0
-for chose, instead in decisions:
+for adr, chose, instead in decisions:
     rect(s, 28.8, ry, 662.4, RH, CARD)
     rect(s, 28.8, ry, 4.5, RH, WHITE)
-    text(s, CHOSE_X, ry, 340, RH, chose, color=WHITE, bold=True,
+    # wrap=False on both text cells: a wrapped ADR range dragged the decision onto
+    # two lines, and neither column is ever long enough to need wrapping.
+    text(s, ADR_X, ry, 68, RH, adr, color=DIM, bold=True,
+         anchor=MSO_ANCHOR.MIDDLE, line=1.0, wrap=False)
+    text(s, CHOSE_X, ry, 296, RH, chose, color=WHITE, bold=True,
+         anchor=MSO_ANCHOR.MIDDLE, line=1.0, wrap=False)
+    text(s, VS_X - 24, ry, 18, RH, "×", color=RGBColor(0x66, 0x66, 0x66),
          anchor=MSO_ANCHOR.MIDDLE, line=1.0)
-    text(s, VS_X - 26, ry, 20, RH, "×", color=RGBColor(0x66, 0x66, 0x66),
-         anchor=MSO_ANCHOR.MIDDLE, line=1.0)
-    text(s, VS_X, ry, 262, RH, instead, color=MUTED, anchor=MSO_ANCHOR.MIDDLE,
-         line=1.0)
+    text(s, VS_X, ry, 248, RH, instead, color=MUTED, anchor=MSO_ANCHOR.MIDDLE,
+         line=1.0, wrap=False)
     ry += RH + RG
 footer(s, "matching stages designed, not yet built", color=DIM,
        link_label="ADR-018:", url=ADR_018,
-       shown_url="github.com/AshrithaG/eparts")
+       shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
 
 NOTES_SOFTWARE = [
     "ETIM is a mid-project requirements CHANGE, not a new project.\n\n"
@@ -382,7 +460,7 @@ NOTES_SOFTWARE = [
 # ─────────────────────────────────────────────────────────── notes, deck 1
 for slide, note in zip(prs.slides, NOTES_SOFTWARE):
     slide.notes_slide.notes_text_frame.text = note
-save(prs, OUT_SOFTWARE, 4)
+save(prs, OUT_SOFTWARE, 5)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
