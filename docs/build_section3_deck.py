@@ -279,27 +279,30 @@ footer(s, "HLR-6 → FR-9 → ADR-16 → ETIM tables in code → 10 tests")
 s = new_slide()
 title(s, "How the architecture changed")
 IY = 84.0
+# v6 is v5 plus one box, so the two thumbnails are near-identical in aspect (1.09 and
+# 1.01). Same height, same baseline — the eye is meant to compare silhouettes.
 s.shapes.add_picture(DIAG + "pipe-filter-architecturev5-grey.png", P(28.8), P(IY + 24),
                      width=P(163), height=P(150))
-s.shapes.add_picture(DIAG + "pipe-filter-architecture-v6-grey.png", P(201), P(IY + 4),
-                     width=P(143), height=P(170))
+s.shapes.add_picture(DIAG + "pipe-filter-architecture-v6-grey.png", P(199), P(IY + 24),
+                     width=P(151), height=P(150))
 text(s, 28.8, IY + 182, 163, 24, "v5.0 · MAY", color=MUTED, bold=True)
-text(s, 201, IY + 182, 143, 24, "v6.0 · JULY", color=ACCENT, bold=True)
+text(s, 199, IY + 182, 151, 24, "v6.0 · JULY", color=ACCENT, bold=True)
 
 DX, DW = 362.0, 329.2
 rect(s, DX, IY, DW, 228.0, CARD)
 rect(s, DX, IY, DW, 5.04, ACCENT)
-text(s, DX + 12, IY + 12, DW - 24, 28, "Five changes", size=22, color=ACCENT, bold=True)
+text(s, DX + 12, IY + 12, DW - 24, 28, "What ETIM changed", size=22, color=ACCENT,
+     bold=True)
 yy = IY + 48
-for n, label in [("1", "ETIM dictionary loaded"),
-                 ("2", "ML now matches to ETIM"),
+for n, label in [("1", "ETIM matching, a new phase"),
+                 ("2", "ETIM dictionary loaded"),
                  ("3", "Raw values kept separately"),
                  ("4", "Fixed handoff format to ML"),
                  ("5", "PIMS keyed by ETIM IDs")]:
     text(s, DX + 12, yy, 16, 26, n, color=ACCENT, bold=True)
     text(s, DX + 30, yy, DW - 44, 26, label, color=WHITE)
     yy += 33
-footer(s, "same structure · five changes inside it",
+footer(s, "one new box · nothing else moved",
        link_label="Full v6.0 diagram:", url=CONFLUENCE, shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
 
 # ─────────────────────────────────────────── 4. the one change that needs explaining
@@ -309,7 +312,7 @@ footer(s, "same structure · five changes inside it",
 # every label is 20 pt. Slide 3 keeps the thumbnails, whose only job is silhouette
 # comparison — you don't have to read those to see that the shape didn't move.
 s = new_slide()
-title(s, "Change 2: matching is now two passes")
+title(s, "Inside the new box: two passes")
 
 BW, BG = 121.0, 14.35           # five boxes across 662.4 pt of usable width
 BX0, ROW2_Y, BH = 28.8, 236.0, 62.0
