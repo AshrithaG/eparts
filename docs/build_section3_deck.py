@@ -252,7 +252,7 @@ card(s, LX, CY, 662.4, CH, WHITE, "What we did", [
     [("Every ETIM decision traces to a requirement, and forward to code and a test.",
       False, MUTED)],
 ])
-footer(s, "HLR-6 → FR-9 → ADR-16 → migration 0005 → 11 tests")
+footer(s, "HLR-6 → FR-9 → ADR-16 → migration 0005 → 10 tests")
 
 # ─────────────────────────────────────────────────────────── 3. architecture v5 → v6
 s = new_slide()

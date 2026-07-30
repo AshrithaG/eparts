@@ -36,7 +36,7 @@ Blockquotes are spoken as written. Cues sit on their own lines outside the quote
 
 Walk the thread with your finger as you say it.
 
-> Let me just walk one, because it's quicker than describing it. ETIM classification is HLR-6. That drives FR-9, the matching requirement. FR-9 is decided in ADR-16 and ADR-18. Those two are built as the ETIM reference tables and migration 0005. And that code is covered by eleven tests — ten unit tests, plus one integration test that loads the real release files and checks that loading twice is a no-op. So requirement, decision, code, test, and it closes at both ends.
+> Let me just walk one, because it's quicker than describing it. ETIM classification is HLR-6. That drives FR-9, the matching requirement. FR-9 is decided in ADR-16 and ADR-18. Those two are built as the ETIM reference tables and migration 0005. And that code is covered by ten unit tests, all passing, plus an integration test that loads the real ETIM archive end to end and checks that loading it twice is a no-op. That last one only runs where the archive is present, and the archive isn't in the repo, so it skips on a clean checkout. So requirement, decision, code, test, and it closes at both ends.
 >
 > The thread that doesn't close yet is matching itself, and that's on purpose. It's specified and its validation test is written, but the test can't run until the code exists, so we didn't pretend otherwise. ETIM is also on the risk register as RISK-ARCH-09, because pinning the release means our catalog goes stale over time and somebody has to own that after we leave.
 
@@ -88,12 +88,12 @@ Measured from the blockquotes at 150 wpm.
 |---|---|---|
 | Handoff | 58 | 23 s |
 | Slide 1 | 168 | 67 s |
-| Slide 2 | 200 | 80 s |
+| Slide 2 | 227 | 91 s |
 | Slide 3 | 263 | 105 s |
 | Slide 4 | 176 | 70 s |
-| **Total** | **865** | **5:46** |
+| **Total** | **892** | **5:56** |
 
-You are 46 seconds over. Cut in the order below; the first two get you to five minutes.
+You are 57 seconds over. Cut in the order below; the first three get you to five minutes exactly.
 
 | Cut | Saves |
 |---|---|
@@ -109,6 +109,7 @@ You are 46 seconds over. Cut in the order below; the first two get you to five m
 - Slide 2's trace thread is the most valuable thirty seconds in the section. Slow down and point at each hop rather than reciting it.
 - Slide 3, let the diagrams do the work. You're narrating a picture, not reading labels.
 - Say the dashed-outline part plainly. Volunteering what isn't built lands better than any number on the slide.
+- The ten unit tests were run on 29 July and all passed, in about 3m40s (`pytest tests/unit/test_etim_loader.py` in `e2e-ocr-ing`). The integration test skips unless `.tmp_etim_csv` is present, and it is gitignored — so if anyone runs the suite in front of you, expect `10 passed, 1 skipped`. Say the skip before they ask.
 - If asked who wrote the documents: the agents drafted them, we reviewed and finalised them. Wiring that into the automated pipeline is still open work. That answer holds up if anyone goes and looks at the repo.
 
 ## Questions you'll probably get

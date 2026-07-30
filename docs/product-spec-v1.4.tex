@@ -387,6 +387,6 @@ VAL-5 & \textbf{Class Review Before Attribute Routing} (FR-9) & Supply a product
 \end{longtable}
 
 \vspace{0.5cm}
-\noindent VAL-4 is covered by automated tests: \texttt{tests/unit/test\_etim\_loader.py} (10 tests) and \texttt{tests/integration/test\_etim\_real\_files.py} (1 test, against the real release files). Both require a database fixture and are run locally rather than in CI. VAL-5 is specified but not yet executable: the ETIM matching stages are designed and not built, so the test exists as a specification only. This is recorded rather than deferred silently.
+\noindent VAL-4 is covered by \texttt{tests/unit/test\_etim\_loader.py} --- 10 tests, all passing --- which exercise the load, the row counts and the idempotent re-import against an in-memory database. \texttt{tests/integration/test\_etim\_real\_files.py} performs the same load against the real ETIM 10.0 archive; it skips automatically unless that archive is present locally, and the archive is not committed, so it does not run on a clean checkout. Neither runs in CI. VAL-5 is specified but not yet executable: the ETIM matching stages are designed and not built, so the test exists as a specification only. This is recorded rather than deferred silently.
 
 \end{document}
