@@ -277,11 +277,13 @@ text(s, QATT_X, HDR_Y, 170, 26, "Attribute", color=WHITE, bold=True)
 text(s, QM_X, HDR_Y, 388, 26, "What it has to do", color=MUTED, bold=True)
 rect(s, 28.8, HDR_Y + 30, 662.4, 1.2, RULE)
 
+# Numeric order. Listing them by priority put QAS-4 above QAS-3, which reads as a
+# mistake rather than as emphasis — the slide is an artifact index, so it sorts by ID.
 qas = [
     ("QAS-1", "Modifiability", "A new supplier format in 4 hours"),
-    ("QAS-4", "Accuracy", "95% of auto-accepted values correct"),
-    ("QAS-3", "Modifiability", "Policy change with no code deploy"),
     ("QAS-2", "Usability", "10 review decisions a minute"),
+    ("QAS-3", "Modifiability", "Policy change with no code deploy"),
+    ("QAS-4", "Accuracy", "95% of auto-accepted values correct"),
 ]
 qy = HDR_Y + 42
 for qid, attr, measure in qas:
@@ -294,7 +296,7 @@ for qid, attr, measure in qas:
     text(s, QM_X, qy, 388, 44.0, measure, color=MUTED,
          anchor=MSO_ANCHOR.MIDDLE, line=1.0, wrap=False)
     qy += 52.0
-footer(s, "QAS-4 is a target, not yet measured",
+footer(s, "QAS-4 restored from April · not yet measured",
        color=DIM, link_label="Spec v1.4:", url=CONFLUENCE,
        shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
 

@@ -298,21 +298,6 @@ DR-4 & Must & Approved data written to PIMS shall be keyed by ETIM identifiers (
 \bottomrule
 \end{longtable}
 
-\subsection*{QAS-4: Accuracy (Published Data Correctness)}
-\begin{longtable}{@{}lp{12cm}@{}}
-\toprule
-\textbf{Attribute} & \textbf{Scenario} \\
-\midrule
-\textbf{ID} & QAS-4 \\
-\textbf{Attribute} & Accuracy \\
-\textbf{Source} & Catalog Team / Client \\
-\textbf{Stimulus} & A batch of supplier attributes is matched and the high-confidence ones are auto-accepted without human review. \\
-\textbf{Response} & Confidence is scored per attribute (FR-3); anything below the configured threshold is routed to human review rather than published (FR-4, FR-7). \\
-\textbf{Measure} & At least 95\% of auto-accepted attribute values are correct, and no attribute is published to PIMS below the threshold without a recorded human decision. \\
-\textbf{Status} & Target, not yet measured. The routing mechanism is built; the golden test set that would measure the 95\% is EPARTS-296 and is outstanding. \\
-\bottomrule
-\end{longtable}
-
 \subsection*{QAS-3: Modifiability (Client Feature Policy)}
 \begin{longtable}{@{}lp{12cm}@{}}
 \toprule
@@ -324,6 +309,22 @@ DR-4 & Must & Approved data written to PIMS shall be keyed by ETIM identifiers (
 \textbf{Stimulus} & The client changes which ETIM features are mandatory for a given product class. ETIM itself carries no required-field flag, so this policy is ours to hold. \\
 \textbf{Response} & The change is applied as per-class configuration; no matching, routing or validation code is modified (ADR-019). \\
 \textbf{Measure} & The revised policy takes effect for the next ingested batch without a code deployment. \\
+\bottomrule
+\end{longtable}
+
+\subsection*{QAS-4: Accuracy (Published Data Correctness)}
+\begin{longtable}{@{}lp{12cm}@{}}
+\toprule
+\textbf{Attribute} & \textbf{Scenario} \\
+\midrule
+\textbf{ID} & QAS-4 \\
+\textbf{Attribute} & Accuracy \\
+\textbf{Source} & Catalog Team / Client \\
+\textbf{Stimulus} & A batch of supplier attributes is matched and the high-confidence ones are auto-accepted without human review. \\
+\textbf{Response} & Confidence is scored per attribute (FR-3); anything below the configured threshold is routed to human review rather than published (FR-4, FR-7). \\
+\textbf{Measure} & At least 95\% of auto-accepted attribute values are correct, and no attribute is published to PIMS below the threshold without a recorded human decision. \\
+\textbf{Provenance} & Carried over from the April baseline document, where this scenario was numbered QAS-1. It is given a new ID here because QAS-1 in this lineage is already Modifiability (Extensibility); no existing scenario was renumbered to make room. Accuracy was never abandoned as a driver --- ADR-004, ADR-005 and ADR-009 all serve it --- this lineage simply never restated it. \\
+\textbf{Status} & Target, not yet measured. The routing mechanism is built; the golden test set that would measure the 95\% is EPARTS-296 and is outstanding. \\
 \bottomrule
 \end{longtable}
 
