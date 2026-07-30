@@ -262,7 +262,43 @@ stat(SX, TY + 120.0, SW, 112.0, "37%", "churn since April", DIM)
 footer(s, "5 new IDs · 2 rewritten · 17 of 19 untouched",
        link_label="Spec v1.4:", url=CONFLUENCE, shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
 
-# ─────────────────────────────────────────────────────────── 2. managing the change
+# ─────────────────────────────────────────── 2. quality attributes
+# Sits next to the requirements slide because that is what these are. Attribute name in
+# the middle column, the measure in plain words on the right — a QAS whose measure you
+# can't say out loud isn't doing any work. Two of the four are modifiability, which is
+# the point: it was the April bet and ETIM is what tested it.
+s = new_slide()
+title(s, "Quality attributes driving the design")
+
+QID_X, QATT_X, QM_X = 42.0, 116.0, 300.0
+HDR_Y = 84.0
+text(s, QID_X, HDR_Y, 68, 26, "QAS", color=MUTED, bold=True)
+text(s, QATT_X, HDR_Y, 170, 26, "Attribute", color=WHITE, bold=True)
+text(s, QM_X, HDR_Y, 388, 26, "What it has to do", color=MUTED, bold=True)
+rect(s, 28.8, HDR_Y + 30, 662.4, 1.2, RULE)
+
+qas = [
+    ("QAS-1", "Modifiability", "A new supplier format in 4 hours"),
+    ("QAS-4", "Accuracy", "95% of auto-accepted values correct"),
+    ("QAS-3", "Modifiability", "Policy change with no code deploy"),
+    ("QAS-2", "Usability", "10 review decisions a minute"),
+]
+qy = HDR_Y + 42
+for qid, attr, measure in qas:
+    rect(s, 28.8, qy, 662.4, 44.0, CARD)
+    rect(s, 28.8, qy, 4.5, 44.0, WHITE)
+    text(s, QID_X, qy, 68, 44.0, qid, color=DIM, bold=True,
+         anchor=MSO_ANCHOR.MIDDLE, line=1.0, wrap=False)
+    text(s, QATT_X, qy, 170, 44.0, attr, color=WHITE, bold=True,
+         anchor=MSO_ANCHOR.MIDDLE, line=1.0, wrap=False)
+    text(s, QM_X, qy, 388, 44.0, measure, color=MUTED,
+         anchor=MSO_ANCHOR.MIDDLE, line=1.0, wrap=False)
+    qy += 52.0
+footer(s, "QAS-4 is a target, not yet measured",
+       color=DIM, link_label="Spec v1.4:", url=CONFLUENCE,
+       shown_url="cmu-mse.atlassian.net/wiki/spaces/AISDLC")
+
+# ─────────────────────────────────────────────────────────── 3. managing the change
 s = new_slide()
 title(s, "How we managed the change")
 banner(s, [
@@ -460,7 +496,7 @@ NOTES_SOFTWARE = [
 # ─────────────────────────────────────────────────────────── notes, deck 1
 for slide, note in zip(prs.slides, NOTES_SOFTWARE):
     slide.notes_slide.notes_text_frame.text = note
-save(prs, OUT_SOFTWARE, 5)
+save(prs, OUT_SOFTWARE, 6)
 
 
 # ══════════════════════════════════════════════════════════════════════════════

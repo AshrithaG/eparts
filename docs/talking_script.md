@@ -1,7 +1,7 @@
 # Talking script — Requirements & Architecture
 
 **Speaker:** Arjun · picks up from Jai after he covers construction, quality and risk
-**Deck:** `eParts_Summer.pptx`, slides 16–20
+**Deck:** `eParts_Summer.pptx`, slides 16–21
 **Length:** see the measured table at the bottom. Target is five minutes.
 
 Blockquotes are spoken as written. Cues sit on their own lines outside the quotes.
@@ -42,7 +42,15 @@ Point down the table as you name each one.
 
 ---
 
-## Slide 17 — How we managed the change · 62 s
+## Slide 17 — Quality attributes · 26 s
+
+> These are the quality attributes the design actually serves. Two of the four are modifiability, and that's deliberate — this system has to absorb new supplier formats and new client rules without a rewrite.
+>
+> One caveat on accuracy. Ninety-five percent of auto-accepted values correct is a target, not a measurement. The routing that protects it is built; the golden test set that would measure it is still open work.
+
+---
+
+## Slide 18 — How we managed the change · 62 s
 
 > Every time ETIM added something we gave it a new ID instead of editing an old one. We renumbered nothing, so every trace link from April still resolves.
 
@@ -58,7 +66,7 @@ Walk the chain with your hand. One box per beat. Do not rush this.
 
 ---
 
-## Slide 18 — How the architecture changed · 55 s
+## Slide 19 — How the architecture changed · 55 s
 
 Let them look at both diagrams for a beat before you start.
 
@@ -76,7 +84,7 @@ Point at the new box on the right-hand diagram.
 
 ---
 
-## Slide 19 — Inside the new box · 78 s
+## Slide 20 — Inside the new box · 78 s
 
 > This is what's inside that box, drawn large enough to read.
 >
@@ -90,7 +98,7 @@ Point at the new box on the right-hand diagram.
 
 ---
 
-## Slide 20 — Decisions, and what we chose against · 68 s
+## Slide 21 — Decisions, and what we chose against · 68 s
 
 > Four decisions, and next to each one the alternative we rejected. The ADR is in the left column.
 >
@@ -111,24 +119,27 @@ Measured from the blockquotes at 150 wpm.
 | Section | Words | Time |
 |---|---|---|
 | Handoff | 44 | 18 s |
-| Slide 16 | 212 | 85 s |
-| Slide 17 | 154 | 62 s |
-| Slide 18 | 137 | 55 s |
-| Slide 19 | 195 | 78 s |
-| Slide 20 | 170 | 68 s |
-| **Total** | **912** | **6:04** |
+| Slide 16 — Requirements | 212 | 85 s |
+| Slide 17 — Quality attributes | 69 | 28 s |
+| Slide 18 — Managing the change | 154 | 62 s |
+| Slide 19 — Architecture | 137 | 55 s |
+| Slide 20 — Inside the new box | 195 | 78 s |
+| Slide 21 — Decisions | 170 | 68 s |
+| **Total** | **981** | **6:32** |
 
-**Read as written this runs 6:04, so the cuts below are not optional.** Spelling the five
-requirements out costs about 50 seconds and it's what the panel asked for, so the time comes
-from elsewhere. All four cuts land you at 5:05; drop the loader detail on slide 17 as well and
-you're at 5:00.
+**Read as written this runs 6:32 against a five-minute slot, so the cuts below are not
+optional — you need all five.** Six slides, a five-ID glossary and four quality attributes
+do not fit in five minutes at full length. Spelling the requirements out was the panel's
+ask, so the time comes from everywhere else. All five cuts land you at 4:59.
 
 | Cut | Saves |
 |---|---|
 | Slide 16, the paragraph about the June gap | 17 s |
 | Slide 16, DR-4 and C-4 — name them instead of reading them: "plus a derived requirement for the PIMS key, and a constraint pinning us to release 10.0" | 22 s |
-| Slide 18, the list of the other four changes, keeping "only one of them shows up on the drawing" | 12 s |
-| Slide 20, the raw-values line — slide 18's list already names it | 8 s |
+| Slide 17, the modifiability sentence — the slide shows two of them, so keep only the accuracy caveat | 14 s |
+| Slide 19, the list of the other four changes, keeping "only one of them shows up on the drawing" | 12 s |
+| Slide 21, the raw-values line — slide 19's list already names it | 8 s |
+| Slide 18, the loader detail, keeping "ten unit tests on the loader, all passing" | 20 s |
 
 **Don't cut** HLR-6, FR-9 or FR-10 on slide 16, the trace walk on slide 17, the valve example
 on slide 19, or the dashed-boxes line. The first three are what the panel asked to hear; the
@@ -137,10 +148,10 @@ last two carry the rubric language.
 ## Delivery notes
 
 - **Slide 16 is now the glossary.** Say the ID, then immediately what it means — "HLR-6 is the new high-level requirement: classify each product against ETIM." Never say a bare ID and move on; that's the thing they called out.
-- Slide 17 works *because* slide 16 defined the IDs first. By the time you walk the chain you can say "HLR-6" and "FR-10" as shorthand, because the room already knows them. Don't re-define them here.
-- Slide 17 is the rubric slide. Hand moves, name the box, hand moves again. The pauses come from your hand, which is what stops it sounding recited.
-- Slide 18, the two thumbnails are a silhouette comparison. Don't invite anyone to read them, and don't tell them what to conclude — the near-identical outline does that on its own. The full diagram is the backup slide at the end if anyone asks.
-- Slide 19 is the one slide where you're explaining a design decision rather than reporting one. Slow down on the valve example. Name the two valves clearly and let the panel picture it before you land the consequence.
+- Slide 18 works *because* slide 16 defined the IDs first. By the time you walk the chain you can say "HLR-6" and "FR-10" as shorthand, because the room already knows them. Don't re-define them here.
+- Slide 18 is the rubric slide. Hand moves, name the box, hand moves again. The pauses come from your hand, which is what stops it sounding recited.
+- Slide 19, the two thumbnails are a silhouette comparison. Don't invite anyone to read them, and don't tell them what to conclude — the near-identical outline does that on its own. The full diagram is the backup slide at the end if anyone asks.
+- Slide 20 is the one slide where you're explaining a design decision rather than reporting one. Slow down on the valve example. Name the two valves clearly and let the panel picture it before you land the consequence.
 - Say the dashed part on 19 plainly and move on. It's on 19 and again on 20, so once out loud is enough.
 - Every paragraph break in the script is a breath. If you run two together you'll start to sound like you're reciting, regardless of the wording.
 - The ten unit tests were run on 29 July and all passed, in about 3m40s (`pytest tests/unit/test_etim_loader.py` in `e2e-ocr-ing`). The integration test skips unless `.tmp_etim_csv` is present, and it is gitignored — so if anyone runs the suite in front of you, expect `10 passed, 1 skipped`. Say the skip before they ask.
@@ -156,7 +167,7 @@ last two carry the rubric language.
 
 > Different requirements. The chain walks FR-10, the dictionary, and ADR-13 is the decision that made it release-versioned reference data owned by ingestion. ADR-16 is matching — that's the row in the decisions table, and it's the thread that isn't built yet. ADR-18 is a third one: it extends routing to ETIM signals and adds the class-review-first path you saw on the previous slide.
 
-**Slide 17 lists FR-9 in the new IDs, but the chain doesn't walk it.**
+**Slide 18 lists FR-9 in the new IDs, but the chain doesn't walk it.**
 
 > Deliberately. FR-9 is matching, and it isn't built, so walking it would break at the implementation step. FR-10 closes all the way to a passing test, so that's the one I walked. FR-9's validation test is written and recorded as not run.
 
