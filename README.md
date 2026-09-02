@@ -1,10 +1,62 @@
 # eParts Agentic Software Engineering System
 
-Multi-agent pipeline for **Pimsie Supreme** — CMU MSE Studio capstone team (Spring–Fall 2026).
+Multi-agent pipeline for the operations of a CMU MSE Studio capstone team. Agents
+handle the mechanical 80% of project operations; humans own the judgment 20%.
 
-This is the team's **Software Engineering System (SES)**, not the client product. Agents handle the mechanical 80% of project operations; humans own the judgment 20%.
+This is the team's **Software Engineering System**, not the client product.
 
-## How It Works — The Trigger Flow
+**The design decision worth stealing:** the orchestration contract is separated
+from what the agents say, so *which* agents fire, in what order, and what happens
+on an unrecognised trigger are all verifiable **without a single model call**. 20
+scenarios exercise that contract offline in about a second:
+
+```bash
+PYTHONPATH=. python -m evals.runner
+# Tier: offline only (no model calls)
+# Scenarios: 20 - 20 passed, 0 failed, 0 skipped
+```
+
+Most agent systems can only be tested by running them, which means every test
+costs tokens, takes seconds to minutes, and is non-deterministic. Here the
+routing layer is a pure function of the trigger, so it is testable the way
+ordinary software is.
+
+## What is actually verified
+
+| suite | cases | what it pins down |
+|---|---|---|
+| `orchestrator_routing` | 14 | which agents a trigger dispatches, their order, and capability coverage |
+| `defect_triage_skill` | 6 | that the triage skill classifies a defect and proposes the right contract |
+
+The routing suite covers the cases that actually break agent systems in
+production, not just the happy path:
+
+- **Ordering constraints.** `transcript.parse_before_extract` fails if the
+  requirements extractor is dispatched before the transcript parser, because an
+  extractor reading an unparsed transcript produces confident nonsense.
+- **Quiet degradation.** `unknown_trigger.degrades_quietly` asserts an
+  unrecognised trigger dispatches *nothing*, rather than guessing a pipeline.
+- **Override isolation.** `manual.override_isolates_single_agent` asserts a
+  manual override runs exactly one agent and does not drag its pipeline along.
+- **Negative cases.** `manual.without_override_dispatches_nothing` and
+  `single_artifact_correction_is_not_a_bug` exist so the suite can fail; a
+  benchmark that only contains things that should happen cannot catch
+  over-triggering.
+
+`evals/baselines.json` records the scores, so a regression shows up as a diff
+rather than as a judgement call.
+
+### The honest limitation
+
+All 20 currently pass, which makes this a **regression guard, not a benchmark**.
+It tells you the orchestration contract has not drifted; it tells you nothing
+about whether an agent's output is any good. Output quality is checked by
+golden-file comparison on transcript processing (`tests/golden/`) and by humans
+driving single modules through the throwaway interfaces in `qa/`. Scoring the
+*content* an agent produces, rather than the routing around it, is the obvious
+next thing and is not done here.
+
+## How It Works, The Trigger Flow
 
 ```
                     ┌──────────────────────────────────────┐
@@ -39,7 +91,7 @@ This is the team's **Software Engineering System (SES)**, not the client product
     └───────────────┘
 ```
 
-### The Cycle — Where Does It End?
+### The Cycle, Where Does It End?
 
 The system is **event-driven**, not circular. Here's the lifecycle:
 
@@ -85,7 +137,7 @@ The system is **event-driven**, not circular. Here's the lifecycle:
 | `project_mgmt` | Project Management | 3 | Cron (Friday 6pm) |
 | `knowledge` | Knowledge Management | 2 | Cron (pre-meeting) |
 
-### 24 Domain Agents
+### 32 Domain Agent Modules
 
 | Domain | Agents |
 |--------|--------|
@@ -113,7 +165,7 @@ The system is **event-driven**, not circular. Here's the lifecycle:
 
 | Component | Purpose | Storage |
 |-----------|---------|---------|
-| **SharedMemory** | Project wiki — agents deposit and query knowledge | SQLite |
+| **SharedMemory** | Project wiki, agents deposit and query knowledge | SQLite |
 | **EventBus** | Cross-pipeline pub/sub communication | SQLite |
 | **MetricsCollector** | Token usage, costs, success rates, durations | SQLite |
 | **PromptRegistry** | Version-controlled prompts with peer review | SQLite |
@@ -123,29 +175,25 @@ The system is **event-driven**, not circular. Here's the lifecycle:
 ## Setup
 
 ```bash
-# Install uv (if not already installed)
-curl -LsSf https://astral.sh/uv/install.sh | sh
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
 
-# Create virtual environment and install dependencies
-uv venv --python 3.12
-source .venv/bin/activate
-uv pip install -r requirements.txt
+# the offline contract suite needs no keys and no network
+PYTHONPATH=. python -m evals.runner
 
-# Copy environment config
-cp .env.example .env
-# Fill in API keys (see .env.example for required values)
+# running actual pipelines needs model and integration credentials
+cp .env.example .env    # then fill in the values
+uvicorn orchestrator.main:app --reload
 
-# Run the orchestrator
-uvicorn orchestrator.main:app --reload --port 8000
-
-# Ingest all transcripts
-curl -X POST http://localhost:8000/ingest
-
-# Run a pipeline manually
-curl -X POST http://localhost:8000/pipeline/requirements \
-  -H "Content-Type: application/json" \
-  -d '{"trigger_type":"transcript","source":"transcripts/example.vtt"}'
+# process the synthetic fixtures in examples/
+python demo.py
 ```
+
+Real meeting recordings, client minutes and coach sessions are deliberately not
+in this repository: they contain other participants' verbatim speech and client
+material. The pipelines run against the synthetic fixtures in `examples/`
+instead, and `pipeline/vtt_processor.py` reads real speaker identities from an
+uncommitted file when one is supplied.
 
 ## API Endpoints
 
@@ -198,9 +246,9 @@ eparts/
 
 ## Conventions
 
-- All LLM calls go through `BaseAgent.call_claude()` — never call Anthropic SDK directly
-- All prompts live in `/prompts/` as `.txt` files — never hardcode prompt strings
-- All external API calls go through `/mcp/` — never call Jira/Slack/etc directly
+- All LLM calls go through `BaseAgent.call_claude()`, never call Anthropic SDK directly
+- All prompts live in `/prompts/` as `.txt` files, never hardcode prompt strings
+- All external API calls go through `/mcp/`, never call Jira/Slack/etc directly
 - Every agent logs its run to metrics DB + JSONL
 - Commit messages from agents: `[agent:name] description`
 - GitHub is the live repo; Bitbucket reserved for client project code
@@ -213,7 +261,7 @@ When the team starts writing actual client code:
 2. `pr_reviewer` reviews the diff, `test_generator` creates test stubs, `doc_generator` updates API docs
 3. The `architecture` pipeline runs `drift_detector` against the PR to catch architectural drift
 4. `traceability_builder` links the PR to requirements and Jira tickets
-5. No changes needed — just configure the GitHub webhook to POST to `/webhook`
+5. No changes needed, just configure the GitHub webhook to POST to `/webhook`
 
 ## Team
 
