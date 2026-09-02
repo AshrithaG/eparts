@@ -276,7 +276,7 @@ def seed(force: bool = False) -> dict:
         {
             "id": "ARCH-005", "title": "Human-in-the-loop for all AI-generated data",
             "description": "All AI-predicted attributes must pass through human review before entering production catalog. No fully automated path to production.",
-            "meeting": "2026-01-22", "speaker": "Dennis Grinberg", "status": "done",
+            "meeting": "2026-01-22", "speaker": "Mentor", "status": "done",
         },
         {
             "id": "ARCH-006", "title": "Agent-Augmented Iterative SDLC (bespoke)",

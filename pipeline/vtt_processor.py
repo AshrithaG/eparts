@@ -23,17 +23,20 @@ from pathlib import Path
 from typing import Any
 
 # Known team member mapping (CMU email → display name)
+# Placeholder identities. Point NI_SPEAKER_MAP at a JSON file to supply the real
+# ones at run time; they are deliberately not committed, since they are other
+# people's names and university addresses.
 SPEAKER_MAP = {
-    "teammate1@example.edu": "Hrishik",
-    "teammate2@example.edu": "Jaivard",
-    "teammate3@example.edu": "Arjun",
-    "teammate4@example.edu": "Liu",
+    "teammate1@example.edu": "Teammate 1",
+    "teammate2@example.edu": "Teammate 2",
+    "teammate3@example.edu": "Teammate 3",
+    "teammate4@example.edu": "Teammate 4",
     "Client Engineer": "Client Engineer",
     "Client Stakeholder": "Cliff (Mentor)",
     "Ashritha": "Ashritha",
     "Client PM": "Harsha (eParts)",
     "Cory Gwin": "Cory (Coach)",
-    "Dennis Grinberg": "Dennis (Mentor)",
+    "Mentor": "Dennis (Mentor)",
     "Client Lead": "David (eParts)",
     "Ben": "Ben (UX Coach)",
     "Christian Kästner": "Christian (AI Coach)",

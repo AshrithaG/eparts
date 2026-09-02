@@ -100,7 +100,7 @@ has been fixed** — this directory does not touch `pipeline/`.
    *"Questions starting with stock phrases"*, which reports 3.
 3. **Unknown emails are mapped onto real teammates.** `_resolve_speaker()` falls back to
    `if prefix in email` over `SPEAKER_MAP`, an unanchored substring test. `n@n.com` and `a@x.com`
-   both resolve to **"Hrishik"**, because `"n"` and `"a"` appear inside
+   both resolve to **"Teammate 1"**, because `"n"` and `"a"` appear inside
    `teammate1@example.edu`. Attributing words to the wrong person corrupts the speaker stats
    that the program-health narrative rests on. Reproduce: fixture *"Unknown speaker email"*.
 4. **Duration can go negative.** Duration is `last turn's end − first turn's start` with no

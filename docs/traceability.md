@@ -318,7 +318,7 @@ Shows which Jira tickets implement each requirement.
   - [concern] **CON-3d2b20**: Is there… I know before we talked about the most sensitive thing from 
 
 ### ARCH-005: Human-in-the-loop for all AI-generated data
-- **Source:** 2026-01-22 (Dennis Grinberg)
+- **Source:** 2026-01-22 (Mentor)
 - **Status:** done
 - **Chain:** 40 nodes → architecture, commitment, concern, decision, meeting, requirement, risk
   - [meeting] **MTG-2026-01-22**: Client Meeting 2026-01-22
