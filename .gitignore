@@ -38,3 +38,12 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+
+# Real meeting recordings, client minutes and coach sessions stay out of the
+# public repo: they contain other people's verbatim speech and client material.
+# The pipelines run on the synthetic fixtures in examples/ instead.
+transcripts/
+coach_meetings/
+minutes/
+*.vtt
+!examples/*.vtt
