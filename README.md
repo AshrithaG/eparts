@@ -125,7 +125,7 @@ The system is **event-driven**, not circular. Here's the lifecycle:
 
 ## Architecture
 
-### 7 Pipelines × 6 Practice Areas
+### 7 Pipelines
 
 | Pipeline | Practice Area | Steps | Trigger |
 |----------|--------------|-------|---------|
@@ -137,17 +137,18 @@ The system is **event-driven**, not circular. Here's the lifecycle:
 | `project_mgmt` | Project Management | 3 | Cron (Friday 6pm) |
 | `knowledge` | Knowledge Management | 2 | Cron (pre-meeting) |
 
-### 32 Domain Agent Modules
+### 31 Domain Agent Modules
 
 | Domain | Agents |
 |--------|--------|
 | Requirements | `transcript_parser`, `priority_classifier`, `req_extractor`, `stale_detector` |
 | Architecture | `drift_detector`, `adr_generator`, `diagram_updater`, `traceability_builder` |
-| Coding | `boilerplate_generator`, `pr_reviewer`, `test_generator`, `doc_generator` |
+| Coding | `boilerplate_generator`, `pr_reviewer`, `test_generator`, `doc_generator`, `refactor_agent`, `test_review_agent` |
 | Project Mgmt | `ticket_creator`, `wbs_updater`, `weekly_digest`, `alert_agent` |
 | Knowledge | `minutes_publisher`, `decision_logger`, `prompt_regression`, `context_packager` |
 | Coach Memory | `session_memory`, `commitment_tracker`, `concern_tracker`, `briefing_generator` |
 | ML Decision | `decision_log`, `evidence_accumulator`, `readiness_detector`, `coach_linker` |
+| Planning | `plan_generator` |
 
 ### 7 MCP Servers (External API Wrappers)
 
@@ -227,19 +228,20 @@ eparts/
 │   ├── base.py            # BaseAgent (call_claude, wiki, events, metrics)
 │   ├── requirements/      # transcript_parser, priority, req_extractor, stale
 │   ├── architecture/      # drift_detector, adr, diagram, traceability
-│   ├── coding/            # boilerplate, pr_review, test_gen, doc_gen
+│   ├── coding/            # boilerplate, pr_review, test_gen, doc_gen, refactor, test_review
 │   ├── project_mgmt/      # tickets, wbs, digest, alerts
 │   ├── knowledge/         # minutes, decisions, prompt_regression, context
 │   ├── coach_memory/      # session_memory, commitments, concerns, briefing
-│   └── ml_decision/       # decision_log, evidence, readiness, coach_linker
+│   ├── ml_decision/       # decision_log, evidence, readiness, coach_linker
+│   └── planning/          # plan_generator
 ├── mcp/                   # MCP server wrappers (GitHub, Jira, Slack, etc.)
 ├── pipeline/              # SharedMemory, EventBus, Metrics, Pipelines, ETVX
 ├── dashboard/             # Interactive HTML dashboards (metrics, intelligence)
 ├── docs/                  # SES assessment, SDLC, practice areas, why-everything
 ├── prompts/               # All LLM prompts as versioned .txt files
-├── transcripts/           # Raw client meeting .vtt files
-├── coach_meetings/        # Coach/mentor session .vtt files
-├── minutes/               # Processed meeting minutes (JSON + MD)
+├── examples/              # Synthetic transcript fixtures; real recordings are not committed
+├── evals/                 # Offline orchestration-contract scenarios and baselines
+├── qa/                    # Throwaway interfaces for driving single modules
 ├── tests/golden/          # Prompt regression golden datasets
 └── memory/                # SQLite DBs + ChromaDB (gitignored)
 ```
